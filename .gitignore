@@ -2,10 +2,18 @@
 dist/
 # generated types
 .astro/
-build_instructions.md
+.claude/
+.husky/
+.vscode/
+.cursor/
+.cursorrules
+.prettierrc
+.prettierignore
+
 
 # dependencies
 node_modules/
+CLAUDE.md
 
 # logs
 npm-debug.log*
