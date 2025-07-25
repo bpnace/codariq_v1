@@ -1,0 +1,159 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = 'KI-Automatisierungsexperte für den deutschen Mittelstand', ogImage } = Astro.props;
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+---
+
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage || '/og-image.jpg'} />
+    <meta property="og:locale" content="de_DE" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage || '/og-image.jpg'} />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+      rel="stylesheet" 
+    />
+    
+    <!-- Global Styles -->
+    <style>
+      html {
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+      
+      /* Custom focus styles for accessibility */
+      :focus-visible {
+        outline: 2px solid #1E3A8A;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+    </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Zynapse",
+        "description": "KI-Automatisierungsexperte für den deutschen Mittelstand",
+        "url": "https://zynapse.de",
+        "logo": "https://zynapse.de/logo.svg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+49-XXX-XXXXXXX",
+          "contactType": "Customer Service",
+          "areaServed": "DE",
+          "availableLanguage": "German"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "DE"
+        }
+      }
+    </script>
+  </head>
+  
+  <body class="bg-white text-gray-900 antialiased">
+    <div class="min-h-screen flex flex-col">
+      <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <!-- Header content will be added here -->
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div class="flex items-center">
+            <img src="/logo.svg" alt="Zynapse" class="h-8 w-auto" />
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#features" class="text-gray-600 hover:text-primary-600 transition-colors">Leistungen</a>
+            <a href="#process" class="text-gray-600 hover:text-primary-600 transition-colors">Vorgehen</a>
+            <a href="#testimonials" class="text-gray-600 hover:text-primary-600 transition-colors">Referenzen</a>
+            <a href="#faq" class="text-gray-600 hover:text-primary-600 transition-colors">FAQ</a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a 
+              href="#contact" 
+              class="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium"
+              aria-label="Strategiegespräch vereinbaren"
+            >
+              Strategiegespräch
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main class="flex-1">
+        <slot />
+      </main>
+
+      <footer class="bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-2">
+              <img src="/logo.svg" alt="Zynapse" class="h-8 w-auto mb-4" />
+              <p class="text-gray-600 mb-4">
+                KI-Automatisierungsexperte für den deutschen Mittelstand. 
+                Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten KI-Lösungen.
+              </p>
+              <div class="flex space-x-4">
+                <!-- Trust badges -->
+                <img src="/badges/tuv-badge.svg" alt="TÜV zertifiziert" class="h-12" />
+                <img src="/badges/iso-badge.svg" alt="ISO 27001" class="h-12" />
+                <img src="/badges/dsgvo-badge.svg" alt="DSGVO konform" class="h-12" />
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-4">Unternehmen</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li><a href="/impressum" class="hover:text-primary-600">Impressum</a></li>
+                <li><a href="/datenschutz" class="hover:text-primary-600">Datenschutz</a></li>
+                <li><a href="/agb" class="hover:text-primary-600">AGB</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-4">Kontakt</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>info@zynapse.de</li>
+                <li>+49 XXX XXXXXXX</li>
+                <li>Frankfurt, Deutschland</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500">
+            <p>&copy; 2025 Zynapse. Alle Rechte vorbehalten.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

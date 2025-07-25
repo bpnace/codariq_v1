@@ -1,14 +1,45 @@
 {
-  "name": "technological-transit",
+  "name": "zynapse-landing",
   "type": "module",
   "version": "0.0.1",
+  "description": "High-converting Astro-powered landing page for Zynapse - KI-Automatisierungsexperte für den deutschen Mittelstand",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext .js,.ts,.astro",
+    "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
-    "astro": "^5.12.3"
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^5.12.3",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/tailwind": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "astro-compress": "^2.3.8",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "vite-imagetools": "^7.1.0"
   }
 }
