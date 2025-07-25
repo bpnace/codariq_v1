@@ -1,0 +1,259 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  primaryCTALink?: string;
+  secondaryCTALink?: string;
+  urgency?: string;
+  benefits?: string[];
+  guarantee?: string;
+}
+
+const {
+  title = "Bereit für den nächsten Schritt?",
+  subtitle = "Revolutionieren Sie Ihr Unternehmen mit KI-Automatisierung",
+  description = "Vereinbaren Sie jetzt Ihr kostenloses Strategiegespräch und erfahren Sie, wie KI-Automatisierung Ihr Unternehmen transformieren kann. Unsere Experten analysieren Ihre Prozesse und zeigen Ihnen konkrete Optimierungsmöglichkeiten auf.",
+  primaryCTA = "Jetzt kostenlose Beratung sichern",
+  secondaryCTA = "Oder direkt anrufen: +49 XXX XXXXXXX",
+  primaryCTALink = "#contact",
+  secondaryCTALink = "tel:+49XXXXXXXXX",
+  urgency = "Begrenzte Kapazitäten - Nur noch wenige Beratungsplätze für Q1 2025 verfügbar",
+  benefits = [
+    "30 Min. kostenlose Erstberatung",
+    "Individuelle Potentialanalyse",
+    "Konkrete ROI-Kalkulation",
+    "Keine Vertragsbindung"
+  ],
+  guarantee = "100% kostenlos und unverbindlich"
+} = Astro.props;
+---
+
+<section id="final-cta" class="py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white relative overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0" style="
+      background-image: radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0);
+      background-size: 40px 40px;
+    "></div>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl animate-pulse"></div>
+  <div class="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-xl animate-pulse" style="animation-delay: 1s"></div>
+  <div class="absolute top-1/2 right-1/4 w-24 h-24 bg-white/5 rounded-full blur-xl animate-pulse" style="animation-delay: 2s"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    
+    <!-- Main Content -->
+    <div class="text-center mb-12 animate-slide-up">
+      <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
+        {title}
+      </h2>
+      <p class="text-xl md:text-2xl font-medium mb-4 opacity-90">
+        {subtitle}
+      </p>
+      <p class="text-lg opacity-80 max-w-3xl mx-auto leading-relaxed">
+        {description}
+      </p>
+    </div>
+
+    <!-- Benefits Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 animate-slide-up" style="animation-delay: 200ms">
+      {benefits.map((benefit, index) => (
+        <div 
+          class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+          style={`animation-delay: ${(index + 1) * 100}ms`}
+        >
+          <div class="flex items-center justify-center mb-2">
+            <svg class="w-5 h-5 text-secondary-300" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <p class="text-sm font-medium">{benefit}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="text-center mb-8 animate-slide-up" style="animation-delay: 400ms">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+        <a 
+          href={primaryCTALink}
+          class="group w-full sm:w-auto bg-white text-primary-700 px-8 py-5 rounded-xl hover:bg-gray-50 transition-all duration-300 font-bold text-lg shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-white/30 relative overflow-hidden"
+        >
+          <!-- Button Background Animation -->
+          <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+          
+          <span class="relative flex items-center justify-center gap-3">
+            <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+            {primaryCTA}
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+      
+      <!-- Secondary CTA -->
+      <div class="mt-6">
+        <a 
+          href={secondaryCTALink}
+          class="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors font-medium border-b border-white/30 hover:border-white pb-1"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+          {secondaryCTA}
+        </a>
+      </div>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="text-center mb-8 animate-slide-up" style="animation-delay: 600ms">
+      <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+        <svg class="w-5 h-5 text-secondary-300" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span class="font-medium">{guarantee}</span>
+      </div>
+    </div>
+
+    <!-- Urgency Message -->
+    {urgency && (
+      <div class="text-center animate-slide-up" style="animation-delay: 800ms">
+        <div class="inline-flex items-center gap-2 bg-accent-500/20 backdrop-blur-sm rounded-lg px-4 py-2 border border-accent-400/30">
+          <svg class="w-4 h-4 text-accent-300 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <span class="text-sm font-medium text-accent-100">{urgency}</span>
+        </div>
+      </div>
+    )}
+
+    <!-- Contact Form Preview -->
+    <div class="mt-16 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 animate-slide-up" style="animation-delay: 1000ms">
+      <div class="max-w-2xl mx-auto">
+        <h3 class="text-2xl font-bold text-center mb-6">
+          Oder füllen Sie direkt unser Formular aus:
+        </h3>
+        
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-4" id="contact-form">
+          <div>
+            <label for="name" class="block text-sm font-medium mb-2">Name *</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name"
+              required
+              class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all"
+              placeholder="Ihr vollständiger Name"
+            />
+          </div>
+          
+          <div>
+            <label for="company" class="block text-sm font-medium mb-2">Unternehmen *</label>
+            <input 
+              type="text" 
+              id="company" 
+              name="company"
+              required
+              class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all"
+              placeholder="Ihr Unternehmen"
+            />
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2">E-Mail *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email"
+              required
+              class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all"
+              placeholder="ihre.email@unternehmen.de"
+            />
+          </div>
+          
+          <div>
+            <label for="phone" class="block text-sm font-medium mb-2">Telefon</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone"
+              class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all"
+              placeholder="+49 XXX XXXXXXX"
+            />
+          </div>
+          
+          <div class="md:col-span-2">
+            <label for="message" class="block text-sm font-medium mb-2">Nachricht</label>
+            <textarea 
+              id="message" 
+              name="message"
+              rows="3"
+              class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all resize-none"
+              placeholder="Beschreiben Sie kurz Ihre Automatisierungsanforderungen..."
+            ></textarea>
+          </div>
+          
+          <div class="md:col-span-2">
+            <label class="flex items-start gap-3 text-sm">
+              <input 
+                type="checkbox" 
+                required
+                class="mt-1 w-4 h-4 text-primary-600 bg-white/20 border-white/30 rounded focus:ring-white/50"
+              />
+              <span class="opacity-90 leading-relaxed">
+                Ich stimme der Verarbeitung meiner Daten gemäß der 
+                <a href="/datenschutz" class="underline hover:no-underline">Datenschutzerklärung</a> zu und möchte über KI-Automatisierungslösungen informiert werden. *
+              </span>
+            </label>
+          </div>
+          
+          <div class="md:col-span-2 text-center">
+            <button 
+              type="submit"
+              class="w-full sm:w-auto bg-secondary-500 hover:bg-secondary-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-secondary-300"
+            >
+              Beratungstermin anfragen
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+</style>
+
+<script>
+  // Form submission handling
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show success message (replace with actual form handling)
+        alert('Vielen Dank für Ihr Interesse! Wir melden uns innerhalb von 24 Stunden bei Ihnen.');
+        
+        // Reset form
+        form.reset();
+      });
+    }
+  });
+</script>
