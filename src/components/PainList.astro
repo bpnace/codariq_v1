@@ -1,0 +1,201 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  painPoints?: Array<{
+    statistic: string;
+    label: string;
+    description: string;
+    icon: string;
+  }>;
+}
+
+const {
+  title = "Diese Herausforderungen kennen Sie",
+  subtitle = "Deutsche Mittelstandsunternehmen verschwenden täglich wertvolle Ressourcen durch manuelle Prozesse",
+  painPoints = [
+    {
+      statistic: "43%",
+      label: "Zeitverschwendung",
+      description: "Ihrer Arbeitszeit geht für repetitive, manuelle Aufgaben verloren, die automatisiert werden könnten.",
+      icon: "clock"
+    },
+    {
+      statistic: "€75.000",
+      label: "Jährliche Kosten",
+      description: "Kostet Sie ein einziger manueller Prozess durch Ineffizienz und menschliche Fehler pro Jahr.",
+      icon: "euro"
+    },
+    {
+      statistic: "67%",
+      label: "Fehlerrate",
+      description: "Höhere Fehlerquote bei manuellen Dateneingaben im Vergleich zu automatisierten Systemen.",
+      icon: "error"
+    }
+  ]
+} = Astro.props;
+---
+
+<section id="pain-points" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16 animate-slide-up">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
+        {title}
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Pain Points Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {painPoints.map((pain, index) => (
+        <div 
+          class="relative group"
+          style={`animation: fadeInUp 0.6s ease-out ${(index + 1) * 200}ms both`}
+        >
+          <!-- Background Card -->
+          <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 h-full">
+            
+            <!-- Icon -->
+            <div class="mb-6">
+              <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center group-hover:bg-red-200 transition-colors duration-300">
+                {pain.icon === 'clock' && (
+                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                )}
+                
+                {pain.icon === 'euro' && (
+                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 5a9 9 0 019 9 9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9z"/>
+                  </svg>
+                )}
+                
+                {pain.icon === 'error' && (
+                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                  </svg>
+                )}
+              </div>
+            </div>
+
+            <!-- Animated Statistic -->
+            <div class="mb-4">
+              <div 
+                class="text-4xl lg:text-5xl font-bold text-red-600 mb-2 counter-animation"
+                data-target={pain.statistic}
+              >
+                {pain.statistic}
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                {pain.label}
+              </h3>
+            </div>
+
+            <!-- Description -->
+            <p class="text-gray-600 leading-relaxed">
+              {pain.description}
+            </p>
+
+            <!-- Decorative Element -->
+            <div class="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+              <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Problem Indicator -->
+          <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
+            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 14h-2v-4h2m0 8h-2v-2h2M12 2A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-16 animate-slide-up" style="animation-delay: 800ms">
+      <div class="bg-white rounded-2xl p-8 shadow-soft border border-gray-100 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+          Schluss mit ineffizienten Prozessen!
+        </h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+          Lassen Sie uns gemeinsam analysieren, wo in Ihrem Unternehmen das größte Automatisierungspotential liegt. 
+          In einem kostenlosen 30-minütigen Strategiegespräch identifizieren wir Ihre wichtigsten Optimierungsmöglichkeiten.
+        </p>
+        <a 
+          href="#contact"
+          class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-medium focus:outline-none focus:ring-4 focus:ring-primary-200"
+        >
+          Kostenlose Analyse anfragen
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .counter-animation {
+    animation: countUp 0.8s ease-out forwards;
+  }
+
+  /* Intersection Observer will trigger these */
+  .counter-animate {
+    animation: countUp 1.2s ease-out forwards;
+  }
+</style>
+
+<script>
+  // Counter animation when element comes into view
+  document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('.counter-animation');
+    
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -10% 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('counter-animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+  });
+</script>
