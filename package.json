@@ -1,8 +1,8 @@
 {
-  "name": "zynapse-landing",
+  "name": "codariq-landing",
   "type": "module",
   "version": "0.0.1",
-  "description": "High-converting Astro-powered landing page for Zynapse - KI-Automatisierungsexperte für den deutschen Mittelstand",
+  "description": "High-converting Astro-powered landing page for Codariq - KI-Automatisierungsexperte für den deutschen Mittelstand",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

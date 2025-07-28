@@ -64,61 +64,69 @@ const {
 } = Astro.props;
 ---
 
-<section id="benefits" class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="benefits" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     
     <!-- Section Header -->
-    <div class="text-center mb-16 animate-slide-up">
-      <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
+    <div class="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
         {title}
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
         {subtitle}
       </p>
     </div>
 
-    <!-- Benefits Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {benefits.map((benefit, index) => (
+    <!-- Bento Box Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-3 sm:gap-4 md:gap-6 max-w-8xl mx-auto px-2 sm:px-3 md:px-4">
+      {benefits.map((benefit, index) => {
+        // Bento box layout: First item spans 2 cols, second spans 2 cols, third and fourth each span 2 cols
+        const getGridClass = (idx) => {
+          if (idx === 0) return 'sm:col-span-2 md:col-span-2 md:row-span-1'; // Top left - 2 cols
+          if (idx === 1) return 'sm:col-span-2 md:col-span-2 md:row-span-1'; // Top right - 2 cols  
+          if (idx === 2) return 'md:col-span-2 md:row-span-1'; // Bottom left - 2 cols
+          if (idx === 3) return 'md:col-span-2 md:row-span-1'; // Bottom right - 2 cols
+        };
+        
+        return (
         <div 
-          class={`relative group h-full ${benefit.highlight ? 'lg:col-span-2' : ''}`}
+          class={`relative group ${getGridClass(index)}`}
           style={`animation: fadeInUp 0.6s ease-out ${(index + 1) * 150}ms both`}
         >
-          <!-- Card -->
+          <!-- Bento Card -->
           <div class={`
-            bg-white rounded-2xl p-8 shadow-soft hover:shadow-strong transition-all duration-500 
-            transform hover:-translate-y-3 border border-gray-100 h-full
-            ${benefit.highlight ? 'border-primary-200 bg-gradient-to-br from-primary-50 to-white' : ''}
-            group-hover:border-primary-200
+            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 
+            transform hover:-translate-y-1 border border-gray-200 h-full flex flex-col
+            ${benefit.highlight ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700' : 'hover:border-gray-300'}
           `}>
             
             <!-- Icon -->
-            <div class="mb-6">
+            <div class="mb-3 sm:mb-4">
               <div class={`
-                w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300
-                ${benefit.highlight ? 'bg-primary-100 group-hover:bg-primary-200' : 'bg-gray-100 group-hover:bg-primary-100'}
+                w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
+                ${benefit.highlight ? 'bg-white/10' : 'bg-gray-100 group-hover:bg-gray-200'}
               `}>
                 {benefit.icon === 'automation' && (
-                  <svg class={`w-8 h-8 ${benefit.highlight ? 'text-primary-600' : 'text-gray-600 group-hover:text-primary-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                   </svg>
                 )}
                 
                 {benefit.icon === 'analytics' && (
-                  <svg class={`w-8 h-8 ${benefit.highlight ? 'text-primary-600' : 'text-gray-600 group-hover:text-primary-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                   </svg>
                 )}
                 
                 {benefit.icon === 'customer' && (
-                  <svg class={`w-8 h-8 ${benefit.highlight ? 'text-primary-600' : 'text-gray-600 group-hover:text-primary-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
                   </svg>
                 )}
                 
                 {benefit.icon === 'integration' && (
-                  <svg class={`w-8 h-8 ${benefit.highlight ? 'text-primary-600' : 'text-gray-600 group-hover:text-primary-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                   </svg>
                 )}
@@ -126,31 +134,34 @@ const {
             </div>
 
             <!-- Content -->
-            <div class="mb-8">
-              <h3 class={`text-xl font-bold mb-3 ${benefit.highlight ? 'text-primary-900' : 'text-gray-900'}`}>
+            <div class="mb-3 sm:mb-4 flex-1">
+              <h3 class={`text-base sm:text-l font-bold mb-2 ${benefit.highlight ? 'text-white' : 'text-gray-900'}`}>
                 {benefit.title}
               </h3>
-              <p class={`leading-relaxed ${benefit.highlight ? 'text-primary-700' : 'text-gray-600'}`}>
+              <p class={`text-m sm:text-m leading-relaxed mb-3 sm:mb-4 ${benefit.highlight ? 'text-white/80' : 'text-gray-600'}`}>
                 {benefit.description}
               </p>
             </div>
 
             <!-- Features List -->
-            <div class="space-y-3">
+            <div class="space-y-1 sm:space-y-2">
               {benefit.features.map((feature) => (
-                <div class="flex items-center gap-3">
-                  <div class={`w-2 h-2 rounded-full flex-shrink-0 ${benefit.highlight ? 'bg-primary-500' : 'bg-secondary-500'}`}></div>
-                  <span class={`text-sm ${benefit.highlight ? 'text-primary-700' : 'text-gray-600'}`}>
+                <div class="flex items-center gap-2">
+                  <div class={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full flex-shrink-0 ${benefit.highlight ? 'bg-white/60' : 'bg-gray-400'}`}></div>
+                  <span class={`text-xs ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`}>
                     {feature}
                   </span>
                 </div>
               ))}
             </div>
 
-            <!-- Highlight Badge -->
+            <!-- TÜV Authority Badge -->
             {benefit.highlight && (
-              <div class="absolute -top-3 -right-3 bg-primary-600 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg">
-                Beliebt
+              <div class="absolute -top-3 -right-3 bg-primary-600 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg flex items-center gap-1">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                TÜV-zertifiziert
               </div>
             )}
 
@@ -162,38 +173,9 @@ const {
             </div>
           </div>
         </div>
-      ))}
+      )})}
     </div>
 
-    <!-- Bottom CTA Section -->
-    <div class="mt-20 text-center animate-slide-up" style="animation-delay: 600ms">
-      <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-white shadow-strong">
-        <div class="max-w-4xl mx-auto">
-          <h3 class="text-2xl md:text-3xl font-bold mb-4">
-            Bereit für die digitale Transformation?
-          </h3>
-          <p class="text-xl opacity-90 mb-8 leading-relaxed">
-            Lassen Sie uns in einem persönlichen Gespräch besprechen, wie KI-Automatisierung 
-            Ihr Unternehmen zum Marktführer machen kann.
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="#contact"
-              class="bg-white text-primary-600 px-8 py-4 rounded-lg hover:bg-gray-50 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary-200"
-            >
-              Kostenloses Beratungsgespräch
-            </a>
-            <a 
-              href="#case-studies"
-              class="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-primary-600 transition-all duration-300 font-medium focus:outline-none focus:ring-4 focus:ring-primary-200"
-            >
-              Erfolgsgeschichten ansehen
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 

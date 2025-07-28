@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+/* Switzer Variable Font */
+@font-face {
+  font-family: 'Switzer Variable';
+  src: url('/fonts/Switzer-Variable.woff2') format('woff2'),
+       url('/fonts/Switzer-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global font family override */
+* {
+  font-family: 'Switzer Variable', system-ui, sans-serif;
+}
