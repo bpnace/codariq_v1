@@ -1,6 +1,6 @@
-# Zynapse Landing Page
+# Codariq Landing Page
 
-> **High-converting Astro-powered landing page positioning Zynapse as "KI-Automatisierungsexperte für den deutschen Mittelstand"**
+> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für den deutschen Mittelstand"**
 
 [![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
 [![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
@@ -31,8 +31,8 @@
 
 ```bash
 # Clone the repository
-git clone git@github.com:zynapse/zynapse-landing.git
-cd zynapse-landing
+git clone git@github.com:codariq/codariq-landing.git
+cd codariq-landing
 
 # Install Node.js 18 LTS via Volta
 volta install node@18
@@ -64,7 +64,7 @@ npm run format         # → Auto-fix formatting
 ### 3. Project Structure
 
 ```
-zynapse-landing/
+codariq-landing/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   │   ├── Hero.astro      # Main hero section
@@ -338,4 +338,4 @@ For questions about this project:
 
 ---
 
-_Built with ❤️ for the German Mittelstand • © 2025 Zynapse_
+_Built with ❤️ for the German Mittelstand • © 2025 Codariq_

@@ -32,61 +32,56 @@ const {
 } = Astro.props;
 ---
 
-<section id="trust-bar" class={`py-12 bg-white border-b border-gray-100 ${className}`}>
+<section id="trust-bar" class={`py-12 sm:py-16 bg-white ${className}`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-8">
-      <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">
+    <div class="text-center mb-8 sm:mb-12 px-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
         Vertrauen Sie auf nachhaltige Qualität
-      </p>
+      </h2>
+      <p class="text-sm sm:text-base text-gray-600">Zertifiziert und zukunftssicher</p>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4">
       {badges.map((badge, index) => (
         <div 
-          class="flex flex-col items-center group opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105 relative"
+          class="flex flex-col items-center group hover:transform hover:-translate-y-1 transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-100 ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
           style={`animation: fadeInUp 0.6s ease-out ${index * 150}ms both`}
         >
-          <!-- Badge SVG -->
-          <div class="mb-4 transform group-hover:scale-105 transition-transform duration-300">
+          <!-- Badge Image -->
+          <div class="mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-105">
             <img 
-              src={`/images/badges/${badge.icon}.svg`}
+              src={`/images/badges/${badge.icon}.webp`}
               alt={badge.name}
-              class="w-16 h-25 md:w-20 md:h-32 object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
+              class="w-16 h-24 sm:w-20 sm:h-32 object-contain"
               loading="lazy"
             />
           </div>
           
           <!-- Badge Text -->
           <div class="text-center">
-            <h3 class="font-semibold text-gray-900 text-sm mb-2 group-hover:text-primary-600 transition-colors">
+            <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-1 sm:mb-2">
               {badge.name}
             </h3>
-            <p class="text-xs text-gray-500 max-w-32 leading-tight hidden md:block">
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
               {badge.description}
             </p>
           </div>
           
-          <!-- Tooltip for mobile -->
-          <div class="md:hidden absolute z-20 invisible group-hover:visible bg-gray-900 text-white text-xs rounded-lg py-3 px-4 mt-2 max-w-56 transform -translate-x-1/2 left-1/2 top-full">
-            {badge.description}
-            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900"></div>
-          </div>
         </div>
       ))}
     </div>
 
-    <!-- Additional Trust Indicators -->
+    <!-- Social Proof -->
     {showLogos && (
-      <div class="mt-12 pt-8 border-t border-gray-100">
-        <p class="text-center text-sm text-gray-500 mb-6">
-          Bereits über 200 deutsche Mittelstandsunternehmen vertrauen auf unsere Lösungen
+      <div class="mt-12 sm:mt-16 text-center px-4">
+        <p class="text-base sm:text-lg font-medium text-gray-900 mb-6 sm:mb-8">
+          Viele deutsche Mittelstandsunternehmen vertrauen bereits auf unsere Lösungen
         </p>
         
-        <!-- Placeholder for customer logos -->
-        <div class="flex flex-wrap justify-center items-center gap-8 opacity-40">
+        <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 opacity-60 hover:opacity-80 transition-opacity">
           {[1, 2, 3, 4, 5].map((logo) => (
-            <div class="h-12 w-24 bg-gray-200 rounded flex items-center justify-center">
-              <span class="text-xs text-gray-400 font-medium">Logo {logo}</span>
+            <div class="h-10 w-20 sm:h-12 sm:w-28 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors">
+              <span class="text-xs sm:text-sm text-gray-500 font-medium">Partner {logo}</span>
             </div>
           ))}
         </div>

@@ -2,6 +2,13 @@
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
+    screens: {
+      'sm': '390px',   // Mobile optimized
+      'md': '768px',   // Tablet optimized  
+      'lg': '1024px',  // Small desktop
+      'xl': '1440px',  // Desktop optimized
+      '2xl': '1536px', // Large desktop
+    },
     extend: {
       colors: {
         primary: {
@@ -42,8 +49,8 @@ export default {
         },
       },
       fontFamily: {
-        'serif': ['Georgia', 'Times New Roman', 'serif'], // Headlines h1-h3
-        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'], // Body text
+        'sans': ['Switzer Variable', 'system-ui', '-apple-system', 'sans-serif'], // All text
+        'serif': ['Switzer Variable', 'system-ui', '-apple-system', 'sans-serif'], // Headers use same font
       },
       fontSize: {
         'hero': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],

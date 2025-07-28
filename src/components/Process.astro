@@ -58,39 +58,56 @@ const {
     {
       number: 4,
       title: "Training & Support",
-      description: "Wir schulen Ihr Team und bieten dauerhaften Support für optimale Ergebnisse.",
+      description: "Wir schulen Ihr Team und bieten 6 Monate Vollsupport für einen reibungslosen Start.",
       details: [
         "Umfassende Mitarbeiterschulungen",
         "Go-Live Support und Begleitung",
-        "24/7 Monitoring und Wartung",
-        "Kontinuierliche Optimierung"
+        "6 Monate Premium-Support inklusive",
+        "Optionale Wartungsverträge verfügbar"
       ],
-      duration: "Laufend",
+      duration: "6 Monate",
       icon: "support"
     }
   ]
 } = Astro.props;
 ---
 
-<section id="process" class="py-20 bg-primary-50 relative overflow-hidden">
-  <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-5">
-    <div class="absolute inset-0" style="
-      background-image: radial-gradient(circle at 2px 2px, #1E3A8A 1px, transparent 0);
-      background-size: 32px 32px;
-    "></div>
-  </div>
+<section id="process" class="py-12 bg-gray-50 relative overflow-hidden">
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative">
     
     <!-- Section Header -->
     <div class="text-center mb-16 animate-slide-up">
-      <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
         {title}
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
         {subtitle}
       </p>
+      
+      <!-- Authority Elements -->
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+        <div class="flex items-center gap-2 bg-green-50 px-3 py-1 rounded-full border border-green-200">
+          <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          <span class="font-medium text-green-700">TÜV-zertifizierte Prozesse</span>
+        </div>
+        
+        <div class="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+          <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="font-medium text-blue-700">ISO 27001 Standards</span>
+        </div>
+        
+        <div class="flex items-center gap-2 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
+          <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span class="font-medium text-purple-700">Avg. 6-Monate ROI</span>
+        </div>
+      </div>
     </div>
 
     <!-- Process Timeline -->
@@ -99,7 +116,7 @@ const {
       <div class="hidden lg:block absolute top-24 left-0 w-full h-0.5 bg-gradient-to-r from-primary-200 via-primary-400 to-primary-600"></div>
       
       <!-- Steps Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-4">
         {steps.map((step, index) => (
           <div 
             class="relative group"
