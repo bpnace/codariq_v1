@@ -1,0 +1,24 @@
+<svg width="128" height="200" viewBox="0 0 128 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="200" rx="12" fill="#059669"/>
+  <rect x="4" y="4" width="120" height="192" rx="8" fill="white"/>
+  
+  <!-- Leaf Icon -->
+  <g transform="translate(44, 20)">
+    <path d="M20 0C9 0 0 9 0 20s9 20 20 20c5.5 0 10.5-2.2 14.1-5.9L40 28.2V40h4V24c0-11-9-20-20-20z" fill="#059669"/>
+    <path d="M20 4c8.8 0 16 7.2 16 16s-7.2 16-16 16S4 28.8 4 20 11.2 4 20 4z" fill="#34d399"/>
+    <path d="M20 8c6.6 0 12 5.4 12 12s-5.4 12-12 12S8 26.6 8 20s5.4-12 12-12z" fill="#10b981"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="64" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f2937">KLIMA</text>
+  <text x="64" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f2937">FREUNDLICH</text>
+  
+  <text x="64" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">CO₂ NEUTRAL</text>
+  <text x="64" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">HOSTING</text>
+  
+  <!-- Certification Mark -->
+  <circle cx="64" cy="160" r="16" fill="#059669"/>
+  <path d="M58 160l4 4 8-8" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <text x="64" y="184" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6b7280">ZERTIFIZIERT</text>
+</svg>
