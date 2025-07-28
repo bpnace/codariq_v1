@@ -31,8 +31,8 @@
 
 ```bash
 # Clone the repository
-git clone git@github.com:codariq/codariq-landing.git
-cd codariq-landing
+git clone https://github.com/bpnace/codariq_v1.git
+cd codariq_v1
 
 # Install Node.js 18 LTS via Volta
 volta install node@18
@@ -64,7 +64,7 @@ npm run format         # → Auto-fix formatting
 ### 3. Project Structure
 
 ```
-codariq-landing/
+codariq_v1/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   │   ├── Hero.astro      # Main hero section
