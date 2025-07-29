@@ -90,8 +90,8 @@ const {
         
         return (
         <div 
-          class={`relative group ${getGridClass(index)}`}
-          style={`animation: fadeInUp 0.6s ease-out ${(index + 1) * 150}ms both`}
+          class={`relative group animate-fade-in-up ${getGridClass(index)}`}
+          style={`animation-delay: ${(index + 1) * 150}ms`}
         >
           <!-- Bento Card -->
           <div class={`
@@ -179,15 +179,3 @@ const {
   </div>
 </section>
 
-<style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>

@@ -119,8 +119,8 @@ const {
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-4">
         {steps.map((step, index) => (
           <div 
-            class="relative group"
-            style={`animation: fadeInUp 0.6s ease-out ${(index + 1) * 200}ms both`}
+            class="relative group animate-fade-in-up"
+            style={`animation-delay: ${(index + 1) * 200}ms`}
           >
             <!-- Step Card -->
             <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-strong transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 group-hover:border-primary-200 h-full relative">
@@ -206,57 +206,10 @@ const {
         ))}
       </div>
     </div>
-
-    <!-- CTA Section -->
-    <div class="mt-20 text-center animate-slide-up" style="animation-delay: 800ms">
-      <div class="bg-white rounded-2xl p-8 md:p-12 shadow-soft border border-gray-100">
-        <div class="max-w-4xl mx-auto">
-          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            Starten Sie noch heute Ihre KI-Transformation
-          </h3>
-          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-            Vereinbaren Sie jetzt Ihr kostenloses Strategiegespräch und erfahren Sie, 
-            wie KI-Automatisierung Ihr Unternehmen zum Marktführer macht.
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="#contact"
-              class="inline-flex items-center gap-2 bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary-200"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-              </svg>
-              Kostenloses Strategiegespräch
-            </a>
-            <a 
-              href="#case-studies"
-              class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-lg hover:bg-primary-50 transition-colors font-medium focus:outline-none focus:ring-4 focus:ring-primary-200"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-              </svg>
-              Fallstudien ansehen
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   /* Pulse animation for step numbers */
   @keyframes pulse {
     0%, 100% {
