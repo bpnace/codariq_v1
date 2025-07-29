@@ -15,6 +15,17 @@
   font-family: 'Switzer Variable', system-ui, sans-serif;
 }
 
+/* Prevent scrolling beyond top of page */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
 /* Global animation keyframes for consistency - DISABLED */
 /*
 @keyframes fadeInUp {
