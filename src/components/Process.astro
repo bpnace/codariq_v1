@@ -68,96 +68,83 @@ const {
       duration: "6 Monate",
       icon: "support"
     }
+  ],
+  additionalServices = [
+    {
+      title: "Intelligente Datenanalyse",
+      subtitle: "One-Time Service Package",
+      description: "Gewinnen Sie wertvolle Erkenntnisse aus Ihren Daten mit fortschrittlichen KI-Algorithmen.",
+      features: [
+        "Predictive Analytics",
+        "Datenvisualisierung",
+        "Trend-Erkennung",
+        "Performance-Monitoring"
+      ],
+      price: "ab €15.000",
+      duration: "4-6 Wochen",
+      icon: "analytics"
+    }
   ]
 } = Astro.props;
 ---
 
-<section id="process" class="py-12 bg-gray-50 relative overflow-hidden">
+<section id="process" class="py-10 sm:py-12 bg-white relative overflow-hidden">
 
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative">
     
     <!-- Section Header -->
-    <div class="text-center mb-16 animate-slide-up">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+    <div class="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
         {title}
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
         {subtitle}
       </p>
-      
-      <!-- Authority Elements -->
-      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
-        <div class="flex items-center gap-2 bg-green-50 px-3 py-1 rounded-full border border-green-200">
-          <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <span class="font-medium text-green-700">TÜV-zertifizierte Prozesse</span>
-        </div>
-        
-        <div class="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-          <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          <span class="font-medium text-blue-700">ISO 27001 Standards</span>
-        </div>
-        
-        <div class="flex items-center gap-2 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
-          <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-          <span class="font-medium text-purple-700">Avg. 6-Monate ROI</span>
-        </div>
-      </div>
     </div>
 
     <!-- Process Timeline -->
     <div class="relative">
-      <!-- Connection Line -->
-      <div class="hidden lg:block absolute top-24 left-0 w-full h-0.5 bg-gradient-to-r from-primary-200 via-primary-400 to-primary-600"></div>
-      
       <!-- Steps Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4">
         {steps.map((step, index) => (
           <div 
             class="relative group animate-fade-in-up"
             style={`animation-delay: ${(index + 1) * 200}ms`}
           >
             <!-- Step Card -->
-            <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-strong transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 group-hover:border-primary-200 h-full relative">
+            <div class="bg-gray-50 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full relative">
               
               <!-- Step Number Circle -->
-              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
-                <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg group-hover:bg-primary-700 transition-colors duration-300 relative z-10">
+              <div class="mb-4">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
                   {step.number}
                 </div>
-                <!-- Pulse Animation -->
-                <div class="absolute inset-0 w-12 h-12 bg-primary-600 rounded-full animate-ping opacity-20"></div>
               </div>
 
               <!-- Icon -->
-              <div class="mb-6 mt-4 flex justify-center">
-                <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-300">
+              <div class="mb-4">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-100 rounded-lg flex items-center justify-center">
                   {step.icon === 'analysis' && (
-                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                     </svg>
                   )}
                   
                   {step.icon === 'design' && (
-                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2H7z"/>
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2-2-2M21 12H9"/>
                     </svg>
                   )}
                   
                   {step.icon === 'development' && (
-                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                     </svg>
                   )}
                   
                   {step.icon === 'support' && (
-                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z"/>
                     </svg>
                   )}
@@ -165,17 +152,17 @@ const {
               </div>
 
               <!-- Content -->
-              <div class="text-center mb-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-900 transition-colors">
+              <div class="mb-4">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   {step.title}
                 </h3>
-                <p class="text-gray-600 leading-relaxed mb-4">
+                <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-3">
                   {step.description}
                 </p>
                 
                 <!-- Duration Badge -->
-                <div class="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium group-hover:bg-primary-200 transition-colors">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   {step.duration}
@@ -183,24 +170,91 @@ const {
               </div>
 
               <!-- Details List -->
-              <div class="space-y-2">
-                <h4 class="font-semibold text-gray-900 text-sm mb-3">Beinhaltet:</h4>
+              <div class="space-y-1.5">
+                <h4 class="font-semibold text-gray-900 text-xs sm:text-sm mb-2">Beinhaltet:</h4>
                 {step.details.map((detail) => (
-                  <div class="flex items-start gap-2 text-sm">
-                    <div class="w-1.5 h-1.5 bg-secondary-500 rounded-full flex-shrink-0 mt-2"></div>
+                  <div class="flex items-start gap-2 text-xs sm:text-sm">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-orange-500 rounded-full flex-shrink-0 mt-1.5 sm:mt-2"></div>
                     <span class="text-gray-600">{detail}</span>
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
-              <!-- Decorative Arrow (Desktop) -->
-              {index < steps.length - 1 && (
-                <div class="hidden lg:block absolute -right-4 top-1/2 transform -translate-y-1/2 z-20">
-                  <svg class="w-8 h-8 text-primary-400 group-hover:text-primary-600 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                  </svg>
+    <!-- Additional Services Section -->
+    <div class="mt-12 sm:mt-16 md:mt-20">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+          Zusätzliche Service-Pakete
+        </h3>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Ergänzen Sie Ihre KI-Automatisierung mit spezialisierten One-Time Services
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto">
+        {additionalServices.map((service, index) => (
+          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 relative overflow-hidden">
+            
+            <!-- Service Badge -->
+            <div class="absolute top-4 right-4">
+              <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">
+                {service.subtitle}
+              </span>
+            </div>
+
+            <!-- Icon -->
+            <div class="mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="mb-6">
+              <h4 class="text-2xl font-bold text-gray-900 mb-3">
+                {service.title}
+              </h4>
+              <p class="text-gray-600 leading-relaxed mb-6">
+                {service.description}
+              </p>
+
+              <!-- Features -->
+              <div class="grid grid-cols-2 gap-3 mb-6">
+                {service.features.map((feature) => (
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                    <span class="text-sm text-gray-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <!-- Pricing & Duration -->
+              <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                <div class="flex items-center gap-4">
+                  <div class="text-2xl font-bold text-gray-900">
+                    {service.price}
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {service.duration}
+                  </div>
                 </div>
-              )}
+                <a 
+                  href="#final-cta" 
+                  class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors font-medium text-sm"
+                >
+                  Anfragen
+                </a>
+              </div>
             </div>
           </div>
         ))}
