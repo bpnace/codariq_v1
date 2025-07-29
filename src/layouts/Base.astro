@@ -200,27 +200,27 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   
   <body class="bg-white text-gray-900 antialiased">
     <div class="min-h-screen flex flex-col">
-      <header class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20" style="position: fixed !important; transform: translateY(0) !important;">
+      <header class="fixed top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-lg border-b border-white/30" style="position: fixed !important; transform: translateY(0) !important;">
         <!-- Header content will be added here -->
-        <nav class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between">
+        <nav class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between" id="main-nav">
           <div class="flex items-center">
-            <a href="#" class="hover:opacity-80 transition-opacity">
-              <img src="/codariq_logo1.png" alt="Codariq" class="h-6 sm:h-8 w-auto" />
+            <a href="#" class="hover:opacity-90 transition-all duration-300">
+              <img src="/codariq_logo2.png" alt="Codariq" class="h-6 sm:h-10 w-auto transition-all duration-300 filter grayscale hover:grayscale-0" id="nav-logo" />
             </a>
           </div>
-          <div class="hidden sm:flex items-center space-x-4 md:space-x-8">
-            <a href="#benefits" class="text-gray-800 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">Lösungen</a>
-            <a href="#testimonials" class="text-gray-800 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">Referenzen</a>
-            <a href="#process" class="text-gray-800 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">Vorgehen</a>
-            <a href="#faq" class="text-gray-800 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">FAQ</a>
+          <div class="hidden sm:flex items-center space-x-4 md:space-x-8" id="nav-links">
+            <a href="#benefits" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Lösungen</a>
+            <a href="#testimonials" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Referenzen</a>
+            <a href="#faq" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">FAQ</a>
+            <a href="#process" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Vorgehen</a>
           </div>
           <div class="flex items-center space-x-4">
             <a 
               href="#final-cta" 
-              class="bg-orange-600 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:bg-orange-700 transition-colors font-medium text-xs sm:text-sm md:text-base"
+              class="bg-orange-600 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:bg-orange-700 transition-colors font-bold text-xs sm:text-sm md:text-base"
               aria-label="Strategiegespräch vereinbaren"
             >
-              <span class="hidden sm:inline">Strategiegespräch</span>
+              <span class="hidden sm:inline">Termin buchen</span>
               <span class="sm:hidden">Kontakt</span>
             </a>
           </div>
@@ -235,9 +235,8 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div class="col-span-2">
-              <img src="/codariq_logo1.png" alt="Codariq" class="h-8 w-auto mb-4" />
+              <img src="/codariq_logo3.png" alt="Codariq" class="h-25 w-auto mb-4 filter grayscale" />
               <p class="text-gray-600 mb-4">
-                KI-Automatisierungsexperte für den deutschen Mittelstand. 
                 Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten KI-Lösungen.
               </p>
               <div class="flex space-x-4">
@@ -261,7 +260,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               <h3 class="font-semibold text-gray-900 mb-4">Kontakt</h3>
               <ul class="space-y-2 text-gray-600">
                 <li>info@codariq.de</li>
-                <li>Berlin, Deutschland</li>
+                <li>Made with love in Berlin ❤️/li>
               </ul>
             </div>
           </div>

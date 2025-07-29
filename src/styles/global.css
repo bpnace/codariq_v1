@@ -35,6 +35,17 @@ header {
   will-change: auto !important;
 }
 
+/* Fix scroll positioning for anchor links to account for fixed header */
+html {
+  scroll-padding-top: 5rem; /* Account for fixed header height */
+}
+
+@media (min-width: 390px) {
+  html {
+    scroll-padding-top: 6rem; /* Larger header on small screens */
+  }
+}
+
 /* Global animation keyframes for consistency - DISABLED */
 /*
 @keyframes fadeInUp {
