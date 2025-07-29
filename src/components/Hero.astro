@@ -15,11 +15,11 @@ export interface Props {
 
 const {
   title = "KI-Automatisierung für den deutschen Mittelstand",
-  subtitle = "Steigern Sie Ihre Effizienz um bis zu 40% mit maßgeschneiderten KI-Lösungen. Automatisieren Sie repetitive Aufgaben und fokussieren Sie sich auf Ihr Kerngeschäft.",
+  subtitle = "Steigern Sie Ihre Effizienz um bis zu 50% mit maßgeschneiderten KI-Lösungen. Automatisieren Sie repetitive Aufgaben und fokussieren Sie sich auf Ihr Kerngeschäft.",
   primaryCTA = "Kostenlose Strategieberatung",
   secondaryCTA = "Live-Demo ansehen",
-  primaryCTALink = "#contact",
-  secondaryCTALink = "#demo",
+  primaryCTALink = "#final-cta",
+  secondaryCTALink = "#final-cta",
   heroImage = "/images/hero/hero1.webp",
   stats = [
     { value: "40%", label: "Effizienzsteigerung" },
@@ -28,14 +28,15 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center overflow-hidden -mt-16 pt-20 lg:pt-32">
-  <!-- Full-width background image -->
-  <div class="absolute inset-0">
+<section class="relative min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 lg:pt-32">
+  <!-- Full-width background image extending to top -->
+  <div class="absolute inset-0 -top-16 sm:-top-20">
     <img 
       src={heroImage}
       alt="KI-Automatisierung Dashboard für deutsche Unternehmen"
       class="w-full h-full object-cover"
       loading="eager"
+      style="height: calc(100% + 4rem);"
     />
     <!-- Dark overlay for text readability -->
     <div class="absolute inset-0 bg-black/20"></div>
@@ -54,7 +55,7 @@ const {
         <!-- Benefits Buttons -->
         <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4">
           <span class="px-3 py-2 sm:px-4 bg-white/20 backdrop-blur-sm text-white text-xs sm:text-sm rounded-full border border-white/30">
-            ✓ +30% Effizienz
+            ✓ min +30% Effizienz
           </span>
           <span class="px-3 py-2 sm:px-4 bg-white/20 backdrop-blur-sm text-white text-xs sm:text-sm rounded-full border border-white/30">
             ✓ min 50h Zeitersparnis

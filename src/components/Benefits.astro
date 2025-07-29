@@ -27,37 +27,25 @@ const {
       ]
     },
     {
-      title: "Intelligente Datenanalyse",
-      description: "Gewinnen Sie wertvolle Erkenntnisse aus Ihren Daten mit fortschrittlichen KI-Algorithmen.",
-      icon: "analytics",
-      features: [
-        "Predictive Analytics",
-        "Datenvisualisierung",
-        "Trend-Erkennung",
-        "Performance-Monitoring"
-      ],
-      highlight: true
-    },
-    {
       title: "Kundenservice-KI",
       description: "Verbessern Sie Ihren Kundenservice mit intelligenten Chatbots und automatisierten Antworten.",
       icon: "customer",
       features: [
         "24/7 Chatbot-Support",
-        "Automatische Ticketklassifizierung",
+        "Automatische Klassifizierung",
         "Sentiment-Analyse",
         "Personalisierte Antworten"
-      ]
+      ],
+      highlight: true
     },
     {
       title: "Integration & Migration",
-      description: "Seamlose Integration in Ihre bestehende IT-Infrastruktur ohne Unterbrechung des Betriebs.",
+      description: "Nahtlose Integration in Ihre bestehende IT-Infrastruktur ohne Unterbrechung des Betriebs.",
       icon: "integration",
       features: [
         "API-Konnektoren",
-        "Legacy-System Integration",
         "Cloud-Migration",
-        "Sicherheits-Compliance"
+        "GRPD-Ready"
       ]
     }
   ]
@@ -78,33 +66,29 @@ const {
     </div>
 
     <!-- Bento Box Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-3 sm:gap-4 md:gap-6 max-w-8xl mx-auto px-2 sm:px-3 md:px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4">
       {benefits.map((benefit, index) => {
-        // Bento box layout: First item spans 2 cols, second spans 2 cols, third and fourth each span 2 cols
+        // Three column layout: Each item spans 1 col on desktop, 2 cols on smaller screens
         const getGridClass = (idx) => {
-          if (idx === 0) return 'sm:col-span-2 md:col-span-2 md:row-span-1'; // Top left - 2 cols
-          if (idx === 1) return 'sm:col-span-2 md:col-span-2 md:row-span-1'; // Top right - 2 cols  
-          if (idx === 2) return 'md:col-span-2 md:row-span-1'; // Bottom left - 2 cols
-          if (idx === 3) return 'md:col-span-2 md:row-span-1'; // Bottom right - 2 cols
+          return 'sm:col-span-1'; // Each card takes 1 column
         };
         
         return (
         <div 
-          class={`relative group ${getGridClass(index)}`}
-          style={`animation: fadeInUp 0.6s ease-out ${(index + 1) * 150}ms both`}
+          class={`relative group animate-fade-in-up ${getGridClass(index)}`}
+          style={`animation-delay: ${(index + 1) * 150}ms`}
         >
           <!-- Bento Card -->
           <div class={`
-            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 
-            transform hover:-translate-y-1 border border-gray-200 h-full flex flex-col
-            ${benefit.highlight ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700' : 'hover:border-gray-300'}
+            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300
+            ${benefit.highlight ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700' : ''}
           `}>
             
             <!-- Icon -->
             <div class="mb-3 sm:mb-4">
               <div class={`
                 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
-                ${benefit.highlight ? 'bg-white/10' : 'bg-gray-100 group-hover:bg-gray-200'}
+                ${benefit.highlight ? 'bg-white/10' : 'bg-gray-100'}
               `}>
                 {benefit.icon === 'automation' && (
                   <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,11 +97,6 @@ const {
                   </svg>
                 )}
                 
-                {benefit.icon === 'analytics' && (
-                  <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                  </svg>
-                )}
                 
                 {benefit.icon === 'customer' && (
                   <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,23 +133,6 @@ const {
                 </div>
               ))}
             </div>
-
-            <!-- TÜV Authority Badge -->
-            {benefit.highlight && (
-              <div class="absolute -top-3 -right-3 bg-primary-600 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg flex items-center gap-1">
-                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                TÜV-zertifiziert
-              </div>
-            )}
-
-            <!-- Decorative Element -->
-            <div class="absolute bottom-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
-              <svg class="w-12 h-12 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-              </svg>
-            </div>
           </div>
         </div>
       )})}
@@ -179,15 +141,3 @@ const {
   </div>
 </section>
 
-<style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>

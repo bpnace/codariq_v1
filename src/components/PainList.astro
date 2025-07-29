@@ -12,7 +12,7 @@ export interface Props {
 
 const {
   title = "Diese Herausforderungen kennen Sie",
-  subtitle = "Deutsche Mittelstandsunternehmen verschwenden täglich wertvolle Ressourcen durch manuelle Prozesse",
+  subtitle = "Deutsche Unternehmen verschwenden täglich wertvolle Ressourcen durch manuelle Prozesse",
   painPoints = [
     {
       statistic: "43%",
@@ -36,101 +36,82 @@ const {
 } = Astro.props;
 ---
 
-<section id="pain-points" class="py-12 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="pain-points" class="py-10 sm:py-12 bg-white">
+  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     
     <!-- Section Header -->
-    <div class="text-center mb-10 animate-slide-up">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+    <div class="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
         {title}
       </h2>
-      <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
         {subtitle}
       </p>
     </div>
 
     <!-- Pain Points Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-5xl mx-auto px-2 sm:px-3 md:px-4">
       {painPoints.map((pain, index) => (
         <div 
-          class="relative group"
-          style={`animation: fadeInUp 0.6s ease-out ${(index + 1) * 200}ms both`}
+          class="group animate-fade-in-up"
+          style={`animation-delay: ${(index + 1) * 150}ms`}
         >
-          <!-- Background Card -->
-          <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 h-full">
+          <!-- Pain Point Card -->
+          <div class="bg-gray-50 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 h-full">
             
             <!-- Icon -->
-            <div class="mb-6">
-              <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center group-hover:bg-red-200 transition-colors duration-300">
+            <div class="mb-3 sm:mb-4">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
                 {pain.icon === 'clock' && (
-                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 )}
                 
                 {pain.icon === 'euro' && (
-                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 5a9 9 0 019 9 9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9z"/>
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
                   </svg>
                 )}
                 
                 {pain.icon === 'error' && (
-                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"/>
                   </svg>
                 )}
               </div>
             </div>
 
-            <!-- Animated Statistic -->
-            <div class="mb-4">
-              <div 
-                class="text-4xl lg:text-5xl font-bold text-red-600 mb-2 counter-animation"
-                data-target={pain.statistic}
-              >
+            <!-- Content -->
+            <div class="mb-3 sm:mb-4 flex-1">
+              <div class="text-2xl sm:text-3xl font-bold text-red-500 mb-2 counter-animation" data-target={pain.statistic}>
                 {pain.statistic}
               </div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
                 {pain.label}
               </h3>
+              <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+                {pain.description}
+              </p>
             </div>
-
-            <!-- Description -->
-            <p class="text-gray-600 leading-relaxed">
-              {pain.description}
-            </p>
-
-            <!-- Decorative Element -->
-            <div class="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
-              <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Problem Indicator -->
-          <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
-            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 14h-2v-4h2m0 8h-2v-2h2M12 2A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/>
-            </svg>
           </div>
         </div>
       ))}
     </div>
 
     <!-- Call to Action -->
-    <div class="text-center mt-16 animate-slide-up" style="animation-delay: 800ms">
-      <div class="bg-white rounded-2xl p-8 shadow-soft border border-gray-100 max-w-4xl mx-auto">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+    <div class="text-center mt-10 sm:mt-12 md:mt-16 animate-slide-up px-4" style="animation-delay: 600ms">
+      <div class="bg-gray-50 rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
           Schluss mit ineffizienten Prozessen!
         </h3>
-        <p class="text-gray-600 mb-6 leading-relaxed">
+        <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
           Lassen Sie uns gemeinsam analysieren, wo in Ihrem Unternehmen das größte Automatisierungspotential liegt. 
           In einem kostenlosen 30-minütigen Strategiegespräch identifizieren wir Ihre wichtigsten Optimierungsmöglichkeiten.
         </p>
         <a 
-          href="#contact"
-          class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-medium focus:outline-none focus:ring-4 focus:ring-primary-200"
+          href="#final-cta"
+          class="inline-flex items-center gap-2 bg-orange-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-orange-700 transition-colors font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200"
         >
           Kostenlose Analyse anfragen
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,17 +124,6 @@ const {
 </section>
 
 <style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   @keyframes countUp {
     from {
       opacity: 0;
