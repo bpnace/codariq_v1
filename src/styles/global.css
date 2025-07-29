@@ -15,7 +15,8 @@
   font-family: 'Switzer Variable', system-ui, sans-serif;
 }
 
-/* Global animation keyframes for consistency */
+/* Global animation keyframes for consistency - DISABLED */
+/*
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -37,3 +38,4 @@
     transform: translateY(0);
   }
 }
+*/

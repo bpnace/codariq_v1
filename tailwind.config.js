@@ -68,11 +68,12 @@ export default {
         '9xl': '96rem',
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.6s ease-out',
-        'fade-in-up': 'fadeInUp 0.6s ease-out',
-        'slide-down': 'slideDown 0.3s ease-out',
-        'counter': 'counter 2s ease-out',
+        // Animations temporarily disabled
+        'fade-in': 'none',
+        'slide-up': 'none', 
+        'fade-in-up': 'none',
+        'slide-down': 'none',
+        'counter': 'counter 2s ease-out', // Keep counter for statistics
       },
       keyframes: {
         fadeIn: {
