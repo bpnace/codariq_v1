@@ -200,7 +200,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   
   <body class="bg-white text-gray-900 antialiased">
     <div class="min-h-screen flex flex-col">
-      <header class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
+      <header class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20" style="position: fixed !important; transform: translateY(0) !important;">
         <!-- Header content will be added here -->
         <nav class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between">
           <div class="flex items-center">
@@ -217,7 +217,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
           <div class="flex items-center space-x-4">
             <a 
               href="#final-cta" 
-              class="bg-orange-600 backdrop-blur-sm text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:bg-orange-700 transition-colors font-medium text-xs sm:text-sm md:text-base shadow-lg"
+              class="bg-orange-600 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:bg-orange-700 transition-colors font-medium text-xs sm:text-sm md:text-base"
               aria-label="Strategiegespräch vereinbaren"
             >
               <span class="hidden sm:inline">Strategiegespräch</span>
@@ -227,7 +227,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         </nav>
       </header>
 
-      <main class="flex-1 pt-14 sm:pt-16">
+      <main class="flex-1">
         <slot />
       </main>
 

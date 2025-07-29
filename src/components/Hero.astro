@@ -28,14 +28,15 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-32">
-  <!-- Full-width background image -->
-  <div class="absolute inset-0">
+<section class="relative min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 lg:pt-32">
+  <!-- Full-width background image extending to top -->
+  <div class="absolute inset-0 -top-16 sm:-top-20">
     <img 
       src={heroImage}
       alt="KI-Automatisierung Dashboard für deutsche Unternehmen"
       class="w-full h-full object-cover"
       loading="eager"
+      style="height: calc(100% + 4rem);"
     />
     <!-- Dark overlay for text readability -->
     <div class="absolute inset-0 bg-black/20"></div>

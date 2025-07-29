@@ -24,6 +24,15 @@ html {
 body {
   overflow-x: hidden;
   position: relative;
+  min-height: 100vh;
+}
+
+/* Ensure header stays fixed and visible */
+header {
+  position: fixed !important;
+  top: 0 !important;
+  transform: none !important;
+  will-change: auto !important;
 }
 
 /* Global animation keyframes for consistency - DISABLED */
