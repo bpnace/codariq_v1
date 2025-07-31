@@ -5,7 +5,7 @@ export interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'KI-Automatisierungsexperte für den deutschen Mittelstand', ogImage } = Astro.props;
+const { title, description = 'KI-Automatisierungsexperte für kleine und mittelständische Unternehmen', ogImage } = Astro.props;
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
 ---
 
@@ -71,7 +71,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         "@type": "Organization",
         "name": "Codariq",
         "alternateName": "Codariq GmbH",
-        "description": "KI-Automatisierungsexperte für den deutschen Mittelstand. Spezialisiert auf Prozessautomatisierung, intelligente Datenanalyse und KI-gestützte Geschäftslösungen.",
+        "description": "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen. Spezialisiert auf Prozessautomatisierung, intelligente Datenanalyse und KI-gestützte Geschäftslösungen.",
         "url": "https://codariq.de",
         "logo": "https://codariq.de/codariq_logo1.png",
         "image": "https://codariq.de/images/hero/hero-placeholder.svg",
@@ -124,7 +124,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
           "Business Intelligence",
           "Digitale Transformation",
           "DSGVO Compliance",
-          "Mittelstand"
+          "Kleine und mittelständische Unternehmen"
         ],
         "serviceArea": {
           "@type": "Country",
