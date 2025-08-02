@@ -204,19 +204,19 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <!-- Header content will be added here -->
         <nav class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between" id="main-nav">
           <div class="flex items-center">
-            <a href="#" class="hover:opacity-90 transition-all duration-300">
+            <a href="/" class="hover:opacity-90 transition-all duration-300">
               <img src="/codariq_logo2.png" alt="Codariq" class="h-6 sm:h-10 w-auto transition-all duration-300 filter grayscale hover:grayscale-0" id="nav-logo" />
             </a>
           </div>
           <div class="hidden sm:flex items-center space-x-4 md:space-x-8" id="nav-links">
-            <a href="#benefits" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Lösungen</a>
-            <a href="#testimonials" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Referenzen</a>
-            <a href="#process" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Vorgehen</a>
+            <a href="/#benefits" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Lösungen</a>
+            <a href="/#testimonials" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Referenzen</a>
+            <a href="/#process" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Vorgehen</a>
           </div>
           <div class="flex items-center space-x-4">
             <a 
-              href="#final-cta" 
-              class="bg-orange-600 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:bg-orange-700 transition-colors font-bold text-xs sm:text-sm md:text-base"
+              href="/#final-cta" 
+              class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-bold text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl transform hover:scale-105"
               aria-label="Strategiegespräch vereinbaren"
             >
               <span class="hidden sm:inline">Termin buchen</span>
@@ -234,23 +234,26 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div class="col-span-2">
-              <img src="/codariq_logo3.png" alt="Codariq" class="h-25 w-auto mb-4 filter grayscale" />
+              <div class="flex items-start gap-8 mb-4">
+                <img src="/codariq_logo3.png" alt="Codariq" class="h-25 w-auto filter grayscale" />
+                <div class="flex space-x-3">
+                  <!-- Trust badges -->
+                  <img src="/images/badges/climate-friendly.webp" alt="Klimafreundlich" class="h-25" />
+                  <img src="/images/badges/gdpr-ready.webp" alt="DSGVO konform" class="h-25" />
+                  <img src="/images/badges/remote-only.webp" alt="Remote verfügbar" class="h-25" />
+                </div>
+              </div>
               <p class="text-gray-600 mb-4">
                 Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten KI-Lösungen.
               </p>
-              <div class="flex space-x-4">
-                <!-- Trust badges -->
-                <img src="/images/badges/climate-friendly.webp" alt="Klimafreundlich" class="h-12" />
-                <img src="/images/badges/gdpr-ready.webp" alt="DSGVO konform" class="h-12" />
-                <img src="/images/badges/remote-only.webp" alt="Remote verfügbar" class="h-12" />
-              </div>
             </div>
             
             <div>
               <h3 class="font-semibold text-gray-900 mb-4">Unternehmen</h3>
               <ul class="space-y-2 text-gray-600">
                 <li><a href="/impressum" class="hover:text-primary-600">Impressum</a></li>
-                <li><a href="/datenschutz" class="hover:text-primary-600">Datenschutz</a></li>
+                <li><a href="/datenschutz" class="hover:text-primary-600">Datenschutzerklärung</a></li>
+                <li><a href="/cookie-richtlinien" class="hover:text-primary-600">Cookie-Richtlinien</a></li>
                 <li><a href="/faq" class="hover:text-primary-600">FAQ</a></li>
                 <li><a href="/agb" class="hover:text-primary-600">AGB</a></li>
               </ul>
@@ -259,7 +262,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
             <div>
               <h3 class="font-semibold text-gray-900 mb-4">Kontakt</h3>
               <ul class="space-y-2 text-gray-600">
-                <li>info@codariq.de</li>
+                <li>kontakt@codariq.de</li>
                 <li>Made with love in Berlin ❤️
               </ul>
             </div>

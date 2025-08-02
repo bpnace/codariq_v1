@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://zynapse.de',
+  site: 'https://codariq.de',
   integrations: [
     sitemap({
       i18n: {
