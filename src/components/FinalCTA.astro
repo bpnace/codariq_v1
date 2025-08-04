@@ -185,8 +185,40 @@ document.addEventListener('DOMContentLoaded', function() {
   const container = document.getElementById('calendly-container');
   
   if (loadButton && container) {
+    // Check cookie consent before loading Calendly
+    function hasMarketingConsent() {
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) return false;
+      const parsed = JSON.parse(consent);
+      return parsed.preferences && parsed.preferences.marketing === true;
+    }
+    
     // Support both click and keyboard events
     function loadCalendlyWidget() {
+      // Check if marketing cookies are allowed
+      if (!hasMarketingConsent()) {
+        container.innerHTML = `
+          <div class="min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
+            <div class="text-center max-w-md">
+              <svg class="w-16 h-16 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+              </svg>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Cookie-Einwilligung erforderlich</h3>
+              <p class="text-gray-600 mb-4">
+                Um den Terminkalender zu laden, benötigen wir Ihre Einwilligung für Marketing-Cookies.
+              </p>
+              <button 
+                onclick="document.getElementById('cookie-settings').click()" 
+                class="bg-gradient-to-r from-orange-600 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium"
+              >
+                Cookie-Einstellungen öffnen
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
       // Show loading state
       container.innerHTML = `
         <div class="min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
