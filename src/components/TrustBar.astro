@@ -44,11 +44,11 @@ const {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4">
       {badges.map((badge, index) => (
         <div 
-          class="flex flex-col items-center group hover:transform hover:-translate-y-1 transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-100 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
+          class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-100 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
           style={`animation-delay: ${index * 150}ms`}
         >
           <!-- Badge Image -->
-          <div class="mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-105">
+          <div class="mb-3 sm:mb-4 transition-transform duration-300">
             <img 
               src={`/images/badges/${badge.icon}.webp`}
               alt={badge.name}
