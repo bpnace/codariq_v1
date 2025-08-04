@@ -1,6 +1,6 @@
 # Codariq Landing Page
 
-> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für den deutschen Mittelstand"**
+> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen"**
 
 [![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
 [![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
@@ -8,16 +8,19 @@
 
 ## 🎯 Project Overview
 
-**Goal:** Build and launch a high-converting marketing website that achieves ≥4% qualified-lead conversion rate (stretch: 6%).
+**Codariq** is a KI-Automatisierung (AI automation) service provider specializing in small and medium-sized enterprises (SMEs) with 5-500 employees across Germany, Austria, and Switzerland.
 
-### Key Metrics & Targets
+### Target Audience
+- **Company Size:** 5-500 employees
+- **Market Focus:** German-speaking SMEs (DACH region)
+- **Industries:** Manufacturing, logistics, professional services, retail
+- **Pain Points:** Manual processes, inefficient workflows, data entry tasks
 
-- **LCP:** ≤ 1.8s
-- **INP:** ≤ 200ms
-- **CLS:** ≤ 0.05
-- **JavaScript Bundle:** ≤ 100kB
-- **Accessibility:** WCAG 2.1 AA compliance
-- **Launch Timeline:** 8 weeks from kickoff
+### Key Services
+1. **Prozess-Automatisierung** - Business process automation
+2. **Kundenservice-KI** - AI-powered customer service solutions
+3. **Document Workflows** - Automated document processing
+4. **Intelligente Datenanalyse** - One-time data analysis package
 
 ## 🚀 Quick Start
 
@@ -67,275 +70,190 @@ npm run format         # → Auto-fix formatting
 codariq_v1/
 ├── src/
 │   ├── components/          # Reusable UI components
-│   │   ├── Hero.astro      # Main hero section
+│   │   ├── Hero.astro      # Main hero section with dual CTA
 │   │   ├── TrustBar.astro  # Trust badges (TÜV, ISO, DSGVO)
+│   │   ├── PainList.astro  # Problem identification with animated counters
 │   │   ├── Benefits.astro  # 4-column features grid
-│   │   ├── Testimonials.astro # Social proof section
-│   │   ├── FAQ.astro       # Accordion-style FAQ
-│   │   ├── Process.astro   # 4-step timeline
-│   │   └── FinalCTA.astro  # Conversion-focused CTA
+│   │   ├── Testimonials.astro # Social proof with randomuser.me photos
+│   │   ├── Process.astro   # 4-step timeline with redesigned layout
+│   │   └── FinalCTA.astro  # Calendly booking widget integration
 │   ├── layouts/
-│   │   └── Base.astro      # Main layout with header/footer
+│   │   └── Base.astro      # Main layout with milky glass navigation
 │   ├── pages/
-│   │   └── index.astro     # Landing page
+│   │   ├── index.astro     # Landing page
+│   │   ├── datenschutz.astro # DSGVO-compliant privacy policy
+│   │   ├── impressum.astro # DDG-compliant legal notice
+│   │   ├── faq.astro       # AI automation FAQ
+│   │   ├── agb.astro       # B2B service terms
+│   │   └── cookie-richtlinien.astro # TTDSG cookie policy
 │   └── styles/
-│       └── global.css      # Global styles & Tailwind
+│       └── global.css      # Global styles & animations
 ├── public/                 # Static assets
-├── dist/                   # Build output (generated)
-└── docs/                   # Documentation & compliance
+│   ├── codariq_logo2.png  # Navigation logo
+│   ├── codariq_logo3.png  # Footer logo
+│   └── images/            # Trust badges and hero assets
+└── dist/                  # Build output (generated)
 ```
 
-## 🛠️ Development Workflow
+## 🎨 Design System
 
-### Phase 1: Project Setup (Week 1)
+### Color Scheme
+- **Primary:** Orange (#EA580C) - CTA buttons and accents
+- **Text:** Gray scale (900-600) for hierarchy
+- **Background:** White with gray-50 for cards
+- **Navigation:** Milky glass effect with backdrop blur
 
-- [x] Repository creation and initial scaffold
-- [x] Node.js 18 LTS with Volta
-- [x] Astro + Tailwind CSS configuration
-- [x] ESLint + Prettier setup
-- [x] Husky pre-commit hooks
-- [x] GitHub Actions CI/CD pipeline
+### Typography
+- **Font:** Switzer Variable (custom font family)
+- **Hierarchy:** Bold headlines, medium body text
+- **Responsive:** Scales from mobile to desktop
 
-### Phase 2: UI Foundation (Week 2)
+### Recent Design Updates
+- **Milky Glass Navigation** - Fixed header with backdrop blur
+- **Gradient CTA Buttons** - Orange gradient from top-left to bottom-right
+- **Process Component Redesign** - Numbers top-left, icons top-right, fixed heights
+- **Testimonial Real Photos** - Replaced SVG graphics with randomuser.me images
+- **Calendly Integration** - Non-scrollable booking widget in FinalCTA
+- **Card-based Layout** - Consistent spacing and text alignment
 
-- [ ] Design system implementation in Figma
-- [ ] Tailwind configuration with custom fonts
-  - **Serif fonts:** Headlines (h1-h3)
-  - **Sans-serif fonts:** Body text
-- [ ] Color scheme setup:
-  - **Primary:** #1E3A8A (blue)
-  - **Secondary:** #059669 (green)
-  - **Accent:** #EA580C (orange)
-- [ ] Layout shell with header/footer
-- [ ] Accessibility tokens (4.5:1 contrast, focus rings)
+## 📄 Legal Pages
 
-### Phase 3: Section Implementation (Weeks 3-4)
+All legal pages are DSGVO-compliant and include real business information:
 
-#### Landing Page Sections (8 total):
+- **Datenschutz** - DSGVO-compliant privacy policy with structured data processing table
+- **Impressum** - Legal notice per § 5 DDG with Codariq business details
+- **AGB** - Comprehensive B2B terms for KI-automation services
+- **Cookie-Richtlinien** - TTDSG-compliant cookie policy
+- **FAQ** - 8 detailed questions about AI automation
 
-1. **Hero Section** (`Hero.astro`)
-   - Dual CTA buttons
-   - Headline + subtitle
-   - Lazy-loaded hero image
+Recent Updates (January 2025):
+- Updated all legal texts with legitimate Codariq business information
+- Added proper DDG compliance tables for Impressum
+- Implemented DSGVO Art. 6 structured data processing overview
+- Included real contact details: Tarik Arthur Marshall, Berlin address
+- Added professional service terms covering analysis, design, development phases
 
-2. **Trust Bar** (`TrustBar.astro`)
-   - TÜV, ISO, DSGVO badges
-   - Inline SVG for crisp rendering
+## 💰 Pricing Strategy
 
-3. **Pain Points** (`PainList.astro`)
-   - 3 key statistics with animated counters
-   - Problem identification
+The site uses **price ranges** instead of specific amounts:
 
-4. **Solution/Benefits** (`Benefits.astro`)
-   - 4-column features grid
-   - Core value propositions
+- **Simple automations:** Low five-digit range
+- **Complex projects:** Mid to high five-digit range
+- **Cost savings:** Mid to high five-digit annual savings
+- **ROI:** Typically achieved within 6-12 months
 
-5. **Social Proof** (`Testimonials.astro`)
-   - MDX-driven testimonials
-   - Support for video & text formats
+Package pricing in Process section maintains specific pricing for transparency.
 
-6. **FAQ Section** (`FAQ.astro`)
-   - Accordion pattern using `<details>`
-   - No JavaScript required
+## 🛠️ Technical Features
 
-7. **Process Steps** (`Process.astro`)
-   - 4-step timeline visualization
-   - Inline SVG icons
+### Performance Optimizations
+- **Static Site Generation** via Astro v5
+- **Minimal JavaScript** - No heavy animations or interactions
+- **Optimized Images** - WebP format with lazy loading
+- **Font Loading** - Preloaded variable fonts
 
-8. **Final CTA** (`FinalCTA.astro`)
-   - Conversion-focused call-to-action
-   - Emphasizes free strategy consultation
+### Accessibility
+- **WCAG 2.1 AA** compliance
+- **Semantic HTML** structure
+- **Focus management** for keyboard navigation
+- **Screen reader** optimized content
 
-### Phase 4: Content & SEO (Week 5)
-
-- [ ] German copy finalization (no anglicisms in CTAs)
-- [ ] SEO meta tags (title, description, OpenGraph)
-- [ ] Sitemap.xml generation
-- [ ] Schema.org structured data (FAQPage, Organization, Service)
-- [ ] Analytics integration (Plausible or GA4 with DSGVO compliance)
-- [ ] VWO A/B testing setup
-
-### Phase 5: Testing & Optimization (Weeks 6-7)
-
-#### Test Coverage Requirements:
-
-- **Unit Tests:** >95% coverage for utilities (Vitest)
-- **Component Tests:** All critical props & ARIA roles (Testing Library)
-- **E2E Tests:** Hero CTA, form submission, ROI calculator (Playwright)
-- **Performance:** All budgets met on 3G Fast (Lighthouse CI + DebugBear)
-- **Accessibility:** 0 violations (axe-core + manual NVDA/VoiceOver)
-- **Visual Regression:** <0.1% pixel difference (Percy)
-
-### Phase 6: Launch & Deployment (Week 8)
-
-- [ ] Deploy to Cloudflare Pages or Vercel
-- [ ] DNS cutover with 15-min TTL fallback
-- [ ] Production smoke testing
-- [ ] Launch checklist sign-off
-- [ ] Documentation handover
-
-## 📊 Performance Monitoring
-
-### Key Metrics Dashboard:
-
-| Metric     | Tool                     | Alert Threshold        |
-| ---------- | ------------------------ | ---------------------- |
-| LCP        | DebugBear RUM            | ≥2s (mobile p75)       |
-| INP        | DebugBear RUM            | ≥200ms (mobile p75)    |
-| Uptime     | Cloudflare Health Checks | <99.9% monthly         |
-| Conversion | VWO + Plausible          | Δ>±0.5% week-over-week |
+### SEO & Analytics
+- **Structured Data** - Organization and services schema
+- **Meta Tags** - Comprehensive OpenGraph and Twitter cards
+- **German Language** - Proper hreflang and locale settings
+- **Performance** - Core Web Vitals optimized
 
 ## 🚢 Deployment
 
-### Strato Web Hosting (Production)
+### Current Hosting
+- **Repository:** https://github.com/bpnace/codariq_v1.git
+- **Domain:** codariq.de (configured for German market)
+- **SSL:** Let's Encrypt certificate
 
-#### Prerequisites:
-
-- Strato "PowerWeb Plus" plan minimum
-- SSH/SFTP enabled in control panel
-- Let's Encrypt SSL activated
-
-#### Manual Deployment:
-
+### Deployment Process
 ```bash
-# Build the project
+# Build for production
 npm run build
 
-# Upload via SFTP
-scp -r dist/* u123456@ssh.strato.de:/htdocs/
+# Deploy to hosting provider
+# (Specific deployment steps depend on hosting choice)
 ```
-
-#### Automated Deployment (GitHub Actions):
-
-```yaml
-# .github/workflows/deploy.yml
-name: Deploy to Strato
-on:
-  push:
-    branches: [main]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - run: npm ci
-      - run: npm run build
-      - name: Deploy via SFTP
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.STRATO_HOST }}
-          username: ${{ secrets.STRATO_USER }}
-          password: ${{ secrets.STRATO_PASS }}
-          script: |
-            rm -rf ~/htdocs/*
-            mkdir -p ~/htdocs
-            cp -r dist/* ~/htdocs/
-```
-
-#### Post-Deployment Checklist:
-
-- [ ] Verify `/robots.txt` and `/sitemap.xml` are accessible
-- [ ] Run Core Web Vitals test via PageSpeed Insights
-- [ ] Confirm DSGVO compliance elements load properly
-- [ ] Test all CTAs and form submissions
-
-## 🧪 A/B Testing Strategy
-
-### Planned Experiments (Post-Launch):
-
-1. **Hero Headline:** Problem-focused vs. Benefit-focused wording
-2. **CTA Copy:** "Demo anfragen" vs. "Strategiegespräch"
-3. **Trust Badge Placement:** Header vs. Hero section
-
-### Testing Tools:
-
-- **VWO:** For experiment setup and variant delivery
-- **Plausible:** For cookieless conversion tracking
-- **DebugBear:** For performance impact monitoring
 
 ## 🔒 Security & Compliance
 
-### Data Privacy (DSGVO):
+### DSGVO Compliance
+- **Cookie-free analytics** preferred
+- **Data minimization** - Only collect necessary data
+- **German servers** - EU data residency
+- **Transparent policies** - Clear privacy notices
 
-- Cookieless analytics (Plausible preferred)
-- Optional VWO consent with explicit opt-in
-- EU data centers (Frankfurt) for hosting
+### Security Headers
+- Content Security Policy implemented
+- HTTPS enforced across all pages
+- No third-party tracking without consent
 
-### Security Headers:
+## 📊 Conversion Optimization
 
-```apache
-# .htaccess
-Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' vwo.com"
-Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-Header always set X-Frame-Options "DENY"
-```
+### Key Conversion Elements
+1. **Orange CTA buttons** - Consistent brand color
+2. **Social proof** - Testimonials with company references
+3. **Clear value props** - Benefits focused on SME pain points
+4. **Trust signals** - Compliance badges and guarantees
+5. **Reduced friction** - Simple contact forms
 
-### Dependencies:
-
-- Weekly `npm audit` via Renovate bot
-- No critical vulnerabilities allowed in production
-
-## 📚 Technology Stack
-
-### Core Technologies:
-
-- **Framework:** Astro v4 (static site generation)
-- **Styling:** Tailwind CSS 3.5
-- **Build Tool:** Vite 5
-- **Node.js:** v18 LTS (managed via Volta)
-
-### Testing & Quality:
-
-- **Unit Testing:** Vitest
-- **Component Testing:** Testing Library
-- **E2E Testing:** Playwright
-- **Accessibility:** axe-core
-- **Visual Regression:** Percy
-- **Performance:** Lighthouse CI
-
-### Analytics & Optimization:
-
-- **Analytics:** Plausible (DSGVO-compliant)
-- **A/B Testing:** VWO
-- **Performance Monitoring:** DebugBear
-- **Design System:** Figma + Storybook
-
-### Deployment & Hosting:
-
-- **Hosting:** Strato Web Hosting (production)
-- **CDN:** Cloudflare (optional)
-- **CI/CD:** GitHub Actions
-- **SSL:** Let's Encrypt (via Strato)
+### A/B Testing Opportunities
+- Hero headline variations (problem vs. solution focused)
+- CTA button text ("Termin buchen" vs. "Demo anfragen")
+- Trust badge placement and messaging
+- Testimonial layout and emphasis
 
 ## 🤝 Contributing
 
-### Development Process:
-
-1. **Daily Standup:** Async in #landing-daily Slack thread
-2. **Sprint Review:** Fridays 14:00 CET via Google Meet
-3. **Decision Records:** ADR template in `/docs/adr/`
-
-### Code Standards:
-
+### Code Standards
 - ESLint + Prettier for consistent formatting
-- Husky pre-commit hooks for quality gates
-- All components must pass accessibility audit
-- Performance budgets enforced in CI
+- Component-based architecture
+- Responsive design mandatory
+- Accessibility testing required
+
+### Development Workflow
+1. Feature branches from main
+2. Pull request reviews
+3. Automated testing via CI/CD
+4. Performance budget enforcement
 
 ---
+
+## 🎯 Current Status (January 2025)
+
+**✅ Completed Features:**
+- Complete Codariq rebranding from zynapse/stackwerkhaus
+- Real legal pages with legitimate business information
+- Calendly booking widget integration
+- Process component redesign with fixed text alignment
+- Testimonial photos from randomuser.me
+- Gradient CTA buttons with consistent styling
+- DSGVO/DDG/TTDSG compliance implementation
+
+**🔄 In Progress:**
+- Performance optimization for mobile devices
+- August 2025 DSGVO regulation compliance check
+- EAA (European Accessibility Act) compliance verification
+
+**📋 Next Tasks:**
+- Mobile-first performance optimization
+- Core Web Vitals improvement
+- Accessibility audit and fixes
+- Advanced analytics implementation
 
 ## 📞 Support
 
 For questions about this project:
 
 - **Technical Issues:** Create GitHub issue
-- **Business Questions:** Contact project stakeholders
-- **Performance Alerts:** #web-alerts Slack channel
+- **Business Questions:** kontakt@codariq.de
+- **Performance Monitoring:** Core Web Vitals dashboard
 
 ---
 
-_Built with ❤️ for the German Mittelstand • © 2025 Codariq_
+_Built for kleine und mittelständische Unternehmen • © 2025 Codariq_

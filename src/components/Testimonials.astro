@@ -25,7 +25,7 @@ const {
       name: "Dr. Michael Weber",
       position: "Geschäftsführer",
       company: "Weber Maschinenbau GmbH",
-      image: "/images/testimonials/dr-michael-weber.svg",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
       results: {
         metric: "45%",
         improvement: "Effizienzsteigerung"
@@ -37,7 +37,7 @@ const {
       name: "Petra Hoffmann",
       position: "Leiterin Kundenservice",
       company: "TechSolutions AG",
-      image: "/images/testimonials/petra-hoffmann.svg",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
       results: {
         metric: "80%",
         improvement: "Automatisierte Anfragen"
@@ -48,7 +48,7 @@ const {
       name: "Thomas Schneider",
       position: "IT-Leiter",
       company: "Schneider Logistik",
-      image: "/images/testimonials/thomas-schneider.svg",
+      image: "https://randomuser.me/api/portraits/men/22.jpg",
       results: {
         metric: "6 Monate",
         improvement: "ROI erreicht"
@@ -59,7 +59,7 @@ const {
       name: "Maria Richter",
       position: "Geschäftsführerin",
       company: "Richter & Söhne KG",
-      image: "/images/testimonials/maria-richter.svg",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
       results: {
         metric: "25%",
         improvement: "Kosteneinsparung"
@@ -121,6 +121,8 @@ const {
                         src={testimonial.image} 
                         alt={`${testimonial.name}, ${testimonial.position} bei ${testimonial.company}`}
                         class="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <div class="w-full h-full flex items-center justify-center text-white font-bold text-sm bg-gray-400">
@@ -186,7 +188,7 @@ const {
         </p>
         <a 
           href="#final-cta"
-          class="inline-flex items-center gap-2 bg-orange-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-orange-700 transition-colors font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200"
+          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg transform hover:scale-105 active:scale-100"
         >
           Kostenloses Strategiegespräch
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

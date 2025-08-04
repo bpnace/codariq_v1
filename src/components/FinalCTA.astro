@@ -39,7 +39,14 @@ const {
       
       <!-- Contact Form -->
       <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 md:p-10">
-        <form class="space-y-6">
+        <div id="form-errors" role="alert" aria-live="polite" class="hidden mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <h3 class="font-semibold text-red-800 mb-2">Bitte korrigieren Sie folgende Fehler:</h3>
+          <ul id="error-list" class="list-disc list-inside text-red-700"></ul>
+        </div>
+        
+        <form class="space-y-6" novalidate>
+          <fieldset>
+            <legend class="sr-only">Kontaktinformationen</legend>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
@@ -51,9 +58,12 @@ const {
                 id="name" 
                 name="name" 
                 required
+                autocomplete="name"
+                aria-describedby="name-error"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
                 placeholder="Ihr vollständiger Name"
               />
+              <div id="name-error" role="alert" aria-live="polite" class="mt-1 text-sm text-red-600 hidden"></div>
             </div>
             
             <div>
@@ -65,9 +75,12 @@ const {
                 id="company" 
                 name="company" 
                 required
+                autocomplete="organization"
+                aria-describedby="company-error"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
                 placeholder="Ihr Unternehmensname"
               />
+              <div id="company-error" role="alert" aria-live="polite" class="mt-1 text-sm text-red-600 hidden"></div>
             </div>
           </div>
           
@@ -81,9 +94,12 @@ const {
                 id="email" 
                 name="email" 
                 required
+                autocomplete="email"
+                aria-describedby="email-error"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
                 placeholder="ihre@email.de"
               />
+              <div id="email-error" role="alert" aria-live="polite" class="mt-1 text-sm text-red-600 hidden"></div>
             </div>
             
             <div>
@@ -94,6 +110,7 @@ const {
                 type="tel" 
                 id="phone" 
                 name="phone"
+                autocomplete="tel"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
                 placeholder="+49 XXX XXXXXXX"
               />
@@ -117,7 +134,7 @@ const {
           <div class="pt-4">
             <button 
               type="submit"
-              class="w-full bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-gray-300"
+              class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-8 py-4 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg transform hover:scale-105 active:scale-100"
             >
               Kostenloses Strategiegespräch vereinbaren
             </button>
@@ -130,23 +147,80 @@ const {
             </p>
           </div>
           
+          </fieldset>
         </form>
       </div>
       
-      <!-- Alternative Contact -->
+      <!-- Calendly Widget with Loading State -->
       <div class="text-center mt-8">
-        <p class="text-gray-600 text-sm mb-3">Oder rufen Sie uns direkt an:</p>
-        <a 
-          href="tel:+49XXXXXXXXX" 
-          class="inline-flex items-center gap-2 text-gray-900 hover:text-gray-700 transition-colors font-medium text-lg"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-          </svg>
-          +49 XXX XXXXXXX
-        </a>
+        <p class="text-gray-600 text-sm mb-6">Oder buchen Sie direkt einen Termin:</p>
+        <div class="bg-white rounded-xl border border-gray-200 p-6 max-w-5xl mx-auto">
+          <div id="calendly-container">
+            <div class="min-h-[700px] flex flex-col items-center justify-center bg-gray-50 rounded-lg">
+              <button 
+                id="load-calendly" 
+                class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-semibold mb-4 min-h-[44px] min-w-[44px] transform hover:scale-105 active:scale-100"
+                aria-describedby="calendly-description"
+              >
+                Terminkalender laden
+              </button>
+              <p id="calendly-description" class="text-sm text-gray-600 text-center max-w-md">
+                Lädt den Calendly-Terminplaner für die direkte Buchung. 
+                <a href="https://calendly.com/kontakt-codariq/45min" class="text-blue-600 hover:underline" target="_blank" rel="noopener">
+                  Alternativ direkt zu Calendly
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       
     </div>
   </div>
 </section>
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', function() {
+  const loadButton = document.getElementById('load-calendly');
+  const container = document.getElementById('calendly-container');
+  
+  if (loadButton && container) {
+    // Support both click and keyboard events
+    function loadCalendlyWidget() {
+      // Show loading state
+      container.innerHTML = `
+        <div class="min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
+          <div class="text-center">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
+            <p class="text-gray-600">Terminkalender wird geladen...</p>
+          </div>
+        </div>
+      `;
+      
+      // Load Calendly widget
+      setTimeout(() => {
+        container.innerHTML = `
+          <div class="calendly-inline-widget" 
+               data-url="https://calendly.com/kontakt-codariq/45min?hide_gdpr_banner=1&hide_event_type_details=1&embed_type=Inline" 
+               style="min-width:320px;height:700px;width:100%;"></div>
+        `;
+        
+        // Load Calendly script
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        document.head.appendChild(script);
+      }, 100);
+    }
+    
+    // Add event listeners for both click and keyboard
+    loadButton.addEventListener('click', loadCalendlyWidget);
+    loadButton.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        loadCalendlyWidget();
+      }
+    });
+  }
+});
+</script>
