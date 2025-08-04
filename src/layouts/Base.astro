@@ -37,30 +37,52 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage || '/og-image.jpg'} />
     
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="https://assets.calendly.com">
+    <link rel="preconnect" href="https://assets.calendly.com" crossorigin>
+    
     <!-- Fonts -->
     <link rel="preload" href="/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Switzer-Variable.ttf" as="font" type="font/ttf" crossorigin />
     
     <!-- Global Styles -->
     <style>
       @font-face {
         font-family: 'Switzer Variable';
-        src: url('/fonts/Switzer-Variable.woff2') format('woff2'),
-             url('/fonts/Switzer-Variable.ttf') format('truetype');
+        src: url('/fonts/Switzer-Variable.woff2') format('woff2');
         font-weight: 100 900;
         font-style: normal;
         font-display: swap;
+        size-adjust: 100.5%;
       }
       
       html {
         font-family: 'Switzer Variable', system-ui, sans-serif;
       }
       
-      /* Custom focus styles for accessibility */
+      /* Enhanced focus styles for EAA compliance */
       :focus-visible {
-        outline: 2px solid #1E3A8A;
+        outline: 3px solid #1E3A8A;
         outline-offset: 2px;
         border-radius: 4px;
+      }
+      
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        :focus-visible {
+          outline: 4px solid;
+          outline-color: Highlight;
+        }
+      }
+      
+      /* Reduced motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
       }
     </style>
     
@@ -73,7 +95,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         "alternateName": "Codariq GmbH",
         "description": "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen. Spezialisiert auf Prozessautomatisierung, intelligente Datenanalyse und KI-gestützte Geschäftslösungen.",
         "url": "https://codariq.de",
-        "logo": "https://codariq.de/codariq_logo1.png",
+        "logo": "https://codariq.de/codariq_logo2.png",
         "image": "https://codariq.de/images/hero/hero-placeholder.svg",
         "foundingDate": "2020",
         "foundingLocation": {
@@ -199,6 +221,25 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   </head>
   
   <body class="bg-white text-gray-900 antialiased">
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    <!-- Skip Links for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white p-3 z-50 focus:z-50 rounded">
+      Zum Hauptinhalt springen
+    </a>
+    
     <div class="min-h-screen flex flex-col">
       <header class="fixed top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-lg border-b border-white/30" style="position: fixed !important; transform: translateY(0) !important;">
         <!-- Header content will be added here -->
@@ -226,11 +267,11 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         </nav>
       </header>
 
-      <main class="flex-1">
+      <main class="flex-1" id="main-content" role="main">
         <slot />
       </main>
 
-      <footer class="bg-gray-50 border-t border-gray-200">
+      <footer class="bg-gray-50 border-t border-gray-200" role="contentinfo">
         <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div class="col-span-2">
