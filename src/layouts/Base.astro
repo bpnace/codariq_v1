@@ -76,6 +76,18 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         }
       }
       
+      /* Consistent CTA button animations */
+      .cta-button {
+        transform-origin: center;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        will-change: transform;
+        backface-visibility: hidden;
+      }
+      
+      .cta-button:hover {
+        transform: scale(1.02);
+      }
+      
       /* Reduced motion for accessibility */
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -84,6 +96,10 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
+        }
+        
+        .cta-button:hover {
+          transform: none !important;
         }
       }
     </style>
@@ -223,17 +239,14 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   </head>
   
   <body class="bg-white text-gray-900 antialiased">
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Cleanup - Clear existing SW for development -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js')
-            .then(function(registration) {
-              console.log('SW registered: ', registration);
-            })
-            .catch(function(registrationError) {
-              console.log('SW registration failed: ', registrationError);
-            });
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister();
+            console.log('ServiceWorker unregistered');
+          }
         });
       }
     </script>
@@ -251,15 +264,29 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               <img src="/codariq_logo2.png" alt="Codariq" class="h-6 sm:h-10 w-auto transition-all duration-300 filter grayscale hover:grayscale-0" id="nav-logo" />
             </a>
           </div>
+          <!-- Desktop Navigation -->
           <div class="hidden sm:flex items-center space-x-4 md:space-x-8" id="nav-links">
             <a href="/#benefits" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Lösungen</a>
             <a href="/#testimonials" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Referenzen</a>
             <a href="/#process" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Vorgehen</a>
           </div>
+          
           <div class="flex items-center space-x-4">
+            <!-- Mobile Menu Button -->
+            <button 
+              id="mobile-menu-button"
+              class="sm:hidden p-2 text-gray-800 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
+              aria-label="Menu öffnen"
+              aria-expanded="false"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+            
             <a 
               href="/#final-cta" 
-              class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-bold text-xs sm:text-sm md:text-base shadow-lg transform hover:scale-105 active:scale-100"
+              class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-bold text-xs sm:text-sm md:text-base shadow-lg cta-button"
               aria-label="Strategiegespräch vereinbaren"
             >
               <span class="hidden sm:inline">Termin buchen</span>
@@ -267,6 +294,18 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
             </a>
           </div>
         </nav>
+        
+        <!-- Mobile Menu -->
+        <div 
+          id="mobile-menu" 
+          class="sm:hidden hidden bg-white/95 backdrop-blur-lg border-b border-white/30"
+        >
+          <div class="px-4 py-3 space-y-3">
+            <a href="/#benefits" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Lösungen</a>
+            <a href="/#testimonials" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Referenzen</a>
+            <a href="/#process" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Vorgehen</a>
+          </div>
+        </div>
       </header>
 
       <main class="flex-1" id="main-content" role="main">
@@ -320,5 +359,39 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
     
     <!-- Cookie Consent -->
     <CookieConsent />
+    
+    <!-- Mobile Menu JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', function() {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+              mobileMenu.classList.add('hidden');
+              mobileMenuButton.setAttribute('aria-expanded', 'false');
+              mobileMenuButton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+            } else {
+              mobileMenu.classList.remove('hidden');
+              mobileMenuButton.setAttribute('aria-expanded', 'true');
+              mobileMenuButton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+            }
+          });
+          
+          // Close mobile menu when clicking on a link
+          const mobileLinks = mobileMenu.querySelectorAll('a');
+          mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              mobileMenu.classList.add('hidden');
+              mobileMenuButton.setAttribute('aria-expanded', 'false');
+              mobileMenuButton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -19,8 +19,7 @@ const {
   secondaryCTALink = "tel:+49XXXXXXXXX"
 } = Astro.props;
 ---
-
-<section id="final-cta" class="py-16 sm:py-20 md:py-24 bg-gray-50">
+<section id="final-cta" class="py-10 sm:py-12 bg-gray-50">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     <div class="max-w-4xl mx-auto">
       
@@ -39,86 +38,109 @@ const {
       
       <!-- Contact Form -->
       <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 md:p-10">
+        <!-- Success Message -->
+        <div id="form-success" role="alert" aria-live="polite" class="hidden mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div>
+              <h3 class="font-semibold text-green-800">Vielen Dank für Ihre Anfrage!</h3>
+              <p class="text-green-700 mt-1">Wir werden uns innerhalb von 24 Stunden bei Ihnen melden.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Error Messages -->
         <div id="form-errors" role="alert" aria-live="polite" class="hidden mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
           <h3 class="font-semibold text-red-800 mb-2">Bitte korrigieren Sie folgende Fehler:</h3>
           <ul id="error-list" class="list-disc list-inside text-red-700"></ul>
         </div>
         
-        <form class="space-y-6" novalidate>
+        <form action="https://formsubmit.co/kontakt@codariq.de" method="POST" class="space-y-5" id="contact-form">
+          
           <fieldset>
             <legend class="sr-only">Kontaktinformationen</legend>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <div>
-              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                Name *
-              </label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                required
-                autocomplete="name"
-                aria-describedby="name-error"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="Ihr vollständiger Name"
-              />
-              <div id="name-error" role="alert" aria-live="polite" class="mt-1 text-sm text-red-600 hidden"></div>
-            </div>
             
-            <div>
-              <label for="company" class="block text-sm font-medium text-gray-700 mb-2">
-                Unternehmen *
-              </label>
-              <input 
-                type="text" 
-                id="company" 
-                name="company" 
-                required
-                autocomplete="organization"
-                aria-describedby="company-error"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="Ihr Unternehmensname"
-              />
-              <div id="company-error" role="alert" aria-live="polite" class="mt-1 text-sm text-red-600 hidden"></div>
-            </div>
+            <!-- FormSubmit.co Configuration -->
+            <input type="hidden" name="_subject" value="Neue Kontaktanfrage von codariq.de">
+            <input type="hidden" name="_next" value="https://codariq.de?success=true#final-cta">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+          
+          <!-- Name Field -->
+          <div class="space-y-2">
+            <label for="name" class="block text-sm font-medium text-gray-700">
+              Name *
+            </label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required
+              autocomplete="name"
+              aria-describedby="name-error"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              placeholder="Ihr vollständiger Name"
+            />
+            <div id="name-error" role="alert" aria-live="polite" class="text-sm text-red-600 hidden"></div>
           </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                E-Mail *
-              </label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                required
-                autocomplete="email"
-                aria-describedby="email-error"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="ihre@email.de"
-              />
-              <div id="email-error" role="alert" aria-live="polite" class="mt-1 text-sm text-red-600 hidden"></div>
-            </div>
-            
-            <div>
-              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-                Telefon
-              </label>
-              <input 
-                type="tel" 
-                id="phone" 
-                name="phone"
-                autocomplete="tel"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="+49 XXX XXXXXXX"
-              />
-            </div>
+          <!-- Company Field -->
+          <div class="space-y-2">
+            <label for="company" class="block text-sm font-medium text-gray-700">
+              Unternehmen *
+            </label>
+            <input 
+              type="text" 
+              id="company" 
+              name="company" 
+              required
+              autocomplete="organization"
+              aria-describedby="company-error"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              placeholder="Ihr Unternehmensname"
+            />
+            <div id="company-error" role="alert" aria-live="polite" class="text-sm text-red-600 hidden"></div>
           </div>
           
-          <div>
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+          <!-- Email Field -->
+          <div class="space-y-2">
+            <label for="email" class="block text-sm font-medium text-gray-700">
+              E-Mail *
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required
+              autocomplete="email"
+              aria-describedby="email-error"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              placeholder="ihre@email.de"
+            />
+            <div id="email-error" role="alert" aria-live="polite" class="text-sm text-red-600 hidden"></div>
+          </div>
+          
+          <!-- Phone Field -->
+          <div class="space-y-2">
+            <label for="phone" class="block text-sm font-medium text-gray-700">
+              Telefon
+            </label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone"
+              autocomplete="tel"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              placeholder="+49 XXX XXXXXXX"
+            />
+            <div class="text-sm text-red-600 hidden"></div>
+          </div>
+          
+          <!-- Message Field -->
+          <div class="space-y-2">
+            <label for="message" class="block text-sm font-medium text-gray-700">
               Ihre Nachricht
             </label>
             <textarea 
@@ -134,7 +156,7 @@ const {
           <div class="pt-4">
             <button 
               type="submit"
-              class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-8 py-4 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg transform hover:scale-105 active:scale-100"
+              class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-8 py-4 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
             >
               Kostenloses Strategiegespräch vereinbaren
             </button>
@@ -159,7 +181,7 @@ const {
             <div class="min-h-[700px] flex flex-col items-center justify-center bg-gray-50 rounded-lg">
               <button 
                 id="load-calendly" 
-                class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-semibold mb-4 min-h-[44px] min-w-[44px] transform hover:scale-105 active:scale-100"
+                class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold mb-4 min-h-[44px] min-w-[44px] cta-button"
                 aria-describedby="calendly-description"
               >
                 Terminkalender laden
@@ -178,6 +200,20 @@ const {
     </div>
   </div>
 </section>
+
+<style>
+  /* Consistent CTA button animation */
+  .cta-button {
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.02);
+  }
+</style>
 
 <script type="module">
 document.addEventListener('DOMContentLoaded', function() {
@@ -231,10 +267,20 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Load Calendly widget
       setTimeout(() => {
+        // Check if mobile device
+        const isMobile = window.innerWidth < 768;
+        const height = isMobile ? '580px' : '700px';
+        
+        // Mobile-optimized parameters
+        const baseParams = 'hide_gdpr_banner=1&hide_event_type_details=1&embed_type=Inline';
+        const mobileParams = isMobile 
+          ? `${baseParams}&embed_domain=${encodeURIComponent(window.location.hostname)}&background_color=ffffff&text_color=111827&primary_color=ea580c`
+          : baseParams;
+        
         container.innerHTML = `
           <div class="calendly-inline-widget" 
-               data-url="https://calendly.com/kontakt-codariq/45min?hide_gdpr_banner=1&hide_event_type_details=1&embed_type=Inline" 
-               style="min-width:320px;height:700px;width:100%;"></div>
+               data-url="https://calendly.com/kontakt-codariq/45min?${mobileParams}" 
+               style="min-width:320px;height:${height};width:100%;border-radius:8px;overflow:hidden;"></div>
         `;
         
         // Load Calendly script
@@ -251,6 +297,89 @@ document.addEventListener('DOMContentLoaded', function() {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         loadCalendlyWidget();
+      }
+    });
+  }
+});
+
+// Handle form submission and success/error messages
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const formErrors = document.getElementById('form-errors');
+  const errorList = document.getElementById('error-list');
+  const successDiv = document.getElementById('form-success');
+  
+  // Check for success parameter in URL (from FormSubmit.co redirect)
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('success') === 'true') {
+    if (successDiv && form) {
+      successDiv.classList.remove('hidden');
+      form.style.display = 'none';
+      
+      // Scroll to success message
+      successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Clean URL
+      window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+    }
+  }
+  
+  // Client-side form validation
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      // Reset error states
+      formErrors.classList.add('hidden');
+      errorList.innerHTML = '';
+      
+      // Get required fields
+      const name = document.getElementById('name');
+      const company = document.getElementById('company');
+      const email = document.getElementById('email');
+      
+      let hasErrors = false;
+      const errors = [];
+      
+      // Validate name
+      if (!name.value.trim()) {
+        errors.push('Bitte geben Sie Ihren Namen ein');
+        document.getElementById('name-error').textContent = 'Bitte geben Sie Ihren Namen ein';
+        document.getElementById('name-error').classList.remove('hidden');
+        hasErrors = true;
+      } else {
+        document.getElementById('name-error').classList.add('hidden');
+      }
+      
+      // Validate company
+      if (!company.value.trim()) {
+        errors.push('Bitte geben Sie Ihren Unternehmensnamen ein');
+        document.getElementById('company-error').textContent = 'Bitte geben Sie Ihren Unternehmensnamen ein';
+        document.getElementById('company-error').classList.remove('hidden');
+        hasErrors = true;
+      } else {
+        document.getElementById('company-error').classList.add('hidden');
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+        errors.push('Bitte geben Sie eine gültige E-Mail-Adresse ein');
+        document.getElementById('email-error').textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+        document.getElementById('email-error').classList.remove('hidden');
+        hasErrors = true;
+      } else {
+        document.getElementById('email-error').classList.add('hidden');
+      }
+      
+      // If there are errors, prevent form submission and show error messages
+      if (hasErrors) {
+        e.preventDefault();
+        formErrors.classList.remove('hidden');
+        errors.forEach(error => {
+          const li = document.createElement('li');
+          li.textContent = error;
+          errorList.appendChild(li);
+        });
+        formErrors.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
   }
