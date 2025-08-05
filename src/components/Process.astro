@@ -277,6 +277,18 @@ const {
 </section>
 
 <style>
+  /* Consistent CTA button animation */
+  .cta-button {
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.02);
+  }
+  
   /* Pulse animation for step numbers */
   @keyframes pulse {
     0%, 100% {
