@@ -10,6 +10,7 @@ const { className = "" } = Astro.props;
 <div 
   id="cookie-consent" 
   class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 transform translate-y-full transition-transform duration-300 ease-in-out"
+  data-cookie-banner
   role="dialog"
   aria-labelledby="cookie-consent-title"
   aria-describedby="cookie-consent-description"
@@ -67,6 +68,19 @@ const { className = "" } = Astro.props;
     </div>
   </div>
 </div>
+
+<!-- Immediate banner show script -->
+<script>
+  // Show banner immediately if no consent exists
+  (function() {
+    if (!localStorage.getItem('cookieConsent')) {
+      const banner = document.getElementById('cookie-consent');
+      if (banner) {
+        banner.classList.remove('translate-y-full');
+      }
+    }
+  })();
+</script>
 
 <!-- Cookie Settings Modal -->
 <div 
@@ -213,9 +227,8 @@ class CookieConsent {
 
   init() {
     // Check if consent was already given
-    if (!this.hasConsent()) {
-      this.showBanner();
-    } else {
+    if (this.hasConsent()) {
+      this.hideBanner();
       this.loadApprovedServices();
     }
 
@@ -285,9 +298,8 @@ class CookieConsent {
   showBanner() {
     const banner = document.getElementById('cookie-consent');
     if (banner) {
-      setTimeout(() => {
-        banner.classList.remove('translate-y-full');
-      }, 1000);
+      banner.style.display = 'block';
+      banner.classList.remove('translate-y-full');
     }
   }
 
@@ -295,6 +307,9 @@ class CookieConsent {
     const banner = document.getElementById('cookie-consent');
     if (banner) {
       banner.classList.add('translate-y-full');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
     }
   }
 
