@@ -21,7 +21,7 @@ const {
       title: "Analyse & Beratung",
       description: "Wir analysieren Ihre aktuellen Prozesse und identifizieren das größte Automatisierungspotential.",
       details: [
-        "Kostenlose Erstberatung (30 Min.)",
+        "Kostenlose Erstberatung (45 Min.)",
         "Detaillierte Prozessanalyse",
         "ROI-Kalkulation und Machbarkeitsstudie",
         "Individuelles Lösungskonzept"
@@ -263,7 +263,7 @@ const {
                 </div>
                 <a 
                   href="/#final-cta" 
-                  class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-medium text-sm shadow-lg transform hover:scale-105 active:scale-100 inline-block"
+                  class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block"
                 >
                   Anfragen
                 </a>
@@ -277,6 +277,18 @@ const {
 </section>
 
 <style>
+  /* Consistent CTA button animation */
+  .cta-button {
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.02);
+  }
+  
   /* Pulse animation for step numbers */
   @keyframes pulse {
     0%, 100% {

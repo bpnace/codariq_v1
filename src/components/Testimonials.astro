@@ -86,9 +86,10 @@ const {
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 max-w-8xl mx-auto px-2 sm:px-3 md:px-4 relative">
       {testimonials.map((testimonial, index) => {
         const isSecondRow = index >= 2;
+        const isHiddenOnMobile = index >= 2; // Hide testimonials 3 and 4 on mobile
         return (
           <div 
-            class={`group animate-fade-in-up relative ${isSecondRow ? 'testimonial-blur' : ''}`}
+            class={`group animate-fade-in-up relative ${isSecondRow ? 'testimonial-blur' : ''} ${isHiddenOnMobile ? 'hidden md:block' : ''}`}
             style={`animation-delay: ${(index + 1) * 150}ms`}
           >
             <!-- Testimonial Card -->
@@ -184,11 +185,11 @@ const {
           Überzeugt? Lassen Sie uns sprechen!
         </h3>
         <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-          Erfahren Sie in einem kostenlosen 30-minütigen Strategiegespräch, wie KI-Automatisierung auch Ihr Unternehmen transformieren kann.
+          Erfahren Sie in einem kostenlosen 45-minütigen Strategiegespräch, wie KI-Automatisierung auch Ihr Unternehmen transformieren kann.
         </p>
         <a 
           href="#final-cta"
-          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-300 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg transform hover:scale-105 active:scale-100"
+          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
         >
           Kostenloses Strategiegespräch
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
