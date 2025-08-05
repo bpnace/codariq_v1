@@ -121,11 +121,11 @@ import '../styles/global.css';
           Weitere Fragen?
         </h3>
         <p class="text-gray-600 mb-6">
-          Wir beraten Sie gerne in einem kostenlosen 30-minütigen Strategiegespräch zu Ihren individuellen Anforderungen.
+          Wir beraten Sie gerne in einem kostenlosen 45-minütigen Strategiegespräch zu Ihren individuellen Anforderungen.
         </p>
         <a 
           href="/#final-cta" 
-          class="inline-flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-full hover:bg-orange-700 transition-colors font-medium"
+          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium shadow-lg cta-button"
         >
           Kostenlose Beratung anfragen
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,3 +136,17 @@ import '../styles/global.css';
     </div>
   </div>
 </Base>
+
+<style>
+  /* Consistent CTA button animation */
+  .cta-button {
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.02);
+  }
+</style>
