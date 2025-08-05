@@ -64,7 +64,7 @@ const {
             
             <!-- FormSubmit.co Configuration -->
             <input type="hidden" name="_subject" value="Neue Kontaktanfrage von codariq.de">
-            <input type="hidden" name="_next" value="https://codariq.de?success=true#final-cta">
+            <input type="hidden" name="_next" value="https://codariq.de?success=true">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
           
@@ -316,11 +316,13 @@ document.addEventListener('DOMContentLoaded', function() {
       successDiv.classList.remove('hidden');
       form.style.display = 'none';
       
-      // Scroll to success message
-      successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Clean URL first to prevent any hash-based jumping
+      window.history.replaceState({}, document.title, window.location.pathname);
       
-      // Clean URL
-      window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+      // Delay scroll to ensure DOM is ready and no competing scrolls
+      setTimeout(() => {
+        successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
     }
   }
   

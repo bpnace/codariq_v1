@@ -360,9 +360,10 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
     <!-- Cookie Consent -->
     <CookieConsent />
     
-    <!-- Mobile Menu JavaScript -->
+    <!-- Mobile Menu and Smooth Scrolling JavaScript -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        // Mobile Menu Logic
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
@@ -391,6 +392,42 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
             });
           });
         }
+        
+        // Enhanced Smooth Scrolling for Internal Links
+        const allLinks = document.querySelectorAll('a[href^="#"], a[href^="/#"]');
+        allLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            const targetId = href.startsWith('/#') ? href.substring(2) : href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              e.preventDefault();
+              
+              // Close mobile menu if open
+              if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                if (mobileMenuButton) {
+                  mobileMenuButton.setAttribute('aria-expanded', 'false');
+                  mobileMenuButton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                }
+              }
+              
+              // Smooth scroll with offset for fixed header
+              const headerOffset = 80; // Account for fixed header
+              const elementPosition = targetElement.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+              
+              // Update URL without causing a jump
+              window.history.pushState(null, null, href);
+            }
+          });
+        });
       });
     </script>
   </body>
