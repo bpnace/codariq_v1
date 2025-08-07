@@ -1,0 +1,12 @@
+.
+./_astro
+./agb
+./cookie-richtlinien
+./datenschutz
+./faq
+./fonts
+./images
+./images/badges
+./images/hero
+./images/testimonials
+./impressum
