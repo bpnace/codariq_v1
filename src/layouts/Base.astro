@@ -16,7 +16,11 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <meta name="msapplication-TileImage" content="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Primary Meta Tags -->
