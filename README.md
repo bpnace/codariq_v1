@@ -11,12 +11,14 @@
 **Codariq** is a KI-Automatisierung (AI automation) service provider specializing in small and medium-sized enterprises (SMEs) with 5-500 employees across Germany, Austria, and Switzerland.
 
 ### Target Audience
+
 - **Company Size:** 5-500 employees
 - **Market Focus:** German-speaking SMEs (DACH region)
 - **Industries:** Manufacturing, logistics, professional services, retail
 - **Pain Points:** Manual processes, inefficient workflows, data entry tasks
 
 ### Key Services
+
 1. **Prozess-Automatisierung** - Business process automation
 2. **Kundenservice-KI** - AI-powered customer service solutions
 3. **Document Workflows** - Automated document processing
@@ -98,17 +100,20 @@ codariq_v1/
 ## 🎨 Design System
 
 ### Color Scheme
+
 - **Primary:** Orange (#EA580C) - CTA buttons and accents
 - **Text:** Gray scale (900-600) for hierarchy
 - **Background:** White with gray-50 for cards
 - **Navigation:** Milky glass effect with backdrop blur
 
 ### Typography
+
 - **Font:** Switzer Variable (custom font family)
 - **Hierarchy:** Bold headlines, medium body text
 - **Responsive:** Scales from mobile to desktop
 
 ### Recent Design Updates
+
 - **Milky Glass Navigation** - Fixed header with backdrop blur
 - **Gradient CTA Buttons** - Orange gradient from top-left to bottom-right
 - **Process Component Redesign** - Numbers top-left, icons top-right, fixed heights
@@ -127,6 +132,7 @@ All legal pages are DSGVO-compliant and include real business information:
 - **FAQ** - 8 detailed questions about AI automation
 
 Recent Updates (January 2025):
+
 - Updated all legal texts with legitimate Codariq business information
 - Added proper DDG compliance tables for Impressum
 - Implemented DSGVO Art. 6 structured data processing overview
@@ -147,18 +153,21 @@ Package pricing in Process section maintains specific pricing for transparency.
 ## 🛠️ Technical Features
 
 ### Performance Optimizations
+
 - **Static Site Generation** via Astro v5
 - **Minimal JavaScript** - No heavy animations or interactions
 - **Optimized Images** - WebP format with lazy loading
 - **Font Loading** - Preloaded variable fonts
 
 ### Accessibility
+
 - **WCAG 2.1 AA** compliance
 - **Semantic HTML** structure
 - **Focus management** for keyboard navigation
 - **Screen reader** optimized content
 
 ### SEO & Analytics
+
 - **Structured Data** - Organization and services schema
 - **Meta Tags** - Comprehensive OpenGraph and Twitter cards
 - **German Language** - Proper hreflang and locale settings
@@ -167,11 +176,13 @@ Package pricing in Process section maintains specific pricing for transparency.
 ## 🚢 Deployment
 
 ### Current Hosting
+
 - **Repository:** https://github.com/bpnace/codariq_v1.git
 - **Domain:** codariq.de (configured for German market)
 - **SSL:** Let's Encrypt certificate
 
 ### Deployment Process
+
 ```bash
 # Build for production
 npm run build
@@ -183,12 +194,14 @@ npm run build
 ## 🔒 Security & Compliance
 
 ### DSGVO Compliance
+
 - **Cookie-free analytics** preferred
 - **Data minimization** - Only collect necessary data
 - **German servers** - EU data residency
 - **Transparent policies** - Clear privacy notices
 
 ### Security Headers
+
 - Content Security Policy implemented
 - HTTPS enforced across all pages
 - No third-party tracking without consent
@@ -196,6 +209,7 @@ npm run build
 ## 📊 Conversion Optimization
 
 ### Key Conversion Elements
+
 1. **Orange CTA buttons** - Consistent brand color
 2. **Social proof** - Testimonials with company references
 3. **Clear value props** - Benefits focused on SME pain points
@@ -203,6 +217,7 @@ npm run build
 5. **Reduced friction** - Simple contact forms
 
 ### A/B Testing Opportunities
+
 - Hero headline variations (problem vs. solution focused)
 - CTA button text ("Termin buchen" vs. "Demo anfragen")
 - Trust badge placement and messaging
@@ -211,12 +226,14 @@ npm run build
 ## 🤝 Contributing
 
 ### Code Standards
+
 - ESLint + Prettier for consistent formatting
 - Component-based architecture
 - Responsive design mandatory
 - Accessibility testing required
 
 ### Development Workflow
+
 1. Feature branches from main
 2. Pull request reviews
 3. Automated testing via CI/CD
@@ -227,6 +244,7 @@ npm run build
 ## 🎯 Current Status (January 2025)
 
 **✅ Completed Features:**
+
 - Complete Codariq rebranding from zynapse/stackwerkhaus
 - Real legal pages with legitimate business information
 - Calendly booking widget integration
@@ -236,11 +254,13 @@ npm run build
 - DSGVO/DDG/TTDSG compliance implementation
 
 **🔄 In Progress:**
+
 - Performance optimization for mobile devices
 - August 2025 DSGVO regulation compliance check
 - EAA (European Accessibility Act) compliance verification
 
 **📋 Next Tasks:**
+
 - Mobile-first performance optimization
 - Core Web Vitals improvement
 - Accessibility audit and fixes

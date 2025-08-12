@@ -1,5 +1,6 @@
 ---
 import CookieConsent from '../components/CookieConsent.astro';
+import '../styles/global.css';
 
 export interface Props {
   title: string;
@@ -16,7 +17,11 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <meta name="msapplication-TileImage" content="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Primary Meta Tags -->
@@ -261,7 +266,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <nav class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between" id="main-nav">
           <div class="flex items-center">
             <a href="/" class="hover:opacity-90 transition-all duration-300">
-              <img src="/codariq_logo2.png" alt="Codariq" class="h-6 sm:h-10 w-auto transition-all duration-300 filter grayscale hover:grayscale-0" id="nav-logo" />
+              <img src="/codariq_logo2.png" alt="Codariq" class="h-6 sm:h-10 w-auto transition-all duration-300" id="nav-logo" />
             </a>
           </div>
           <!-- Desktop Navigation -->
@@ -316,18 +321,36 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div class="col-span-2">
-              <div class="flex items-start gap-8 mb-4">
-                <img src="/codariq_logo3.png" alt="Codariq" class="h-25 w-auto filter grayscale" loading="lazy" decoding="async" />
-                <div class="flex space-x-3">
-                  <!-- Trust badges -->
-                  <img src="/images/badges/climate-friendly.webp" alt="Klimafreundlich" class="h-25" loading="lazy" decoding="async" />
-                  <img src="/images/badges/gdpr-ready.webp" alt="DSGVO konform" class="h-25" loading="lazy" decoding="async" />
-                  <img src="/images/badges/remote-only.webp" alt="Remote verfügbar" class="h-25" loading="lazy" decoding="async" />
+              <div class="flex items-end gap-8 mb-4">
+                <img src="/codariq_logo3.png" alt="Codariq" class="h-25 w-auto" loading="lazy" decoding="async" />
+                <div class="flex items-end h-25">
+                  <div class="h-25 w-px bg-gray-300 mx-4"></div>
+                  <div class="flex flex-col justify-end h-full">
+                    <span class="text-gray-500 text-xs mb-2">Trusted by • Certified by:</span>
+                    <div class="flex space-x-3">
+                      <!-- Trust badges next to logo -->
+                      <img src="/images/badges/climate-friendly.webp" alt="Klimafreundlich" class="h-20" loading="lazy" decoding="async" />
+                      <img src="/images/badges/gdpr-ready.webp" alt="DSGVO konform" class="h-20" loading="lazy" decoding="async" />
+                      <img src="/images/badges/remote-only.webp" alt="Remote verfügbar" class="h-20" loading="lazy" decoding="async" />
+                    </div>
+                  </div>
                 </div>
               </div>
               <p class="text-gray-600 mb-4">
                 Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten KI-Lösungen.
               </p>
+              <div class="flex flex-col">
+                <span class="text-gray-500 text-sm mb-3">Powered by industry leaders:</span>
+                <div class="flex items-center space-x-6">
+                  <img src="/images/logos/google.svg" alt="Google" class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <a href="https://www.credly.com/badges/bc236bf7-2cb8-4435-bbea-660a4c37329e/public_url" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 transition-opacity" aria-label="View IBM certification on Credly">
+                    <img src="/images/logos/ibm.svg" alt="IBM" class="h-22 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  </a>
+                  <a href="https://learn.deeplearning.ai/accomplishments/4c4f4d61-8e90-4756-b0a3-1b32b7111c97?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 transition-opacity" aria-label="View DeepLearning.AI accomplishments">
+                    <img src="/images/logos/openai.svg" alt="OpenAI" class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  </a>
+                </div>
+              </div>
             </div>
             
             <div>

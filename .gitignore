@@ -11,10 +11,12 @@ dist/
 .prettierignore
 
 
+
 # dependencies
 node_modules/
 CLAUDE.md
 build_instructions.md
+sftp_full_upload.expect
 
 # logs
 npm-debug.log*
@@ -26,6 +28,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
 
 # macOS-specific files
 .DS_Store
