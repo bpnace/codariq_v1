@@ -342,7 +342,9 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               <div class="flex flex-col">
                 <span class="text-gray-500 text-sm mb-3">Powered by industry leaders:</span>
                 <div class="flex items-center space-x-6">
-                  <img src="/images/logos/google.svg" alt="Google" class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/02X85MNGYZGE" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 transition-opacity" aria-label="View Google certification on Coursera">
+                    <img src="/images/logos/google.svg" alt="Google" class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  </a>
                   <a href="https://www.credly.com/badges/bc236bf7-2cb8-4435-bbea-660a4c37329e/public_url" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 transition-opacity" aria-label="View IBM certification on Credly">
                     <img src="/images/logos/ibm.svg" alt="IBM" class="h-22 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </a>
