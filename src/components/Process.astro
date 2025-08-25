@@ -21,7 +21,7 @@ const {
       title: "Analyse & Beratung",
       description: "Wir analysieren Ihre aktuellen Prozesse und identifizieren das größte Automatisierungspotential.",
       details: [
-        "Kostenlose Erstberatung (45 Min.)",
+        "Kostenlose Erstberatung (30 Min.)",
         "Detaillierte Prozessanalyse",
         "ROI-Kalkulation und Machbarkeitsstudie",
         "Individuelles Lösungskonzept"
@@ -35,7 +35,7 @@ const {
       description: "Gemeinsam entwickeln wir das optimale Design für Ihre maßgeschneiderte KI-Lösung.",
       details: [
         "Technische Spezifikation",
-        "UI/UX Design und Prototyping",
+        "Prototyp Entwicklung",
         "Integrationsstrategie",
         "Projekt-Roadmap mit Meilensteinen"
       ],
@@ -47,7 +47,6 @@ const {
       title: "Entwicklung & Integration",
       description: "Unser Expertenteam entwickelt und integriert Ihre KI-Lösung in bestehende Systeme.",
       details: [
-        "Agile Entwicklung in 2-Wochen-Sprints",
         "Kontinuierliche Tests und Qualitätssicherung",
         "Nahtlose Integration ohne Betriebsunterbrechung",
         "Ausführliche Dokumentation"
@@ -58,49 +57,20 @@ const {
     {
       number: 4,
       title: "Training & Support",
-      description: "Wir schulen Ihr Team und bieten 6 Monate Vollsupport für einen reibungslosen Start.",
+      description: "Wir schulen bei Bedarf Ihr Team und bieten monatlichen Vollsupport für einen reibungslosen Start.",
       details: [
         "Umfassende Mitarbeiterschulungen",
         "Go-Live Support und Begleitung",
-        "6 Monate Premium-Support inklusive",
-        "Optionale Wartungsverträge verfügbar"
+        "Optionale ergänzende Services verfügbar"
       ],
-      duration: "6 Monate",
+      duration: "bis zu 6 Monate",
       icon: "support"
     }
   ],
   additionalServices = [
     {
-      title: "AI Readiness Check",
-      subtitle: "One-Time Service Package",
-      description: "Umfassende Analyse Ihrer Prozesse zur Identifikation der besten KI-Automatisierungsmöglichkeiten.",
-      features: [
-        "Detaillierte Prozessanalyse",
-        "ROI-Kalkulation",
-        "Machbarkeitsstudie",
-        "Strategische Empfehlungen"
-      ],
-      price: "€999",
-      duration: "1-2 Wochen",
-      icon: "check"
-    },
-    {
-      title: "Automation Pilot",
-      subtitle: "One-Time Service Package", 
-      description: "Vollständige Entwicklung und Implementierung einer maßgeschneiderten KI-Automatisierungslösung.",
-      features: [
-        "Custom KI-Entwicklung",
-        "Systemintegration",
-        "Testing & Qualitätssicherung",
-        "Go-Live Support"
-      ],
-      price: "€2.500 - €9.500",
-      duration: "4-12 Wochen",
-      icon: "automation"
-    },
-    {
       title: "Teamtraining",
-      subtitle: "One-Time Service Package",
+      subtitle: "Zusätzliches Service-Paket",
       description: "Umfassende Schulung Ihres Teams für den optimalen Umgang mit KI-Automatisierungslösungen.",
       features: [
         "Mitarbeiterschulungen",
@@ -109,11 +79,9 @@ const {
         "Schulungsunterlagen"
       ],
       price: "€699 - €1.600",
-      duration: "1-3 Tage",
+      duration: "2-7 Tage",
       icon: "training"
-    }
-  ],
-  retainerServices = [
+    },
     {
       title: "Advisory-Retainer",
       subtitle: "Monatlicher Service",
@@ -246,16 +214,16 @@ const {
     <div class="mt-12 sm:mt-16 md:mt-20">
       <div class="text-center mb-12">
         <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-          Zusätzliche Service-Pakete
+          Ergänzende Service-Pakete
         </h3>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Ergänzen Sie Ihre KI-Automatisierung mit spezialisierten Services
+          Erweitern Sie Ihre KI-Automatisierung mit zusätzlichen Services für maximalen Erfolg
         </p>
       </div>
 
-      <!-- One-Time Services -->
+      <!-- Additional Services -->
       <div class="max-w-5xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {additionalServices.map((service, index) => (
             <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 relative overflow-hidden">
               
@@ -283,6 +251,11 @@ const {
                   {service.icon === 'training' && (
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                  )}
+                  {service.icon === 'advisory' && (
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                   )}
                 </div>
@@ -323,80 +296,6 @@ const {
                   <a 
                     href="/#final-cta" 
                     class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center"
-                  >
-                    Anfragen
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <!-- Retainer Services -->
-        <div class="bg-gray-50 rounded-2xl p-8">
-          <div class="text-center mb-8">
-            <h4 class="text-xl font-bold text-gray-900 mb-2">
-              Monatliche Service-Pakete
-            </h4>
-            <p class="text-gray-600">
-              Kontinuierliche Unterstützung für langfristigen Erfolg
-            </p>
-          </div>
-          
-          {retainerServices.map((service, index) => (
-            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 relative overflow-hidden max-w-2xl mx-auto">
-              
-              <!-- Service Badge -->
-              <div class="absolute top-4 right-4">
-                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                  {service.subtitle}
-                </span>
-              </div>
-
-              <!-- Icon -->
-              <div class="mb-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                  </svg>
-                </div>
-              </div>
-
-              <!-- Content -->
-              <div class="mb-4">
-                <h4 class="text-xl font-bold text-gray-900 mb-2">
-                  {service.title}
-                </h4>
-                <p class="text-gray-600 leading-relaxed mb-4">
-                  {service.description}
-                </p>
-
-                <!-- Features -->
-                <div class="grid grid-cols-2 gap-3 mb-6">
-                  {service.features.map((feature) => (
-                    <div class="flex items-center gap-2">
-                      <div class="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                      <span class="text-sm text-gray-700">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <!-- Pricing & Duration -->
-                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                  <div class="flex items-center gap-4">
-                    <div class="text-xl font-bold text-gray-900">
-                      {service.price}
-                    </div>
-                    <div class="flex items-center gap-2 text-sm text-gray-600">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                      </svg>
-                      {service.duration}
-                    </div>
-                  </div>
-                  <a 
-                    href="/#final-cta" 
-                    class="bg-gradient-to-br from-green-500 to-green-700 text-white px-6 py-2 rounded-full hover:from-green-600 hover:to-green-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block"
                   >
                     Anfragen
                   </a>
