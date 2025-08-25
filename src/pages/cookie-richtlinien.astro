@@ -156,8 +156,8 @@ import Base from '../layouts/Base.astro';
           Wenn Sie Fragen zu unserer Cookie-Richtlinie haben, können Sie uns kontaktieren:
         </p>
         <p class="text-gray-700 leading-relaxed mb-4">
-          E-Mail: kontakt@codariq.de<br>
-          Telefon: +49 (0) 176 3137 8294
+          E-Mail: <span class="obfuscated-email" data-name="kontakt" data-domain="codariq.de">[email&#160;geschützt]</span><br>
+          Telefon: <span class="obfuscated-phone" data-phone="0176 3137 8294">01XX XXX XXXX</span>
         </p>
 
         <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Änderungen dieser Richtlinien</h2>
@@ -172,4 +172,50 @@ import Base from '../layouts/Base.astro';
     </div>
   </div>
 </Base>
+
+<style>
+  .obfuscated-email, .obfuscated-phone {
+    color: #2563eb;
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .obfuscated-email:hover, .obfuscated-phone:hover {
+    color: #1d4ed8;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Email obfuscation
+    const emailElements = document.querySelectorAll('.obfuscated-email');
+    emailElements.forEach(function(element) {
+      element.addEventListener('click', function() {
+        const name = this.getAttribute('data-name');
+        const domain = this.getAttribute('data-domain');
+        if (name && domain) {
+          const email = name + '@' + domain;
+          this.textContent = email;
+          this.classList.remove('obfuscated-email');
+          this.removeAttribute('data-name');
+          this.removeAttribute('data-domain');
+        }
+      });
+    });
+
+    // Phone obfuscation
+    const phoneElements = document.querySelectorAll('.obfuscated-phone');
+    phoneElements.forEach(function(element) {
+      element.addEventListener('click', function() {
+        const phone = this.getAttribute('data-phone');
+        if (phone) {
+          this.textContent = '+49 (0) ' + phone;
+          this.classList.remove('obfuscated-phone');
+          this.removeAttribute('data-phone');
+        }
+      });
+    });
+  });
+</script>
 

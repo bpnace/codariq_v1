@@ -3,8 +3,7 @@ const CACHE_NAME = 'codariq-v1';
 const urlsToCache = [
   '/',
   '/fonts/Switzer-Variable.woff2',
-  '/codariq_logo2.png',
-  '/codariq_logo3.png',
+  '/Logo1.svg',
   '/images/hero/hero1.webp',
   '/images/badges/climate-friendly.webp',
   '/images/badges/gdpr-ready.webp',
