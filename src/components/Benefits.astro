@@ -11,6 +11,11 @@ export interface Props {
     price?: string;
     duration?: string;
     isProduct?: boolean;
+    rebate?: {
+      percentage: number;
+      originalPrice: string;
+      discountedPrice: string;
+    };
   }>;
   additionalServices?: Array<{
     title: string;
@@ -39,7 +44,12 @@ const {
       ],
       price: "€999",
       duration: "1-2 Wochen",
-      isProduct: true
+      isProduct: true,
+      rebate: {
+        percentage: 25,
+        originalPrice: "€999",
+        discountedPrice: "€749"
+      }
     },
     {
       title: "Automation Pilot",
@@ -54,21 +64,31 @@ const {
       price: "€2.500 - €9.500",
       duration: "4-12 Wochen",
       highlight: true,
-      isProduct: true
+      isProduct: true,
+      rebate: {
+        percentage: 25,
+        originalPrice: "€2.500 - €9.500",
+        discountedPrice: "€1.875 - €7.125"
+      }
     },
     {
-      title: "Team Training & AI Readiness",
-      description: "Komplettpaket aus AI Readiness Check und professionellem Team Training für den optimalen Start.",
+      title: "Team Training & AI Awareness",
+      description: "Komplettpaket aus AI Awareness Check und professionellem Team Training für den optimalen Start.",
       icon: "training",
       features: [
-        "AI Readiness Analyse",
+        "AI Awareness Analyse",
         "Team-Schulungen",
         "Best-Practice Workshops",
         "Strategieberatung"
       ],
       price: "ab €699",
       duration: "1-3 Wochen",
-      isProduct: true
+      isProduct: true,
+      rebate: {
+        percentage: 25,
+        originalPrice: "ab €699",
+        discountedPrice: "ab €524"
+      }
     }
   ],
   additionalServices = [
@@ -132,9 +152,18 @@ const {
         >
           <!-- Bento Card -->
           <div class={`
-            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300
+            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300 relative
             ${benefit.highlight ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700' : ''}
           `}>
+            
+            <!-- Rebate Badge -->
+            {benefit.rebate && (
+              <div class="absolute -top-2 -right-2 z-10">
+                <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                  -{benefit.rebate.percentage}% Neukunden-Rabatt
+                </div>
+              </div>
+            )}
             
             <!-- Icon -->
             <div class="mb-3 sm:mb-4">
@@ -144,12 +173,14 @@ const {
               `}>
                 {benefit.icon === 'check' && (
                   <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <title>AI Readiness Check Service Icon</title>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 )}
                 
                 {benefit.icon === 'automation' && (
                   <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <title>Automation Pilot Service Icon</title>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                   </svg>
@@ -157,6 +188,7 @@ const {
                 
                 {benefit.icon === 'training' && (
                   <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <title>Team Training & AI Awareness Service Icon</title>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                   </svg>
                 )}
@@ -199,22 +231,41 @@ const {
                 </div>
 
                 {/* Pricing */}
-                <div class="flex items-center justify-between mb-3">
-                  <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-gray-900'}`}>
-                    {benefit.price}
-                  </div>
+                <div class="flex flex-col mb-3">
+                  {benefit.rebate ? (
+                    <>
+                      <div class={`text-sm line-through ${benefit.highlight ? 'text-white/50' : 'text-gray-500'}`}>
+                        {benefit.rebate.originalPrice}
+                      </div>
+                      <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-green-600'}`}>
+                        {benefit.rebate.discountedPrice}
+                      </div>
+                    </>
+                  ) : (
+                    <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-gray-900'}`}>
+                      {benefit.price}
+                    </div>
+                  )}
                 </div>
+
+                {/* Rebate Disclaimer */}
+                {benefit.rebate && (
+                  <div class={`text-xs mb-2 ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`}>
+                    * Nur für Neukunden gültig
+                  </div>
+                )}
 
                 {/* CTA Button */}
                 <a 
                   href="/#final-cta" 
                   class={`
-                    w-full px-4 py-2 rounded-lg font-medium text-sm shadow-sm transition-all duration-200 text-center inline-block
+                    w-full px-4 py-2 rounded-lg font-medium text-sm shadow-sm transition-all duration-200 text-center inline-block cta-button
                     ${benefit.highlight 
                       ? 'bg-white text-gray-900 hover:bg-gray-100' 
-                      : 'bg-gradient-to-br from-orange-500 to-orange-700 text-white hover:from-orange-600 hover:to-orange-800'
+                      : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                     }
                   `}
+                  aria-label={`${benefit.title} anfragen - Zum Kontaktformular springen`}
                 >
                   Jetzt anfragen
                 </a>
@@ -240,7 +291,7 @@ const {
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {additionalServices.map((service, index) => (
-            <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 relative overflow-hidden">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
               
               <!-- Service Badge -->
               <div class="absolute top-4 right-4">
@@ -254,11 +305,13 @@ const {
                 <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
                   {service.icon === 'training' && (
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <title>Team Training Service Icon</title>
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
                   )}
                   {service.icon === 'advisory' && (
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <title>Advisory Retainer Service Icon</title>
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                   )}
@@ -300,6 +353,7 @@ const {
                   <a 
                     href="/#final-cta" 
                     class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center"
+                    aria-label={`${service.title} anfragen - Zum Kontaktformular springen`}
                   >
                     Anfragen
                   </a>

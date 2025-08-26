@@ -42,7 +42,7 @@ Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell e
 - API-Konnektoren für bestehende Systeme
 - Legacy-System Integration ohne Betriebsunterbrechung
 - Cloud-Migration und Modernisierung
-- Vollständige DSGVO- und Sicherheits-Compliance
+- DSGVO-Konform - Vollständige DSGVO- und Sicherheits-Compliance
 
 ## Technische Expertise
 
