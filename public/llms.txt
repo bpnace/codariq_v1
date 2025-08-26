@@ -3,31 +3,46 @@
 ## Über Codariq
 Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell entwickelt für deutsche Mittelstandsunternehmen. Wir helfen Unternehmen dabei, ihre Effizienz um durchschnittlich 40% zu steigern und repetitive Aufgaben zu automatisieren.
 
-## Unsere Dienstleistungen
+## Unsere Service-Pakete
 
-### Prozess-Automatisierung
-- Workflow-Automatisierung für wiederkehrende Geschäftsprozesse
-- Dokumenten-Verarbeitung mit KI-gestützter Texterkennung
-- E-Mail-Automatisierung und intelligente Weiterleitung
-- Automatische Berichtsgenerierung und Dashboards
+### AI Readiness Check (€999)
+- Dauer: 1-2 Wochen
+- Detaillierte Prozessanalyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten
+- ROI-Kalkulation und Machbarkeitsstudie
+- Strategische Empfehlungen für KI-Implementierung
 
-### Intelligente Datenanalyse
-- Predictive Analytics für bessere Geschäftsentscheidungen
-- Datenvisualisierung mit interaktiven Dashboards
-- Trend-Erkennung und Marktanalyse
-- Performance-Monitoring und KPI-Tracking
+### Automation Pilot (€2.500 - €9.500)
+- Dauer: 4-12 Wochen
+- Vollständige Entwicklung und Implementierung einer maßgeschneiderten KI-Automatisierungslösung
+- Custom KI-Entwicklung und Systemintegration
+- Testing, Qualitätssicherung und Go-Live Support
 
-### Kundenservice-KI
-- 24/7 Chatbot-Support in deutscher Sprache
-- Automatische Ticketklassifizierung und Routing
-- Sentiment-Analyse für Kundenfeedback
-- Personalisierte Antworten basierend auf Kundenhistorie
+### Team Training & AI Readiness (ab €699)
+- Dauer: 1-3 Wochen
+- Komplettpaket aus AI Readiness Check und professionellem Team Training
+- Mitarbeiterschulungen und Best-Practice Workshops
+- Individuelle Betreuung und Strategieberatung
+
+## Zusätzliche Services
+
+### Team Training (€699 - €1.600)
+- Dauer: 2-7 Tage
+- Umfassende Schulung für den optimalen Umgang mit KI-Automatisierungslösungen
+- Best-Practice Workshops und individuelle Betreuung
+- Schulungsunterlagen und Zertifizierung
+
+### Advisory Retainer (€499 - €1.500 pro Monat)
+- Kontinuierliche strategische Beratung und Optimierung
+- Performance Monitoring und kontinuierliche Verbesserung
+- Priority Support und regelmäßige Strategiemeetings
+
+## Technische Kapazitäten
 
 ### Integration & Migration
 - API-Konnektoren für bestehende Systeme
 - Legacy-System Integration ohne Betriebsunterbrechung
 - Cloud-Migration und Modernisierung
-- Vollständige DSGVO- und Sicherheits-Compliance
+- DSGVO-Konform - Vollständige DSGVO- und Sicherheits-Compliance
 
 ## Technische Expertise
 
@@ -102,11 +117,12 @@ Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell e
 - Über 200 zufriedene Kunden
 
 ## Kontakt und Standort
-- Hauptsitz: Frankfurt am Main, Deutschland
+- Hauptsitz: Berlin, Deutschland (Sigmaringer Str. 27, 10713 Berlin)
 - Remote-First Arbeitsweise
 - Servicegebiet: Deutschland, Österreich, Schweiz
 - Sprachen: Deutsch, Englisch
-- E-Mail: info@codariq.de
+- E-Mail: kontakt@codariq.de
+- Telefon: +49 (0) 176 3137 8294
 - Website: https://codariq.de
 
 ## SEO Keywords

@@ -13,15 +13,22 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
 ---
 
 <!doctype html>
-<html lang="de" class="scroll-smooth">
+<html lang="de" class="scroll-smooth bg-white">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1E3A8A" />
+    <meta name="msapplication-TileColor" content="#1E3A8A" />
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/favicon.ico" />
-    <meta name="msapplication-TileImage" content="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+    <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Primary Meta Tags -->
@@ -64,6 +71,11 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
       
       html {
         font-family: 'Switzer Variable', system-ui, sans-serif;
+        background-color: white;
+      }
+      
+      body {
+        background-color: white;
       }
       
       /* Enhanced focus styles for EAA compliance */
@@ -115,24 +127,24 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Codariq",
-        "alternateName": "Codariq GmbH",
+        "alternateName": "codariq",
         "description": "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen. Spezialisiert auf Prozessautomatisierung, intelligente Datenanalyse und KI-gestützte Geschäftslösungen.",
         "url": "https://codariq.de",
-        "logo": "https://codariq.de/codariq_logo2.png",
+        "logo": "https://codariq.de/Logo1.svg",
         "image": "https://codariq.de/images/hero/hero-placeholder.svg",
-        "foundingDate": "2020",
+        "foundingDate": "2025",
         "foundingLocation": {
           "@type": "Place",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Frankfurt am Main",
+            "addressLocality": "Berlin",
             "addressCountry": "DE"
           }
         },
         "contactPoint": [
           {
             "@type": "ContactPoint",
-            "telephone": "+49-69-XXXXXXX",
+            "telephone": "+49-176-31378294",
             "contactType": "Customer Service",
             "areaServed": ["DE", "AT", "CH"],
             "availableLanguage": ["German", "English"],
@@ -145,7 +157,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
           },
           {
             "@type": "ContactPoint",
-            "email": "info@codariq.de",
+            "email": "kontakt@codariq.de",
             "contactType": "Sales",
             "areaServed": ["DE", "AT", "CH"],
             "availableLanguage": ["German", "English"]
@@ -154,7 +166,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Berlin",
-          "addressRegion": "HesBerlinsen",
+          "addressRegion": "Berlin",
           "addressCountry": "DE"
         },
         "sameAs": [
@@ -183,25 +195,37 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Prozess-Automatisierung",
-                "description": "Automatisierung wiederkehrender Geschäftsprozesse mit KI-Technologie"
-              }
+                "name": "AI Readiness Check",
+                "description": "Umfassende Analyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten"
+              },
+              "price": "999 EUR"
             },
             {
               "@type": "Offer", 
               "itemOffered": {
                 "@type": "Service",
-                "name": "Intelligente Datenanalyse",
-                "description": "KI-gestützte Datenanalyse und Business Intelligence Lösungen"
-              }
+                "name": "Automation Pilot",
+                "description": "Vollständige Entwicklung und Implementierung maßgeschneiderter KI-Automatisierungslösungen"
+              },
+              "priceRange": "2500-9500 EUR"
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service", 
-                "name": "Kundenservice-KI",
-                "description": "Chatbots und automatisierte Kundenservice-Lösungen"
-              }
+                "name": "Team Training & AI Readiness",
+                "description": "Komplettpaket aus AI Readiness Check und professionellem Team Training"
+              },
+              "price": "699 EUR"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service", 
+                "name": "Advisory Retainer",
+                "description": "Kontinuierliche strategische Beratung und Optimierung der KI-Automatisierungsstrategie"
+              },
+              "priceRange": "499-1500 EUR per month"
             }
           ]
         },
@@ -223,12 +247,12 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         "image": "https://codariq.de/images/hero/hero-placeholder.svg",
         "@id": "https://codariq.de",
         "url": "https://codariq.de",
-        "telephone": "+49-69-XXXXXXX",
+        "telephone": "+49-176-31378294",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "Frankfurt am Main",
-          "addressRegion": "Hessen",
-          "postalCode": "60329",
+          "addressLocality": "Berlin",
+          "addressRegion": "Berlin",
+          "postalCode": "10713",
           "addressCountry": "DE"
         },
         "openingHoursSpecification": {
@@ -238,12 +262,12 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
           "closes": "18:00"
         },
         "priceRange": "€€€",
-        "servedCuisine": "Business Automation Services"
+        "serviceType": "Business Automation and AI Services"
       }
     </script>
   </head>
   
-  <body class="bg-white text-gray-900 antialiased">
+  <body class="bg-white text-gray-900 antialiased overscroll-behavior-y-contain">
     <!-- Service Worker Cleanup - Clear existing SW for development -->
     <script>
       if ('serviceWorker' in navigator) {
@@ -266,12 +290,13 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <nav class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between" id="main-nav">
           <div class="flex items-center">
             <a href="/" class="hover:opacity-90 transition-all duration-300">
-              <img src="/codariq_logo2.png" alt="Codariq" class="h-6 sm:h-10 w-auto transition-all duration-300" id="nav-logo" />
+              <img src="/Logo1.svg" alt="Codariq" class="h-8 sm:h-10 w-auto transition-all duration-300" id="nav-logo" />
             </a>
           </div>
           <!-- Desktop Navigation -->
           <div class="hidden sm:flex items-center space-x-4 md:space-x-8" id="nav-links">
             <a href="/#benefits" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Lösungen</a>
+            <a href="/#benefits" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Preise</a>
             <a href="/#testimonials" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Referenzen</a>
             <a href="/#process" class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base">Vorgehen</a>
           </div>
@@ -307,6 +332,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         >
           <div class="px-4 py-3 space-y-3">
             <a href="/#benefits" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Lösungen</a>
+            <a href="/#benefits" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Preise</a>
             <a href="/#testimonials" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Referenzen</a>
             <a href="/#process" class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2">Vorgehen</a>
           </div>
@@ -322,11 +348,10 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div class="col-span-2">
               <div class="flex items-end gap-8 mb-4">
-                <img src="/codariq_logo3.png" alt="Codariq" class="h-25 w-auto" loading="lazy" decoding="async" />
+                <img src="/Logo1.svg" alt="Codariq" class="h-25 w-auto" loading="lazy" decoding="async" />
                 <div class="flex items-end h-25">
                   <div class="h-25 w-px bg-gray-300 mx-4"></div>
-                  <div class="flex flex-col justify-end h-full">
-                    <span class="text-gray-500 text-xs mb-2">Trusted by • Certified by:</span>
+                  <div class="flex flex-col justify-center h-full">
                     <div class="flex space-x-3">
                       <!-- Trust badges next to logo -->
                       <img src="/images/badges/climate-friendly.webp" alt="Klimafreundlich" class="h-20" loading="lazy" decoding="async" />
@@ -342,7 +367,9 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               <div class="flex flex-col">
                 <span class="text-gray-500 text-sm mb-3">Powered by industry leaders:</span>
                 <div class="flex items-center space-x-6">
-                  <img src="/images/logos/google.svg" alt="Google" class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/02X85MNGYZGE" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 transition-opacity" aria-label="View Google certification on Coursera">
+                    <img src="/images/logos/google.svg" alt="Google" class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  </a>
                   <a href="https://www.credly.com/badges/bc236bf7-2cb8-4435-bbea-660a4c37329e/public_url" target="_blank" rel="noopener noreferrer" class="hover:opacity-90 transition-opacity" aria-label="View IBM certification on Credly">
                     <img src="/images/logos/ibm.svg" alt="IBM" class="h-22 w-auto opacity-60 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </a>

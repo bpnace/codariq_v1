@@ -1,0 +1,193 @@
+# Robots.txt for codariq.de
+
+# Allow legitimate search engines
+User-agent: Googlebot
+Disallow: /impressum
+Disallow: /agb
+Disallow: /datenschutz
+Disallow: /cookie-richtlinien
+
+User-agent: Bingbot
+Disallow: /impressum
+Disallow: /agb
+Disallow: /datenschutz
+Disallow: /cookie-richtlinien
+
+User-agent: DuckDuckBot
+Disallow: /impressum
+Disallow: /agb
+Disallow: /datenschutz
+Disallow: /cookie-richtlinien
+
+# Block known spam/scraper bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Block aggressive crawlers and email harvesters
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: EmailSiphon
+Disallow: /
+
+User-agent: WebBandit
+Disallow: /
+
+User-agent: EmailWolf
+Disallow: /
+
+User-agent: ExtractorPro
+Disallow: /
+
+User-agent: CherryPickerSE
+Disallow: /
+
+User-agent: CherryPickerElite
+Disallow: /
+
+User-agent: WebEnhancer
+Disallow: /
+
+User-agent: SpankBot
+Disallow: /
+
+User-agent: greedy
+Disallow: /
+
+User-agent: grab
+Disallow: /
+
+User-agent: intelligentx
+Disallow: /
+
+User-agent: larbin
+Disallow: /
+
+User-agent: libwww
+Disallow: /
+
+User-agent: lwp-trivial
+Disallow: /
+
+User-agent: Microsoft.URL
+Disallow: /
+
+User-agent: NetAnts
+Disallow: /
+
+User-agent: QueryN.Metasearch
+Disallow: /
+
+User-agent: sitecheck.internetseer.com
+Disallow: /
+
+User-agent: teleport
+Disallow: /
+
+User-agent: TeleportPro
+Disallow: /
+
+User-agent: Wget
+Disallow: /
+
+User-agent: WWW-Collector-E
+Disallow: /
+
+User-agent: RMA
+Disallow: /
+
+User-agent: WebStripper
+Disallow: /
+
+User-agent: WebSauger
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: NetMechanic
+Disallow: /
+
+User-agent: URLy.Warning
+Disallow: /
+
+User-agent: Vacuum
+Disallow: /
+
+User-agent: VoidEYE
+Disallow: /
+
+User-agent: Web.Image.Collector
+Disallow: /
+
+User-agent: WebmasterWorldForumBot
+Disallow: /
+
+User-agent: WWW-Collector
+Disallow: /
+
+User-agent: Zeus
+Disallow: /
+
+# Allow access to main pages for legitimate search engines
+User-agent: *
+Allow: /
+Allow: /faq
+Disallow: /impressum
+Disallow: /agb
+Disallow: /datenschutz
+Disallow: /cookie-richtlinien
+
+# Sitemap location
+Sitemap: https://codariq.de/sitemap-index.xml
+
+# Crawl delay to prevent aggressive scraping
+Crawl-delay: 10

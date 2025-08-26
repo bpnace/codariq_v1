@@ -8,45 +8,117 @@ export interface Props {
     icon: string;
     features: string[];
     highlight?: boolean;
+    price?: string;
+    duration?: string;
+    isProduct?: boolean;
+    rebate?: {
+      percentage: number;
+      originalPrice: string;
+      discountedPrice: string;
+    };
+  }>;
+  additionalServices?: Array<{
+    title: string;
+    subtitle: string;
+    description: string;
+    features: string[];
+    price: string;
+    duration: string;
+    icon: string;
   }>;
 }
 
 const {
-  title = "Unsere KI-Lösungen für Ihren Erfolg",
-  subtitle = "Maßgeschneiderte Automatisierungslösungen, die Ihre Effizienz steigern und Kosten senken",
+  title = "Unsere KI-Automatisierungs-Pakete",
+  subtitle = "Von der ersten Analyse bis zur vollständigen Implementierung - wählen Sie das passende Paket für Ihren Erfolg",
   benefits = [
     {
-      title: "Prozess-Automatisierung",
-      description: "Automatisieren Sie wiederkehrende Aufgaben und reduzieren Sie manuelle Eingriffe um bis zu 80%.",
+      title: "AI Readiness Check",
+      description: "Umfassende Analyse Ihrer Prozesse zur Identifikation der besten KI-Automatisierungsmöglichkeiten.",
+      icon: "check",
+      features: [
+        "Detaillierte Prozessanalyse",
+        "ROI-Kalkulation",
+        "Machbarkeitsstudie",
+        "Strategische Empfehlungen"
+      ],
+      price: "€999",
+      duration: "1-2 Wochen",
+      isProduct: true,
+      rebate: {
+        percentage: 25,
+        originalPrice: "€999",
+        discountedPrice: "€749"
+      }
+    },
+    {
+      title: "Automation Pilot",
+      description: "Vollständige Entwicklung und Implementierung einer maßgeschneiderten KI-Automatisierungslösung.",
       icon: "automation",
       features: [
-        "Workflow-Automatisierung",
-        "Dokumenten-Verarbeitung",
-        "E-Mail-Automatisierung",
-        "Berichtsgenerierung"
-      ]
-    },
-    {
-      title: "Kundenservice-KI",
-      description: "Verbessern Sie Ihren Kundenservice mit intelligenten Chatbots und automatisierten Antworten.",
-      icon: "customer",
-      features: [
-        "24/7 Chatbot-Support",
-        "Automatische Klassifizierung",
-        "Sentiment-Analyse",
-        "Personalisierte Antworten"
+        "Custom KI-Entwicklung",
+        "Systemintegration",
+        "Testing & Qualitätssicherung",
+        "Go-Live Support"
       ],
-      highlight: true
+      price: "€2.500 - €9.500",
+      duration: "4-12 Wochen",
+      highlight: true,
+      isProduct: true,
+      rebate: {
+        percentage: 25,
+        originalPrice: "€2.500 - €9.500",
+        discountedPrice: "€1.875 - €7.125"
+      }
     },
     {
-      title: "Integration & Migration",
-      description: "Nahtlose Integration in Ihre bestehende IT-Infrastruktur ohne Unterbrechung des Betriebs.",
-      icon: "integration",
+      title: "Team Training & AI Awareness",
+      description: "Komplettpaket aus AI Awareness Check und professionellem Team Training für den optimalen Start.",
+      icon: "training",
       features: [
-        "API-Konnektoren",
-        "Cloud-Migration",
-        "GRPD-Ready"
-      ]
+        "AI Awareness Analyse",
+        "Team-Schulungen",
+        "Best-Practice Workshops",
+        "Strategieberatung"
+      ],
+      price: "ab €699",
+      duration: "1-3 Wochen",
+      isProduct: true,
+      rebate: {
+        percentage: 25,
+        originalPrice: "ab €699",
+        discountedPrice: "ab €524"
+      }
+    }
+  ],
+  additionalServices = [
+    {
+      title: "Teamtraining",
+      subtitle: "Zusätzliches Service-Paket",
+      description: "Umfassende Schulung Ihres Teams für den optimalen Umgang mit KI-Automatisierungslösungen.",
+      features: [
+        "Mitarbeiterschulungen",
+        "Best-Practice Workshops", 
+        "Individuelle Betreuung",
+        "Schulungsunterlagen"
+      ],
+      price: "€699 - €1.600",
+      duration: "2-7 Tage",
+      icon: "training"
+    },
+    {
+      title: "Advisory-Retainer",
+      subtitle: "Monatlicher Service",
+      description: "Kontinuierliche strategische Beratung und Optimierung Ihrer KI-Automatisierungsstrategie.",
+      features: [
+        "Strategische Beratung",
+        "Performance Monitoring",
+        "Kontinuierliche Optimierung",
+        "Priority Support"
+      ],
+      price: "€499 - €1.500 pro Monat",
+      duration: "Laufend",
+      icon: "advisory"
     }
   ]
 } = Astro.props;
@@ -66,7 +138,7 @@ const {
     </div>
 
     <!-- Bento Box Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4">
       {benefits.map((benefit, index) => {
         // Three column layout: Each item spans 1 col on desktop, 2 cols on smaller screens
         const getGridClass = (idx) => {
@@ -80,9 +152,18 @@ const {
         >
           <!-- Bento Card -->
           <div class={`
-            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300
+            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300 relative
             ${benefit.highlight ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700' : ''}
           `}>
+            
+            <!-- Rebate Badge -->
+            {benefit.rebate && (
+              <div class="absolute -top-2 -right-2 z-10">
+                <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                  -{benefit.rebate.percentage}% Neukunden-Rabatt
+                </div>
+              </div>
+            )}
             
             <!-- Icon -->
             <div class="mb-3 sm:mb-4">
@@ -90,23 +171,25 @@ const {
                 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
                 ${benefit.highlight ? 'bg-white/10' : 'bg-gray-100'}
               `}>
+                {benefit.icon === 'check' && (
+                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <title>AI Readiness Check Service Icon</title>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                )}
+                
                 {benefit.icon === 'automation' && (
                   <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <title>Automation Pilot Service Icon</title>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                   </svg>
                 )}
                 
-                
-                {benefit.icon === 'customer' && (
+                {benefit.icon === 'training' && (
                   <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
-                  </svg>
-                )}
-                
-                {benefit.icon === 'integration' && (
-                  <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                    <title>Team Training & AI Awareness Service Icon</title>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                   </svg>
                 )}
               </div>
@@ -123,7 +206,7 @@ const {
             </div>
 
             <!-- Features List -->
-            <div class="space-y-1 sm:space-y-2">
+            <div class="space-y-1 sm:space-y-2 mb-4">
               {benefit.features.map((feature) => (
                 <div class="flex items-center gap-2">
                   <div class={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full flex-shrink-0 ${benefit.highlight ? 'bg-white/60' : 'bg-gray-400'}`}></div>
@@ -133,11 +216,169 @@ const {
                 </div>
               ))}
             </div>
+
+            <!-- Pricing & CTA for Products -->
+            {benefit.isProduct && (
+              <div class="mt-auto pt-4 border-t border-gray-200">
+                {/* Duration Badge */}
+                <div class="flex items-center gap-2 mb-3">
+                  <svg class={`w-3 h-3 sm:w-4 sm:h-4 ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span class={`text-xs font-medium ${benefit.highlight ? 'text-white/70' : 'text-gray-600'}`}>
+                    {benefit.duration}
+                  </span>
+                </div>
+
+                {/* Pricing */}
+                <div class="flex flex-col mb-3">
+                  {benefit.rebate ? (
+                    <>
+                      <div class={`text-sm line-through ${benefit.highlight ? 'text-white/50' : 'text-gray-500'}`}>
+                        {benefit.rebate.originalPrice}
+                      </div>
+                      <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-green-600'}`}>
+                        {benefit.rebate.discountedPrice}
+                      </div>
+                    </>
+                  ) : (
+                    <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-gray-900'}`}>
+                      {benefit.price}
+                    </div>
+                  )}
+                </div>
+
+                {/* Rebate Disclaimer */}
+                {benefit.rebate && (
+                  <div class={`text-xs mb-2 ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`}>
+                    * Nur für Neukunden gültig
+                  </div>
+                )}
+
+                {/* CTA Button */}
+                <a 
+                  href="/#final-cta" 
+                  class={`
+                    w-full px-4 py-2 rounded-lg font-medium text-sm shadow-sm transition-all duration-200 text-center inline-block cta-button
+                    ${benefit.highlight 
+                      ? 'bg-white text-gray-900 hover:bg-gray-100' 
+                      : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                    }
+                  `}
+                  aria-label={`${benefit.title} anfragen - Zum Kontaktformular springen`}
+                >
+                  Jetzt anfragen
+                </a>
+              </div>
+            )}
           </div>
         </div>
       )})}
     </div>
 
+    <!-- Additional Services Section -->
+    <div class="mt-12 sm:mt-16 md:mt-20">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+          Ergänzende Service-Pakete
+        </h3>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Erweitern Sie Ihre KI-Automatisierung mit zusätzlichen Services für maximalen Erfolg
+        </p>
+      </div>
+
+      <!-- Additional Services -->
+      <div class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {additionalServices.map((service, index) => (
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
+              
+              <!-- Service Badge -->
+              <div class="absolute top-4 right-4">
+                <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">
+                  {service.subtitle}
+                </span>
+              </div>
+
+              <!-- Icon -->
+              <div class="mb-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
+                  {service.icon === 'training' && (
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <title>Team Training Service Icon</title>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                  )}
+                  {service.icon === 'advisory' && (
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <title>Advisory Retainer Service Icon</title>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  )}
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="mb-4">
+                <h4 class="text-lg font-bold text-gray-900 mb-2">
+                  {service.title}
+                </h4>
+                <p class="text-gray-600 leading-relaxed mb-4 text-sm">
+                  {service.description}
+                </p>
+
+                <!-- Features -->
+                <div class="space-y-2 mb-4">
+                  {service.features.map((feature) => (
+                    <div class="flex items-center gap-2">
+                      <div class="w-1.5 h-1.5 bg-gray-700 rounded-full flex-shrink-0"></div>
+                      <span class="text-xs text-gray-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Pricing & Duration -->
+                <div class="pt-4 border-t border-gray-200">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="text-lg font-bold text-gray-900">
+                      {service.price}
+                    </div>
+                    <div class="flex items-center gap-1 text-xs text-gray-600">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      {service.duration}
+                    </div>
+                  </div>
+                  <a 
+                    href="/#final-cta" 
+                    class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center"
+                    aria-label={`${service.title} anfragen - Zum Kontaktformular springen`}
+                  >
+                    Anfragen
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<style>
+  /* Consistent CTA button animation */
+  .cta-button {
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.02);
+  }
+</style>
 

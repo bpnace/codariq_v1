@@ -19,7 +19,7 @@ const {
   secondaryCTALink = "tel:+49XXXXXXXXX"
 } = Astro.props;
 ---
-<section id="final-cta" class="py-10 sm:py-12 bg-gray-50">
+<section id="final-cta" class="py-10 sm:py-12 bg-white">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     <div class="max-w-4xl mx-auto">
       
@@ -176,9 +176,9 @@ const {
       <!-- Calendly Widget with Loading State -->
       <div class="text-center mt-8">
         <p class="text-gray-600 text-sm mb-6">Oder buchen Sie direkt einen Termin:</p>
-        <div class="bg-white rounded-xl border border-gray-200 p-6 max-w-5xl mx-auto">
+        <div class="bg-white rounded-xl p-6 max-w-5xl mx-auto">
           <div id="calendly-container">
-            <div class="min-h-[700px] flex flex-col items-center justify-center bg-gray-50 rounded-lg">
+            <div class="min-h-[500px] sm:min-h-[700px] flex flex-col items-center justify-center bg-gray-50 rounded-lg">
               <button 
                 id="load-calendly" 
                 class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold mb-4 min-h-[44px] min-w-[44px] cta-button"
@@ -234,18 +234,18 @@ document.addEventListener('DOMContentLoaded', function() {
       // Check if marketing cookies are allowed
       if (!hasMarketingConsent()) {
         container.innerHTML = `
-          <div class="min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
-            <div class="text-center max-w-md">
-              <svg class="w-16 h-16 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="min-h-[500px] sm:min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
+            <div class="text-center max-w-md px-4">
+              <svg class="w-12 h-12 sm:w-16 sm:h-16 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
               </svg>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Cookie-Einwilligung erforderlich</h3>
-              <p class="text-gray-600 mb-4">
+              <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Cookie-Einwilligung erforderlich</h3>
+              <p class="text-sm sm:text-base text-gray-600 mb-4">
                 Um den Terminkalender zu laden, benötigen wir Ihre Einwilligung für Marketing-Cookies.
               </p>
               <button 
                 onclick="document.getElementById('cookie-settings').click()" 
-                class="bg-gradient-to-r from-orange-600 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium"
+                class="bg-gradient-to-r from-orange-600 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-sm sm:text-base"
               >
                 Cookie-Einstellungen öffnen
               </button>
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Show loading state
       container.innerHTML = `
-        <div class="min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
+        <div class="min-h-[500px] sm:min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
           <div class="text-center">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
             <p class="text-gray-600">Terminkalender wird geladen...</p>
@@ -269,12 +269,12 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => {
         // Check if mobile device
         const isMobile = window.innerWidth < 768;
-        const height = isMobile ? '580px' : '700px';
+        const height = isMobile ? '500px' : '700px';
         
         // Mobile-optimized parameters
         const baseParams = 'hide_gdpr_banner=1&hide_event_type_details=1&embed_type=Inline';
         const mobileParams = isMobile 
-          ? `${baseParams}&embed_domain=${encodeURIComponent(window.location.hostname)}&background_color=ffffff&text_color=111827&primary_color=ea580c`
+          ? `${baseParams}&embed_domain=${encodeURIComponent(window.location.hostname)}&background_color=ffffff&text_color=111827&primary_color=ff5f00&hide_landing_page_details=1&hide_avatar=1`
           : baseParams;
         
         container.innerHTML = `

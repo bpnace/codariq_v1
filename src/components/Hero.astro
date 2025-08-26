@@ -1,4 +1,22 @@
 ---
+/* 
+TODO: Transparent Inverted Navigation Idea
+- Remove nav background completely (transparent)
+- Apply mix-blend-mode: difference to nav links and logo
+- Nav text automatically inverts based on content behind it
+- Dark text becomes light over light content, vice versa
+- Pure CSS solution, no JavaScript needed
+- Maximum page space utilization with real-time color adaptation
+
+Implementation:
+.nav-links {
+  mix-blend-mode: difference;
+  color: white; // Will invert to black on white backgrounds
+}
+
+Alternative: mix-blend-mode: exclusion for different color mixing
+*/
+
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -20,7 +38,7 @@ const {
   secondaryCTA = "Live-Demo ansehen",
   primaryCTALink = "#final-cta",
   secondaryCTALink = "#final-cta",
-  heroImage = "/images/hero/hero1.webp",
+  heroImage = "/images/hero/hero2.webp",
   stats = [
     { value: "40%", label: "Effizienzsteigerung" },
     { value: "60h", label: "Zeitersparnis/Monat" },
@@ -75,6 +93,7 @@ const {
             <span class="flex items-center justify-center gap-2">
               <span class="truncate">{primaryCTA}</span>
               <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <title>Arrow Right Icon</title>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </span>
@@ -82,7 +101,7 @@ const {
           
           <!-- Risk Reduction Text -->
           <p class="text-white/80 text-sm font-bold mb-6">
-            Unverbindlich & kostenfrei • Ohne Implementierungsrisiko
+            100% Unverbindlich & kostenfrei
           </p>
           
           <!-- Trust Bar with Partner Logos -->

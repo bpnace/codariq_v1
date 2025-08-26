@@ -36,7 +36,7 @@ import Base from '../layouts/Base.astro';
         
         <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Verantwortlicher</h2>
         <p class="text-gray-700 leading-relaxed mb-6">
-          Codariq – Tarik Arthur Marshall, Sigmaringer Str. 27, 10713 Berlin, kontakt@codariq.de, Tel. 0176 3137 8294.
+          Codariq – Tarik Arthur Marshall, Sigmaringer Str. 27, 10713 Berlin, <span class="obfuscated-email" data-name="kontakt" data-domain="codariq.de">[email&#160;geschützt]</span>, Tel. <span class="obfuscated-phone" data-phone="0176 3137 8294">01XX XXX XXXX</span>.
         </p>
 
         <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">2. Datenschutzbeauftragter</h2>
@@ -77,7 +77,7 @@ import Base from '../layouts/Base.astro';
               </tr>
               <tr class="bg-gray-50">
                 <td class="border border-gray-300 px-4 py-3 text-gray-700">Vertrags-/Projektdurchführung</td>
-                <td class="border border-gray-300 px-4 py-3 text-gray-700">Erfüllung von Dienstleistungsverträgen</td>
+                <td class="border border-gray-300 px-4 py-3 text-gray-700">Erfüllung von Dienstleistungsverträgen (AI Readiness Check, Automation Pilot, Teamtraining, Advisory-Retainer)</td>
                 <td class="border border-gray-300 px-4 py-3 text-gray-700">lit. b</td>
               </tr>
               <tr>
@@ -91,7 +91,11 @@ import Base from '../layouts/Base.astro';
 
         <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">5. Cookies & Tracking</h2>
         <p class="text-gray-700 leading-relaxed mb-6">
-          Derzeit nur essenzielle Session-Cookies. Keine Statistik-, Marketing- oder Dritt-Cookies; Banner informiert und ermöglicht Ablehnung zukünftiger nicht-essenzieller Cookies gem. TTDSG-Vorgaben.
+          <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO i.V.m. § 25 TTDSG<br>
+          <strong>Notwendige Cookies:</strong> Session-Cookies für Website-Funktionalität (keine Einwilligung erforderlich)<br>
+          <strong>Analyse-Cookies:</strong> Plausible Analytics (EU-Server, anonymisiert, nur mit Einwilligung)<br>
+          <strong>Marketing-Cookies:</strong> Calendly Widget für Terminbuchung (USA, nur mit Einwilligung)<br>
+          Unser Cookie-Banner erfüllt die TTDSG-Anforderungen mit gleichwertigen "Akzeptieren" und "Ablehnen" Optionen.
         </p>
 
         <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">6. Terminbuchung über Calendly (USA)</h2>
@@ -102,7 +106,7 @@ import Base from '../layouts/Base.astro';
           <p class="mb-2"><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)</p>
           <p class="mb-2"><strong>Übermittlung in Drittland:</strong> USA - Angemessenheitsbeschluss der EU-Kommission</p>
           <p class="mb-2"><strong>Speicherdauer:</strong> Gemäß Calendly-Datenschutzrichtlinie (24 Monate nach letzter Aktivität)</p>
-          <p class="mb-2"><strong>Widerspruchsrecht:</strong> Sie können der Verarbeitung jederzeit per E-Mail an kontakt@codariq.de widersprechen</p>
+          <p class="mb-2"><strong>Widerspruchsrecht:</strong> Sie können der Verarbeitung jederzeit per E-Mail an <span class="obfuscated-email" data-name="kontakt" data-domain="codariq.de">[email&#160;geschützt]</span> widersprechen</p>
           <p><strong>Weitere Informationen:</strong> <a href="https://calendly.com/privacy" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-800 underline">Calendly Datenschutzerklärung</a></p>
         </div>
 
@@ -131,7 +135,7 @@ import Base from '../layouts/Base.astro';
           <li class="mb-2"><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Widerspruch gegen Verarbeitung</li>
         </ul>
         <div class="bg-gray-50 p-4 rounded-lg border mb-6">
-          <p class="mb-2"><strong>Kontakt für Betroffenenrechte:</strong> kontakt@codariq.de</p>
+          <p class="mb-2"><strong>Kontakt für Betroffenenrechte:</strong> <span class="obfuscated-email" data-name="kontakt" data-domain="codariq.de">[email&#160;geschützt]</span></p>
           <p class="mb-2"><strong>Bearbeitungsfrist:</strong> 30 Tage nach Eingang Ihres Antrags</p>
           <p><strong>Beschwerderecht:</strong> Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59-61, 10555 Berlin</p>
         </div>
@@ -142,4 +146,50 @@ import Base from '../layouts/Base.astro';
     </div>
   </div>
 </Base>
+
+<style>
+  .obfuscated-email, .obfuscated-phone {
+    color: #2563eb;
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .obfuscated-email:hover, .obfuscated-phone:hover {
+    color: #1d4ed8;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Email obfuscation
+    const emailElements = document.querySelectorAll('.obfuscated-email');
+    emailElements.forEach(function(element) {
+      element.addEventListener('click', function() {
+        const name = this.getAttribute('data-name');
+        const domain = this.getAttribute('data-domain');
+        if (name && domain) {
+          const email = name + '@' + domain;
+          this.textContent = email;
+          this.classList.remove('obfuscated-email');
+          this.removeAttribute('data-name');
+          this.removeAttribute('data-domain');
+        }
+      });
+    });
+
+    // Phone obfuscation
+    const phoneElements = document.querySelectorAll('.obfuscated-phone');
+    phoneElements.forEach(function(element) {
+      element.addEventListener('click', function() {
+        const phone = this.getAttribute('data-phone');
+        if (phone) {
+          this.textContent = '+49 (0) ' + phone;
+          this.classList.remove('obfuscated-phone');
+          this.removeAttribute('data-phone');
+        }
+      });
+    });
+  });
+</script>
 
