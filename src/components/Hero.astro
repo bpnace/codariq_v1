@@ -32,24 +32,26 @@ export interface Props {
 }
 
 const {
-  title = "KI-Automatisierung für den deutschen Mittelstand",
-  subtitle = "Steigern Sie Ihre Effizienz um bis zu 50% mit maßgeschneiderten KI-Lösungen. Automatisieren Sie repetitive Aufgaben und fokussieren Sie sich auf Ihr Kerngeschäft.",
-  primaryCTA = "Kostenlose Strategieberatung",
-  secondaryCTA = "Live-Demo ansehen",
-  primaryCTALink = "#final-cta",
-  secondaryCTALink = "#final-cta",
-  heroImage = "/images/hero/hero2.webp",
+  title = 'KI-Automatisierung für den deutschen Mittelstand',
+  subtitle = 'Steigern Sie Ihre Effizienz um bis zu 50% mit maßgeschneiderten KI-Lösungen. Automatisieren Sie repetitive Aufgaben und fokussieren Sie sich auf Ihr Kerngeschäft.',
+  primaryCTA = 'Kostenlose Strategieberatung',
+  secondaryCTA = 'Live-Demo ansehen',
+  primaryCTALink = '#final-cta',
+  secondaryCTALink = '#final-cta',
+  heroImage = '/images/hero/hero2.webp',
   stats = [
-    { value: "40%", label: "Effizienzsteigerung" },
-    { value: "60h", label: "Zeitersparnis/Monat" },
-  ]
+    { value: '40%', label: 'Effizienzsteigerung' },
+    { value: '60h', label: 'Zeitersparnis/Monat' },
+  ],
 } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 lg:pt-32">
+<section
+  class="relative min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 lg:pt-32"
+>
   <!-- Full-width background image extending to top -->
   <div class="absolute inset-0 -top-16 sm:-top-20">
-    <img 
+    <img
       src={heroImage}
       alt="KI-Automatisierung Dashboard für deutsche Unternehmen"
       class="w-full h-full object-cover"
@@ -62,58 +64,113 @@ const {
     <div class="absolute inset-0 bg-black/20"></div>
   </div>
 
-  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10">
+  <div
+    class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
+  >
     <div class="text-center max-w-6xl mx-auto">
-      
-      <div class="animate-slide-up">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl font-black text-white mb-2 leading-tight xl:leading-none max-w-5xl mx-auto" style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
+      <!-- Main Headline with staggered animation -->
+      <div class="hero-animate" style="animation-delay: 0.2s">
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl font-black text-white mb-2 leading-tight xl:leading-none max-w-5xl mx-auto"
+          style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);"
+        >
           {title}
         </h1>
-        <p class="text-base sm:text-lg md:text-xl lg:text-1xl text-white/90 mb-6 max-w-4xl mx-auto leading-normal px-4" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);">
+      </div>
+
+      <!-- Subtitle with delay -->
+      <div class="hero-animate" style="animation-delay: 0.4s">
+        <p
+          class="text-base sm:text-lg md:text-xl lg:text-1xl text-white/90 mb-6 max-w-4xl mx-auto leading-normal px-4"
+          style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);"
+        >
           {subtitle}
         </p>
-        
-        <!-- Benefits Buttons -->
-        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4">
-          <span class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full">
+      </div>
+
+      <!-- Benefits Buttons with staggered delay -->
+      <div class="hero-animate" style="animation-delay: 0.6s">
+        <div
+          class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4"
+        >
+          <span
+            class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full"
+          >
             ✓ min +30% Effizienz
           </span>
-          <span class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full"> 
+          <span
+            class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full"
+          >
             ✓ min 50h Zeitersparnis
           </span>
         </div>
+      </div>
 
-        <!-- CTA Button with Risk Reduction -->
-        <div class="flex flex-col items-center mb-6 sm:mb-8 md:mb-12 px-6 sm:px-4">
-          <a 
+      <!-- CTA Button with Risk Reduction -->
+      <div class="hero-animate" style="animation-delay: 0.8s">
+        <div
+          class="flex flex-col items-center mb-6 sm:mb-8 md:mb-12 px-6 sm:px-4"
+        >
+          <a
             href={primaryCTALink}
             class="group bg-white text-gray-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-semibold text-base sm:text-lg shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-auto text-center mb-3 cta-button"
             aria-label={primaryCTA}
-           >
+          >
             <span class="flex items-center justify-center gap-2">
               <span class="truncate">{primaryCTA}</span>
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <title>Arrow Right Icon</title>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </span>
           </a>
-          
+
           <!-- Risk Reduction Text -->
           <p class="text-white/80 text-sm font-bold mb-6">
             100% Unverbindlich & kostenfrei
           </p>
-          
-          <!-- Trust Bar with Partner Logos -->
-          <div class="flex flex-col items-center">
-            <p class="text-white/70 text-xs sm:text-sm mb-3 font-medium">
-              Powered by industry leaders
-            </p>
-            <div class="flex items-center justify-center space-x-6 sm:space-x-8">
-              <img src="/images/logos/google.svg" alt="Google" class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert" loading="lazy" decoding="async" />
-              <img src="/images/logos/ibm.svg" alt="IBM" class="h-8 sm:h-16 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert" loading="lazy" decoding="async" />
-              <img src="/images/logos/openai.svg" alt="OpenAI" class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert" loading="lazy" decoding="async" />
-            </div>
+        </div>
+      </div>
+
+      <!-- Trust Bar with Partner Logos -->
+      <div class="hero-animate" style="animation-delay: 1.0s">
+        <div class="flex flex-col items-center">
+          <p class="text-white/70 text-xs sm:text-sm mb-3 font-medium">
+            Powered by industry leaders
+          </p>
+          <div
+            class="flex items-center justify-center space-x-6 sm:space-x-8"
+          >
+            <img
+              src="/images/logos/google.svg"
+              alt="Google"
+              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/logos/ibm.svg"
+              alt="IBM"
+              class="h-8 sm:h-16 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/logos/openai.svg"
+              alt="OpenAI"
+              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
@@ -122,6 +179,23 @@ const {
 </section>
 
 <style>
+  /* Minimal upward appearing animation for hero elements */
+  @keyframes heroFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-animate {
+    opacity: 0;
+    animation: heroFadeInUp 0.8s ease-out forwards;
+  }
+
   @keyframes counter {
     from {
       opacity: 0;
@@ -136,16 +210,31 @@ const {
   .animate-counter {
     animation: counter 0.8s ease-out forwards;
   }
-  
+
   /* Consistent CTA button animation */
   .cta-button {
     transform-origin: center;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
     will-change: transform;
     backface-visibility: hidden;
   }
-  
+
   .cta-button:hover {
     transform: scale(1.02);
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate {
+      opacity: 1;
+      animation: none;
+      transform: translateY(0);
+    }
+    
+    .cta-button:hover {
+      transform: none;
+    }
   }
 </style>
