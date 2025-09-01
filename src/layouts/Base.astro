@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const { title, description = 'KI-Automatisierungsexperte für kleine und mittelständische Unternehmen', ogImage } = Astro.props;
-const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 ---
 
 <!doctype html>
@@ -222,7 +222,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service", 
-                "name": "Advisory Retainer",
+                "name": "Strategische Beratung",
                 "description": "Kontinuierliche strategische Beratung und Optimierung der KI-Automatisierungsstrategie"
               },
               "priceRange": "499-1500 EUR per month"
@@ -446,8 +446,10 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         // Enhanced Smooth Scrolling for Internal Links
         const allLinks = document.querySelectorAll('a[href^="#"], a[href^="/#"]');
         allLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
+          link.addEventListener('click', function(this: HTMLAnchorElement, e) {
             const href = this.getAttribute('href');
+            if (!href) return;
+            
             const targetId = href.startsWith('/#') ? href.substring(2) : href.substring(1);
             const targetElement = document.getElementById(targetId);
             
@@ -474,7 +476,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
               });
               
               // Update URL without causing a jump
-              window.history.pushState(null, null, href);
+              window.history.pushState({}, '', href);
             }
           });
         });

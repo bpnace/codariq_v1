@@ -6,6 +6,11 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://codariq.de',
+  base: '/',
+  trailingSlash: 'never',
+  build: {
+    format: 'directory',
+  },
   integrations: [
     sitemap({
       i18n: {
@@ -14,6 +19,7 @@ export default defineConfig({
           de: 'de-DE',
         },
       },
+      canonicalURL: 'https://codariq.de',
     }),
   ],
   vite: {
