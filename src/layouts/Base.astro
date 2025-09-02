@@ -173,6 +173,29 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     </style>
 
     <!-- Enhanced Structured Data -->
+    <!-- WebSite Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Codariq - KI-Automatisierung für KMU",
+        "alternateName": "Codariq",
+        "url": "https://codariq.de",
+        "description": "Professionelle KI-Automatisierungslösungen für kleine und mittelständische Unternehmen in Deutschland, Österreich und der Schweiz",
+        "inLanguage": "de-DE",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Codariq"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://codariq.de/?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- Organization Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -182,7 +205,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
         "description": "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen. Spezialisiert auf Prozessautomatisierung, intelligente Datenanalyse und KI-gestützte Geschäftslösungen.",
         "url": "https://codariq.de",
         "logo": "https://codariq.de/Logo1.svg",
-        "image": "https://codariq.de/images/hero/hero-placeholder.svg",
+        "image": "https://codariq.de/images/hero/hero2.webp",
         "foundingDate": "2025",
         "foundingLocation": {
           "@type": "Place",
@@ -250,47 +273,124 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
           "itemListElement": [
             {
               "@type": "Offer",
+              "@id": "https://codariq.de/#ai-readiness-check",
               "itemOffered": {
                 "@type": "Service",
                 "name": "AI Readiness Check",
-                "description": "Umfassende Analyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten"
+                "description": "Umfassende Analyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Codariq"
+                },
+                "areaServed": ["DE", "AT", "CH"],
+                "serviceType": "Business Process Analysis",
+                "category": "Artificial Intelligence Consulting"
               },
-              "price": "999 EUR"
+              "price": "749",
+              "priceCurrency": "EUR",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "749",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": true
+              },
+              "availability": "https://schema.org/InStock",
+              "deliveryLeadTime": "P1W/P2W"
             },
             {
               "@type": "Offer",
+              "@id": "https://codariq.de/#automation-pilot",
               "itemOffered": {
                 "@type": "Service",
                 "name": "Automation Pilot",
-                "description": "Vollständige Entwicklung und Implementierung maßgeschneiderter KI-Automatisierungslösungen"
+                "description": "Vollständige Entwicklung und Implementierung maßgeschneiderter KI-Automatisierungslösungen",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Codariq"
+                },
+                "areaServed": ["DE", "AT", "CH"],
+                "serviceType": "Custom AI Development",
+                "category": "Artificial Intelligence Implementation"
               },
-              "priceRange": "2500-9500 EUR"
+              "priceRange": "1875-7125 EUR",
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "deliveryLeadTime": "P4W/P12W"
             },
             {
               "@type": "Offer",
+              "@id": "https://codariq.de/#team-training",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Team Training & AI Readiness",
-                "description": "Komplettpaket aus AI Readiness Check und professionellem Team Training"
+                "name": "Team Training & AI Awareness",
+                "description": "Komplettpaket aus AI Awareness Check und professionellem Team Training",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Codariq"
+                },
+                "areaServed": ["DE", "AT", "CH"],
+                "serviceType": "Professional Training",
+                "category": "Artificial Intelligence Training"
               },
-              "price": "699 EUR"
+              "price": "524",
+              "priceCurrency": "EUR",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "524",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": true
+              },
+              "availability": "https://schema.org/InStock",
+              "deliveryLeadTime": "P1W/P3W"
             },
             {
               "@type": "Offer",
+              "@id": "https://codariq.de/#strategische-beratung",
               "itemOffered": {
                 "@type": "Service",
                 "name": "Strategische Beratung",
-                "description": "Kontinuierliche strategische Beratung und Optimierung der KI-Automatisierungsstrategie"
+                "description": "Kontinuierliche strategische Beratung und Optimierung der KI-Automatisierungsstrategie",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Codariq"
+                },
+                "areaServed": ["DE", "AT", "CH"],
+                "serviceType": "Strategic AI Consulting",
+                "category": "Artificial Intelligence Consulting"
               },
-              "priceRange": "499-1500 EUR per month"
+              "priceRange": "499-1500 EUR",
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "billingIncrement": "P1M",
+              "recurringCharge": true
             }
           ]
+        }
+      }
+    </script>
+
+    <!-- Special Announcement Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SpecialAnnouncement",
+        "name": "Kostenlose KI-Automatisierung Strategieberatung",
+        "text": "Erhalten Sie eine kostenlose 45-minütige Strategieberatung zur Identifikation Ihrer besten KI-Automatisierungsmöglichkeiten. Unverbindlich und ohne Risiko.",
+        "category": "https://www.wikidata.org/wiki/Q186386",
+        "datePosted": "2024-12-28",
+        "expires": "2025-12-31",
+        "spatialCoverage": {
+          "@type": "Country",
+          "name": "Deutschland"
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "bestRating": "5",
-          "ratingCount": "156"
+        "announcementLocation": {
+          "@type": "VirtualLocation",
+          "url": "https://codariq.de"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Codariq",
+          "url": "https://codariq.de"
         }
       }
     </script>
@@ -301,7 +401,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "Codariq - KI-Automatisierung",
-        "image": "https://codariq.de/images/hero/hero-placeholder.svg",
+        "image": "https://codariq.de/images/hero/hero2.webp",
         "@id": "https://codariq.de",
         "url": "https://codariq.de",
         "telephone": "+49-176-31378294",

@@ -7,6 +7,7 @@ import Benefits from '../components/Benefits.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Process from '../components/Process.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 ---
 
 <Base
@@ -14,6 +15,9 @@ import FinalCTA from '../components/FinalCTA.astro';
   description="Steigern Sie Ihre Effizienz mit maßgeschneiderten KI-Automatisierungslösungen. Kostenlose Strategieberatung für kleine und mittelständische Unternehmen."
   ogImage="https://codariq.de/images/hero/hero2.webp"
 >
+  <!-- Structured Data -->
+  <BreadcrumbSchema />
+  
   <!-- Hero Section -->
   <Hero />
 
