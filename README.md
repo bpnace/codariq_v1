@@ -275,4 +275,4 @@ For questions about this project:
 
 ---
 
-_Built for kleine und mittelständische Unternehmen • © 2025 Codariq_
+_Built with love • © 2025 Codariq_

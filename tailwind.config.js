@@ -3,10 +3,10 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     screens: {
-      'sm': '390px',   // Mobile optimized
-      'md': '768px',   // Tablet optimized  
-      'lg': '1024px',  // Small desktop
-      'xl': '1440px',  // Desktop optimized
+      sm: '390px', // Mobile optimized
+      md: '768px', // Tablet optimized
+      lg: '1024px', // Small desktop
+      xl: '1440px', // Desktop optimized
       '2xl': '1536px', // Large desktop
     },
     extend: {
@@ -37,19 +37,19 @@ export default {
         },
       },
       fontFamily: {
-        'sans': ['Switzer Variable', 'system-ui', '-apple-system', 'sans-serif'], // All text
-        'serif': ['Switzer Variable', 'system-ui', '-apple-system', 'sans-serif'], // Headers use same font
+        sans: ['Switzer Variable', 'system-ui', '-apple-system', 'sans-serif'], // All text
+        serif: ['Switzer Variable', 'system-ui', '-apple-system', 'sans-serif'], // Headers use same font
       },
       fontSize: {
-        'hero': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'h1': ['2.75rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
-        'h2': ['2.25rem', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
-        'h3': ['1.875rem', { lineHeight: '1.3' }],
+        hero: ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        h1: ['2.75rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        h2: ['2.25rem', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        h3: ['1.875rem', { lineHeight: '1.3' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       maxWidth: {
         '8xl': '88rem',
@@ -58,10 +58,10 @@ export default {
       animation: {
         // Animations temporarily disabled
         'fade-in': 'none',
-        'slide-up': 'none', 
+        'slide-up': 'none',
         'fade-in-up': 'none',
         'slide-down': 'none',
-        'counter': 'counter 2s ease-out', // Keep counter for statistics
+        counter: 'counter 2s ease-out', // Keep counter for statistics
       },
       keyframes: {
         fadeIn: {
@@ -86,11 +86,13 @@ export default {
         },
       },
       boxShadow: {
-        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
-        'medium': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04)',
-        'strong': '0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        soft: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+        medium:
+          '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04)',
+        strong:
+          '0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
       },
     },
   },
   plugins: [],
-}
+};

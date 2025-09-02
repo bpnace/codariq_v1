@@ -1,10 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Switzer Variable Font */
 @font-face {
   font-family: 'Switzer Variable';
-  src: url('/fonts/Switzer-Variable.woff2') format('woff2'),
-       url('/fonts/Switzer-Variable.ttf') format('truetype');
+  src:
+    url('/fonts/Switzer-Variable.woff2') format('woff2'),
+    url('/fonts/Switzer-Variable.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -46,12 +47,11 @@ html {
   }
 }
 
-/* Global animation keyframes for consistency - DISABLED */
-/*
-@keyframes fadeInUp {
+/* Optimized global animation keyframes for titles and elements */
+@keyframes titleFadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -59,14 +59,89 @@ html {
   }
 }
 
-@keyframes slideDown {
+@keyframes subtitleFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-*/
+
+@keyframes elementSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation classes with performance optimizations */
+.animate-title {
+  opacity: 0;
+  animation: titleFadeInUp 0.7s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.animate-subtitle {
+  opacity: 0;
+  animation: subtitleFadeIn 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+  will-change: transform, opacity;
+}
+
+.animate-element {
+  opacity: 0;
+  animation: elementSlideUp 0.6s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+/* Intersection Observer based animations for better performance */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .animate-title,
+  .animate-subtitle,
+  .animate-element {
+    animation-duration: 0.5s;
+  }
+  
+  @keyframes titleFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-title,
+  .animate-subtitle,
+  .animate-element,
+  .animate-on-scroll {
+    opacity: 1;
+    animation: none;
+    transform: translateY(0);
+    transition: none;
+  }
+}

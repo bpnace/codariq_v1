@@ -73,11 +73,11 @@ const {
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     
     <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+    <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
         {title}
       </h2>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
         {subtitle}
       </p>
     </div>
@@ -179,23 +179,25 @@ const {
     </div>
     
     <!-- Call to Action -->
-    <div class="text-center -mt-16 sm:-mt-20 md:-mt-24 relative z-20 animate-slide-up px-4" style="animation-delay: 800ms">
-      <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
+    <div class="text-center -mt-16 sm:-mt-20 md:-mt-24 relative z-20 px-4">
+      <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto animate-on-scroll">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
           Überzeugt? Lassen Sie uns sprechen!
         </h3>
-        <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
+        <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
           Erfahren Sie in einem kostenlosen 45-minütigen Strategiegespräch, wie KI-Automatisierung auch Ihr Unternehmen transformieren kann.
         </p>
-        <a 
-          href="#final-cta"
-          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
-        >
-          Kostenloses Strategiegespräch
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
+        <div class="animate-on-scroll" style="transition-delay: 0.3s">
+          <a 
+            href="#final-cta"
+            class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
+          >
+            Kostenloses Strategiegespräch
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>

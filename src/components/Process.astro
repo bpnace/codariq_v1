@@ -14,56 +14,56 @@ export interface Props {
 
 const {
   title = "So funktioniert unsere Zusammenarbeit",
-  subtitle = "Ein transparenter 4-Schritt-Prozess für Ihre erfolgreiche KI-Automatisierung",
+  subtitle = "Ein klarer 4-Schritt-Prozess für Ihre erfolgreiche KI-Automatisierung",
   steps = [
     {
       number: 1,
       title: "Analyse & Beratung",
-      description: "Wir analysieren Ihre aktuellen Prozesse und identifizieren das größte Automatisierungspotential.",
+      description: "Wir prüfen Ihre Prozesse und identifizieren das größte Automatisierungspotential.",
       details: [
         "Kostenlose Erstberatung (30 Min.)",
         "Detaillierte Prozessanalyse",
         "ROI-Kalkulation und Machbarkeitsstudie",
         "Individuelles Lösungskonzept"
       ],
-      duration: "1-2 Wochen",
+      duration: "1–2 Wochen",
       icon: "analysis"
     },
     {
       number: 2,
       title: "Planung & Design",
-      description: "Gemeinsam entwickeln wir das optimale Design für Ihre maßgeschneiderte KI-Lösung.",
+      description: "Gemeinsam entwickeln wir das optimale Konzept für Ihre maßgeschneiderte KI-Lösung.",
       details: [
         "Technische Spezifikation",
-        "Prototyp Entwicklung",
+        "Prototyp-Entwicklung",
         "Integrationsstrategie",
         "Projekt-Roadmap mit Meilensteinen"
       ],
-      duration: "2-3 Wochen",
+      duration: "2–3 Wochen",
       icon: "design"
     },
     {
       number: 3,
       title: "Entwicklung & Integration",
-      description: "Unser Expertenteam entwickelt und integriert Ihre KI-Lösung in bestehende Systeme.",
+      description: "Wir entwickeln und integrieren Ihre KI-Lösung nahtlos in bestehende Systeme.",
       details: [
-        "Kontinuierliche Tests und Qualitätssicherung",
-        "Nahtlose Integration ohne Betriebsunterbrechung",
+        "Kontinuierliche Tests & Qualitätssicherung",
+        "Integration ohne Betriebsunterbrechung",
         "Ausführliche Dokumentation"
       ],
-      duration: "4-12 Wochen",
+      duration: "4–12 Wochen (abhängig von Komplexität)",
       icon: "development"
     },
     {
       number: 4,
-      title: "Training & Support",
-      description: "Wir schulen bei Bedarf Ihr Team und bieten monatlichen Vollsupport für einen reibungslosen Start.",
+      title: "Training & Begleitung",
+      description: "Wir machen Ihr Team fit und sichern einen reibungslosen Start.",
       details: [
-        "Umfassende Mitarbeiterschulungen",
-        "Go-Live Support und Begleitung",
-        "Optionale ergänzende Services verfügbar"
+        "Mitarbeiterschulungen",
+        "Go-Live Begleitung",
+        "Fortlaufender Support nach Bedarf"
       ],
-      duration: "bis zu 6 Monate",
+      duration: "bis zu 6 Monate (je nach Serviceumfang)",
       icon: "support"
     }
   ]
@@ -75,11 +75,11 @@ const {
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative">
     
     <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+    <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
         {title}
       </h2>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
         {subtitle}
       </p>
     </div>
