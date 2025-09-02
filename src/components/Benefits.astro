@@ -29,12 +29,12 @@ export interface Props {
 }
 
 const {
-  title = "Unsere Pakete",
-  subtitle = "Von der ersten Analyse bis zur vollständigen Umsetzung – Sie wählen, wie tief wir einsteigen",
+  title = "Unsere Hauptpakete",
+  subtitle = "",
   benefits = [
     {
       title: "AI Readiness Check",
-      description: "Umfassende Analyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten.",
+      description: "Umfassende Analyse zur Identifikation der besten Automatisierungsmöglichkeiten.",
       icon: "check",
       features: [
         "Prozessanalyse",
@@ -53,7 +53,7 @@ const {
     },
     {
       title: "Automation Pilot",
-      description: "Entwicklung und Implementierung einer individuellen Automatisierungslösung.",
+      description: "Ihre individuelle Automatisierungslösung von der Entwicklung bis zum Go-Live.",
       icon: "automation",
       features: [
         "Maßgeschneiderte KI-Entwicklung",
@@ -73,21 +73,21 @@ const {
     },
     {
       title: "Team Training & AI Awareness",
-      description: "Kombination aus Analyse und praxisnaher Schulung.",
+      description: "Der kompakte Einstieg für Unternehmen, die ihr Team fit für KI machen wollen.",
       icon: "training",
       features: [
-        "Awareness-Analyse",
+        "Awareness-Analyse (Light-Check)",
         "Mitarbeiterschulung",
         "Best-Practice Workshops",
-        "Strategieberatung"
+        "Strategieberatung zu Anwendungsfeldern"
       ],
-      price: "€1.999",
-      duration: "1–3 Wochen",
+      price: "ab €1.500",
+      duration: "2–4 Tage",
       isProduct: true,
       rebate: {
         percentage: 25,
-        originalPrice: "€1.999",
-        discountedPrice: "€1.499"
+        originalPrice: "ab €1.500",
+        discountedPrice: "ab €1.125"
       }
     }
   ],
@@ -95,29 +95,29 @@ const {
     {
       title: "Vertiefungstraining",
       subtitle: "Ergänzendes Service-Paket",
-      description: "Umfassende Weiterbildung für den sicheren Umgang mit KI-Lösungen.",
+      description: "Gezielte Weiterbildung für den sicheren Umgang mit KI-Lösungen.",
       features: [
-        "Mitarbeiterschulungen",
-        "Best-Practice Workshops",
+        "Erweiterte Mitarbeiterschulungen",
+        "Praxis-Workshops",
         "Individuelle Betreuung",
         "Schulungsunterlagen"
       ],
       price: "€699–€1.600",
-      duration: "2–7 Tage",
+      duration: "1–3 Tage",
       icon: "training"
     },
     {
-      title: "Strategische Begleitung",
+      title: "KI-Dashboard",
       subtitle: "Ergänzendes Service-Paket",
-      description: "Kontinuierliche Beratung und Optimierung Ihrer KI-Strategie.",
+      description: "Ihr zentrales Cockpit für Automatisierung & Strategie – als SaaS-Lösung.",
       features: [
-        "Strategische Beratung",
-        "Performance-Monitoring",
-        "Kontinuierliche Verbesserung",
-        "Priorisierter Support"
+        "Übersichtliche KPI-Dashboards",
+        "Monitoring der Automatisierungen",
+        "Kontinuierliche Optimierung",
+        "Coming soon"
       ],
-      price: "€499–€1.500 pro Monat",
-      duration: "Laufend",
+      price: "ab €2.000 pro Monat",
+      duration: "monatlich",
       icon: "advisory"
     }
   ]
@@ -280,7 +280,7 @@ const {
     <div class="mt-12 sm:mt-16 md:mt-20">
       <div class="text-center mb-12">
         <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 animate-on-scroll">
-          Ergänzende Service-Pakete
+          Ergänzende Services
         </h3>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 0.15s">
           Erweitern Sie Ihre KI-Automatisierung mit zusätzlichen Services für maximalen Erfolg
