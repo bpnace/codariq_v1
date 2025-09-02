@@ -23,6 +23,11 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1E3A8A" />
     <meta name="msapplication-TileColor" content="#1E3A8A" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Codariq" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -52,22 +57,43 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="author" content="Codariq - KI-Automatisierungsexperte" />
+    <meta name="keywords" content="KI-Automatisierung, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, Business Intelligence, Machine Learning, DSGVO, Digitalisierung" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="de" />
+    <meta name="revisit-after" content="7 days" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage || '/og-image.jpg'} />
+    <meta property="og:image" content={ogImage || `${canonicalURL.origin}/images/hero/hero2.webp`} />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:type" content="image/webp" />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Codariq" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage || '/og-image.jpg'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage || `${canonicalURL.origin}/images/hero/hero2.webp`} />
+    <meta name="twitter:image:alt" content="Codariq KI-Automatisierung Dashboard für deutsche Unternehmen" />
+    <meta name="twitter:site" content="@codariq" />
+    <meta name="twitter:creator" content="@codariq" />
 
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="DE-BE" />
+    <meta name="geo.placename" content="Berlin" />
+    <meta name="geo.position" content="52.520008;13.404954" />
+    <meta name="ICBM" content="52.520008, 13.404954" />
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    
     <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
     <link rel="preconnect" href="https://assets.calendly.com" crossorigin />
