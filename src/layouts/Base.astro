@@ -884,6 +884,18 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 
     <!-- ElevenLabs Conversational AI Widget -->
     <elevenlabs-convai agent-id="agent_5401k40hten3edv8fq1pzjg1hf8p"></elevenlabs-convai>
+    
+    <!-- ElevenLabs z-index fix for Cookie Consent -->
+    <style>
+      elevenlabs-convai {
+        z-index: 998 !important;
+      }
+      
+      /* Ensure cookie consent is above ElevenLabs widget */
+      #cookie-consent {
+        z-index: 999 !important;
+      }
+    </style>
 
   </body>
 </html>

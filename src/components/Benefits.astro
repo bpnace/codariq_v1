@@ -113,12 +113,12 @@ const {
       features: [
         "Übersichtliche KPI-Dashboards",
         "Monitoring der Automatisierungen",
-        "Kontinuierliche Optimierung",
-        "Coming soon"
+        "Kontinuierliche Optimierung"
       ],
       price: "ab €2.000 pro Monat",
       duration: "monatlich",
-      icon: "advisory"
+      icon: "advisory",
+      comingSoon: true
     }
   ]
 } = Astro.props;
@@ -320,9 +320,16 @@ const {
 
               <!-- Content -->
               <div class="mb-4">
-                <h4 class="text-lg font-bold text-gray-900 mb-2">
-                  {service.title}
-                </h4>
+                <div class="flex items-center gap-2 mb-2">
+                  <h4 class="text-lg font-bold text-gray-900">
+                    {service.title}
+                  </h4>
+                  {service.comingSoon && (
+                    <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">
+                      Coming soon
+                    </span>
+                  )}
+                </div>
                 <p class="text-gray-600 leading-relaxed mb-4 text-sm">
                   {service.description}
                 </p>
