@@ -286,14 +286,29 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                 "serviceType": "Business Process Analysis",
                 "category": "Artificial Intelligence Consulting"
               },
-              "price": "749",
+              "price": "999",
               "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "PriceSpecification",
-                "price": "749",
-                "priceCurrency": "EUR",
-                "valueAddedTaxIncluded": true
-              },
+              "priceSpecification": [
+                {
+                  "@type": "PriceSpecification",
+                  "name": "Regulärer Preis",
+                  "price": "999",
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": true
+                },
+                {
+                  "@type": "PriceSpecification",
+                  "name": "Neukunden-Rabatt (25%)",
+                  "price": "749",
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": true,
+                  "eligibleQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value": 1
+                  },
+                  "eligibleCustomerType": "New Customer"
+                }
+              ],
               "availability": "https://schema.org/InStock",
               "deliveryLeadTime": "P1W/P2W"
             },
@@ -312,8 +327,31 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                 "serviceType": "Custom AI Development",
                 "category": "Artificial Intelligence Implementation"
               },
-              "priceRange": "1875-7125 EUR",
+              "priceRange": "2500-9500 EUR",
               "priceCurrency": "EUR",
+              "priceSpecification": [
+                {
+                  "@type": "PriceSpecification",
+                  "name": "Regulärer Preis",
+                  "minPrice": "2500",
+                  "maxPrice": "9500",
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": true
+                },
+                {
+                  "@type": "PriceSpecification",
+                  "name": "Neukunden-Rabatt (25%)",
+                  "minPrice": "1875",
+                  "maxPrice": "7125",
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": true,
+                  "eligibleQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value": 1
+                  },
+                  "eligibleCustomerType": "New Customer"
+                }
+              ],
               "availability": "https://schema.org/InStock",
               "deliveryLeadTime": "P4W/P12W"
             },
@@ -332,14 +370,29 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                 "serviceType": "Professional Training",
                 "category": "Artificial Intelligence Training"
               },
-              "price": "524",
+              "price": "699",
               "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "PriceSpecification",
-                "price": "524",
-                "priceCurrency": "EUR",
-                "valueAddedTaxIncluded": true
-              },
+              "priceSpecification": [
+                {
+                  "@type": "PriceSpecification",
+                  "name": "Regulärer Preis",
+                  "price": "699",
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": true
+                },
+                {
+                  "@type": "PriceSpecification",
+                  "name": "Neukunden-Rabatt (25%)",
+                  "price": "524",
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": true,
+                  "eligibleQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value": 1
+                  },
+                  "eligibleCustomerType": "New Customer"
+                }
+              ],
               "availability": "https://schema.org/InStock",
               "deliveryLeadTime": "P1W/P3W"
             },
