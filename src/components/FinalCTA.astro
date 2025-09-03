@@ -243,39 +243,98 @@ const {
         </form>
       </div>
 
-      <!-- Calendly Widget with Loading State -->
-      <div class="text-center mt-8">
-        <p class="text-gray-600 text-sm mb-6">
-          Oder buchen Sie direkt einen Termin:
-        </p>
-        <div class="bg-white rounded-xl p-6 max-w-5xl mx-auto">
-          <div id="calendly-container">
-            <div
-              class="min-h-[500px] sm:min-h-[700px] flex flex-col items-center justify-center bg-gray-50 rounded-lg"
-            >
-              <button
-                id="load-calendly"
-                class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold mb-4 min-h-[44px] min-w-[44px] cta-button"
-                aria-describedby="calendly-description"
-              >
-                Terminkalender laden
-              </button>
-              <p
-                id="calendly-description"
-                class="text-sm text-gray-600 text-center max-w-md"
-              >
-                Lädt den Calendly-Terminplaner für die direkte Buchung.
-                <a
-                  href="https://calendly.com/kontakt-codariq/45min"
-                  class="text-blue-600 hover:underline"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Alternativ direkt zu Calendly
-                </a>
-              </p>
+      <!-- Blog Preview Section -->
+      <div class="mt-12">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-2">
+            Insights & Expertise
+          </h3>
+          <p class="text-gray-600">
+            Aktuelle Einblicke in KI-Automatisierung und digitale Transformation
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Blog Post 1 -->
+          <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group">
+            <div class="mb-4">
+              <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+                KI-Strategie
+              </span>
             </div>
-          </div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+              5 Schritte zur erfolgreichen KI-Integration
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Wie Sie KI-Technologien strategisch in Ihr Unternehmen integrieren und messbare Erfolge erzielen.
+            </p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+              <span>8 Min. Lesezeit</span>
+              <span>Neu</span>
+            </div>
+          </article>
+
+          <!-- Blog Post 2 -->
+          <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group">
+            <div class="mb-4">
+              <div class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                Automatisierung
+              </span>
+            </div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+              ROI von Prozessautomatisierung maximieren
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Praxiserprobte Methoden zur Identifikation und Umsetzung der profitabelsten Automatisierungsprojekte.
+            </p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+              <span>12 Min. Lesezeit</span>
+              <span>Beliebt</span>
+            </div>
+          </article>
+
+          <!-- Blog Post 3 -->
+          <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group md:col-span-2 lg:col-span-1">
+            <div class="mb-4">
+              <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                </svg>
+              </div>
+              <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
+                Change Management
+              </span>
+            </div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+              Teams erfolgreich auf KI vorbereiten
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Bewährte Strategien für die Mitarbeiterschulung und den kulturellen Wandel bei der KI-Einführung.
+            </p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+              <span>10 Min. Lesezeit</span>
+              <span>Praxistipp</span>
+            </div>
+          </article>
+        </div>
+        
+        <div class="text-center mt-8">
+          <p class="text-sm text-gray-500 mb-4">
+            Mehr Insights und Praxistipps in unserem Newsletter
+          </p>
+          <button class="text-orange-600 hover:text-orange-700 font-medium text-sm border-b border-orange-200 hover:border-orange-300 transition-colors">
+            Newsletter abonnieren →
+          </button>
         </div>
       </div>
     </div>
@@ -299,93 +358,6 @@ const {
 </style>
 
 <script type="module">
-  document.addEventListener('DOMContentLoaded', function () {
-    const loadButton = document.getElementById('load-calendly');
-    const container = document.getElementById('calendly-container');
-
-    if (loadButton && container) {
-      // Check cookie consent before loading Calendly
-      function hasMarketingConsent() {
-        const consent = localStorage.getItem('cookieConsent');
-        if (!consent) return false;
-        const parsed = JSON.parse(consent);
-        return parsed.preferences && parsed.preferences.marketing === true;
-      }
-
-      // Support both click and keyboard events
-      function loadCalendlyWidget() {
-        // Check if marketing cookies are allowed
-        if (!hasMarketingConsent()) {
-          container.innerHTML = `
-          <div class="min-h-[500px] sm:min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
-            <div class="text-center max-w-md px-4">
-              <svg class="w-12 h-12 sm:w-16 sm:h-16 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-              </svg>
-              <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Cookie-Einwilligung erforderlich</h3>
-              <p class="text-sm sm:text-base text-gray-600 mb-4">
-                Um den Terminkalender zu laden, benötigen wir Ihre Einwilligung für Marketing-Cookies.
-              </p>
-              <button 
-                onclick="document.getElementById('cookie-settings').click()" 
-                class="bg-gradient-to-r from-orange-600 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-sm sm:text-base"
-              >
-                Cookie-Einstellungen öffnen
-              </button>
-            </div>
-          </div>
-        `;
-          return;
-        }
-
-        // Show loading state
-        container.innerHTML = `
-        <div class="min-h-[500px] sm:min-h-[700px] flex items-center justify-center bg-gray-50 rounded-lg">
-          <div class="text-center">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
-            <p class="text-gray-600">Terminkalender wird geladen...</p>
-          </div>
-        </div>
-      `;
-
-        // Load Calendly widget
-        setTimeout(() => {
-          // Check if mobile device
-          const isMobile = window.innerWidth < 768;
-          const height = isMobile ? '500px' : '700px';
-
-          // Mobile-optimized parameters
-          const baseParams =
-            'hide_gdpr_banner=1&hide_event_type_details=1&embed_type=Inline';
-          const mobileParams = isMobile
-            ? `${baseParams}&embed_domain=${encodeURIComponent(window.location.hostname)}&background_color=ffffff&text_color=111827&primary_color=ff5f00&hide_landing_page_details=1&hide_avatar=1`
-            : baseParams;
-
-          container.innerHTML = `
-          <div class="calendly-inline-widget" 
-               data-url="https://calendly.com/kontakt-codariq/45min?${mobileParams}" 
-               style="min-width:320px;height:${height};width:100%;border-radius:8px;overflow:hidden;"></div>
-        `;
-
-          // Load Calendly script
-          const script = document.createElement('script');
-          script.src = 'https://assets.calendly.com/assets/external/widget.js';
-          script.async = true;
-          document.head.appendChild(script);
-        }, 100);
-      }
-
-      // Add event listeners for both click and keyboard
-      loadButton.addEventListener('click', loadCalendlyWidget);
-      loadButton.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          loadCalendlyWidget();
-        }
-      });
-    }
-  });
-
   // Handle form submission and success/error messages
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('contact-form');

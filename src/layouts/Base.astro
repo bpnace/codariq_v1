@@ -547,11 +547,6 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
               class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base"
               >Referenzen</a
             >
-            <a
-              href="/#process"
-              class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base"
-              >Vorgehen</a
-            >
           </div>
 
           <!-- Right: CTA and Mobile Menu -->
@@ -609,11 +604,6 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
               class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
               >Referenzen</a
             >
-            <a
-              href="/#process"
-              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
-              >Vorgehen</a
-            >
           </div>
         </div>
       </header>
@@ -622,7 +612,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
         <slot />
       </main>
 
-      <footer class="bg-gray-50 border-t border-gray-200" role="contentinfo">
+      <footer class="bg-gray-800 border-t border-gray-700" role="contentinfo">
         <div
           class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12"
         >
@@ -630,37 +620,37 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"
           >
             <div class="col-span-2">
-              <div class="flex items-end gap-8 mb-4">
+              <div class="flex items-end gap-6 md:gap-8 mb-4">
                 <img
                   src="/Logo1.svg"
                   alt="Codariq"
-                  class="h-25 w-auto"
+                  class="h-20 md:h-25 w-auto"
                   loading="lazy"
                   decoding="async"
                 />
-                <div class="flex items-end h-25">
-                  <div class="h-25 w-px bg-gray-300 mx-4"></div>
+                <div class="flex items-end h-20 md:h-25">
+                  <div class="h-20 md:h-25 w-px bg-gray-600 mx-3 md:mx-4"></div>
                   <div class="flex flex-col justify-center h-full">
-                    <div class="flex space-x-3">
+                    <div class="flex space-x-2 md:space-x-3">
                       <!-- Trust badges next to logo -->
                       <img
                         src="/images/badges/climate-friendly.webp"
                         alt="Klimafreundlich"
-                        class="h-20"
+                        class="h-16 md:h-20"
                         loading="lazy"
                         decoding="async"
                       />
                       <img
                         src="/images/badges/gdpr-ready.webp"
                         alt="DSGVO konform"
-                        class="h-20"
+                        class="h-16 md:h-20"
                         loading="lazy"
                         decoding="async"
                       />
                       <img
                         src="/images/badges/remote-only.webp"
                         alt="Remote verfügbar"
-                        class="h-20"
+                        class="h-16 md:h-20"
                         loading="lazy"
                         decoding="async"
                       />
@@ -668,15 +658,15 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   </div>
                 </div>
               </div>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-300 mb-4">
                 Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten
                 KI-Lösungen.
               </p>
               <div class="flex flex-col">
-                <span class="text-gray-500 text-sm mb-3"
+                <span class="text-gray-400 text-sm mb-3"
                   >Powered by industry leaders:</span
                 >
-                <div class="flex items-center space-x-6">
+                <div class="flex items-center space-x-4 md:space-x-6">
                   <a
                     href="https://www.coursera.org/account/accomplishments/specialization/certificate/02X85MNGYZGE"
                     target="_blank"
@@ -687,7 +677,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/google.svg"
                       alt="Google"
-                      class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity"
+                      class="h-12 md:h-16 w-auto opacity-60 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
@@ -702,7 +692,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/ibm.svg"
                       alt="IBM"
-                      class="h-22 w-auto opacity-60 hover:opacity-100 transition-opacity"
+                      class="h-16 md:h-22 w-auto opacity-60 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
@@ -717,7 +707,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/openai.svg"
                       alt="OpenAI"
-                      class="h-16 w-auto opacity-60 hover:opacity-100 transition-opacity"
+                      class="h-12 md:h-16 w-auto opacity-60 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
@@ -727,35 +717,35 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
             </div>
 
             <div>
-              <h3 class="font-semibold text-gray-900 mb-4">Unternehmen</h3>
-              <ul class="space-y-2 text-gray-600">
+              <h3 class="font-semibold text-gray-100 mb-4">Unternehmen</h3>
+              <ul class="space-y-2 text-gray-300">
                 <li>
-                  <a href="/impressum" class="hover:text-primary-600"
+                  <a href="/impressum" class="hover:text-orange-400 transition-colors"
                     >Impressum</a>
                 </li>
                 <li>
-                  <a href="/datenschutz" class="hover:text-primary-600"
+                  <a href="/datenschutz" class="hover:text-orange-400 transition-colors"
                     >Datenschutzerklärung</a>
                 </li>
                 <li>
-                  <a href="/cookie-richtlinien" class="hover:text-primary-600"
+                  <a href="/cookie-richtlinien" class="hover:text-orange-400 transition-colors"
                     >Cookie-Richtlinien</a>
                 </li>
-                <li><a href="/faq" class="hover:text-primary-600">FAQ</a></li>
-                <li><a href="/agb" class="hover:text-primary-600">AGB</a></li>
+                <li><a href="/faq" class="hover:text-orange-400 transition-colors">FAQ</a></li>
+                <li><a href="/agb" class="hover:text-orange-400 transition-colors">AGB</a></li>
               </ul>
             </div>
 
             <div>
-              <h3 class="font-semibold text-gray-900 mb-4">Kontakt</h3>
-              <ul class="space-y-2 text-gray-600">
+              <h3 class="font-semibold text-gray-100 mb-4">Kontakt</h3>
+              <ul class="space-y-2 text-gray-300">
                 <li>kontakt@codariq.de</li>
                 <li>Made with love in Berlin ❤️</li>
               </ul>
             </div>
 
             <div
-              class="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500"
+              class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400"
             >
               <p>&copy; 2025 Codariq. Alle Rechte vorbehalten.</p>
             </div>
