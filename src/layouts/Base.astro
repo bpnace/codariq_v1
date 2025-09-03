@@ -29,6 +29,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Codariq" />
 
+    <!-- Performance optimizations -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="preload" href="/images/hero/hero2.webp" as="image" type="image/webp" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -97,6 +101,14 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
     <link rel="preconnect" href="https://assets.calendly.com" crossorigin />
+
+    <!-- Preconnect to ElevenLabs API for faster loading -->
+    <link rel="dns-prefetch" href="https://api.us.elevenlabs.io" />
+    <link rel="preconnect" href="https://api.us.elevenlabs.io" crossorigin />
+
+    <!-- Preconnect to unpkg for widget loading -->
+    <link rel="dns-prefetch" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
 
     <!-- Fonts -->
     <link
@@ -476,8 +488,51 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
       }
     </script>
 
-    <!-- ElevenLabs Conversational AI Widget -->
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <!-- ElevenLabs Conversational AI Widget - Scroll-triggered loading -->
+    <script type="text/javascript">
+      // Load ElevenLabs widget when user scrolls to solutions section
+      let widgetLoaded = false;
+
+      function loadElevenLabsWidget() {
+        if (widgetLoaded) return;
+
+        widgetLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+        script.async = true;
+        script.type = 'text/javascript';
+        document.head.appendChild(script);
+
+        console.log('ElevenLabs widget loaded on scroll to solutions section');
+      }
+
+      // Wait for page to load first
+      window.addEventListener('load', function() {
+        // Use Intersection Observer to detect when solutions section comes into view
+        const solutionsSection = document.getElementById('benefits');
+
+        if (solutionsSection && 'IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              // Trigger when 20% of the section is visible
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+                loadElevenLabsWidget();
+                observer.unobserve(entry.target); // Stop observing once loaded
+              }
+            });
+          }, {
+            threshold: 0.2, // 20% of the section must be visible
+            rootMargin: '0px 0px -50px 0px' // Trigger slightly before fully in view
+          });
+
+          observer.observe(solutionsSection);
+        } else {
+          // Fallback for browsers without Intersection Observer
+          // Load after a longer delay if section is not found
+          setTimeout(loadElevenLabsWidget, 3000);
+        }
+      });
+    </script>
 
   </head>
 
