@@ -304,7 +304,7 @@ const {
           </article>
 
           <!-- Blog Post 3 -->
-          <article class="hidden md:block bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group md:col-span-2 lg:col-span-1">
+          <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group md:col-span-2 lg:col-span-1 hidden md:block">
             <div class="mb-4">
               <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
                 <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -328,7 +328,6 @@ const {
           </article>
         </div>
         
-
     </div>
   </div>
 </section>
@@ -357,11 +356,6 @@ const {
     const errorList = document.getElementById('error-list');
     const successDiv = document.getElementById('form-success');
 
-    // Newsletter form elements
-    const newsletterForm = document.getElementById('newsletter-form');
-    const newsletterErrors = document.getElementById('newsletter-errors');
-    const newsletterErrorList = document.getElementById('newsletter-error-list');
-    const newsletterSuccess = document.getElementById('newsletter-success');
 
     // Check for success parameter in URL (from FormSubmit.co redirect)
     const urlParams = new URLSearchParams(window.location.search);
@@ -383,22 +377,6 @@ const {
       }
     }
 
-    // Handle newsletter success
-    if (urlParams.get('newsletter') === 'success') {
-      if (newsletterSuccess && newsletterForm) {
-        newsletterSuccess.classList.remove('hidden');
-        newsletterForm.style.display = 'none';
-
-        // Clean URL to remove newsletter parameter
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-
-        // No automatic scrolling - user stays where they are
-      }
-    }
 
     // Client-side form validation
     if (form) {
@@ -463,42 +441,5 @@ const {
       });
     }
 
-    // Newsletter form validation
-    if (newsletterForm) {
-      newsletterForm.addEventListener('submit', function (e) {
-        // Reset error states
-        newsletterErrors.classList.add('hidden');
-        newsletterErrorList.innerHTML = '';
-
-        // Get email field
-        const email = document.getElementById('newsletter-email');
-        let hasErrors = false;
-        const errors = [];
-
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
-          errors.push('Bitte geben Sie eine gültige E-Mail-Adresse ein');
-          document.getElementById('newsletter-email-error').textContent =
-            'Bitte geben Sie eine gültige E-Mail-Adresse ein';
-          document.getElementById('newsletter-email-error').classList.remove('hidden');
-          hasErrors = true;
-        } else {
-          document.getElementById('newsletter-email-error').classList.add('hidden');
-        }
-
-        // If there are errors, prevent form submission and show error messages
-        if (hasErrors) {
-          e.preventDefault();
-          newsletterErrors.classList.remove('hidden');
-          errors.forEach(error => {
-            const li = document.createElement('li');
-            li.textContent = error;
-            newsletterErrorList.appendChild(li);
-          });
-          // No automatic scrolling - user stays where they are to see their input
-        }
-      });
-    }
   });
 </script>

@@ -109,7 +109,7 @@ const {
       <!-- CTA Button with Risk Reduction -->
       <div class="hero-animate" style="animation-delay: 0.8s">
         <div
-          class="flex flex-col items-center mb-6 sm:mb-8 md:mb-12 px-6 sm:px-4"
+          class="flex flex-col items-center mb-3 sm:mb-4 md:mb-6 px-6 sm:px-4"
         >
           <a
             href={primaryCTALink}
@@ -135,7 +135,7 @@ const {
           </a>
 
           <!-- Risk Reduction Text -->
-          <p class="text-white/80 text-sm font-bold mb-6">
+          <p class="text-white/80 text-sm font-bold mb-2">
             100% Unverbindlich & kostenfrei
           </p>
         </div>
@@ -148,11 +148,18 @@ const {
             Powered by industry leaders
           </p>
           <div
-            class="flex items-center justify-center space-x-6 sm:space-x-8"
+            class="flex items-center justify-center space-x-4 sm:space-x-6 md:space-x-8"
           >
             <img
               src="/images/logos/google.svg"
               alt="Google"
+              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/logos/n8n.svg"
+              alt="n8n"
               class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
               loading="lazy"
               decoding="async"
