@@ -697,7 +697,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/ibm.svg"
                       alt="IBM"
-                      class="h-10 md:h-12 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+                      class="h-10 md:h-18 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
@@ -748,9 +748,94 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
               </ul>
             </div>
 
-            <div
-              class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400"
-            >
+            <!-- Newsletter Signup -->
+            <div class="border-t border-gray-600 pt-8">
+              <div class="text-center mb-6">
+                <h3 class="text-lg font-bold text-gray-100 mb-2">
+                  Bleiben Sie auf dem Laufenden
+                </h3>
+                <p class="text-gray-300 text-sm">
+                  Erhalten Sie wöchentlich Insights zu KI-Automatisierung und digitaler Transformation
+                </p>
+              </div>
+
+              <!-- Newsletter Success Message -->
+              <div
+                id="newsletter-success"
+                role="alert"
+                aria-live="polite"
+                class="hidden mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
+              >
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                    <h5 class="font-semibold text-green-800">Erfolgreich angemeldet!</h5>
+                    <p class="text-green-700 text-sm mt-1">Vielen Dank für Ihr Interesse. Sie erhalten eine Bestätigungs-E-Mail.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Newsletter Error Messages -->
+              <div
+                id="newsletter-errors"
+                role="alert"
+                aria-live="polite"
+                class="hidden mb-6 p-4 bg-red-50 border border-red-200 rounded-lg"
+              >
+                <h5 class="font-semibold text-red-800 mb-2">Bitte korrigieren Sie:</h5>
+                <ul id="newsletter-error-list" class="list-disc list-inside text-red-700 text-sm"></ul>
+              </div>
+
+              <!-- Newsletter Form -->
+              <form
+                action="https://formsubmit.co/newsletter@codariq.de"
+                method="POST"
+                id="newsletter-form"
+                class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              >
+                <!-- FormSubmit.co Configuration -->
+                <input type="hidden" name="_subject" value="Newsletter-Anmeldung von codariq.de" />
+                <input type="hidden" name="_next" value="https://codariq.de?newsletter=success" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+
+                <div class="flex-1">
+                  <label for="newsletter-email" class="sr-only">E-Mail-Adresse</label>
+                  <input
+                    type="email"
+                    id="newsletter-email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                    placeholder="ihre@email.de"
+                    aria-describedby="newsletter-email-error"
+                    class="w-full px-4 py-2.5 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm bg-gray-700 text-gray-100"
+                  />
+                  <div
+                    id="newsletter-email-error"
+                    role="alert"
+                    aria-live="polite"
+                    class="text-sm text-red-400 mt-1 hidden"
+                  ></div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-2.5 rounded-lg hover:from-orange-600 hover:to-orange-800 font-medium text-sm transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap"
+                >
+                  Anmelden
+                </button>
+              </form>
+
+              <p class="text-xs text-gray-400 text-center mt-4">
+                Kostenlos abmeldbar. Keine Spam-E-Mails.
+                <a href="/datenschutz" class="underline hover:text-orange-400 transition-colors">Datenschutz</a>
+              </p>
+            </div>
+
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
               <p>&copy; 2025 Codariq. Alle Rechte vorbehalten.</p>
             </div>
           </div>
