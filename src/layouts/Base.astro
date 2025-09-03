@@ -622,21 +622,30 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
           class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12"
         >
           <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
           >
-            <!-- Logo & Company Info -->
-            <div class="md:col-span-2 lg:col-span-4">
-              <div class="flex items-center gap-4 mb-6">
+            <!-- Column 1: Logo + Beschreibung -->
+            <div>
+              <div class="mb-6">
                 <img
                   src="/Logo1.svg"
                   alt="Codariq"
-                  class="h-16 md:h-20 w-auto brightness-0 invert"
+                  class="h-20 md:h-25 w-auto brightness-0 invert mb-4"
                   loading="lazy"
                   decoding="async"
                 />
-                <div class="h-16 md:h-20 w-px bg-gray-600"></div>
-                <div class="flex space-x-2 md:space-x-3">
-                  <!-- Trust badges next to logo -->
+                <p class="text-gray-300 text-sm leading-relaxed">
+                  Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten
+                  KI-Lösungen.
+                </p>
+              </div>
+            </div>
+
+            <!-- Column 2: Trust Badges + Industry Leaders -->
+            <div>
+              <div class="mb-6">
+                <h4 class="font-semibold text-gray-100 mb-3">Zertifizierungen</h4>
+                <div class="flex flex-wrap gap-3 mb-6">
                   <img
                     src="/images/badges/climate-friendly.webp"
                     alt="Klimafreundlich"
@@ -660,15 +669,12 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   />
                 </div>
               </div>
-              <p class="text-gray-300 text-sm leading-relaxed mb-6">
-                Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten
-                KI-Lösungen.
-              </p>
-              <div class="flex flex-col">
-                <span class="text-gray-400 text-xs mb-3"
+
+              <div>
+                <span class="text-gray-400 text-sm mb-3 block"
                   >Powered by industry leaders:</span
                 >
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-3 md:space-x-4">
                   <a
                     href="https://www.coursera.org/account/accomplishments/specialization/certificate/02X85MNGYZGE"
                     target="_blank"
@@ -679,18 +685,11 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/google.svg"
                       alt="Google"
-                      class="h-6 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                      class="h-8 md:h-10 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
                   </a>
-                  <img
-                    src="/images/logos/n8n.svg"
-                    alt="n8n"
-                    class="h-6 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                    decoding="async"
-                  />
                   <a
                     href="https://www.credly.com/badges/bc236bf7-2cb8-4435-bbea-660a4c37329e/public_url"
                     target="_blank"
@@ -701,7 +700,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/ibm.svg"
                       alt="IBM"
-                      class="h-7 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                      class="h-10 md:h-12 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
@@ -716,7 +715,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                     <img
                       src="/images/logos/openai.svg"
                       alt="OpenAI"
-                      class="h-6 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                      class="h-8 md:h-10 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
                     />
@@ -724,34 +723,11 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                 </div>
               </div>
             </div>
-            
-            <!-- Services & Solutions -->
-            <div class="md:col-span-1 lg:col-span-2">
-              <h3 class="font-semibold text-gray-100 mb-4">Lösungen</h3>
-              <ul class="space-y-3 text-gray-300 text-sm">
-                <li>
-                  <a href="/#solutions" class="hover:text-orange-400 transition-colors"
-                    >AI Readiness Check</a>
-                </li>
-                <li>
-                  <a href="/#solutions" class="hover:text-orange-400 transition-colors"
-                    >Automation Pilot</a>
-                </li>
-                <li>
-                  <a href="/#solutions" class="hover:text-orange-400 transition-colors"
-                    >Team Training</a>
-                </li>
-                <li>
-                  <a href="/#solutions" class="hover:text-orange-400 transition-colors"
-                    >Strategische Beratung</a>
-                </li>
-              </ul>
-            </div>
 
-            <!-- Company Links -->
-            <div class="md:col-span-1 lg:col-span-2">
+            <!-- Column 3: Unternehmen -->
+            <div>
               <h3 class="font-semibold text-gray-100 mb-4">Unternehmen</h3>
-              <ul class="space-y-3 text-gray-300 text-sm">
+              <ul class="space-y-2 text-gray-300 mb-6">
                 <li>
                   <a href="/impressum" class="hover:text-orange-400 transition-colors"
                     >Impressum</a>
@@ -762,42 +738,45 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                 </li>
                 <li>
                   <a href="/cookie-richtlinien" class="hover:text-orange-400 transition-colors"
-                    >Cookies</a>
+                    >Cookie-Richtlinien</a>
                 </li>
+                <li><a href="/faq" class="hover:text-orange-400 transition-colors">FAQ</a></li>
                 <li><a href="/agb" class="hover:text-orange-400 transition-colors">AGB</a></li>
               </ul>
             </div>
 
-            <!-- Contact & Newsletter -->
-            <div class="md:col-span-2 lg:col-span-4">
+            <!-- Column 4: Kontakt + Newsletter -->
+            <div>
+              <!-- Kontakt Section -->
               <div class="mb-6">
-                <h3 class="font-semibold text-gray-100 mb-4">Kontakt</h3>
-                <div class="space-y-2 text-gray-300 text-sm">
-                  <p>kontakt@codariq.de</p>
-                  <p class="text-xs text-gray-400">Montag - Freitag, 9:00 - 18:00 Uhr</p>
-                  <p class="text-xs text-gray-400 mt-3">Made with ❤️ in Berlin</p>
-                </div>
+                <h3 class="font-semibold text-gray-100 mb-3">Kontakt</h3>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                  <li>kontakt@codariq.de</li>
+                  <li>Made with love in Berlin ❤️</li>
+                </ul>
               </div>
 
-                             <!-- Newsletter -->
-               <div>
-                 <h4 class="text-base font-semibold text-gray-100 mb-3">Newsletter abonnieren</h4>
-                 <p class="text-gray-400 text-xs mb-4">Wöchentliche KI-Insights in Ihr Postfach</p>
-                
+              <!-- Newsletter Section -->
+              <div>
+                <h4 class="font-semibold text-gray-100 mb-2">Newsletter</h4>
+                <p class="text-gray-400 text-xs mb-3">
+                  KI-News & Insights
+                </p>
+
                 <!-- Newsletter Success Message -->
                 <div
                   id="newsletter-success"
                   role="alert"
                   aria-live="polite"
-                  class="hidden mb-4 p-3 bg-green-900/20 border border-green-600 rounded-lg"
+                  class="hidden mb-3 p-2 bg-green-900/20 border border-green-600 rounded-lg"
                 >
                   <div class="flex items-center">
-                    <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                     </svg>
                     <div>
-                      <p class="font-medium text-green-300 text-sm">Erfolgreich angemeldet!</p>
-                      <p class="text-green-400 text-xs mt-1">Sie erhalten eine Bestätigungs-E-Mail.</p>
+                      <p class="font-medium text-green-300 text-xs">Erfolgreich angemeldet!</p>
+                      <p class="text-green-400 text-xs">Bestätigungs-E-Mail folgt!</p>
                     </div>
                   </div>
                 </div>
@@ -807,57 +786,58 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   id="newsletter-errors"
                   role="alert"
                   aria-live="polite"
-                  class="hidden mb-4 p-3 bg-red-900/20 border border-red-600 rounded-lg"
+                  class="hidden mb-3 p-2 bg-red-900/20 border border-red-600 rounded-lg"
                 >
-                  <p class="font-medium text-red-300 text-sm mb-1">Bitte korrigieren Sie:</p>
+                  <p class="font-medium text-red-300 text-xs mb-1">Bitte korrigieren:</p>
                   <ul id="newsletter-error-list" class="list-disc list-inside text-red-400 text-xs"></ul>
                 </div>
 
-              <!-- Newsletter Form -->
-              <form
-                action="https://formsubmit.co/newsletter@codariq.de"
-                method="POST"
-                id="newsletter-form"
-                class="space-y-3"
-              >
-                <!-- FormSubmit.co Configuration -->
-                <input type="hidden" name="_subject" value="Newsletter-Anmeldung von codariq.de" />
-                <input type="hidden" name="_next" value="https://codariq.de?newsletter=success" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-
-                <div>
-                  <label for="footer-newsletter-email" class="sr-only">E-Mail-Adresse</label>
-                  <input
-                    type="email"
-                    id="footer-newsletter-email"
-                    name="email"
-                    required
-                    autocomplete="email"
-                    placeholder="ihre@email.de"
-                    aria-describedby="footer-newsletter-email-error"
-                    class="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm placeholder-gray-400"
-                  />
-                  <div
-                    id="footer-newsletter-email-error"
-                    role="alert"
-                    aria-live="polite"
-                    class="text-sm text-red-400 mt-1 hidden"
-                  ></div>
-                </div>
-
-                <button
-                  type="submit"
-                  class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 font-medium text-sm transition-all duration-200 shadow-md hover:shadow-lg"
+                <!-- Newsletter Form (Compact Horizontal Layout) -->
+                <form
+                  action="https://formsubmit.co/newsletter@codariq.de"
+                  method="POST"
+                  id="newsletter-form"
+                  class="flex gap-2"
                 >
-                  Abonnieren
-                </button>
-              </form>
+                  <!-- FormSubmit.co Configuration -->
+                  <input type="hidden" name="_subject" value="Newsletter-Anmeldung von codariq.de" />
+                  <input type="hidden" name="_next" value="https://codariq.de?newsletter=success" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_captcha" value="false" />
 
-              <p class="text-xs text-gray-400 mt-3">
-                Kostenlos abmeldbar. 
-                <a href="/datenschutz" class="underline hover:text-orange-400">Datenschutz</a>
-              </p>
+                  <div class="flex-1">
+                    <label for="footer-newsletter-email" class="sr-only">E-Mail-Adresse</label>
+                    <input
+                      type="email"
+                      id="footer-newsletter-email"
+                      name="email"
+                      required
+                      autocomplete="email"
+                      placeholder="ihre@email.de"
+                      aria-describedby="footer-newsletter-email-error"
+                      class="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm placeholder-gray-400"
+                    />
+                    <div
+                      id="footer-newsletter-email-error"
+                      role="alert"
+                      aria-live="polite"
+                      class="text-sm text-red-400 mt-1 hidden"
+                    ></div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 font-medium text-sm transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap"
+                  >
+                    Abonnieren
+                  </button>
+                </form>
+
+                <p class="text-xs text-gray-400 mt-2">
+                  Kostenlos und jederzeit kündbar.
+                  <a href="/datenschutz" class="underline hover:text-orange-400">Datenschutz</a>
+                </p>
+              </div>
             </div>
             
 
