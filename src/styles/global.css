@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 /* Switzer Variable Font */
 @font-face {
@@ -30,12 +28,20 @@ body {
   min-height: 100vh;
 }
 
-/* Ensure header stays fixed and visible */
-header {
+/* Ensure main navigation header stays fixed and visible */
+header.fixed,
+#main-nav header,
+header[style*="position: fixed"] {
   position: fixed !important;
   top: 0 !important;
   transform: none !important;
   will-change: auto !important;
+}
+
+/* Ensure article headers are positioned normally (not fixed) */
+.article-header {
+  position: static !important;
+  transform: none !important;
 }
 
 /* Fix scroll positioning for anchor links to account for fixed header */
