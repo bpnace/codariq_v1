@@ -31,7 +31,7 @@ Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell e
 - Best-Practice Workshops und individuelle Betreuung
 - Schulungsunterlagen und Zertifizierung
 
-### KI-Dashboard (€1.999 pro Monat) [Coming Soon]
+### KI-Dashboard (auf Anfrage) [Coming Soon]
 - Zentrales Cockpit für Automatisierung & Strategie als SaaS-Lösung
 - Übersichtliche KPI-Dashboards
 - Monitoring der Automatisierungen
