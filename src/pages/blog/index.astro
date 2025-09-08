@@ -1,0 +1,275 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// SEO and meta data
+const title = "Codariq Blog: KI-Automatisierung & Digitale Transformation";
+const description = "Entdecken Sie unsere Insights zu KI-Automatisierung, digitaler Transformation und Change Management. Praktische Tipps für deutsche Unternehmen und aktuelle Trends.";
+const keywords = "KI-Blog Deutschland, Automatisierung Blog, Digitale Transformation, KI-Trends 2024, Change Management Blog, Prozessautomatisierung Tipps, Unternehmensdigitalisierung";
+const author = "Codariq Team";
+const publishedTime = "2024-12-15T10:00:00+01:00";
+const image = "/images/hero/hero2.webp";
+---
+
+<Base
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage={image}
+>
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="bg-gray-50 py-3">
+  <div class="max-w-4xl mx-auto px-4">
+    <ol class="flex items-center space-x-2 text-sm">
+      <li><a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a></li>
+      <li class="text-gray-400">/</li>
+      <li class="text-gray-900 font-medium">Blog</li>
+    </ol>
+  </div>
+</nav>
+
+<!-- Blog Header -->
+<header class="bg-gradient-to-r from-orange-50 to-orange-100 py-12 sm:py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">
+          📝 Blog
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        KI-Automatisierung & <span class="text-orange-600">Digitale Transformation</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+        {description}
+      </p>
+
+      <div class="flex items-center justify-center gap-4 text-sm text-gray-600">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          {author}
+        </span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Blog Posts Grid -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <!-- Blog Post 1 -->
+    <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+      <a href="/blog/5-schritte-zur-erfolgreichen-ki-integration" class="block">
+        <div class="p-6">
+          <div class="mb-4">
+            <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+              KI-Strategie
+            </span>
+          </div>
+          <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
+            5 Schritte zur erfolgreichen KI-Integration: Praxisguide für deutsche Unternehmen 2024
+          </h2>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+            Erfahren Sie die 5 bewährten Schritte zur erfolgreichen KI-Integration in deutsche Unternehmen. Von Strategie bis Implementierung mit aktuellen EU-Trends.
+          </p>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>8 Min. Lesezeit</span>
+            <span>15. Dezember 2024</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Blog Post 2 -->
+    <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+      <a href="/blog/roi-von-prozessautomatisierung-maximieren" class="block">
+        <div class="p-6">
+          <div class="mb-4">
+            <div class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
+              Automatisierung
+            </span>
+          </div>
+          <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+            ROI von Prozessautomatisierung maximieren: Die besten Strategien 2024
+          </h2>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+            Entdecken Sie bewährte Methoden zur Maximierung des ROI Ihrer Automatisierungsprojekte. Praktische Tipps für deutsche Unternehmen mit Benchmarks.
+          </p>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>12 Min. Lesezeit</span>
+            <span>15. Dezember 2024</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Blog Post 3 -->
+    <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+      <a href="/blog/teams-erfolgreich-auf-ki-vorbereiten" class="block">
+        <div class="p-6">
+          <div class="mb-4">
+            <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
+              Change Management
+            </span>
+          </div>
+          <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
+            Teams erfolgreich auf KI vorbereiten: Change Management Guide 2024
+          </h2>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+            Bewährte Strategien für die Vorbereitung Ihrer Teams auf KI-Technologien. Praktische Tipps für Change Management in deutschen Unternehmen.
+          </p>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>10 Min. Lesezeit</span>
+            <span>15. Dezember 2024</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+
+  <!-- Newsletter CTA -->
+  <div class="mt-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-8 text-center">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+      Mehr Insights erhalten
+    </h3>
+    <p class="text-gray-700 mb-6 max-w-2xl mx-auto">
+      Abonnieren Sie unseren Newsletter und erhalten Sie regelmäßig aktuelle Einblicke zu KI-Automatisierung und digitaler Transformation.
+    </p>
+    <a
+      href="/#final-cta"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-all duration-200"
+    >
+      Newsletter abonnieren
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section class="bg-gray-50 py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h3 class="text-2xl font-bold text-gray-900 mb-8">Entdecken Sie mehr Themen</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-lg p-6 border border-gray-200">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h4 class="font-semibold text-gray-900 mb-2">KI-Strategie</h4>
+        <p class="text-gray-600 text-sm">Strategische KI-Implementierung und langfristige Planung</p>
+      </div>
+
+      <div class="bg-white rounded-lg p-6 border border-gray-200">
+        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h4 class="font-semibold text-gray-900 mb-2">Automatisierung</h4>
+        <p class="text-gray-600 text-sm">Prozessoptimierung und Workflow-Automatisierung</p>
+      </div>
+
+      <div class="bg-white rounded-lg p-6 border border-gray-200">
+        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+          </svg>
+        </div>
+        <h4 class="font-semibold text-gray-900 mb-2">Change Management</h4>
+        <p class="text-gray-600 text-sm">Mitarbeiterführung und kultureller Wandel</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Base>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Codariq Blog",
+  "description": "Insights zu KI-Automatisierung und digitaler Transformation für deutsche Unternehmen",
+  "url": "https://codariq.de/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Codariq",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/Logo1.svg"
+    }
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "5 Schritte zur erfolgreichen KI-Integration",
+      "url": "https://codariq.de/blog/5-schritte-zur-erfolgreichen-ki-integration",
+      "datePublished": "2024-12-15T10:00:00+01:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Codariq Team"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "ROI von Prozessautomatisierung maximieren",
+      "url": "https://codariq.de/blog/roi-von-prozessautomatisierung-maximieren",
+      "datePublished": "2024-12-15T11:00:00+01:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Codariq Team"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Teams erfolgreich auf KI vorbereiten",
+      "url": "https://codariq.de/blog/teams-erfolgreich-auf-ki-vorbereiten",
+      "datePublished": "2024-12-15T12:00:00+01:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Codariq Team"
+      }
+    }
+  ]
+}
+</script>
