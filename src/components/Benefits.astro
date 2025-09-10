@@ -521,7 +521,7 @@ const {
         }
 
         // Handle different response scenarios based on status and HTTP code
-        if (response.status === 201 && responseJson.status === 'ok' && responseJson.message === 'Erfolgreich hinzugefügt.') {
+        if (response.status === 201 && responseJson.status === 'ok' && responseJson.action === 'subscribed') {
           // HTTP 201 - Success: Email added to waitlist
           successMessage.classList.remove('hidden');
           dashboardForm.reset();
@@ -530,7 +530,7 @@ const {
           setTimeout(() => {
             successMessage.classList.add('hidden');
           }, 5000);
-        } else if (response.status === 200 && responseJson.status === 'ok' && responseJson.duplicate === true) {
+        } else if (response.status === 200 && responseJson.status === 'ok' && responseJson.action === 'already_subscribed') {
           // HTTP 200 - Already exists: Email already on waitlist
           errorMessage.classList.remove('hidden');
           errorText.textContent = 'Diese E-Mail-Adresse ist bereits in der Warteliste registriert.';
@@ -558,8 +558,17 @@ const {
           }
           
           throw new Error(`HTTP ${response.status}: ${errorMsg}`);
+        } else if (response.ok && responseJson.status === 'ok') {
+          // Handle any other successful responses that we didn't explicitly handle above
+          successMessage.classList.remove('hidden');
+          dashboardForm.reset();
+
+          // Auto-hide success message after 5 seconds
+          setTimeout(() => {
+            successMessage.classList.add('hidden');
+          }, 5000);
         } else {
-          // Unexpected response format
+          // Unexpected response format only for non-successful cases
           throw new Error(responseJson.message || 'Unbekannte Antwort vom Server.');
         }
 
