@@ -5,19 +5,19 @@ Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell e
 
 ## Unsere Service-Pakete
 
-### AI Readiness Check (€999)
-- Dauer: 1-2 Wochen
-- Detaillierte Prozessanalyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten
+### AI Readiness Check (Kostenlos)
+- Dauer: 30 Minuten
+- Kostenlose Erstberatung zur Identifikation der besten KI-Automatisierungsmöglichkeiten
 - ROI-Kalkulation und Machbarkeitsstudie
 - Strategische Empfehlungen für KI-Implementierung
 
-### Automation Pilot (€2.500 - €9.500)
+### Automation Pilot (€3.500 - €12.500)
 - Dauer: 4-12 Wochen
 - Vollständige Entwicklung und Implementierung einer maßgeschneiderten KI-Automatisierungslösung
 - Custom KI-Entwicklung und Systemintegration
 - Testing, Qualitätssicherung und Go-Live Support
 
-### Team Training & AI Readiness (ab €1.500)
+### Team Training & AI Readiness (ab €2.500)
 - Dauer: 1-3 Tage
 - Komplettpaket aus AI Readiness Check und professionellem Team Training
 - Mitarbeiterschulungen und Best-Practice Workshops
@@ -25,7 +25,7 @@ Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell e
 
 ## Zusätzliche Services
 
-### Vertiefungstraining (€699 - €1.600)
+### Vertiefungstraining (€899 - €2.200)
 - Dauer: 6 Stunden
 - Umfassende Schulung für den optimalen Umgang mit KI-Automatisierungslösungen
 - Best-Practice Workshops und individuelle Betreuung
@@ -92,7 +92,7 @@ Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell e
 ## Unser Prozess
 
 ### 1. Analyse & Beratung (1-2 Wochen)
-- Kostenlose Erstberatung und Prozessanalyse
+- Kostenlose 30-minütige Erstberatung und Prozessanalyse
 - ROI-Kalkulation und Machbarkeitsstudie
 - Individuelles Lösungskonzept
 - Detaillierte Projektplanung
