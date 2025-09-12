@@ -4,6 +4,3 @@ http://www.codariq.de/* https://codariq.de/:splat 301!
 
 # Redirect www to non-www
 https://www.codariq.de/* https://codariq.de/:splat 301!
-
-# Force HTTPS and canonical domain
-/* https://codariq.de/:splat 301!

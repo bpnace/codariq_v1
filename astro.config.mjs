@@ -20,6 +20,7 @@ export default defineConfig({
         },
       },
       canonicalURL: 'https://codariq.de',
+      filter: (page) => !page.includes('/agb') && !page.includes('/cookie-richtlinien'),
     }),
   ],
   vite: {

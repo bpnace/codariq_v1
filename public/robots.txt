@@ -2,21 +2,21 @@
 
 # Allow legitimate search engines
 User-agent: Googlebot
-Disallow: /impressum
+Allow: /impressum
+Allow: /datenschutz
 Disallow: /agb
-Disallow: /datenschutz
 Disallow: /cookie-richtlinien
 
 User-agent: Bingbot
-Disallow: /impressum
+Allow: /impressum
+Allow: /datenschutz
 Disallow: /agb
-Disallow: /datenschutz
 Disallow: /cookie-richtlinien
 
 User-agent: DuckDuckBot
-Disallow: /impressum
+Allow: /impressum
+Allow: /datenschutz
 Disallow: /agb
-Disallow: /datenschutz
 Disallow: /cookie-richtlinien
 
 # Block known spam/scraper bots
@@ -181,13 +181,11 @@ Disallow: /
 User-agent: *
 Allow: /
 Allow: /faq
-Disallow: /impressum
-Disallow: /agb
-Disallow: /datenschutz
-Disallow: /cookie-richtlinien
+Allow: /impressum
+Allow: /datenschutz
 
 # Sitemap location
 Sitemap: https://codariq.de/sitemap-index.xml
 
-# Crawl delay to prevent aggressive scraping
-Crawl-delay: 10
+# Reasonable crawl delay
+Crawl-delay: 1
