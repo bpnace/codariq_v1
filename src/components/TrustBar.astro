@@ -14,61 +14,74 @@ const {
     {
       name: "Klimafreundlich",
       icon: "climate-friendly",
-      description: "CO₂ neutrales Hosting und umweltfreundliche Serverinfrastruktur"
+      description:
+        "CO₂ neutrales Hosting und umweltfreundliche Serverinfrastruktur",
     },
     {
       name: "DSGVO konform",
       icon: "gdpr-ready",
-      description: "Vollständige Datenschutz-Grundverordnung Compliance nach EU-Standard"
+      description:
+        "Vollständige Datenschutz-Grundverordnung Compliance nach EU-Standard",
     },
     {
       name: "Remote verfügbar",
       icon: "remote-only",
-      description: "100% digitale Beratung und Implementierung - ortsunabhängig"
-    }
+      description:
+        "100% digitale Beratung und Implementierung - ortsunabhängig",
+    },
   ],
   showLogos = true,
-  className = ""
+  className = "",
 } = Astro.props;
 ---
 
 <section id="trust-bar" class={`py-12 sm:py-16 bg-white ${className}`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-8 sm:mb-12 px-4">
-      <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 animate-on-scroll">
+      <h2
+        class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 animate-on-scroll"
+      >
         Vertrauen Sie auf nachhaltige Qualität
       </h2>
-      <p class="text-sm sm:text-base text-gray-600 animate-on-scroll" style="transition-delay: 0.1s">Zertifiziert und zukunftssicher</p>
+      <p
+        class="text-sm sm:text-base text-gray-600 animate-on-scroll"
+        style="transition-delay: 0.1s"
+      >
+        Zertifiziert und zukunftssicher
+      </p>
     </div>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4">
-      {badges.map((badge, index) => (
-        <div 
-          class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-100 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
-          style={`animation-delay: ${index * 150}ms`}
-        >
-          <!-- Badge Image - Made smaller -->
-          <div class="mb-3 sm:mb-4 transition-transform duration-300">
-            <img 
-              src={`/images/badges/${badge.icon}.webp`}
-              alt={badge.name}
-              class="w-12 h-16 sm:w-16 sm:h-24 object-contain"
-              loading="lazy"
-            />
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4"
+    >
+      {
+        badges.map((badge, index) => (
+          <div
+            class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-100 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
+            style={`animation-delay: ${index * 150}ms`}
+          >
+            {/* Badge Image - Made smaller */}
+            <div class="mb-3 sm:mb-4 transition-transform duration-300">
+              <img
+                src={`/images/badges/${badge.icon}.webp`}
+                alt={badge.name}
+                class="w-12 h-16 sm:w-16 sm:h-24 object-contain"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Badge Text */}
+            <div class="text-center">
+              <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-1 sm:mb-2">
+                {badge.name}
+              </h3>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                {badge.description}
+              </p>
+            </div>
           </div>
-          
-          <!-- Badge Text -->
-          <div class="text-center">
-            <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-1 sm:mb-2">
-              {badge.name}
-            </h3>
-            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-              {badge.description}
-            </p>
-          </div>
-          
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <!-- Social Proof -->

@@ -1,5 +1,5 @@
 ---
-import AIComplianceChecker from './AIComplianceChecker.astro';
+import AIComplianceChecker from "./AIComplianceChecker.astro";
 
 export interface Props {
   title?: string;
@@ -19,106 +19,163 @@ const {
     {
       statistic: "43%",
       label: "Zeitverschwendung",
-      description: "Ihrer Arbeitszeit geht für repetitive, manuelle Aufgaben verloren, die automatisiert werden könnten.",
-      icon: "clock"
+      description:
+        "Ihrer Arbeitszeit geht für repetitive, manuelle Aufgaben verloren, die automatisiert werden könnten.",
+      icon: "clock",
     },
     {
       statistic: "€75.000",
       label: "Jährliche Kosten",
-      description: "Kostet Sie ein einziger manueller Prozess durch Ineffizienz und menschliche Fehler pro Jahr.",
-      icon: "euro"
+      description:
+        "Kostet Sie ein einziger manueller Prozess durch Ineffizienz und menschliche Fehler pro Jahr.",
+      icon: "euro",
     },
     {
       statistic: "67%",
       label: "Fehlerrate",
-      description: "Höhere Fehlerquote bei manuellen Dateneingaben im Vergleich zu automatisierten Systemen.",
-      icon: "error"
+      description:
+        "Höhere Fehlerquote bei manuellen Dateneingaben im Vergleich zu automatisierten Systemen.",
+      icon: "error",
     },
     {
       statistic: "€50.000+",
       label: "DSGVO-Risiko",
-      description: "Bußgelder und Abmahnungen drohen bei unzureichendem Datenschutz und fehlender KI-Compliance.",
-      icon: "shield"
-    }
-  ]
+      description:
+        "Bußgelder und Abmahnungen drohen bei unzureichendem Datenschutz und fehlender KI-Compliance.",
+      icon: "shield",
+    },
+  ],
 } = Astro.props;
 ---
 
 <section id="pain-points" class="py-12 sm:py-16 md:py-20 bg-gray-50">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
+      <h2
+        class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+      >
         {title}
       </h2>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
+      <p
+        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        style="transition-delay: 0.15s"
+      >
         {subtitle}
       </p>
     </div>
 
     <!-- Pain Points Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4">
-      {painPoints.map((pain, index) => (
-        <div 
-          class="group animate-fade-in-up"
-          style={`animation-delay: ${(index + 1) * 150}ms`}
-        >
-          <!-- Pain Point Card -->
-          <div class="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full">
-            
-            <!-- Icon -->
-            <div class="mb-3 sm:mb-4">
-              <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
-                {pain.icon === 'clock' && (
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>Time Waste Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                )}
-                
-                {pain.icon === 'euro' && (
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>Financial Cost Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                  </svg>
-                )}
-                
-                {pain.icon === 'error' && (
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>Error Rate Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-                  </svg>
-                )}
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
+    >
+      {
+        painPoints.map((pain, index) => (
+          <div
+            class="group animate-fade-in-up"
+            style={`animation-delay: ${(index + 1) * 150}ms`}
+          >
+            {/* Pain Point Card */}
+            <div class="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full">
+              {/* Icon */}
+              <div class="mb-3 sm:mb-4">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
+                  {pain.icon === "clock" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Time Waste Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  )}
 
-                {pain.icon === 'shield' && (
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>DSGVO Risk Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                  </svg>
-                )}
-              </div>
-            </div>
+                  {pain.icon === "euro" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Financial Cost Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                      />
+                    </svg>
+                  )}
 
-            <!-- Content -->
-            <div class="mb-3 sm:mb-4 flex-1">
-              <div class="text-2xl sm:text-3xl font-bold text-red-500 mb-2 counter-animation" data-target={pain.statistic}>
-                {pain.statistic}
+                  {pain.icon === "error" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Error Rate Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"
+                      />
+                    </svg>
+                  )}
+
+                  {pain.icon === "shield" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>DSGVO Risk Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                      />
+                    </svg>
+                  )}
+                </div>
               </div>
-              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
-                {pain.label}
-              </h3>
-              <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {pain.description}
-              </p>
+
+              {/* Content */}
+              <div class="mb-3 sm:mb-4 flex-1">
+                <div
+                  class="text-2xl sm:text-3xl font-bold text-red-500 mb-2 counter-animation"
+                  data-target={pain.statistic}
+                >
+                  {pain.statistic}
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
+                  {pain.label}
+                </h3>
+                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  {pain.description}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <!-- KI Compliance Quiz -->
-    <div class="mt-12 sm:mt-16 md:mt-20 mb-0 animate-slide-up" style="animation-delay: 450ms">
+    <div
+      class="mt-12 sm:mt-16 md:mt-20 mb-0 animate-slide-up"
+      style="animation-delay: 450ms"
+    >
       <AIComplianceChecker />
     </div>
 
@@ -146,51 +203,52 @@ const {
       </div>
     </div>
   </div>-->
-</section>
+  </div>
 
-<style>
-  @keyframes countUp {
-    from {
-      opacity: 0;
-      transform: scale(0.5);
+  <style>
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
-    to {
-      opacity: 1;
-      transform: scale(1);
+
+    .counter-animation {
+      animation: countUp 0.8s ease-out forwards;
     }
-  }
 
-  .counter-animation {
-    animation: countUp 0.8s ease-out forwards;
-  }
+    /* Intersection Observer will trigger these */
+    .counter-animate {
+      animation: countUp 1.2s ease-out forwards;
+    }
+  </style>
 
-  /* Intersection Observer will trigger these */
-  .counter-animate {
-    animation: countUp 1.2s ease-out forwards;
-  }
-</style>
+  <script>
+    // Counter animation when element comes into view
+    document.addEventListener("DOMContentLoaded", function () {
+      const counters = document.querySelectorAll(".counter-animation");
 
-<script>
-  // Counter animation when element comes into view
-  document.addEventListener('DOMContentLoaded', function() {
-    const counters = document.querySelectorAll('.counter-animation');
-    
-    const observerOptions = {
-      threshold: 0.5,
-      rootMargin: '0px 0px -10% 0px'
-    };
+      const observerOptions = {
+        threshold: 0.5,
+        rootMargin: "0px 0px -10% 0px",
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('counter-animate');
-          observer.unobserve(entry.target);
-        }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("counter-animate");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      counters.forEach((counter) => {
+        observer.observe(counter);
       });
-    }, observerOptions);
-
-    counters.forEach(counter => {
-      observer.observe(counter);
     });
-  });
-</script>
+  </script>
+</section>

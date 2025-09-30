@@ -10,13 +10,13 @@ export interface Props {
 }
 
 const {
-  title = 'Starten Sie noch heute Ihre KI-Transformation',
-  subtitle = 'Kostenlose Strategieberatung',
-  description = 'Vereinbaren Sie Ihr kostenloses Strategiegespräch und erfahren Sie, wie KI-Automatisierung Ihr Unternehmen zum Marktführer macht.',
-  primaryCTA = 'Kostenlose Strategieberatung sichern',
-  secondaryCTA = 'Oder direkt anrufen: +49 XXX XXXXXXX',
-  primaryCTALink = '#contact',
-  secondaryCTALink = 'tel:+49XXXXXXXXX',
+  title = "Starten Sie noch heute Ihre KI-Transformation",
+  subtitle = "Kostenlose Strategieberatung",
+  description = "Vereinbaren Sie Ihr kostenloses Strategiegespräch und erfahren Sie, wie KI-Automatisierung Ihr Unternehmen zum Marktführer macht.",
+  primaryCTA = "Kostenlose Strategieberatung sichern",
+  secondaryCTA = "Oder direkt anrufen: +49 XXX XXXXXXX",
+  primaryCTALink = "#contact",
+  secondaryCTALink = "tel:+49XXXXXXXXX",
 } = Astro.props;
 ---
 
@@ -30,10 +30,16 @@ const {
         >
           {title}
         </h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 0.15s">
+        <p
+          class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll"
+          style="transition-delay: 0.15s"
+        >
           {description}
         </p>
-        <p class="text-sm text-gray-500 mt-3 animate-on-scroll" style="transition-delay: 0.25s">
+        <p
+          class="text-sm text-gray-500 mt-3 animate-on-scroll"
+          style="transition-delay: 0.25s"
+        >
           Unverbindlich & kostenfrei • Ohne Risiko
         </p>
       </div>
@@ -242,118 +248,115 @@ const {
           </fieldset>
         </form>
       </div>
-
+    </div>
   </div>
-</section>
 
-<style>
-  /* Consistent CTA button animation */
-  .cta-button {
-    transform-origin: center;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
+  <style>
+    /* Consistent CTA button animation */
+    .cta-button {
+      transform-origin: center;
+      transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
 
-  .cta-button:hover {
-    transform: scale(1.02);
-  }
-</style>
+    .cta-button:hover {
+      transform: scale(1.02);
+    }
+  </style>
 
-<script type="module">
-  // Handle form submission and success/error messages
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('contact-form');
-    const formErrors = document.getElementById('form-errors');
-    const errorList = document.getElementById('error-list');
-    const successDiv = document.getElementById('form-success');
+  <script type="module">
+    // Handle form submission and success/error messages
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("contact-form");
+      const formErrors = document.getElementById("form-errors");
+      const errorList = document.getElementById("error-list");
+      const successDiv = document.getElementById("form-success");
 
+      // Check for success parameter in URL (from FormSubmit.co redirect)
+      const urlParams = new URLSearchParams(window.location.search);
 
-    // Check for success parameter in URL (from FormSubmit.co redirect)
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // Handle contact form success
-    if (urlParams.get('success') === 'true') {
-      if (successDiv && form) {
-        successDiv.classList.remove('hidden');
-        form.style.display = 'none';
+      // Handle contact form success
+      if (urlParams.get("success") === "true") {
+        if (successDiv && form) {
+          successDiv.classList.remove("hidden");
+          form.style.display = "none";
 
-        // Clean URL to remove success parameter
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
+          // Clean URL to remove success parameter
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname,
+          );
 
-        // No automatic scrolling - user stays where they are
+          // No automatic scrolling - user stays where they are
+        }
       }
-    }
 
+      // Client-side form validation
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          // Reset error states
+          formErrors.classList.add("hidden");
+          errorList.innerHTML = "";
 
-    // Client-side form validation
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        // Reset error states
-        formErrors.classList.add('hidden');
-        errorList.innerHTML = '';
+          // Get required fields
+          const name = document.getElementById("name");
+          const company = document.getElementById("company");
+          const email = document.getElementById("email");
 
-        // Get required fields
-        const name = document.getElementById('name');
-        const company = document.getElementById('company');
-        const email = document.getElementById('email');
+          let hasErrors = false;
+          const errors = [];
 
-        let hasErrors = false;
-        const errors = [];
+          // Validate name
+          if (!name.value.trim()) {
+            errors.push("Bitte geben Sie Ihren Namen ein");
+            document.getElementById("name-error").textContent =
+              "Bitte geben Sie Ihren Namen ein";
+            document.getElementById("name-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("name-error").classList.add("hidden");
+          }
 
-        // Validate name
-        if (!name.value.trim()) {
-          errors.push('Bitte geben Sie Ihren Namen ein');
-          document.getElementById('name-error').textContent =
-            'Bitte geben Sie Ihren Namen ein';
-          document.getElementById('name-error').classList.remove('hidden');
-          hasErrors = true;
-        } else {
-          document.getElementById('name-error').classList.add('hidden');
-        }
+          // Validate company
+          if (!company.value.trim()) {
+            errors.push("Bitte geben Sie Ihren Unternehmensnamen ein");
+            document.getElementById("company-error").textContent =
+              "Bitte geben Sie Ihren Unternehmensnamen ein";
+            document.getElementById("company-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("company-error").classList.add("hidden");
+          }
 
-        // Validate company
-        if (!company.value.trim()) {
-          errors.push('Bitte geben Sie Ihren Unternehmensnamen ein');
-          document.getElementById('company-error').textContent =
-            'Bitte geben Sie Ihren Unternehmensnamen ein';
-          document.getElementById('company-error').classList.remove('hidden');
-          hasErrors = true;
-        } else {
-          document.getElementById('company-error').classList.add('hidden');
-        }
+          // Validate email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+            errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
+            document.getElementById("email-error").textContent =
+              "Bitte geben Sie eine gültige E-Mail-Adresse ein";
+            document.getElementById("email-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("email-error").classList.add("hidden");
+          }
 
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
-          errors.push('Bitte geben Sie eine gültige E-Mail-Adresse ein');
-          document.getElementById('email-error').textContent =
-            'Bitte geben Sie eine gültige E-Mail-Adresse ein';
-          document.getElementById('email-error').classList.remove('hidden');
-          hasErrors = true;
-        } else {
-          document.getElementById('email-error').classList.add('hidden');
-        }
-
-        // If there are errors, prevent form submission and show error messages
-        if (hasErrors) {
-          e.preventDefault();
-          formErrors.classList.remove('hidden');
-          errors.forEach(error => {
-            const li = document.createElement('li');
-            li.textContent = error;
-            errorList.appendChild(li);
-          });
-          // No automatic scrolling - user stays where they are to see their input
-        }
-      });
-    }
-
-  });
-</script>
+          // If there are errors, prevent form submission and show error messages
+          if (hasErrors) {
+            e.preventDefault();
+            formErrors.classList.remove("hidden");
+            errors.forEach((error) => {
+              const li = document.createElement("li");
+              li.textContent = error;
+              errorList.appendChild(li);
+            });
+            // No automatic scrolling - user stays where they are to see their input
+          }
+        });
+      }
+    });
+  </script>
+</section>

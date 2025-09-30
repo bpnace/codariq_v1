@@ -3,7 +3,7 @@ export interface Props {
   className?: string;
 }
 
-const { className = '' } = Astro.props;
+const { className = "" } = Astro.props;
 ---
 
 <!-- Cookie Consent Banner -->
@@ -97,10 +97,10 @@ const { className = '' } = Astro.props;
 <script>
   // Show banner immediately if no consent exists
   (function () {
-    if (!localStorage.getItem('cookieConsent')) {
-      const banner = document.getElementById('cookie-consent');
+    if (!localStorage.getItem("cookieConsent")) {
+      const banner = document.getElementById("cookie-consent");
       if (banner) {
-        banner.classList.remove('translate-y-full');
+        banner.classList.remove("translate-y-full");
       }
     }
   })();
@@ -262,7 +262,8 @@ const { className = '' } = Astro.props;
                 href="https://calendly.com/privacy"
                 class="text-orange-600 hover:text-orange-700 underline"
                 target="_blank"
-                rel="noopener">Calendly Privacy Policy</a>
+                rel="noopener">Calendly Privacy Policy</a
+              >
             </p>
           </div>
         </div>
@@ -293,7 +294,7 @@ const { className = '' } = Astro.props;
   // Cookie Consent Management
   class CookieConsent {
     constructor() {
-      this.consentKey = 'cookieConsent';
+      this.consentKey = "cookieConsent";
       this.init();
     }
 
@@ -310,57 +311,57 @@ const { className = '' } = Astro.props;
     bindEvents() {
       // Banner buttons
       document
-        .getElementById('cookie-accept-all')
-        ?.addEventListener('click', () => {
+        .getElementById("cookie-accept-all")
+        ?.addEventListener("click", () => {
           this.acceptAll();
         });
 
       document
-        .getElementById('cookie-accept-necessary')
-        ?.addEventListener('click', () => {
+        .getElementById("cookie-accept-necessary")
+        ?.addEventListener("click", () => {
           this.acceptNecessary();
         });
 
       document
-        .getElementById('cookie-settings')
-        ?.addEventListener('click', () => {
+        .getElementById("cookie-settings")
+        ?.addEventListener("click", () => {
           this.showSettings();
         });
 
       // Modal buttons
       document
-        .getElementById('cookie-settings-close')
-        ?.addEventListener('click', () => {
+        .getElementById("cookie-settings-close")
+        ?.addEventListener("click", () => {
           this.hideSettings();
         });
 
       document
-        .getElementById('cookie-save-settings')
-        ?.addEventListener('click', () => {
+        .getElementById("cookie-save-settings")
+        ?.addEventListener("click", () => {
           this.saveSettings();
         });
 
       document
-        .getElementById('cookie-accept-all-modal')
-        ?.addEventListener('click', () => {
+        .getElementById("cookie-accept-all-modal")
+        ?.addEventListener("click", () => {
           this.acceptAll();
           this.hideSettings();
         });
 
       // Toggle switches
       document
-        .querySelectorAll('.analytics-toggle, .marketing-toggle')
-        .forEach(toggle => {
-          toggle.addEventListener('change', e => {
+        .querySelectorAll(".analytics-toggle, .marketing-toggle")
+        .forEach((toggle) => {
+          toggle.addEventListener("change", (e) => {
             this.updateToggleUI(e.target);
           });
         });
 
       // Close modal on backdrop click
       document
-        .getElementById('cookie-settings-modal')
-        ?.addEventListener('click', e => {
-          if (e.target.id === 'cookie-settings-modal') {
+        .getElementById("cookie-settings-modal")
+        ?.addEventListener("click", (e) => {
+          if (e.target.id === "cookie-settings-modal") {
             this.hideSettings();
           }
         });
@@ -384,64 +385,64 @@ const { className = '' } = Astro.props;
     }
 
     showBanner() {
-      const banner = document.getElementById('cookie-consent');
+      const banner = document.getElementById("cookie-consent");
       if (banner) {
-        banner.style.display = 'block';
-        banner.classList.remove('translate-y-full');
+        banner.style.display = "block";
+        banner.classList.remove("translate-y-full");
       }
     }
 
     hideBanner() {
-      const banner = document.getElementById('cookie-consent');
+      const banner = document.getElementById("cookie-consent");
       if (banner) {
-        banner.classList.add('translate-y-full');
+        banner.classList.add("translate-y-full");
         setTimeout(() => {
-          banner.style.display = 'none';
+          banner.style.display = "none";
         }, 300);
       }
     }
 
     showSettings() {
-      const modal = document.getElementById('cookie-settings-modal');
+      const modal = document.getElementById("cookie-settings-modal");
       if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
 
         // Load current preferences
         const consent = this.getConsent();
         if (consent) {
-          document.getElementById('analytics-cookies').checked =
+          document.getElementById("analytics-cookies").checked =
             consent.preferences.analytics;
-          document.getElementById('marketing-cookies').checked =
+          document.getElementById("marketing-cookies").checked =
             consent.preferences.marketing;
 
           // Update toggle UI
-          this.updateToggleUI(document.getElementById('analytics-cookies'));
-          this.updateToggleUI(document.getElementById('marketing-cookies'));
+          this.updateToggleUI(document.getElementById("analytics-cookies"));
+          this.updateToggleUI(document.getElementById("marketing-cookies"));
         }
       }
     }
 
     hideSettings() {
-      const modal = document.getElementById('cookie-settings-modal');
+      const modal = document.getElementById("cookie-settings-modal");
       if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
       }
     }
 
     updateToggleUI(toggle) {
-      const toggleBg = toggle.parentElement.querySelector('.toggle-bg');
-      const toggleDot = toggle.parentElement.querySelector('.toggle-dot');
+      const toggleBg = toggle.parentElement.querySelector(".toggle-bg");
+      const toggleDot = toggle.parentElement.querySelector(".toggle-dot");
 
       if (toggle.checked) {
-        toggleBg.classList.remove('bg-gray-200');
-        toggleBg.classList.add('bg-orange-600');
-        toggleDot.classList.add('translate-x-5');
+        toggleBg.classList.remove("bg-gray-200");
+        toggleBg.classList.add("bg-orange-600");
+        toggleDot.classList.add("translate-x-5");
       } else {
-        toggleBg.classList.add('bg-gray-200');
-        toggleBg.classList.remove('bg-orange-600');
-        toggleDot.classList.remove('translate-x-5');
+        toggleBg.classList.add("bg-gray-200");
+        toggleBg.classList.remove("bg-orange-600");
+        toggleDot.classList.remove("translate-x-5");
       }
     }
 
@@ -473,8 +474,8 @@ const { className = '' } = Astro.props;
     saveSettings() {
       const preferences = {
         necessary: true,
-        analytics: document.getElementById('analytics-cookies').checked,
-        marketing: document.getElementById('marketing-cookies').checked,
+        analytics: document.getElementById("analytics-cookies").checked,
+        marketing: document.getElementById("marketing-cookies").checked,
       };
 
       this.saveConsent(preferences);
@@ -489,10 +490,10 @@ const { className = '' } = Astro.props;
 
       // Load Plausible Analytics if approved
       if (consent.preferences.analytics && !window.plausible) {
-        const script = document.createElement('script');
+        const script = document.createElement("script");
         script.defer = true;
-        script.dataset.domain = 'codariq.de';
-        script.src = 'https://plausible.io/js/script.js';
+        script.dataset.domain = "codariq.de";
+        script.src = "https://plausible.io/js/script.js";
         document.head.appendChild(script);
       }
 
@@ -505,7 +506,7 @@ const { className = '' } = Astro.props;
   }
 
   // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     new CookieConsent();
   });
 </script>

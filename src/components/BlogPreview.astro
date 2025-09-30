@@ -8,19 +8,23 @@ export interface Props {
 const {
   title = "Insights & Expertise",
   subtitle = "Aktuelle Einblicke in KI-Automatisierung und digitale Transformation",
-  showAllLink = true
+  showAllLink = true,
 } = Astro.props;
 ---
 
 <section id="insights" class="py-12 sm:py-16 md:py-20 bg-gray-50">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
+      <h2
+        class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+      >
         {title}
       </h2>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
+      <p
+        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        style="transition-delay: 0.15s"
+      >
         {subtitle}
       </p>
     </div>
@@ -28,27 +32,46 @@ const {
     <!-- Blog Posts Grid -->
     <div class="max-w-6xl mx-auto">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-
         <!-- Blog Post 1 - New Compliance Blog -->
-        <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group">
+        <article
+          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
+        >
           <a href="/blog/ki-compliance-2025" class="block">
             <div class="mb-4">
-              <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <div
+                class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-orange-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
-              <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+              <span
+                class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded"
+              >
                 KI-Compliance
               </span>
             </div>
-            <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+            <h4
+              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
+            >
               KI-Projekte compliant halten: Der deutsche Leitfaden für 2025
             </h4>
             <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Umfassender Leitfaden für KI-Compliance in Deutschland 2025. DSGVO, IT-Sicherheitsgesetz und weitere deutsche Gesetze.
+              Umfassender Leitfaden für KI-Compliance in Deutschland 2025.
+              DSGVO, IT-Sicherheitsgesetz und weitere deutsche Gesetze.
             </p>
-            <div class="flex items-center justify-between text-xs text-gray-500">
+            <div
+              class="flex items-center justify-between text-xs text-gray-500"
+            >
               <span>15 Min. Lesezeit</span>
               <span>Neu</span>
             </div>
@@ -56,25 +79,46 @@ const {
         </article>
 
         <!-- Blog Post 2 -->
-        <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group">
+        <article
+          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
+        >
           <a href="/blog/ki-integration-5-schritte" class="block">
             <div class="mb-4">
-              <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              <div
+                class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-orange-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  ></path>
                 </svg>
               </div>
-              <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+              <span
+                class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded"
+              >
                 KI-Strategie
               </span>
             </div>
-            <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+            <h4
+              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
+            >
               KI-Integration in 5 Schritten
             </h4>
             <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Wie Sie KI-Technologien strategisch in Ihr Unternehmen integrieren und messbare Erfolge erzielen.
+              Wie Sie KI-Technologien strategisch in Ihr Unternehmen integrieren
+              und messbare Erfolge erzielen.
             </p>
-            <div class="flex items-center justify-between text-xs text-gray-500">
+            <div
+              class="flex items-center justify-between text-xs text-gray-500"
+            >
               <span>8 Min. Lesezeit</span>
               <span>Beliebt</span>
             </div>
@@ -82,25 +126,45 @@ const {
         </article>
 
         <!-- Blog Post 3 -->
-        <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group md:col-span-2 lg:col-span-1 hidden md:block">
+        <article
+          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group md:col-span-2 lg:col-span-1 hidden md:block"
+        >
           <a href="/blog/automatisierung-roi-maximieren" class="block">
             <div class="mb-4">
-              <div class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              <div
+                class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
-              <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
+              <span
+                class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded"
+              >
                 Automatisierung
               </span>
             </div>
-            <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+            <h4
+              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors"
+            >
               Automatisierung ROI maximieren
             </h4>
             <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Praxiserprobte Methoden zur Identifikation und Umsetzung der profitabelsten Automatisierungsprojekte.
+              Praxiserprobte Methoden zur Identifikation und Umsetzung der
+              profitabelsten Automatisierungsprojekte.
             </p>
-            <div class="flex items-center justify-between text-xs text-gray-500">
+            <div
+              class="flex items-center justify-between text-xs text-gray-500"
+            >
               <span>12 Min. Lesezeit</span>
               <span>Praxistipp</span>
             </div>
@@ -109,21 +173,32 @@ const {
       </div>
 
       <!-- View All Link -->
-      {showAllLink && (
-        <div class="text-center">
-          <a
-            href="/blog"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 text-gray-700 font-medium"
-          >
-            Alle Beiträge ansehen
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </a>
-        </div>
-      )}
+      {
+        showAllLink && (
+          <div class="text-center">
+            <a
+              href="/blog"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 text-gray-700 font-medium"
+            >
+              Alle Beiträge ansehen
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
+        )
+      }
     </div>
-
   </div>
 </section>
 
