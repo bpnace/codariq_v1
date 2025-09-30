@@ -1,11 +1,11 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Switzer Variable Font */
 @font-face {
-  font-family: 'Switzer Variable';
+  font-family: "Switzer Variable";
   src:
-    url('/fonts/Switzer-Variable.woff2') format('woff2'),
-    url('/fonts/Switzer-Variable.ttf') format('truetype');
+    url("/fonts/Switzer-Variable.woff2") format("woff2"),
+    url("/fonts/Switzer-Variable.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -13,7 +13,7 @@
 
 /* Global font family override */
 * {
-  font-family: 'Switzer Variable', system-ui, sans-serif;
+  font-family: "Switzer Variable", system-ui, sans-serif;
 }
 
 /* Prevent scrolling beyond top of page */
@@ -128,7 +128,7 @@ html {
   .animate-element {
     animation-duration: 0.5s;
   }
-  
+
   @keyframes titleFadeInUp {
     from {
       opacity: 0;

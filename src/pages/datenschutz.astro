@@ -1,5 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from "../layouts/Base.astro";
 ---
 
 <Base
@@ -204,7 +204,8 @@ import Base from '../layouts/Base.astro';
               target="_blank"
               rel="noopener"
               class="text-blue-600 hover:text-blue-800 underline"
-              >Calendly Datenschutzerklärung</a>
+              >Calendly Datenschutzerklärung</a
+            >
           </p>
         </div>
 
@@ -267,7 +268,8 @@ import Base from '../layouts/Base.astro';
             <span
               class="obfuscated-email"
               data-name="kontakt"
-              data-domain="codariq.de">[email&#160;geschützt]</span>
+              data-domain="codariq.de">[email&#160;geschützt]</span
+            >
           </p>
           <p class="mb-2">
             <strong>Bearbeitungsfrist:</strong> 30 Tage nach Eingang Ihres Antrags
@@ -299,32 +301,32 @@ import Base from '../layouts/Base.astro';
   </style>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("DOMContentLoaded", function () {
       // Email obfuscation
-      const emailElements = document.querySelectorAll('.obfuscated-email');
+      const emailElements = document.querySelectorAll(".obfuscated-email");
       emailElements.forEach(function (element) {
-        element.addEventListener('click', function () {
-          const name = this.getAttribute('data-name');
-          const domain = this.getAttribute('data-domain');
+        element.addEventListener("click", function () {
+          const name = this.getAttribute("data-name");
+          const domain = this.getAttribute("data-domain");
           if (name && domain) {
-            const email = name + '@' + domain;
+            const email = name + "@" + domain;
             this.textContent = email;
-            this.classList.remove('obfuscated-email');
-            this.removeAttribute('data-name');
-            this.removeAttribute('data-domain');
+            this.classList.remove("obfuscated-email");
+            this.removeAttribute("data-name");
+            this.removeAttribute("data-domain");
           }
         });
       });
 
       // Phone obfuscation
-      const phoneElements = document.querySelectorAll('.obfuscated-phone');
+      const phoneElements = document.querySelectorAll(".obfuscated-phone");
       phoneElements.forEach(function (element) {
-        element.addEventListener('click', function () {
-          const phone = this.getAttribute('data-phone');
+        element.addEventListener("click", function () {
+          const phone = this.getAttribute("data-phone");
           if (phone) {
-            this.textContent = '+49 (0) ' + phone;
-            this.classList.remove('obfuscated-phone');
-            this.removeAttribute('data-phone');
+            this.textContent = "+49 (0) " + phone;
+            this.classList.remove("obfuscated-phone");
+            this.removeAttribute("data-phone");
           }
         });
       });

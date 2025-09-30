@@ -271,7 +271,7 @@ npm run build
 
 - **Waitlist Functionality:** Email collection for KI-Dashboard with duplicate detection
 - **Blog Content:** 3 detailed German blog posts (2000+ words each)
-- **Navigation Enhancement:** Removed "Vorgehen" link, added "Insights" 
+- **Navigation Enhancement:** Removed "Vorgehen" link, added "Insights"
 - **Footer Optimization:** Dark theme with industry leader logos
 - **Performance:** Optimized for mobile and desktop viewing
 - **CTA Updates:** Changed from "Jetzt anfragen" to "Jetzt starten"
