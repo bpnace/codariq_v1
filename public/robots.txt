@@ -2,20 +2,17 @@
 
 # Allow legitimate search engines
 User-agent: Googlebot
-Allow: /impressum
-Allow: /datenschutz
+Allow: /
 Disallow: /agb
 Disallow: /cookie-richtlinien
 
 User-agent: Bingbot
-Allow: /impressum
-Allow: /datenschutz
+Allow: /
 Disallow: /agb
 Disallow: /cookie-richtlinien
 
 User-agent: DuckDuckBot
-Allow: /impressum
-Allow: /datenschutz
+Allow: /
 Disallow: /agb
 Disallow: /cookie-richtlinien
 
@@ -177,12 +174,10 @@ Disallow: /
 User-agent: Zeus
 Disallow: /
 
-# Allow access to main pages for legitimate search engines
+# Default rules for other bots
 User-agent: *
-Allow: /
-Allow: /faq
-Allow: /impressum
-Allow: /datenschutz
+Disallow: /agb
+Disallow: /cookie-richtlinien
 
 # Sitemap location
 Sitemap: https://codariq.de/sitemap-index.xml

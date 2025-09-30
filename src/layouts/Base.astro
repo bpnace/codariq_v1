@@ -1,6 +1,6 @@
 ---
-import CookieConsent from '../components/CookieConsent.astro';
-import '../styles/global.css';
+import CookieConsent from "../components/CookieConsent.astro";
+import "../styles/global.css";
 
 export interface Props {
   title: string;
@@ -10,10 +10,10 @@ export interface Props {
 
 const {
   title,
-  description = 'KI-Automatisierungsexperte für kleine und mittelständische Unternehmen',
+  description = "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen",
   ogImage,
 } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
+const canonicalURL = new URL(Astro.url.pathname, "https://codariq.de");
 ---
 
 <!doctype html>
@@ -30,8 +30,16 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta name="apple-mobile-web-app-title" content="Codariq" />
 
     <!-- Performance optimizations -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="preload" href="/images/hero/hero2.webp" as="image" type="image/webp" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <link
+      rel="preload"
+      href="/images/hero/hero2.webp"
+      as="image"
+      type="image/webp"
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -62,7 +70,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content="Codariq - KI-Automatisierungsexperte" />
-    <meta name="keywords" content="KI-Automatisierung, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, Business Intelligence, Machine Learning, DSGVO, Digitalisierung" />
+    <meta
+      name="keywords"
+      content="KI-Automatisierung, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, Business Intelligence, Machine Learning, DSGVO, Digitalisierung"
+    />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="de" />
     <meta name="revisit-after" content="7 days" />
@@ -72,7 +83,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage || `${canonicalURL.origin}/images/hero/hero2.webp`} />
+    <meta
+      property="og:image"
+      content={ogImage || `${canonicalURL.origin}/images/hero/hero2.webp`}
+    />
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
     <meta property="og:image:type" content="image/webp" />
@@ -84,8 +98,14 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage || `${canonicalURL.origin}/images/hero/hero2.webp`} />
-    <meta name="twitter:image:alt" content="Codariq KI-Automatisierung Dashboard für deutsche Unternehmen" />
+    <meta
+      name="twitter:image"
+      content={ogImage || `${canonicalURL.origin}/images/hero/hero2.webp`}
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Codariq KI-Automatisierung Dashboard für deutsche Unternehmen"
+    />
     <meta name="twitter:site" content="@codariq" />
     <meta name="twitter:creator" content="@codariq" />
 
@@ -94,15 +114,13 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <meta name="geo.placename" content="Berlin" />
     <meta name="geo.position" content="52.520008;13.404954" />
     <meta name="ICBM" content="52.520008, 13.404954" />
-    
+
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    
+
     <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
     <link rel="preconnect" href="https://assets.calendly.com" crossorigin />
-
-
 
     <!-- Fonts -->
     <link
@@ -116,8 +134,8 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
     <!-- Global Styles -->
     <style>
       @font-face {
-        font-family: 'Switzer Variable';
-        src: url('/fonts/Switzer-Variable.woff2') format('woff2');
+        font-family: "Switzer Variable";
+        src: url("/fonts/Switzer-Variable.woff2") format("woff2");
         font-weight: 100 900;
         font-style: normal;
         font-display: swap;
@@ -125,7 +143,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
       }
 
       html {
-        font-family: 'Switzer Variable', system-ui, sans-serif;
+        font-family: "Switzer Variable", system-ui, sans-serif;
         background-color: white;
       }
 
@@ -195,7 +213,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
         },
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://codariq.de/?search={search_term_string}",
+          "target": "https://codariq.de/",
           "query-input": "required name=search_term_string"
         }
       }
@@ -481,8 +499,6 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
         "serviceType": "Business Automation and AI Services"
       }
     </script>
-
-
   </head>
 
   <body
@@ -490,13 +506,13 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
   >
     <!-- Service Worker Cleanup - Clear existing SW for development -->
     <script>
-      if ('serviceWorker' in navigator) {
+      if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .getRegistrations()
           .then(function (registrations) {
             for (let registration of registrations) {
               registration.unregister();
-              console.log('ServiceWorker unregistered');
+              console.log("ServiceWorker unregistered");
             }
           });
       }
@@ -638,9 +654,11 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   loading="lazy"
                   decoding="async"
                 />
-                <p class="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">
-                  Wir digitalisieren Ihre Geschäftsprozesse mit maßgeschneiderten
-                  KI-Lösungen.
+                <p
+                  class="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto md:mx-0"
+                >
+                  Wir digitalisieren Ihre Geschäftsprozesse mit
+                  maßgeschneiderten KI-Lösungen.
                 </p>
               </div>
             </div>
@@ -648,8 +666,12 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
             <!-- Column 2: Trust Badges + Industry Leaders -->
             <div class="text-center md:text-left">
               <div class="mb-6">
-                <h4 class="font-semibold text-gray-100 mb-3 text-sm">Zertifizierungen</h4>
-                <div class="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-4">
+                <h4 class="font-semibold text-gray-100 mb-3 text-sm">
+                  Zertifizierungen
+                </h4>
+                <div
+                  class="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-4"
+                >
                   <img
                     src="/images/badges/climate-friendly.webp"
                     alt="Klimafreundlich"
@@ -678,7 +700,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                 <span class="text-gray-400 text-xs mb-2 block"
                   >Powered by industry leaders:</span
                 >
-                <div class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3">
+                <div
+                  class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3"
+                >
                   <a
                     href="https://www.coursera.org/account/accomplishments/specialization/certificate/02X85MNGYZGE"
                     target="_blank"
@@ -733,19 +757,33 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
               <h3 class="font-semibold text-gray-100 mb-4">Unternehmen</h3>
               <ul class="space-y-2 text-gray-300 mb-6">
                 <li>
-                  <a href="/impressum" class="hover:text-orange-400 transition-colors"
-                    >Impressum</a>
+                  <a
+                    href="/impressum"
+                    class="hover:text-orange-400 transition-colors">Impressum</a
+                  >
                 </li>
                 <li>
-                  <a href="/datenschutz" class="hover:text-orange-400 transition-colors"
-                    >Datenschutzerklärung</a>
+                  <a
+                    href="/datenschutz"
+                    class="hover:text-orange-400 transition-colors"
+                    >Datenschutzerklärung</a
+                  >
                 </li>
                 <li>
-                  <a href="/cookie-richtlinien" class="hover:text-orange-400 transition-colors"
-                    >Cookie-Richtlinien</a>
+                  <a
+                    href="/cookie-richtlinien"
+                    class="hover:text-orange-400 transition-colors"
+                    >Cookie-Richtlinien</a
+                  >
                 </li>
-                <li><a href="/faq" class="hover:text-orange-400 transition-colors">FAQ</a></li>
-                <li><a href="/agb" class="hover:text-orange-400 transition-colors">AGB</a></li>
+                <li>
+                  <a href="/faq" class="hover:text-orange-400 transition-colors"
+                    >FAQ</a>
+                </li>
+                <li>
+                  <a href="/agb" class="hover:text-orange-400 transition-colors"
+                    >AGB</a>
+                </li>
               </ul>
             </div>
 
@@ -763,9 +801,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
               <!-- Newsletter Section -->
               <div>
                 <h4 class="font-semibold text-gray-100 mb-2">Newsletter</h4>
-                <p class="text-gray-400 text-xs mb-3">
-                  KI-News & Insights
-                </p>
+                <p class="text-gray-400 text-xs mb-3">KI-News & Insights</p>
 
                 <!-- Newsletter Success Message -->
                 <div
@@ -775,12 +811,23 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   class="hidden mb-3 p-2 bg-green-900/20 border border-green-600 rounded-lg"
                 >
                   <div class="flex items-center">
-                    <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    <svg
+                      class="w-3 h-3 text-green-400 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
                     </svg>
                     <div>
-                      <p class="font-medium text-green-300 text-xs">Erfolgreich angemeldet!</p>
-                      <p class="text-green-400 text-xs">Bestätigungs-E-Mail folgt!</p>
+                      <p class="font-medium text-green-300 text-xs">
+                        Erfolgreich angemeldet!
+                      </p>
+                      <p class="text-green-400 text-xs">
+                        Bestätigungs-E-Mail folgt!
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -792,18 +839,22 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   aria-live="polite"
                   class="hidden mb-3 p-2 bg-red-900/20 border border-red-600 rounded-lg"
                 >
-                  <p class="font-medium text-red-300 text-xs mb-1">Bitte korrigieren:</p>
-                  <ul id="newsletter-error-list" class="list-disc list-inside text-red-400 text-xs"></ul>
+                  <p class="font-medium text-red-300 text-xs mb-1">
+                    Bitte korrigieren:
+                  </p>
+                  <ul
+                    id="newsletter-error-list"
+                    class="list-disc list-inside text-red-400 text-xs"
+                  >
+                  </ul>
                 </div>
 
                 <!-- Newsletter Form (Compact Horizontal Layout) -->
-                <form
-                  id="newsletter-form"
-                  class="flex gap-2"
-                >
-
+                <form id="newsletter-form" class="flex gap-2">
                   <div class="flex-1">
-                    <label for="footer-newsletter-email" class="sr-only">E-Mail-Adresse</label>
+                    <label for="footer-newsletter-email" class="sr-only"
+                      >E-Mail-Adresse</label
+                    >
                     <input
                       type="email"
                       id="footer-newsletter-email"
@@ -819,7 +870,8 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                       role="alert"
                       aria-live="polite"
                       class="text-sm text-red-400 mt-1 hidden"
-                    ></div>
+                    >
+                    </div>
                   </div>
 
                   <button
@@ -832,12 +884,12 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 
                 <p class="text-xs text-gray-400 mt-2">
                   Kostenlos und jederzeit kündbar.
-                  <a href="/datenschutz" class="underline hover:text-orange-400">Datenschutz</a>
+                  <a href="/datenschutz" class="underline hover:text-orange-400"
+                    >Datenschutz</a
+                  >
                 </p>
               </div>
             </div>
-            
-
           </div>
           <div
             class="border-t border-gray-600 mt-6 pt-6 text-center text-gray-400"
@@ -852,67 +904,92 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 
       <!-- Mobile Menu and Smooth Scrolling JavaScript -->
       <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener("DOMContentLoaded", function () {
           // Newsletter form elements (footer)
-          const footerNewsletterForm = document.getElementById('newsletter-form');
-          const footerNewsletterErrors = document.getElementById('newsletter-errors');
-          const footerNewsletterErrorList = document.getElementById('newsletter-error-list');
-          const footerNewsletterSuccess = document.getElementById('newsletter-success');
+          const footerNewsletterForm =
+            document.getElementById("newsletter-form");
+          const footerNewsletterErrors =
+            document.getElementById("newsletter-errors");
+          const footerNewsletterErrorList = document.getElementById(
+            "newsletter-error-list",
+          );
+          const footerNewsletterSuccess =
+            document.getElementById("newsletter-success");
 
           // Check for newsletter success parameter in URL
           const urlParams = new URLSearchParams(window.location.search);
-          if (urlParams.get('newsletter') === 'success') {
+          if (urlParams.get("newsletter") === "success") {
             if (footerNewsletterSuccess && footerNewsletterForm) {
-              footerNewsletterSuccess.classList.remove('hidden');
-              footerNewsletterForm.style.display = 'none';
+              footerNewsletterSuccess.classList.remove("hidden");
+              footerNewsletterForm.style.display = "none";
 
               // Clean URL to remove newsletter parameter
               window.history.replaceState(
                 {},
                 document.title,
-                window.location.pathname
+                window.location.pathname,
               );
             }
           }
 
           // Footer Newsletter form submission with webhook
-          if (footerNewsletterForm && footerNewsletterErrors && footerNewsletterErrorList) {
-            footerNewsletterForm.addEventListener('submit', async function (e) {
+          if (
+            footerNewsletterForm &&
+            footerNewsletterErrors &&
+            footerNewsletterErrorList
+          ) {
+            footerNewsletterForm.addEventListener("submit", async function (e) {
               e.preventDefault();
 
               // Reset error states
-              if (footerNewsletterErrors) footerNewsletterErrors.classList.add('hidden');
-              if (footerNewsletterErrorList) footerNewsletterErrorList.innerHTML = '';
+              if (footerNewsletterErrors)
+                footerNewsletterErrors.classList.add("hidden");
+              if (footerNewsletterErrorList)
+                footerNewsletterErrorList.innerHTML = "";
 
               // Get email field
-              const email = document.getElementById('footer-newsletter-email') as HTMLInputElement;
-              const submitButton = footerNewsletterForm.querySelector('button[type="submit"]') as HTMLButtonElement;
-              
+              const email = document.getElementById(
+                "footer-newsletter-email",
+              ) as HTMLInputElement;
+              const submitButton = footerNewsletterForm.querySelector(
+                'button[type="submit"]',
+              ) as HTMLButtonElement;
+
               let hasErrors = false;
               const errors: string[] = [];
 
               // Validate email
               const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              if (!email?.value?.trim() || !emailRegex.test(email.value.trim())) {
-                errors.push('Bitte geben Sie eine gültige E-Mail-Adresse ein');
-                const errorElement = document.getElementById('footer-newsletter-email-error');
+              if (
+                !email?.value?.trim() ||
+                !emailRegex.test(email.value.trim())
+              ) {
+                errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
+                const errorElement = document.getElementById(
+                  "footer-newsletter-email-error",
+                );
                 if (errorElement) {
-                  errorElement.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
-                  errorElement.classList.remove('hidden');
+                  errorElement.textContent =
+                    "Bitte geben Sie eine gültige E-Mail-Adresse ein";
+                  errorElement.classList.remove("hidden");
                 }
                 hasErrors = true;
               } else {
-                const errorElement = document.getElementById('footer-newsletter-email-error');
-                if (errorElement) errorElement.classList.add('hidden');
+                const errorElement = document.getElementById(
+                  "footer-newsletter-email-error",
+                );
+                if (errorElement) errorElement.classList.add("hidden");
               }
 
               // If there are errors, show error messages
               if (hasErrors) {
-                if (footerNewsletterErrors) footerNewsletterErrors.classList.remove('hidden');
-                errors.forEach(error => {
-                  const li = document.createElement('li');
+                if (footerNewsletterErrors)
+                  footerNewsletterErrors.classList.remove("hidden");
+                errors.forEach((error) => {
+                  const li = document.createElement("li");
                   li.textContent = error;
-                  if (footerNewsletterErrorList) footerNewsletterErrorList.appendChild(li);
+                  if (footerNewsletterErrorList)
+                    footerNewsletterErrorList.appendChild(li);
                 });
                 return;
               }
@@ -920,48 +997,53 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
               // Set loading state
               if (submitButton) {
                 submitButton.disabled = true;
-                submitButton.textContent = 'Wird gesendet...';
+                submitButton.textContent = "Wird gesendet...";
               }
 
               try {
                 // Send to webhook
-                const response = await fetch('https://automation.codariq.de/webhook/9f2483b5-7d05-432c-be3b-95e578dae228', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + btoa('admin:razxoc-kYzxow-jejbu9')
+                const response = await fetch(
+                  "https://automation.codariq.de/webhook/9f2483b5-7d05-432c-be3b-95e578dae228",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization:
+                        "Basic " + btoa("admin:razxoc-kYzxow-jejbu9"),
+                    },
+                    body: JSON.stringify({
+                      email: email.value.trim(),
+                      source: "footer_newsletter",
+                      timestamp: new Date().toISOString(),
+                      userAgent: navigator.userAgent,
+                    }),
                   },
-                  body: JSON.stringify({
-                    email: email.value.trim(),
-                    source: 'footer_newsletter',
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent
-                  })
-                });
+                );
 
                 if (response.ok) {
                   // Show success message
                   if (footerNewsletterSuccess) {
-                    footerNewsletterSuccess.classList.remove('hidden');
-                    footerNewsletterForm.style.display = 'none';
+                    footerNewsletterSuccess.classList.remove("hidden");
+                    footerNewsletterForm.style.display = "none";
                   }
                 } else {
-                  throw new Error('Newsletter-Anmeldung fehlgeschlagen');
+                  throw new Error("Newsletter-Anmeldung fehlgeschlagen");
                 }
-
               } catch (error) {
-                console.error('Newsletter subscription error:', error);
+                console.error("Newsletter subscription error:", error);
                 if (footerNewsletterErrors) {
-                  footerNewsletterErrors.classList.remove('hidden');
-                  const li = document.createElement('li');
-                  li.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
-                  if (footerNewsletterErrorList) footerNewsletterErrorList.appendChild(li);
+                  footerNewsletterErrors.classList.remove("hidden");
+                  const li = document.createElement("li");
+                  li.textContent =
+                    "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.";
+                  if (footerNewsletterErrorList)
+                    footerNewsletterErrorList.appendChild(li);
                 }
               } finally {
                 // Reset loading state
                 if (submitButton) {
                   submitButton.disabled = false;
-                  submitButton.textContent = 'Abonnieren';
+                  submitButton.textContent = "Abonnieren";
                 }
               }
             });
@@ -969,33 +1051,33 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 
           // Mobile Menu Logic
           const mobileMenuButton =
-            document.getElementById('mobile-menu-button');
-          const mobileMenu = document.getElementById('mobile-menu');
+            document.getElementById("mobile-menu-button");
+          const mobileMenu = document.getElementById("mobile-menu");
 
           if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', function () {
+            mobileMenuButton.addEventListener("click", function () {
               const isExpanded =
-                mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.getAttribute("aria-expanded") === "true";
 
               if (isExpanded) {
-                mobileMenu.classList.add('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                mobileMenu.classList.add("hidden");
+                mobileMenuButton.setAttribute("aria-expanded", "false");
                 mobileMenuButton.innerHTML =
                   '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
               } else {
-                mobileMenu.classList.remove('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', 'true');
+                mobileMenu.classList.remove("hidden");
+                mobileMenuButton.setAttribute("aria-expanded", "true");
                 mobileMenuButton.innerHTML =
                   '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
               }
             });
 
             // Close mobile menu when clicking on a link
-            const mobileLinks = mobileMenu.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-              link.addEventListener('click', function () {
-                mobileMenu.classList.add('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            const mobileLinks = mobileMenu.querySelectorAll("a");
+            mobileLinks.forEach((link) => {
+              link.addEventListener("click", function () {
+                mobileMenu.classList.add("hidden");
+                mobileMenuButton.setAttribute("aria-expanded", "false");
                 mobileMenuButton.innerHTML =
                   '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
               });
@@ -1004,16 +1086,16 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 
           // Enhanced Smooth Scrolling for Internal Links
           const allLinks = document.querySelectorAll(
-            'a[href^="#"], a[href^="/#"]'
+            'a[href^="#"], a[href^="/#"]',
           );
-          allLinks.forEach(link => {
+          allLinks.forEach((link) => {
             link.addEventListener(
-              'click',
+              "click",
               function (this: HTMLAnchorElement, e) {
-                const href = this.getAttribute('href');
+                const href = this.getAttribute("href");
                 if (!href) return;
 
-                const targetId = href.startsWith('/#')
+                const targetId = href.startsWith("/#")
                   ? href.substring(2)
                   : href.substring(1);
                 const targetElement = document.getElementById(targetId);
@@ -1022,17 +1104,19 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
                   e.preventDefault();
 
                   // Close mobile menu if open
-                  if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
+                  if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                    mobileMenu.classList.add("hidden");
                     if (mobileMenuButton) {
-                      mobileMenuButton.setAttribute('aria-expanded', 'false');
+                      mobileMenuButton.setAttribute("aria-expanded", "false");
                       mobileMenuButton.innerHTML =
                         '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
                     }
                   }
 
                   // Smooth scroll with offset for fixed header
-                  const headerHeight = document.getElementById('main-nav')?.getBoundingClientRect().height || 64;
+                  const headerHeight =
+                    document.getElementById("main-nav")?.getBoundingClientRect()
+                      .height || 64;
                   const headerOffset = headerHeight + 20; // Account for fixed header + some padding
                   const elementPosition =
                     targetElement.getBoundingClientRect().top;
@@ -1041,46 +1125,44 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://codariq.de');
 
                   window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth',
+                    behavior: "smooth",
                   });
 
                   // Update URL without causing a jump
-                  window.history.pushState({}, '', href);
+                  window.history.pushState({}, "", href);
                 }
-              }
+              },
             );
           });
-          
+
           // Intersection Observer for scroll animations
-          if ('IntersectionObserver' in window) {
+          if ("IntersectionObserver" in window) {
             const observerOptions = {
               threshold: 0.1,
-              rootMargin: '0px 0px -50px 0px'
+              rootMargin: "0px 0px -50px 0px",
             };
-            
+
             const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
+              entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  entry.target.classList.add('is-visible');
+                  entry.target.classList.add("is-visible");
                   observer.unobserve(entry.target); // Only animate once
                 }
               });
             }, observerOptions);
-            
+
             // Observe all elements with animate-on-scroll class
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
               observer.observe(el);
             });
           } else {
             // Fallback for browsers without IntersectionObserver
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-              el.classList.add('is-visible');
+            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+              el.classList.add("is-visible");
             });
           }
         });
       </script>
     </div>
-
-
   </body>
 </html>

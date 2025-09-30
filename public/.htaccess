@@ -7,6 +7,13 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.codariq\.de [NC]
 RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301]
 
+# Blog URL redirects (fix Google Analytics 404s)
+RewriteRule ^blog/roi-von-prozessautomatisierung-maximieren/?$ /blog/automatisierung-roi-maximieren [R=301,L]
+
+# Remove search parameters from URLs for canonical tag issues
+RewriteCond %{QUERY_STRING} ^search=.*
+RewriteRule ^$ /? [R=301,L]
+
 # Security headers
 <IfModule mod_headers.c>
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
