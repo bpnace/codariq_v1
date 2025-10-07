@@ -13,7 +13,12 @@ const {
   description = "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen",
   ogImage,
 } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, "https://codariq.de");
+// Normalize canonical URL: remove trailing slashes (except root)
+let pathname = Astro.url.pathname;
+if (pathname !== "/" && pathname.endsWith("/")) {
+  pathname = pathname.slice(0, -1);
+}
+const canonicalURL = new URL(pathname, "https://codariq.de");
 ---
 
 <!doctype html>
@@ -242,7 +247,6 @@ const canonicalURL = new URL(Astro.url.pathname, "https://codariq.de");
         "contactPoint": [
           {
             "@type": "ContactPoint",
-            "telephone": "+49-176-31378294",
             "contactType": "Customer Service",
             "areaServed": ["DE", "AT", "CH"],
             "availableLanguage": ["German", "English"],
@@ -481,7 +485,6 @@ const canonicalURL = new URL(Astro.url.pathname, "https://codariq.de");
         "image": "https://codariq.de/images/hero/hero2.webp",
         "@id": "https://codariq.de",
         "url": "https://codariq.de",
-        "telephone": "+49-176-31378294",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Berlin",

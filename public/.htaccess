@@ -1,11 +1,19 @@
-# Force HTTPS
+# Force HTTPS and www to non-www in one step (avoid redirect chains)
 RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Redirect www to non-www
+# Redirect www to non-www with HTTPS in one step
 RewriteCond %{HTTP_HOST} ^www\.codariq\.de [NC]
 RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301]
+
+# Force HTTPS for non-www
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove trailing slashes from URLs (except root)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
 
 # Blog URL redirects (fix Google Analytics 404s)
 RewriteRule ^blog/roi-von-prozessautomatisierung-maximieren/?$ /blog/automatisierung-roi-maximieren [R=301,L]
