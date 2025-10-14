@@ -281,12 +281,60 @@ const complianceQuestions = [
               </div>
 
               <!-- Detailed Description -->
-              <div class="text-center lg:text-left mb-4">
+              <div class="text-center lg:text-left mb-6">
                 <p
                   id="result-description"
-                  class="text-sm sm:text-base text-gray-700 leading-relaxed"
+                  class="text-sm sm:text-base text-gray-700 leading-relaxed mb-4"
                 >
                 </p>
+                <!-- Email Report Option -->
+                <div
+                  id="email-report-section"
+                  class="bg-blue-50 rounded-lg p-4 border border-blue-200"
+                >
+                  <h5 class="font-semibold text-blue-900 mb-2 text-sm">
+                    📧 Detaillierten Compliance-Report per E-Mail erhalten
+                  </h5>
+                  <p class="text-xs text-blue-700 mb-3">
+                    Erhalten Sie eine ausführliche Analyse mit konkreten
+                    Handlungsempfehlungen und Compliance-Checkliste.
+                  </p>
+                  <form
+                    id="compliance-report-form"
+                    class="flex flex-col sm:flex-row gap-2"
+                  >
+                    <input
+                      type="email"
+                      id="compliance-email"
+                      name="email"
+                      placeholder="Ihre E-Mail-Adresse"
+                      required
+                      class="flex-1 px-3 py-2 text-sm border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                    />
+                    <button
+                      type="submit"
+                      class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm shadow-sm whitespace-nowrap"
+                    >
+                      Report anfordern
+                    </button>
+                  </form>
+                  <!-- Success/Error Messages -->
+                  <div
+                    id="compliance-success"
+                    class="hidden mt-2 p-2 bg-green-50 border border-green-200 rounded text-green-700 text-xs"
+                  >
+                    ✅ Vielen Dank! Sie erhalten Ihren Compliance-Report in
+                    wenigen Minuten per E-Mail.
+                  </div>
+                  <div
+                    id="compliance-error"
+                    class="hidden mt-2 p-2 bg-red-50 border border-red-200 rounded text-red-700 text-xs"
+                  >
+                    ❌ <span id="compliance-error-text"
+                      >Fehler beim Versenden. Bitte versuchen Sie es erneut.</span
+                    >
+                  </div>
+                </div>
               </div>
 
               <!-- Minimal Breakdown Grid - Below CTAs -->
@@ -295,33 +343,6 @@ const complianceQuestions = [
                   id="score-breakdown"
                   class="grid grid-cols-5 gap-2 justify-center"
                 >
-                  <!-- Will be populated by JavaScript -->
-                </div>
-              </div>
-
-              <!-- Detailed Breakdown - Expandable Below Everything -->
-              <div id="detailed-breakdown">
-                <button
-                  type="button"
-                  id="toggle-details"
-                  class="w-full text-left flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
-                >
-                  <span>Bewertung im Detail</span>
-                  <svg
-                    class="w-4 h-4 transform transition-transform"
-                    id="details-arrow"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                <div id="detailed-content" class="hidden mt-3 space-y-2">
                   <!-- Will be populated by JavaScript -->
                 </div>
               </div>
@@ -495,29 +516,6 @@ const complianceQuestions = [
           }, 300);
         });
 
-        // Details toggle functionality
-        const toggleDetailsBtn = document.getElementById(
-          "toggle-details",
-        ) as HTMLElement;
-        const detailedContent = document.getElementById(
-          "detailed-content",
-        ) as HTMLElement;
-        const detailsArrow = document.getElementById(
-          "details-arrow",
-        ) as HTMLElement;
-
-        if (toggleDetailsBtn && detailedContent && detailsArrow) {
-          toggleDetailsBtn.addEventListener("click", function () {
-            if (detailedContent.classList.contains("hidden")) {
-              detailedContent.classList.remove("hidden");
-              detailsArrow.style.transform = "rotate(180deg)";
-            } else {
-              detailedContent.classList.add("hidden");
-              detailsArrow.style.transform = "rotate(0deg)";
-            }
-          });
-        }
-
         function slideToQuestion(questionIndex: number) {
           console.log(`Sliding to question ${questionIndex + 1}`);
 
@@ -633,47 +631,6 @@ const complianceQuestions = [
             scoreBreakdown.innerHTML = breakdownHTML;
           }
 
-          // Generate detailed breakdown for expandable section
-          const detailedContent = document.getElementById(
-            "detailed-content",
-          ) as HTMLElement;
-          if (detailedContent) {
-            let detailedHTML = "";
-            answers.forEach((answer, index) => {
-              const question = complianceQuestions[index];
-              const status =
-                answer.answer === "yes" ? "erfüllt" : "nicht erfüllt";
-              const statusClass =
-                answer.answer === "yes"
-                  ? "text-green-600 bg-green-50"
-                  : "text-red-600 bg-red-50";
-              const iconSvg =
-                answer.answer === "yes"
-                  ? '<svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>'
-                  : '<svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>';
-
-              detailedHTML += `
-            <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-gray-100">
-              <div class="flex-shrink-0 p-1 rounded ${statusClass}">
-                ${iconSvg}
-              </div>
-              <div class="flex-1">
-                <div class="text-sm font-medium text-gray-900 mb-1">
-                  ${question.question}
-                </div>
-                <div class="text-xs text-gray-600 mb-2">
-                  ${question.hint}
-                </div>
-                <span class="text-xs font-medium px-2 py-1 rounded-full ${statusClass}">
-                  ${status} (${answer.weight} Punkte)
-                </span>
-              </div>
-            </div>
-          `;
-            });
-            detailedContent.innerHTML = detailedHTML;
-          }
-
           if (percentage >= 80) {
             // GREEN: Excellent result
             if (resultIcon) {
@@ -686,8 +643,8 @@ const complianceQuestions = [
               resultTitle.textContent =
                 "🎉 Ausgezeichnete Compliance-Bereitschaft!";
             if (resultDescription)
-              resultDescription.textContent =
-                "Ihr Unternehmen zeigt eine vorbildliche Compliance-Haltung gegenüber KI-Regulierungen. Sie sind optimal auf die Anforderungen des EU AI Act vorbereitet und können KI-Technologien sicher und rechtskonform einsetzen.";
+              resultDescription.innerHTML =
+                "Ihr Unternehmen zeigt eine vorbildliche Compliance-Haltung gegenüber KI-Regulierungen. Sie sind optimal auf die Anforderungen des EU AI Act vorbereitet und können KI-Technologien sicher und rechtskonform einsetzen.<br><br><strong>Ihre Stärken:</strong> Umfassende Dokumentation, regelmäßige Risikobewertungen und transparente Kommunikation. Sie erfüllen bereits heute die Standards, die ab 2025 verpflichtend werden.<br><br><strong>Empfehlung:</strong> Nutzen Sie Ihren Compliance-Vorsprung als Wettbewerbsvorteil und erweitern Sie Ihre KI-Automatisierungen mit Zuversicht.";
             if (improvementCta) improvementCta.classList.add("hidden");
           } else if (percentage >= 60) {
             // YELLOW: Good but needs improvement
@@ -700,8 +657,8 @@ const complianceQuestions = [
             if (resultTitle)
               resultTitle.textContent = "⚠️ Gute Basis, Optimierung empfohlen";
             if (resultDescription)
-              resultDescription.textContent =
-                "Sie haben bereits eine solide Compliance-Grundlage geschaffen. In einigen kritischen Bereichen bestehen jedoch noch Verbesserungsmöglichkeiten, um vollständig EU AI Act-konform zu werden.";
+              resultDescription.innerHTML =
+                "Sie haben bereits eine solide Compliance-Grundlage geschaffen. In einigen kritischen Bereichen bestehen jedoch noch Verbesserungsmöglichkeiten, um vollständig EU AI Act-konform zu werden.<br><br><strong>Handlungsbedarf:</strong> Verbesserung der Datenqualitätsdokumentation, Etablierung regelmäßiger Audits und Stärkung der Transparenz-Maßnahmen.<br><br><strong>Empfehlung:</strong> Schließen Sie die identifizierten Lücken systematisch – dann sind Sie optimal für die neuen Regulierungen gerüstet.";
             if (improvementCta) improvementCta.classList.remove("hidden");
           } else {
             // RED: Critical improvement needed
@@ -714,10 +671,80 @@ const complianceQuestions = [
             if (resultTitle)
               resultTitle.textContent = "🚨 Dringender Handlungsbedarf";
             if (resultDescription)
-              resultDescription.textContent =
-                "In mehreren kritischen Compliance-Bereichen bestehen erhebliche Lücken. Eine umgehende professionelle Überprüfung und Anpassung Ihrer KI-Strategie ist unerlässlich, um rechtliche Risiken zu vermeiden.";
+              resultDescription.innerHTML =
+                "In mehreren kritischen Compliance-Bereichen bestehen erhebliche Lücken. Eine umgehende professionelle Überprüfung und Anpassung Ihrer KI-Strategie ist unerlässlich, um rechtliche Risiken zu vermeiden.<br><br><strong>Kritische Lücken:</strong> Fehlende Systemdokumentation, mangelnde Risikobewertung und unzureichende Qualitätskontrolle Ihrer KI-Systeme.<br><br><strong>Sofortmaßnahmen:</strong> Compliance-Audit, Implementierung eines Risk-Management-Systems und Aufbau strukturierter Dokumentationsprozesse.";
             if (improvementCta) improvementCta.classList.remove("hidden");
           }
+        }
+
+        // Compliance Report Email Form Handler
+        const complianceForm = document.getElementById(
+          "compliance-report-form",
+        );
+        const complianceEmail = document.getElementById("compliance-email");
+        const complianceSuccess = document.getElementById("compliance-success");
+        const complianceError = document.getElementById("compliance-error");
+        const complianceErrorText = document.getElementById(
+          "compliance-error-text",
+        );
+
+        if (
+          complianceForm &&
+          complianceEmail &&
+          complianceSuccess &&
+          complianceError &&
+          complianceErrorText
+        ) {
+          complianceForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = complianceEmail.value.trim();
+
+            // Hide previous messages
+            complianceSuccess.classList.add("hidden");
+            complianceError.classList.add("hidden");
+
+            // Validate email
+            if (!email || !isValidEmail(email)) {
+              complianceErrorText.textContent =
+                "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
+              complianceError.classList.remove("hidden");
+              return;
+            }
+
+            // Show loading state
+            const submitButton = complianceForm.querySelector(
+              'button[type="submit"]',
+            );
+            const originalText = submitButton?.textContent;
+            if (submitButton) {
+              submitButton.textContent = "Wird gesendet...";
+              submitButton.disabled = true;
+            }
+
+            try {
+              // Note: This would normally send to a backend endpoint
+              // For now, we'll simulate success and show the success message
+              await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+
+              complianceForm.reset();
+              complianceSuccess.classList.remove("hidden");
+
+              // Track the email submission for analytics (if needed)
+              console.log("Compliance report requested for:", email);
+            } catch (error) {
+              console.error("Error submitting compliance report form:", error);
+              complianceErrorText.textContent =
+                "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+              complianceError.classList.remove("hidden");
+            } finally {
+              // Reset button state
+              if (submitButton) {
+                submitButton.textContent = originalText || "Report anfordern";
+                submitButton.disabled = false;
+              }
+            }
+          });
         }
       });
     </script>

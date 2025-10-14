@@ -378,188 +378,228 @@ const {
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {
-            additionalServices.map((service, index) => (
-              <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
-                {/* Service Badge */}
-                <div class="absolute top-4 right-4">
-                  <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">
-                    {service.subtitle}
-                  </span>
-                </div>
+            additionalServices.map((service, index) => {
+              // Special gradient design for KI-Dashboard
+              if (service.title === "KI-Dashboard") {
+                return (
+                  <div class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-6 shadow-xl text-white relative overflow-hidden">
+                    {/* Content */}
+                    <div class="flex flex-col sm:flex-row items-start justify-between gap-4">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                          <h4 class="text-xl sm:text-2xl font-bold">
+                            🚀 Live-Dashboard: KPI-Tracking in Echtzeit
+                          </h4>
+                        </div>
+                        <p class="text-blue-100 text-sm sm:text-base mb-4 leading-relaxed">
+                          Überwachen Sie Ihre Automatisierungserfolge auf einen
+                          Blick – verfügbar ab Q1 2025
+                        </p>
 
-                {/* Icon */}
-                <div class="mb-4">
-                  <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
-                    {service.icon === "training" && (
-                      <svg
-                        class="w-6 h-6 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <title>Team Training Service Icon</title>
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                        />
-                      </svg>
-                    )}
-                    {service.icon === "advisory" && (
-                      <svg
-                        class="w-6 h-6 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <title>Advisory Retainer Service Icon</title>
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M13 10V3L4 14h7v7l9-11h-7z"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                </div>
+                        {/* Features */}
+                        <div class="space-y-2 mb-4">
+                          {service.features.map((feature) => (
+                            <div class="flex items-center gap-2">
+                              <div class="w-1.5 h-1.5 bg-blue-200 rounded-full flex-shrink-0" />
+                              <span class="text-xs text-blue-100">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
 
-                {/* Content */}
-                <div class="mb-4">
-                  <div class="flex items-center gap-2 mb-2">
-                    <h4 class="text-lg font-bold text-gray-900">
-                      {service.title}
-                    </h4>
-                    {service.comingSoon && (
-                      <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">
-                        Coming soon
-                      </span>
-                    )}
-                  </div>
-                  <p class="text-gray-600 leading-relaxed mb-4 text-sm">
-                    {service.description}
-                  </p>
-
-                  {/* Features */}
-                  <div class="space-y-2 mb-4">
-                    {service.features.map((feature) => (
-                      <div class="flex items-center gap-2">
-                        <div class="w-1.5 h-1.5 bg-gray-700 rounded-full flex-shrink-0" />
-                        <span class="text-xs text-gray-700">{feature}</span>
+                        {/* Pricing & Duration */}
+                        <div class="flex items-center gap-4 mb-4">
+                          <div class="text-lg font-bold text-white">
+                            {service.price}
+                          </div>
+                          <div class="flex items-center gap-1 text-xs text-blue-200">
+                            <svg
+                              class="w-3 h-3"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            {service.duration}
+                          </div>
+                        </div>
                       </div>
-                    ))}
+                    </div>
+
+                    {/* Waitlist Form */}
+                    <div>
+                      <form
+                        id="dashboard-waitlist-form"
+                        class="flex flex-col sm:flex-row gap-2"
+                      >
+                        <input
+                          type="email"
+                          id="dashboard-email"
+                          name="email"
+                          placeholder="Ihre E-Mail-Adresse"
+                          required
+                          class="flex-1 px-3 py-2 text-sm border border-blue-300 bg-white/10 backdrop-blur-sm text-white placeholder-blue-200 rounded-lg focus:ring-2 focus:ring-white focus:border-white outline-none transition-all duration-200"
+                        />
+                        <button
+                          type="submit"
+                          class="bg-white text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200 font-semibold text-sm shadow-lg cta-button whitespace-nowrap"
+                          aria-label="Zur Warteliste für KI-Dashboard anmelden"
+                        >
+                          Warteliste beitreten
+                        </button>
+                      </form>
+
+                      {/* Success Message */}
+                      <div
+                        id="dashboard-success"
+                        class="hidden mt-2 p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg"
+                      >
+                        <div class="flex items-center gap-2">
+                          <svg
+                            class="w-4 h-4 text-green-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <div>
+                            <p class="font-medium text-white text-sm">
+                              Erfolgreich angemeldet!
+                            </p>
+                            <p class="text-blue-200 text-xs">
+                              Sie erhalten eine Bestätigungs-E-Mail
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Error Message */}
+                      <div
+                        id="dashboard-error"
+                        class="hidden mt-2 p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg"
+                      >
+                        <div class="flex items-center gap-2">
+                          <svg
+                            class="w-4 h-4 text-red-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          <div>
+                            <p class="font-medium text-white text-sm">
+                              Fehler bei der Anmeldung
+                            </p>
+                            <p
+                              id="dashboard-error-text"
+                              class="text-blue-200 text-xs"
+                            >
+                              Bitte versuchen Sie es erneut
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              // Default design for other services
+              return (
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
+                  {/* Service Badge */}
+                  <div class="absolute top-4 right-4">
+                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">
+                      {service.subtitle}
+                    </span>
                   </div>
 
-                  {/* Pricing & Duration */}
-                  <div class="pt-4 border-t border-gray-200">
-                    <div class="flex items-center justify-between mb-3">
-                      <div class="text-lg font-bold text-gray-900">
-                        {service.price}
-                      </div>
-                      <div class="flex items-center gap-1 text-xs text-gray-600">
+                  {/* Icon */}
+                  <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
+                      {service.icon === "training" && (
                         <svg
-                          class="w-3 h-3"
+                          class="w-6 h-6 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
                         >
+                          <title>Team Training Service Icon</title>
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                           />
                         </svg>
-                        {service.duration}
-                      </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                      <h4 class="text-lg font-bold text-gray-900">
+                        {service.title}
+                      </h4>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4 text-sm">
+                      {service.description}
+                    </p>
+
+                    {/* Features */}
+                    <div class="space-y-2 mb-4">
+                      {service.features.map((feature) => (
+                        <div class="flex items-center gap-2">
+                          <div class="w-1.5 h-1.5 bg-gray-700 rounded-full flex-shrink-0" />
+                          <span class="text-xs text-gray-700">{feature}</span>
+                        </div>
+                      ))}
                     </div>
 
-                    {/* Waitlist Form for KI-Dashboard */}
-                    {service.title === "KI-Dashboard" ? (
-                      <div>
-                        <form id="dashboard-waitlist-form" class="flex gap-2">
-                          <input
-                            type="email"
-                            id="dashboard-email"
-                            name="email"
-                            placeholder="Ihre E-Mail-Adresse"
-                            required
-                            class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all duration-200"
-                          />
-                          <button
-                            type="submit"
-                            class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center whitespace-nowrap"
-                            aria-label="Zur Warteliste für KI-Dashboard anmelden"
-                          >
-                            Warteliste beitreten
-                          </button>
-                        </form>
-
-                        {/* Success Message */}
-                        <div
-                          id="dashboard-success"
-                          class="hidden mt-2 p-3 bg-green-50 border border-green-200 rounded-lg"
-                        >
-                          <div class="flex items-center gap-2">
-                            <svg
-                              class="w-4 h-4 text-green-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                            <div>
-                              <p class="font-medium text-green-800 text-sm">
-                                Erfolgreich angemeldet!
-                              </p>
-                              <p class="text-green-700 text-xs">
-                                Sie erhalten eine Bestätigungs-E-Mail
-                              </p>
-                            </div>
-                          </div>
+                    {/* Pricing & Duration */}
+                    <div class="pt-4 border-t border-gray-200">
+                      <div class="flex items-center justify-between mb-3">
+                        <div class="text-lg font-bold text-gray-900">
+                          {service.price}
                         </div>
-
-                        {/* Error Message */}
-                        <div
-                          id="dashboard-error"
-                          class="hidden mt-2 p-3 bg-red-50 border border-red-200 rounded-lg"
-                        >
-                          <div class="flex items-center gap-2">
-                            <svg
-                              class="w-4 h-4 text-red-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <div>
-                              <p class="font-medium text-red-800 text-sm">
-                                Fehler bei der Anmeldung
-                              </p>
-                              <p
-                                id="dashboard-error-text"
-                                class="text-red-700 text-xs"
-                              >
-                                Bitte versuchen Sie es erneut
-                              </p>
-                            </div>
-                          </div>
+                        <div class="flex items-center gap-1 text-xs text-gray-600">
+                          <svg
+                            class="w-3 h-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          {service.duration}
                         </div>
                       </div>
-                    ) : (
+
                       <a
                         href="/#final-cta"
                         class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center"
@@ -567,11 +607,11 @@ const {
                       >
                         Jetzt starten
                       </a>
-                    )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           }
         </div>
       </div>
