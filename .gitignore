@@ -9,6 +9,8 @@ dist/
 .cursorrules
 .prettierrc
 .prettierignore
+.playwright*
+.venv/
 
 
 

@@ -680,8 +680,10 @@ const complianceQuestions = [
         // Compliance Report Email Form Handler
         const complianceForm = document.getElementById(
           "compliance-report-form",
-        );
-        const complianceEmail = document.getElementById("compliance-email");
+        ) as HTMLFormElement;
+        const complianceEmail = document.getElementById(
+          "compliance-email",
+        ) as HTMLInputElement;
         const complianceSuccess = document.getElementById("compliance-success");
         const complianceError = document.getElementById("compliance-error");
         const complianceErrorText = document.getElementById(
@@ -715,7 +717,7 @@ const complianceQuestions = [
             // Show loading state
             const submitButton = complianceForm.querySelector(
               'button[type="submit"]',
-            );
+            ) as HTMLButtonElement;
             const originalText = submitButton?.textContent;
             if (submitButton) {
               submitButton.textContent = "Wird gesendet...";
