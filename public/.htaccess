@@ -1,26 +1,37 @@
 # Force HTTPS and www to non-www in one step (avoid redirect chains)
 RewriteEngine On
 
-# Redirect www to non-www with HTTPS in one step
-RewriteCond %{HTTP_HOST} ^www\.codariq\.de [NC]
-RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301]
+# Disable mod_dir's automatic directory slash handling
+DirectorySlash Off
 
-# Force HTTPS for non-www
+# Enable directory indexes
+DirectoryIndex index.html index.htm
+
+# Combined redirect: www OR non-HTTPS to canonical HTTPS non-www (single redirect)
+# This ensures only ONE redirect happens for all variants
+RewriteCond %{HTTP_HOST} ^www\.codariq\.de [NC,OR]
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?codariq\.de$ [NC]
+RewriteCond %{REQUEST_URI} !^/.well-known/
+RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301,NE]
 
-# Remove trailing slashes from URLs (except root)
-RewriteCond %{REQUEST_FILENAME} !-d
+# Remove trailing slashes from external URLs FIRST (for when users explicitly add them)
+# This redirects /faq/ to /faq
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} (.+)/$
-RewriteRule ^ %1 [L,R=301]
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.*)/$ https://codariq.de/$1 [L,R=301,NE]
 
-# Blog URL redirects (fix Google Analytics 404s)
-RewriteRule ^blog/roi-von-prozessautomatisierung-maximieren/?$ /blog/automatisierung-roi-maximieren [R=301,L]
+# CRITICAL: Internal rewrite - serve index.html without redirect
+# This allows /faq to serve /faq/index.html internally without any visible redirect
+# Must use END flag to prevent mod_dir from interfering
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)$ %{DOCUMENT_ROOT}/$1/index.html [L,END]
 
 # Remove search parameters from URLs for canonical tag issues
-RewriteCond %{QUERY_STRING} ^search=.*
-RewriteRule ^$ /? [R=301,L]
+RewriteCond %{QUERY_STRING} ^search=
+RewriteRule ^$ https://codariq.de/? [R=301,L,NE]
 
 # Security headers
 <IfModule mod_headers.c>
