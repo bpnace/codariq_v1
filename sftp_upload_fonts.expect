@@ -1,0 +1,44 @@
+#!/usr/bin/expect -f
+# Upload fonts to server
+set timeout -1
+set host "5017709652.ssh.w2.strato.hosting"
+set port "22"
+set user "su122510"
+set password "razxoc-kYzxow-jejbu9"
+set localdir "/Users/BumpinAce/CodeStuff/codariq/public"
+set remotedir "/codariq"
+
+puts "================================================"
+puts "Uploading fonts folder to server"
+puts "================================================"
+
+spawn sftp -oBatchMode=no -P $port $user@$host
+expect {
+  -re "(?i)password:" { send "$password\r" }
+  timeout {
+    puts "ERROR: Connection timeout"
+    exit 2
+  }
+}
+expect "sftp>"
+
+send "lcd $localdir\r"
+expect "sftp>"
+send "cd $remotedir\r"
+expect "sftp>"
+
+puts "\n==> Uploading fonts folder..."
+send "put -r fonts\r"
+expect "sftp>"
+
+puts "\n==> Verifying fonts upload..."
+send "ls -la fonts/\r"
+expect "sftp>"
+
+puts "\n==> Disconnecting..."
+send "bye\r"
+expect eof
+
+puts "\n================================================"
+puts "Fonts uploaded successfully!"
+puts "================================================"

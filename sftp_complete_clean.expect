@@ -1,0 +1,50 @@
+#!/usr/bin/expect -f
+# Complete cleanup script - removes old files that are no longer in dist
+set timeout -1
+set host "5017709652.ssh.w2.strato.hosting"
+set port "22"
+set user "su122510"
+set password "razxoc-kYzxow-jejbu9"
+set remotedir "/codariq"
+
+puts "================================================"
+puts "Cleaning old files from codariq.de server"
+puts "================================================"
+
+spawn sftp -oBatchMode=no -P $port $user@$host
+expect {
+  -re "(?i)password:" { send "$password\r" }
+  timeout {
+    puts "ERROR: Connection timeout"
+    exit 2
+  }
+}
+expect "sftp>"
+
+# Navigate to /codariq
+send "cd $remotedir\r"
+expect "sftp>"
+
+puts "\n==> Removing old logo files..."
+send "rm codariq_logo1.png\r"
+expect "sftp>"
+send "rm codariq_logo2.png\r"
+expect "sftp>"
+send "rm codariq_logo3.png\r"
+expect "sftp>"
+
+puts "\n==> Removing old service worker..."
+send "rm sw.js\r"
+expect "sftp>"
+
+puts "\n==> Verifying files were removed..."
+send "ls -la\r"
+expect "sftp>"
+
+puts "\n==> Disconnecting..."
+send "bye\r"
+expect eof
+
+puts "\n================================================"
+puts "Cleanup completed!"
+puts "================================================"

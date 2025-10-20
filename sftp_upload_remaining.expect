@@ -1,0 +1,64 @@
+#!/usr/bin/expect -f
+# Upload remaining files including hidden files and public assets
+set timeout -1
+set host "5017709652.ssh.w2.strato.hosting"
+set port "22"
+set user "su122510"
+set password "razxoc-kYzxow-jejbu9"
+set localdir "/Users/BumpinAce/CodeStuff/codariq/dist"
+set remotedir "/codariq"
+
+puts "================================================"
+puts "Uploading remaining files (hidden files + assets)"
+puts "================================================"
+
+spawn sftp -oBatchMode=no -P $port $user@$host
+expect {
+  -re "(?i)password:" { send "$password\r" }
+  timeout {
+    puts "ERROR: Connection timeout"
+    exit 2
+  }
+}
+expect "sftp>"
+
+send "lcd $localdir\r"
+expect "sftp>"
+send "cd $remotedir\r"
+expect "sftp>"
+
+puts "\n==> Uploading .htaccess..."
+send "put .htaccess\r"
+expect "sftp>"
+
+puts "\n==> Uploading .DS_Store (if exists)..."
+send "put .DS_Store\r"
+expect "sftp>"
+
+puts "\n==> Checking if fonts folder exists in public..."
+send "!ls -la /Users/BumpinAce/CodeStuff/codariq/public/fonts 2>/dev/null\r"
+expect "sftp>"
+
+puts "\n==> Uploading fonts folder from public..."
+send "lcd /Users/BumpinAce/CodeStuff/codariq/public\r"
+expect "sftp>"
+send "mput -r fonts\r"
+expect "sftp>"
+
+puts "\n==> Uploading images folder from public..."
+send "mput -r images\r"
+expect "sftp>"
+
+puts "\n==> Verifying final upload..."
+send "cd $remotedir\r"
+expect "sftp>"
+send "ls -la\r"
+expect "sftp>"
+
+puts "\n==> Disconnecting..."
+send "bye\r"
+expect eof
+
+puts "\n================================================"
+puts "Upload completed successfully!"
+puts "================================================"

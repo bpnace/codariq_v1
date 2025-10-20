@@ -1,0 +1,110 @@
+#!/usr/bin/expect -f
+# Safe SFTP script to clean ONLY /codariq/ folder and upload new files
+set timeout -1
+set host "5017709652.ssh.w2.strato.hosting"
+set port "22"
+set user "su122510"
+set password "razxoc-kYzxow-jejbu9"
+set localdir "/Users/BumpinAce/CodeStuff/codariq/dist"
+set remotedir "/codariq"
+
+puts "================================================"
+puts "SFTP Clean & Upload Script for codariq.de"
+puts "================================================"
+puts "Remote directory: $remotedir (WILL BE CLEANED)"
+puts "Local directory: $localdir"
+puts "================================================"
+
+spawn sftp -oBatchMode=no -P $port $user@$host
+expect {
+  -re "(?i)password:" { send "$password\r" }
+  timeout {
+    puts "ERROR: Connection timeout"
+    exit 2
+  }
+}
+expect "sftp>"
+
+# Navigate to parent directory first (to be safe)
+puts "\n==> Navigating to parent directory..."
+send "cd /\r"
+expect "sftp>"
+
+# Verify we're in the right place
+send "pwd\r"
+expect "sftp>"
+
+# Remove ONLY the /codariq directory contents (BE VERY CAREFUL HERE)
+puts "\n==> Cleaning /codariq folder (ONLY this folder will be affected)..."
+send "cd /codariq\r"
+expect {
+  "sftp>" { puts "Successfully entered /codariq directory" }
+  timeout {
+    puts "ERROR: Could not enter /codariq directory"
+    exit 3
+  }
+}
+
+# List contents before deletion (for verification)
+puts "\n==> Listing current contents of /codariq before deletion..."
+send "ls -la\r"
+expect "sftp>"
+
+# Delete all contents in /codariq folder
+# Note: This removes files and directories within /codariq, but not /codariq itself
+puts "\n==> Removing all contents from /codariq folder..."
+send "rm -r /codariq/*\r"
+expect "sftp>"
+
+# Also remove hidden files (like .htaccess, .DS_Store)
+send "rm -r /codariq/.*\r"
+expect "sftp>"
+
+# Verify deletion
+puts "\n==> Verifying /codariq is now empty..."
+send "ls -la\r"
+expect "sftp>"
+
+# Change local directory
+puts "\n==> Changing to local directory: $localdir"
+send "lcd $localdir\r"
+expect "sftp>"
+
+# Verify local directory
+send "!ls -la\r"
+expect "sftp>"
+
+# Navigate back to /codariq for upload
+puts "\n==> Navigating to /codariq for upload..."
+send "cd /codariq\r"
+expect "sftp>"
+
+# Upload all files recursively
+puts "\n==> Uploading all files from dist to /codariq..."
+send "mput -r *\r"
+expect {
+  "sftp>" { puts "Upload completed successfully!" }
+  timeout {
+    puts "ERROR: Upload timeout"
+    exit 4
+  }
+}
+
+# Upload hidden files (like .htaccess)
+puts "\n==> Uploading hidden files (like .htaccess)..."
+send "put .htaccess\r"
+expect "sftp>"
+
+# Verify upload
+puts "\n==> Verifying files were uploaded..."
+send "ls -la\r"
+expect "sftp>"
+
+# Disconnect
+puts "\n==> Disconnecting from server..."
+send "bye\r"
+expect eof
+
+puts "\n================================================"
+puts "Deployment completed successfully!"
+puts "================================================"
