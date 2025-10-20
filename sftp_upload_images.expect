@@ -1,0 +1,60 @@
+#!/usr/bin/expect -f
+# Upload images to server
+set timeout -1
+set host "5017709652.ssh.w2.strato.hosting"
+set port "22"
+set user "su122510"
+set password "razxoc-kYzxow-jejbu9"
+set localdir "/Users/BumpinAce/CodeStuff/codariq/public"
+set remotedir "/codariq"
+
+puts "================================================"
+puts "Uploading images folder to server"
+puts "================================================"
+
+spawn sftp -oBatchMode=no -P $port $user@$host
+expect {
+  -re "(?i)password:" { send "$password\r" }
+  timeout {
+    puts "ERROR: Connection timeout"
+    exit 2
+  }
+}
+expect "sftp>"
+
+send "lcd $localdir\r"
+expect "sftp>"
+send "cd $remotedir\r"
+expect "sftp>"
+
+puts "\n==> Uploading images folder with all subdirectories..."
+send "put -r images\r"
+expect "sftp>"
+
+puts "\n==> Verifying images structure..."
+send "ls -la images/\r"
+expect "sftp>"
+
+puts "\n==> Checking badges..."
+send "ls -la images/badges/\r"
+expect "sftp>"
+
+puts "\n==> Checking hero images..."
+send "ls -la images/hero/\r"
+expect "sftp>"
+
+puts "\n==> Checking logos..."
+send "ls -la images/logos/\r"
+expect "sftp>"
+
+puts "\n==> Checking testimonials..."
+send "ls -la images/testimonials/\r"
+expect "sftp>"
+
+puts "\n==> Disconnecting..."
+send "bye\r"
+expect eof
+
+puts "\n================================================"
+puts "Images uploaded successfully!"
+puts "================================================"
