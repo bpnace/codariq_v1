@@ -1,23 +1,14 @@
 # Robots.txt for codariq.de
 
-# Allow legitimate search engines
+# Allow legitimate search engines full access
 User-agent: Googlebot
-Disallow: /impressum
-Disallow: /agb
-Disallow: /datenschutz
-Disallow: /cookie-richtlinien
+Allow: /
 
 User-agent: Bingbot
-Disallow: /impressum
-Disallow: /agb
-Disallow: /datenschutz
-Disallow: /cookie-richtlinien
+Allow: /
 
 User-agent: DuckDuckBot
-Disallow: /impressum
-Disallow: /agb
-Disallow: /datenschutz
-Disallow: /cookie-richtlinien
+Allow: /
 
 # Block known spam/scraper bots
 User-agent: SemrushBot
@@ -48,12 +39,6 @@ User-agent: PetalBot
 Disallow: /
 
 User-agent: CCBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: GPTBot
 Disallow: /
 
 User-agent: Google-Extended
@@ -177,17 +162,9 @@ Disallow: /
 User-agent: Zeus
 Disallow: /
 
-# Allow access to main pages for legitimate search engines
+# Default directives for remaining crawlers
 User-agent: *
 Allow: /
-Allow: /faq
-Disallow: /impressum
-Disallow: /agb
-Disallow: /datenschutz
-Disallow: /cookie-richtlinien
 
 # Sitemap location
 Sitemap: https://codariq.de/sitemap-index.xml
-
-# Crawl delay to prevent aggressive scraping
-Crawl-delay: 10
