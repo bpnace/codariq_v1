@@ -1,0 +1,834 @@
+---
+export interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+
+const complianceQuestions = [
+  {
+    id: "data-inventory",
+    question:
+      "Haben Sie eine vollständige Übersicht aller genutzten KI-Systeme und Datenquellen?",
+    weight: 3,
+    hint: "EU AI Act erfordert umfassende Systemdokumentation",
+  },
+  {
+    id: "risk-assessment",
+    question:
+      "Führen Sie regelmäßige Risikobewertungen für Ihre KI-Anwendungen durch?",
+    weight: 4,
+    hint: "Hochrisiko-KI-Systeme benötigen kontinuierliche Überwachung",
+  },
+  {
+    id: "data-quality",
+    question:
+      "Können Sie die Qualität und Herkunft Ihrer Trainingsdaten nachweisen?",
+    weight: 3,
+    hint: "Bias-Vermeidung und Datenqualität sind zentrale Compliance-Faktoren",
+  },
+  {
+    id: "transparency",
+    question:
+      "Informieren Sie Nutzer transparent über den Einsatz von KI-Systemen?",
+    weight: 2,
+    hint: "Transparenzpflicht nach DSGVO und AI Act",
+  },
+  {
+    id: "human-oversight",
+    question:
+      "Ist menschliche Kontrolle über kritische KI-Entscheidungen gewährleistet?",
+    weight: 4,
+    hint: "Human-in-the-loop ist für viele Anwendungen verpflichtend",
+  },
+];
+---
+
+<section class={`py-8 sm:py-12 ${className}`} id="compliance-quiz">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-6 sm:mb-8">
+      <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-2 sm:mb-3">
+        KI-Compliance-Schnellprüfung
+      </h3>
+      <p
+        class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed"
+      >
+        Evaluieren Sie die Compliance-Bereitschaft Ihres Unternehmens in 5
+        Fragen
+      </p>
+    </div>
+
+    <!-- Quiz Container -->
+    <div class="max-w-4xl mx-auto">
+      <div
+        class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
+      >
+        <!-- Progress Header -->
+        <div
+          class="px-6 sm:px-8 py-4 bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-sm font-semibold text-blue-900"
+                >Compliance Check</span
+              >
+            </div>
+            <div class="text-right">
+              <p
+                class="text-sm font-medium text-orange-600"
+                id="question-counter"
+              >
+                Frage 1 von 5
+              </p>
+              <div class="w-24 h-1 bg-blue-200 rounded-full mt-1">
+                <div
+                  id="progress-bar"
+                  class="h-1 bg-orange-500 rounded-full transition-all duration-300"
+                  style="width: 20%"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Height Content Container -->
+        <div class="relative min-h-80">
+          <!-- Question Container -->
+          <div
+            id="question-container"
+            class="absolute inset-0 p-6 sm:p-8 overflow-hidden"
+          >
+            {
+              complianceQuestions.map((item, index) => (
+                <div
+                  class={`question-step absolute inset-0 ${index === 0 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}`}
+                  id={`question-${index}`}
+                >
+                  <div class="h-full flex flex-col">
+                    {/* Question Content */}
+                    <div class="text-center px-4 py-8 flex flex-col justify-center h-full">
+                      {/* Question Number Badge */}
+                      <div class="flex justify-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                          <span class="text-lg font-bold text-blue-600">
+                            {index + 1}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Question Text */}
+                      <div class="mb-8 flex-1 flex flex-col justify-center">
+                        <h4 class="text-lg sm:text-xl font-semibold text-gray-900 mb-6 leading-relaxed max-w-2xl mx-auto">
+                          {item.question}
+                        </h4>
+                      </div>
+
+                      {/* Answer Buttons */}
+                      <div class="flex gap-4 justify-center max-w-md mx-auto">
+                        <button
+                          type="button"
+                          class="answer-btn flex-1 py-3 px-6 bg-green-600 hover:bg-green-700 text-white rounded-xl text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
+                          data-answer="yes"
+                          data-weight={item.weight}
+                        >
+                          <div class="flex items-center justify-center gap-2">
+                            <svg
+                              class="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            Ja
+                          </div>
+                        </button>
+                        <button
+                          type="button"
+                          class="answer-btn flex-1 py-3 px-6 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
+                          data-answer="no"
+                          data-weight={item.weight}
+                        >
+                          <div class="flex items-center justify-right gap-2">
+                            <svg
+                              class="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                            Nein
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Results Section (Hidden by default) -->
+          <div
+            id="quiz-results"
+            class="absolute inset-0 opacity-0 translate-x-full transition-all duration-300 overflow-y-auto"
+          >
+            <div class="h-full flex flex-col justify-start p-6 sm:p-8 py-4">
+              <!-- Compact Header Section -->
+              <div
+                class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-8 lg:justify-items-center items-center lg:items-start mb-4"
+              >
+                <!-- Left Column: Icon, Title & Score -->
+                <div class="text-center flex-shrink-0">
+                  <div class="flex justify-center mb-2">
+                    <div
+                      id="result-icon"
+                      class="w-16 h-16 rounded-full shadow-lg flex items-center justify-center"
+                    >
+                    </div>
+                  </div>
+                  <h4
+                    id="result-title"
+                    class="text-xl sm:text-2xl font-bold text-gray-900 mb-4"
+                  >
+                  </h4>
+                  <!-- Score Display - Compact -->
+                  <div
+                    class="inline-flex items-center gap-2 bg-blue-50 rounded-lg px-4 py-2 border border-blue-200"
+                  >
+                    <span class="text-sm text-gray-700 font-medium">Score:</span
+                    >
+                    <span
+                      id="result-score"
+                      class="text-xl font-bold text-blue-600"></span>
+                  </div>
+                </div>
+
+                <!-- Right Column: Action Buttons -->
+                <div
+                  class="flex flex-col items-center justify-center gap-3 mt-4 lg:mt-0 w-full lg:max-w-xs lg:h-full"
+                >
+                  <div id="improvement-cta" class="hidden w-full">
+                    <a
+                      href="#final-cta"
+                      class="inline-flex items-center justify-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button w-full"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                      </svg>
+                      <span>Jetzt starten</span>
+                    </a>
+                  </div>
+                  <button
+                    type="button"
+                    id="restart-quiz"
+                    class="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-gray-700 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-medium transition-all duration-200 border border-gray-300 hover:border-gray-400 shadow-lg hover:shadow-xl cta-button w-full"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      ></path>
+                    </svg>
+                    Erneut testen
+                  </button>
+                </div>
+              </div>
+
+              <!-- Detailed Description -->
+              <div class="text-center lg:text-left mb-6">
+                <p
+                  id="result-description"
+                  class="text-sm sm:text-base text-gray-700 leading-relaxed mb-4"
+                >
+                </p>
+                <!-- Email Report Option -->
+                <div
+                  id="email-report-section"
+                  class="bg-blue-50 rounded-lg p-4 border border-blue-200"
+                >
+                  <h5 class="font-semibold text-blue-900 mb-2 text-sm">
+                    📧 Detaillierten Compliance-Report per E-Mail erhalten
+                  </h5>
+                  <p class="text-xs text-blue-700 mb-3">
+                    Erhalten Sie eine ausführliche Analyse mit konkreten
+                    Handlungsempfehlungen und Compliance-Checkliste.
+                  </p>
+                  <form
+                    id="compliance-report-form"
+                    class="flex flex-col sm:flex-row gap-2"
+                  >
+                    <input
+                      type="email"
+                      id="compliance-email"
+                      name="email"
+                      placeholder="Ihre E-Mail-Adresse"
+                      required
+                      class="flex-1 px-3 py-2 text-sm border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                    />
+                    <button
+                      type="submit"
+                      class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm shadow-sm whitespace-nowrap"
+                    >
+                      Report anfordern
+                    </button>
+                  </form>
+                  <!-- Success/Error Messages -->
+                  <div
+                    id="compliance-success"
+                    class="hidden mt-2 p-2 bg-green-50 border border-green-200 rounded text-green-700 text-xs"
+                  >
+                    ✅ Vielen Dank! Sie erhalten Ihren Compliance-Report in
+                    wenigen Minuten per E-Mail.
+                  </div>
+                  <div
+                    id="compliance-error"
+                    class="hidden mt-2 p-2 bg-red-50 border border-red-200 rounded text-red-700 text-xs"
+                  >
+                    ❌ <span id="compliance-error-text"
+                      >Fehler beim Versenden. Bitte versuchen Sie es erneut.</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Minimal Breakdown Grid - Below CTAs -->
+              <div id="result-details" class="mb-4">
+                <div
+                  id="score-breakdown"
+                  class="grid grid-cols-5 gap-2 justify-center"
+                >
+                  <!-- Will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const quizContainer = document.getElementById(
+          "compliance-quiz",
+        ) as HTMLElement;
+        const questionContainer = document.getElementById(
+          "question-container",
+        ) as HTMLElement;
+        const resultsContainer = document.getElementById(
+          "quiz-results",
+        ) as HTMLElement;
+        const restartBtn = document.getElementById(
+          "restart-quiz",
+        ) as HTMLElement;
+        const questionCounter = document.getElementById(
+          "question-counter",
+        ) as HTMLElement;
+        const progressBar = document.getElementById(
+          "progress-bar",
+        ) as HTMLElement;
+
+        if (
+          !quizContainer ||
+          !questionContainer ||
+          !resultsContainer ||
+          !restartBtn ||
+          !questionCounter ||
+          !progressBar
+        ) {
+          console.error("Quiz elements not found");
+          console.log("Missing elements:", {
+            quizContainer: !!quizContainer,
+            questionContainer: !!questionContainer,
+            resultsContainer: !!resultsContainer,
+            restartBtn: !!restartBtn,
+            questionCounter: !!questionCounter,
+            progressBar: !!progressBar,
+          });
+          return;
+        }
+
+        let currentQuestion: number = 0;
+        let answers: Array<{ answer: string; weight: number }> = [];
+        const maxScore = 16;
+        const totalQuestions = 5;
+
+        // Initialize quiz
+        console.log("Initializing quiz...");
+        updateQuestionCounter();
+
+        // Make sure first question is visible
+        const firstQuestion = document.getElementById("question-0");
+        if (firstQuestion) {
+          firstQuestion.classList.add("opacity-100", "translate-x-0");
+          firstQuestion.classList.remove("opacity-0", "translate-x-full");
+        }
+
+        // Define questions data for JavaScript
+        const complianceQuestions = [
+          {
+            id: "data-inventory",
+            question:
+              "Haben Sie eine vollständige Übersicht aller genutzten KI-Systeme und Datenquellen?",
+            weight: 3,
+            hint: "EU AI Act erfordert umfassende Systemdokumentation",
+          },
+          {
+            id: "risk-assessment",
+            question:
+              "Führen Sie regelmäßige Risikobewertungen für Ihre KI-Anwendungen durch?",
+            weight: 4,
+            hint: "Hochrisiko-KI-Systeme benötigen kontinuierliche Überwachung",
+          },
+          {
+            id: "data-quality",
+            question:
+              "Können Sie die Qualität und Herkunft Ihrer Trainingsdaten nachweisen?",
+            weight: 3,
+            hint: "Bias-Vermeidung und Datenqualität sind zentrale Compliance-Faktoren",
+          },
+          {
+            id: "transparency",
+            question:
+              "Informieren Sie Nutzer transparent über den Einsatz von KI-Systemen?",
+            weight: 2,
+            hint: "Transparenzpflicht nach DSGVO und AI Act",
+          },
+          {
+            id: "human-oversight",
+            question:
+              "Ist menschliche Kontrolle über kritische KI-Entscheidungen gewährleistet?",
+            weight: 4,
+            hint: "Human-in-the-loop ist für viele Anwendungen verpflichtend",
+          },
+        ];
+
+        // Handle answer clicks
+        quizContainer.addEventListener("click", function (e: Event) {
+          const target = e.target as HTMLElement;
+          const button = target.closest(".answer-btn") as HTMLButtonElement;
+
+          if (button) {
+            const answer = button.dataset.answer || "";
+            const weightStr = button.dataset.weight || "0";
+            const weight = parseInt(weightStr, 10);
+
+            console.log(
+              `Question ${currentQuestion + 1}: ${answer} (weight: ${weight})`,
+            );
+
+            // Store answer
+            answers[currentQuestion] = { answer, weight };
+
+            // Move to next question or show results
+            if (currentQuestion < complianceQuestions.length - 1) {
+              slideToQuestion(currentQuestion + 1);
+            } else {
+              slideToResults();
+            }
+          }
+        });
+
+        // Restart quiz
+        restartBtn.addEventListener("click", function () {
+          console.log("Restarting quiz");
+          currentQuestion = 0;
+          answers = [];
+          updateQuestionCounter();
+
+          // Hide results
+          resultsContainer.classList.add("opacity-0", "translate-x-full");
+          resultsContainer.classList.remove("opacity-100", "translate-x-0");
+
+          // Reset all questions to initial state
+          for (let i = 0; i < complianceQuestions.length; i++) {
+            const questionElement = document.getElementById(`question-${i}`);
+            if (questionElement) {
+              if (i === 0) {
+                // Show first question
+                questionElement.classList.add("opacity-100", "translate-x-0");
+                questionElement.classList.remove(
+                  "opacity-0",
+                  "translate-x-full",
+                  "-translate-x-full",
+                );
+              } else {
+                // Hide other questions
+                questionElement.classList.add("opacity-0", "translate-x-full");
+                questionElement.classList.remove(
+                  "opacity-100",
+                  "translate-x-0",
+                  "-translate-x-full",
+                );
+              }
+            }
+          }
+
+          // Show question container after results fade out
+          setTimeout(() => {
+            questionContainer.classList.add("opacity-100", "translate-x-0");
+            questionContainer.classList.remove("opacity-0", "translate-x-full");
+          }, 300);
+        });
+
+        function slideToQuestion(questionIndex: number) {
+          console.log(`Sliding to question ${questionIndex + 1}`);
+
+          // Slide out current question
+          const currentElement = document.getElementById(
+            `question-${currentQuestion}`,
+          );
+          if (currentElement) {
+            currentElement.classList.remove("opacity-100", "translate-x-0");
+            currentElement.classList.add("opacity-0", "-translate-x-full");
+          }
+
+          // Update counter
+          currentQuestion = questionIndex;
+          updateQuestionCounter();
+
+          // Slide in next question
+          setTimeout(() => {
+            const nextElement = document.getElementById(
+              `question-${questionIndex}`,
+            );
+            if (nextElement) {
+              nextElement.classList.remove("opacity-0", "translate-x-full");
+              nextElement.classList.add("opacity-100", "translate-x-0");
+            }
+          }, 200);
+        }
+
+        function slideToResults() {
+          console.log("Sliding to results");
+
+          // Slide out last question
+          const currentElement = document.getElementById(
+            `question-${currentQuestion}`,
+          );
+          if (currentElement) {
+            currentElement.classList.remove("opacity-100", "translate-x-0");
+            currentElement.classList.add("opacity-0", "-translate-x-full");
+          }
+
+          // Show results with slide animation
+          setTimeout(() => {
+            resultsContainer.classList.remove("opacity-0", "translate-x-full");
+            resultsContainer.classList.add("opacity-100", "translate-x-0");
+            showResults();
+          }, 300);
+        }
+
+        function updateQuestionCounter() {
+          if (questionCounter) {
+            questionCounter.textContent = `Frage ${currentQuestion + 1} von ${totalQuestions}`;
+          }
+          // Update progress bar
+          if (progressBar) {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+          }
+        }
+
+        function showResults() {
+          let score = 0;
+          answers.forEach((answer) => {
+            if (answer.answer === "yes") {
+              score += answer.weight;
+            }
+          });
+
+          const percentage = Math.round((score / maxScore) * 100);
+
+          // Update results
+          const resultIcon = document.getElementById(
+            "result-icon",
+          ) as HTMLElement;
+          const resultTitle = document.getElementById(
+            "result-title",
+          ) as HTMLElement;
+          const resultDescription = document.getElementById(
+            "result-description",
+          ) as HTMLElement;
+          const resultScore = document.getElementById(
+            "result-score",
+          ) as HTMLElement;
+          const improvementCta = document.getElementById(
+            "improvement-cta",
+          ) as HTMLElement;
+          const scoreBreakdown = document.getElementById(
+            "score-breakdown",
+          ) as HTMLElement;
+
+          // Show score
+          if (resultScore) {
+            resultScore.textContent = `${percentage}%`;
+          }
+
+          // Generate minimal breakdown - just checkmarks/X
+          if (scoreBreakdown) {
+            let breakdownHTML = "";
+            answers.forEach((answer, index) => {
+              const question = complianceQuestions[index];
+              const bgClass =
+                answer.answer === "yes" ? "bg-green-500" : "bg-red-500";
+              const iconSvg =
+                answer.answer === "yes"
+                  ? '<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>'
+                  : '<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+
+              breakdownHTML += `
+            <div class="w-10 h-10 rounded-full ${bgClass} flex items-center justify-center shadow-sm" title="Frage ${index + 1}: ${question.question}">
+              ${iconSvg}
+            </div>
+          `;
+            });
+            scoreBreakdown.innerHTML = breakdownHTML;
+          }
+
+          if (percentage >= 80) {
+            // GREEN: Excellent result
+            if (resultIcon) {
+              resultIcon.innerHTML =
+                '<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>';
+              resultIcon.className =
+                "w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-lg";
+            }
+            if (resultTitle)
+              resultTitle.textContent =
+                "🎉 Ausgezeichnete Compliance-Bereitschaft!";
+            if (resultDescription)
+              resultDescription.innerHTML =
+                "Ihr Unternehmen zeigt eine vorbildliche Compliance-Haltung gegenüber KI-Regulierungen. Sie sind optimal auf die Anforderungen des EU AI Act vorbereitet und können KI-Technologien sicher und rechtskonform einsetzen.<br><br><strong>Ihre Stärken:</strong> Umfassende Dokumentation, regelmäßige Risikobewertungen und transparente Kommunikation. Sie erfüllen bereits heute die Standards, die ab 2025 verpflichtend werden.<br><br><strong>Empfehlung:</strong> Nutzen Sie Ihren Compliance-Vorsprung als Wettbewerbsvorteil und erweitern Sie Ihre KI-Automatisierungen mit Zuversicht.";
+            if (improvementCta) improvementCta.classList.add("hidden");
+          } else if (percentage >= 60) {
+            // YELLOW: Good but needs improvement
+            if (resultIcon) {
+              resultIcon.innerHTML =
+                '<svg class="w-8 h-8 text-yellow-800" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>';
+              resultIcon.className =
+                "w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center shadow-lg";
+            }
+            if (resultTitle)
+              resultTitle.textContent = "⚠️ Gute Basis, Optimierung empfohlen";
+            if (resultDescription)
+              resultDescription.innerHTML =
+                "Sie haben bereits eine solide Compliance-Grundlage geschaffen. In einigen kritischen Bereichen bestehen jedoch noch Verbesserungsmöglichkeiten, um vollständig EU AI Act-konform zu werden.<br><br><strong>Handlungsbedarf:</strong> Verbesserung der Datenqualitätsdokumentation, Etablierung regelmäßiger Audits und Stärkung der Transparenz-Maßnahmen.<br><br><strong>Empfehlung:</strong> Schließen Sie die identifizierten Lücken systematisch – dann sind Sie optimal für die neuen Regulierungen gerüstet.";
+            if (improvementCta) improvementCta.classList.remove("hidden");
+          } else {
+            // RED: Critical improvement needed
+            if (resultIcon) {
+              resultIcon.innerHTML =
+                '<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>';
+              resultIcon.className =
+                "w-16 h-16 rounded-full bg-red-500 flex items-center justify-center shadow-lg";
+            }
+            if (resultTitle)
+              resultTitle.textContent = "🚨 Dringender Handlungsbedarf";
+            if (resultDescription)
+              resultDescription.innerHTML =
+                "In mehreren kritischen Compliance-Bereichen bestehen erhebliche Lücken. Eine umgehende professionelle Überprüfung und Anpassung Ihrer KI-Strategie ist unerlässlich, um rechtliche Risiken zu vermeiden.<br><br><strong>Kritische Lücken:</strong> Fehlende Systemdokumentation, mangelnde Risikobewertung und unzureichende Qualitätskontrolle Ihrer KI-Systeme.<br><br><strong>Sofortmaßnahmen:</strong> Compliance-Audit, Implementierung eines Risk-Management-Systems und Aufbau strukturierter Dokumentationsprozesse.";
+            if (improvementCta) improvementCta.classList.remove("hidden");
+          }
+        }
+
+        // Compliance Report Email Form Handler
+        const complianceForm = document.getElementById(
+          "compliance-report-form",
+        ) as HTMLFormElement;
+        const complianceEmail = document.getElementById(
+          "compliance-email",
+        ) as HTMLInputElement;
+        const complianceSuccess = document.getElementById("compliance-success");
+        const complianceError = document.getElementById("compliance-error");
+        const complianceErrorText = document.getElementById(
+          "compliance-error-text",
+        );
+
+        if (
+          complianceForm &&
+          complianceEmail &&
+          complianceSuccess &&
+          complianceError &&
+          complianceErrorText
+        ) {
+          complianceForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = complianceEmail.value.trim();
+
+            // Hide previous messages
+            complianceSuccess.classList.add("hidden");
+            complianceError.classList.add("hidden");
+
+            // Validate email
+            if (!email || !isValidEmail(email)) {
+              complianceErrorText.textContent =
+                "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
+              complianceError.classList.remove("hidden");
+              return;
+            }
+
+            // Show loading state
+            const submitButton = complianceForm.querySelector(
+              'button[type="submit"]',
+            ) as HTMLButtonElement;
+            const originalText = submitButton?.textContent;
+            if (submitButton) {
+              submitButton.textContent = "Wird gesendet...";
+              submitButton.disabled = true;
+            }
+
+            try {
+              // Note: This would normally send to a backend endpoint
+              // For now, we'll simulate success and show the success message
+              await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+
+              complianceForm.reset();
+              complianceSuccess.classList.remove("hidden");
+
+              // Track the email submission for analytics (if needed)
+              console.log("Compliance report requested for:", email);
+            } catch (error) {
+              console.error("Error submitting compliance report form:", error);
+              complianceErrorText.textContent =
+                "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+              complianceError.classList.remove("hidden");
+            } finally {
+              // Reset button state
+              if (submitButton) {
+                submitButton.textContent = originalText || "Report anfordern";
+                submitButton.disabled = false;
+              }
+            }
+          });
+        }
+      });
+    </script>
+
+    <style>
+      /* Smooth slide animations for question transitions */
+      .question-step {
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform, opacity;
+      }
+
+      /* Ensure proper question visibility control */
+      .question-step.opacity-0 {
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      .question-step.opacity-100 {
+        opacity: 1 !important;
+        pointer-events: auto;
+      }
+
+      .question-step.translate-x-full {
+        transform: translateX(100%) !important;
+      }
+
+      .question-step.translate-x-0 {
+        transform: translateX(0) !important;
+      }
+
+      .question-step.-translate-x-full {
+        transform: translateX(-100%) !important;
+      }
+
+      /* Enhanced button hover effects */
+      .answer-btn {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0) scale(1);
+        will-change: transform;
+      }
+
+      .answer-btn:hover {
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .answer-btn:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      /* Smooth transitions for results */
+      #quiz-results {
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      /* Progress bar animation */
+      #progress-bar {
+        transition: width 0.3s ease-out;
+      }
+
+      /* Ensure proper stacking context and smooth rendering */
+      .question-step {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform-style: preserve-3d;
+      }
+
+      /* Fade in animation for the entire quiz */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #compliance-quiz {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+    </style>
+  </div>
+</section>

@@ -9,22 +9,24 @@ export interface Props {
 const { items = [] } = Astro.props;
 
 // Default breadcrumb for homepage
-const defaultBreadcrumbs = [
-  { name: "Home", url: "https://codariq.de/" }
-];
+const defaultBreadcrumbs = [{ name: "Home", url: "https://codariq.de/" }];
 
-const breadcrumbs = items.length > 0 ? [defaultBreadcrumbs[0], ...items] : defaultBreadcrumbs;
+const breadcrumbs =
+  items.length > 0 ? [defaultBreadcrumbs[0], ...items] : defaultBreadcrumbs;
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": breadcrumbs.map((item, index) => ({
+  itemListElement: breadcrumbs.map((item, index) => ({
     "@type": "ListItem",
-    "position": index + 1,
-    "name": item.name,
-    "item": item.url
-  }))
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbSchema)}
+/>

@@ -34,358 +34,840 @@ const {
   benefits = [
     {
       title: "AI Readiness Check",
-      description: "Umfassende Analyse zur Identifikation der besten Automatisierungsmöglichkeiten.",
+      description:
+        "Kostenlose 30-minütige Analyse zur Identifikation der besten Automatisierungsmöglichkeiten.",
       icon: "check",
       features: [
         "Prozessanalyse",
         "ROI-Kalkulation",
         "Machbarkeitsstudie",
-        "Strategische Handlungsempfehlungen"
+        "Strategische Handlungsempfehlungen",
       ],
-      price: "€999",
-      duration: "1–2 Wochen",
+      price: "Kostenlos",
+      duration: "30 Minuten",
       isProduct: true,
-      rebate: {
-        percentage: 25,
-        originalPrice: "€999",
-        discountedPrice: "€749"
-      }
     },
     {
       title: "Automation Pilot",
-      description: "Ihre individuelle Automatisierungslösung von der Entwicklung bis zum Go-Live.",
+      description:
+        "Ihre individuelle Automatisierungslösung von der Entwicklung bis zum Go-Live.",
       icon: "automation",
       features: [
         "Maßgeschneiderte KI-Entwicklung",
         "Systemintegration",
         "Tests & Qualitätssicherung",
-        "Go-Live Unterstützung"
+        "Go-Live Unterstützung",
       ],
-      price: "€2.500–€9.500",
+      price: "€3.500–€12.500",
       duration: "4–12 Wochen",
       highlight: true,
       isProduct: true,
       rebate: {
         percentage: 25,
-        originalPrice: "€2.500–€9.500",
-        discountedPrice: "€1.875–€7.125"
-      }
+        originalPrice: "€3.500–€12.500",
+        discountedPrice: "€2.625–€9.375",
+      },
     },
     {
       title: "Team Training & AI Awareness",
-      description: "Der kompakte Einstieg für Unternehmen, die ihr Team fit für KI machen wollen.",
+      description:
+        "Der kompakte Einstieg für Unternehmen, die ihr Team fit für KI machen wollen.",
       icon: "training",
       features: [
         "Awareness-Analyse (Light-Check)",
         "Mitarbeiterschulung",
         "Best-Practice Workshops",
-        "Strategieberatung zu Anwendungsfeldern"
+        "Strategieberatung zu Anwendungsfeldern",
       ],
-      price: "ab €1.500",
+      price: "ab €2.500",
       duration: "1–3 Tage",
       isProduct: true,
       rebate: {
         percentage: 25,
-        originalPrice: "ab €1.500",
-        discountedPrice: "ab €1.125"
-      }
-    }
+        originalPrice: "ab €2.500",
+        discountedPrice: "ab €1.875",
+      },
+    },
   ],
   additionalServices = [
     {
       title: "Vertiefungstraining",
       subtitle: "Ergänzendes Service-Paket",
-      description: "Gezielte Weiterbildung für den sicheren Umgang mit KI-Lösungen.",
+      description:
+        "Gezielte Weiterbildung für den sicheren Umgang mit KI-Lösungen.",
       features: [
         "Erweiterte Mitarbeiterschulungen",
         "Praxis-Workshops",
         "Individuelle Betreuung",
-        "Schulungsunterlagen"
+        "Schulungsunterlagen",
       ],
-      price: "€699–€1.600",
+      price: "€899–€2.200",
       duration: "6 Stunden",
-      icon: "training"
+      icon: "training",
     },
     {
       title: "KI-Dashboard",
       subtitle: "Ergänzendes Service-Paket",
-      description: "Ihr zentrales Cockpit für Automatisierung & Strategie – als SaaS-Lösung.",
+      description:
+        "Ihr zentrales Cockpit für Automatisierung & Strategie – als SaaS-Lösung.",
       features: [
         "Übersichtliche KPI-Dashboards",
         "Monitoring der Automatisierungen",
-        "Kontinuierliche Optimierung"
+        "Kontinuierliche Optimierung",
       ],
-      price: "€1.999 pro Monat",
+      price: "auf Anfrage",
       duration: "monatlich",
       icon: "advisory",
-      comingSoon: true
-    }
-  ]
+      comingSoon: true,
+    },
+  ],
 } = Astro.props;
 ---
 
 <section id="benefits" class="py-12 sm:py-16 md:py-20 bg-gray-50">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
+      <h2
+        class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+      >
         {title}
       </h2>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
+      <p
+        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        style="transition-delay: 0.15s"
+      >
         {subtitle}
       </p>
     </div>
 
     <!-- Bento Box Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4">
-      {benefits.map((benefit, index) => {
-        // Three column layout: Each item spans 1 col on desktop, 2 cols on smaller screens
-        const getGridClass = (idx: number) => {
-          return 'sm:col-span-1'; // Each card takes 1 column
-        };
-        
-        return (
-        <div 
-          class={`relative group animate-fade-in-up ${getGridClass(index)}`}
-          style={`animation-delay: ${(index + 1) * 150}ms`}
-        >
-          <!-- Bento Card -->
-          <div class={`
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4"
+    >
+      {
+        benefits.map((benefit, index) => {
+          // Three column layout: Each item spans 1 col on desktop, 2 cols on smaller screens
+          const getGridClass = (idx: number) => {
+            return "sm:col-span-1"; // Each card takes 1 column
+          };
+
+          return (
+            <div
+              class={`relative group animate-fade-in-up ${getGridClass(index)}`}
+              style={`animation-delay: ${(index + 1) * 150}ms`}
+            >
+              {/* Bento Card */}
+              <div
+                class={`
             bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300 relative
-            ${benefit.highlight ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700' : ''}
-          `}>
-            
-            <!-- Rebate Badge -->
-            {benefit.rebate && (
-              <div class="absolute -top-2 -right-2 z-10">
-                <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
-                  -{benefit.rebate.percentage}% Neukunden-Rabatt
-                </div>
-              </div>
-            )}
-            
-            <!-- Icon -->
-            <div class="mb-3 sm:mb-4">
-              <div class={`
-                w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
-                ${benefit.highlight ? 'bg-white/10' : 'bg-gray-100'}
-              `}>
-                {benefit.icon === 'check' && (
-                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>AI Readiness Check Service Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                )}
-                
-                {benefit.icon === 'automation' && (
-                  <svg class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>Automation Pilot Service Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                )}
-                
-                {benefit.icon === 'training' && (
-                  <svg class={`w-6 h-6 ${benefit.highlight ? 'text-white' : 'text-gray-600'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <title>Team Training & AI Awareness Service Icon</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                  </svg>
-                )}
-              </div>
-            </div>
-
-            <!-- Content -->
-            <div class="mb-3 sm:mb-4 flex-1">
-              <h3 class={`text-base sm:text-l font-bold mb-2 ${benefit.highlight ? 'text-white' : 'text-gray-900'}`}>
-                {benefit.title}
-              </h3>
-              <p class={`text-m sm:text-m leading-relaxed mb-3 sm:mb-4 ${benefit.highlight ? 'text-white/80' : 'text-gray-600'}`}>
-                {benefit.description}
-              </p>
-            </div>
-
-            <!-- Features List -->
-            <div class="space-y-1 sm:space-y-2 mb-4">
-              {benefit.features.map((feature) => (
-                <div class="flex items-center gap-2">
-                  <div class={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full flex-shrink-0 ${benefit.highlight ? 'bg-white/60' : 'bg-gray-400'}`}></div>
-                  <span class={`text-xs ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`}>
-                    {feature}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <!-- Pricing & CTA for Products -->
-            {benefit.isProduct && (
-              <div class="mt-auto pt-4 border-t border-gray-200">
-                {/* Duration Badge */}
-                <div class="flex items-center gap-2 mb-3">
-                  <svg class={`w-3 h-3 sm:w-4 sm:h-4 ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  <span class={`text-xs font-medium ${benefit.highlight ? 'text-white/70' : 'text-gray-600'}`}>
-                    {benefit.duration}
-                  </span>
-                </div>
-
-                {/* Pricing */}
-                <div class="flex flex-col mb-3">
-                  {benefit.rebate ? (
-                    <>
-                      <div class={`text-sm line-through ${benefit.highlight ? 'text-white/50' : 'text-gray-500'}`}>
-                        {benefit.rebate.originalPrice}
-                      </div>
-                      <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-green-600'}`}>
-                        {benefit.rebate.discountedPrice}
-                      </div>
-                    </>
-                  ) : (
-                    <div class={`text-lg font-bold ${benefit.highlight ? 'text-white' : 'text-gray-900'}`}>
-                      {benefit.price}
-                    </div>
-                  )}
-                </div>
-
-                {/* Rebate Disclaimer */}
+            ${benefit.highlight ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700" : ""}
+          `}
+              >
+                {/* Rebate Badge */}
                 {benefit.rebate && (
-                  <div class={`text-xs mb-2 ${benefit.highlight ? 'text-white/70' : 'text-gray-500'}`}>
-                    * Nur für Neukunden gültig
+                  <div class="absolute -top-2 -right-2 z-10">
+                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                      -{benefit.rebate.percentage}% Neukunden-Rabatt
+                    </div>
                   </div>
                 )}
 
-                {/* CTA Button */}
-                <a 
-                  href="/#final-cta" 
-                  class={`
+                {/* Icon */}
+                <div class="mb-3 sm:mb-4">
+                  <div
+                    class={`
+                w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
+                ${benefit.highlight ? "bg-white/10" : "bg-gray-100"}
+              `}
+                  >
+                    {benefit.icon === "check" && (
+                      <svg
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-gray-600"} transition-colors`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>AI Readiness Check Service Icon</title>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    )}
+
+                    {benefit.icon === "automation" && (
+                      <svg
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-gray-600"} transition-colors`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>Automation Pilot Service Icon</title>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                        />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    )}
+
+                    {benefit.icon === "training" && (
+                      <svg
+                        class={`w-6 h-6 ${benefit.highlight ? "text-white" : "text-gray-600"} transition-colors`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>Team Training & AI Awareness Service Icon</title>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div class="mb-3 sm:mb-4 flex-1">
+                  <h3
+                    class={`text-base sm:text-l font-bold mb-2 ${benefit.highlight ? "text-white" : "text-gray-900"}`}
+                  >
+                    {benefit.title}
+                  </h3>
+                  <p
+                    class={`text-m sm:text-m leading-relaxed mb-3 sm:mb-4 ${benefit.highlight ? "text-white/80" : "text-gray-600"}`}
+                  >
+                    {benefit.description}
+                  </p>
+                </div>
+
+                {/* Features List */}
+                <div class="space-y-1 sm:space-y-2 mb-4">
+                  {benefit.features.map((feature) => (
+                    <div class="flex items-center gap-2">
+                      <div
+                        class={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full flex-shrink-0 ${benefit.highlight ? "bg-white/60" : "bg-gray-400"}`}
+                      />
+                      <span
+                        class={`text-xs ${benefit.highlight ? "text-white/70" : "text-gray-500"}`}
+                      >
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Pricing & CTA for Products */}
+                {benefit.isProduct && (
+                  <div class="mt-auto pt-4 border-t border-gray-200">
+                    {/* Duration Badge */}
+                    <div class="flex items-center gap-2 mb-3">
+                      <svg
+                        class={`w-3 h-3 sm:w-4 sm:h-4 ${benefit.highlight ? "text-white/70" : "text-gray-500"}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span
+                        class={`text-xs font-medium ${benefit.highlight ? "text-white/70" : "text-gray-600"}`}
+                      >
+                        {benefit.duration}
+                      </span>
+                    </div>
+
+                    {/* Pricing */}
+                    <div class="flex flex-col mb-3">
+                      {benefit.rebate ? (
+                        <>
+                          <div
+                            class={`text-sm line-through ${benefit.highlight ? "text-white/50" : "text-gray-500"}`}
+                          >
+                            {benefit.rebate.originalPrice}
+                          </div>
+                          <div
+                            class={`text-lg font-bold ${benefit.highlight ? "text-white" : "text-green-600"}`}
+                          >
+                            {benefit.rebate.discountedPrice}
+                          </div>
+                        </>
+                      ) : (
+                        <div
+                          class={`text-lg font-bold ${benefit.highlight ? "text-white" : benefit.price === "Kostenlos" ? "text-green-600" : "text-gray-900"}`}
+                        >
+                          {benefit.price}
+                          {benefit.price === "Kostenlos" && (
+                            <span class="block text-xs text-green-600 font-normal">
+                              30-minütige Beratung
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Rebate Disclaimer */}
+                    {benefit.rebate && (
+                      <div
+                        class={`text-xs mb-2 ${benefit.highlight ? "text-white/70" : "text-gray-500"}`}
+                      >
+                        * Nur für Neukunden gültig
+                      </div>
+                    )}
+
+                    {/* CTA Button */}
+                    <a
+                      href="/#final-cta"
+                      class={`
                     w-full px-4 py-2 rounded-lg font-medium text-sm shadow-sm transition-all duration-200 text-center inline-block cta-button
-                    ${benefit.highlight 
-                      ? 'bg-white text-gray-900 hover:bg-gray-100' 
-                      : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                    ${
+                      benefit.highlight
+                        ? "bg-white text-gray-900 hover:bg-gray-100"
+                        : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                     }
                   `}
-                  aria-label={`${benefit.title} anfragen - Zum Kontaktformular springen`}
-                >
-                  Jetzt anfragen
-                </a>
+                      aria-label={`${benefit.title} starten - Zum Kontaktformular springen`}
+                    >
+                      Jetzt starten
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
-      )})}
+            </div>
+          );
+        })
+      }
     </div>
 
     <!-- Additional Services Section -->
     <div class="mt-12 sm:mt-16 md:mt-20">
       <div class="text-center mb-12">
-        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 animate-on-scroll">
+        <h3
+          class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 animate-on-scroll"
+        >
           Ergänzende Services
         </h3>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 0.15s">
-          Erweitern Sie Ihre KI-Automatisierung mit zusätzlichen Services für maximalen Erfolg
+        <p
+          class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll"
+          style="transition-delay: 0.15s"
+        >
+          Erweitern Sie Ihre KI-Automatisierung mit zusätzlichen Services für
+          maximalen Erfolg
         </p>
       </div>
 
       <!-- Additional Services -->
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {additionalServices.map((service, index) => (
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
-              
-              <!-- Service Badge -->
-              <div class="absolute top-4 right-4">
-                <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">
-                  {service.subtitle}
-                </span>
-              </div>
-
-              <!-- Icon -->
-              <div class="mb-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
-                  {service.icon === 'training' && (
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <title>Team Training Service Icon</title>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                    </svg>
-                  )}
-                  {service.icon === 'advisory' && (
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <title>Advisory Retainer Service Icon</title>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                  )}
-                </div>
-              </div>
-
-              <!-- Content -->
-              <div class="mb-4">
-                <div class="flex items-center gap-2 mb-2">
-                  <h4 class="text-lg font-bold text-gray-900">
-                    {service.title}
-                  </h4>
-                  {service.comingSoon && (
-                    <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">
-                      Coming soon
-                    </span>
-                  )}
-                </div>
-                <p class="text-gray-600 leading-relaxed mb-4 text-sm">
-                  {service.description}
-                </p>
-
-                <!-- Features -->
-                <div class="space-y-2 mb-4">
-                  {service.features.map((feature) => (
-                    <div class="flex items-center gap-2">
-                      <div class="w-1.5 h-1.5 bg-gray-700 rounded-full flex-shrink-0"></div>
-                      <span class="text-xs text-gray-700">{feature}</span>
+          {
+            additionalServices.map((service, index) => {
+              // Special design for KI-Dashboard with purple gradient button
+              if (service.title === "KI-Dashboard") {
+                return (
+                  <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
+                    {/* Service Badge */}
+                    <div class="absolute top-4 right-4">
+                      <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">
+                        {service.subtitle}
+                      </span>
                     </div>
-                  ))}
-                </div>
 
-                <!-- Pricing & Duration -->
-                <div class="pt-4 border-t border-gray-200">
-                  <div class="flex items-center justify-between mb-3">
-                    <div class="text-lg font-bold text-gray-900">
-                      {service.price}
+                    {/* Icon */}
+                    <div class="mb-4">
+                      <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
+                        <svg
+                          class="w-6 h-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <title>Live Dashboard Icon</title>
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                          />
+                        </svg>
+                      </div>
                     </div>
-                    <div class="flex items-center gap-1 text-xs text-gray-600">
-                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
-                      {service.duration}
+
+                    {/* Content */}
+                    <div class="mb-4">
+                      <div class="flex items-center gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-gray-900">
+                          Live-Dashboard: KPI-Tracking in Echtzeit
+                        </h4>
+                        {service.comingSoon && (
+                          <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
+                            Coming soon
+                          </span>
+                        )}
+                      </div>
+                      <p class="text-gray-600 leading-relaxed mb-4 text-sm">
+                        Überwachen Sie Ihre Automatisierungserfolge auf einen
+                        Blick – verfügbar ab Q1 2025
+                      </p>
+
+                      {/* Features */}
+                      <div class="space-y-2 mb-4">
+                        {service.features.map((feature) => (
+                          <div class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-gray-700 rounded-full flex-shrink-0" />
+                            <span class="text-xs text-gray-700">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Pricing & Duration */}
+                      <div class="pt-4 border-t border-gray-200">
+                        <div class="flex items-center justify-between mb-3">
+                          <div class="text-lg font-bold text-gray-900">
+                            {service.price}
+                          </div>
+                          <div class="flex items-center gap-1 text-xs text-gray-600">
+                            <svg
+                              class="w-3 h-3"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            {service.duration}
+                          </div>
+                        </div>
+
+                        {/* Waitlist Form */}
+                        <form id="dashboard-waitlist-form" class="flex gap-2">
+                          <input
+                            type="email"
+                            id="dashboard-email"
+                            name="email"
+                            placeholder="Ihre E-Mail-Adresse"
+                            required
+                            class="flex-1 px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-blue-800 focus:border-blue-800 outline-none transition-all duration-200"
+                          />
+                          <button
+                            type="submit"
+                            class="bg-gradient-to-br from-blue-800 to-blue-900 text-white px-4 py-2 rounded-lg hover:from-blue-900 hover:to-blue-950 transition-all duration-200 font-medium text-sm shadow-lg cta-button whitespace-nowrap"
+                            aria-label="Zur Warteliste für KI-Dashboard anmelden"
+                          >
+                            Warteliste beitreten
+                          </button>
+                        </form>
+
+                        {/* Success Message */}
+                        <div
+                          id="dashboard-success"
+                          class="hidden mt-2 p-3 bg-green-50 border border-green-200 rounded-lg"
+                        >
+                          <div class="flex items-center gap-2">
+                            <svg
+                              class="w-4 h-4 text-green-600"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            <div>
+                              <p class="font-medium text-green-800 text-sm">
+                                Erfolgreich angemeldet!
+                              </p>
+                              <p class="text-green-600 text-xs">
+                                Sie erhalten eine Bestätigungs-E-Mail
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Error Message */}
+                        <div
+                          id="dashboard-error"
+                          class="hidden mt-2 p-3 bg-red-50 border border-red-200 rounded-lg"
+                        >
+                          <div class="flex items-center gap-2">
+                            <svg
+                              class="w-4 h-4 text-red-600"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <div>
+                              <p class="font-medium text-red-800 text-sm">
+                                Fehler bei der Anmeldung
+                              </p>
+                              <p
+                                id="dashboard-error-text"
+                                class="text-red-600 text-xs"
+                              >
+                                Bitte versuchen Sie es erneut
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <a 
-                    href="/#final-cta" 
-                    class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center"
-                    aria-label={`${service.title} anfragen - Zum Kontaktformular springen`}
-                  >
-                    Anfragen
-                  </a>
+                );
+              }
+
+              // Default design for other services
+              return (
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden">
+                  {/* Service Badge */}
+                  <div class="absolute top-4 right-4">
+                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">
+                      {service.subtitle}
+                    </span>
+                  </div>
+
+                  {/* Icon */}
+                  <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl flex items-center justify-center">
+                      {service.icon === "training" && (
+                        <svg
+                          class="w-6 h-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <title>Team Training Service Icon</title>
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                      <h4 class="text-lg font-bold text-gray-900">
+                        {service.title}
+                      </h4>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4 text-sm">
+                      {service.description}
+                    </p>
+
+                    {/* Features */}
+                    <div class="space-y-2 mb-4">
+                      {service.features.map((feature) => (
+                        <div class="flex items-center gap-2">
+                          <div class="w-1.5 h-1.5 bg-gray-700 rounded-full flex-shrink-0" />
+                          <span class="text-xs text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Pricing & Duration */}
+                    <div class="pt-4 border-t border-gray-200">
+                      <div class="flex items-center justify-between mb-3">
+                        <div class="text-lg font-bold text-gray-900">
+                          {service.price}
+                        </div>
+                        <div class="flex items-center gap-1 text-xs text-gray-600">
+                          <svg
+                            class="w-3 h-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          {service.duration}
+                        </div>
+                      </div>
+
+                      <a
+                        href="/#final-cta"
+                        class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm shadow-lg cta-button inline-block text-center"
+                        aria-label={`${service.title} starten - Zum Kontaktformular springen`}
+                      >
+                        Jetzt starten
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })
+          }
         </div>
       </div>
     </div>
-
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dashboardForm = document.getElementById(
+      "dashboard-waitlist-form",
+    ) as HTMLFormElement | null;
+    const emailInput = document.getElementById(
+      "dashboard-email",
+    ) as HTMLInputElement | null;
+    const successMessage = document.getElementById(
+      "dashboard-success",
+    ) as HTMLElement | null;
+    const errorMessage = document.getElementById(
+      "dashboard-error",
+    ) as HTMLElement | null;
+    const errorText = document.getElementById(
+      "dashboard-error-text",
+    ) as HTMLElement | null;
+    const submitButton = dashboardForm?.querySelector(
+      'button[type="submit"]',
+    ) as HTMLButtonElement | null;
+
+    if (
+      !dashboardForm ||
+      !emailInput ||
+      !successMessage ||
+      !errorMessage ||
+      !submitButton ||
+      !errorText
+    ) {
+      console.warn("KI-Dashboard waitlist form elements not found");
+      return;
+    }
+
+    // Email validation function
+    function isValidEmail(email: string): boolean {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Hide messages function
+    function hideMessages(): void {
+      if (successMessage) successMessage.classList.add("hidden");
+      if (errorMessage) errorMessage.classList.add("hidden");
+    }
+
+    // Show loading state
+    function setLoading(loading: boolean): void {
+      if (!submitButton) return;
+
+      if (loading) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Wird gesendet...";
+      } else {
+        submitButton.disabled = false;
+        submitButton.textContent = "Warteliste beitreten";
+      }
+    }
+
+    // Handle form submission
+    dashboardForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+
+      // Hide previous messages
+      hideMessages();
+
+      // Validate email
+      if (!email) {
+        errorMessage.classList.remove("hidden");
+        errorText.textContent = "Bitte geben Sie eine E-Mail-Adresse ein";
+        emailInput.focus();
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        errorMessage.classList.remove("hidden");
+        errorText.textContent =
+          "Bitte geben Sie eine gültige E-Mail-Adresse ein";
+        emailInput.focus();
+        return;
+      }
+
+      // Set loading state
+      setLoading(true);
+
+      try {
+        // Send data to n8n webhook with Basic Auth
+        const response = await fetch(
+          "https://automation.codariq.de/webhook/179939e2-cef1-4b9f-b513-272b356d7e57",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Basic " + btoa("admin:razxoc-kYzxow-jejbu9"),
+            },
+            body: JSON.stringify({
+              email: email,
+              body: {
+                email: email,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+              },
+            }),
+          },
+        );
+
+        // Parse the response content
+        const responseData = await response.text();
+        let responseJson: any = {};
+
+        try {
+          responseJson = JSON.parse(responseData);
+        } catch (e) {
+          // If it's not JSON, treat as plain text
+          responseJson = { message: responseData };
+        }
+
+        // Handle different response scenarios based on status and HTTP code
+        if (
+          response.status === 201 &&
+          responseJson.status === "ok" &&
+          responseJson.action === "subscribed"
+        ) {
+          // HTTP 201 - Success: Email added to waitlist
+          successMessage.classList.remove("hidden");
+          dashboardForm.reset();
+
+          // Auto-hide success message after 5 seconds
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
+        } else if (
+          response.status === 200 &&
+          responseJson.status === "ok" &&
+          responseJson.action === "already_subscribed"
+        ) {
+          // HTTP 200 - Already exists: Email already on waitlist
+          errorMessage.classList.remove("hidden");
+          errorText.textContent =
+            "Diese E-Mail-Adresse ist bereits in der Warteliste registriert.";
+
+          // Auto-hide error message after 5 seconds
+          setTimeout(() => {
+            errorMessage.classList.add("hidden");
+          }, 5000);
+        } else if (
+          response.status === 400 &&
+          responseJson.status === "error" &&
+          responseJson.code === "MISSING_EMAIL"
+        ) {
+          // HTTP 400 - Missing email
+          errorMessage.classList.remove("hidden");
+          errorText.textContent = "E-Mail-Adresse ist erforderlich.";
+
+          // Auto-hide error message after 5 seconds
+          setTimeout(() => {
+            errorMessage.classList.add("hidden");
+          }, 5000);
+        } else if (!response.ok) {
+          // Handle other HTTP errors
+          let errorMsg = responseJson.message || response.statusText;
+
+          // Handle specific error cases
+          if (
+            typeof responseData === "string" &&
+            responseData.includes("Authorization data is wrong")
+          ) {
+            errorMsg =
+              "Webhook-Konfigurationsfehler. Bitte kontaktieren Sie den Support.";
+          }
+
+          throw new Error(`HTTP ${response.status}: ${errorMsg}`);
+        } else if (response.ok && responseJson.status === "ok") {
+          // Handle any other successful responses that we didn't explicitly handle above
+          successMessage.classList.remove("hidden");
+          dashboardForm.reset();
+
+          // Auto-hide success message after 5 seconds
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
+        } else {
+          // Unexpected response format only for non-successful cases
+          throw new Error(
+            responseJson.message || "Unbekannte Antwort vom Server.",
+          );
+        }
+      } catch (error: any) {
+        console.error("Error submitting dashboard waitlist form:", error);
+        errorMessage.classList.remove("hidden");
+        errorText.textContent =
+          error.message ||
+          "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.";
+      } finally {
+        // Reset loading state
+        setLoading(false);
+      }
+    });
+
+    // Clear messages when user starts typing
+    emailInput.addEventListener("input", function () {
+      if (
+        !successMessage.classList.contains("hidden") ||
+        !errorMessage.classList.contains("hidden")
+      ) {
+        hideMessages();
+      }
+    });
+  });
+</script>
 
 <style>
   /* Consistent CTA button animation */
   .cta-button {
     transform-origin: center;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
     will-change: transform;
     backface-visibility: hidden;
   }
-  
+
   .cta-button:hover {
     transform: scale(1.02);
   }
 </style>
-

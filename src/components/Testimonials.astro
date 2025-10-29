@@ -21,180 +21,223 @@ const {
   subtitle = "Viele deutsche Mittelstandsunternehmen vertrauen bereits auf unsere KI-Automatisierungslösungen",
   testimonials = [
     {
-      quote: "Die Implementierung der KI-Automatisierung hat unsere Effizienz um 45% gesteigert. Manuelle Dateneingaben gehören der Vergangenheit an, und unser Team kann sich auf strategische Aufgaben konzentrieren.",
+      quote:
+        "Die Implementierung der KI-Automatisierung hat unsere Effizienz um 45% gesteigert. Manuelle Dateneingaben gehören der Vergangenheit an, und unser Team kann sich auf strategische Aufgaben konzentrieren.",
       name: "Dr. Michael Weber",
       position: "Geschäftsführer",
       company: "Weber Maschinenbau GmbH",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
       results: {
         metric: "45%",
-        improvement: "Effizienzsteigerung"
+        improvement: "Effizienzsteigerung",
       },
-      featured: true
+      featured: true,
     },
     {
-      quote: "Codariq hat uns geholfen, unsere Kundenservice-Prozesse zu revolutionieren. Unser Chatbot beantwortet 80% der Anfragen automatisch und unsere Kundenzufriedenheit ist um 30% gestiegen.",
+      quote:
+        "Codariq hat uns geholfen, unsere Kundenservice-Prozesse zu revolutionieren. Unser Chatbot beantwortet 80% der Anfragen automatisch und unsere Kundenzufriedenheit ist um 30% gestiegen.",
       name: "Petra Hoffmann",
       position: "Leiterin Kundenservice",
       company: "TechSolutions AG",
       image: "https://randomuser.me/api/portraits/women/44.jpg",
       results: {
         metric: "80%",
-        improvement: "Automatisierte Anfragen"
-      }
+        improvement: "Automatisierte Anfragen",
+      },
     },
     {
-      quote: "Die nahtlose Integration in unsere bestehenden Systeme war beeindruckend. Kein Stillstand, keine Datenverluste - nur pure Effizienz. ROI bereits nach 6 Monaten erreicht.",
+      quote:
+        "Die nahtlose Integration in unsere bestehenden Systeme war beeindruckend. Kein Stillstand, keine Datenverluste - nur pure Effizienz. ROI bereits nach 6 Monaten erreicht.",
       name: "Thomas Schneider",
       position: "IT-Leiter",
       company: "Schneider Logistik",
       image: "https://randomuser.me/api/portraits/men/22.jpg",
       results: {
         metric: "6 Monate",
-        improvement: "ROI erreicht"
-      }
+        improvement: "ROI erreicht",
+      },
     },
     {
-      quote: "Als traditionelles Familienunternehmen waren wir skeptisch gegenüber KI. Codariq hat uns vom Gegenteil überzeugt - professionell, verständlich und mit messbaren Ergebnissen.",
+      quote:
+        "Als traditionelles Familienunternehmen waren wir skeptisch gegenüber KI. Codariq hat uns vom Gegenteil überzeugt - professionell, verständlich und mit messbaren Ergebnissen.",
       name: "Maria Richter",
       position: "Geschäftsführerin",
       company: "Richter & Söhne KG",
       image: "https://randomuser.me/api/portraits/women/68.jpg",
       results: {
         metric: "25%",
-        improvement: "Kosteneinsparung"
-      }
-    }
-  ]
+        improvement: "Kosteneinsparung",
+      },
+    },
+  ],
 } = Astro.props;
 ---
 
 <section id="testimonials" class="py-10 sm:py-12 bg-white">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
+      <h2
+        class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+      >
         {title}
       </h2>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
+      <p
+        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        style="transition-delay: 0.15s"
+      >
         {subtitle}
       </p>
     </div>
 
     <!-- Testimonials Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 max-w-8xl mx-auto px-2 sm:px-3 md:px-4 relative">
-      {testimonials.map((testimonial, index) => {
-        const isSecondRow = index >= 2;
-        const isHiddenOnMobile = index >= 2; // Hide testimonials 3 and 4 on mobile
-        return (
-          <div 
-            class={`group animate-fade-in-up relative ${isSecondRow ? 'testimonial-blur' : ''} ${isHiddenOnMobile ? 'hidden md:block' : ''}`}
-            style={`animation-delay: ${(index + 1) * 150}ms`}
-          >
-            <!-- Testimonial Card -->
-            <div class={`
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 max-w-8xl mx-auto px-2 sm:px-3 md:px-4 relative"
+    >
+      {
+        testimonials.map((testimonial, index) => {
+          const isSecondRow = index >= 2;
+          const isHiddenOnMobile = index >= 2; // Hide testimonials 3 and 4 on mobile
+          return (
+            <div
+              class={`group animate-fade-in-up relative ${isSecondRow ? "testimonial-blur" : ""} ${isHiddenOnMobile ? "hidden md:block" : ""}`}
+              style={`animation-delay: ${(index + 1) * 150}ms`}
+            >
+              {/* Testimonial Card */}
+              <div
+                class={`
               rounded-xl p-4 sm:p-5 md:p-6 shadow-sm border h-full flex flex-col transition-all duration-300
               bg-white border-gray-200
-              ${!isSecondRow ? 'hover:shadow-md' : ''}
-            `}>
-              
-              <!-- Quote Icon -->
-              <div class="mb-3 sm:mb-4">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                </svg>
-              </div>
+              ${!isSecondRow ? "hover:shadow-md" : ""}
+            `}
+              >
+                {/* Quote Icon */}
+                <div class="mb-3 sm:mb-4">
+                  <svg
+                    class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
 
-              <!-- Quote Text -->
-              <blockquote class="mb-4 sm:mb-5 leading-relaxed text-sm sm:text-base flex-1 text-gray-700">
-                "{testimonial.quote}"
-              </blockquote>
+                {/* Quote Text */}
+                <blockquote class="mb-4 sm:mb-5 leading-relaxed text-sm sm:text-base flex-1 text-gray-700">
+                  "{testimonial.quote}"
+                </blockquote>
 
-              <!-- Author Info -->
-              <div class="flex items-center gap-3 sm:gap-4">
-                
-                <!-- Avatar -->
-                <div class="flex-shrink-0">
-                  <div class="rounded-full overflow-hidden border-2 w-12 h-12 sm:w-14 sm:h-14 border-gray-200">
-                    {testimonial.image ? (
-                      <img 
-                        src={testimonial.image} 
-                        alt={`${testimonial.name}, ${testimonial.position} bei ${testimonial.company}`}
-                        class="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ) : (
-                      <div class="w-full h-full flex items-center justify-center text-white font-bold text-sm bg-gray-400">
-                        {testimonial.name.split(' ').map(n => n[0]).join('')}
+                {/* Author Info */}
+                <div class="flex items-center gap-3 sm:gap-4">
+                  {/* Avatar */}
+                  <div class="flex-shrink-0">
+                    <div class="rounded-full overflow-hidden border-2 w-12 h-12 sm:w-14 sm:h-14 border-gray-200">
+                      {testimonial.image ? (
+                        <img
+                          src={testimonial.image}
+                          alt={`${testimonial.name}, ${testimonial.position} bei ${testimonial.company}`}
+                          class="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <div class="w-full h-full flex items-center justify-center text-white font-bold text-sm bg-gray-400">
+                          {testimonial.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    {/* Author Details */}
+                    <div class="mb-2">
+                      <div class="font-bold text-sm sm:text-base text-gray-900">
+                        {testimonial.name}
                       </div>
-                    )}
+                      <div class="text-xs sm:text-sm text-gray-600">
+                        {testimonial.position}
+                      </div>
+                      <div class="text-xs sm:text-sm font-medium text-gray-500">
+                        {testimonial.company}
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Results Badge */}
+                  {testimonial.results && (
+                    <div class="text-center px-3 py-2 rounded-lg border flex-shrink-0 border-gray-200 bg-gray-50">
+                      <div class="font-bold text-lg sm:text-xl text-gray-900">
+                        {testimonial.results.metric}
+                      </div>
+                      <div class="text-xs font-medium text-gray-600">
+                        {testimonial.results.improvement}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div class="flex-1 min-w-0">
-                  <!-- Author Details -->
-                  <div class="mb-2">
-                    <div class="font-bold text-sm sm:text-base text-gray-900">
-                      {testimonial.name}
-                    </div>
-                    <div class="text-xs sm:text-sm text-gray-600">
-                      {testimonial.position}
-                    </div>
-                    <div class="text-xs sm:text-sm font-medium text-gray-500">
-                      {testimonial.company}
-                    </div>
-                  </div>
+                {/* Decorative Element */}
+                <div class="absolute bottom-4 right-4 opacity-5 transition-opacity duration-300">
+                  <svg
+                    class="w-8 h-8 sm:w-12 sm:h-12 text-gray-500"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+                  </svg>
                 </div>
-
-                <!-- Results Badge -->
-                {testimonial.results && (
-                  <div class="text-center px-3 py-2 rounded-lg border flex-shrink-0 border-gray-200 bg-gray-50">
-                    <div class="font-bold text-lg sm:text-xl text-gray-900">
-                      {testimonial.results.metric}
-                    </div>
-                    <div class="text-xs font-medium text-gray-600">
-                      {testimonial.results.improvement}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <!-- Decorative Element -->
-              <div class="absolute bottom-4 right-4 opacity-5 transition-opacity duration-300">
-                <svg class="w-8 h-8 sm:w-12 sm:h-12 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                </svg>
               </div>
             </div>
-          </div>
-        );
-      })}
-      
+          );
+        })
+      }
+
       <!-- Gradient Overlay for Second Row -->
       <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-1/2 left-0 right-0 bottom-0 bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent"></div>
+        <div
+          class="absolute top-1/2 left-0 right-0 bottom-0 bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent"
+        >
+        </div>
       </div>
     </div>
-    
+
     <!-- Call to Action -->
     <div class="text-center -mt-16 sm:-mt-20 md:-mt-24 relative z-20 px-4">
-      <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto animate-on-scroll">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll">
+      <div
+        class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto animate-on-scroll"
+      >
+        <h3
+          class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+        >
           Überzeugt? Lassen Sie uns sprechen!
         </h3>
-        <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed animate-on-scroll" style="transition-delay: 0.15s">
-          Erfahren Sie in einem kostenlosen 45-minütigen Strategiegespräch, wie KI-Automatisierung auch Ihr Unternehmen transformieren kann.
+        <p
+          class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed animate-on-scroll"
+          style="transition-delay: 0.15s"
+        >
+          Erfahren Sie in einem kostenlosen 45-minütigen Strategiegespräch, wie
+          KI-Automatisierung auch Ihr Unternehmen transformieren kann.
         </p>
         <div class="animate-on-scroll" style="transition-delay: 0.3s">
-          <a 
+          <a
             href="#final-cta"
             class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
           >
             Kostenloses Strategiegespräch
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>
         </div>
@@ -207,40 +250,43 @@ const {
   .testimonial-blur {
     position: relative;
   }
-  
+
   .testimonial-blur::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 35%;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, 
-      transparent 0%, 
-      rgba(249, 250, 251, 0.4) 25%, 
-      rgba(249, 250, 251, 0.7) 50%, 
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(249, 250, 251, 0.4) 25%,
+      rgba(249, 250, 251, 0.7) 50%,
       rgba(249, 250, 251, 0.95) 100%
     );
     pointer-events: none;
     z-index: 1;
   }
-  
+
   .testimonial-blur:nth-child(3)::before {
     top: 25%;
-    background: linear-gradient(to bottom, 
-      transparent 0%, 
-      rgba(249, 250, 251, 0.5) 20%, 
-      rgba(249, 250, 251, 0.8) 45%, 
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(249, 250, 251, 0.5) 20%,
+      rgba(249, 250, 251, 0.8) 45%,
       rgba(249, 250, 251, 0.98) 100%
     );
   }
-  
+
   .testimonial-blur:nth-child(4)::before {
     top: 15%;
-    background: linear-gradient(to bottom, 
-      transparent 0%, 
-      rgba(249, 250, 251, 0.6) 15%, 
-      rgba(249, 250, 251, 0.85) 35%, 
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(249, 250, 251, 0.6) 15%,
+      rgba(249, 250, 251, 0.85) 35%,
       rgba(249, 250, 251, 1) 100%
     );
   }

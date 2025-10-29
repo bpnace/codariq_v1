@@ -10,6 +10,54 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
+# Allow AI search engines and assistants
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Allow AI training crawlers
+User-agent: Google-Extended
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Block data extraction crawlers
+User-agent: CCBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
 # Block known spam/scraper bots
 User-agent: SemrushBot
 Disallow: /
@@ -38,22 +86,7 @@ Disallow: /
 User-agent: PetalBot
 Disallow: /
 
-User-agent: CCBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Claude-Web
+User-agent: WebmasterWorldForumBot
 Disallow: /
 
 # Block aggressive crawlers and email harvesters
@@ -102,9 +135,6 @@ Disallow: /
 User-agent: lwp-trivial
 Disallow: /
 
-User-agent: Microsoft.URL
-Disallow: /
-
 User-agent: NetAnts
 Disallow: /
 
@@ -151,9 +181,6 @@ User-agent: VoidEYE
 Disallow: /
 
 User-agent: Web.Image.Collector
-Disallow: /
-
-User-agent: WebmasterWorldForumBot
 Disallow: /
 
 User-agent: WWW-Collector

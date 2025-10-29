@@ -32,16 +32,16 @@ export interface Props {
 }
 
 const {
-  title = 'KI-Automatisierung für den deutschen Mittelstand',
-  subtitle = 'Steigern Sie Ihre Effizienz um bis zu 50% mit maßgeschneiderten KI-Lösungen. Automatisieren Sie repetitive Aufgaben und fokussieren Sie sich auf Ihr Kerngeschäft.',
-  primaryCTA = 'Kostenlose Strategieberatung',
-  secondaryCTA = 'Live-Demo ansehen',
-  primaryCTALink = '#final-cta',
-  secondaryCTALink = '#final-cta',
-  heroImage = '/images/hero/hero2.webp',
+  title = "KI-Automatisierung für den deutschen Mittelstand",
+  subtitle = "Steigern Sie Ihre Effizienz um bis zu 50% mit maßgeschneiderten KI-Lösungen. Automatisieren Sie repetitive Aufgaben und fokussieren Sie sich auf Ihr Kerngeschäft.",
+  primaryCTA = "Kostenlose Strategieberatung",
+  secondaryCTA = "Live-Demo ansehen",
+  primaryCTALink = "#final-cta",
+  secondaryCTALink = "#final-cta",
+  heroImage = "/images/hero/hero2.webp",
   stats = [
-    { value: '40%', label: 'Effizienzsteigerung' },
-    { value: '60h', label: 'Zeitersparnis/Monat' },
+    { value: "40%", label: "Effizienzsteigerung" },
+    { value: "60h", label: "Zeitersparnis/Monat" },
   ],
 } = Astro.props;
 ---
@@ -93,23 +93,87 @@ const {
         <div
           class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4"
         >
-          <span
-            class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full"
-          >
-            ✓ min +30% Effizienz
-          </span>
-          <span
-            class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full"
-          >
-            ✓ min 50h Zeitersparnis
-          </span>
+          <div class="relative group">
+            <span
+              class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full cursor-help"
+            >
+              ✓ min +30% Effizienz
+              <svg
+                class="inline-block w-3 h-3 ml-1 opacity-70"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </span>
+            <!-- Tooltip -->
+            <div
+              class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20"
+            >
+              <div
+                class="bg-white text-gray-900 text-xs rounded-lg px-3 py-2 shadow-lg border border-gray-200 whitespace-nowrap"
+              >
+                <div class="font-semibold mb-1">So messen wir:</div>
+                <div>Durchschnittliche Effizienzsteigerung</div>
+                <div>unserer Kundenprojekte im ersten Jahr</div>
+                <!-- Arrow -->
+                <div
+                  class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-white"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative group">
+            <span
+              class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full cursor-help"
+            >
+              ✓ min 50h Zeitersparnis
+              <svg
+                class="inline-block w-3 h-3 ml-1 opacity-70"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </span>
+            <!-- Tooltip -->
+            <div
+              class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20"
+            >
+              <div
+                class="bg-white text-gray-900 text-xs rounded-lg px-3 py-2 shadow-lg border border-gray-200 whitespace-nowrap"
+              >
+                <div class="font-semibold mb-1">So messen wir:</div>
+                <div>Monatliche Arbeitszeitreduktion durch</div>
+                <div>automatisierte Prozesse (Mindestgarantie)</div>
+                <!-- Arrow -->
+                <div
+                  class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-white"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- CTA Button with Risk Reduction -->
       <div class="hero-animate" style="animation-delay: 0.8s">
         <div
-          class="flex flex-col items-center mb-6 sm:mb-8 md:mb-12 px-6 sm:px-4"
+          class="flex flex-col items-center mb-3 sm:mb-4 md:mb-6 px-6 sm:px-4"
         >
           <a
             href={primaryCTALink}
@@ -135,7 +199,7 @@ const {
           </a>
 
           <!-- Risk Reduction Text -->
-          <p class="text-white/80 text-sm font-bold mb-6">
+          <p class="text-white/80 text-sm font-bold mb-2">
             100% Unverbindlich & kostenfrei
           </p>
         </div>
@@ -145,14 +209,21 @@ const {
       <div class="hero-animate" style="animation-delay: 1.8s">
         <div class="flex flex-col items-center">
           <p class="text-white/70 text-xs sm:text-sm mb-3 font-medium">
-            Powered by industry leaders
+            Zertifizierte Partnerschaften mit führenden Unternehmen:
           </p>
           <div
-            class="flex items-center justify-center space-x-6 sm:space-x-8"
+            class="flex items-center justify-center space-x-4 sm:space-x-6 md:space-x-8"
           >
             <img
               src="/images/logos/google.svg"
               alt="Google"
+              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/logos/n8n.svg"
+              alt="n8n"
               class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
               loading="lazy"
               decoding="async"
@@ -232,7 +303,7 @@ const {
       animation: none;
       transform: translateY(0);
     }
-    
+
     .cta-button:hover {
       transform: none;
     }

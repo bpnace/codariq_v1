@@ -14,129 +14,171 @@ const {
   subtitle = "Antworten auf die wichtigsten Fragen zur KI-Automatisierung für deutsche Unternehmen",
   faqs = [
     {
-      question: "Wie lange dauert die Implementierung einer KI-Automatisierungslösung?",
-      answer: "Die Implementierungsdauer hängt von der Komplexität Ihrer Anforderungen ab. Einfache Automatisierungen können bereits in 2-4 Wochen umgesetzt werden, während umfassende Systeme 2-6 Monate benötigen. Wir erstellen einen detaillierten Projektplan mit klaren Meilensteinen und halten Sie über jeden Fortschritt auf dem Laufenden.",
-      category: "Implementation"
+      question:
+        "Wie lange dauert die Implementierung einer KI-Automatisierungslösung?",
+      answer:
+        "Die Implementierungsdauer hängt von der Komplexität Ihrer Anforderungen ab. Einfache Automatisierungen können bereits in 2-4 Wochen umgesetzt werden, während umfassende Systeme 2-6 Monate benötigen. Wir erstellen einen detaillierten Projektplan mit klaren Meilensteinen und halten Sie über jeden Fortschritt auf dem Laufenden.",
+      category: "Implementation",
     },
     {
-      question: "Ist eine KI-Automatisierung auch für kleinere Mittelstandsunternehmen wirtschaftlich?",
-      answer: "Absolut! Gerade kleinere Unternehmen profitieren oft überproportional von Automatisierung, da repetitive Aufgaben einen größeren Anteil der Arbeitszeit ausmachen. Wir bieten bereits einen AI Readiness Check für 999€ und Automation Pilot-Projekte ab 2.500€. Unsere Kunden erreichen typischerweise einen ROI innerhalb von 6-12 Monaten.",
-      category: "Kosten"
+      question:
+        "Ist eine KI-Automatisierung auch für kleinere Mittelstandsunternehmen wirtschaftlich?",
+      answer:
+        "Absolut! Gerade kleinere Unternehmen profitieren oft überproportional von Automatisierung, da repetitive Aufgaben einen größeren Anteil der Arbeitszeit ausmachen. Wir bieten bereits einen kostenlosen AI Readiness Check (30 Min.) und Automation Pilot-Projekte ab 3.500€. Unsere Kunden erreichen typischerweise einen ROI innerhalb von 6-12 Monaten.",
+      category: "Kosten",
     },
     {
-      question: "Wie wird die DSGVO-Konformität bei KI-Lösungen sichergestellt?",
-      answer: "Datenschutz hat bei uns höchste Priorität. Alle unsere Lösungen werden nach deutschen Datenschutzstandards entwickelt und auf deutschen Servern gehostet. Wir führen regelmäßige DSGVO-Audits durch und dokumentieren alle Datenverarbeitungsprozesse transparent. Sie erhalten von uns eine vollständige Datenschutz-Dokumentation.",
-      category: "Datenschutz"
+      question:
+        "Wie wird die DSGVO-Konformität bei KI-Lösungen sichergestellt?",
+      answer:
+        "Datenschutz hat bei uns höchste Priorität. Alle unsere Lösungen werden nach deutschen Datenschutzstandards entwickelt und auf deutschen Servern gehostet. Wir führen regelmäßige DSGVO-Audits durch und dokumentieren alle Datenverarbeitungsprozesse transparent. Sie erhalten von uns eine vollständige Datenschutz-Dokumentation.",
+      category: "Datenschutz",
     },
     {
-      question: "Welche Auswirkungen hat KI-Automatisierung auf bestehende Arbeitsplätze?",
-      answer: "KI-Automatisierung ersetzt in der Regel nicht Arbeitsplätze, sondern verlagert den Fokus auf wertvollere Tätigkeiten. Mitarbeiter werden von repetitiven Aufgaben befreit und können sich auf strategische, kreative und kundenorientierte Arbeiten konzentrieren. Wir unterstützen Sie auch bei der Mitarbeiterschulung für neue Aufgabenbereiche.",
-      category: "Personal"
+      question:
+        "Welche Auswirkungen hat KI-Automatisierung auf bestehende Arbeitsplätze?",
+      answer:
+        "KI-Automatisierung ersetzt in der Regel nicht Arbeitsplätze, sondern verlagert den Fokus auf wertvollere Tätigkeiten. Mitarbeiter werden von repetitiven Aufgaben befreit und können sich auf strategische, kreative und kundenorientierte Arbeiten konzentrieren. Wir unterstützen Sie auch bei der Mitarbeiterschulung für neue Aufgabenbereiche.",
+      category: "Personal",
     },
     {
-      question: "Wie funktioniert die Integration in bestehende ERP- und CRM-Systeme?",
-      answer: "Wir haben Erfahrung mit allen gängigen Systemen wie SAP, Microsoft Dynamics, Salesforce und vielen anderen. Unsere API-basierten Lösungen integrieren sich nahtlos ohne Unterbrechung Ihres laufenden Betriebs. Bei Legacy-Systemen entwickeln wir maßgeschneiderte Schnittstellen.",
-      category: "Integration"
+      question:
+        "Wie funktioniert die Integration in bestehende ERP- und CRM-Systeme?",
+      answer:
+        "Wir haben Erfahrung mit allen gängigen Systemen wie SAP, Microsoft Dynamics, Salesforce und vielen anderen. Unsere API-basierten Lösungen integrieren sich nahtlos ohne Unterbrechung Ihres laufenden Betriebs. Bei Legacy-Systemen entwickeln wir maßgeschneiderte Schnittstellen.",
+      category: "Integration",
     },
     {
       question: "Welche Kostenersparnisse sind realistisch zu erwarten?",
-      answer: "Unsere Kunden erreichen durchschnittlich 30-50% Kostenreduktion in automatisierten Prozessen. Zusätzlich profitieren Sie von reduzierten Fehlerkosten, schnelleren Durchlaufzeiten und verbesserter Kundenzufriedenheit. Eine detaillierte ROI-Analyse erstellen wir individuell für Ihr Unternehmen.",
-      category: "ROI"
+      answer:
+        "Unsere Kunden erreichen durchschnittlich 30-50% Kostenreduktion in automatisierten Prozessen. Zusätzlich profitieren Sie von reduzierten Fehlerkosten, schnelleren Durchlaufzeiten und verbesserter Kundenzufriedenheit. Eine detaillierte ROI-Analyse erstellen wir individuell für Ihr Unternehmen.",
+      category: "ROI",
     },
     {
       question: "Bieten Sie auch Support und Wartung nach der Implementierung?",
-      answer: "Ja, wir bieten umfassende Support-Pakete mit verschiedenen Service-Levels. Dazu gehören 24/7-Monitoring, regelmäßige Updates, Optimierungen und telefonischer Support. Unser deutschsprachiges Support-Team steht Ihnen jederzeit zur Verfügung.",
-      category: "Support"
+      answer:
+        "Ja, wir bieten umfassende Support-Pakete mit verschiedenen Service-Levels. Dazu gehören 24/7-Monitoring, regelmäßige Updates, Optimierungen und telefonischer Support. Unser deutschsprachiges Support-Team steht Ihnen jederzeit zur Verfügung.",
+      category: "Support",
     },
     {
-      question: "Wie sicher sind KI-Automatisierungslösungen vor Cyberangriffen?",
-      answer: "Sicherheit ist ein zentraler Bestandteil unserer Entwicklung. Wir verwenden End-to-End-Verschlüsselung, Multi-Faktor-Authentifizierung und regelmäßige Penetrationstests. Alle Systeme entsprechen den neuesten IT-Sicherheitsstandards und werden kontinuierlich auf Schwachstellen überwacht.",
-      category: "Sicherheit"
-    }
-  ]
+      question:
+        "Wie sicher sind KI-Automatisierungslösungen vor Cyberangriffen?",
+      answer:
+        "Sicherheit ist ein zentraler Bestandteil unserer Entwicklung. Wir verwenden End-to-End-Verschlüsselung, Multi-Faktor-Authentifizierung und regelmäßige Penetrationstests. Alle Systeme entsprechen den neuesten IT-Sicherheitsstandards und werden kontinuierlich auf Schwachstellen überwacht.",
+      category: "Sicherheit",
+    },
+  ],
 } = Astro.props;
 
 // Group FAQs by category for better organization
-const categories = [...new Set(faqs.map(faq => faq.category))].filter(Boolean);
-const groupedFAQs = categories.length > 0 
-  ? categories.reduce((acc, category) => {
-      acc[category] = faqs.filter(faq => faq.category === category);
-      return acc;
-    }, {})
-  : { 'Allgemein': faqs };
+const categories = [...new Set(faqs.map((faq) => faq.category))].filter(
+  Boolean,
+);
+const groupedFAQs =
+  categories.length > 0
+    ? categories.reduce((acc, category) => {
+        acc[category] = faqs.filter((faq) => faq.category === category);
+        return acc;
+      }, {})
+    : { Allgemein: faqs };
 ---
 
 <section id="faq" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    
     <!-- Section Header -->
     <div class="text-center mb-8 sm:mb-12 lg:mb-16 animate-slide-up">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+      <h2
+        class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4"
+      >
         {title}
       </h2>
-      <p class="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+      <p
+        class="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
+      >
         {subtitle}
       </p>
     </div>
 
     <!-- FAQ Accordion - Two Column Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
-      {faqs.slice(0, 6).map((faq, index) => (
-        <div 
-          class="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-200 group mb-2 animate-fade-in-up"
-          style={`animation-delay: ${index * 50}ms`}
-        >
-          <details class="group/details">
-            <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer list-none hover:bg-gray-50 transition-colors duration-200">
-              <div class="flex-1 pr-3 sm:pr-4">
-                <h3 class="text-sm sm:text-base font-medium text-gray-900 group-hover/details:text-gray-700 transition-colors leading-tight">
-                  {faq.question}
-                </h3>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
+    >
+      {
+        faqs.slice(0, 6).map((faq, index) => (
+          <div
+            class="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-200 group mb-2 animate-fade-in-up"
+            style={`animation-delay: ${index * 50}ms`}
+          >
+            <details class="group/details">
+              <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer list-none hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex-1 pr-3 sm:pr-4">
+                  <h3 class="text-sm sm:text-base font-medium text-gray-900 group-hover/details:text-gray-700 transition-colors leading-tight">
+                    {faq.question}
+                  </h3>
+                </div>
+
+                {/* Toggle Icon */}
+                <div class="flex-shrink-0 ml-3 sm:ml-4">
+                  <svg
+                    class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover/details:text-gray-600 transition-all duration-200 transform group-open/details:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </summary>
+
+              {/* Answer Content */}
+              <div class="px-3 sm:px-4 pb-3 sm:pb-4">
+                <div class="pt-2 sm:pt-3 border-t border-gray-100">
+                  <p class="text-gray-600 leading-relaxed text-xs sm:text-sm">
+                    {faq.answer}
+                  </p>
+                </div>
               </div>
-              
-              <!-- Toggle Icon -->
-              <div class="flex-shrink-0 ml-3 sm:ml-4">
-                <svg 
-                  class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover/details:text-gray-600 transition-all duration-200 transform group-open/details:rotate-180" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-            </summary>
-            
-            <!-- Answer Content -->
-            <div class="px-3 sm:px-4 pb-3 sm:pb-4">
-              <div class="pt-2 sm:pt-3 border-t border-gray-100">
-                <p class="text-gray-600 leading-relaxed text-xs sm:text-sm">
-                  {faq.answer}
-                </p>
-              </div>
-            </div>
-          </details>
-        </div>
-      ))}
+            </details>
+          </div>
+        ))
+      }
     </div>
 
     <!-- Contact CTA -->
-    <div class="mt-6 sm:mt-8 text-center animate-slide-up px-4" style="animation-delay: 300ms">
+    <div
+      class="mt-6 sm:mt-8 text-center animate-slide-up px-4"
+      style="animation-delay: 300ms"
+    >
       <div class="bg-white rounded-lg p-4 sm:p-6 border border-gray-200">
         <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-2">
           Weitere Fragen?
         </h3>
         <p class="text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm">
-          Sprechen Sie mit unseren Experten in einem kostenlosen Beratungsgespräch.
+          Sprechen Sie mit unseren Experten in einem kostenlosen
+          Beratungsgespräch.
         </p>
-        
-        <a 
+
+        <a
           href="#contact"
           class="inline-flex items-center gap-2 bg-gray-900 text-white px-4 sm:px-6 py-2 rounded-full hover:bg-gray-800 transition-colors font-medium text-xs sm:text-sm"
         >
           Jetzt beraten lassen
-          <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          <svg
+            class="w-3 h-3 sm:w-4 sm:h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </a>
       </div>
@@ -166,15 +208,18 @@ const groupedFAQs = categories.length > 0
 </style>
 
 <!-- Schema.org structured data for FAQ -->
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
-    "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer
-    }
-  }))
-})} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  })}
+/>

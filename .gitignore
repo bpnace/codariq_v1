@@ -9,6 +9,8 @@ dist/
 .cursorrules
 .prettierrc
 .prettierignore
+.playwright*
+.venv/
 
 
 
@@ -29,9 +31,17 @@ pnpm-debug.log*
 .env
 .env.production
 .env.local
+.playwright-mcp
 
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+blog/
+
+# Blog post pages (excluded from GitHub)
+src/pages/blog/ki-integration-5-schritte.astro
+src/pages/blog/automatisierung-roi-maximieren.astro  
+src/pages/blog/ki-teams-vorbereiten.astro
+src/pages/blog/index.astro

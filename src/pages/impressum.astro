@@ -1,5 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from "../layouts/Base.astro";
 ---
 
 <Base
@@ -206,7 +206,7 @@ import Base from '../layouts/Base.astro';
     }
     .obfuscated-email::after,
     .obfuscated-phone::after {
-      content: 'Klicken zum Anzeigen';
+      content: "Klicken zum Anzeigen";
       position: absolute;
       bottom: 100%;
       left: 50%;
@@ -234,23 +234,23 @@ import Base from '../layouts/Base.astro';
 
   <script>
     // Wait for the DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("DOMContentLoaded", function () {
       // Handle email obfuscation
-      const emailElements = document.querySelectorAll('.obfuscated-email');
-      emailElements.forEach(element => {
-        element.addEventListener('click', function () {
-          const name = this.getAttribute('data-name');
-          const domain = this.getAttribute('data-domain');
+      const emailElements = document.querySelectorAll(".obfuscated-email");
+      emailElements.forEach((element) => {
+        element.addEventListener("click", function () {
+          const name = this.getAttribute("data-name");
+          const domain = this.getAttribute("data-domain");
           if (name && domain) {
-            const email = name + '@' + domain;
+            const email = name + "@" + domain;
             this.textContent = email;
-            this.classList.remove('obfuscated-email');
-            this.removeAttribute('data-name');
-            this.removeAttribute('data-domain');
+            this.classList.remove("obfuscated-email");
+            this.removeAttribute("data-name");
+            this.removeAttribute("data-domain");
 
             // Optional: Create a mailto link
-            const link = document.createElement('a');
-            link.href = 'mailto:' + email;
+            const link = document.createElement("a");
+            link.href = "mailto:" + email;
             link.textContent = email;
             this.parentNode.replaceChild(link, this);
           }
@@ -258,18 +258,18 @@ import Base from '../layouts/Base.astro';
       });
 
       // Handle phone obfuscation
-      const phoneElements = document.querySelectorAll('.obfuscated-phone');
-      phoneElements.forEach(element => {
-        element.addEventListener('click', function () {
-          const phone = this.getAttribute('data-phone');
+      const phoneElements = document.querySelectorAll(".obfuscated-phone");
+      phoneElements.forEach((element) => {
+        element.addEventListener("click", function () {
+          const phone = this.getAttribute("data-phone");
           if (phone) {
             this.textContent = phone;
-            this.classList.remove('obfuscated-phone');
-            this.removeAttribute('data-phone');
+            this.classList.remove("obfuscated-phone");
+            this.removeAttribute("data-phone");
 
             // Optional: Create a tel link
-            const link = document.createElement('a');
-            link.href = 'tel:' + phone.replace(/\s/g, '');
+            const link = document.createElement("a");
+            link.href = "tel:" + phone.replace(/\s/g, "");
             link.textContent = phone;
             this.parentNode.replaceChild(link, this);
           }

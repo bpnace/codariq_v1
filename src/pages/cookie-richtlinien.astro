@@ -1,5 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from "../layouts/Base.astro";
 ---
 
 <Base
@@ -193,29 +193,8 @@ import Base from '../layouts/Base.astro';
           Third-Party-Cookies
         </h2>
         <p class="text-gray-700 leading-relaxed mb-4">
-          Unsere Website kann auch Cookies von Drittanbietern verwenden, um
-          zusätzliche Funktionen bereitzustellen:
+          Derzeit verwenden wir keine Third-Party-Cookies für Marketing-Zwecke.
         </p>
-
-        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">
-          Calendly Terminbuchung
-        </h3>
-        <div class="bg-yellow-50 p-4 rounded-lg border mb-4">
-          <p class="mb-2"><strong>Anbieter:</strong> Calendly, LLC (USA)</p>
-          <p class="mb-2">
-            <strong>Zweck:</strong> Terminbuchung und Kalenderfunktionalität
-          </p>
-          <p class="mb-2">
-            <strong>Cookie-Typen:</strong> Session-Cookies, Funktionale Cookies
-          </p>
-          <p class="mb-2"><strong>Speicherdauer:</strong> Bis zu 2 Jahre</p>
-          <p class="mb-2">
-            <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)
-          </p>
-          <p>
-            <strong>Opt-Out:</strong> Deaktivierung durch Nicht-Nutzung des Buchungswidgets
-          </p>
-        </div>
 
         <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">
           Derzeit nicht verwendete Services
@@ -226,6 +205,9 @@ import Base from '../layouts/Base.astro';
           </li>
           <li class="mb-1">
             <strong>Social Media Plugins:</strong> Derzeit nicht implementiert
+          </li>
+          <li class="mb-1">
+            <strong>Terminbuchungs-Tools:</strong> Derzeit nicht implementiert
           </li>
           <li class="mb-1">
             <strong>Marketing-Tracking:</strong> Derzeit nicht implementiert
@@ -289,32 +271,34 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener("DOMContentLoaded", function () {
     // Email obfuscation
-    const emailElements = document.querySelectorAll('.obfuscated-email');
+    const emailElements = document.querySelectorAll(".obfuscated-email");
     emailElements.forEach(function (element) {
-      element.addEventListener('click', function () {
-        const name = this.getAttribute('data-name');
-        const domain = this.getAttribute('data-domain');
+      element.addEventListener("click", function () {
+        const name = this.getAttribute("data-name");
+        const domain = this.getAttribute("data-domain");
         if (name && domain) {
-          const email = name + '@' + domain;
+          const email = name + "@" + domain;
           this.textContent = email;
-          this.classList.remove('obfuscated-email');
-          this.removeAttribute('data-name');
-          this.removeAttribute('data-domain');
+          this.classList.remove("obfuscated-email");
+          this.removeAttribute("data-name");
+          this.removeAttribute("data-domain");
         }
       });
     });
 
     // Phone obfuscation
-    const phoneElements = document.querySelectorAll('.obfuscated-phone');
+    const phoneElements = document.querySelectorAll(".obfuscated-phone");
     phoneElements.forEach(function (element) {
-      element.addEventListener('click', function () {
-        const phone = this.getAttribute('data-phone');
+      element.addEventListener("click", function () {
+        const phone = this.getAttribute("data-phone");
         if (phone) {
-          this.textContent = '+49 (0) ' + phone;
-          this.classList.remove('obfuscated-phone');
-          this.removeAttribute('data-phone');
+          // Sanitize: only allow digits, spaces, parentheses, and hyphens
+          const sanitized = phone.replace(/[^0-9\s()\-]/g, "");
+          this.textContent = "+49 (0) " + sanitized;
+          this.classList.remove("obfuscated-phone");
+          this.removeAttribute("data-phone");
         }
       });
     });

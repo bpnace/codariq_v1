@@ -158,6 +158,15 @@ Package pricing in Process section maintains specific pricing for transparency.
 - **Optimized Images** - WebP format with lazy loading
 - **Font Loading** - Preloaded variable fonts
 
+### Waitlist Integration
+
+- **n8n Webhook** - Automated email collection workflow
+- **Google Sheets** - Real-time data storage and management
+- **Duplicate Detection** - Prevents multiple entries from same email
+- **Basic Auth Security** - Protected webhook endpoints
+- **German Error Messages** - Localized user feedback
+- **Response Handling** - Success, duplicate, and error states
+
 ### Accessibility
 
 - **WCAG 2.1 AA** compliance
@@ -178,7 +187,9 @@ Package pricing in Process section maintains specific pricing for transparency.
 
 - **Repository:** https://github.com/bpnace/codariq_v1.git
 - **Domain:** codariq.de (configured for German market)
-- **SSL:** Let's Encrypt certificate
+- **Hosting:** Strato Web Hosting
+- **SSL:** Automatically managed
+- **SSH:** 5017709652.ssh.w2.strato.hosting
 
 ### Deployment Process
 
@@ -186,9 +197,51 @@ Package pricing in Process section maintains specific pricing for transparency.
 # Build for production
 npm run build
 
-# Deploy to hosting provider
-# (Specific deployment steps depend on hosting choice)
+# Deploy to Strato via SFTP (automated script)
+expect sftp_full_upload.expect
 ```
+
+**Deployment Script:** The `sftp_full_upload.expect` script automatically uploads the entire `dist/` folder to the Strato server, including:
+
+- All HTML files
+- Static assets (images, fonts, logos)
+- `.htaccess` configuration
+- Sitemap and robots.txt
+
+**Post-Deployment Verification:**
+
+```bash
+# Test main pages for redirect chains
+curl -I https://codariq.de/faq
+# Should return: HTTP/2 200
+
+# Test redirect handling
+curl -I https://www.codariq.de/faq
+# Should return: HTTP/2 301 → https://codariq.de/faq
+```
+
+### SEO Deployment Notes (October 2025)
+
+After deploying SEO fixes:
+
+1. **Verify .htaccess is active:**
+
+   ```bash
+   curl -I https://codariq.de/faq
+   # Must return HTTP 200, not 301
+   ```
+
+2. **Request Google re-indexing:**
+   - Visit [Google Search Console](https://search.google.com/search-console)
+   - Use URL Inspection tool for main pages
+   - Click "Request Indexing" for each URL
+
+3. **Monitor for 2 weeks:**
+   - Check "Page Indexing" report daily
+   - Watch for "Seite mit Weiterleitung" to drop to 0
+   - Verify all blog posts get indexed
+
+See [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) for detailed deployment test results and [SEO_FIXES_DOCUMENTATION.md](SEO_FIXES_DOCUMENTATION.md) for technical implementation details.
 
 ## 🔒 Security & Compliance
 
@@ -240,29 +293,80 @@ npm run build
 
 ---
 
-## 🎯 Current Status (January 2025)
+## 🎯 Current Status (October 2025)
 
 **✅ Completed Features:**
 
 - Complete Codariq rebranding from zynapse/stackwerkhaus
 - Real legal pages with legitimate business information
-- Calendly booking widget integration
+- **KI-Dashboard Waitlist Integration** - Fully functional with n8n webhook + Google Sheets
+- **Blog System** - 4 comprehensive blog posts with SEO optimization
+- **Enhanced Navigation** - Added "Insights" link to blog section
+- **Footer Redesign** - 4-column layout with newsletter signup
+- **Responsive Animations** - Scroll-triggered animations throughout
 - Process component redesign with fixed text alignment
 - Testimonial photos from randomuser.me
 - Gradient CTA buttons with consistent styling
 - DSGVO/DDG/TTDSG compliance implementation
+- **Pricing Updates** - Real pricing with customer discounts
+- **Meta Tags & Structured Data** - Complete SEO implementation
+- **🆕 SEO Redirect Fixes** - Eliminated all redirect chains for perfect indexing
 
-**🔄 In Progress:**
+**🔄 Recent Major Updates (October 2025):**
 
-- Performance optimization for mobile devices
-- August 2025 DSGVO regulation compliance check
-- EAA (European Accessibility Act) compliance verification
+### SEO & Google Search Console Fixes ✅
+
+**Problem Solved:** Eliminated all "Seite mit Weiterleitung" errors in Google Search Console
+
+**What Was Fixed:**
+
+- ✅ **Zero redirect chains** - All canonical URLs now return HTTP 200 directly
+- ✅ **Removed SearchAction** - No more fake search URLs being indexed
+- ✅ **Optimized .htaccess** - Single combined redirects for www/HTTPS
+- ✅ **DirectorySlash Off** - Internal rewrites serve index.html without external redirects
+
+**Test Results (Production - Oct 15, 2025):**
+
+```
+✅ https://codariq.de/faq                         → HTTP 200 (no redirect)
+✅ https://codariq.de/impressum                   → HTTP 200 (no redirect)
+✅ https://codariq.de/blog/ki-teams-vorbereiten   → HTTP 200 (no redirect)
+✅ https://codariq.de/blog/automatisierung-roi-maximieren → HTTP 200 (no redirect)
+
+✅ https://codariq.de/faq/     → 301 → /faq (single redirect)
+✅ https://www.codariq.de/faq  → 301 → /faq (single redirect)
+✅ http://codariq.de/faq       → 301 → /faq (single redirect)
+✅ http://www.codariq.de/faq   → 301 → /faq (single redirect)
+```
+
+**Expected Impact:**
+
+- **Week 1-2:** "Seite mit Weiterleitung" errors drop to 0
+- **Week 2-4:** All pages properly indexed in Google
+- **Month 1-3:** Increased organic traffic from blog content, better keyword connections
+
+**Files Modified:**
+
+- `public/.htaccess` - Added DirectorySlash Off, combined redirects, internal rewrites
+- `src/layouts/Base.astro` - Removed SearchAction, added noindex for search params
+- See [SEO_FIXES_DOCUMENTATION.md](SEO_FIXES_DOCUMENTATION.md) for complete technical details
+
+**Previous Updates:**
+
+- **Waitlist Functionality:** Email collection for KI-Dashboard with duplicate detection
+- **Blog Content:** 4 detailed German blog posts (2000+ words each)
+- **Navigation Enhancement:** Removed "Vorgehen" link, added "Insights"
+- **Footer Optimization:** Dark theme with industry leader logos
+- **Performance:** Optimized for mobile and desktop viewing
+- **CTA Updates:** Changed from "Jetzt anfragen" to "Jetzt starten"
 
 **📋 Next Tasks:**
 
+- ✅ ~~Eliminate Google Search Console redirect errors~~ (COMPLETED Oct 15, 2025)
+- Request re-indexing in Google Search Console (immediate action)
+- Monitor indexing improvements over 2-4 weeks
 - Mobile-first performance optimization
 - Core Web Vitals improvement
-- Accessibility audit and fixes
 - Advanced analytics implementation
 
 ## 📞 Support

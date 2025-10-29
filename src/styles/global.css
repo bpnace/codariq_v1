@@ -1,11 +1,11 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Switzer Variable Font */
 @font-face {
-  font-family: 'Switzer Variable';
+  font-family: "Switzer Variable";
   src:
-    url('/fonts/Switzer-Variable.woff2') format('woff2'),
-    url('/fonts/Switzer-Variable.ttf') format('truetype');
+    url("/fonts/Switzer-Variable.woff2") format("woff2"),
+    url("/fonts/Switzer-Variable.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -13,7 +13,7 @@
 
 /* Global font family override */
 * {
-  font-family: 'Switzer Variable', system-ui, sans-serif;
+  font-family: "Switzer Variable", system-ui, sans-serif;
 }
 
 /* Prevent scrolling beyond top of page */
@@ -28,12 +28,20 @@ body {
   min-height: 100vh;
 }
 
-/* Ensure header stays fixed and visible */
-header {
+/* Ensure main navigation header stays fixed and visible */
+header.fixed,
+#main-nav header,
+header[style*="position: fixed"] {
   position: fixed !important;
   top: 0 !important;
   transform: none !important;
   will-change: auto !important;
+}
+
+/* Ensure article headers are positioned normally (not fixed) */
+.article-header {
+  position: static !important;
+  transform: none !important;
 }
 
 /* Fix scroll positioning for anchor links to account for fixed header */
@@ -120,7 +128,7 @@ html {
   .animate-element {
     animation-duration: 0.5s;
   }
-  
+
   @keyframes titleFadeInUp {
     from {
       opacity: 0;
