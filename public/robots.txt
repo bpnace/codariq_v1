@@ -6,38 +6,33 @@
 # ============================================
 User-agent: Googlebot
 Allow: /
-Disallow: /agb
 Disallow: /cookie-richtlinien
 Crawl-delay: 0
 
 User-agent: Googlebot-Image
 Allow: /
+Disallow: /cookie-richtlinien
 
 User-agent: Googlebot-Mobile
 Allow: /
-Disallow: /agb
-Disallow: /cookie-richtlinien
+
 
 User-agent: Bingbot
 Allow: /
-Disallow: /agb
 Disallow: /cookie-richtlinien
 Crawl-delay: 0
 
 User-agent: Slurp
 Allow: /
-Disallow: /agb
 Disallow: /cookie-richtlinien
 
 User-agent: DuckDuckBot
 Allow: /
-Disallow: /agb
 Disallow: /cookie-richtlinien
 Crawl-delay: 0
 
 User-agent: Baiduspider
 Allow: /
-Disallow: /agb
 Disallow: /cookie-richtlinien
 
 # Block known spam/scraper bots
@@ -62,35 +57,12 @@ Disallow: /
 User-agent: MegaIndex
 Disallow: /
 
-User-agent: YandexBot
-Disallow: /
-
 User-agent: PetalBot
 Disallow: /
 
 User-agent: CCBot
 Disallow: /
 
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
 
 # Block aggressive crawlers and email harvesters
 User-agent: EmailCollector
@@ -136,9 +108,6 @@ User-agent: libwww
 Disallow: /
 
 User-agent: lwp-trivial
-Disallow: /
-
-User-agent: Microsoft.URL
 Disallow: /
 
 User-agent: NetAnts
@@ -189,9 +158,6 @@ Disallow: /
 User-agent: Web.Image.Collector
 Disallow: /
 
-User-agent: WebmasterWorldForumBot
-Disallow: /
-
 User-agent: WWW-Collector
 Disallow: /
 
@@ -203,7 +169,6 @@ Disallow: /
 # ============================================
 User-agent: *
 Allow: /
-Disallow: /agb
 Disallow: /cookie-richtlinien
 Crawl-delay: 2
 
@@ -212,8 +177,3 @@ Crawl-delay: 2
 # ============================================
 Sitemap: https://codariq.de/sitemap-index.xml
 Sitemap: https://codariq.de/sitemap-0.xml
-
-# ============================================
-# Host Declaration (Preferred Domain)
-# ============================================
-Host: https://codariq.de
