@@ -19,10 +19,6 @@ if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
 const canonicalURL = new URL(pathname, "https://codariq.de");
-
-// Check for search parameters or other unwanted query strings
-const hasSearchParams = Astro.url.searchParams.has("search");
-const shouldNoIndex = hasSearchParams;
 ---
 
 <!doctype html>
@@ -83,10 +79,7 @@ const shouldNoIndex = hasSearchParams;
       name="keywords"
       content="KI-Automatisierung, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, Business Intelligence, Machine Learning, DSGVO, Digitalisierung"
     />
-    <meta
-      name="robots"
-      content={shouldNoIndex ? "noindex, nofollow" : "index, follow"}
-    />
+    <meta name="robots" content="index, follow" />
     <meta name="language" content="de" />
     <meta name="revisit-after" content="7 days" />
 
@@ -517,15 +510,6 @@ const shouldNoIndex = hasSearchParams;
   <body
     class="bg-white text-gray-900 antialiased overscroll-behavior-y-contain"
   >
-    <!-- Client-side redirect for unwanted search parameters -->
-    <script>
-      // Redirect away from search parameter URLs immediately
-      if (window.location.search.includes("search=")) {
-        window.location.replace(
-          window.location.origin + window.location.pathname,
-        );
-      }
-    </script>
     <!-- Skip Links for accessibility -->
     <a
       href="#main-content"

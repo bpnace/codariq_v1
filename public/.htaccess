@@ -39,14 +39,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^(.+)$ %{DOCUMENT_ROOT}/$1/index.html [L,END]
 
-# ============================================
-# Remove Unwanted Query Parameters
-# ============================================
-# Remove search parameters and other tracking parameters
-RewriteCond %{QUERY_STRING} ^search= [OR]
-RewriteCond %{QUERY_STRING} search_term_string
-RewriteCond %{REQUEST_URI} !^/api/
-RewriteRule ^(.*)$ https://codariq.de/$1? [R=301,L,NE]
 
 # Security headers
 <IfModule mod_headers.c>
