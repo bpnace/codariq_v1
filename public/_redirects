@@ -3,8 +3,4 @@ http://codariq.de/* https://codariq.de/:splat 301!
 http://www.codariq.de/* https://codariq.de/:splat 301!
 
 # Redirect www to non-www
-https://www.codariq.de/* https://codariq.de/:splat 301!
-
-# Blog URL redirects (fix Google Analytics 404s)
-/blog/roi-von-prozessautomatisierung-maximieren /blog/automatisierung-roi-maximieren 301!
-
+https://www.codariq.de/* https://codariq.de/:splat 301
