@@ -1,5 +1,4 @@
 # Robots.txt for codariq.de
-# Optimized for search engine crawling and indexing
 
 # Allow legitimate search engines full access
 User-agent: Googlebot
@@ -10,6 +9,54 @@ Allow: /
 
 User-agent: DuckDuckBot
 Allow: /
+
+# Allow AI search engines and assistants
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Allow AI training crawlers
+User-agent: Google-Extended
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Block data extraction crawlers
+User-agent: CCBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
 
 # Block known spam/scraper bots
 User-agent: SemrushBot
@@ -33,12 +80,14 @@ Disallow: /
 User-agent: MegaIndex
 Disallow: /
 
+User-agent: YandexBot
+Disallow: /
+
 User-agent: PetalBot
 Disallow: /
 
-User-agent: CCBot
+User-agent: WebmasterWorldForumBot
 Disallow: /
-
 
 # Block aggressive crawlers and email harvesters
 User-agent: EmailCollector
@@ -144,8 +193,5 @@ Disallow: /
 User-agent: *
 Allow: /
 
-# ============================================
-# Sitemap Location
-# ============================================
+# Sitemap location
 Sitemap: https://codariq.de/sitemap-index.xml
-Sitemap: https://codariq.de/sitemap-0.xml
