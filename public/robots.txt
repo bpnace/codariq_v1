@@ -192,6 +192,8 @@ Disallow: /
 # Default directives for remaining crawlers
 User-agent: *
 Allow: /
+# Disallow URLs with query parameters (no search functionality exists)
+Disallow: /*?*
 
 # Sitemap location
 Sitemap: https://codariq.de/sitemap-index.xml
