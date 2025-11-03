@@ -10,9 +10,9 @@ DirectoryIndex index.html index.htm
 # ============================================
 # Block URLs with query parameters (no search functionality exists)
 # ============================================
-# Return 410 Gone for URLs with query parameters since we don't use them
+# Redirect URLs with query parameters to clean version (no query params)
 RewriteCond %{QUERY_STRING} .+
-RewriteRule .* - [R=410,L]
+RewriteRule ^(.*)$ https://codariq.de/$1? [L,R=301]
 
 # ============================================
 # 301 Redirects for Old Blog URLs (renamed posts)
