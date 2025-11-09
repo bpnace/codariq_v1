@@ -12,6 +12,7 @@ export interface Props {
     duration?: string;
     isProduct?: boolean;
     additionalInfo?: string;
+    colorTheme?: string;
   }>;
   additionalServices?: Array<{
     title: string;
@@ -27,91 +28,109 @@ export interface Props {
 
 const {
   title = "Unsere Lösungen",
-  subtitle = "Bewährte KI-Systeme für Ihr Unternehmen. DSGVO-konform, betrieben in der EU oder On-Premises. Vom Go-Live bis zur Wartung – inklusive Team Training.",
+  subtitle = "KI-Automatisierung für jede Unternehmensgröße. Vom ersten Pilotprojekt bis zur flächendeckenden Integration – DSGVO-konform und made in EU.",
   benefits = [
     {
-      title: "Interner KI-Assistent für Wissensmanagement",
+      title: "Einsteiger-Paket",
       description:
-        "Mitarbeitende erhalten verlässliche Antworten mit Quellenangabe. Suchzeit sinkt, Entscheidungen werden schneller und sicherer.",
-      icon: "knowledge",
+        "Für kleine Teams oder erste KI-Pilotprojekte. Automation ohne Risiko, mit klarer Umsetzung und begrenztem Scope.",
+      icon: "starter",
       features: [
-        "RAG Agent auf bestehendem Wissen",
-        "Chat-Oberfläche in Langdock",
-        "Rechte, Rollen & Audit Logs",
-        "Team Training inbegriffen",
+        "1 Prozess (z. B. Tickets, Rechnungen oder Wissenszugriff)",
+        "1 Datenquelle angebunden",
+        "Schnelle Integration, 5 Wochen",
+        "DSGVO-konformes Setup",
+        "Wartung optional zubuchbar (300 €/Monat)",
       ],
-      price: "€39.000–€55.000",
-      duration: "6–10 Wochen",
+      price: "ab €4.500",
+      duration: "einmalig",
       isProduct: true,
-      additionalInfo: "inkl. 3 Monate Basiswartung",
+      additionalInfo: "KMU, die testen, lernen und intern überzeugen wollen",
+      colorTheme: "green",
     },
     {
-      title: "Automatisierte Rechnungsverarbeitung mit OCR & LLM",
+      title: "Standard-Paket",
       description:
-        "Belege werden automatisch erkannt, geprüft, vorkontiert und ins ERP übergeben. Durchlaufzeiten sinken, Fehlerquoten sinken.",
-      icon: "invoice",
+        "Für Unternehmen, die messbar Zeit sparen und mehrere Teams einbinden wollen.",
+      icon: "growth",
       features: [
-        "OCR & LLM Extraktion",
-        "Validierung gegen Stammdaten",
-        "Freigabe-Flows & Journal-Export",
-        "Team Training inbegriffen",
+        "Bis zu 3 automatisierte Prozesse",
+        "Anbindung an 2+ Systeme (z. B. Zendesk + CRM + GDrive)",
+        "RAG-Wissenssuche oder OCR-Analyse inkludiert",
+        "Go-Live inkl. menschlicher Fallback-Regeln",
+        "Optional: Schulungspaket + Wartung (400–600 €/Monat)",
       ],
-      price: "€58.000–€78.000",
-      duration: "8–14 Wochen",
+      price: "ab €9.900",
+      duration: "einmalig",
       highlight: true,
       isProduct: true,
-      additionalInfo: "inkl. 6 Monate Basiswartung",
+      additionalInfo: "Teams mit 10–50 Personen, die jetzt wirklich produktiv werden wollen",
+      colorTheme: "blue",
     },
     {
-      title: "KI-Ticketing-Agent für Support & Helpdesk",
+      title: "Umfangreiches Paket",
       description:
-        "Anfragen werden klassifiziert, zusammengefasst und häufig direkt beantwortet. Antwortzeit sinkt, First Contact Quote steigt.",
-      icon: "support",
+        "Für Unternehmen, die KI flächendeckend einsetzen – vom First Level bis Buchhaltung.",
+      icon: "scale",
       features: [
-        "LLM-Assistent mit Wissensbasis",
-        "Integration in Zendesk, Freshdesk, OTRS und mehr",
-        "Vorschläge mit Quellen",
-        "Team Training inbegriffen",
+        "Vollständiger Agenten-Workflow (Ticketing / Finance / Wiki)",
+        "Doppelte Sicherheitsarchitektur: n8n + Langdock EU",
+        "Stufen-Rollout inkl. Monitoring & Dashboards",
+        "Bis zu 50 Nutzer:innen integriert",
+        "Wartung & Betrieb: 500–800 €/Monat möglich",
       ],
-      price: "€32.000–€49.000",
-      duration: "5–9 Wochen",
+      price: "ab €14.900",
+      duration: "einmalig",
       isProduct: true,
-      additionalInfo: "inkl. 3 Monate Basiswartung",
+      additionalInfo: "Unternehmen mit Wachstumspfad Richtung 'AI-enabled Business'",
+      colorTheme: "purple",
+    },
+    {
+      title: "Enterprise-Lösung",
+      description:
+        "Für komplexe Anforderungen, dedizierte Compliance oder hohe Ticket-Volumina.",
+      icon: "enterprise",
+      features: [
+        "Individuelle Prozessanalyse & Architekturoptionen",
+        "Unterstützung für On-Prem oder Hybrid-Hosting",
+        "Vollständig dedizierter Workflow inkl. ISO-konformer TOMs",
+        "24/7 Bereitschaft optional",
+        "Erweiterung auf Custom-LLMs oder interne APIs möglich",
+      ],
+      price: "ab €25.000",
+      duration: "individuelle Planung",
+      isProduct: true,
+      additionalInfo: "(IT-)Unternehmen mit 150+ Personen und speziellen Anforderungen",
+      colorTheme: "black",
     },
   ],
   additionalServices = [
     {
-      title: "Live-Dashboard: Automatisierung messbar machen",
-      subtitle: "Add-on für alle Produkte",
-      description:
-        "Sie sehen in Echtzeit, was Ihre KI-Automatisierungen leisten: Zeitersparnis, Ticket-Reduktion, Antwortgeschwindigkeit, Durchlaufzeiten, Qualität. Keine Bauchgefühle – klare Zahlen.",
+      title: "Alle Pakete beinhalten",
+      subtitle: "Included",
+      description: "",
       features: [
-        "Echtzeit-Dashboards für alle KI-Workflows",
-        "Automatisches Monitoring: Fehler, Latenzen, Durchlaufzeiten",
-        "Frühwarnsystem bei Qualitätsabfall",
-        "KPI-Reports für Management & Teams",
+        "Setup auf Basis von n8n + Langdock EU",
+        "DSGVO-konformes Datenhandling",
+        "Klar dokumentierte Schnittstellen (REST, Webhook, CSV etc.)",
+        "Prompt- und Modelloptimierung während Implementierung",
+        "Transparenter Projektplan mit Milestones",
+        "ROI-Schätzung (Zeitersparnis, Kostenreduktion)",
       ],
-      price: "auf Anfrage",
-      duration: "monatlich",
-      icon: "dashboard",
-      comingSoon: true,
+      price: "",
+      duration: "",
+      icon: "included",
     },
     {
-      title: "Wartungs- & Weiterentwicklungs-Paket",
-      subtitle: "Betrieb & Weiterentwicklung",
+      title: "Live-Dashboard",
+      subtitle: "Verfügbar ab Q2 2026",
       description:
-        "Ihre Lösung bleibt stabil, sicher und lernt mit. Fehler werden nicht nur behoben – das System verbessert sich kontinuierlich.",
-      features: [
-        "Garantierte Reaktionszeiten (SLA)",
-        "Proaktive Optimierung & Modell-Feintuning",
-        "Kontinuierliche Qualitätskontrolle & Monitoring",
-        "Fester Ansprechpartner",
-        "Enthält bis zu 8 Support-/Optimierungsstunden pro Monat",
-        "Leistungen darüber hinaus nach Bedarf zubuchbar",
-      ],
-      price: "ab €2.500/Monat",
-      duration: "flexible Laufzeit",
-      icon: "maintenance",
+        "Messen Sie Ihre KI-Automatisierung: Zeitersparnis, Ticket-Reduktion, Antwortgeschwindigkeit, Durchlaufzeiten.",
+      features: [],
+      price: "",
+      duration: "",
+      icon: "dashboard",
+      comingSoon: true,
     },
   ],
 } = Astro.props;
@@ -136,18 +155,13 @@ const {
 
     <!-- Bento Box Grid -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-3 md:px-4"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
     >
       {
         benefits.map((benefit, index) => {
-          // Three column layout: Each item spans 1 col on desktop, 2 cols on smaller screens
-          const getGridClass = (idx: number) => {
-            return "sm:col-span-1"; // Each card takes 1 column
-          };
-
           return (
             <div
-              class={`relative group animate-fade-in-up ${getGridClass(index)}`}
+              class={`relative group animate-fade-in-up`}
               style={`animation-delay: ${(index + 1) * 150}ms`}
             >
               {/* Bento Card */}
@@ -163,56 +177,73 @@ const {
                   <div
                     class={`
                 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
-                ${benefit.highlight ? "bg-white/10" : "bg-gray-100"}
+                ${benefit.highlight ? "bg-white/10" : benefit.icon === "enterprise" ? "bg-gradient-to-br from-gray-900 to-gray-800" : "bg-gray-100"}
               `}
                   >
-                    {benefit.icon === "knowledge" && (
+                    {benefit.icon === "starter" && (
                       <svg
-                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-gray-600"} transition-colors`}
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-green-600"} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <title>Wissensmanagement Icon</title>
+                        <title>Einsteiger-Paket Icon</title>
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           stroke-width="2"
-                          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
                         />
                       </svg>
                     )}
 
-                    {benefit.icon === "invoice" && (
+                    {benefit.icon === "growth" && (
                       <svg
-                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-gray-600"} transition-colors`}
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-blue-600"} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <title>Rechnungsverarbeitung Icon</title>
+                        <title>Standard-Paket Icon</title>
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           stroke-width="2"
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
                         />
                       </svg>
                     )}
 
-                    {benefit.icon === "support" && (
+                    {benefit.icon === "scale" && (
                       <svg
-                        class={`w-6 h-6 ${benefit.highlight ? "text-white" : "text-gray-600"} transition-colors`}
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-purple-600"} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <title>Support & Helpdesk Icon</title>
+                        <title>Umfangreiches Paket Icon</title>
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           stroke-width="2"
-                          d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                          d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                        />
+                      </svg>
+                    )}
+
+                    {benefit.icon === "enterprise" && (
+                      <svg
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-gray-300"} transition-colors`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>Enterprise-Lösung Icon</title>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                         />
                       </svg>
                     )}
@@ -282,11 +313,12 @@ const {
                         {benefit.price}
                       </div>
                       {benefit.additionalInfo && (
-                        <span
-                          class={`text-xs mt-1 ${benefit.highlight ? "text-white/70" : "text-gray-600"}`}
+                        <div
+                          class={`text-xs mt-3 pt-3 border-t ${benefit.highlight ? "border-white/20 text-white/80" : "border-gray-200 text-gray-600"}`}
                         >
+                          <span class="font-semibold">Ideal für:</span>{" "}
                           {benefit.additionalInfo}
-                        </span>
+                        </div>
                       )}
                     </div>
 
@@ -316,42 +348,60 @@ const {
 
     <!-- Additional Services Section -->
     <div class="mt-12 sm:mt-16 md:mt-20">
-      <div class="text-center mb-12">
-        <h3
-          class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 animate-on-scroll"
-        >
-          Ergänzende Services
-        </h3>
-        <p
-          class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll"
-          style="transition-delay: 0.15s"
-        >
-          Erweitern Sie Ihre KI-Automatisierung mit zusätzlichen Services für
-          maximalen Erfolg
-        </p>
-      </div>
-
       <!-- Additional Services -->
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {
             additionalServices.map((service, index) => {
-              // Special design for Live-Dashboard with waitlist form
-              if (service.title === "Live-Dashboard: Automatisierung messbar machen") {
+              // Included features card
+              if (service.icon === "included") {
                 return (
-                  <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden h-full flex flex-col">
-                    {/* Service Badge */}
-                    <div class="absolute top-4 right-4">
-                      <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-xs font-medium">
-                        {service.subtitle}
-                      </span>
+                  <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 h-full flex flex-col">
+                    {/* Icon & Title */}
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg
+                          class="w-5 h-5 text-gray-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <title>Included Features Icon</title>
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </div>
+                      <h4 class="text-lg font-bold text-gray-900">
+                        {service.title}
+                      </h4>
                     </div>
 
-                    {/* Icon */}
-                    <div class="mb-4">
-                      <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                    {/* Features */}
+                    <div class="space-y-2">
+                      {service.features.map((feature) => (
+                        <div class="flex items-start gap-2">
+                          <div class="w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0 mt-1.5" />
+                          <span class="text-sm text-gray-600">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              // Special design for Live-Dashboard with waitlist form
+              if (service.title === "Live-Dashboard") {
+                return (
+                  <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 h-full flex flex-col">
+                    {/* Icon & Title */}
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg
-                          class="w-6 h-6 text-gray-600"
+                          class="w-5 h-5 text-gray-600"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -365,76 +415,40 @@ const {
                           />
                         </svg>
                       </div>
-                    </div>
-
-                    {/* Content */}
-                    <div class="mb-4 flex-1 flex flex-col">
-                      <div class="flex items-center gap-2 mb-2">
-                        <h4 class="text-base sm:text-l font-bold text-gray-900">
+                      <div class="flex-1">
+                        <h4 class="text-lg font-bold text-gray-900">
                           {service.title}
                         </h4>
-                        {service.comingSoon && (
-                          <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
-                            Verfügbar ab Q1 2025
-                          </span>
-                        )}
+                        <span class="text-xs text-gray-500">
+                          {service.subtitle}
+                        </span>
                       </div>
-                      <p class="text-m sm:text-m text-gray-600 leading-relaxed mb-3 sm:mb-4">
-                        {service.description}
-                      </p>
+                    </div>
 
-                      {/* Features */}
-                      <div class="space-y-1 sm:space-y-2 mb-4 flex-1">
-                        {service.features.map((feature) => (
-                          <div class="flex items-center gap-2">
-                            <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
-                            <span class="text-xs text-gray-500">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
+                    {/* Description */}
+                    <p class="text-sm text-gray-600 mb-4">
+                      {service.description}
+                    </p>
 
-                      {/* Pricing & Duration */}
-                      <div class="pt-4 border-t border-gray-200 mt-auto">
-                        <div class="flex items-center justify-between mb-3">
-                          <div class="text-lg font-bold text-gray-900">
-                            {service.price}
-                          </div>
-                          <div class="flex items-center gap-1 text-xs text-gray-600">
-                            <svg
-                              class="w-3 h-3"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            {service.duration}
-                          </div>
-                        </div>
-
-                        {/* Waitlist Form */}
-                        <form id="dashboard-waitlist-form" class="flex gap-2">
-                          <input
-                            type="email"
-                            id="dashboard-email"
-                            name="email"
-                            placeholder="Ihre E-Mail-Adresse"
-                            required
-                            class="flex-1 px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-blue-800 focus:border-blue-800 outline-none transition-all duration-200"
-                          />
-                          <button
-                            type="submit"
-                            class="bg-gradient-to-br from-gray-900 to-gray-800 text-white hover:from-gray-800 hover:to-gray-700 px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm shadow-sm cta-button whitespace-nowrap"
-                            aria-label="Zur Warteliste für KI-Dashboard anmelden"
-                          >
-                            Warteliste beitreten
-                          </button>
-                        </form>
+                    {/* Waitlist Form */}
+                    <div class="mt-auto">
+                      <form id="dashboard-waitlist-form" class="flex gap-2">
+                        <input
+                          type="email"
+                          id="dashboard-email"
+                          name="email"
+                          placeholder="E-Mail-Adresse"
+                          required
+                          class="flex-1 px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-all duration-200"
+                        />
+                        <button
+                          type="submit"
+                          class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 text-sm shadow-lg cta-button whitespace-nowrap"
+                          aria-label="Zur Warteliste für KI-Dashboard anmelden"
+                        >
+                          Beitreten
+                        </button>
+                      </form>
 
                         {/* Success Message */}
                         <div
@@ -504,100 +518,7 @@ const {
                 );
               }
 
-              // Default design for other services
-              return (
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 relative overflow-hidden h-full flex flex-col">
-                  {/* Service Badge */}
-                  <div class="absolute top-4 right-4">
-                    <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-xs font-medium">
-                      {service.subtitle}
-                    </span>
-                  </div>
-
-                  {/* Icon */}
-                  <div class="mb-4">
-                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-                      {service.icon === "maintenance" && (
-                        <svg
-                          class="w-6 h-6 text-gray-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <title>Maintenance Retainer Icon</title>
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div class="mb-4 flex-1 flex flex-col">
-                    <div class="flex items-center gap-2 mb-2">
-                      <h4 class="text-base sm:text-l font-bold text-gray-900">
-                        {service.title}
-                      </h4>
-                    </div>
-                    <p class="text-m sm:text-m text-gray-600 leading-relaxed mb-3 sm:mb-4">
-                      {service.description}
-                    </p>
-
-                    {/* Features */}
-                    <div class="space-y-1 sm:space-y-2 mb-4 flex-1">
-                      {service.features.map((feature) => (
-                        <div class="flex items-center gap-2">
-                          <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
-                          <span class="text-xs text-gray-500">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Pricing & Duration */}
-                    <div class="pt-4 border-t border-gray-200 mt-auto">
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-gray-900">
-                          {service.price}
-                        </div>
-                        <div class="flex items-center gap-1 text-xs text-gray-600">
-                          <svg
-                            class="w-3 h-3"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          {service.duration}
-                        </div>
-                      </div>
-
-                      <a
-                        href="/#final-cta"
-                        class="w-full bg-gray-200 text-gray-800 hover:bg-gray-300 px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm shadow-sm cta-button inline-block text-center"
-                        aria-label={`${service.title} starten - Zum Kontaktformular springen`}
-                      >
-                        Jetzt starten
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
+              return null;
             })
           }
         </div>
