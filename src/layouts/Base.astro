@@ -13,8 +13,13 @@ const {
   description = "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen",
   ogImage,
 } = Astro.props;
-// Normalize canonical URL: remove trailing slashes (except root)
+// Normalize canonical URL: remove trailing slashes and .html extension
 let pathname = Astro.url.pathname;
+// Remove .html extension if present
+if (pathname.endsWith(".html")) {
+  pathname = pathname.slice(0, -5);
+}
+// Remove trailing slashes (except root)
 if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }

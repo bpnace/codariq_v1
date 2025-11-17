@@ -9,7 +9,7 @@ export default defineConfig({
   base: "/",
   trailingSlash: "never",
   build: {
-    format: "directory",
+    format: "file",
   },
   integrations: [
     sitemap({

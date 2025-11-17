@@ -8,13 +8,6 @@ DirectorySlash Off
 DirectoryIndex index.html index.htm
 
 # ============================================
-# Block URLs with query parameters (no search functionality exists)
-# ============================================
-# Redirect URLs with query parameters to clean version (no query params)
-RewriteCond %{QUERY_STRING} .+
-RewriteRule ^(.*)$ https://codariq.de/$1? [L,R=301]
-
-# ============================================
 # 301 Redirects for Old Blog URLs (renamed posts)
 # ============================================
 # Redirect old blog post URLs to new ones
