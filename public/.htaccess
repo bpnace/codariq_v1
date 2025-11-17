@@ -25,19 +25,23 @@ RewriteCond %{HTTP_HOST} ^(?:www\.)?codariq\.de$ [NC]
 RewriteCond %{REQUEST_URI} !^/.well-known/
 RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301,NE]
 
-# Remove trailing slashes from external URLs FIRST (for when users explicitly add them)
-# This redirects /faq/ to /faq
+# ============================================
+# Directory Index Handling (NO external redirects)
+# ============================================
+# Serve /directory/ as /directory/index.html internally WITHOUT redirect
+# This prevents Google from seeing redirect chains
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)/?$ %{DOCUMENT_ROOT}/$1/index.html [L,END]
+
+# Only redirect trailing slashes for file-like URLs (no extension, not a directory)
+# This handles cases where someone manually types /page/ in their browser
+# But won't affect crawlers following /blog/ links since those are directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} (.+)/$
 RewriteCond %{REQUEST_URI} !^/$
 RewriteRule ^(.*)/$ https://codariq.de/$1 [L,R=301,NE]
-
-# CRITICAL: Internal rewrite - serve index.html without redirect
-# This allows /faq to serve /faq/index.html internally without any visible redirect
-# Must use END flag to prevent mod_dir from interfering
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.+)$ %{DOCUMENT_ROOT}/$1/index.html [L,END]
 
 
 # Security headers

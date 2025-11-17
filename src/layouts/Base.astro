@@ -13,8 +13,13 @@ const {
   description = "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen",
   ogImage,
 } = Astro.props;
-// Normalize canonical URL: remove trailing slashes (except root)
+// Normalize canonical URL: remove trailing slashes and .html extension
 let pathname = Astro.url.pathname;
+// Remove .html extension if present
+if (pathname.endsWith(".html")) {
+  pathname = pathname.slice(0, -5);
+}
+// Remove trailing slashes (except root)
 if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
@@ -77,7 +82,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <meta name="author" content="Codariq - KI-Automatisierungsexperte" />
     <meta
       name="keywords"
-      content="KI-Automatisierung, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, Business Intelligence, Machine Learning, DSGVO, Digitalisierung"
+      content="KI-Automatisierung, Wissensmanagement, Rechnungsverarbeitung, Support-Automatisierung, OCR, LLM, Ticketing-Agent, RAG, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, DSGVO, EU AI Act, On-Premises"
     />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="de" />
@@ -187,6 +192,73 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       .cta-button:hover {
         transform: scale(1.02);
+      }
+
+      /* Navigation link hover effect with growing underline (desktop only) */
+      .nav-link {
+        position: relative;
+        display: inline-block;
+        transition: color 0.3s ease;
+      }
+
+      /* Underline hover effect only on desktop (md breakpoint and up) */
+      @media (min-width: 768px) {
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -4px;
+          left: 50%;
+          background-color: #ea580c; /* Orange brand color */
+          transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      /* Color transitions for navigation elements when scrolling */
+      #main-nav .nav-link,
+      #main-nav svg,
+      #main-nav button {
+        transition: color 0.3s ease, stroke 0.3s ease;
+      }
+
+      /* Logo starts white on hero (inverted) */
+      #nav-logo {
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      /* Dark mode for navigation when scrolled past hero */
+      header.nav-scrolled #main-nav .nav-link {
+        color: #111827 !important; /* text-gray-900 */
+      }
+
+      header.nav-scrolled #main-nav svg {
+        color: #111827 !important; /* text-gray-900 */
+        stroke: currentColor;
+      }
+
+      header.nav-scrolled #main-nav button {
+        color: #111827 !important; /* text-gray-900 */
+      }
+
+      /* Keep hover states working in both modes */
+      header.nav-scrolled #main-nav .nav-link:hover {
+        color: #4b5563 !important; /* text-gray-600 */
+      }
+
+      header.nav-scrolled #main-nav button:hover {
+        color: #4b5563 !important; /* text-gray-600 */
+      }
+
+      /* Logo shows natural dark color when scrolled */
+      header.nav-scrolled #nav-logo {
+        filter: none;
       }
 
       /* Reduced motion for accessibility */
@@ -543,22 +615,22 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           >
             <a
               href="/#process"
-              class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base"
-              >Lösungen</a
+              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              >Prozess</a
             >
             <a
               href="/#benefits"
-              class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base"
+              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
               >Preise</a
             >
             <a
               href="/#testimonials"
-              class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base"
+              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
               >Referenzen</a
             >
             <a
               href="/#insights"
-              class="nav-link text-gray-800 hover:text-gray-600 transition-colors font-medium text-sm md:text-base"
+              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
               >Blog</a
             >
           </div>
@@ -568,7 +640,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             <!-- Mobile Menu Button -->
             <button
               id="mobile-menu-button"
-              class="sm:hidden p-2 text-gray-800 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
+              class="sm:hidden p-2 text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
               aria-label="Menu öffnen"
               aria-expanded="false"
             >
@@ -606,7 +678,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             <a
               href="/#process"
               class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
-              >Lösungen</a
+              >Prozess</a
             >
             <a
               href="/#benefits"
@@ -1151,6 +1223,41 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             document.querySelectorAll(".animate-on-scroll").forEach((el) => {
               el.classList.add("is-visible");
             });
+          }
+
+          // Navigation color change on scroll past hero section
+          const header = document.querySelector("header");
+          const heroSection = document.querySelector("#hero");
+
+          if (header && heroSection) {
+            let ticking = false;
+
+            function updateNavColor() {
+              const heroBottom = heroSection.getBoundingClientRect().bottom;
+
+              // Toggle class based on whether we've scrolled past the hero
+              if (heroBottom <= 0) {
+                header.classList.add("nav-scrolled");
+              } else {
+                header.classList.remove("nav-scrolled");
+              }
+
+              ticking = false;
+            }
+
+            // Use requestAnimationFrame for smooth performance
+            function onScroll() {
+              if (!ticking) {
+                window.requestAnimationFrame(updateNavColor);
+                ticking = true;
+              }
+            }
+
+            // Initial check
+            updateNavColor();
+
+            // Listen to scroll events
+            window.addEventListener("scroll", onScroll, { passive: true });
           }
         });
       </script>

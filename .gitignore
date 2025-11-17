@@ -41,7 +41,3 @@ pnpm-debug.log*
 blog/
 
 # Blog post pages (excluded from GitHub)
-src/pages/blog/ki-integration-5-schritte.astro
-src/pages/blog/automatisierung-roi-maximieren.astro  
-src/pages/blog/ki-teams-vorbereiten.astro
-src/pages/blog/index.astro

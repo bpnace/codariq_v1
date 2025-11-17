@@ -1,7 +1,8 @@
 {
   "name": "codariq-landing",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.1.0",
+  "date": "2025-01-10",
   "description": "High-converting Astro-powered landing page for Codariq - KI-Automatisierungsexperte für den deutschen Mittelstand",
   "scripts": {
     "dev": "astro dev",
