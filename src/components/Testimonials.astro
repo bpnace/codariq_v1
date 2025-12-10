@@ -17,56 +17,80 @@ export interface Props {
 }
 
 const {
-  title = "Was unsere Kunden sagen",
-  subtitle = "Viele deutsche Mittelstandsunternehmen vertrauen bereits auf unsere KI-Automatisierungslösungen",
+  title = "Praxisbeispiele aus dem Mittelstand",
+  subtitle = "Echte Ergebnisse aus der täglichen Praxis: Wie deutsche KMU mit unseren KI-Systemen ihre Prozesse transformieren",
   testimonials = [
     {
       quote:
-        "Die Implementierung der KI-Automatisierung hat unsere Effizienz um 45% gesteigert. Manuelle Dateneingaben gehören der Vergangenheit an, und unser Team kann sich auf strategische Aufgaben konzentrieren.",
-      name: "Dr. Michael Weber",
-      position: "Geschäftsführer",
-      company: "Weber Maschinenbau GmbH",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+        "Als HR-Team von zwei Personen waren wir mit Urlaubsanträgen und Onboarding-Dokumenten überlastet. Mit dem KI-System für HR-Prozesse sparen wir jetzt 12 Stunden pro Woche.",
+      name: "Lisa Hoffmann",
+      position: "HR-Leiterin",
+      company: "Mittelständischer Maschinenbau (80 Mitarbeiter)",
+      image: "https://randomuser.me/api/portraits/women/45.jpg",
       results: {
-        metric: "45%",
-        improvement: "Effizienzsteigerung",
+        metric: "60%",
+        improvement: "Weniger Dateneingabe",
       },
       featured: true,
     },
     {
       quote:
-        "Codariq hat uns geholfen, unsere Kundenservice-Prozesse zu revolutionieren. Unser Chatbot beantwortet 80% der Anfragen automatisch und unsere Kundenzufriedenheit ist um 30% gestiegen.",
-      name: "Petra Hoffmann",
-      position: "Leiterin Kundenservice",
-      company: "TechSolutions AG",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
+        "Unser Support-Team kann sich endlich auf komplexe Fälle konzentrieren. Der KI-Ticketing-Agent beantwortet 70% der Standard-Anfragen automatisch in unter 2 Minuten.",
+      name: "Dr. Michael Weber",
+      position: "CTO",
+      company: "Software-Unternehmen (120 Mitarbeiter)",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
       results: {
-        metric: "80%",
-        improvement: "Automatisierte Anfragen",
+        metric: "70%",
+        improvement: "Tickets automatisiert",
       },
     },
     {
       quote:
-        "Die nahtlose Integration in unsere bestehenden Systeme war beeindruckend. Kein Stillstand, keine Datenverluste - nur pure Effizienz. ROI bereits nach 6 Monaten erreicht.",
+        "Von 800 Rechnungen im Monat verarbeitet unser KI-System 650 vollautomatisch mit OCR-Technologie. Die Fehlerquote liegt unter 2% und die Durchlaufzeit ist 45% schneller.",
       name: "Thomas Schneider",
-      position: "IT-Leiter",
-      company: "Schneider Logistik",
-      image: "https://randomuser.me/api/portraits/men/22.jpg",
+      position: "Leiter Operations",
+      company: "Logistikunternehmen (250 Mitarbeiter)",
+      image: "https://randomuser.me/api/portraits/men/28.jpg",
       results: {
-        metric: "6 Monate",
+        metric: "45%",
+        improvement: "Schnellere Durchlaufzeit",
+      },
+    },
+    {
+      quote:
+        "Nach 6 Monaten und €85.000 hatten wir nur frustrierte Mitarbeiter und kein funktionierendes System. Codariq hat das gescheiterte Projekt analysiert, gerettet und in 3 Monaten produktiv gemacht.",
+      name: "Petra Richter",
+      position: "Finanzleiterin",
+      company: "Familienunternehmen (180 Mitarbeiter)",
+      image: "https://randomuser.me/api/portraits/women/52.jpg",
+      results: {
+        metric: "8 Monate",
         improvement: "ROI erreicht",
       },
     },
     {
       quote:
-        "Als traditionelles Familienunternehmen waren wir skeptisch gegenüber KI. Codariq hat uns vom Gegenteil überzeugt - professionell, verständlich und mit messbaren Ergebnissen.",
-      name: "Maria Richter",
-      position: "Geschäftsführerin",
-      company: "Richter & Söhne KG",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
+        "Neue Mitarbeiter finden Antworten sofort in unserem internen KI-Wissensmanagement-Assistenten. Er kennt 4 Jahre Dokumentation auswendig und reduziert wiederholte Fragen um 85%.",
+      name: "Sarah Müller",
+      position: "Leiterin Kundenservice",
+      company: "E-Commerce (95 Mitarbeiter)",
+      image: "https://randomuser.me/api/portraits/women/38.jpg",
       results: {
-        metric: "25%",
-        improvement: "Kosteneinsparung",
+        metric: "85%",
+        improvement: "Weniger Rückfragen",
+      },
+    },
+    {
+      quote:
+        "KI hat unsere Arbeitsweise über 5 Abteilungen hinweg transformiert. Von HR über Einkauf bis Controlling – überall sehen wir messbare Verbesserungen von durchschnittlich 30% Effizienzsteigerung.",
+      name: "Dr. Anna Schmidt",
+      position: "Geschäftsführerin",
+      company: "Produktionsunternehmen (400 Mitarbeiter)",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      results: {
+        metric: "30%",
+        improvement: "Effizienzgewinn",
       },
     },
   ],
@@ -96,19 +120,24 @@ const {
     >
       {
         testimonials.map((testimonial, index) => {
-          const isSecondRow = index >= 2;
-          const isHiddenOnMobile = index >= 2; // Hide testimonials 3 and 4 on mobile
+          // Progressive gradient classes based on row
+          const getGradientClass = (idx) => {
+            if (idx < 2) return "testimonial-gradient-light";   // Row 1: cards 1-2
+            if (idx < 4) return "testimonial-gradient-medium";  // Row 2: cards 3-4
+            return "testimonial-gradient-heavy";                // Row 3: cards 5-6
+          };
+          const gradientClass = getGradientClass(index);
+          const isHiddenOnMobile = index >= 2; // Hide testimonials 3-6 on mobile
           return (
             <div
-              class={`group animate-fade-in-up relative ${isSecondRow ? "testimonial-blur" : ""} ${isHiddenOnMobile ? "hidden md:block" : ""}`}
+              class={`group animate-fade-in-up relative ${gradientClass} ${isHiddenOnMobile ? "hidden md:block" : ""}`}
               style={`animation-delay: ${(index + 1) * 150}ms`}
             >
               {/* Testimonial Card */}
               <div
                 class={`
               rounded-xl p-4 sm:p-5 md:p-6 shadow-sm border h-full flex flex-col transition-all duration-300
-              bg-white border-gray-200
-              ${!isSecondRow ? "hover:shadow-md" : ""}
+              bg-white border-gray-200 hover:shadow-md
             `}
               >
                 {/* Quote Icon */}
@@ -247,41 +276,64 @@ const {
 </section>
 
 <style>
-  .testimonial-blur {
+  /* Light gradient for Row 1 (cards 1-2) - Slight overlay */
+  .testimonial-gradient-light {
     position: relative;
   }
 
-  .testimonial-blur::before {
+  .testimonial-gradient-light::before {
     content: "";
     position: absolute;
-    top: 35%;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(249, 250, 251, 0.4) 25%,
-      rgba(249, 250, 251, 0.7) 50%,
-      rgba(249, 250, 251, 0.95) 100%
+      rgba(249, 250, 251, 0.2) 30%,
+      rgba(249, 250, 251, 0.4) 60%,
+      rgba(249, 250, 251, 0.6) 100%
     );
     pointer-events: none;
     z-index: 1;
   }
 
-  .testimonial-blur:nth-child(3)::before {
-    top: 25%;
+  /* Medium gradient for Row 2 (cards 3-4) - Medium overlay */
+  .testimonial-gradient-medium {
+    position: relative;
+  }
+
+  .testimonial-gradient-medium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(249, 250, 251, 0.5) 20%,
-      rgba(249, 250, 251, 0.8) 45%,
-      rgba(249, 250, 251, 0.98) 100%
+      rgba(249, 250, 251, 0.4) 20%,
+      rgba(249, 250, 251, 0.65) 50%,
+      rgba(249, 250, 251, 0.85) 100%
     );
+    pointer-events: none;
+    z-index: 1;
   }
 
-  .testimonial-blur:nth-child(4)::before {
-    top: 15%;
+  /* Heavy gradient for Row 3 (cards 5-6) - Heavy overlay */
+  .testimonial-gradient-heavy {
+    position: relative;
+  }
+
+  .testimonial-gradient-heavy::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: linear-gradient(
       to bottom,
       transparent 0%,
@@ -289,5 +341,7 @@ const {
       rgba(249, 250, 251, 0.85) 35%,
       rgba(249, 250, 251, 1) 100%
     );
+    pointer-events: none;
+    z-index: 1;
   }
 </style>

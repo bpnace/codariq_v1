@@ -10,7 +10,7 @@ export interface Props {
 
 const {
   title,
-  description = "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen",
+  description = "KI-Systeme für KMU: Beratung, Implementierung, Wartung und Rettung misslückter KI-Projekte in Deutschland",
   ogImage,
 } = Astro.props;
 // Normalize canonical URL: remove trailing slashes and .html extension
@@ -79,7 +79,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content="Codariq - KI-Automatisierungsexperte" />
+    <meta name="author" content="Codariq - KI-Systeme für den Mittelstand" />
     <meta
       name="keywords"
       content="KI-Automatisierung, Wissensmanagement, Rechnungsverarbeitung, Support-Automatisierung, OCR, LLM, Ticketing-Agent, RAG, Künstliche Intelligenz, Prozessautomatisierung, Mittelstand, Deutschland, DSGVO, EU AI Act, On-Premises"
@@ -302,7 +302,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
         "@type": "Organization",
         "name": "Codariq",
         "alternateName": "codariq",
-        "description": "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen. Spezialisiert auf Prozessautomatisierung, intelligente Datenanalyse und KI-gestützte Geschäftslösungen.",
+        "description": "Kleingewerbe für KI-Systeme im deutschen Mittelstand. Spezialisiert auf Beratung, Implementierung, Wartung und Rettung misglückter KI-Projekte in KMU.",
         "url": "https://codariq.de",
         "logo": "https://codariq.de/Logo1.svg",
         "image": "https://codariq.de/images/hero/hero2.webp",
@@ -1225,18 +1225,22 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             });
           }
 
-          // Navigation color change on scroll past hero section
+          // Navigation color change on scroll past hero section or article header
           const header = document.querySelector("header");
           const heroSection = document.querySelector("#hero");
+          const articleHeader = document.querySelector(".article-header"); // Blog article header
 
-          if (header && heroSection) {
+          // Use whichever section exists (hero for homepage, article-header for blog)
+          const targetSection = heroSection || articleHeader;
+
+          if (header && targetSection) {
             let ticking = false;
 
             function updateNavColor() {
-              const heroBottom = heroSection.getBoundingClientRect().bottom;
+              const sectionBottom = targetSection.getBoundingClientRect().bottom;
 
-              // Toggle class based on whether we've scrolled past the hero
-              if (heroBottom <= 0) {
+              // Toggle class based on whether we've scrolled past the section
+              if (sectionBottom <= 0) {
                 header.classList.add("nav-scrolled");
               } else {
                 header.classList.remove("nav-scrolled");
