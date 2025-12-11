@@ -19,6 +19,7 @@ node_modules/
 CLAUDE.md
 build_instructions.md
 sftp_full_upload.expect
+sftp_sitemap_upload.expect
 
 # logs
 npm-debug.log*

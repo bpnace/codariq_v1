@@ -421,6 +421,34 @@ const {
                       {service.description}
                     </p>
 
+                    {/* Dashboard Screenshot Gallery */}
+                    <div class="mb-4 relative overflow-hidden rounded-lg bg-gray-50 border border-gray-200" id="dashboard-gallery">
+                      {/* Gallery Images */}
+                      <div class="relative w-full" style="aspect-ratio: 16/10;">
+                        <img
+                          src="/images/dashboard/1.webp"
+                          alt="Dashboard Analytics - Zeitersparnis und Automatisierungsrate"
+                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500"
+                          data-slide="0"
+                          loading="lazy"
+                        />
+                        <img
+                          src="/images/dashboard/2.webp"
+                          alt="ROI Prognose - Automatisierungsvorteile und Break-Even Analyse"
+                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500 opacity-0"
+                          data-slide="1"
+                          loading="lazy"
+                        />
+                        <img
+                          src="/images/dashboard/3.webp"
+                          alt="Aufgaben Management - Zeitersparnis pro Prozess"
+                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500 opacity-0"
+                          data-slide="2"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+
                     {/* Waitlist Form */}
                     <div class="mt-auto">
                       <form id="dashboard-waitlist-form" class="flex gap-2">
@@ -505,8 +533,7 @@ const {
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
+                  );
               }
 
               return null;
@@ -520,6 +547,74 @@ const {
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // Dashboard Gallery Slideshow
+    const gallery = document.getElementById("dashboard-gallery");
+    if (gallery) {
+      const slides = gallery.querySelectorAll(".dashboard-slide") as NodeListOf<HTMLElement>;
+      let currentSlide = 0;
+      let slideInterval: number | null = null;
+      let isPaused = false;
+
+      // Function to show a specific slide
+      function showSlide(index: number): void {
+        // Hide all slides
+        slides.forEach((slide) => {
+          slide.style.opacity = "0";
+          slide.style.pointerEvents = "none";
+        });
+
+        // Show current slide
+        slides[index].style.opacity = "1";
+        slides[index].style.pointerEvents = "auto";
+        currentSlide = index;
+      }
+
+      // Function to go to next slide
+      function nextSlide(): void {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+      }
+
+      // Start auto-advance
+      function startSlideshow(): void {
+        if (!slideInterval && !isPaused) {
+          slideInterval = window.setInterval(nextSlide, 4000);
+        }
+      }
+
+      // Stop auto-advance
+      function stopSlideshow(): void {
+        if (slideInterval) {
+          clearInterval(slideInterval);
+          slideInterval = null;
+        }
+      }
+
+      // Pause on hover
+      gallery.addEventListener("mouseenter", () => {
+        isPaused = true;
+        stopSlideshow();
+      });
+
+      // Resume on mouse leave
+      gallery.addEventListener("mouseleave", () => {
+        isPaused = false;
+        startSlideshow();
+      });
+
+      // Respect prefers-reduced-motion
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (!prefersReducedMotion.matches) {
+        // Initialize slideshow
+        showSlide(0);
+        startSlideshow();
+      } else {
+        // Just show first slide without animation
+        showSlide(0);
+      }
+    }
+
+    // Dashboard Waitlist Form
     const dashboardForm = document.getElementById(
       "dashboard-waitlist-form",
     ) as HTMLFormElement | null;
