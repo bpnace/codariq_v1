@@ -2,48 +2,43 @@
 export interface Props {
   title?: string;
   subtitle?: string;
-  painPoints?: Array<{
-    statistic: string;
-    label: string;
-    description: string;
-    icon: string;
-  }>;
 }
 
 const {
-  title = "Diese Herausforderungen kennen Sie",
-  subtitle = "Deutsche Unternehmen verschwenden täglich wertvolle Ressourcen durch manuelle Prozesse",
-  painPoints = [
-    {
-      statistic: "43%",
-      label: "Zeitverschwendung",
-      description:
-        "Ihrer Arbeitszeit geht für repetitive, manuelle Aufgaben verloren, die automatisiert werden könnten.",
-      icon: "clock",
-    },
-    {
-      statistic: "€75.000",
-      label: "Jährliche Kosten",
-      description:
-        "Kostet Sie ein einziger manueller Prozess durch Ineffizienz und menschliche Fehler pro Jahr.",
-      icon: "euro",
-    },
-    {
-      statistic: "67%",
-      label: "Fehlerrate",
-      description:
-        "Höhere Fehlerquote bei manuellen Dateneingaben im Vergleich zu automatisierten Systemen.",
-      icon: "error",
-    },
-    {
-      statistic: "€50.000+",
-      label: "DSGVO-Risiko",
-      description:
-        "Bußgelder und Abmahnungen drohen bei unzureichendem Datenschutz und fehlender KI-Compliance.",
-      icon: "shield",
-    },
-  ],
+  title = "Diese Probleme kennen Sie",
+  subtitle = "Ihr Team verliert täglich wertvolle Zeit mit Routineaufgaben, die KI übernehmen könnte",
 } = Astro.props;
+
+const problems = [
+  {
+    title: "Support-Postfach",
+    description:
+      "E-Mails stapeln sich, Standardfragen kosten 2-3h täglich, Kunden warten zu lange.",
+    solution: "KI sortiert vor und antwortet",
+    icon: "mail",
+  },
+  {
+    title: "Rechnungen & Dokumente",
+    description:
+      "Jede Rechnung manuell prüfen, abtippen, ablegen machen 30min mehr pro Rechnung aus.",
+    solution: "KI liest aus und bucht automatisch",
+    icon: "document",
+  },
+  {
+    title: "Verstreutes Wissen",
+    description:
+      "Antworten in Anhängen, Mails, PDFs und die gleichen Fragen immer wieder.",
+    solution: "KI durchsucht alles und antwortet",
+    icon: "book",
+  },
+  {
+    title: "Tool-Flickenteppich",
+    description:
+      "CRM, Ticketsystem, Buchhaltung aber nichts greift ineinander, Doppelarbeit.",
+    solution: "KI verbindet alle Systeme",
+    icon: "link",
+  },
+];
 ---
 
 <section id="pain-points" class="py-12 sm:py-16 md:py-20 bg-gray-50">
@@ -63,85 +58,129 @@ const {
       </p>
     </div>
 
-    <!-- Pain Points Grid -->
+    <!-- Problem Cards Grid -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
     >
       {
-        painPoints.map((pain, index) => (
+        problems.map((problem, index) => (
           <div
             class="group animate-fade-in-up"
             style={`animation-delay: ${(index + 1) * 150}ms`}
           >
-            {/* Pain Point Card */}
-            <div class="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full">
+            <div class="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col">
               {/* Icon */}
               <div class="mb-3 sm:mb-4">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
-                  {pain.icon === "clock" && (
+                  {problem.icon === "mail" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <title>Time Waste Icon</title>
+                      <title>Email Icon</title>
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
                   )}
-
-                  {pain.icon === "euro" && (
+                  {problem.icon === "document" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <title>Financial Cost Icon</title>
+                      <title>Document Icon</title>
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                       />
                     </svg>
                   )}
-
-                  {pain.icon === "error" && (
+                  {problem.icon === "users" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <title>Error Rate Icon</title>
+                      <title>Users Icon</title>
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                       />
                     </svg>
                   )}
-
-                  {pain.icon === "shield" && (
+                  {problem.icon === "book" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <title>DSGVO Risk Icon</title>
+                      <title>Book Icon</title>
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                      />
+                    </svg>
+                  )}
+                  {problem.icon === "chart" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Chart Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                      />
+                    </svg>
+                  )}
+                  {problem.icon === "graph" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Graph Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                      />
+                    </svg>
+                  )}
+                  {problem.icon === "link" && (
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Link Icon</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
                       />
                     </svg>
                   )}
@@ -150,17 +189,19 @@ const {
 
               {/* Content */}
               <div class="mb-3 sm:mb-4 flex-1">
-                <div
-                  class="text-2xl sm:text-3xl font-black text-red-500 mb-2 counter-animation"
-                  data-target={pain.statistic}
-                >
-                  {pain.statistic}
-                </div>
-                <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
-                  {pain.label}
+                <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2 sm:mb-3">
+                  {problem.title}
                 </h3>
-                <p class="text-sm sm:text-base font-light text-gray-600 leading-relaxed">
-                  {pain.description}
+                <p class="text-sm sm:text-base font-light text-gray-600 leading-relaxed mb-3">
+                  {problem.description}
+                </p>
+              </div>
+
+              {/* Solution */}
+              <div class="pt-3 border-t border-gray-100">
+                <p class="text-sm sm:text-base font-semibold text-orange-600 flex items-start gap-2">
+                  <span class="flex-shrink-0">→</span>
+                  <span>{problem.solution}</span>
                 </p>
               </div>
             </div>
@@ -168,77 +209,37 @@ const {
         ))
       }
     </div>
-
-    <!-- Call to Action -->
-    <!--<div class="text-center mt-8 sm:mt-12 md:mt-16 animate-slide-up px-4" style="animation-delay: 600ms">
-      <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
-          Schluss mit ineffizienten Prozessen!
-        </h3>
-        <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-          Lassen Sie uns gemeinsam analysieren, wo in Ihrem Unternehmen das größte Automatisierungspotential liegt. 
-          In einem kostenlosen 30-minütigen Strategiegespräch identifizieren wir Ihre wichtigsten Optimierungsmöglichkeiten.
-        </p>
-        <a 
-          href="#final-cta"
-          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
-          aria-label="Kostenlose Analyse anfragen - Zum Kontaktformular springen"
-        >
-          Kostenlose Analyse anfragen
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <title>Arrow Right Icon</title>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </div>-->
   </div>
-
-  <style>
-    @keyframes countUp {
-      from {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .counter-animation {
-      animation: countUp 0.8s ease-out forwards;
-    }
-
-    /* Intersection Observer will trigger these */
-    .counter-animate {
-      animation: countUp 1.2s ease-out forwards;
-    }
-  </style>
-
-  <script>
-    // Counter animation when element comes into view
-    document.addEventListener("DOMContentLoaded", function () {
-      const counters = document.querySelectorAll(".counter-animation");
-
-      const observerOptions = {
-        threshold: 0.5,
-        rootMargin: "0px 0px -10% 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("counter-animate");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      counters.forEach((counter) => {
-        observer.observe(counter);
-      });
-    });
-  </script>
 </section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Intersection Observer will add is-visible class */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

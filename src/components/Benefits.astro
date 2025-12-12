@@ -56,6 +56,7 @@ const {
       features: [
         "Bis zu 3 automatisierte Prozesse",
         "Anbindung an 2+ Systeme (z. B. Zendesk + CRM + GDrive)",
+        "Beispiele: Bewerbungen vorsortieren, Rechnungen buchen, CRM-Follow-ups",
         "RAG-Wissenssuche oder OCR-Analyse inkludiert",
         "Go-Live inkl. menschlicher Fallback-Regeln",
         "Optional: Schulungspaket + Wartung (400–600 €/Monat)",
@@ -73,7 +74,7 @@ const {
         "Für Unternehmen, die KI flächendeckend einsetzen – vom First Level bis Buchhaltung.",
       icon: "scale",
       features: [
-        "Vollständiger Agenten-Workflow (Ticketing / Finance / Wiki)",
+        "Vollständiger Agenten-Workflow (Support, Backoffice, HR, Vertrieb oder Wiki)",
         "Doppelte Sicherheitsarchitektur: n8n + Langdock EU",
         "Stufen-Rollout inkl. Monitoring & Dashboards",
         "Bis zu 50 Nutzer:innen integriert",
@@ -355,9 +356,13 @@ const {
               // Included features card - Enhanced prominence
               if (service.icon === "included") {
                 return (
-                  <div class="bg-white rounded-2xl p-8 md:p-10 shadow-md border-2 border-gray-200 h-full flex flex-col">
+                  <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border-2 border-gray-200 h-full flex flex-col">
+                    {/* Icon Container */}
+                    <div class="mb-3">
+                    </div>
+
                     {/* Enhanced Title Section */}
-                    <div class="text-center mb-6">
+                    <div class="text-left mb-4">
                       <h4 class="text-2xl font-black text-gray-900 mb-2">
                         {service.title}
                       </h4>
@@ -367,11 +372,11 @@ const {
                     </div>
 
                     {/* Features with enhanced cards */}
-                    <div class="space-y-3">
+                    <div class="space-y-2">
                       {service.features.map((feature) => (
-                        <div class="flex items-start gap-3 bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-all duration-200">
+                        <div class="flex items-start gap-3 bg-gray-50 rounded-lg p-2 hover:bg-gray-100 transition-all duration-200">
                           <div class="w-5 h-5 bg-white rounded flex items-center justify-center border border-gray-200 flex-shrink-0 mt-0.5">
-                            <svg class="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                             </svg>
                           </div>
