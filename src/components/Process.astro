@@ -20,7 +20,7 @@ const {
       number: 1,
       title: "Analyse & Potenzialbewertung",
       description:
-        "Wir identifizieren, welcher Prozess sich am schnellsten und effizientesten automatisieren lässt – inklusive klarer ROI-Aussage.",
+        "Wir identifizieren, welcher Prozess sich am schnellsten und effizientesten automatisieren lässt inklusive klarer ROI-Aussage.",
       details: [
         "30-Min Erstgespräch (kostenfrei)",
         "Tiefenanalyse des Zielprozesses (Ticketing, Rechnungen etc.)",
@@ -50,7 +50,7 @@ const {
       number: 3,
       title: "Entwicklung & Integration",
       description:
-        "Wir bauen die fertige Automationslösung – direkt in eure bestehende Systemlandschaft.",
+        "Wir bauen die fertige Automationslösung direkt in eure bestehende Systemlandschaft.",
       details: [
         "Implementierung des vollständigen KI-Workflows in n8n",
         "Einbindung von Langdock als EU-LLM-Backend",
@@ -88,12 +88,12 @@ const {
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
       <h2
-        class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+        class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
       >
         {title}
       </h2>
       <p
-        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        class="text-base sm:text-lg md:text-xl font-light text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
         style="transition-delay: 0.15s"
       >
         {subtitle}
@@ -125,7 +125,7 @@ const {
                 {/* Title */}
                 <div class="flex-1 min-w-0">
                   <h3
-                    class="text-base font-bold leading-tight transition-colors duration-300"
+                    class="text-base font-black leading-tight transition-colors duration-300"
                     data-step-title={index}
                     style={index === 0 ? "color: rgb(17 24 39);" : "color: rgb(107 114 128);"}
                   >
@@ -148,7 +148,7 @@ const {
               >
                 {/* Header */}
                 <div class="mb-4">
-                  <h3 class="text-xl font-bold text-gray-900 mb-1.5">
+                  <h3 class="text-xl font-black text-gray-900 mb-1.5">
                     {step.title}
                   </h3>
                   <div class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs font-semibold">
@@ -160,13 +160,13 @@ const {
                 </div>
 
                 {/* Description */}
-                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">
                   {step.description}
                 </p>
 
                 {/* Details */}
                 <div class="mb-4">
-                  <h4 class="font-semibold text-gray-900 text-sm mb-3">Was ist enthalten:</h4>
+                  <h4 class="font-black text-gray-900 text-sm mb-3">Was ist enthalten:</h4>
                   <div class="grid grid-cols-2 gap-2">
                     {step.details.map((detail) => (
                       <div class="flex items-start gap-2 bg-gray-50 rounded-lg p-2.5 border border-gray-200">
@@ -184,7 +184,7 @@ const {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div class="flex-1">
-                      <span class="font-semibold text-gray-900 text-xs block mb-0.5">Ergebnis:</span>
+                      <span class="font-black text-gray-900 text-xs block mb-0.5">Ergebnis:</span>
                       <p class="text-gray-700 text-xs leading-relaxed">{step.result}</p>
                     </div>
                   </div>
@@ -218,7 +218,7 @@ const {
                 {/* Title */}
                 <div class="flex-1 min-w-0">
                   <h3
-                    class="text-sm font-bold leading-tight transition-colors duration-300"
+                    class="text-sm font-black leading-tight transition-colors duration-300"
                     data-step-title-mobile={index}
                     style={index === 0 ? "color: rgb(17 24 39);" : "color: rgb(107 114 128);"}
                   >
@@ -241,7 +241,7 @@ const {
               >
                 {/* Header */}
                 <div class="mb-3">
-                  <h3 class="text-lg font-bold text-gray-900 mb-1.5">
+                  <h3 class="text-lg font-black text-gray-900 mb-1.5">
                     {step.title}
                   </h3>
                   <div class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs font-semibold">
@@ -253,13 +253,13 @@ const {
                 </div>
 
                 {/* Description */}
-                <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                <p class="text-sm font-light text-gray-600 leading-relaxed mb-3">
                   {step.description}
                 </p>
 
                 {/* Details */}
                 <div class="mb-3">
-                  <h4 class="font-semibold text-gray-900 text-sm mb-2.5">Was ist enthalten:</h4>
+                  <h4 class="font-black text-gray-900 text-sm mb-2.5">Was ist enthalten:</h4>
                   <div class="space-y-1.5">
                     {step.details.map((detail) => (
                       <div class="flex items-start gap-2 bg-gray-50 rounded-lg p-2 border border-gray-200">
@@ -277,7 +277,7 @@ const {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div class="flex-1">
-                      <span class="font-semibold text-gray-900 text-xs block mb-0.5">Ergebnis:</span>
+                      <span class="font-black text-gray-900 text-xs block mb-0.5">Ergebnis:</span>
                       <p class="text-gray-700 text-xs leading-relaxed">{step.result}</p>
                     </div>
                   </div>

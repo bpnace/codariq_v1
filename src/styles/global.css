@@ -1,19 +1,31 @@
 @import "tailwindcss";
 
-/* Switzer Variable Font */
+/* Custom Theme Colors for Tailwind v4 */
+@theme {
+  --color-text-primary: #111827;
+  --color-primary-500: #0e1421;
+  --color-primary-600: #0b1633;
+  --color-accent-500: #E85002;
+  --color-accent-600: #C13A00;
+}
+
+/* Satoshi Variable Font - Regular (Upright) */
 @font-face {
-  font-family: "Switzer Variable";
+  font-family: "Satoshi";
   src:
-    url("/fonts/Switzer-Variable.woff2") format("woff2"),
-    url("/fonts/Switzer-Variable.ttf") format("truetype");
-  font-weight: 100 900;
+    url("/fonts/Satoshi-Variable.woff2") format("woff2"),
+    url("/fonts/Satoshi-Variable.ttf") format("truetype");
+  font-weight: 300 900;
   font-style: normal;
   font-display: swap;
 }
-
-/* Global font family override */
+/* Global font family override - Satoshi for everything */
 * {
-  font-family: "Switzer Variable", system-ui, sans-serif;
+  font-family: "Satoshi", system-ui, sans-serif;
+}
+
+.font-regular {
+  font-weight: 400;
 }
 
 /* Prevent scrolling beyond top of page */
@@ -26,6 +38,35 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  font-weight: 400;
+}
+
+p,
+li,
+span,
+button,
+label,
+input,
+textarea {
+  font-weight: 500;
+}
+
+.cta-button,
+.cta-button * {
+  font-weight: 800 !important;
+}
+
+.hero-title {
+  font-weight: 900;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+.section-heading {
+  font-weight: 800;
 }
 
 /* Ensure main navigation header stays fixed and visible */
@@ -151,5 +192,240 @@ html {
     animation: none;
     transform: translateY(0);
     transition: none;
+  }
+}
+
+/* ===== Hero Section Styles ===== */
+
+/* macOS Window Container - Glassmorphism Effect */
+.macos-window {
+  /* Glassmorphism styling */
+  background: rgba(255, 255, 255, 0.59);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Border and shadows */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  /* Layout */
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 0 2rem 0;
+
+  /* Performance */
+  will-change: transform, opacity;
+  transform-origin: center;
+  transform: translateZ(0);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(20px)) {
+  .macos-window {
+    background: rgba(255, 255, 255, 0.85);
+  }
+}
+
+/* Window Title Bar */
+.window-titlebar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Title bar shine effect */
+.window-titlebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Traffic Lights Container */
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+}
+
+/* Traffic Light Buttons */
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.2),
+    0 1px 1px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+.traffic-light:hover {
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.traffic-light.red {
+  background: linear-gradient(135deg, #FF5F57 0%, #FF4136 100%);
+}
+
+.traffic-light.yellow {
+  background: linear-gradient(135deg, #FFBD2E 0%, #FFAA00 100%);
+}
+
+.traffic-light.green {
+  background: linear-gradient(135deg, #28CA42 0%, #00B300 100%);
+}
+
+/* Window Content Area */
+.window-content {
+  padding: 2rem 2.5rem 2.5rem;
+}
+
+/* macOS Window Entrance Animation */
+@keyframes macOSWindowAppear {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Apply animation to macOS window */
+.macos-window.hero-animate {
+  opacity: 0;
+  animation: macOSWindowAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Minimal upward appearing animation for hero elements */
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  opacity: 0;
+  animation: heroFadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes counter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-counter {
+  animation: counter 0.8s ease-out forwards;
+}
+
+/* Responsive Styles for macOS Window */
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  .macos-window {
+    max-width: 700px;
+    border-radius: 10px;
+  }
+
+  .window-titlebar {
+    height: 36px;
+  }
+
+  .traffic-light {
+    width: 10px;
+    height: 10px;
+  }
+
+  .window-content {
+    padding: 1.75rem 2rem 2rem;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .macos-window {
+    max-width: 100%;
+    margin: 0 0.75rem 1.5rem;
+    border-radius: 8px;
+  }
+
+  .window-titlebar {
+    height: 32px;
+    padding: 0 10px;
+  }
+
+  .traffic-lights {
+    gap: 6px;
+  }
+
+  .traffic-light {
+    width: 8px;
+    height: 8px;
+  }
+
+  .window-content {
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  /* Optimized mobile animation */
+  @keyframes macOSWindowAppear {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .macos-window.hero-animate {
+    animation-duration: 1s;
+  }
+}
+
+/* Hero section motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate,
+  .macos-window.hero-animate {
+    opacity: 1;
+    animation: none;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }

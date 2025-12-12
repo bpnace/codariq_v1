@@ -36,7 +36,7 @@ const {
   subtitle = "Mit unseren KI Agenten automatisieren wir Anfragen, Dokumente und Standardprozesse in Support, Backoffice und HR. Weniger Klicks in den Systemen, weniger Nachfassen per Mail, mehr Zeit für die Fälle, bei denen wirklich Menschen gebraucht werden.",
   primaryCTA = "Kostenloses Erstgespräch",
   primaryCTALink = "#final-cta",
-  heroImage = "/images/hero/hero2.webp",
+  heroImage = "/images/hero/final1.webp",
   stats = [
     { value: "40%", label: "Effizienzsteigerung" },
     { value: "60h", label: "Zeitersparnis/Monat" },
@@ -59,64 +59,56 @@ const {
       decoding="async"
       style="height: calc(100% + 4rem);"
     />
-    <!-- Dark overlay for text readability -->
-    <div class="absolute inset-0 bg-black/40"></div>
+    <!-- Overlay for text readability 
+    <div class="absolute inset-0 bg-white/10" style="mix-blend-mode:screen;"></div>-->
   </div>
 
   <div
-    class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
+    class="max-w-8xl px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
   >
-    <div class="text-center max-w-6xl mx-auto">
-      <!-- Main Headline with staggered animation -->
-      <div class="hero-animate" style="animation-delay: 0.2s">
-        <h1
-          class="text-3xl sm:text-4xl md:text-4xl lg:text-7xl xl:text-5xl font-black text-white mb-2 leading-tight xl:leading-none max-w-5xl mx-auto"
-          style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);"
-        >
-          {title}
-        </h1>
-      </div>
+    <div class="grid lg:grid-cols-1 gap-8 items-center">
+      <!-- LEFT COLUMN: Existing text content -->
+      <div class="text-center lg:text-left max-w-6xl lg:max-w-none" style="max-width: 80%;">
 
-      <!-- Subtitle with delay -->
-      <div class="hero-animate" style="animation-delay: 0.4s">
-        <p
-          class="text-base sm:text-m md:text-l lg:text-1xl text-white/90 mb-6 max-w-2xl mx-auto leading-normal"
-          style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);"
-        >
-          {subtitle}
-        </p>
-      </div>
+      <!-- macOS Window Container -->
+      <div class="macos-window hero-animate" style="animation-delay: 0.1s">
+        <!-- Window Title Bar -->
+        <div class="window-titlebar">
+          <!-- Traffic Light Buttons -->
+          <div class="traffic-lights" role="presentation" aria-hidden="true">
+            <span class="traffic-light red"></span>
+            <span class="traffic-light yellow"></span>
+            <span class="traffic-light green"></span>
+          </div>
+        </div>
 
-      <!-- Benefits Buttons with staggered delay -->
-      <div class="hero-animate" style="animation-delay: 0.6s">
-        <div
-          class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4"
-        >
-          <div class="relative group">
-            <span
-              class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full cursor-default"
-            >
-              DSGVO konforme KI Lösungen
-            </span>
-          </div>
-          <div class="relative group">
-            <span
-              class="px-3 py-2 sm:px-4 bg-gradient-to-r from-orange-500 to-orange-600 backdrop-blur-sm text-white text-xs sm:text-sm font-bold rounded-full cursor-default"
-            >
-              Entlastet Ihr Team spürbar im Alltag
-            </span>
-          </div>
+        <!-- Window Content Area -->
+        <div class="window-content">
+          <!-- Main Headline -->
+          <h1
+            class="hero-title font-headline font-black text-3xl sm:text-4xl md:text-4xl lg:text-7xl xl:text-4xl text-gray-700 mb-2 leading-tight xl:leading-none max-w-5xl"
+          >
+            {title}
+          </h1>
+
+          <!-- Subtitle -->
+          <p
+            class="font-regular text-base sm:text-m md:text-l lg:text-1xl text-gray-600 mb-6 max-w-4xl leading-normal"
+          >
+            {subtitle}
+          </p>
         </div>
       </div>
 
-      <!-- CTA Button with Risk Reduction -->
+      <!-- CTA Button with Benefits -->
       <div class="hero-animate" style="animation-delay: 0.8s">
         <div
-          class="flex flex-col items-center mb-3 sm:mb-4 md:mb-6 px-6 sm:px-4"
+          class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-4 mb-3 sm:mb-4 md:mb-2 px-6 sm:px-4"
         >
+          <!-- CTA Button -->
           <a
             href={primaryCTALink}
-            class="group bg-white text-gray-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-semibold text-base sm:text-lg shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-auto text-center mb-3 cta-button"
+            class="group bg-white text-gray-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-bold text-base sm:text-lg shadow-1xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-auto text-center cta-button"
             aria-label={primaryCTA}
           >
             <span class="flex items-center justify-center gap-2">
@@ -136,115 +128,14 @@ const {
               </svg>
             </span>
           </a>
-
-          <!-- Risk Reduction Text -->
-          <p class="text-white/80 text-sm font-bold mb-2">
-            Wir prüfen gemeinsam, welche Lösung in Ihrem Unternehmen am schnellsten Wirkung zeigt.
-          </p>
         </div>
+
+        <!-- Risk Reduction Text -->
+        <p class="text-white/80 text-sm font-bold mb-2 max-w-xs mx-auto text-center">
+          Wir prüfen gemeinsam, welche Lösung in Ihrem Unternehmen am schnellsten Wirkung zeigt.
+        </p>
       </div>
-
-      <!-- Trust Bar with Partner Logos -->
-      <div class="hero-animate" style="animation-delay: 1.8s">
-        <div class="flex flex-col items-center">
-          <p class="text-white/70 text-xs sm:text-sm mb-4 font-medium">
-            Zertifizierte Partnerschaften mit führenden Unternehmen:
-          </p>
-          <div
-            class="flex items-center justify-center space-x-4 sm:space-x-6 md:space-x-8"
-          >
-            <img
-              src="/images/logos/google.svg"
-              alt="Google"
-              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src="/images/logos/n8n.svg"
-              alt="n8n"
-              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src="/images/logos/ibm.svg"
-              alt="IBM"
-              class="h-8 sm:h-16 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src="/images/logos/openai.svg"
-              alt="OpenAI"
-              class="h-8 sm:h-10 w-auto opacity-70 hover:opacity-90 transition-opacity filter brightness-0 invert"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  /* Minimal upward appearing animation for hero elements */
-  @keyframes heroFadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-animate {
-    opacity: 0;
-    animation: heroFadeInUp 0.8s ease-out forwards;
-  }
-
-  @keyframes counter {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-counter {
-    animation: counter 0.8s ease-out forwards;
-  }
-
-  /* Consistent CTA button animation */
-  .cta-button {
-    transform-origin: center;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  .cta-button:hover {
-    transform: scale(1.02);
-  }
-
-  /* Respect user's motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .hero-animate {
-      opacity: 1;
-      animation: none;
-      transform: translateY(0);
-    }
-
-    .cta-button:hover {
-      transform: none;
-    }
-  }
-</style>

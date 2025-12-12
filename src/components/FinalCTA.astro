@@ -10,13 +10,11 @@ export interface Props {
 }
 
 const {
-  title = "Starten Sie noch heute Ihre KI-Transformation",
+  title = "Starten Sie noch heute Ihre digitale Transformation",
   subtitle = "Kostenlose Strategieberatung",
-  description = "Vereinbaren Sie Ihr kostenloses Strategiegespräch und erfahren Sie, wie KI-Automatisierung Ihr Unternehmen zum Marktführer macht.",
+  description = "Vereinbaren Sie jetzt ein unverbindliches 30 Minuten Gespräch und erhalten Sie klare nächste Schritte, wie Sie KI pragmatisch in Ihren Arbeitsalltag bringen statt nur darüber zu sprechen.",
   primaryCTA = "Kostenlose Strategieberatung sichern",
-  secondaryCTA = "Oder direkt anrufen: +49 XXX XXXXXXX",
   primaryCTALink = "#contact",
-  secondaryCTALink = "tel:+49XXXXXXXXX",
 } = Astro.props;
 ---
 
@@ -26,19 +24,19 @@ const {
       <!-- Header -->
       <div class="text-center mb-12">
         <h2
-          class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-on-scroll"
+          class="text-3xl sm:text-4xl md:text-5xl mb-4 text-gray-900 animate-on-scroll"
         >
           {title}
         </h2>
         <p
-          class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll"
+          class="text-lg text-gray-600 max-w-3xl mx-auto animate-on-scroll"
           style="transition-delay: 0.15s"
         >
           {description}
         </p>
         <p
-          class="text-sm text-gray-500 mt-3 animate-on-scroll"
-          style="transition-delay: 0.25s"
+          class="text-sm mt-3 animate-on-scroll"
+          style="transition-delay: 0.25s; font-weight: 800 !important;"
         >
           Unverbindlich & kostenfrei • Ohne Risiko
         </p>
