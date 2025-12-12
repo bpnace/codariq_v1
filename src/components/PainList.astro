@@ -25,32 +25,11 @@ const problems = [
     icon: "document",
   },
   {
-    title: "Bewerbungen & HR",
-    description:
-      "Bewerbungen manuell lesen, sortieren, kommentieren – gute Kandidaten springen ab.",
-    solution: "KI sammelt, sortiert und schlägt vor",
-    icon: "users",
-  },
-  {
     title: "Verstreutes Wissen",
     description:
       "Antworten in Köpfen, Mails, PDFs – gleiche Fragen immer wieder.",
     solution: "KI durchsucht alles und antwortet",
     icon: "book",
-  },
-  {
-    title: "Leads & Follow-ups",
-    description:
-      "Follow-ups versanden, Angebote ohne Reaktion, unklare Pipeline.",
-    solution: "KI terminiert und erinnert automatisch",
-    icon: "chart",
-  },
-  {
-    title: "Kennzahlen & Reports",
-    description:
-      "Geschäftsführung zieht Zahlen selbst, keine Zeit für Strategie.",
-    solution: "KI erstellt automatisch Berichte",
-    icon: "graph",
   },
   {
     title: "Tool-Flickenteppich",
@@ -81,7 +60,7 @@ const problems = [
 
     <!-- Problem Cards Grid -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
     >
       {
         problems.map((problem, index) => (

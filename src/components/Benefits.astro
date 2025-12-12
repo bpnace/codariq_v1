@@ -357,8 +357,19 @@ const {
               if (service.icon === "included") {
                 return (
                   <div class="bg-white rounded-2xl p-8 md:p-10 shadow-md border-2 border-gray-200 h-full flex flex-col">
+                    {/* Icon Container */}
+                    <div class="mb-4">
+                      <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <title>Included Features Icon</title>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      </div>
+                    </div>
+
                     {/* Enhanced Title Section */}
-                    <div class="text-center mb-6">
+                    <div class="text-left mb-6">
                       <h4 class="text-2xl font-black text-gray-900 mb-2">
                         {service.title}
                       </h4>
@@ -372,7 +383,7 @@ const {
                       {service.features.map((feature) => (
                         <div class="flex items-start gap-3 bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-all duration-200">
                           <div class="w-5 h-5 bg-white rounded flex items-center justify-center border border-gray-200 flex-shrink-0 mt-0.5">
-                            <svg class="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                             </svg>
                           </div>
