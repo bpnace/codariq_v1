@@ -17,14 +17,14 @@ const {
       question:
         "Wie lange dauert die Implementierung einer KI-Automatisierungslösung?",
       answer:
-        "Die Implementierungsdauer hängt von der gewählten Lösung ab: Ein KI-Ticketing-Agent ist in 5-9 Wochen produktiv, ein interner KI-Assistent für Wissensmanagement in 6-10 Wochen, und die automatisierte Rechnungsverarbeitung in 8-14 Wochen. Wir arbeiten in agilen Sprints, sodass Sie bereits früh erste Ergebnisse sehen.",
+        "Die Implementierungsdauer hängt vom gewählten Paket ab: Das Einsteiger-Paket ist in 5 Wochen produktiv, das Standard-Paket in 6-8 Wochen, und das Umfangreiche Paket in 10-14 Wochen. Enterprise-Lösungen werden individuell geplant. Wir arbeiten in agilen Sprints, sodass Sie bereits früh erste Ergebnisse sehen.",
       category: "Implementation",
     },
     {
       question:
         "Wie viel kostet eine KI-Automatisierungslösung?",
       answer:
-        "Unsere Lösungen bieten transparente Festpreise: Der KI-Ticketing-Agent kostet €32.000-€49.000 (inkl. 6 Monate Wartung), der KI-Assistent für Wissensmanagement €39.000-€55.000 (inkl. 3 Monate Wartung), und die automatisierte Rechnungsverarbeitung €58.000-€78.000 (inkl. 12 Monate Wartung). Jede Lösung enthält Team Training.",
+        "Unsere Pakete beginnen bei €999 (Einsteiger-Paket) für erste KI-Pilotprojekte mit einem Prozess. Das Standard-Paket für bis zu 3 Prozesse startet ab €4.500, das Umfangreiche Paket für flächendeckende Automatisierung ab €9.900. Enterprise-Lösungen werden individuell kalkuliert. Alle Preise sind einmalige Implementierungskosten. Wartung ist optional zubuchbar: Einsteiger 300 €/Monat, Standard 400-600 €/Monat, Umfangreiches Paket 500-800 €/Monat. Alle Preise verstehen sich als Komplettlösungen inklusive Setup, DSGVO-konformer Architektur und Prompt-Optimierung.",
       category: "Kosten",
     },
     {
@@ -57,7 +57,7 @@ const {
     {
       question: "Bieten Sie auch Support und Wartung nach der Implementierung?",
       answer:
-        "Ja, jede Lösung beinhaltet Basiswartung (3, 6 oder 12 Monate je nach Produkt). In dieser Zeit optimieren wir die Lösung kontinuierlich. Für erweiterten Support bieten wir den Maintenance Retainer an. Bei Bedarf können Sie auch unser Live-Dashboard für KPI-Tracking buchen.",
+        "Ja, Wartung und Support sind optional zubuchbar: Einsteiger-Paket 300 €/Monat, Standard-Paket 400-600 €/Monat, Umfangreiches Paket 500-800 €/Monat. In der Wartung optimieren wir Ihre Lösung kontinuierlich, passen Prompts an und erweitern Funktionen. Zusätzlich können Sie ab Q2 2026 unser Live-Dashboard für KPI-Tracking und ROI-Messung buchen.",
       category: "Support",
     },
     {
@@ -88,12 +88,12 @@ const groupedFAQs =
     <!-- Section Header -->
     <div class="text-center mb-8 sm:mb-12 lg:mb-16 animate-slide-up">
       <h2
-        class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4"
+        class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-3 sm:mb-4"
       >
         {title}
       </h2>
       <p
-        class="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
+        class="text-base sm:text-lg lg:text-xl font-light text-gray-600 leading-relaxed max-w-3xl mx-auto"
       >
         {subtitle}
       </p>
@@ -112,7 +112,7 @@ const groupedFAQs =
             <details class="group/details">
               <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer list-none hover:bg-gray-50 transition-colors duration-200">
                 <div class="flex-1 pr-3 sm:pr-4">
-                  <h3 class="text-sm sm:text-base font-medium text-gray-900 group-hover/details:text-gray-700 transition-colors leading-tight">
+                  <h3 class="text-sm sm:text-base font-black text-gray-900 group-hover/details:text-gray-700 transition-colors leading-tight">
                     {faq.question}
                   </h3>
                 </div>
@@ -155,10 +155,10 @@ const groupedFAQs =
       style="animation-delay: 300ms"
     >
       <div class="bg-white rounded-lg p-4 sm:p-6 border border-gray-200">
-        <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-2">
+        <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
           Weitere Fragen?
         </h3>
-        <p class="text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm">
+        <p class="font-light text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm">
           Sprechen Sie mit unseren Experten in einem kostenlosen
           Beratungsgespräch.
         </p>

@@ -22,28 +22,35 @@ export default defineConfig({
       serialize(item) {
         // Add lastmod, changefreq, and priority to sitemap entries
         const url = item.url;
+        const now = new Date();
 
-        // Blog posts get higher priority and more frequent updates
-        if (url.includes('/blog/') && !url.endsWith('/blog')) {
-          item.lastmod = new Date('2025-11-01').toISOString();
+        // Newest blog post (ki-projekte-retten) - just published
+        if (url.includes('/blog/ki-projekte-retten')) {
+          item.lastmod = new Date('2025-01-09').toISOString();
+          item.changefreq = 'monthly';
+          item.priority = 0.9;
+        }
+        // Other blog posts get higher priority and more frequent updates
+        else if (url.includes('/blog/') && !url.endsWith('/blog')) {
+          item.lastmod = new Date('2025-01-01').toISOString();
           item.changefreq = 'monthly';
           item.priority = 0.8;
         }
-        // Blog index page
+        // Blog index page (updated with newest post)
         else if (url.endsWith('/blog')) {
-          item.lastmod = new Date('2025-11-01').toISOString();
+          item.lastmod = new Date('2025-01-09').toISOString();
           item.changefreq = 'weekly';
           item.priority = 0.7;
         }
-        // Homepage
+        // Homepage (recently updated with pricing changes)
         else if (url === 'https://codariq.de/' || url === 'https://codariq.de') {
-          item.lastmod = new Date('2025-11-01').toISOString();
+          item.lastmod = now.toISOString();
           item.changefreq = 'weekly';
           item.priority = 1.0;
         }
         // Other pages (legal, FAQ, etc.)
         else {
-          item.lastmod = new Date('2025-11-01').toISOString();
+          item.lastmod = new Date('2025-01-01').toISOString();
           item.changefreq = 'monthly';
           item.priority = 0.5;
         }

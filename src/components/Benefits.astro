@@ -28,7 +28,7 @@ export interface Props {
 
 const {
   title = "Unsere Lösungen",
-  subtitle = "KI-Automatisierung für jede Unternehmensgröße. Vom ersten Pilotprojekt bis zur flächendeckenden Integration – DSGVO-konform und made in EU.",
+  subtitle = "KI-Automatisierung für jede Unternehmensgröße. Vom ersten Pilotprojekt bis zur flächendeckenden Integration - DSGVO-konform und made in EU.",
   benefits = [
     {
       title: "Einsteiger-Paket",
@@ -42,7 +42,7 @@ const {
         "DSGVO-konformes Setup",
         "Wartung optional zubuchbar (300 €/Monat)",
       ],
-      price: "ab €4.500",
+      price: "ab €999",
       duration: "einmalig",
       isProduct: true,
       additionalInfo: "KMU, die testen, lernen und intern überzeugen wollen",
@@ -60,7 +60,7 @@ const {
         "Go-Live inkl. menschlicher Fallback-Regeln",
         "Optional: Schulungspaket + Wartung (400–600 €/Monat)",
       ],
-      price: "ab €9.900",
+      price: "ab €4.500",
       duration: "einmalig",
       highlight: true,
       isProduct: true,
@@ -79,7 +79,7 @@ const {
         "Bis zu 50 Nutzer:innen integriert",
         "Wartung & Betrieb: 500–800 €/Monat möglich",
       ],
-      price: "ab €14.900",
+      price: "ab €9.900",
       duration: "einmalig",
       isProduct: true,
       additionalInfo: "Unternehmen mit Wachstumspfad Richtung 'AI-enabled Business'",
@@ -97,7 +97,7 @@ const {
         "24/7 Bereitschaft optional",
         "Erweiterung auf Custom-LLMs oder interne APIs möglich",
       ],
-      price: "ab €25.000",
+      price: "auf Anfrage",
       duration: "individuelle Planung",
       isProduct: true,
       additionalInfo: "(IT-)Unternehmen mit 150+ Personen und speziellen Anforderungen",
@@ -141,12 +141,12 @@ const {
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
       <h2
-        class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+        class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
       >
         {title}
       </h2>
       <p
-        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        class="text-base sm:text-lg md:text-xl font-light text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
         style="transition-delay: 0.15s"
       >
         {subtitle}
@@ -167,8 +167,7 @@ const {
               {/* Bento Card */}
               <div
                 class={`
-            bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-200 h-full flex flex-col transition-all duration-300 relative
-            ${benefit.highlight ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700" : ""}
+            ${benefit.highlight ? "bg-gradient-to-br from-primary-600 to-primary-500 text-white border-primary-600" : "bg-white border-gray-200"} rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border h-full flex flex-col transition-all duration-300 relative
           `}
               >
 
@@ -253,12 +252,12 @@ const {
                 {/* Content */}
                 <div class="mb-3 sm:mb-4 flex-1">
                   <h3
-                    class={`text-base sm:text-l font-bold mb-2 ${benefit.highlight ? "text-white" : "text-gray-900"}`}
+                    class={`text-base sm:text-l font-black mb-2 ${benefit.highlight ? "text-white" : "text-gray-900"}`}
                   >
                     {benefit.title}
                   </h3>
                   <p
-                    class={`text-m sm:text-m leading-relaxed mb-3 sm:mb-4 ${benefit.highlight ? "text-white/80" : "text-gray-600"}`}
+                    class={`text-m sm:text-m font-light leading-relaxed mb-3 sm:mb-4 ${benefit.highlight ? "text-white/80" : "text-gray-600"}`}
                   >
                     {benefit.description}
                   </p>
@@ -282,7 +281,7 @@ const {
 
                 {/* Pricing & CTA for Products */}
                 {benefit.isProduct && (
-                  <div class="mt-auto pt-4 border-t border-gray-200">
+                  <div class={`mt-auto pt-4 border-t ${benefit.highlight ? "border-white/20" : "border-gray-200"}`}>
                     {/* Duration Badge */}
                     <div class="flex items-center gap-2 mb-3">
                       <svg
@@ -333,9 +332,9 @@ const {
                         : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                     }
                   `}
-                      aria-label={`${benefit.title} starten - Zum Kontaktformular springen`}
+                      aria-label={`${benefit.title} ${benefit.price === "auf Anfrage" ? "anfragen" : "starten"} - Zum Kontaktformular springen`}
                     >
-                      Jetzt starten
+                      {benefit.price === "auf Anfrage" ? "Jetzt anfragen" : "Jetzt starten"}
                     </a>
                   </div>
                 )}
@@ -353,39 +352,30 @@ const {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {
             additionalServices.map((service, index) => {
-              // Included features card
+              // Included features card - Enhanced prominence
               if (service.icon === "included") {
                 return (
-                  <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 h-full flex flex-col">
-                    {/* Icon & Title */}
-                    <div class="flex items-center gap-3 mb-4">
-                      <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg
-                          class="w-5 h-5 text-gray-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <title>Included Features Icon</title>
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                      </div>
-                      <h4 class="text-lg font-bold text-gray-900">
+                  <div class="bg-white rounded-2xl p-8 md:p-10 shadow-md border-2 border-gray-200 h-full flex flex-col">
+                    {/* Enhanced Title Section */}
+                    <div class="text-center mb-6">
+                      <h4 class="text-2xl font-black text-gray-900 mb-2">
                         {service.title}
                       </h4>
+                      <p class="text-base font-light text-gray-600">
+                        Unabhängig vom gewählten Paket erhalten Sie diese Leistungen als Standard
+                      </p>
                     </div>
 
-                    {/* Features */}
-                    <div class="space-y-2">
+                    {/* Features with enhanced cards */}
+                    <div class="space-y-3">
                       {service.features.map((feature) => (
-                        <div class="flex items-start gap-2">
-                          <div class="w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0 mt-1.5" />
-                          <span class="text-sm text-gray-600">{feature}</span>
+                        <div class="flex items-start gap-3 bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-all duration-200">
+                          <div class="w-5 h-5 bg-white rounded flex items-center justify-center border border-gray-200 flex-shrink-0 mt-0.5">
+                            <svg class="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                          <span class="text-sm text-gray-700 font-medium">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -396,12 +386,12 @@ const {
               // Special design for Live-Dashboard with waitlist form
               if (service.title === "Live-Dashboard") {
                 return (
-                  <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 h-full flex flex-col">
+                  <div class="hidden md:block bg-white rounded-2xl p-6 shadow-sm border border-gray-200 h-full flex flex-col">
                     {/* Icon & Title */}
                     <div class="flex items-center gap-3 mb-3">
                       <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg
-                          class="w-5 h-5 text-gray-600"
+                          class="w-5 h-5 text-purple-600"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -416,19 +406,47 @@ const {
                         </svg>
                       </div>
                       <div class="flex-1">
-                        <h4 class="text-lg font-bold text-gray-900">
+                        <h4 class="text-lg font-black text-gray-900">
                           {service.title}
                         </h4>
-                        <span class="text-xs text-gray-500">
+                        <span class="text-xs font-light text-gray-500">
                           {service.subtitle}
                         </span>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p class="text-sm text-gray-600 mb-4">
+                    <p class="text-sm font-light text-gray-600 mb-4">
                       {service.description}
                     </p>
+
+                    {/* Dashboard Screenshot Gallery */}
+                    <div class="mb-4 relative overflow-hidden rounded-lg bg-gray-50 border border-gray-200" id="dashboard-gallery">
+                      {/* Gallery Images */}
+                      <div class="relative w-full" style="aspect-ratio: 16/10;">
+                        <img
+                          src="/images/dashboard/1.webp"
+                          alt="Dashboard Analytics - Zeitersparnis und Automatisierungsrate"
+                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500"
+                          data-slide="0"
+                          loading="lazy"
+                        />
+                        <img
+                          src="/images/dashboard/2.webp"
+                          alt="ROI Prognose - Automatisierungsvorteile und Break-Even Analyse"
+                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500 opacity-0"
+                          data-slide="1"
+                          loading="lazy"
+                        />
+                        <img
+                          src="/images/dashboard/3.webp"
+                          alt="Aufgaben Management - Zeitersparnis pro Prozess"
+                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500 opacity-0"
+                          data-slide="2"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
 
                     {/* Waitlist Form */}
                     <div class="mt-auto">
@@ -514,8 +532,7 @@ const {
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
+                  );
               }
 
               return null;
@@ -529,6 +546,74 @@ const {
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // Dashboard Gallery Slideshow
+    const gallery = document.getElementById("dashboard-gallery");
+    if (gallery) {
+      const slides = gallery.querySelectorAll(".dashboard-slide") as NodeListOf<HTMLElement>;
+      let currentSlide = 0;
+      let slideInterval: number | null = null;
+      let isPaused = false;
+
+      // Function to show a specific slide
+      function showSlide(index: number): void {
+        // Hide all slides
+        slides.forEach((slide) => {
+          slide.style.opacity = "0";
+          slide.style.pointerEvents = "none";
+        });
+
+        // Show current slide
+        slides[index].style.opacity = "1";
+        slides[index].style.pointerEvents = "auto";
+        currentSlide = index;
+      }
+
+      // Function to go to next slide
+      function nextSlide(): void {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+      }
+
+      // Start auto-advance
+      function startSlideshow(): void {
+        if (!slideInterval && !isPaused) {
+          slideInterval = window.setInterval(nextSlide, 4000);
+        }
+      }
+
+      // Stop auto-advance
+      function stopSlideshow(): void {
+        if (slideInterval) {
+          clearInterval(slideInterval);
+          slideInterval = null;
+        }
+      }
+
+      // Pause on hover
+      gallery.addEventListener("mouseenter", () => {
+        isPaused = true;
+        stopSlideshow();
+      });
+
+      // Resume on mouse leave
+      gallery.addEventListener("mouseleave", () => {
+        isPaused = false;
+        startSlideshow();
+      });
+
+      // Respect prefers-reduced-motion
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (!prefersReducedMotion.matches) {
+        // Initialize slideshow
+        showSlide(0);
+        startSlideshow();
+      } else {
+        // Just show first slide without animation
+        showSlide(0);
+      }
+    }
+
+    // Dashboard Waitlist Form
     const dashboardForm = document.getElementById(
       "dashboard-waitlist-form",
     ) as HTMLFormElement | null;

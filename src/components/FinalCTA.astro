@@ -10,13 +10,11 @@ export interface Props {
 }
 
 const {
-  title = "Starten Sie noch heute Ihre KI-Transformation",
+  title = "Starten Sie noch heute Ihre digitale Transformation",
   subtitle = "Kostenlose Strategieberatung",
-  description = "Vereinbaren Sie Ihr kostenloses Strategiegespräch und erfahren Sie, wie KI-Automatisierung Ihr Unternehmen zum Marktführer macht.",
+  description = "Vereinbaren Sie jetzt ein unverbindliches 30 Minuten Gespräch und erhalten Sie klare nächste Schritte, wie Sie KI pragmatisch in Ihren Arbeitsalltag bringen statt nur darüber zu sprechen.",
   primaryCTA = "Kostenlose Strategieberatung sichern",
-  secondaryCTA = "Oder direkt anrufen: +49 XXX XXXXXXX",
   primaryCTALink = "#contact",
-  secondaryCTALink = "tel:+49XXXXXXXXX",
 } = Astro.props;
 ---
 
@@ -26,19 +24,19 @@ const {
       <!-- Header -->
       <div class="text-center mb-12">
         <h2
-          class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-on-scroll"
+          class="text-3xl sm:text-4xl md:text-5xl mb-4 text-gray-900 animate-on-scroll"
         >
           {title}
         </h2>
         <p
-          class="text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll"
+          class="text-lg text-gray-600 max-w-3xl mx-auto animate-on-scroll"
           style="transition-delay: 0.15s"
         >
           {description}
         </p>
         <p
-          class="text-sm text-gray-500 mt-3 animate-on-scroll"
-          style="transition-delay: 0.25s"
+          class="text-sm mt-3 animate-on-scroll"
+          style="transition-delay: 0.25s; font-weight: 800 !important;"
         >
           Unverbindlich & kostenfrei • Ohne Risiko
         </p>
@@ -188,7 +186,7 @@ const {
                 type="submit"
                 class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-8 py-4 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
               >
-                Kostenloses Strategiegespräch vereinbaren
+                <span class="cta-button-text">Kostenloses Strategiegespräch vereinbaren</span>
               </button>
             </div>
 
@@ -261,13 +259,27 @@ const {
       transform-origin: center;
       transition:
         transform 0.2s ease,
-        background-image 0.3s ease;
+        background 0.5s ease;
       will-change: transform;
       backface-visibility: hidden;
     }
 
     .cta-button:hover:not(:disabled) {
       transform: scale(1.02);
+    }
+
+    /* Success state */
+    .cta-button.success {
+      background: linear-gradient(to bottom right, #22c55e, #16a34a) !important;
+    }
+
+    /* Text fade animation */
+    .cta-button-text {
+      transition: opacity 0.3s ease;
+    }
+
+    .cta-button-text.fade-out {
+      opacity: 0;
     }
   </style>
 
@@ -285,7 +297,7 @@ const {
       const MIN_FORM_TIME = 3000; // 3 seconds minimum
 
       // Store original button text
-      const originalButtonText = submitButton?.textContent || "";
+      const originalButtonText = submitButton?.querySelector('.cta-button-text')?.textContent || "";
 
       // Clear messages when user starts typing
       const formInputs = form?.querySelectorAll("input, textarea");
@@ -381,9 +393,13 @@ const {
           // Show loading state
           if (submitButton) {
             submitButton.disabled = true;
-            submitButton.textContent = "Wird gesendet...";
+            const buttonText = submitButton.querySelector('.cta-button-text');
+            if (buttonText) {
+              buttonText.textContent = "Wird gesendet...";
+            }
           }
 
+          let response; // Declare outside try block for finally access
           try {
             // Prepare payload
             const payload = {
@@ -402,7 +418,7 @@ const {
               "https://automation.codariq.de/webhook/505861af-3734-43ab-bc87-b00b13338db6";
 
             // Send to n8n webhook
-            const response = await fetch(webhookUrl, {
+            response = await fetch(webhookUrl, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -425,17 +441,21 @@ const {
               // Success - Lead accepted
               successDiv.classList.remove("hidden");
 
-              // Update button to success state with smooth transition
-              submitButton.textContent = "✓ Gesendet!";
-              submitButton.className = submitButton.className.replace(
-                "from-orange-500 to-orange-700",
-                "from-green-500 to-green-600"
-              );
-              submitButton.className = submitButton.className.replace(
-                "hover:from-orange-600 hover:to-orange-800",
-                "hover:from-green-500 hover:to-green-600"
-              );
-              submitButton.disabled = true;
+              // Update button to success state with smooth fade animation
+              const buttonText = submitButton.querySelector('.cta-button-text');
+
+              // Fade out text
+              buttonText.classList.add('fade-out');
+
+              // Wait for fade out, then update content and fade in
+              setTimeout(() => {
+                buttonText.textContent = "✓ Gesendet!";
+                submitButton.classList.add('success');
+                submitButton.disabled = true;
+
+                // Fade text back in
+                buttonText.classList.remove('fade-out');
+              }, 300); // Match CSS transition duration
             } else if (response.status === 400) {
               // Validation error - missing required fields
               errors.push(
@@ -490,8 +510,11 @@ const {
           } finally {
             // Reset button state only if not successful
             if (submitButton && response && response.status !== 200) {
+              const buttonText = submitButton.querySelector('.cta-button-text');
               submitButton.disabled = false;
-              submitButton.textContent = originalButtonText;
+              if (buttonText) {
+                buttonText.textContent = originalButtonText;
+              }
             }
           }
         });

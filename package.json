@@ -25,21 +25,20 @@
     ]
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.12.9",
-    "resend": "^4.8.0",
-    "tailwindcss": "^4.1.11"
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.16.4",
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.4.2",
-    "@typescript-eslint/eslint-plugin": "^8.38.0",
-    "@typescript-eslint/parser": "^8.38.0",
+    "@astrojs/sitemap": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
     "astro-compress": "^2.3.8",
-    "eslint": "^9.31.0",
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^8.0.0",
-    "lint-staged": "^16.1.2",
-    "prettier": "^3.6.2",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "vite-imagetools": "^7.1.0"
   }

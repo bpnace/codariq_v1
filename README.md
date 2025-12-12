@@ -107,7 +107,7 @@ codariq_v1/
 
 ### Typography
 
-- **Font:** Switzer Variable (custom font family)
+- **Font:** Satoshi Variable (custom font family)
 - **Hierarchy:** Bold headlines, medium body text
 - **Responsive:** Scales from mobile to desktop
 
