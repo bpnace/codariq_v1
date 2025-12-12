@@ -260,6 +260,16 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
         filter: none;
       }
 
+      /* Mobile menu button color transition */
+      #mobile-menu-button {
+        transition: color 0.3s ease;
+      }
+
+      /* Dark color for mobile menu button when scrolled */
+      header.nav-scrolled #mobile-menu-button {
+        color: #374151 !important; /* text-gray-700 */
+      }
+
       /* Reduced motion for accessibility */
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -592,7 +602,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       >
         <!-- Header content will be added here -->
         <nav
-          class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 grid grid-cols-3 items-center"
+          class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 h-14 sm:h-16 flex items-center justify-between sm:grid sm:grid-cols-3 relative"
           id="main-nav"
         >
           <!-- Left: Logo -->
@@ -639,12 +649,11 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             >
           </div>
 
-          <!-- Right: CTA and Mobile Menu -->
-          <div class="flex items-center justify-end space-x-4">
-            <!-- Mobile Menu Button -->
+          <!-- Mobile: Centered Burger Menu -->
+          <div class="absolute left-1/2 -translate-x-1/2 sm:hidden">
             <button
               id="mobile-menu-button"
-              class="sm:hidden p-2 text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
+              class="p-2 text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
               aria-label="Menu öffnen"
               aria-expanded="false"
             >
@@ -661,7 +670,10 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                   d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
             </button>
+          </div>
 
+          <!-- Right: CTA Button -->
+          <div class="flex items-center justify-end">
             <a
               href="/#final-cta"
               class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-bold text-xs sm:text-sm md:text-base shadow-lg cta-button"
@@ -1242,6 +1254,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           // Navigation color change on scroll past hero section or article header
           const header = document.querySelector("header");
           const heroSection = document.querySelector("#hero");
+          const footer = document.querySelector("footer");
           const articleHeader = document.querySelector(".article-header"); // Blog article header
 
           // Use whichever section exists (hero for homepage, article-header for blog)
@@ -1253,8 +1266,17 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             function updateNavColor() {
               const sectionBottom = targetSection.getBoundingClientRect().bottom;
 
-              // Toggle class based on whether we've scrolled past the section
-              if (sectionBottom <= 0) {
+              // Check if we're in the footer area
+              let inFooter = false;
+              if (footer) {
+                const footerTop = footer.getBoundingClientRect().top;
+                const headerHeight = header.offsetHeight;
+                // If footer is touching or overlapping with header
+                inFooter = footerTop <= headerHeight;
+              }
+
+              // Toggle class based on whether we've scrolled past the section AND not in footer
+              if (sectionBottom <= 0 && !inFooter) {
                 header.classList.add("nav-scrolled");
               } else {
                 header.classList.remove("nav-scrolled");
@@ -1276,6 +1298,8 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
             // Listen to scroll events
             window.addEventListener("scroll", onScroll, { passive: true });
+            // Also listen to resize events to update on window size changes
+            window.addEventListener("resize", updateNavColor);
           }
         });
       </script>
