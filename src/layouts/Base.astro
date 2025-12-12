@@ -234,16 +234,16 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* Dark mode for navigation when scrolled past hero */
       header.nav-scrolled #main-nav .nav-link {
-        color: #111827 !important; /* text-gray-900 */
+        color: #374151 !important; /* text-gray-700 - dark gray */
       }
 
       header.nav-scrolled #main-nav svg {
-        color: #111827 !important; /* text-gray-900 */
+        color: #374151 !important; /* text-gray-700 - dark gray */
         stroke: currentColor;
       }
 
       header.nav-scrolled #main-nav button {
-        color: #111827 !important; /* text-gray-900 */
+        color: #374151 !important; /* text-gray-700 - dark gray */
       }
 
       /* Keep hover states working in both modes */
@@ -587,7 +587,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
     <div class="min-h-screen flex flex-col">
       <header
-        class="fixed top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-lg border-b border-white/30"
+        class="fixed top-0 left-0 right-0 z-50 bg-black/25 backdrop-blur-lg border-b border-white/20 transition-all duration-300"
         style="position: fixed !important; transform: translateY(0) !important;"
       >
         <!-- Header content will be added here -->
@@ -626,6 +626,11 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
               href="/#testimonials"
               class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
               >Referenzen</a
+            >
+            <a
+              href="/faq"
+              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              >FAQ</a
             >
             <a
               href="/#insights"
@@ -689,6 +694,16 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
               class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
               >Referenzen</a
             >
+            <a
+              href="/faq"
+              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
+              >FAQ</a
+            >
+            <a
+              href="/#insights"
+              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
+              >Blog</a
+            >
           </div>
         </div>
       </header>
@@ -705,17 +720,17 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8"
           >
             <!-- Column 1: Logo + Beschreibung -->
-            <div class="text-center md:text-left">
+            <div class="text-left">
               <div class="mb-6">
                 <img
                   src="/Logo1.svg"
                   alt="Codariq"
-                  class="h-16 md:h-20 w-auto brightness-0 invert mb-4 mx-auto md:mx-0"
+                  class="h-16 md:h-20 w-auto brightness-0 invert mb-4 md:mx-0"
                   loading="lazy"
                   decoding="async"
                 />
                 <p
-                  class="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto md:mx-0"
+                  class="text-gray-300 text-sm leading-relaxed max-w-sm md:mx-0"
                 >
                   Wir digitalisieren Ihre Geschäftsprozesse mit
                   maßgeschneiderten KI-Lösungen.
@@ -724,13 +739,13 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             </div>
 
             <!-- Column 2: Trust Badges + Industry Leaders -->
-            <div class="text-center md:text-left">
+            <div class="text-left">
               <div class="mb-6">
                 <h4 class="font-semibold text-gray-100 mb-3 text-sm">
                   Zertifizierungen
                 </h4>
                 <div
-                  class="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-4"
+                  class="flex flex-wrap justify-start gap-2 md:gap-3 mb-4"
                 >
                   <img
                     src="/images/badges/climate-friendly.webp"
@@ -761,7 +776,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                   >Zertifiziert durch:</span
                 >
                 <div
-                  class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3"
+                  class="flex items-center justify-start space-x-2 md:space-x-3"
                 >
                   <a
                     href="https://www.coursera.org/account/accomplishments/specialization/certificate/02X85MNGYZGE"
@@ -813,7 +828,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             </div>
 
             <!-- Column 3: Unternehmen -->
-            <div class="text-center md:text-left">
+            <div class="text-left">
               <h3 class="font-semibold text-gray-100 mb-4">Unternehmen</h3>
               <ul class="space-y-2 text-gray-300 mb-6">
                 <li>
@@ -850,7 +865,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             </div>
 
             <!-- Column 4: Kontakt + Newsletter -->
-            <div class="text-center md:text-left">
+            <div class="text-left">
               <!-- Kontakt Section -->
               <div class="mb-6">
                 <h3 class="font-semibold text-gray-100 mb-3">Kontakt</h3>
