@@ -20,21 +20,21 @@ const problems = [
   {
     title: "Rechnungen & Dokumente",
     description:
-      "Jede Rechnung manuell prüfen, abtippen, ablegen – 30min pro Rechnung.",
+      "Jede Rechnung manuell prüfen, abtippen, ablegen machen 30min mehr pro Rechnung aus.",
     solution: "KI liest aus und bucht automatisch",
     icon: "document",
   },
   {
     title: "Verstreutes Wissen",
     description:
-      "Antworten in Köpfen, Mails, PDFs – gleiche Fragen immer wieder.",
+      "Antworten in Anhängen, Mails, PDFs und die gleichen Fragen immer wieder.",
     solution: "KI durchsucht alles und antwortet",
     icon: "book",
   },
   {
     title: "Tool-Flickenteppich",
     description:
-      "CRM, Ticketsystem, Buchhaltung – nichts greift ineinander, Doppelarbeit.",
+      "CRM, Ticketsystem, Buchhaltung aber nichts greift ineinander, Doppelarbeit.",
     solution: "KI verbindet alle Systeme",
     icon: "link",
   },
@@ -71,10 +71,10 @@ const problems = [
             <div class="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col">
               {/* Icon */}
               <div class="mb-3 sm:mb-4">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-orange-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-orange-100 transition-colors duration-300">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
                   {problem.icon === "mail" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -90,7 +90,7 @@ const problems = [
                   )}
                   {problem.icon === "document" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -122,7 +122,7 @@ const problems = [
                   )}
                   {problem.icon === "book" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -170,7 +170,7 @@ const problems = [
                   )}
                   {problem.icon === "link" && (
                     <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
