@@ -231,7 +231,7 @@ const {
         </div>
 
         {/* Content Area */}
-        <div class="bg-white rounded-xl border-2 border-gray-200 shadow-xl relative min-h-[600px]">
+        <div class="bg-white rounded-xl border-2 border-gray-200 shadow-xl relative transition-all duration-300" style="min-height: 400px;">
           {
             steps.map((step, index) => (
               <div
@@ -343,6 +343,21 @@ const {
 
     // Mobile: Step navigation slideshow
     const navButtonsMobile = document.querySelectorAll<HTMLElement>("[data-step-nav-mobile]");
+    const mobileContainer = document.querySelector<HTMLElement>(".step-content-mobile")?.parentElement;
+
+    // Function to update mobile container height
+    function updateMobileContainerHeight() {
+      if (!mobileContainer) return;
+
+      const activeContent = mobileContainer.querySelector<HTMLElement>('[data-step-content-mobile][style*="opacity: 1"]');
+      if (activeContent) {
+        const contentHeight = activeContent.scrollHeight;
+        mobileContainer.style.height = `${contentHeight}px`;
+      }
+    }
+
+    // Set initial height
+    updateMobileContainerHeight();
 
     navButtonsMobile.forEach((button) => {
       button.addEventListener("click", function (this: HTMLElement) {
@@ -386,6 +401,9 @@ const {
             }
           }
         });
+
+        // Update container height after content change
+        setTimeout(updateMobileContainerHeight, 50);
       });
     });
   });
