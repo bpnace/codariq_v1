@@ -33,6 +33,10 @@ export default [
     },
   },
   {
-    ignores: ["**/*.astro"], // Skip Astro files for now since parser isn't working
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "**/*.astro", // Skip Astro files for now since parser isn't working
+    ],
   },
 ];
