@@ -59,19 +59,37 @@ textarea {
 /* Pulsing orange outline animation for CTA button in hero and testimonials */
 @keyframes pulse-outline {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(232, 80, 2, 0.7),
-                0 0 0 0 rgba(232, 80, 2, 0.4);
+    box-shadow: 0 0 0 0 rgba(var(--cta-pulse-rgb, 232, 80, 2), 0.7),
+                0 0 0 0 rgba(var(--cta-pulse-rgb, 232, 80, 2), 0.4);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(232, 80, 2, 0.4),
-                0 0 0 8px rgba(232, 80, 2, 0.1);
+    box-shadow: 0 0 0 4px rgba(var(--cta-pulse-rgb, 232, 80, 2), 0.4),
+                0 0 0 8px rgba(var(--cta-pulse-rgb, 232, 80, 2), 0.1);
   }
 }
 
 #hero .cta-button,
-#testimonials .cta-button {
+#testimonials .cta-button,
+.cta-button.cta-pulse {
+  --cta-pulse-rgb: 232, 80, 2;
   animation: pulse-outline 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  border: 1px solid rgba(232, 80, 2, 0.5);
+  border: 1px solid rgba(var(--cta-pulse-rgb, 232, 80, 2), 0.5);
+}
+
+.cta-pulse-orange {
+  --cta-pulse-rgb: 232, 80, 2;
+}
+
+.cta-pulse-blue {
+  --cta-pulse-rgb: 37, 99, 235;
+}
+
+.cta-pulse-purple {
+  --cta-pulse-rgb: 147, 51, 234;
+}
+
+.cta-pulse-green {
+  --cta-pulse-rgb: 22, 163, 74;
 }
 
 .hero-title {

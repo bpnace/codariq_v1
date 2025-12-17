@@ -1,0 +1,164 @@
+---
+export interface Props {
+  accent?: "orange" | "blue" | "purple" | "green";
+  variant?: "light" | "dark";
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  bullets?: string[];
+  buttonText: string;
+  href?: string;
+  footnote?: string;
+}
+
+const {
+  accent = "orange",
+  variant = "light",
+  eyebrow = "Kostenlos & unverbindlich",
+  title,
+  description,
+  bullets = ["15 Minuten Erstgespräch", "Vertraulich & praxisnah"],
+  buttonText,
+  href = "/#final-cta",
+  footnote = "Wir melden uns innerhalb von 24 Stunden zurück.",
+} = Astro.props;
+
+const lightByAccent =
+  accent === "blue"
+    ? {
+        wrap: "border-blue-200/70 bg-gradient-to-br from-blue-50 to-white",
+        badge: "bg-blue-100 text-blue-700",
+        button:
+          "bg-blue-600 hover:bg-blue-700 focus-visible:ring-blue-300/50",
+        icon: "bg-blue-600",
+      }
+    : accent === "purple"
+      ? {
+          wrap: "border-purple-200/70 bg-gradient-to-br from-purple-50 to-white",
+          badge: "bg-purple-100 text-purple-700",
+          button:
+            "bg-purple-600 hover:bg-purple-700 focus-visible:ring-purple-300/50",
+          icon: "bg-purple-600",
+        }
+      : accent === "green"
+        ? {
+            wrap: "border-green-200/70 bg-gradient-to-br from-green-50 to-white",
+            badge: "bg-green-100 text-green-700",
+            button:
+              "bg-green-600 hover:bg-green-700 focus-visible:ring-green-300/50",
+            icon: "bg-green-600",
+          }
+        : {
+            wrap: "border-orange-200/70 bg-gradient-to-br from-orange-50 to-white",
+            badge: "bg-orange-100 text-orange-700",
+            button:
+              "bg-orange-600 hover:bg-orange-700 focus-visible:ring-orange-300/50",
+            icon: "bg-orange-600",
+          };
+
+const darkByAccent =
+  accent === "blue"
+    ? {
+        wrap: "border-white/15 bg-white/10 backdrop-blur",
+        badge: "bg-white/15 text-white",
+        button:
+          "bg-white text-blue-900 hover:bg-white/90 focus-visible:ring-white/30",
+        icon: "bg-white/15",
+      }
+    : accent === "purple"
+      ? {
+          wrap: "border-white/15 bg-white/10 backdrop-blur",
+          badge: "bg-white/15 text-white",
+          button:
+            "bg-white text-purple-900 hover:bg-white/90 focus-visible:ring-white/30",
+          icon: "bg-white/15",
+        }
+      : accent === "green"
+        ? {
+            wrap: "border-white/15 bg-white/10 backdrop-blur",
+            badge: "bg-white/15 text-white",
+            button:
+              "bg-white text-green-900 hover:bg-white/90 focus-visible:ring-white/30",
+            icon: "bg-white/15",
+          }
+        : {
+            wrap: "border-white/15 bg-white/10 backdrop-blur",
+            badge: "bg-white/15 text-white",
+            button:
+              "bg-white text-orange-900 hover:bg-white/90 focus-visible:ring-white/30",
+            icon: "bg-white/15",
+          };
+
+const theme = variant === "dark" ? darkByAccent : lightByAccent;
+const textClass = variant === "dark" ? "text-white" : "text-gray-900";
+const subTextClass = variant === "dark" ? "text-white/80" : "text-gray-700";
+const bulletClass = variant === "dark" ? "text-white/85" : "text-gray-700";
+const blobClass =
+  accent === "blue"
+    ? "from-blue-200/60"
+    : accent === "purple"
+      ? "from-purple-200/60"
+      : accent === "green"
+        ? "from-green-200/60"
+        : "from-orange-200/60";
+---
+
+<section
+  class={`not-prose relative overflow-hidden rounded-2xl border p-6 sm:p-8 md:p-10 shadow-sm ${theme.wrap}`}
+>
+  <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <div class="min-w-0">
+      <div class="flex items-center gap-3 mb-3">
+        <span class={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${theme.badge}`}>
+          {eyebrow}
+        </span>
+        <span class={`hidden sm:inline text-xs ${subTextClass}`}>{footnote}</span>
+      </div>
+
+      <h3 class={`text-xl sm:text-2xl font-bold leading-tight ${textClass}`}>
+        {title}
+      </h3>
+      {description && (
+        <p class={`mt-2 text-sm sm:text-base leading-relaxed ${subTextClass}`}>
+          {description}
+        </p>
+      )}
+
+      {bullets?.length > 0 && (
+        <ul class="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
+          {bullets.map((b) => (
+            <li class={`flex items-start gap-2 ${bulletClass}`}>
+              <span class={`mt-0.5 h-5 w-5 rounded-full flex items-center justify-center ${theme.icon}`}>
+                <svg class="h-3 w-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span class="min-w-0">{b}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <div class="flex flex-col items-center gap-3">
+      <a
+        href={href}
+        class="cta-button cta-pulse inline-flex items-center justify-center gap-3 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 bg-gradient-to-br from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800 text-white whitespace-nowrap w-auto"
+        aria-label={buttonText}
+      >
+        {buttonText}
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+      <span class={`text-xs text-center ${subTextClass}`}>Keine Verpflichtung • Keine Buzzwords • Klare nächste Schritte</span>
+    </div>
+  </div>
+
+  {variant === "light" && (
+    <div
+      class={`absolute -top-16 -right-16 h-48 w-48 rounded-full bg-gradient-to-br ${blobClass} to-transparent blur-2xl`}
+      aria-hidden="true"
+    ></div>
+  )}
+</section>
