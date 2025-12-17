@@ -32,8 +32,8 @@ export interface Props {
 }
 
 const {
-  title = "Ihr Team ertrinkt in E-Mails, Rechnungen und Routinefragen?",
-  subtitle = "Wir bauen KI Agenten für Support, Backoffice, HR und Vertrieb, damit Sie wieder Zeit für Kunden und Strategie haben der retten misslückte bereits implementierte Ki-Anwendungen.",
+  title = "Ihr Team ertrinkt in E-Mails, Rechnungen und anderem Papierkram?",
+  subtitle = "Wir bauen intelligente Automationen für Support, Backoffice, HR und Vertrieb, damit Sie wieder Zeit für Kunden und Strategie haben oder retten misslückte bereits implementierte Ki-Anwendungen.",
   primaryCTA = "Kostenloses Erstgespräch",
   primaryCTALink = "#final-cta",
   heroImage = "/images/hero/hero1.webp",
@@ -59,6 +59,11 @@ const {
       decoding="async"
       style="height: calc(100% + 4rem);"
     />
+    <!-- Desktop-only gradient overlay (darker left, transparent right) -->
+    <div
+      class="hidden lg:block absolute inset-0 pointer-events-none bg-gradient-to-r from-black/40 via-black/0 to-transparent"
+      aria-hidden="true"
+    ></div>
     <!-- Overlay for text readability 
     <div class="absolute inset-0 bg-white/10" style="mix-blend-mode:screen;"></div>-->
   </div>
