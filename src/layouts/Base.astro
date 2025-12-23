@@ -220,14 +220,46 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       /* Color transitions for navigation elements when scrolling */
       #main-nav .nav-link,
       #main-nav svg,
-      #main-nav button {
+      #main-nav button,
+      #nav-logo {
         transition: color 0.3s ease, stroke 0.3s ease;
       }
 
-      /* Logo starts white on hero (inverted) */
+      /* Default: no header background, dark elements */
+      header {
+        background: transparent !important;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: transparent !important;
+        transition:
+          background-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+          backdrop-filter 500ms cubic-bezier(0.16, 1, 0.3, 1),
+          -webkit-backdrop-filter 500ms cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: background-color, border-color, box-shadow, backdrop-filter;
+      }
+
+      #main-nav .nav-link {
+        color: #374151 !important; /* text-gray-700 */
+      }
+
+      #main-nav .nav-link:hover {
+        color: #111827 !important; /* text-gray-900 */
+      }
+
+      #main-nav svg,
+      #main-nav button {
+        color: #374151 !important; /* text-gray-700 */
+        stroke: currentColor;
+      }
+
+      #main-nav button:hover {
+        color: #111827 !important; /* text-gray-900 */
+      }
+
       #nav-logo {
-        color: #ffffff;
-        transition: color 0.3s ease;
+        color: #374151; /* text-gray-700 */
       }
 
       /* Dark mode for navigation when scrolled past hero */
@@ -256,6 +288,15 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       /* Logo shows natural dark color when scrolled */
       header.nav-scrolled #nav-logo {
         color: #111827; /* text-gray-900 */
+      }
+
+      /* After scrolling past hero: blurred white header background */
+      header.nav-scrolled {
+        background: rgba(255, 255, 255, 0.78);
+        border-color: rgba(17, 24, 39, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
       }
 
       /* Mobile menu button color transition */
@@ -612,7 +653,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
     <div class="min-h-screen flex flex-col">
       <header
-        class="fixed top-0 left-0 right-0 z-50 bg-black/25 backdrop-blur-lg border-b border-white/20 transition-all duration-300"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
         style="position: fixed !important; transform: translateY(0) !important;"
       >
         <!-- Header content will be added here -->
@@ -640,27 +681,27 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           >
             <a
               href="/#process"
-              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
               >Prozess</a
             >
             <a
               href="/#benefits"
-              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
               >Preise</a
             >
             <a
               href="/#testimonials"
-              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
               >Referenzen</a
             >
             <a
               href="/faq"
-              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
               >FAQ</a
             >
             <a
               href="/#insights"
-              class="nav-link text-white hover:text-gray-200 transition-colors font-medium text-sm md:text-base"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
               >Blog</a
             >
           </div>
@@ -669,7 +710,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           <div class="absolute left-1/2 -translate-x-1/2 sm:hidden">
             <button
               id="mobile-menu-button"
-              class="p-2 text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
+              class="p-2 text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
               aria-label="Menu öffnen"
               aria-expanded="false"
             >
@@ -758,6 +799,10 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                 >
                   Wir automatisieren Ihr Business individuell und datensicher, 
                   damit Sie wieder Luft zum wachsen haben.
+                  Ordner
+                  Intelligente Automatisierungen, die dir echte Arbeit abnehmen.
+                  Ordner
+                  Intelligente Automatisierungen für Selbstständige und kleine Teams, damit Routinearbeit verschwindet und du wertvolle Zeit zurückgewinnst.
                 </p>
               </div>
             </div>
