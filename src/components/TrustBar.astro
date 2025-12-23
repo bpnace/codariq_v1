@@ -12,22 +12,22 @@ export interface Props {
 const {
   badges = [
     {
-      name: "Klimafreundlich",
-      icon: "climate-friendly",
-      description:
-        "CO₂ neutrales Hosting und umweltfreundliche Serverinfrastruktur",
-    },
-    {
       name: "DSGVO konform",
       icon: "gdpr-ready",
       description:
-        "Vollständige Datenschutz-Grundverordnung Compliance nach EU-Standard",
+        "Hosting und Datenverarbeitung in der EU auf Wunsch auch in Deutschland, damit eure Daten dort bleiben, wo sie hingehören.",
+    },
+    {
+      name: "EU-gehostet",
+      icon: "EU-hosted",
+      description:
+        "Hosting und Datenverarbeitung in der EU auf Wunsch auch in Deutschland, damit eure Daten dort bleiben, wo sie hingehören.",
     },
     {
       name: "Remote verfügbar",
       icon: "remote-only",
       description:
-        "100% digitale Beratung und Implementierung - ortsunabhängig",
+        "Hosting und Datenverarbeitung in der EU auf Wunsch auch in Deutschland, damit eure Daten dort bleiben, wo sie hingehören.",
     },
   ],
   showLogos = true,
@@ -38,12 +38,12 @@ const {
 <section id="trust-bar" class={`py-12 sm:py-16 bg-white ${className}`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-px max-w-4xl mx-auto bg-gray-200 p-px rounded-2xl"
     >
       {
         badges.map((badge, index) => (
           <div
-            class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md border border-gray-100 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
+            class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
             style={`animation-delay: ${index * 150}ms`}
           >
             {/* Badge Image - Made smaller */}
@@ -51,7 +51,7 @@ const {
               <img
                 src={`/images/badges/${badge.icon}.webp`}
                 alt={badge.name}
-                class="w-12 h-16 sm:w-16 sm:h-24 object-contain"
+                class={`w-12 h-16 sm:w-16 sm:h-24 ${badge.icon === "EU-hosted" ? "object-cover" : "object-contain"}`}
                 loading="lazy"
               />
             </div>
@@ -71,7 +71,7 @@ const {
     </div>
 
     <!-- Social Proof -->
-           <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-10">
+           <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-10">
         <div class="flex flex-col items-center">
           <p class="color-text-primary text-xs sm:text-sm mb-4 font-medium">
             Zertifizierte Partnerschaften mit führenden Unternehmen:
@@ -89,14 +89,21 @@ const {
             <img
               src="/images/logos/n8n.svg"
               alt="n8n"
-              class="h-8 sm:h-10 w-auto opacity-80"
+              class="h-12 sm:h-14 w-auto opacity-80"
               loading="lazy"
               decoding="async"
             />
             <img
               src="/images/logos/ibm.svg"
               alt="IBM"
-              class="h-8 sm:h-16 w-auto opacity-80"
+              class="h-14 sm:h-16 w-auto opacity-80"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/logos/mistral.svg"
+              alt="Mistral"
+              class="h-5 sm:h-8 w-auto opacity-80"
               loading="lazy"
               decoding="async"
             />

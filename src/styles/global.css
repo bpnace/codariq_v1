@@ -68,7 +68,6 @@ textarea {
   }
 }
 
-#hero .cta-button,
 #testimonials .cta-button,
 .cta-button.cta-pulse {
   --cta-pulse-rgb: 232, 80, 2;
@@ -498,7 +497,7 @@ header.nav-scrolled {
     margin-bottom: 0.75rem;
   }
 
-  #hero .window-content p {
+  #hero .hero-subtitle {
     font-size: 0.875rem;
     line-height: 1.5;
     margin-bottom: 1rem;
@@ -534,7 +533,7 @@ header.nav-scrolled {
     font-size: 1.25rem;
   }
 
-  #hero .window-content p {
+  #hero .hero-subtitle {
     font-size: 0.8125rem;
   }
 
