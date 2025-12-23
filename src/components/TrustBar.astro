@@ -38,33 +38,46 @@ const {
 <section id="trust-bar" class={`py-12 sm:py-16 bg-white ${className}`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-px max-w-4xl mx-auto bg-gray-200 p-px rounded-2xl"
+      class="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-row md:items-stretch md:justify-center gap-4 sm:gap-6 md:gap-0 max-w-4xl mx-auto px-4"
     >
       {
         badges.map((badge, index) => (
           <div
-            class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 animate-fade-in-up ${index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}"
-            style={`animation-delay: ${index * 150}ms`}
+            class={`relative ${index === 2 ? "sm:col-span-2 md:col-span-1" : ""} md:flex-1`}
           >
-            {/* Badge Image - Made smaller */}
-            <div class="mb-3 sm:mb-4 transition-transform duration-300">
-              <img
-                src={`/images/badges/${badge.icon}.webp`}
-                alt={badge.name}
-                class={`w-12 h-16 sm:w-16 sm:h-24 ${badge.icon === "EU-hosted" ? "object-cover" : "object-contain"}`}
-                loading="lazy"
-              />
+            <div
+              class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 animate-fade-in-up h-full"
+              style={`animation-delay: ${index * 150}ms`}
+            >
+              {/* Badge Image - Made smaller */}
+              <div class="mb-3 sm:mb-4 transition-transform duration-300">
+                <img
+                  src={`/images/badges/${badge.icon}.webp`}
+                  alt={badge.name}
+                  class={`w-12 h-16 sm:w-16 sm:h-24 ${badge.icon === "EU-hosted" ? "object-cover" : "object-contain"}`}
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Badge Text */}
+              <div class="text-center">
+                <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-1 sm:mb-2">
+                  {badge.name}
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                  {badge.description}
+                </p>
+              </div>
             </div>
 
-            {/* Badge Text */}
-            <div class="text-center">
-              <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-1 sm:mb-2">
-                {badge.name}
-              </h3>
-              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                {badge.description}
-              </p>
-            </div>
+            {
+              index < badges.length - 1 && (
+                <div
+                  class="hidden md:block absolute top-1/2 -translate-y-1/2 w-px h-[50px] bg-gray-200 right-[-0.5px]"
+                  aria-hidden="true"
+                ></div>
+              )
+            }
           </div>
         ))
       }

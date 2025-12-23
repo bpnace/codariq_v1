@@ -41,14 +41,16 @@ body {
   font-weight: 400;
 }
 
-p,
-li,
-span,
-button,
-label,
-input,
-textarea {
-  font-weight: 500;
+@layer base {
+  p,
+  li,
+  span,
+  button,
+  label,
+  input,
+  textarea {
+    font-weight: 500;
+  }
 }
 
 .cta-button,
