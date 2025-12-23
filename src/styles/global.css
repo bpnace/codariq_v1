@@ -9,6 +9,40 @@
   --color-accent-600: #C13A00;
 }
 
+@layer components {
+  .section-title {
+    @apply text-3xl sm:text-4xl md:text-5xl font-black text-gray-900;
+  }
+
+  .section-subtitle {
+    @apply text-base sm:text-lg md:text-xl font-medium text-gray-600 leading-relaxed;
+  }
+
+  .content-title {
+    @apply text-xl sm:text-2xl font-black text-gray-900;
+  }
+
+  .content-subtitle {
+    @apply text-base sm:text-lg font-medium text-gray-600 leading-relaxed;
+  }
+
+  .body-text {
+    @apply text-base sm:text-lg font-normal text-gray-700 leading-relaxed;
+  }
+
+  .body-muted {
+    @apply text-base sm:text-lg font-normal text-gray-600 leading-relaxed;
+  }
+
+  .micro-title {
+    @apply text-sm sm:text-base font-black text-gray-900;
+  }
+
+  .micro-text {
+    @apply text-sm font-medium text-gray-700 leading-relaxed;
+  }
+}
+
 /* Satoshi Variable Font - Regular (Upright) */
 @font-face {
   font-family: "Satoshi";

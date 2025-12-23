@@ -13,69 +13,53 @@ export interface Props {
 }
 
 const {
-  title = "So arbeiten wir",
-  subtitle = "Ein klarer 4-Schritt-Prozess für Ihre erfolgreiche KI-Automatisierung",
+  title = "So läuft die Zusammenarbeit",
+  subtitle = "Ein klarer Ablauf, damit du schnell Entlastung spürst. DSGVO konform und ohne Technik Chaos.",
   steps = [
     {
       number: 1,
-      title: "Analyse & Potenzialbewertung",
+      title: "Klarheit schaffen",
       description:
-        "Wir identifizieren, welcher Prozess sich am schnellsten und effizientesten automatisieren lässt inklusive klarer ROI-Aussage.",
+        "Wir schauen auf deinen Ablauf, wählen den besten Startpunkt und legen fest, woran du Erfolg misst.",
       details: [
-        "30-Min Erstgespräch (kostenfrei)",
-        "Tiefenanalyse des Zielprozesses (Ticketing, Rechnungen etc.)",
-        "Technische Machbarkeitsprüfung (Daten, Tools, Schnittstellen)",
-        "ROI-Schätzung und Aufwand-Nutzen-Matrix",
-        "Entscheidungsvorlage: Automatisieren oder nicht?",
+        "Kurzes Gespräch zum Ziel und aktuellen Frustpunkten",
+        "Wir skizzieren den Ablauf so, wie er aktuell läuft",
+        "Wir checken welche Tools du bereits nutzt und wo die Daten liegen",
+        "Wir definieren gemeinsam 1 bis 2 klare Messwerte, z.B. Zeitersparnis und schnellere Reaktionszeit",
+        "Du bekommst einen klaren Plan zur Umsetzung, Dauer und Kostenabschätzung",
       ],
-      duration: "1–2 Wochen",
-      result: "Klarer Go/No-Go für den Pilot.",
+      duration: "3 bis 5 Tage",
+      result: "Du weißt genau, was gebaut wird, warum es sich lohnt und wie der nächste Schritt aussieht.",
     },
     {
       number: 2,
-      title: "Architektur & Konzeptentwicklung",
+      title: "Umsetzen und verbinden",
       description:
-        "Gemeinsam definieren wir die optimale KI-Lösung: Welche Datenquellen, welche Tools, welcher Automationsgrad.",
+        "Wir bauen die Automatisierung und verbinden deine bestehenden Systeme.",
       details: [
-        "Technische Architektur (n8n + Langdock EU + bestehende Systeme)",
-        "Auswahl des richtigen Modells (RAG, OCR, Klassifikator etc.)",
-        "Prototyp / Flow-Spezifikation",
-        "Sicherheits- & DSGVO-Konzept (Logging, Zugriff, Datenfluss)",
-        "Milestone-Roadmap bis Go-Live",
+        "Wir setzen den Workflow in n8n um und binden die benötigten Systeme an",
+        "Bei Bedarf mit KI Funktionen wie Sortierung, Zusammenfassung und Antwortentwürfe.",
+        "Wir testen mit echten Beispielen aus deinem Alltag und bauen Fallbacks für Sonderfälle",
+        "Zugriffe, Protokolle und Datenflüsse richten wir so ein, dass es DSGVO sicher bleibt",
+        "Ausführliche Dokumentation, damit du jederzeit den Überblick behältst",
       ],
-      duration: "1–2 Wochen",
-      result: "Freigegebener Lösungsplan, kein 'Beratungsvakuum'.",
+      duration: "2 bis 6 Wochen",
+      result: "Die Lösung läuft in deiner Umgebung und nimmt dir spürbar Arbeit ab.",
     },
     {
       number: 3,
-      title: "Entwicklung & Integration",
+      title: "Einführen und stabilisieren",
       description:
-        "Wir bauen die fertige Automationslösung direkt in eure bestehende Systemlandschaft.",
+        "Wir bringen die Lösung in den Alltag, schulen und verbessern gezielt, bis alles zuverlässig sitzt.",
       details: [
-        "Implementierung des vollständigen KI-Workflows in n8n",
-        "Einbindung von Langdock als EU-LLM-Backend",
-        "Anbindung an Helpdesk, DMS, ERP oder Datenquellen",
-        "Testphase mit Golden-Set & Human-Fallback",
-        "Monitoring & Kostenkontrolle (Token, OCR, API etc.)",
-        "Vollständige technische Dokumentation",
+        "Einführung in Stufen, damit der Betrieb entspannt weiterläuft",
+        "Kurze Einweisung für dich und dein Team, ohne Fachchinesisch",
+        "Monitoring und Feinjustierung in den ersten Wochen",
+        "Anpassungen, wenn sich Prozesse oder Daten ändern",
+        "Optional: laufende Betreuung, wenn du das dauerhaft auslagern willst",
       ],
-      duration: "4–10 Wochen (je nach Produkt & Prozesskomplexität)",
-      result: "Funktionsfähige Lösung in echter Umgebung – nicht nur 'Prototyp'.",
-    },
-    {
-      number: 4,
-      title: "Go-Live & Begleitphase",
-      description:
-        "Wir rollen die Lösung stabil aus, schulen die Nutzer und stellen sicher, dass die Automatisierung messbar wirkt.",
-      details: [
-        "Stufenweiser Rollout (25 % → 50 % → 100 %)",
-        "KPI-Tracking (Zeitersparnis, FCR, Kostenreduktion etc.)",
-        "Team-Onboarding / Kurzschulung (wenn gebucht)",
-        "Optionaler Wartungs- & Optimierungs-Retainer",
-        "Anpassung bei Daten- oder Prozessänderungen",
-      ],
-      duration: "3–12 Monate Begleitung (abhängig vom Paket)",
-      result: "Dauerhafte, messbare Automatisierung statt Einmal-Projekt.",
+      duration: "4 bis 12 Wochen Begleitung",
+      result: "Stabile Automatisierung, die dein Team wirklich nutzt und die messbar entlastet.",
     },
   ],
 } = Astro.props;
@@ -88,12 +72,12 @@ const {
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
       <h2
-        class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+        class="section-title mb-3 sm:mb-4 animate-on-scroll"
       >
         {title}
       </h2>
       <p
-        class="text-base sm:text-lg md:text-xl font-light text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        class="section-subtitle max-w-3xl mx-auto animate-on-scroll"
         style="transition-delay: 0.15s"
       >
         {subtitle}
@@ -103,9 +87,9 @@ const {
     <!-- Process Steps -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       {/* Desktop: Vertical Slideshow (hidden on mobile) */}
-      <div class="hidden lg:flex gap-8">
+      <div class="hidden lg:flex gap-8 items-stretch">
         {/* Left: Step Navigation */}
-        <div class="w-80 flex-shrink-0 space-y-8">
+        <div class="w-80 flex-shrink-0 flex flex-col justify-center gap-6 min-h-[560px]">
           {
             steps.map((step, index) => (
               <button
@@ -125,7 +109,7 @@ const {
                 {/* Title */}
                 <div class="flex-1 min-w-0">
                   <h3
-                    class="text-base font-black leading-tight transition-colors duration-300"
+                    class="text-lg font-black leading-tight transition-colors duration-300"
                     data-step-title={index}
                     style={index === 0 ? "color: rgb(17 24 39);" : "color: rgb(107 114 128);"}
                   >
@@ -138,7 +122,7 @@ const {
         </div>
 
         {/* Right: Content Area */}
-        <div class="flex-1 bg-white rounded-xl border-2 border-gray-200 shadow-xl relative min-h-[400px] overflow-hidden">
+        <div class="flex-1 bg-white rounded-xl border-2 border-gray-200 shadow-xl relative min-h-[560px] overflow-hidden">
           {
             steps.map((step, index) => (
               <div
@@ -148,7 +132,7 @@ const {
               >
                 {/* Header */}
                 <div class="mb-4">
-                  <h3 class="text-xl font-black text-gray-900 mb-1.5">
+                  <h3 class="content-title mb-1.5">
                     {step.title}
                   </h3>
                   <div class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs font-semibold">
@@ -160,18 +144,20 @@ const {
                 </div>
 
                 {/* Description */}
-                <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">
+                <p class="body-muted mb-4">
                   {step.description}
                 </p>
 
                 {/* Details */}
                 <div class="mb-4">
-                  <h4 class="font-black text-gray-900 text-sm mb-3">Was ist enthalten:</h4>
-                  <div class="grid grid-cols-2 gap-2">
+                  <h4 class="micro-title mb-3">Was ist enthalten:</h4>
+                  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
                     {step.details.map((detail) => (
-                      <div class="flex items-start gap-2 bg-gray-50 rounded-lg p-2.5 border border-gray-200">
+                      <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3 border border-gray-200">
                         <div class="w-1.5 h-1.5 bg-orange-500 rounded-full flex-shrink-0 mt-1.5" />
-                        <span class="text-xs text-gray-700 leading-snug">{detail}</span>
+                        <span class="text-sm sm:text-base font-medium text-gray-700 leading-snug">
+                          {detail}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -184,8 +170,12 @@ const {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div class="flex-1">
-                      <span class="font-black text-gray-900 text-xs block mb-0.5">Ergebnis:</span>
-                      <p class="text-gray-700 text-xs leading-relaxed">{step.result}</p>
+                      <span class="text-sm sm:text-base font-black text-gray-900 block mb-1">
+                        Ergebnis:
+                      </span>
+                      <p class="text-sm sm:text-base font-medium text-gray-700 leading-relaxed">
+                        {step.result}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -218,7 +208,7 @@ const {
                 {/* Title */}
                 <div class="flex-1 min-w-0">
                   <h3
-                    class="text-sm font-black leading-tight transition-colors duration-300"
+                    class="text-base font-black leading-tight transition-colors duration-300"
                     data-step-title-mobile={index}
                     style={index === 0 ? "color: rgb(17 24 39);" : "color: rgb(107 114 128);"}
                   >
@@ -231,7 +221,7 @@ const {
         </div>
 
         {/* Content Area */}
-        <div class="bg-white rounded-xl border-2 border-gray-200 shadow-xl relative transition-all duration-300" style="min-height: 400px;">
+        <div class="bg-white rounded-xl border-2 border-gray-200 shadow-xl relative transition-all duration-300" style="min-height: 440px;">
           {
             steps.map((step, index) => (
               <div
@@ -253,18 +243,20 @@ const {
                 </div>
 
                 {/* Description */}
-                <p class="text-sm font-light text-gray-600 leading-relaxed mb-3">
+                <p class="body-muted mb-3">
                   {step.description}
                 </p>
 
                 {/* Details */}
                 <div class="mb-3">
-                  <h4 class="font-black text-gray-900 text-sm mb-2.5">Was ist enthalten:</h4>
-                  <div class="space-y-1.5">
+                  <h4 class="micro-title mb-2.5">Was ist enthalten:</h4>
+                  <div class="space-y-2">
                     {step.details.map((detail) => (
-                      <div class="flex items-start gap-2 bg-gray-50 rounded-lg p-2 border border-gray-200">
+                      <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3 border border-gray-200">
                         <div class="w-1.5 h-1.5 bg-orange-500 rounded-full flex-shrink-0 mt-1.5" />
-                        <span class="text-xs text-gray-700 leading-snug">{detail}</span>
+                        <span class="text-sm sm:text-base font-medium text-gray-700 leading-snug">
+                          {detail}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -277,8 +269,12 @@ const {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div class="flex-1">
-                      <span class="font-black text-gray-900 text-xs block mb-0.5">Ergebnis:</span>
-                      <p class="text-gray-700 text-xs leading-relaxed">{step.result}</p>
+                      <span class="text-sm sm:text-base font-black text-gray-900 block mb-1">
+                        Ergebnis:
+                      </span>
+                      <p class="text-sm sm:text-base font-medium text-gray-700 leading-relaxed">
+                        {step.result}
+                      </p>
                     </div>
                   </div>
                 </div>
