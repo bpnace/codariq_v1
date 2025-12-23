@@ -9,6 +9,23 @@
   --color-accent-600: #C13A00;
 }
 
+/* Codec Pro (Logo) */
+@font-face {
+  font-family: "CodecPro";
+  src: url("/fonts/CodecPro-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CodecPro";
+  src: url("/fonts/CodecPro-Heavy.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer components {
   .section-title {
     @apply text-3xl sm:text-4xl md:text-5xl font-black text-gray-900;
@@ -40,6 +57,14 @@
 
   .micro-text {
     @apply text-sm font-medium text-gray-700 leading-relaxed;
+  }
+
+  .brand-logo {
+    font-family: "CodecPro", "Satoshi", system-ui, sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
   }
 }
 

@@ -226,8 +226,8 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* Logo starts white on hero (inverted) */
       #nav-logo {
-        filter: brightness(0) invert(1);
-        transition: filter 0.3s ease;
+        color: #ffffff;
+        transition: color 0.3s ease;
       }
 
       /* Dark mode for navigation when scrolled past hero */
@@ -255,7 +255,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* Logo shows natural dark color when scrolled */
       header.nav-scrolled #nav-logo {
-        filter: none;
+        color: #111827; /* text-gray-900 */
       }
 
       /* Mobile menu button color transition */
@@ -311,7 +311,6 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
         "alternateName": "codariq",
         "description": "Kleingewerbe für KI-Systeme im deutschen Mittelstand. Spezialisiert auf Beratung, Implementierung, Wartung und Rettung misglückter KI-Projekte in KMU.",
         "url": "https://codariq.de",
-        "logo": "https://codariq.de/Logo1.svg",
         "image": "https://codariq.de/images/hero/hero2.webp",
         "foundingDate": "2025",
         "foundingLocation": {
@@ -624,12 +623,13 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           <!-- Left: Logo -->
           <div class="flex items-center justify-start">
             <a href="/" class="hover:opacity-90 transition-all duration-300">
-              <img
-                src="/Logo1.svg"
-                alt="Codariq"
-                class="h-8 sm:h-10 w-auto transition-all duration-300"
+              <span
                 id="nav-logo"
-              />
+                class="brand-logo text-xl sm:text-2xl leading-none"
+                aria-label="Codariq"
+              >
+                codariq
+              </span>
             </a>
           </div>
 
@@ -750,18 +750,14 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             <!-- Column 1: Logo + Beschreibung -->
             <div class="text-left">
               <div class="mb-6">
-                <img
-                  src="/Logo1.svg"
-                  alt="Codariq"
-                  class="h-16 md:h-20 w-auto brightness-0 invert mb-4 md:mx-0"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div class="brand-logo text-white text-3xl md:text-4xl leading-none mb-4">
+                  codariq
+                </div>
                 <p
                   class="text-gray-300 text-sm leading-relaxed max-w-sm md:mx-0"
                 >
-                  Wir digitalisieren Ihre Geschäftsprozesse mit
-                  maßgeschneiderten KI-Lösungen.
+                  Wir automatisieren Ihr Business individuell und datensicher, 
+                  damit Sie wieder Luft zum wachsen haben.
                 </p>
               </div>
             </div>
