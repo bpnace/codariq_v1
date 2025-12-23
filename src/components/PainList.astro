@@ -160,7 +160,7 @@ const problems = [
                 {/* Back */}
                 <label
                   for={`pain-card-${index}`}
-                  class="flip-face flip-back bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col cursor-pointer"
+                  class="flip-face flip-back bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col text-center cursor-pointer"
                 >
                   <div class="mb-3 sm:mb-4">
                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-50 flex items-center justify-center">
@@ -184,17 +184,17 @@ const problems = [
                       }
                     </div>
                   </div>
-                  <div class="flex-1">
-                    <p class="text-xs sm:text-sm font-bold text-gray-500 mb-2">
-                      Lösung für {problem.title}
-                    </p>
-                    <p class="text-sm sm:text-base font-regular text-gray-800 leading-relaxed">
+                  <div class="flex-1 flex flex-col items-center justify-center">
+                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+                      {problem.title}
+                    </h3>
+                    <p class="text-sm sm:text-base font-regular text-gray-600 leading-relaxed">
                       {problem.solution}
                     </p>
+                    <p class="mt-5 text-sm sm:text-base font-bold text-orange-600">
+                      Zurück
+                    </p>
                   </div>
-                  <p class="mt-4 text-sm sm:text-base font-bold text-gray-500">
-                    Zurück
-                  </p>
                 </label>
               </div>
             </div>
