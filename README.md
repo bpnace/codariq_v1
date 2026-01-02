@@ -1,6 +1,6 @@
 # Codariq Landing Page
 
-> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen"**
+> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für Selbstständige und kleine Teams bis 50 Personen"**
 
 [![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
 [![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
@@ -8,14 +8,14 @@
 
 ## 🎯 Project Overview
 
-**Codariq** is a KI-Automatisierung (AI automation) service provider specializing in small and medium-sized enterprises (SMEs) with 5-500 employees across Germany, Austria, and Switzerland.
+**Codariq** is a KI-Automatisierung (AI automation) service provider specializing in self-employed professionals and small teams (1-50 people) across Germany, Austria, and Switzerland.
 
 ### Target Audience
 
-- **Company Size:** 5-500 employees
-- **Market Focus:** German-speaking SMEs (DACH region)
-- **Industries:** Manufacturing, logistics, professional services, retail
-- **Pain Points:** Manual processes, inefficient workflows, data entry tasks
+- **Company Size:** Self-employed individuals and small teams (1-50 people)
+- **Market Focus:** German-speaking solo entrepreneurs and small businesses (DACH region)
+- **Industries:** Professional services, consulting, freelancers, agencies
+- **Pain Points:** Email overload, document processing, backoffice tasks, repetitive manual work
 
 ### Key Services
 
@@ -257,6 +257,14 @@ See [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) for detailed deployment test 
 - Content Security Policy implemented
 - HTTPS enforced across all pages
 - No third-party tracking without consent
+
+### Security Improvements (Januar 2025)
+
+- ✅ Moved webhook credentials from client-side to server-side API endpoints
+- ✅ Created `/api/newsletter` and `/api/dashboard-waitlist` endpoints
+- ✅ Credentials stored in `.env` file (not committed to git)
+- ✅ Verified: No credentials exposed in build output
+- ✅ All newsletter forms (footer, blog, dashboard) use secure server-side endpoints
 
 ## 📊 Conversion Optimization
 

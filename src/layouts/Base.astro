@@ -5,12 +5,14 @@ export interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  forceNavSolid?: boolean;
 }
 
 const {
   title,
   description = "Wir bauen KI Agenten, die Support, Backoffice und HR entlasten – damit Sie mehr Zeit für Kunden und Entscheidungen haben",
   ogImage,
+  forceNavSolid = false,
 } = Astro.props;
 // Normalize canonical URL: remove trailing slashes and .html extension
 let pathname = Astro.url.pathname;
@@ -649,6 +651,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
   <body
     class="bg-white text-gray-900 antialiased overscroll-behavior-y-contain"
+    data-force-nav-solid={forceNavSolid}
   >
     <!-- Skip Links for accessibility -->
     <a
@@ -660,7 +663,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
     <div class="min-h-screen flex flex-col">
       <header
-        class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
+        class={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${forceNavSolid ? "nav-scrolled" : ""}`}
         style="position: fixed !important; transform: translateY(0) !important;"
       >
         <!-- Header content will be added here -->
@@ -1312,6 +1315,15 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           const heroSection = document.querySelector("#hero");
           const footer = document.querySelector("footer");
           const articleHeader = document.querySelector(".article-header"); // Blog article header
+
+          const forceNavSolid =
+            document.body.dataset.forceNavSolid === "true";
+
+          // Force solid nav (e.g., blog pages without hero)
+          if (forceNavSolid && header) {
+            header.classList.add("nav-scrolled");
+            return;
+          }
 
           // Use whichever section exists (hero for homepage, article-header for blog)
           const targetSection = heroSection || articleHeader;

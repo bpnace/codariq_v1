@@ -1,13 +1,44 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { fetchDrupalPosts, type DrupalPost } from '../../lib/drupal';
 
 // SEO and meta data
-const title = "Codariq Blog: KI-Automatisierung & Digitale Transformation";
-const description = "Praxisnahe Insights zu KI Agenten, erfolgreichen Pilotprojekten und Rettung gescheiterter Implementierungen – für Ihre Entscheidung im Mittelstand";
-const keywords = "KI-Blog Deutschland, Automatisierung Blog, Digitale Transformation, KI-Trends 2024, Change Management Blog, Prozessautomatisierung Tipps, Unternehmensdigitalisierung";
-const author = "Codariq Team";
-const publishedTime = "2024-12-15T10:00:00+01:00";
+const title = "Codariq Blog: Automatisierung für Selbstständige und kleine Teams";
+const description = "Praxisnahe Artikel zu Automatisierung, Datenschutz und Projektrettung, damit du weniger Routinearbeit hast und mehr Zeit für dein Kerngeschäft gewinnst.";
+const keywords = "Prozesse automatisieren, Workflow automatisieren, Automatisierung für Selbstständige, Prozessautomatisierung KMU, E Mail automatisieren, Dokumente automatisieren, Rechnungen automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, DSGVO konforme Automatisierung";
+const author = "Codariq Research Team";
+const publishedTime = "2026-01-02T10:00:00+01:00";
 const image = "/images/hero/hero2.webp";
+
+const drupalPosts: DrupalPost[] = await fetchDrupalPosts(6);
+
+const formatDate = (value?: string) => {
+  if (!value) return "";
+  const d = new Date(value);
+  return d.toLocaleDateString("de-DE", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
+const formatCategory = (value: string | string[] | undefined) => {
+  if (!value) return "Blog";
+  let first: string =
+    Array.isArray(value) && value.length > 0
+      ? value[0] as string
+      : (value as string);
+
+  if (typeof first === "object" && first !== null) {
+    // Drupal list items can come back as objects; try common props
+    // @ts-ignore
+    first = first.value || first.name || String(first);
+  }
+
+  const cleaned = String(first).trim();
+  if (!cleaned) return "Blog";
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+};
 ---
 
 <Base
@@ -15,10 +46,11 @@ const image = "/images/hero/hero2.webp";
   description={description}
   keywords={keywords}
   ogImage={image}
+  forceNavSolid={true}
 >
 
 <!-- Breadcrumb Navigation -->
-<nav aria-label="Breadcrumb" class="bg-gray-50 py-3">
+<nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
   <div class="max-w-4xl mx-auto px-4">
     <ol class="flex items-center space-x-2 text-sm">
       <li><a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a></li>
@@ -34,7 +66,7 @@ const image = "/images/hero/hero2.webp";
     <div class="text-center">
 
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-        KI-Automatisierung & <span class="text-orange-600">Digitale Transformation</span>
+        Automatisierung, die dir <span class="text-orange-600">Routinearbeit abnimmt</span>
       </h1>
 
       <p class="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
@@ -72,13 +104,13 @@ const image = "/images/hero/hero2.webp";
                 </span>
               </div>
               <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-red-600 transition-colors line-clamp-2">
-                Misglückte KI-Projekte retten: Der Praxis-Leitfaden
+                KI Projekt retten: 3 Praxisbeispiele, wie es wieder stabil läuft
               </h2>
               <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                KI-Projekte scheitern in 70% der Fälle. Erfahren Sie, wie Sie gescheiterte Implementierungen erkennen und erfolgreich retten.
+                Wenn Automatisierung im Alltag nicht stabil läuft: typische Ursachen, schnelle Checks und ein klarer Plan, damit es genutzt wird.
               </p>
               <div class="flex items-center justify-between text-xs text-gray-500">
-                <span>18 Min. Lesezeit</span>
+                <span>10 Min. Lesezeit</span>
                 <span>9. Januar 2025</span>
               </div>
             </div>
@@ -100,10 +132,10 @@ const image = "/images/hero/hero2.webp";
                 </span>
               </div>
               <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
-                KI-Projekte compliant halten: Der deutsche Leitfaden für 2025
+                KI und Datenschutz in Deutschland: das Wichtigste ohne Juristendeutsch
               </h2>
               <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                Umfassender Leitfaden für KI-Compliance in Deutschland 2025. DSGVO, IT-Sicherheitsgesetz, TMG und weitere deutsche Gesetze für rechtssichere KI-Implementierung.
+                DSGVO, AVV, Hosting und Zugriffsschutz, kurz und verständlich. Damit du weißt, worauf es vor dem Start wirklich ankommt.
               </p>
               <div class="flex items-center justify-between text-xs text-gray-500">
                 <span>15 Min. Lesezeit</span>
@@ -124,14 +156,14 @@ const image = "/images/hero/hero2.webp";
                   </svg>
                 </div>
                 <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
-                  KI-Strategie
+                  Einstieg
                 </span>
               </div>
               <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
-                KI-Integration in 5 Schritten
+                Automatisierung starten in 5 Schritten
               </h2>
               <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                Erfahren Sie die 5 bewährten Schritte zur erfolgreichen KI-Integration in deutsche Unternehmen. Von Strategie bis Implementierung mit aktuellen EU-Trends.
+                Ein klarer Ablauf für den Einstieg, ohne Tool Chaos. Du siehst, wie du den richtigen Startpunkt wählst und Fortschritt messbar machst.
               </p>
               <div class="flex items-center justify-between text-xs text-gray-500">
                 <span>8 Min. Lesezeit</span>
@@ -156,38 +188,38 @@ const image = "/images/hero/hero2.webp";
             </span>
           </div>
           <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-            Automatisierung ROI maximieren
+            ROI von Prozessautomatisierung: So rechnet es sich
           </h2>
           <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-            Entdecken Sie bewährte Methoden zur Maximierung des ROI Ihrer Automatisierungsprojekte. Praktische Tipps für deutsche Unternehmen mit Benchmarks.
+            Eine einfache Rechenlogik, um zu entscheiden, ob sich ein Ablauf lohnt. Mit Beispielen aus E Mails, Dokumenten, Leads und Recruiting.
           </p>
           <div class="flex items-center justify-between text-xs text-gray-500">
             <span>12 Min. Lesezeit</span>
-            <span>15. Dezember 2024</span>
+            <span>2. Januar 2026</span>
           </div>
         </div>
       </a>
     </article>
 
     <!-- Blog Post 4 -->
-    <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-      <a href="/blog/ki-teams-vorbereiten" class="block">
-        <div class="p-6">
-          <div class="mb-4">
-            <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
+        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+          <a href="/blog/ki-teams-vorbereiten" class="block">
+            <div class="p-6">
+              <div class="mb-4">
+                <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
               </svg>
             </div>
             <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
-              Change Management
+              Alltag
             </span>
           </div>
           <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
-            KI-Teams erfolgreich vorbereiten
+            Teams und Abläufe so vorbereiten, dass es genutzt wird
           </h2>
           <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-            Bewährte Strategien für die Vorbereitung Ihrer Teams auf KI-Technologien. Praktische Tipps für Change Management in deutschen Unternehmen.
+            Technik allein reicht nicht. So bringst du Automatisierung in deinen Alltag, ohne dass sie umgangen wird oder nebenher ausstirbt.
           </p>
           <div class="flex items-center justify-between text-xs text-gray-500">
             <span>10 Min. Lesezeit</span>
@@ -195,17 +227,76 @@ const image = "/images/hero/hero2.webp";
           </div>
         </div>
       </a>
-    </article>
+        </article>
 
-  </div>
+        {
+          drupalPosts.map((post) => {
+            const displayCategory = formatCategory(post.category);
+            const rawSummary = post.summary || post.body || "";
+            const summaryText = rawSummary
+              .replace(/<[^>]+>/g, " ")
+              .replace(/\s+/g, " ")
+              .trim()
+              .slice(0, 140);
+            return (
+              <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                <a href={`/blog/${post.slug}`} class="block">
+                  <div class="p-6">
+                    <div class="mb-4">
+                      <div class="w-full h-32 rounded-lg overflow-hidden mb-4 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                        {
+                          post.coverUrl ? (
+                            <img
+                              src={post.coverUrl}
+                              alt={post.title}
+                              class="w-full h-full object-cover"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          ) : (
+                            <svg
+                              class="w-8 h-8 text-orange-600"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                          )
+                        }
+                      </div>
+                      <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+                        {displayCategory}
+                      </span>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                      {post.title}
+                    </h4>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                      {summaryText}
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                      <span>
+                        {post.readTime ? `${post.readTime} Min. Lesezeit` : ""}
+                      </span>
+                      <span>{formatDate(post.date)}</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            );
+          })
+        }
+
+      </div>
 
   <!-- Newsletter CTA -->
   <div class="mt-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-8 text-center">
     <h3 class="text-2xl font-bold text-gray-900 mb-4">
-      Mehr Insights erhalten
+      Mehr Praxiswissen erhalten
     </h3>
     <p class="text-gray-700 mb-6 max-w-2xl mx-auto">
-      Abonnieren Sie unseren Newsletter und erhalten Sie regelmäßig aktuelle Einblicke zu KI-Automatisierung und digitaler Transformation.
+      Hol dir ab und zu einen kurzen Impuls: konkrete Beispiele, klare Abläufe und Dinge, die dir wirklich Zeit sparen.
     </p>
     <!-- Newsletter Form -->
     <form id="blog-newsletter-form" class="max-w-md mx-auto flex gap-3">
@@ -237,7 +328,7 @@ const image = "/images/hero/hero2.webp";
         </svg>
         <div>
           <p class="font-medium text-green-800 text-sm">Erfolgreich angemeldet!</p>
-          <p class="text-green-700 text-xs">Sie erhalten eine Bestätigungs-E-Mail</p>
+          <p class="text-green-700 text-xs">Du erhältst eine Bestätigungs E Mail</p>
         </div>
       </div>
     </div>
@@ -249,7 +340,7 @@ const image = "/images/hero/hero2.webp";
   </div>
 </section>
 
-<!-- Categories Section -->
+<!-- Categories Section
 <section class="bg-gray-50 py-12">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h3 class="text-2xl font-bold text-gray-900 mb-8">Entdecken Sie mehr Themen</h3>
@@ -285,7 +376,7 @@ const image = "/images/hero/hero2.webp";
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 </Base>
 
@@ -310,38 +401,38 @@ const image = "/images/hero/hero2.webp";
     const blogNewsletterForm = document.getElementById('blog-newsletter-form');
     const blogNewsletterSuccess = document.getElementById('blog-newsletter-success');
     const blogNewsletterError = document.getElementById('blog-newsletter-error');
-    
+
     if (blogNewsletterForm) {
       blogNewsletterForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+
         const emailInput = document.getElementById('blog-newsletter-email');
         const submitButton = blogNewsletterForm.querySelector('button[type="submit"]');
         const email = emailInput.value.trim();
-        
+
         // Hide previous messages
         if (blogNewsletterSuccess) blogNewsletterSuccess.classList.add('hidden');
         if (blogNewsletterError) blogNewsletterError.classList.add('hidden');
-        
+
         // Validate email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email || !emailRegex.test(email)) {
           if (blogNewsletterError) {
-            blogNewsletterError.querySelector('p').textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+            blogNewsletterError.querySelector('p').textContent = 'Bitte gib eine gültige E Mail Adresse ein.';
             blogNewsletterError.classList.remove('hidden');
           }
           return;
         }
-        
+
         // Set loading state
         if (submitButton) {
           submitButton.disabled = true;
           submitButton.textContent = 'Wird gesendet...';
         }
-        
+
         try {
-          // Send to webhook
-          const response = await fetch('https://automation.codariq.de/webhook/9f2483b5-7d05-432c-be3b-95e578dae228', {
+          // Send to newsletter API endpoint
+          const response = await fetch('/api/newsletter', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -353,7 +444,7 @@ const image = "/images/hero/hero2.webp";
               userAgent: navigator.userAgent
             })
           });
-          
+
           if (response.ok) {
             // Show success message
             if (blogNewsletterSuccess) {
@@ -363,7 +454,7 @@ const image = "/images/hero/hero2.webp";
           } else {
             throw new Error('Newsletter-Anmeldung fehlgeschlagen');
           }
-          
+
         } catch (error) {
           console.error('Newsletter subscription error:', error);
           if (blogNewsletterError) {
@@ -387,7 +478,7 @@ const image = "/images/hero/hero2.webp";
   "@context": "https://schema.org",
   "@type": "Blog",
   "name": "Codariq Blog",
-  "description": "Insights zu KI-Automatisierung und digitaler Transformation für deutsche Unternehmen",
+  "description": "Praxisnahe Artikel zu Automatisierung, Datenschutz und Projektrettung für Selbstständige und kleine Teams in DACH.",
   "url": "https://codariq.de/blog",
   "publisher": {
     "@type": "Organization",
@@ -400,52 +491,52 @@ const image = "/images/hero/hero2.webp";
   "blogPost": [
     {
       "@type": "BlogPosting",
-      "headline": "Misglückte KI-Projekte retten: Der Praxis-Leitfaden für deutsche KMU",
+      "headline": "KI Projekt retten: 3 Praxisbeispiele, wie es wieder stabil läuft",
       "url": "https://codariq.de/blog/ki-projekte-retten",
       "datePublished": "2025-01-09T10:00:00+01:00",
       "author": {
         "@type": "Organization",
-        "name": "Codariq Team"
+        "name": "Codariq"
       }
     },
     {
       "@type": "BlogPosting",
-      "headline": "KI-Projekte compliant halten: Der deutsche Leitfaden für 2025",
+      "headline": "KI und Datenschutz in Deutschland: das Wichtigste ohne Juristendeutsch",
       "url": "https://codariq.de/blog/ki-compliance-2025",
       "datePublished": "2025-01-15T10:00:00+01:00",
       "author": {
         "@type": "Organization",
-        "name": "Codariq Team"
+        "name": "Codariq"
       }
     },
     {
       "@type": "BlogPosting",
-      "headline": "KI-Integration in 5 Schritten",
+      "headline": "Automatisierung starten in 5 Schritten",
       "url": "https://codariq.de/blog/ki-integration-5-schritte",
       "datePublished": "2024-12-15T10:00:00+01:00",
       "author": {
         "@type": "Organization",
-        "name": "Codariq Team"
+        "name": "Codariq"
       }
     },
     {
       "@type": "BlogPosting",
-      "headline": "Automatisierung ROI maximieren",
+      "headline": "ROI von Prozessautomatisierung: So rechnet es sich",
       "url": "https://codariq.de/blog/automatisierung-roi-maximieren",
       "datePublished": "2024-12-15T11:00:00+01:00",
       "author": {
         "@type": "Organization",
-        "name": "Codariq Team"
+        "name": "Codariq"
       }
     },
     {
       "@type": "BlogPosting",
-      "headline": "KI-Teams erfolgreich vorbereiten",
+      "headline": "Teams und Abläufe so vorbereiten, dass es genutzt wird",
       "url": "https://codariq.de/blog/ki-teams-vorbereiten",
       "datePublished": "2024-12-15T12:00:00+01:00",
       "author": {
         "@type": "Organization",
-        "name": "Codariq Team"
+        "name": "Codariq"
       }
     }
   ]
