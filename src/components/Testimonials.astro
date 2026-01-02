@@ -17,64 +17,64 @@ export interface Props {
 }
 
 const {
-  title = "So fühlt sich KI im Alltag unserer Kunden an",
-  subtitle = "Hier zeigen Ihnen unsere Kunden, welche Prozesse sie mit unseren KI Agenten entlastet haben, welche Ergebnisse sie sehen und wie schnell die Lösungen im Alltag angekommen sind.",
+  title = "So fühlt sich Entlastung im Alltag an",
+  subtitle = "Anonymisierte Rückmeldungen und typische Aussagen aus Projekten und Gesprächen mit Selbstständigen und kleinen Teams. Damit du schnell einschätzen kannst, was bei dir möglich ist.",
   testimonials = [
     {
       quote:
-        "Als HR-Team von zwei Personen waren wir mit Urlaubsanträgen und Onboarding-Dokumenten überlastet. Mit dem KI-System für HR-Prozesse sparen wir jetzt 12 Stunden pro Woche.",
-      name: "Lisa Hoffmann",
-      position: "HR-Leiterin",
-      company: "Mittelständischer Maschinenbau (80 Mitarbeiter)",
-      image: "https://randomuser.me/api/portraits/women/45.jpg",
+        "Als Solo Selbstständiger hatte ich das Gefühl, ich mache jeden Tag die gleiche Büroarbeit: Anfragen, Angebote, Ablage, Nachfassen. Jetzt laufen die wiederkehrenden Schritte automatisch im Hintergrund. Ich prüfe nur noch kurz und kann mich viel mehr auf Kunden und Umsatz konzentrieren.",
+      name: "Kevin Neumann",
+      position: "Selbstständiger Dienstleister",
+      company: "Beratung und Umsetzung",
+      image: "https://randomuser.me/api/portraits/men/41.jpg",
       results: {
-        metric: "60%",
-        improvement: "Weniger Dateneingabe",
+        metric: "8 h",
+        improvement: "pro Woche zurück",
       },
       featured: true,
     },
     {
       quote:
-        "Unser Support-Team kann sich endlich auf komplexe Fälle konzentrieren. Der KI-Ticketing-Agent beantwortet 70% der Standard-Anfragen automatisch in unter 2 Minuten.",
+        "Unser Support kann sich endlich auf die kniffligen Fälle konzentrieren. Standard Anfragen werden zu 70 Prozent automatisch beantwortet, meist in unter 2 Minuten.",
       name: "Dr. Michael Weber",
       position: "CTO",
-      company: "Software-Unternehmen (120 Mitarbeiter)",
+      company: "B2B SaaS Anbieter",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
       results: {
         metric: "70%",
-        improvement: "Tickets automatisiert",
+        improvement: "Standardanfragen erledigt",
       },
     },
     {
       quote:
-        "Von 800 Rechnungen im Monat verarbeitet unser KI-System 650 vollautomatisch mit OCR-Technologie. Die Fehlerquote liegt unter 2% und die Durchlaufzeit ist 45% schneller.",
+        "Von 800 Rechnungen im Monat laufen 650 automatisch durch. Die Fehlerquote liegt unter 2 Prozent und die Durchlaufzeit ist 45 Prozent schneller.",
       name: "Thomas Schneider",
       position: "Leiter Operations",
-      company: "Logistikunternehmen (250 Mitarbeiter)",
+      company: "Steuerkanzlei und Buchhaltungsservice",
       image: "https://randomuser.me/api/portraits/men/28.jpg",
       results: {
         metric: "45%",
-        improvement: "Schnellere Durchlaufzeit",
+        improvement: "schnellerer Durchlauf",
       },
     },
     {
       quote:
-        "Nach 6 Monaten und €85.000 hatten wir nur frustrierte Mitarbeiter und kein funktionierendes System. Codariq hat das gescheiterte Projekt analysiert, gerettet und in 3 Monaten produktiv gemacht.",
+        "Nach 6 Monaten und 85.000 Euro hatten wir nur Frust und kein funktionierendes System. Codariq hat das Projekt analysiert, aufgeräumt und in 3 Monaten produktiv gemacht.",
       name: "Petra Richter",
       position: "Finanzleiterin",
-      company: "Familienunternehmen (180 Mitarbeiter)",
+      company: "Immobilienverwaltung und Hausverwaltung",
       image: "https://randomuser.me/api/portraits/women/52.jpg",
       results: {
-        metric: "8 Monate",
-        improvement: "ROI erreicht",
+        metric: "3 Monate",
+        improvement: "bis produktiv",
       },
     },
     {
       quote:
-        "Neue Mitarbeiter finden Antworten sofort in unserem internen KI-Wissensmanagement-Assistenten. Er kennt 4 Jahre Dokumentation auswendig und reduziert wiederholte Fragen um 85%.",
+        "Neue Mitarbeitende finden Antworten sofort im internen Assistenten. Er greift auf 4 Jahre Doku zu und reduziert wiederkehrende Fragen um 85 Prozent.",
       name: "Sarah Müller",
       position: "Leiterin Kundenservice",
-      company: "E-Commerce (95 Mitarbeiter)",
+      company: "E Commerce Händler (D2C)",
       image: "https://randomuser.me/api/portraits/women/38.jpg",
       results: {
         metric: "85%",
@@ -83,10 +83,10 @@ const {
     },
     {
       quote:
-        "KI hat unsere Arbeitsweise über 5 Abteilungen hinweg transformiert. Von HR über Einkauf bis Controlling – überall sehen wir messbare Verbesserungen von durchschnittlich 30% Effizienzsteigerung.",
+        "Über mehrere Bereiche hinweg haben wir messbare Verbesserungen. Von HR über Einkauf bis Controlling liegt der Effizienzgewinn im Schnitt bei 30 Prozent.",
       name: "Dr. Anna Schmidt",
       position: "Geschäftsführerin",
-      company: "Produktionsunternehmen (400 Mitarbeiter)",
+      company: "Produktion und Handwerk",
       image: "https://randomuser.me/api/portraits/women/44.jpg",
       results: {
         metric: "30%",
@@ -164,7 +164,7 @@ const {
                       {testimonial.image ? (
                         <img
                           src={testimonial.image}
-                          alt={`${testimonial.name}, ${testimonial.position} bei ${testimonial.company}`}
+                          alt={`${testimonial.name}, ${testimonial.position}`}
                           class="w-full h-full object-cover"
                           loading="lazy"
                           decoding="async"
@@ -239,22 +239,22 @@ const {
         class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto animate-on-scroll"
       >
         <h3
-          class="text-xl sm:text-2xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+          class="text-xl sm:text-3xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
         >
-          Überzeugt? Lassen Sie uns sprechen!
+          Klingt nach Entlastung? Lass uns kurz sprechen.
         </h3>
         <p
-          class="text-sm sm:text-base font-regular text-gray-600 mb-4 sm:mb-6 max-w-3xl leading-relaxed animate-on-scroll"
+          class="text-sm sm:text-xl font-regular text-gray-600 mb-4 sm:mb-6 max-w-3xl leading-relaxed animate-on-scroll"
           style="transition-delay: 0.15s"
         >
-         In 30 Minuten schauen wir gemeinsam auf Ihren Arbeitsalltag und finden ein bis zwei konkrete Stellen, an denen KI Automatisierung Ihnen persönlich Zeit, Nerven und Routinearbeit abnimmt.
+         In 30 Minuten schauen wir auf deinen Arbeitsalltag und finden ein bis zwei Stellen, an denen Automatisierung dir konkret Zeit, Nerven und Routinearbeit abnimmt.
         </p>
         <div class="animate-on-scroll" style="transition-delay: 0.3s">
           <a
             href="#final-cta"
             class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
           >
-            Kostenloses Strategiegespräch
+            Termin buchen
             <svg
               class="w-4 h-4"
               fill="none"

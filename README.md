@@ -91,7 +91,7 @@ codariq_v1/
 │   └── styles/
 │       └── global.css      # Global styles & animations
 ├── public/                 # Static assets
-│   ├── Logo1.svg          # Main company logo
+│   ├── images/logos/codariqLogo1.svg # Main company logo
 │   └── images/            # Trust badges and hero assets
 └── dist/                  # Build output (generated)
 ```

@@ -11,61 +11,81 @@ export interface Props {
 
 const {
   title = "Häufig gestellte Fragen",
-  subtitle = "Antworten auf die wichtigsten Fragen zur KI-Automatisierung für deutsche Unternehmen",
+  subtitle =
+    "Antworten zu Automatisierung, Kosten, Zeitrahmen und Datenschutz für Selbstständige und kleine Teams in DACH",
   faqs = [
     {
-      question:
-        "Wie lange dauert die Implementierung einer KI-Automatisierungslösung?",
+      question: "Für wen ist Automatisierung geeignet?",
       answer:
-        "Die Implementierungsdauer hängt vom gewählten Paket ab: Das Einsteiger-Paket ist in 5 Wochen produktiv, das Standard-Paket in 6-8 Wochen, und das Umfangreiche Paket in 10-14 Wochen. Enterprise-Lösungen werden individuell geplant. Wir arbeiten in agilen Sprints, sodass Sie bereits früh erste Ergebnisse sehen.",
-      category: "Implementation",
+        "Für Selbstständige und Unternehmen bis 50 Personen, die viele wiederkehrende Aufgaben haben und im Alltag zu viel Zeit mit E Mails, Dokumenten, Leads oder Backoffice verlieren. Du musst dafür keine Tools kennen. Entscheidend ist nur, dass es einen Ablauf gibt, der sich wiederholt.",
+      category: "Allgemein",
     },
     {
-      question:
-        "Wie viel kostet eine KI-Automatisierungslösung?",
+      question: "Welche Prozesse lassen sich am besten automatisieren?",
       answer:
-        "Unsere Pakete beginnen bei €999 (Einsteiger-Paket) für erste KI-Pilotprojekte mit einem Prozess. Das Standard-Paket für bis zu 3 Prozesse startet ab €4.500, das Umfangreiche Paket für flächendeckende Automatisierung ab €9.900. Enterprise-Lösungen werden individuell kalkuliert. Alle Preise sind einmalige Implementierungskosten. Wartung ist optional zubuchbar: Einsteiger 300 €/Monat, Standard 400-600 €/Monat, Umfangreiches Paket 500-800 €/Monat. Alle Preise verstehen sich als Komplettlösungen inklusive Setup, DSGVO-konformer Architektur und Prompt-Optimierung.",
+        "Am besten funktionieren Abläufe, die regelmäßig vorkommen und heute manuell ablaufen. Typische Beispiele sind Support und Kontaktanfragen, Lead Nachfassen, Dokumente und Rechnungen, Recruiting und Onboarding, Terminabstimmungen sowie wiederkehrende Dateneingaben zwischen Tools.",
+      category: "Use Cases",
+    },
+    {
+      question: "Wie läuft die Zusammenarbeit ab?",
+      answer:
+        "Erst schaffen wir Klarheit über Ziel, Ablauf und Startpunkt. Dann setzen wir die Automatisierung um und verbinden deine vorhandenen Systeme. Danach führen wir es in deinen Alltag ein, beobachten die ersten Wochen und justieren nach, bis es stabil läuft.",
+      category: "Ablauf",
+    },
+    {
+      question: "Wie lange dauert die Umsetzung?",
+      answer:
+        "Das hängt vom Umfang ab. Das Start Paket ist meist in 2 bis 5 Wochen produktiv, das Team Paket in 3 bis 8 Wochen und das Wachstum Paket in 6 bis 12 Wochen. Entscheidend sind Anzahl der Abläufe, Datenlage und wie viele Tools verbunden werden.",
+      category: "Zeitrahmen",
+    },
+    {
+      question: "Was kostet das und wovon hängt der Preis ab?",
+      answer:
+        "Die Pakete starten ab 490 Euro, ab 1.490 Euro und ab 3.990 Euro. Der genaue Preis hängt vor allem von drei Dingen ab: wie viele Abläufe umgesetzt werden, welche Systeme angebunden werden und wie sauber die Daten heute schon vorliegen. Du bekommst vor der Umsetzung einen klaren Plan mit Dauer und ab Preis.",
       category: "Kosten",
     },
     {
-      question:
-        "Wie wird die DSGVO-Konformität bei KI-Lösungen sichergestellt?",
+      question: "Muss ich dafür IT Wissen mitbringen?",
       answer:
-        "Datenschutz hat bei uns höchste Priorität. Alle unsere Lösungen werden nach deutschen Datenschutzstandards entwickelt und auf deutschen Servern gehostet. Wir führen regelmäßige DSGVO-Audits durch und dokumentieren alle Datenverarbeitungsprozesse transparent. Sie erhalten von uns eine vollständige Datenschutz-Dokumentation.",
+        "Nein. Du erklärst kurz, was heute passiert, zeigst ein paar Beispiele und gibst die nötigen Zugriffe frei. Wir übernehmen Umsetzung, Tests und Übergabe. Du bekommst eine kurze, verständliche Übersicht, damit du weißt, was läuft und nicht abhängig bist.",
+      category: "Aufwand",
+    },
+    {
+      question: "Wie bleibt das DSGVO konform?",
+      answer:
+        "Wir richten Zugriffe, Datenflüsse und Freigaben so ein, dass nur das verarbeitet wird, was wirklich nötig ist. EU Hosting ist möglich, auf Wunsch auch Deutschland. Für Auftragsverarbeitung können wir eine AVV bereitstellen. Du behältst jederzeit die Kontrolle, wer worauf zugreifen darf.",
       category: "Datenschutz",
     },
     {
-      question:
-        "Welche Auswirkungen hat KI-Automatisierung auf bestehende Arbeitsplätze?",
+      question: "Welche Tools und Systeme könnt ihr anbinden?",
       answer:
-        "KI-Automatisierung ersetzt in der Regel nicht Arbeitsplätze, sondern verlagert den Fokus auf wertvollere Tätigkeiten. Mitarbeiter werden von repetitiven Aufgaben befreit und können sich auf strategische, kreative und kundenorientierte Arbeiten konzentrieren. Wir unterstützen Sie auch bei der Mitarbeiterschulung für neue Aufgabenbereiche.",
-      category: "Personal",
-    },
-    {
-      question:
-        "Wie funktioniert die Integration in bestehende ERP- und CRM-Systeme?",
-      answer:
-        "Wir haben Erfahrung mit allen gängigen Systemen wie SAP, Microsoft Dynamics, Salesforce und vielen anderen. Unsere API-basierten Lösungen integrieren sich nahtlos ohne Unterbrechung Ihres laufenden Betriebs. Bei Legacy-Systemen entwickeln wir maßgeschneiderte Schnittstellen.",
+        "Typisch sind E Mail Postfächer, Kalender, Formulare, CRM Systeme, Buchhaltung, Shops, Helpdesk und Dateiablagen wie Google Drive oder OneDrive. Wenn ein System eine Schnittstelle hat, lässt es sich meistens sauber verbinden. Wenn nicht, finden wir eine pragmatische Alternative.",
       category: "Integration",
     },
     {
-      question: "Welche Kostenersparnisse sind realistisch zu erwarten?",
+      question: "Wie viel Zeit brauche ich selbst dafür?",
       answer:
-        "Unsere Kunden erreichen durchschnittlich 30-50% Kostenreduktion in automatisierten Prozessen. Zusätzlich profitieren Sie von reduzierten Fehlerkosten, schnelleren Durchlaufzeiten und verbesserter Kundenzufriedenheit. Eine detaillierte ROI-Analyse erstellen wir individuell für Ihr Unternehmen.",
-      category: "ROI",
+        "Dein Aufwand bleibt klein. Am Anfang brauchen wir einmal deinen Ablauf und ein paar Beispiele. Danach gibt es kurze Abstimmungen, damit wir richtig liegen. In der Regel reicht ein fester Ansprechpartner und wenig Zeit pro Woche, während wir umsetzen und testen.",
+      category: "Aufwand",
     },
     {
-      question: "Bieten Sie auch Support und Wartung nach der Implementierung?",
+      question: "Was passiert nach dem Live Gang?",
       answer:
-        "Ja, Wartung und Support sind optional zubuchbar: Einsteiger-Paket 300 €/Monat, Standard-Paket 400-600 €/Monat, Umfangreiches Paket 500-800 €/Monat. In der Wartung optimieren wir Ihre Lösung kontinuierlich, passen Prompts an und erweitern Funktionen. Zusätzlich können Sie ab Q2 2026 unser Live-Dashboard für KPI-Tracking und ROI-Messung buchen.",
-      category: "Support",
+        "In den ersten Wochen beobachten wir die Ergebnisse, fangen Sonderfälle ab und passen nach, bis es zuverlässig läuft. Wenn du möchtest, übernehmen wir auch die laufende Betreuung, damit Änderungen an Tools oder Prozessen kein Problem werden.",
+      category: "Betrieb",
+    },
+    {
+      question: "Geht das komplett remote?",
+      answer:
+        "Ja. Setup, Abstimmungen und Umsetzung können vollständig remote passieren. Du bekommst klare Schritte, feste Termine und Updates, damit du jederzeit weißt, wo wir stehen.",
+      category: "Ablauf",
     },
     {
       question:
-        "Wie sicher sind KI-Automatisierungslösungen vor Cyberangriffen?",
+        "Was, wenn ich schon mal angefangen habe und es nicht funktioniert?",
       answer:
-        "Sicherheit ist ein zentraler Bestandteil unserer Entwicklung. Wir verwenden End-to-End-Verschlüsselung, Multi-Faktor-Authentifizierung und regelmäßige Penetrationstests. Alle Systeme entsprechen den neuesten IT-Sicherheitsstandards und werden kontinuierlich auf Schwachstellen überwacht.",
-      category: "Sicherheit",
+        "Dann schauen wir uns an, warum es hängt. Oft ist der Ablauf zu kompliziert, Zuständigkeiten sind unklar oder Sonderfälle wurden nicht bedacht. Wir vereinfachen, bauen sauber neu auf und bringen es so in den Alltag, dass es genutzt wird und stabil bleibt.",
+      category: "Ablauf",
     },
   ],
 } = Astro.props;
@@ -104,7 +124,7 @@ const groupedFAQs =
       class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
     >
       {
-        faqs.slice(0, 6).map((faq, index) => (
+        faqs.map((faq, index) => (
           <div
             class="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-200 group mb-2 animate-fade-in-up"
             style={`animation-delay: ${index * 50}ms`}
@@ -159,15 +179,14 @@ const groupedFAQs =
           Weitere Fragen?
         </h3>
         <p class="font-light text-gray-600 mb-3 sm:mb-4 text-xs sm:text-sm">
-          Sprechen Sie mit unseren Experten in einem kostenlosen
-          Beratungsgespräch.
+          In 30 Minuten schauen wir auf deinen Alltag und klären, ob und wo Automatisierung dir konkret Routinearbeit abnimmt.
         </p>
 
         <a
           href="#contact"
           class="inline-flex items-center gap-2 bg-gray-900 text-white px-4 sm:px-6 py-2 rounded-full hover:bg-gray-800 transition-colors font-medium text-xs sm:text-sm"
         >
-          Jetzt beraten lassen
+          Termin anfragen
           <svg
             class="w-3 h-3 sm:w-4 sm:h-4"
             fill="none"

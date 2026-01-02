@@ -222,7 +222,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       #main-nav svg,
       #main-nav button,
       #nav-logo {
-        transition: color 0.3s ease, stroke 0.3s ease;
+        transition: color 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
       }
 
       /* Default: no header background, dark elements */
@@ -259,7 +259,10 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       }
 
       #nav-logo {
-        color: #374151; /* text-gray-700 */
+        height: 28px;
+        width: auto;
+        opacity: 0.95;
+        display: block;
       }
 
       /* Dark mode for navigation when scrolled past hero */
@@ -287,7 +290,11 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* Logo shows natural dark color when scrolled */
       header.nav-scrolled #nav-logo {
-        color: #111827; /* text-gray-900 */
+        opacity: 1;
+      }
+
+      .footer-logo {
+        filter: brightness(0) invert(1);
       }
 
       /* After scrolling past hero: blurred white header background */
@@ -664,13 +671,14 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           <!-- Left: Logo -->
           <div class="flex items-center justify-start">
             <a href="/" class="hover:opacity-90 transition-all duration-300">
-              <span
+              <img
                 id="nav-logo"
-                class="brand-logo text-xl sm:text-2xl leading-none"
-                aria-label="Codariq"
-              >
-                codariq
-              </span>
+                src="/images/logos/codariqLogo1.svg"
+                alt="Codariq"
+                class="h-7 sm:h-8 w-auto"
+                loading="lazy"
+                decoding="async"
+              />
             </a>
           </div>
 
@@ -791,18 +799,17 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             <!-- Column 1: Logo + Beschreibung -->
             <div class="text-left">
               <div class="mb-6">
-                <div class="brand-logo text-white text-3xl md:text-4xl leading-none mb-4">
-                  codariq
-                </div>
+                <img
+                  src="/images/logos/codariqLogo1.svg"
+                  alt="Codariq"
+                  class="h-8 md:h-10 w-auto mb-4 footer-logo"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <p
                   class="text-gray-300 text-sm leading-relaxed max-w-sm md:mx-0"
                 >
-                  Wir automatisieren Ihr Business individuell und datensicher, 
-                  damit Sie wieder Luft zum wachsen haben.
-                  Ordner
-                  Intelligente Automatisierungen, die dir echte Arbeit abnehmen.
-                  Ordner
-                  Intelligente Automatisierungen für Selbstständige und kleine Teams, damit Routinearbeit verschwindet und du wertvolle Zeit zurückgewinnst.
+                  Intelligente Automatisierungen für Selbstständige und kleine Teams.
                 </p>
               </div>
             </div>
