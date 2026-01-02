@@ -1151,24 +1151,19 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
               }
 
               try {
-                // Send to webhook
-                const response = await fetch(
-                  "https://automation.codariq.de/webhook/9f2483b5-7d05-432c-be3b-95e578dae228",
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization:
-                        "Basic " + btoa("admin:razxoc-kYzxow-jejbu9"),
-                    },
-                    body: JSON.stringify({
-                      email: email.value.trim(),
-                      source: "footer_newsletter",
-                      timestamp: new Date().toISOString(),
-                      userAgent: navigator.userAgent,
-                    }),
+                // Send to server-side API endpoint
+                const response = await fetch("/api/newsletter", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
                   },
-                );
+                  body: JSON.stringify({
+                    email: email.value.trim(),
+                    source: "footer_newsletter",
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent,
+                  }),
+                });
 
                 if (response.ok) {
                   // Show success message

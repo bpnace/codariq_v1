@@ -716,25 +716,18 @@ const {
       setLoading(true);
 
       try {
-        // Send data to n8n webhook with Basic Auth
-        const response = await fetch(
-          "https://automation.codariq.de/webhook/179939e2-cef1-4b9f-b513-272b356d7e57",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Basic " + btoa("admin:razxoc-kYzxow-jejbu9"),
-            },
-            body: JSON.stringify({
-              email: email,
-              body: {
-                email: email,
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-              },
-            }),
+        // Send data to server-side API endpoint
+        const response = await fetch("/api/dashboard-waitlist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            email: email,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent,
+          }),
+        });
 
         // Parse the response content
         const responseData = await response.text();
