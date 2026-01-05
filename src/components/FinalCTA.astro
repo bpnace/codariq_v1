@@ -17,8 +17,19 @@ const {
 } = Astro.props;
 ---
 
-<section id="final-cta" class="py-10 sm:py-12 bg-white">
-  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+<section id="final-cta" class="py-10 sm:py-12 relative overflow-hidden isolate">
+  <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+	    <img
+	      src="/images/final_cta.webp"
+	      alt=""
+	      class="w-full h-full object-cover scale-90 opacity-100"
+	      style="filter: saturate(1.35) contrast(1.05);"
+	      loading="lazy"
+	      decoding="async"
+	    />
+	    <!-- <div class="absolute inset-0 bg-white/20"></div> -->
+	  </div>
+  <div class="relative z-10 max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     <div class="max-w-4xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         <!-- Copy -->
