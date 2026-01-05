@@ -59,7 +59,7 @@ const {
         "Automatische Übergaben zwischen deinen Tools",
         "Tests mit echten Beispielen aus deinem Alltag",
         "Einweisung, damit du und dein Team direkt damit arbeiten könnt",
-        "Optional: Betreuung ab 199€ pro Monat",
+        "Optional: Betreuung ab 139€ pro Monat",
       ],
       price: "ab 1.499 €",
       duration: "einmalig",
@@ -78,7 +78,7 @@ const {
         "Klare Regeln und Zugriffsschutz",
         "Auswertung, ob es wirklich Zeit spart",
         "Begleitung in den ersten Wochen, bis es zuverlässig läuft",
-        "Optional: Betreuung ab 299€ pro Monat",
+        "Optional: Betreuung ab 199€ pro Monat",
       ],
       price: "ab 3.499 €",
       duration: "einmalig",
@@ -144,6 +144,24 @@ const {
     >
       {
         benefits.map((benefit, index) => {
+          const isTeamTier = benefit.colorTheme === "blue" || benefit.icon === "growth";
+
+          const teamGradient =
+            "linear-gradient(135deg, var(--color-pack-blue), var(--color-neutral-gray-900))";
+          const highlightGradient =
+            "linear-gradient(135deg, var(--color-brand-light), var(--color-brand-dark))";
+
+          const cardStyle = benefit.highlight
+            ? isTeamTier
+              ? `background: ${teamGradient}; border-color: var(--color-pack-blue);`
+              : `background: ${highlightGradient}; border-color: var(--color-brand-light);`
+            : undefined;
+
+          const iconWrapperStyle = isTeamTier
+            ? "background: var(--color-neutral-gray-100);"
+            : undefined;
+          const iconWrapperThemeClasses = benefit.highlight ? "bg-white/10" : "bg-gray-100";
+
           return (
             <div
               class={`relative group animate-fade-in-up`}
@@ -151,22 +169,25 @@ const {
             >
               {/* Bento Card */}
               <div
+                style={cardStyle}
                 class={`
-            ${benefit.highlight ? "bg-gradient-to-br from-primary-600 to-primary-500 text-white border-primary-600" : "bg-white border-gray-200"} rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border h-full flex flex-col transition-all duration-300 relative
+            ${benefit.highlight ? "text-white" : "bg-white border-gray-200"} rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md border h-full flex flex-col transition-all duration-300 relative
           `}
               >
 
                 {/* Icon */}
                 <div class="mb-3 sm:mb-4">
                   <div
+                    style={iconWrapperStyle}
                     class={`
                 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300
-                ${benefit.highlight ? "bg-white/10" : benefit.icon === "enterprise" ? "bg-gradient-to-br from-gray-900 to-gray-800" : "bg-gray-100"}
+                ${iconWrapperThemeClasses}
               `}
                   >
                     {benefit.icon === "starter" && (
                       <svg
-                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-green-600"} transition-colors`}
+                        style={benefit.highlight ? undefined : "color: var(--color-pack-green);"}
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : ""} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -183,7 +204,14 @@ const {
 
                     {benefit.icon === "growth" && (
                       <svg
-                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-blue-600"} transition-colors`}
+                        style={
+                          isTeamTier
+                            ? "color: var(--color-pack-blue);"
+                            : benefit.highlight
+                              ? undefined
+                              : "color: var(--color-package-team-icon);"
+                        }
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight && !isTeamTier ? "text-white" : ""} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -200,7 +228,10 @@ const {
 
                     {benefit.icon === "scale" && (
                       <svg
-                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-purple-600"} transition-colors`}
+                        style={
+                          benefit.highlight ? undefined : "color: var(--color-package-growth-icon);"
+                        }
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : ""} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -217,7 +248,8 @@ const {
 
                     {benefit.icon === "enterprise" && (
                       <svg
-                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : "text-gray-300"} transition-colors`}
+                        style={benefit.highlight ? undefined : "color: var(--color-pack-purple);"}
+                        class={`w-5 h-5 sm:w-6 sm:h-6 ${benefit.highlight ? "text-white" : ""} transition-colors`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -478,7 +510,7 @@ const {
                         />
                         <button
                           type="submit"
-                          class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 transition-all duration-200 text-base shadow-lg cta-button whitespace-nowrap"
+                          class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-4 py-2 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 text-base shadow-lg cta-button whitespace-nowrap"
                           aria-label="Zur Warteliste für KI-Dashboard anmelden"
                         >
                           Beitreten

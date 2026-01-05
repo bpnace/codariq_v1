@@ -11,7 +11,6 @@ export interface Props {
 
 const {
   title = "Lass uns deine Abläufe spürbar entlasten!",
-  subtitle = "Kurzer Erstcall",
   description = "Schildere mir kurz deine aktuelle Situation. In 30 Minuten finden wir ein bis zwei Stellen, an denen Automatisierungen dir konkret Zeit, Nerven und Routinearbeit abnehmen kann.",
   primaryCTA = "Termin anfragen",
   primaryCTALink = "#contact",
@@ -27,12 +26,12 @@ const {
           <h2 class="section-title mb-4 animate-on-scroll">
             {title}
           </h2>
-          <p
-            class="body-muted max-w-3xl mx-auto lg:mx-0 animate-on-scroll"
-            style="transition-delay: 0.15s"
-          >
-            {description}
-          </p>
+	          <p
+	            class="body-muted font-medium max-w-3xl mx-auto lg:mx-0 animate-on-scroll"
+	            style="transition-delay: 0.15s"
+	          >
+	            {description}
+	          </p>
           <p
             class="text-sm mt-4 animate-on-scroll"
             style="transition-delay: 0.25s; font-weight: 800 !important;"
@@ -183,7 +182,7 @@ const {
             <div class="pt-4">
               <button
                 type="submit"
-                class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-8 py-4 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
+                class="w-full bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-8 py-4 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)] shadow-lg cta-button"
               >
                 <span class="cta-button-text">{primaryCTA}</span>
               </button>

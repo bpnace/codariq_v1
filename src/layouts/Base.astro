@@ -35,8 +35,8 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#1E3A8A" />
-    <meta name="msapplication-TileColor" content="#1E3A8A" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <meta name="msapplication-TileColor" content="#1d4ed8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,7 +166,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* Enhanced focus styles for EAA compliance */
       :focus-visible {
-        outline: 3px solid #1e3a8a;
+        outline: 3px solid var(--color-nav-focus);
         outline-offset: 2px;
         border-radius: 4px;
       }
@@ -209,7 +209,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           height: 2px;
           bottom: -4px;
           left: 50%;
-          background-color: #ea580c; /* Orange brand color */
+          background-color: var(--color-nav-underline);
           transition: width 0.3s ease, left 0.3s ease;
         }
 
@@ -243,21 +243,21 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       }
 
       #main-nav .nav-link {
-        color: #374151 !important; /* text-gray-700 */
+        color: var(--color-nav-link) !important;
       }
 
       #main-nav .nav-link:hover {
-        color: #111827 !important; /* text-gray-900 */
+        color: var(--color-nav-link-hover) !important;
       }
 
       #main-nav svg,
       #main-nav button {
-        color: #374151 !important; /* text-gray-700 */
+        color: var(--color-nav-link) !important;
         stroke: currentColor;
       }
 
       #main-nav button:hover {
-        color: #111827 !important; /* text-gray-900 */
+        color: var(--color-nav-link-hover) !important;
       }
 
       #nav-logo {
@@ -269,25 +269,25 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* Dark mode for navigation when scrolled past hero */
       header.nav-scrolled #main-nav .nav-link {
-        color: #374151 !important; /* text-gray-700 - dark gray */
+        color: var(--color-nav-link) !important;
       }
 
       header.nav-scrolled #main-nav svg {
-        color: #374151 !important; /* text-gray-700 - dark gray */
+        color: var(--color-nav-link) !important;
         stroke: currentColor;
       }
 
       header.nav-scrolled #main-nav button {
-        color: #374151 !important; /* text-gray-700 - dark gray */
+        color: var(--color-nav-link) !important;
       }
 
       /* Keep hover states working in both modes */
       header.nav-scrolled #main-nav .nav-link:hover {
-        color: #4b5563 !important; /* text-gray-600 */
+        color: var(--color-neutral-gray-600) !important;
       }
 
       header.nav-scrolled #main-nav button:hover {
-        color: #4b5563 !important; /* text-gray-600 */
+        color: var(--color-neutral-gray-600) !important;
       }
 
       /* Logo shows natural dark color when scrolled */
@@ -301,9 +301,9 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
       /* After scrolling past hero: blurred white header background */
       header.nav-scrolled {
-        background: rgba(255, 255, 255, 0.78);
-        border-color: rgba(17, 24, 39, 0.08) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        background: var(--color-nav-bg-scrolled);
+        border-color: var(--color-nav-border-scrolled) !important;
+        box-shadow: 0 10px 30px var(--color-nav-shadow-scrolled);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
       }
@@ -744,7 +744,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           <div class="flex items-center justify-end">
             <a
               href="/#final-cta"
-              class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-bold text-xs sm:text-sm md:text-base shadow-lg cta-button"
+              class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 font-bold text-xs sm:text-sm md:text-base shadow-lg cta-button"
               aria-label="Strategiegespräch vereinbaren"
             >
               <span class="hidden sm:inline">Termin buchen</span>
@@ -1032,7 +1032,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
                   <button
                     type="submit"
-                    class="bg-gradient-to-br from-orange-500 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-800 font-medium text-sm transition-all duration-200 shadow-md cta-button whitespace-nowrap"
+                    class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-4 py-2 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] font-medium text-sm transition-all duration-200 shadow-md cta-button whitespace-nowrap"
                   >
                     Abonnieren
                   </button>
@@ -1315,6 +1315,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           const heroSection = document.querySelector("#hero");
           const footer = document.querySelector("footer");
           const articleHeader = document.querySelector(".article-header"); // Blog article header
+          const parallaxImage = document.querySelector("[data-parallax]");
 
           const forceNavSolid =
             document.body.dataset.forceNavSolid === "true";
@@ -1353,21 +1354,40 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
               ticking = false;
             }
 
+            function updateParallax() {
+              if (parallaxImage && heroSection) {
+                const scrollY = window.scrollY;
+                const heroBottom = heroSection.getBoundingClientRect().bottom + scrollY;
+
+                // Only apply parallax while hero section is visible
+                if (scrollY < heroBottom) {
+                  const parallaxOffset = scrollY * 0.25; // 25% = subtle effect
+                  parallaxImage.style.transform = `translateY(${parallaxOffset}px)`;
+                }
+              }
+            }
+
+            // Combined update function
+            function updateScrollEffects() {
+              updateNavColor();
+              updateParallax();
+            }
+
             // Use requestAnimationFrame for smooth performance
             function onScroll() {
               if (!ticking) {
-                window.requestAnimationFrame(updateNavColor);
+                window.requestAnimationFrame(updateScrollEffects);
                 ticking = true;
               }
             }
 
             // Initial check
-            updateNavColor();
+            updateScrollEffects();
 
             // Listen to scroll events
             window.addEventListener("scroll", onScroll, { passive: true });
             // Also listen to resize events to update on window size changes
-            window.addEventListener("resize", updateNavColor);
+            window.addEventListener("resize", updateScrollEffects);
           }
         });
       </script>
