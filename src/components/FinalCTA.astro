@@ -38,7 +38,7 @@ const {
             {title}
           </h2>
 	          <p
-	            class="body-muted font-medium max-w-3xl mx-auto lg:mx-0 animate-on-scroll"
+	            class="body-muted text-gray-900 font-medium max-w-3xl mx-auto lg:mx-0 animate-on-scroll"
 	            style="transition-delay: 0.15s"
 	          >
 	            {description}
@@ -49,6 +49,33 @@ const {
           >
             Unverbindlich • Antwort innerhalb von 24 Stunden
           </p>
+          <a
+            href="https://calendly.com/kontakt-codariq/30min"
+            onclick="Calendly.initPopupWidget({url: 'https://calendly.com/kontakt-codariq/30min'});return false;"
+            class="hidden lg:inline-flex mt-6 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white/80 px-6 py-3 text-base font-semibold text-gray-900 shadow-sm backdrop-blur-sm hover:bg-white hover:border-gray-400 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)]"
+            aria-label="30 min Potenzialgespräch über Calendly buchen"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              class="h-5 w-5 flex-none"
+            >
+              <circle cx="12" cy="12" r="12" fill="#006BFF"></circle>
+              <text
+                x="12"
+                y="16.5"
+                text-anchor="middle"
+                font-size="14"
+                font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+                font-weight="800"
+                fill="white"
+              >
+                C
+              </text>
+            </svg>
+            <span>30 min Potenzialgespräch</span>
+            <span class="text-xs font-bold text-gray-600">(Calendly)</span>
+          </a>
         </div>
 
         <!-- Contact Form -->
@@ -198,6 +225,35 @@ const {
                 <span class="cta-button-text">{primaryCTA}</span>
               </button>
             </div>
+            <a
+              href="https://calendly.com/kontakt-codariq/30min"
+              onclick="Calendly.initPopupWidget({url: 'https://calendly.com/kontakt-codariq/30min'});return false;"
+              class="lg:hidden mt-3 w-full rounded-lg border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)]"
+              aria-label="30 min Potenzialgespräch über Calendly buchen"
+            >
+              <span class="inline-flex w-full items-center justify-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  class="h-5 w-5 flex-none"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#006BFF"></circle>
+                  <text
+                    x="12"
+                    y="16.5"
+                    text-anchor="middle"
+                    font-size="14"
+                    font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+                    font-weight="800"
+                    fill="white"
+                  >
+                    C
+                  </text>
+                </svg>
+                <span>30 min Potenzialgespräch</span>
+                <span class="text-xs font-bold text-gray-600">(Calendly)</span>
+              </span>
+            </a>
 
             <!-- Message Container (fixed height prevents layout shift) -->
             <div class="mt-4" style="min-height: 64px">
