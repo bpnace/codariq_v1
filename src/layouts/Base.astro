@@ -428,52 +428,36 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           "itemListElement": [
             {
               "@type": "Offer",
-              "@id": "https://codariq.de/#ai-readiness-check",
+              "@id": "https://codariq.de/#starter-paket",
               "itemOffered": {
                 "@type": "Service",
-                "name": "AI Readiness Check",
-                "description": "Umfassende Analyse zur Identifikation der besten KI-Automatisierungsmöglichkeiten",
+                "name": "Starter Paket",
+                "description": "Für Selbstständige und kleine Teams, die einen Ablauf spürbar entlasten wollen. Auch wenn du allein bist: Automationen übernehmen Aufgaben wie ein zusätzliches Teammitglied.",
                 "provider": {
                   "@type": "Organization",
                   "name": "Codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "Business Process Analysis",
-                "category": "Artificial Intelligence Consulting"
+                "serviceType": "Business Process Automation",
+                "category": "Artificial Intelligence Implementation"
               },
-              "price": "999",
+              "price": "399",
               "priceCurrency": "EUR",
-              "priceSpecification": [
-                {
-                  "@type": "PriceSpecification",
-                  "name": "Regulärer Preis",
-                  "price": "999",
-                  "priceCurrency": "EUR",
-                  "valueAddedTaxIncluded": true
-                },
-                {
-                  "@type": "PriceSpecification",
-                  "name": "Neukunden-Rabatt (25%)",
-                  "price": "749",
-                  "priceCurrency": "EUR",
-                  "valueAddedTaxIncluded": true,
-                  "eligibleQuantity": {
-                    "@type": "QuantitativeValue",
-                    "value": 1
-                  },
-                  "eligibleCustomerType": "New Customer"
-                }
-              ],
-              "availability": "https://schema.org/InStock",
-              "deliveryLeadTime": "P1W/P2W"
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "399",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": true
+              },
+              "availability": "https://schema.org/InStock"
             },
             {
               "@type": "Offer",
-              "@id": "https://codariq.de/#automation-pilot",
+              "@id": "https://codariq.de/#team-paket",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Automation Pilot",
-                "description": "Entwicklung und Implementierung einer individuellen Automatisierungslösung",
+                "name": "Team Paket",
+                "description": "Für Selbstständige und kleine Teams, die mehrere Abläufe verbinden wollen, ohne dass es kompliziert wird. Deine Automationen und Agenten arbeiten wie ein eingespieltes Team im Hintergrund.",
                 "provider": {
                   "@type": "Organization",
                   "name": "Codariq"
@@ -482,95 +466,40 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                 "serviceType": "Custom AI Development",
                 "category": "Artificial Intelligence Implementation"
               },
-              "priceRange": "2500-9500 EUR",
+              "price": "1499",
               "priceCurrency": "EUR",
-              "priceSpecification": [
-                {
-                  "@type": "PriceSpecification",
-                  "name": "Regulärer Preis",
-                  "minPrice": "2500",
-                  "maxPrice": "9500",
-                  "priceCurrency": "EUR",
-                  "valueAddedTaxIncluded": true
-                },
-                {
-                  "@type": "PriceSpecification",
-                  "name": "Neukunden-Rabatt (25%)",
-                  "minPrice": "1875",
-                  "maxPrice": "7125",
-                  "priceCurrency": "EUR",
-                  "valueAddedTaxIncluded": true,
-                  "eligibleQuantity": {
-                    "@type": "QuantitativeValue",
-                    "value": 1
-                  },
-                  "eligibleCustomerType": "New Customer"
-                }
-              ],
-              "availability": "https://schema.org/InStock",
-              "deliveryLeadTime": "P4W/P12W"
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "1499",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": true
+              },
+              "availability": "https://schema.org/InStock"
             },
             {
               "@type": "Offer",
-              "@id": "https://codariq.de/#team-training",
+              "@id": "https://codariq.de/#wachstums-paket",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Team Training & AI Awareness",
-                "description": "Der kompakte Einstieg für Unternehmen, die ihr Team fit für KI machen wollen",
+                "name": "Wachstums Paket",
+                "description": "Für Selbstständige und Teams bis 50 Personen, die einen Bereich stabil und dauerhaft automatisieren wollen. So schaffst du mehr Volumen, ohne ständig neue Leute zu brauchen.",
                 "provider": {
                   "@type": "Organization",
                   "name": "Codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "Professional Training",
-                "category": "Artificial Intelligence Training"
+                "serviceType": "Enterprise AI Automation",
+                "category": "Artificial Intelligence Implementation"
               },
-              "price": "1500",
+              "price": "3499",
               "priceCurrency": "EUR",
-              "priceSpecification": [
-                {
-                  "@type": "PriceSpecification",
-                  "name": "Regulärer Preis",
-                  "price": "1500",
-                  "priceCurrency": "EUR",
-                  "valueAddedTaxIncluded": true
-                },
-                {
-                  "@type": "PriceSpecification",
-                  "name": "Neukunden-Rabatt (25%)",
-                  "price": "1125",
-                  "priceCurrency": "EUR",
-                  "valueAddedTaxIncluded": true,
-                  "eligibleQuantity": {
-                    "@type": "QuantitativeValue",
-                    "value": 1
-                  },
-                  "eligibleCustomerType": "New Customer"
-                }
-              ],
-              "availability": "https://schema.org/InStock",
-              "deliveryLeadTime": "P1D/P3D"
-            },
-            {
-              "@type": "Offer",
-              "@id": "https://codariq.de/#strategische-beratung",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Strategische Beratung",
-                "description": "Kontinuierliche strategische Beratung und Optimierung der KI-Automatisierungsstrategie",
-                "provider": {
-                  "@type": "Organization",
-                  "name": "Codariq"
-                },
-                "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "Strategic AI Consulting",
-                "category": "Artificial Intelligence Consulting"
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "3499",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": true
               },
-              "priceRange": "499-1500 EUR",
-              "priceCurrency": "EUR",
-              "availability": "https://schema.org/InStock",
-              "billingIncrement": "P1M",
-              "recurringCharge": true
+              "availability": "https://schema.org/InStock"
             }
           ]
         }
@@ -634,19 +563,20 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <script
       id="Cookiebot"
       src="https://consent.cookiebot.com/uc.js"
-      data-cbid="c47e2f75-b87b-42f0-9ef4-383dd0ba2d09"
+      data-cbid="5b61b27b-4228-425d-8a66-0601f96037a1"
       data-blockingmode="auto"
       type="text/javascript"
     ></script>
 
-    <!-- Analytics (loaded after consent) -->
-    <script
-      type="text/plain"
-      data-cookieconsent="statistics"
-      defer
-      data-domain="codariq.de"
-      src="https://plausible.io/js/script.js"
-    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-6TLXVYD8V2"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6TLXVYD8V2');
+    </script>
   </head>
 
   <body
