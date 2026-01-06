@@ -1,11 +1,15 @@
 ---
 import Base from "../layouts/Base.astro";
+import FAQSchema from "../components/FAQSchema.astro";
 ---
 
 <Base
   title="FAQ - Häufig gestellte Fragen - Codariq"
   description="Antworten zu KI Agenten, Automatisierung, Kosten und Zeitrahmen – auch zur Rettung misslückter Projekte. Für Ihre fundierte Entscheidung"
 >
+  <!-- FAQPage Schema for SEO and AI Search Optimization -->
+  <FAQSchema />
+
   <div class="min-h-screen bg-white pt-20 pb-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Back Button -->
@@ -49,10 +53,9 @@ import Base from "../layouts/Base.astro";
             Für welche Unternehmen ist KI-Automatisierung geeignet?
           </h3>
           <p class="text-gray-700 leading-relaxed">
-            KI-Automatisierung eignet sich für Unternehmen aller Größen, die
-            wiederkehrende Prozesse haben. Besonders profitieren kleine und
-            mittelständische Unternehmen mit 5-500 Mitarbeitern, die manuelle
-            Tätigkeiten wie Datenerfassung, Kundenservice oder Berichtswesen
+            KI-Automatisierung eignet sich für Selbstständige und kleine Teams mit 1-50 Personen, die
+            wiederkehrende Prozesse haben. Besonders profitieren Teams, die manuelle
+            Tätigkeiten wie Datenerfassung, E-Mail-Sortierung, Dokumentenverarbeitung oder Routineaufgaben
             optimieren möchten.
           </p>
         </div>
@@ -139,7 +142,7 @@ import Base from "../layouts/Base.astro";
             Wie viel kostet eine KI-Automatisierungslösung?
           </h3>
           <p class="text-gray-700 leading-relaxed">
-            Unsere Lösungen bieten transparente Festpreise: Der KI-Ticketing-Agent kostet €32.000-€49.000 (inkl. 6 Monate Wartung), der KI-Assistent für Wissensmanagement €39.000-€55.000 (inkl. 3 Monate Wartung), und die automatisierte Rechnungsverarbeitung €58.000-€78.000 (inkl. 12 Monate Wartung). Jede Lösung enthält Team Training. Die Investition amortisiert sich typischerweise innerhalb eines Jahres.
+            Unsere Pakete bieten transparente Festpreise: Das Starter Paket beginnt ab 399 €, das Team Paket ab 1.499 € und das Wachstums Paket ab 3.499 €. Jedes Paket ist einmalig zu zahlen und wird an deinen konkreten Ablauf angepasst. Wir kümmern uns um Datenschutz, saubere Abläufe und eine verständliche Übergabe. Optional gibt es Betreuung ab 99-199 € pro Monat.
           </p>
         </div>
       </div>
@@ -155,7 +158,7 @@ import Base from "../layouts/Base.astro";
         </p>
         <a
           href="/#final-cta"
-          class="inline-flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-700 text-white px-6 py-3 rounded-full hover:from-orange-600 hover:to-orange-800 transition-all duration-200 font-medium shadow-lg cta-button"
+          class="inline-flex items-center gap-2 bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-6 py-3 rounded-full hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 font-medium shadow-lg cta-button"
         >
           Kostenlose Beratung anfragen
           <svg

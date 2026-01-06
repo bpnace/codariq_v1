@@ -4,6 +4,9 @@ RewriteEngine On
 # Disable mod_dir's automatic directory slash handling
 DirectorySlash Off
 
+# Disable Apache MultiViews (can cause duplicate URL variants)
+Options -MultiViews
+
 # Enable directory indexes
 DirectoryIndex index.html index.htm
 
@@ -24,6 +27,26 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} ^(?:www\.)?codariq\.de$ [NC]
 RewriteCond %{REQUEST_URI} !^/.well-known/
 RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301,NE]
+
+# ============================================
+# Canonicalize explicit .html URLs
+# ============================================
+# /index.html -> /
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[?\s] [NC]
+RewriteRule ^(.*/)?index\.html$ $1 [R=301,L,NE]
+
+# /path.html -> /path (only if the file exists)
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[?\s] [NC]
+RewriteCond %{DOCUMENT_ROOT}/%1.html -f
+RewriteRule ^(.+)\.html$ $1 [R=301,L,NE]
+
+# ============================================
+# Pretty URLs for static .html output
+# ============================================
+# Serve /path as /path.html if it exists (internal rewrite, no redirect)
+# This is important because sitemap + canonicals use extensionless URLs.
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L,END]
 
 # ============================================
 # Directory Index Handling (NO external redirects)

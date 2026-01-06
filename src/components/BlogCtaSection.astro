@@ -1,0 +1,55 @@
+---
+export interface Props {
+  accent?: "orange" | "blue" | "purple" | "green";
+  id?: string;
+  title: string;
+  buttonText: string;
+  href?: string;
+}
+
+const {
+  accent = "orange",
+  id = "fazit",
+  title,
+  buttonText,
+  href = "/#final-cta",
+} = Astro.props;
+
+const containerClass =
+  accent === "blue"
+    ? "bg-blue-50"
+    : accent === "purple"
+      ? "bg-purple-50"
+      : accent === "green"
+        ? "bg-green-50"
+        : "bg-orange-50";
+
+const buttonClass =
+  "bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] focus-visible:ring-[color:var(--color-cta-primary-ring)]";
+---
+
+<section id={id} class={`${containerClass} rounded-xl p-8`}>
+  <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{title}</h2>
+
+  <div class="prose prose-lg max-w-none mb-8">
+    <slot />
+  </div>
+
+  <div class="text-center">
+    <a
+      href={href}
+      class={`cta-button cta-pulse inline-flex items-center justify-center gap-3 px-6 sm:px-8 md:px-12 py-3 sm:py-4 text-white font-semibold rounded-full transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-4 whitespace-nowrap w-auto ${buttonClass}`}
+      aria-label={buttonText}
+    >
+      {buttonText}
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"
+        />
+      </svg>
+    </a>
+  </div>
+</section>

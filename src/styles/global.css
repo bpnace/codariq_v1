@@ -1,12 +1,133 @@
 @import "tailwindcss";
 
-/* Custom Theme Colors for Tailwind v4 */
+/* ========================================
+   TAILWIND V4 THEME - CENTRALIZED COLORS
+   ======================================== */
 @theme {
-  --color-text-primary: #111827;
-  --color-primary-500: #0e1421;
-  --color-primary-600: #0b1633;
-  --color-accent-500: #E85002;
-  --color-accent-600: #C13A00;
+  /* === BRAND COLORS === */
+  --color-brand-light: #ED254E;
+  --color-brand-dark: #2D0C1B;
+
+  /* === NEUTRAL SCALE === */
+  --color-neutral-white: #ffffff;
+  --color-neutral-gray-50: #f9fafb;
+  --color-neutral-gray-100: #f3f4f6;
+  --color-neutral-gray-200: #e5e7eb;
+  --color-neutral-gray-300: #d1d5db;
+  --color-neutral-gray-400: #9ca3af;
+  --color-neutral-gray-500: #6b7280;
+  --color-neutral-gray-600: #4b5563;
+  --color-neutral-gray-700: #374151;
+  --color-neutral-gray-800: #1f2937;
+  --color-neutral-gray-900: #111827;
+
+  /* === SEMANTIC COLORS === */
+
+  --color-pack-purple: #611fd1;
+  --color-pack-blue: #081a40;
+  --color-pack-green: #22c9a2;
+
+  --color-semantic-success: #16a34a;
+  --color-semantic-error: #dd3a44;
+  --color-semantic-warning: #f59e0b;
+  --color-semantic-info: #3b82f6;
+
+  /* === COMPONENT TOKENS === */
+  /* CTA Buttons */
+  --color-cta-primary-from: var(--color-brand-light);
+  --color-cta-primary-to: var(--color-brand-dark);
+  --color-cta-primary-hover: var(--color-brand-dark);
+  --color-cta-primary-ring: var(--color-neutral-gray-200);
+
+  --color-cta-success-from: var(--color-semantic-success);
+  --color-cta-success-to: var(--color-pack-green);
+
+  /* Navigation */
+  --color-nav-link: var(--color-neutral-gray-700);
+  --color-nav-link-hover: var(--color-neutral-gray-900);
+  --color-nav-underline: var(--color-brand-light);
+  --color-nav-focus: var(--color-brand-dark);
+  --color-nav-bg-scrolled: rgba(255, 255, 255, 0.78);
+  --color-nav-border-scrolled: rgba(17, 24, 39, 0.08);
+  --color-nav-shadow-scrolled: rgba(0, 0, 0, 0.08);
+
+  /* Package Icons */
+  --color-package-starter-icon: var(--color-pack-green);
+  --color-package-team-icon: var(--color-pack-blue);
+  --color-package-growth-icon: var(--color-pack-purple);
+
+  /* Pain Points */
+  --color-pain-icon-bg: var(--color-neutral-white);
+  --color-pain-icon: var(--color-semantic-error);
+  --color-solution-icon-bg: var(--color-neutral-white);
+  --color-solution-icon: var(--color-semantic-success);
+
+  /* Process */
+  --color-process-badge-active-from: var(--color-neutral-gray-900);
+  --color-process-badge-active-to: var(--color-neutral-gray-800);
+  --color-process-bullet: var(--color-brand-light);
+
+  /* === CTA PULSE RGB === */
+  --cta-pulse-brand-rgb: 237, 37, 78;
+}
+
+/* Codec Pro (Logo) */
+@font-face {
+  font-family: "CodecPro";
+  src: url("/fonts/CodecPro-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CodecPro";
+  src: url("/fonts/CodecPro-Heavy.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl sm:text-4xl md:text-5xl font-black text-gray-900;
+  }
+
+  .section-subtitle {
+    @apply text-base sm:text-lg md:text-xl font-medium text-gray-600 leading-relaxed;
+  }
+
+  .content-title {
+    @apply text-xl sm:text-2xl font-black text-gray-900;
+  }
+
+  .content-subtitle {
+    @apply text-base sm:text-lg font-medium text-gray-600 leading-relaxed;
+  }
+
+  .body-text {
+    @apply text-base sm:text-lg font-normal text-gray-700 leading-relaxed;
+  }
+
+  .body-muted {
+    @apply text-base sm:text-lg font-normal text-gray-600 leading-relaxed;
+  }
+
+  .micro-title {
+    @apply text-sm sm:text-base font-black text-gray-900;
+  }
+
+  .micro-text {
+    @apply text-sm font-medium text-gray-700 leading-relaxed;
+  }
+
+  .brand-logo {
+    font-family: "CodecPro", "Satoshi", system-ui, sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
 }
 
 /* Satoshi Variable Font - Regular (Upright) */
@@ -24,10 +145,6 @@
   font-family: "Satoshi", system-ui, sans-serif;
 }
 
-.font-regular {
-  font-weight: 400;
-}
-
 /* Prevent scrolling beyond top of page */
 html {
   scroll-behavior: smooth;
@@ -41,14 +158,16 @@ body {
   font-weight: 400;
 }
 
-p,
-li,
-span,
-button,
-label,
-input,
-textarea {
-  font-weight: 500;
+@layer base {
+  p,
+  li,
+  span,
+  button,
+  label,
+  input,
+  textarea {
+    font-weight: 500;
+  }
 }
 
 .cta-button,
@@ -56,22 +175,23 @@ textarea {
   font-weight: 800 !important;
 }
 
-/* Pulsing orange outline animation for CTA button in hero and testimonials */
+/* Pulsing brand outline animation for CTA button in hero and testimonials */
 @keyframes pulse-outline {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(232, 80, 2, 0.7),
-                0 0 0 0 rgba(232, 80, 2, 0.4);
+    box-shadow: 0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.7),
+                0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(232, 80, 2, 0.4),
-                0 0 0 8px rgba(232, 80, 2, 0.1);
+    box-shadow: 0 0 0 4px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4),
+                0 0 0 8px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.1);
   }
 }
 
-#hero .cta-button,
-#testimonials .cta-button {
+#testimonials .cta-button,
+.cta-button.cta-pulse {
+  --cta-pulse-rgb: var(--cta-pulse-brand-rgb);
   animation: pulse-outline 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  border: 1px solid rgba(232, 80, 2, 0.5);
+  border: 1px solid rgba(var(--cta-pulse-rgb), 0.5);
 }
 
 .hero-title {
@@ -215,52 +335,6 @@ html {
 
 /* ===== Hero Section Styles ===== */
 
-/* macOS Window Container - Glassmorphism Effect */
-.macos-window {
-  /* Glassmorphism styling */
-  background: rgba(255, 255, 255, 0.59);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(20px);
-
-  /* Border and shadows */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 2px 8px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-
-  /* Layout */
-  overflow: hidden;
-  max-width: 900px;
-  margin: 0 0 2rem 0;
-
-  /* Performance */
-  will-change: transform, opacity;
-  transform-origin: center;
-  transform: translateZ(0);
-}
-
-/* Fallback for browsers without backdrop-filter support */
-@supports not (backdrop-filter: blur(20px)) {
-  .macos-window {
-    background: rgba(255, 255, 255, 0.85);
-  }
-}
-
-/* Window Title Bar */
-.window-titlebar {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  height: 30px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
 /* Smooth background transitions for header */
 header {
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -270,95 +344,6 @@ header {
 header.nav-scrolled {
   background: rgba(255, 255, 255, 0.3) !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
-}
-
-/* Fallback for browsers without backdrop-filter support */
-@supports not (backdrop-filter: blur(30px)) {
-  header {
-    background: rgba(0, 0, 0, 0.5) !important;
-  }
-
-  header.nav-scrolled {
-    background: rgba(255, 255, 255, 0.7) !important;
-  }
-}
-
-/* Title bar shine effect */
-.window-titlebar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    transparent 100%
-  );
-  pointer-events: none;
-}
-
-/* Traffic Lights Container */
-.traffic-lights {
-  display: flex;
-  gap: 8px;
-}
-
-/* Traffic Light Buttons */
-.traffic-light {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow:
-    inset 0 1px 2px rgba(0, 0, 0, 0.2),
-    0 1px 1px rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: box-shadow 0.2s ease;
-}
-
-.traffic-light:hover {
-  box-shadow:
-    inset 0 1px 2px rgba(0, 0, 0, 0.3),
-    0 1px 2px rgba(255, 255, 255, 0.6);
-}
-
-.traffic-light.red {
-  background: linear-gradient(135deg, #FF5F57 0%, #FF4136 100%);
-}
-
-.traffic-light.yellow {
-  background: linear-gradient(135deg, #FFBD2E 0%, #FFAA00 100%);
-}
-
-.traffic-light.green {
-  background: linear-gradient(135deg, #28CA42 0%, #00B300 100%);
-}
-
-/* Window Content Area */
-.window-content {
-  padding: 2rem 2.5rem 2.5rem;
-}
-
-/* macOS Window Entrance Animation */
-@keyframes macOSWindowAppear {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-/* Apply animation to macOS window */
-.macos-window.hero-animate {
-  opacity: 0;
-  animation: macOSWindowAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Minimal upward appearing animation for hero elements */
@@ -378,160 +363,23 @@ header.nav-scrolled {
   animation: heroFadeInUp 0.8s ease-out forwards;
 }
 
-@keyframes counter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-counter {
-  animation: counter 0.8s ease-out forwards;
-}
-
-/* Responsive Styles for macOS Window */
-
-/* Tablet (768px - 1023px) */
-@media (max-width: 1023px) {
-  .macos-window {
-    max-width: 700px;
-    border-radius: 10px;
-  }
-
-  .window-titlebar {
-    height: 36px;
-  }
-
-  .traffic-light {
-    width: 10px;
-    height: 10px;
-  }
-
-  .window-content {
-    padding: 1.75rem 2rem 2rem;
-  }
-}
-
-/* Mobile (< 768px) */
-@media (max-width: 767px) {
-  .macos-window {
-    max-width: 100%;
-    margin: 0 0.5rem 1.5rem;
-    border-radius: 8px;
-  }
-
-  .window-titlebar {
-    height: 32px;
-    padding: 0 10px;
-  }
-
-  .traffic-lights {
-    gap: 6px;
-  }
-
-  .traffic-light {
-    width: 8px;
-    height: 8px;
-  }
-
-  .window-content {
-    padding: 1.25rem 1rem 1.5rem;
-  }
-
-  /* Mobile-specific hero optimizations */
-  #hero {
-    padding-top: 4rem;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Hero background image - show left side on mobile */
-  #hero .absolute.inset-0 img {
-    object-position: left center;
-  }
-
-  /* Center the macOS window on mobile */
-  #hero > div {
-    width: 100%;
-  }
-
-  #hero > div > div > div {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-  }
-
-  #hero .macos-window {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: calc(100% - 1rem);
-  }
-
-  #hero .hero-title {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    margin-bottom: 0.75rem;
-  }
-
-  #hero .window-content p {
-    font-size: 0.875rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
-
-  #hero .cta-button {
-    font-size: 0.875rem;
-    padding: 0.75rem 1.5rem;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Optimized mobile animation */
-  @keyframes macOSWindowAppear {
-    from {
-      opacity: 0;
-      transform: translateY(24px) scale(0.98);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  .macos-window.hero-animate {
-    animation-duration: 1s;
-  }
-}
-
-/* Extra small mobile devices (< 375px) */
-@media (max-width: 374px) {
-  #hero .hero-title {
-    font-size: 1.25rem;
-  }
-
-  #hero .window-content p {
-    font-size: 0.8125rem;
-  }
-
-  .window-content {
-    padding: 1rem 0.875rem 1.25rem;
-  }
+/* Parallax performance optimization */
+[data-parallax] {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* Force GPU layer */
 }
 
 /* Hero section motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .hero-animate,
-  .macos-window.hero-animate {
+  .hero-animate {
     opacity: 1;
     animation: none;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0);
+  }
+
+  /* Disable parallax effect for users with motion sensitivity */
+  [data-parallax] {
+    transform: none !important;
   }
 }

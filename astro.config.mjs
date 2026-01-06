@@ -61,5 +61,21 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          if (
+            warning?.code === "UNUSED_EXTERNAL_IMPORT" &&
+            typeof warning?.message === "string" &&
+            warning.message.includes("astro/dist/assets/utils/remotePattern.js") &&
+            warning.message.includes("@astrojs/internal-helpers/remote")
+          ) {
+            return;
+          }
+
+          defaultHandler(warning);
+        },
+      },
+    },
   },
 });

@@ -1,22 +1,4 @@
 ---
-/* 
-TODO: Transparent Inverted Navigation Idea
-- Remove nav background completely (transparent)
-- Apply mix-blend-mode: difference to nav links and logo
-- Nav text automatically inverts based on content behind it
-- Dark text becomes light over light content, vice versa
-- Pure CSS solution, no JavaScript needed
-- Maximum page space utilization with real-time color adaptation
-
-Implementation:
-.nav-links {
-  mix-blend-mode: difference;
-  color: white; // Will invert to black on white backgrounds
-}
-
-Alternative: mix-blend-mode: exclusion for different color mixing
-*/
-
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -32,11 +14,13 @@ export interface Props {
 }
 
 const {
-  title = "Ihr Team ertrinkt in E-Mails, Rechnungen und Routinefragen?",
-  subtitle = "Wir bauen KI Agenten für Support, Backoffice, HR und Vertrieb – damit Sie wieder Zeit für Kunden und Strategie haben. Oder retten misslückte Implementierungen.",
+  title = "Weniger Klickarbeit. Mehr Ergebnis.",
+  subtitle = "Wir bauen intelligente Automatisierungen, die E Mails, Leads, Dokumente und Routineaufgaben sauber verbinden. DSGVO konform, verständlich erklärt, in wenigen Wochen spürbar.",
   primaryCTA = "Kostenloses Erstgespräch",
+  secondaryCTA = "Beispiele ansehen",
   primaryCTALink = "#final-cta",
-  heroImage = "/images/hero/final1.webp",
+  secondaryCTALink = "#benefits",
+  heroImage = "/images/hero/hero2.webp",
   stats = [
     { value: "40%", label: "Effizienzsteigerung" },
     { value: "60h", label: "Zeitersparnis/Monat" },
@@ -46,11 +30,12 @@ const {
 
 <section
   id="hero"
-  class="relative min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 lg:pt-32"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 lg:pt-32"
 >
   <!-- Full-width background image extending to top -->
-  <div class="absolute inset-0 -top-16 sm:-top-20">
+  <div id="hero-parallax-container" class="absolute inset-0 -top-16 sm:-top-20">
     <img
+      data-parallax
       src={heroImage}
       alt="KI-Automatisierung Dashboard für deutsche Unternehmen"
       class="w-full h-full object-cover"
@@ -59,60 +44,71 @@ const {
       decoding="async"
       style="height: calc(100% + 4rem);"
     />
-    <!-- Overlay for text readability 
+     <!--   <div
+      class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/60 via-black/35 to-black/60 lg:bg-gradient-to-r lg:from-black/60 lg:via-black/10 lg:to-transparent"
+      aria-hidden="true"
+    ></div>
+ Overlay for text readability
     <div class="absolute inset-0 bg-white/10" style="mix-blend-mode:screen;"></div>-->
   </div>
 
   <div
-    class="w-full max-w-6xl px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
+    class="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
   >
     <div class="grid lg:grid-cols-1 gap-8 items-center">
       <!-- LEFT COLUMN: Existing text content -->
-      <div class="text-center lg:text-left w-full lg:w-4/5 mx-auto lg:mx-0">
+      <div class="text-center w-full max-w-4xl mx-auto">
 
-      <!-- macOS Window Container -->
-      <div class="macos-window hero-animate" style="animation-delay: 0.1s">
-        <!-- Window Title Bar -->
-        <div class="window-titlebar">
-          <!-- Traffic Light Buttons -->
-          <div class="traffic-lights" role="presentation" aria-hidden="true">
-            <span class="traffic-light red"></span>
-            <span class="traffic-light yellow"></span>
-            <span class="traffic-light green"></span>
-          </div>
-        </div>
+      <h1
+        class="hero-title hero-animate font-headline font-black text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white mb-4 leading-tight max-w-5xl"
+        style="animation-delay: 0.1s; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);"
+      >
+        {title}
+      </h1>
 
-        <!-- Window Content Area -->
-        <div class="window-content">
-          <!-- Main Headline -->
-          <h1
-            class="hero-title font-headline font-black text-3xl sm:text-4xl md:text-4xl lg:text-7xl xl:text-4xl text-gray-700 mb-2 leading-tight xl:leading-none max-w-5xl"
-          >
-            {title}
-          </h1>
-
-          <!-- Subtitle -->
-          <p
-            class="font-regular text-base sm:text-m md:text-l lg:text-1xl text-gray-600 mb-6 max-w-4xl leading-normal"
-          >
-            {subtitle}
-          </p>
-        </div>
-      </div>
+      <p
+        class="hero-subtitle hero-animate font-medium text-base sm:text-lg md:text-xl text-white/90 mb-7 max-w-4xl leading-normal"
+        style="animation-delay: 0.25s"
+      >
+        {subtitle}
+      </p>
 
       <!-- CTA Button with Benefits -->
       <div class="hero-animate" style="animation-delay: 0.8s">
         <div
-          class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-4 mb-3 sm:mb-4 md:mb-2 px-6 sm:px-4"
+          class="flex flex-col lg:flex-row items-center justify-center gap-4 mb-3 sm:mb-4 md:mb-2 px-6 sm:px-4"
         >
           <!-- CTA Button -->
           <a
             href={primaryCTALink}
-            class="group bg-white text-gray-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-bold text-base sm:text-lg shadow-1xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-auto text-center cta-button"
+            class="group bg-white text-gray-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-bold text-base sm:text-lg shadow-1xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-80 md:w-96 text-center cta-button cta-pulse"
             aria-label={primaryCTA}
           >
-            <span class="flex items-center justify-center gap-2">
-              <span class="truncate">{primaryCTA}</span>
+            <span class="flex flex-wrap items-center justify-center gap-2">
+              <span>{primaryCTA}</span>
+              <svg
+                class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <title>Arrow Right Icon</title>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href={secondaryCTALink}
+            class="group bg-white/10 text-white border border-white/30 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-white/15 hover:border-white/50 transition-all duration-200 font-bold text-base sm:text-lg backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/20 w-full sm:w-80 md:w-96 text-center cta-button"
+            aria-label={secondaryCTA}
+          >
+            <span class="flex flex-wrap items-center justify-center gap-2">
+              <span>{secondaryCTA}</span>
               <svg
                 class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
                 fill="none"
@@ -131,7 +127,10 @@ const {
         </div>
 
         <!-- Risk Reduction Text -->
-        <p class="text-white text-sm mb-2 max-w-xs sm:max-w-sm mx-auto text-center" style="font-weight: 800 !important;">
+        <p
+          class="text-white text-sm mb-2 max-w-xs sm:max-w-sm mx-auto text-center"
+          style="font-weight: 800 !important;"
+        >
           Wir prüfen gemeinsam, welche Lösung in Ihrem Unternehmen am schnellsten Wirkung zeigt.
         </p>
       </div>

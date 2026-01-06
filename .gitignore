@@ -11,6 +11,8 @@ dist/
 .prettierignore
 .playwright*
 .venv/
+*.expect
+*.sh
 
 
 

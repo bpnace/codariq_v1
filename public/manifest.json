@@ -1,11 +1,11 @@
 {
-  "name": "Codariq - KI-Automatisierungsexperte",
+  "name": "Codariq Intelligente Automatisierungen",
   "short_name": "Codariq",
-  "description": "KI-Automatisierungsexperte für kleine und mittelständische Unternehmen",
-  "start_url": "/",
+  "description": "Automatisierungen für Selbstständige und kleine Teams. Weniger Routinearbeit, mehr Zeit fürs Kerngeschäft.",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#1E3A8A",
+  "theme_color": "#1d4ed8",
   "orientation": "portrait-primary",
   "lang": "de-DE",
   "icons": [
@@ -23,7 +23,7 @@
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-192x192.png",
@@ -40,5 +40,5 @@
   ],
   "categories": ["business", "productivity", "utilities"],
   "scope": "/",
-  "id": "/?source=pwa"
+  "id": "/"
 }

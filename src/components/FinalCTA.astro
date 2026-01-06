@@ -10,42 +10,78 @@ export interface Props {
 }
 
 const {
-  title = "Starten Sie noch heute Ihre digitale Transformation",
-  subtitle = "Kostenlose Strategieberatung",
-  description = "Vereinbaren Sie jetzt ein unverbindliches 30 Minuten Gespräch und erhalten Sie klare nächste Schritte, wie Sie KI pragmatisch in Ihren Arbeitsalltag bringen statt nur darüber zu sprechen.",
-  primaryCTA = "Kostenlose Strategieberatung sichern",
+  title = "Lass uns deine Abläufe spürbar entlasten!",
+  description = "Schildere mir kurz deine aktuelle Situation. In 30 Minuten finden wir ein bis zwei Stellen, an denen Automatisierungen dir konkret Zeit, Nerven und Routinearbeit abnehmen kann.",
+  primaryCTA = "Termin anfragen",
   primaryCTALink = "#contact",
 } = Astro.props;
 ---
 
-<section id="final-cta" class="py-10 sm:py-12 bg-white">
-  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+<section id="final-cta" class="py-10 sm:py-12 relative overflow-hidden isolate">
+  <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+	    <img
+	      src="/images/final_cta.webp"
+	      alt=""
+	      class="w-full h-full object-cover scale-90 opacity-100"
+	      style="filter: saturate(1.35) contrast(1.05);"
+	      loading="lazy"
+	      decoding="async"
+	    />
+	    <!-- <div class="absolute inset-0 bg-white/20"></div> -->
+	  </div>
+  <div class="relative z-10 max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     <div class="max-w-4xl mx-auto">
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <h2
-          class="text-3xl sm:text-4xl md:text-5xl mb-4 text-gray-900 animate-on-scroll"
-        >
-          {title}
-        </h2>
-        <p
-          class="text-lg text-gray-600 max-w-3xl mx-auto animate-on-scroll"
-          style="transition-delay: 0.15s"
-        >
-          {description}
-        </p>
-        <p
-          class="text-sm mt-3 animate-on-scroll"
-          style="transition-delay: 0.25s; font-weight: 800 !important;"
-        >
-          Unverbindlich & kostenfrei • Ohne Risiko
-        </p>
-      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <!-- Copy -->
+        <div class="text-center lg:text-left mb-10 lg:mb-0">
+          <h2 class="section-title mb-4 animate-on-scroll">
+            {title}
+          </h2>
+	          <p
+	            class="body-muted text-gray-900 font-medium max-w-3xl mx-auto lg:mx-0 animate-on-scroll"
+	            style="transition-delay: 0.15s"
+	          >
+	            {description}
+	          </p>
+          <p
+            class="text-sm mt-4 animate-on-scroll"
+            style="transition-delay: 0.25s; font-weight: 800 !important;"
+          >
+            Unverbindlich • Antwort innerhalb von 24 Stunden
+          </p>
+          <a
+            href="https://calendly.com/kontakt-codariq/30min"
+            onclick="Calendly.initPopupWidget({url: 'https://calendly.com/kontakt-codariq/30min'});return false;"
+            class="hidden lg:inline-flex mt-6 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white/80 px-6 py-3 text-base font-semibold text-gray-900 shadow-sm backdrop-blur-sm hover:bg-white hover:border-gray-400 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)]"
+            aria-label="30 min Potenzialgespräch über Calendly buchen"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              class="h-5 w-5 flex-none"
+            >
+              <circle cx="12" cy="12" r="12" fill="#006BFF"></circle>
+              <text
+                x="12"
+                y="16.5"
+                text-anchor="middle"
+                font-size="14"
+                font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+                font-weight="800"
+                fill="white"
+              >
+                C
+              </text>
+            </svg>
+            <span>30 min Potenzialgespräch</span>
+            <span class="text-xs font-bold text-gray-600">(Calendly)</span>
+          </a>
+        </div>
 
-      <!-- Contact Form -->
-      <div
-        class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 md:p-10"
-      >
+        <!-- Contact Form -->
+        <div
+          class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 md:p-10"
+        >
         <form
           action="#"
           method="POST"
@@ -79,7 +115,7 @@ const {
                 autocomplete="name"
                 aria-describedby="name-error"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="Ihr vollständiger Name"
+                placeholder="Dein Name"
               />
               <div
                 id="name-error"
@@ -96,7 +132,7 @@ const {
                 for="company"
                 class="block text-sm font-medium text-gray-700"
               >
-                Unternehmen *
+                Unternehmen oder Tätigkeit *
               </label>
               <input
                 type="text"
@@ -106,7 +142,7 @@ const {
                 autocomplete="organization"
                 aria-describedby="company-error"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="Ihr Unternehmensname"
+                placeholder="Firma oder Selbstständig"
               />
               <div
                 id="company-error"
@@ -133,7 +169,7 @@ const {
                 autocomplete="email"
                 aria-describedby="email-error"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
-                placeholder="ihre@email.de"
+                placeholder="dein@email.de"
               />
               <div
                 id="email-error"
@@ -169,14 +205,14 @@ const {
                 for="message"
                 class="block text-sm font-medium text-gray-700"
               >
-                Ihre Nachricht
+                Deine Nachricht
               </label>
               <textarea
                 id="message"
                 name="message"
                 rows="4"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
-                placeholder="Beschreiben Sie kurz Ihr Automatisierungsziel oder Ihre Herausforderung..."
+                placeholder="Wobei soll dir Automatisierung helfen? Zum Beispiel Postfach, Leads, Dokumente oder Backoffice..."
               ></textarea>
             </div>
 
@@ -184,11 +220,40 @@ const {
             <div class="pt-4">
               <button
                 type="submit"
-                class="w-full bg-gradient-to-br from-orange-500 to-orange-700 text-white px-8 py-4 rounded-lg hover:from-orange-600 hover:to-orange-800 font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-orange-200 shadow-lg cta-button"
+                class="w-full bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-8 py-4 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)] shadow-lg cta-button"
               >
-                <span class="cta-button-text">Kostenloses Strategiegespräch vereinbaren</span>
+                <span class="cta-button-text">{primaryCTA}</span>
               </button>
             </div>
+            <a
+              href="https://calendly.com/kontakt-codariq/30min"
+              onclick="Calendly.initPopupWidget({url: 'https://calendly.com/kontakt-codariq/30min'});return false;"
+              class="lg:hidden mt-3 w-full rounded-lg border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)]"
+              aria-label="30 min Potenzialgespräch über Calendly buchen"
+            >
+              <span class="inline-flex w-full items-center justify-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  class="h-5 w-5 flex-none"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#006BFF"></circle>
+                  <text
+                    x="12"
+                    y="16.5"
+                    text-anchor="middle"
+                    font-size="14"
+                    font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+                    font-weight="800"
+                    fill="white"
+                  >
+                    C
+                  </text>
+                </svg>
+                <span>30 min Potenzialgespräch</span>
+                <span class="text-xs font-bold text-gray-600">(Calendly)</span>
+              </span>
+            </a>
 
             <!-- Message Container (fixed height prevents layout shift) -->
             <div class="mt-4" style="min-height: 64px">
@@ -213,10 +278,10 @@ const {
                   </svg>
                   <div>
                     <h3 class="font-semibold text-green-800 text-sm sm:text-base">
-                      Vielen Dank für Ihre Anfrage!
+                      Danke! Ich melde mich bei dir.
                     </h3>
                     <p class="text-green-700 mt-1 text-xs sm:text-sm">
-                      Wir werden uns innerhalb von 24 Stunden bei Ihnen melden.
+                      Du bekommst innerhalb von 24 Stunden eine Rückmeldung.
                     </p>
                   </div>
                 </div>
@@ -230,7 +295,7 @@ const {
                 class="hidden p-4 bg-red-50 border border-red-200 rounded-lg"
               >
                 <h3 class="font-semibold text-red-800 mb-2 text-sm sm:text-base">
-                  Bitte korrigieren Sie folgende Fehler:
+                  Bitte korrigiere Folgendes:
                 </h3>
                 <ul
                   id="error-list"
@@ -241,7 +306,7 @@ const {
 
             <div class="text-center pt-2">
               <p class="text-xs text-gray-500">
-                Mit dem Absenden stimmen Sie unserer
+                Mit dem Absenden stimmst du unserer
                 <a href="/datenschutz" class="underline hover:text-gray-700"
                   >Datenschutzerklärung</a
                 > zu.
@@ -249,6 +314,7 @@ const {
             </div>
           </fieldset>
         </form>
+      </div>
       </div>
     </div>
   </div>
@@ -332,9 +398,9 @@ const {
 
           // Validate name
           if (!name.value.trim()) {
-            errors.push("Bitte geben Sie Ihren Namen ein");
+            errors.push("Bitte gib deinen Namen ein");
             document.getElementById("name-error").textContent =
-              "Bitte geben Sie Ihren Namen ein";
+              "Bitte gib deinen Namen ein";
             document.getElementById("name-error").classList.remove("hidden");
             hasErrors = true;
           } else {
@@ -343,9 +409,9 @@ const {
 
           // Validate company
           if (!company.value.trim()) {
-            errors.push("Bitte geben Sie Ihren Unternehmensnamen ein");
+            errors.push("Bitte gib dein Unternehmen oder deine Tätigkeit ein");
             document.getElementById("company-error").textContent =
-              "Bitte geben Sie Ihren Unternehmensnamen ein";
+              "Bitte gib dein Unternehmen oder deine Tätigkeit ein";
             document.getElementById("company-error").classList.remove("hidden");
             hasErrors = true;
           } else {
@@ -355,9 +421,9 @@ const {
           // Validate email
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
-            errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
+            errors.push("Bitte gib eine gültige E Mail Adresse ein");
             document.getElementById("email-error").textContent =
-              "Bitte geben Sie eine gültige E-Mail-Adresse ein";
+              "Bitte gib eine gültige E Mail Adresse ein";
             document.getElementById("email-error").classList.remove("hidden");
             hasErrors = true;
           } else {
@@ -374,7 +440,7 @@ const {
           const timeSinceLoad = Date.now() - formLoadTime;
           if (timeSinceLoad < MIN_FORM_TIME) {
             errors.push(
-              "Bitte nehmen Sie sich einen Moment Zeit, um das Formular auszufüllen",
+              "Bitte nimm dir einen Moment Zeit, um das Formular auszufüllen",
             );
             hasErrors = true;
           }
@@ -459,7 +525,7 @@ const {
             } else if (response.status === 400) {
               // Validation error - missing required fields
               errors.push(
-                "Bitte füllen Sie alle Pflichtfelder korrekt aus.",
+                "Bitte füll alle Pflichtfelder korrekt aus.",
               );
               formErrors.classList.remove("hidden");
               const li = document.createElement("li");
@@ -472,7 +538,7 @@ const {
             } else if (response.status === 429) {
               // Too many requests / Rate limit
               errors.push(
-                "Zu viele Anfragen. Bitte versuchen Sie es in einigen Minuten erneut.",
+                "Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.",
               );
               formErrors.classList.remove("hidden");
               const li = document.createElement("li");
@@ -481,7 +547,7 @@ const {
             } else {
               // Other errors
               errors.push(
-                "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+                "Es ist ein Fehler passiert. Bitte versuch es erneut.",
               );
               formErrors.classList.remove("hidden");
               const li = document.createElement("li");
@@ -500,7 +566,7 @@ const {
             formErrors.classList.remove("hidden");
             const li = document.createElement("li");
             li.textContent =
-              "Es ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.";
+              "Es ist ein Netzwerkfehler passiert. Bitte prüf deine Internetverbindung.";
             errorList.appendChild(li);
 
             // Auto-hide after 5 seconds

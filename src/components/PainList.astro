@@ -2,40 +2,69 @@
 export interface Props {
   title?: string;
   subtitle?: string;
+  closingText?: string;
 }
 
 const {
-  title = "Diese Probleme kennen Sie",
-  subtitle = "Ihr Team verliert täglich wertvolle Zeit mit Routineaufgaben, die KI übernehmen könnte",
+  title = "Kommt dir das bekannt vor?",
+  subtitle = "Wenn Abläufe manuell laufen, zahlen Sie jeden Tag mit Zeit, Nerven und Umsatz. Wir bringen Ordnung rein und automatisieren genau dort, wo es im Alltag am meisten entlastet. DSGVO konform, verständlich, ohne neues IT Team.",
+  closingText = "Wir starten dort, wo der Aufwand heute am größten ist, und bauen dann Schritt für Schritt weiter aus, ohne euren Betrieb auf den Kopf zu stellen.",
 } = Astro.props;
+
+const iconMeta: Record<string, { title: string; d: string }> = {
+  mail: {
+    title: "Email Icon",
+    d: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  document: {
+    title: "Document Icon",
+    d: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+  },
+  book: {
+    title: "Book Icon",
+    d: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+  },
+  link: {
+    title: "Link Icon",
+    d: "M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1",
+  },
+};
 
 const problems = [
   {
-    title: "Support-Postfach",
+    title: "Nachrichten Postfächer",
     description:
-      "E-Mails stapeln sich, Standardfragen kosten 2-3h täglich, Kunden warten zu lange.",
-    solution: "KI sortiert vor und antwortet",
+      "Das Postfach wird nie leer. Standardfragen wiederholen sich. Kunden warten, während das Team nur noch reagiert.",
+    outcome: "Schnellere Antworten, weniger Druck im Team.",
+    solution:
+      "KI sortiert, priorisiert und erstellt Antwortentwürfe, auf Wunsch mit Ticketanlage.",
     icon: "mail",
   },
   {
     title: "Rechnungen & Dokumente",
     description:
-      "Jede Rechnung manuell prüfen, abtippen, ablegen machen 30min mehr pro Rechnung aus.",
-    solution: "KI liest aus und bucht automatisch",
+      "PDFs kommen von überall. Prüfen, abtippen, ablegen, nachfragen. Der Monatsabschluss zieht sich und Fehler passieren genau dann, wenn es brennt.",
+    outcome: "Weniger Aufwand, sauberere Abläufe.",
+    solution:
+      "KI liest Dokumente aus, benennt korrekt, legt ab und übergibt Daten an Buchhaltung oder ERP.",
     icon: "document",
   },
   {
     title: "Verstreutes Wissen",
     description:
-      "Antworten in Anhängen, Mails, PDFs und die gleichen Fragen immer wieder.",
-    solution: "KI durchsucht alles und antwortet",
+      "Infos stecken in Mails, Anhängen, Chats und Ordnern. Niemand findet schnell die richtige Antwort und neue Mitarbeitende brauchen zu lange, um reinzukommen.",
+    outcome: "Antworten schneller, Wissen endlich auffindbar.",
+    solution:
+      "Ein interner Assistent durchsucht eure Inhalte und beantwortet Fragen mit Quellen und Zugriffsschutz.",
     icon: "book",
   },
   {
-    title: "Tool-Flickenteppich",
+    title: "App-Chaos",
     description:
-      "CRM, Ticketsystem, Buchhaltung aber nichts greift ineinander, Doppelarbeit.",
-    solution: "KI verbindet alle Systeme",
+      "CRM, Ticketsystem, Buchhaltung, Kalender. Alles ist da, aber nichts greift ineinander. Ergebnis ist Copy Paste und doppelte Arbeit.",
+    outcome: "Ein durchgängiger Ablauf statt Insellösungen.",
+    solution:
+      "Wir verbinden eure Systeme, damit Daten automatisch fließen und Aufgaben ohne Brüche weiterlaufen.",
     icon: "link",
   },
 ];
@@ -46,12 +75,12 @@ const problems = [
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
       <h2
-        class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
+        class="section-title mb-3 sm:mb-4 animate-on-scroll"
       >
         {title}
       </h2>
       <p
-        class="text-base sm:text-lg md:text-xl font-light text-gray-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll"
+        class="section-subtitle max-w-3xl mx-auto animate-on-scroll"
         style="transition-delay: 0.15s"
       >
         {subtitle}
@@ -65,154 +94,175 @@ const problems = [
       {
         problems.map((problem, index) => (
           <div
-            class="group animate-fade-in-up"
+            class="group animate-fade-in-up h-full"
             style={`animation-delay: ${(index + 1) * 150}ms`}
           >
-            <div class="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col">
-              {/* Icon */}
-              <div class="mb-3 sm:mb-4">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
-                  {problem.icon === "mail" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Email Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  )}
-                  {problem.icon === "document" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Document Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                  )}
-                  {problem.icon === "users" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Users Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                      />
-                    </svg>
-                  )}
-                  {problem.icon === "book" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Book Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                      />
-                    </svg>
-                  )}
-                  {problem.icon === "chart" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Chart Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                      />
-                    </svg>
-                  )}
-                  {problem.icon === "graph" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-orange-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Graph Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                      />
-                    </svg>
-                  )}
-                  {problem.icon === "link" && (
-                    <svg
-                      class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <title>Link Icon</title>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                      />
-                    </svg>
-                  )}
-                </div>
-              </div>
+            <div class="flip-card h-full">
+              <input
+                type="checkbox"
+                id={`pain-card-${index}`}
+                class="flip-toggle"
+                aria-label={`Lösung anzeigen: ${problem.title}`}
+              />
 
-              {/* Content */}
-              <div class="mb-3 sm:mb-4 flex-1">
-                <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2 sm:mb-3">
-                  {problem.title}
-                </h3>
-                <p class="text-sm sm:text-base font-light text-gray-600 leading-relaxed mb-3">
-                  {problem.description}
-                </p>
-              </div>
+              <div class="flip-inner">
+                {/* Front */}
+                <label
+                  for={`pain-card-${index}`}
+                  class="flip-face flip-front bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col cursor-pointer"
+                >
+                  {/* Icon */}
+                  <div class="mb-3 sm:mb-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
+                      {
+                        iconMeta[problem.icon] && (
+                          <svg
+                            class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <title>{iconMeta[problem.icon].title}</title>
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d={iconMeta[problem.icon].d}
+                            />
+                          </svg>
+                        )
+                      }
+                    </div>
+                  </div>
 
-              {/* Solution */}
-              <div class="pt-3 border-t border-gray-100">
-                <p class="text-sm sm:text-base font-semibold text-orange-600 flex items-start gap-2">
-                  <span class="flex-shrink-0">→</span>
-                  <span>{problem.solution}</span>
-                </p>
+                  <div class="flex-1">
+                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2 sm:mb-3">
+                      {problem.title}
+                    </h3>
+                    <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed mb-4">
+                      {problem.description}
+                    </p>
+                  </div>
+
+                  <div class="pt-3 border-t border-gray-100">
+                    <p class="text-sm sm:text-base font-semibold text-gray-900">
+                      Ergebnis:{" "}
+                      <span class="font-medium text-gray-700">
+                        {problem.outcome}
+                      </span>
+                    </p>
+                    <p class="mt-2 text-sm sm:text-base font-black text-[color:var(--color-brand-light)]">
+                      Click für die Lösung
+                    </p>
+                  </div>
+                </label>
+
+                {/* Back */}
+                <label
+                  for={`pain-card-${index}`}
+                  class="flip-face flip-back bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col text-center cursor-pointer"
+                >
+                  <div class="mb-3 sm:mb-4">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-50 flex items-center justify-center">
+                      {
+                        iconMeta[problem.icon] && (
+                          <svg
+                            class="w-7 h-7 sm:w-8 sm:h-8 text-green-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <title>{iconMeta[problem.icon].title}</title>
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d={iconMeta[problem.icon].d}
+                            />
+                          </svg>
+                        )
+                      }
+                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col items-center justify-center">
+                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+                      {problem.title}
+                    </h3>
+                    <p class="text-sm sm:text-base font-normal text-gray-600 leading-relaxed">
+                      {problem.solution}
+                    </p>
+                    <p class="mt-5 text-sm sm:text-base font-bold text-[color:var(--color-brand-light)]">
+                      Zurück
+                    </p>
+                  </div>
+                </label>
               </div>
             </div>
           </div>
         ))
       }
     </div>
+
+    <p class="mt-8 sm:mt-10 text-center text-sm sm:text-base text-gray-700 max-w-4xl mx-auto px-4 animate-on-scroll">
+      {closingText}
+    </p>
   </div>
 </section>
 
 <style>
+  .flip-card {
+    perspective: 1000px;
+    position: relative;
+    min-height: 360px;
+  }
+
+  .flip-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .flip-inner {
+    position: relative;
+    display: grid;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .flip-face {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+
+  .flip-toggle:checked ~ .flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Focus ring on the whole card when tabbing */
+  .flip-toggle:focus-visible ~ .flip-inner .flip-front,
+  .flip-toggle:focus-visible ~ .flip-inner .flip-back {
+    outline: 2px solid rgba(232, 80, 2, 0.8);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip-inner {
+      transition: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .flip-card {
+      min-height: 420px;
+    }
+  }
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
