@@ -1356,11 +1356,11 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           }
 
           // Navigation color change on scroll past hero section or article header
-          const header = document.querySelector("header");
-          const heroSection = document.querySelector("#hero");
-          const footer = document.querySelector("footer");
-          const articleHeader = document.querySelector(".article-header"); // Blog article header
-          const parallaxImage = document.querySelector("[data-parallax]");
+          const header = document.querySelector<HTMLElement>("header");
+          const heroSection = document.querySelector<HTMLElement>("#hero");
+          const footer = document.querySelector<HTMLElement>("footer");
+          const articleHeader = document.querySelector<HTMLElement>(".article-header"); // Blog article header
+          const parallaxImage = document.querySelector<HTMLElement>("[data-parallax]");
 
           const forceNavSolid =
             document.body.dataset.forceNavSolid === "true";
@@ -1375,39 +1375,45 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           const targetSection = heroSection || articleHeader;
 
           if (header && targetSection) {
+            const safeHeader = header;
+            const safeTargetSection = targetSection;
+            const safeFooter = footer;
+            const safeHeroSection = heroSection;
+            const safeParallaxImage = parallaxImage;
             let ticking = false;
 
             function updateNavColor() {
-              const sectionBottom = targetSection.getBoundingClientRect().bottom;
+              const sectionBottom = safeTargetSection.getBoundingClientRect().bottom;
 
               // Check if we're in the footer area
               let inFooter = false;
-              if (footer) {
-                const footerTop = footer.getBoundingClientRect().top;
-                const headerHeight = header.offsetHeight;
+              if (safeFooter) {
+                const footerTop = safeFooter.getBoundingClientRect().top;
+                const headerHeight = safeHeader.offsetHeight;
                 // If footer is touching or overlapping with header
                 inFooter = footerTop <= headerHeight;
               }
 
               // Toggle class based on whether we've scrolled past the section AND not in footer
               if (sectionBottom <= 0 && !inFooter) {
-                header.classList.add("nav-scrolled");
+                safeHeader.classList.add("nav-scrolled");
               } else {
-                header.classList.remove("nav-scrolled");
+                safeHeader.classList.remove("nav-scrolled");
               }
 
               ticking = false;
             }
 
             function updateParallax() {
-              if (parallaxImage && heroSection) {
+              if (safeParallaxImage && safeHeroSection) {
                 const scrollY = window.scrollY;
-                const heroBottom = heroSection.getBoundingClientRect().bottom + scrollY;
+                const heroBottom =
+                  safeHeroSection.getBoundingClientRect().bottom + scrollY;
 
                 // Only apply parallax while hero section is visible
                 if (scrollY < heroBottom) {
                   const parallaxOffset = scrollY * 0.25; // 25% = subtle effect
-                  parallaxImage.style.transform = `translateY(${parallaxOffset}px)`;
+                  safeParallaxImage.style.transform = `translateY(${parallaxOffset}px)`;
                 }
               }
             }
