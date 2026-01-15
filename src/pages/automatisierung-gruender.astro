@@ -1,0 +1,332 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import UseCaseGrid from "../components/UseCaseGrid.astro";
+import FAQ from "../components/FAQ.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+import FAQSchema from "../components/FAQSchema.astro";
+
+const useCases = [
+  {
+    title: "Angebote, Rechnungen und Belege automatisieren",
+    description:
+      "Dokumente werden aus dem richtigen Kontext erstellt, sauber abgelegt und für die Buchhaltung vorbereitet, damit der Monatsabschluss nicht jedes Mal ein kleines Drama wird.",
+    outcome: "Weniger Admin Zeit, mehr Fokus auf Umsatz.",
+    icon: "document",
+  },
+  {
+    title: "Wissen und Dokumente zentral verfügbar machen",
+    description:
+      "Dateien werden automatisch benannt, sortiert und auffindbar. Auf Wunsch entsteht ein interner Assistent, der Antworten aus deinen eigenen Dokumenten liefert.",
+    outcome: "Weniger Suchen, schnellere Entscheidungen.",
+    icon: "book",
+  },
+  {
+    title: "Inbox und Kundenanfragen auf Autopilot",
+    description:
+      "E Mails werden priorisiert, zu Aufgaben umgewandelt und mit dem nächsten Schritt versehen. Follow ups laufen zuverlässig, ohne dass du hinterherlaufen musst.",
+    outcome: "Klare Übergaben, weniger operatives Chaos.",
+    icon: "mail",
+  },
+];
+
+const processSteps = [
+  {
+    number: 1,
+    title: "Startpunkt mit schnellem ROI",
+    description:
+      "Wir finden den Prozess, der dich im Alltag am meisten blockiert, und definieren den schnellsten Weg zu spürbarer Entlastung.",
+    details: [
+      "Kurzer Ablauf-Workshop",
+      "Definition der wichtigsten Backoffice-Prozesse",
+      "Festlegung von Erfolgskriterien",
+    ],
+    duration: "3 bis 5 Tage",
+    result: "Ein klarer Startpunkt mit messbarem Effekt im Alltag.",
+  },
+  {
+    number: 2,
+    title: "Agenten und Automationen live bringen",
+    description:
+      "Wir verbinden deine Tools und setzen die ersten Automationen um, inklusive Regeln für Freigaben, Ausnahmen und saubere Übergaben.",
+    details: [
+      "Automatische Ablage und Benennung",
+      "Regeln für Ausnahmen und Freigaben",
+      "Tests mit realen Fällen",
+    ],
+    duration: "2 bis 4 Wochen",
+    result: "Routine läuft stabil, du gewinnst Zeit und Klarheit zurück.",
+  },
+  {
+    number: 3,
+    title: "Skalieren ohne neue Mitarbeiter",
+    description:
+      "Nach dem Go live erweitern wir schrittweise weitere Abläufe, damit dein Setup mitwächst, ohne dass du ständig neue Leute brauchst.",
+    details: [
+      "Feinschliff basierend auf Feedback",
+      "Erweiterung auf weitere Abläufe",
+      "Optionaler Support für laufende Begleitung",
+    ],
+    duration: "2 bis 6 Wochen Begleitung",
+    result: "Weniger Admin Stress, mehr Fokus auf Wachstum.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Welche Aufgaben lohnen sich für Gründer als erstes?",
+    answer:
+      "Alles, was jede Woche wiederkommt: Angebote, Rechnungen, Belegablage, Postfach Triage, Follow ups, Status Updates und Übergaben zwischen Tools. Wir starten dort, wo du sofort Zeit zurückgewinnst.",
+  },
+  {
+    question: "Was ist der Unterschied zwischen Automatisierung und KI Agenten?",
+    answer:
+      "Automatisierung folgt festen Regeln. KI Agenten können zusätzlich Kontext verstehen, Schritte vorschlagen und Aufgaben über mehrere Tools hinweg ausführen, immer innerhalb klarer Grenzen und mit Freigaben, wo es sinnvoll ist.",
+  },
+  {
+    question: "Funktioniert das mit unserem bestehenden Tool Stack?",
+    answer:
+      "In den meisten Fällen ja. Wir verbinden E Mail, Drive oder OneDrive, Buchhaltung, CRM und Projekttools über sichere Schnittstellen und bauen nur das, was wirklich genutzt wird.",
+  },
+  {
+    question: "Wie schnell ist der erste Prozess produktiv?",
+    answer:
+      "Typisch sind 2 bis 4 Wochen bis der erste Ablauf stabil läuft. Danach lässt sich das Setup schnell erweitern.",
+  },
+  {
+    question: "Wie bleibt das kontrollierbar und sicher?",
+    answer:
+      "Wir arbeiten mit klaren Rollen, Rechten, Logs und Freigaben. Ausnahmen werden markiert statt blind ausgeführt. Du behältst jederzeit die Kontrolle über Daten und Auslöser.",
+  },
+  {
+    question: "Was kostet das und wie läuft der Start?",
+    answer:
+      "Du bekommst vorab einen klaren Plan mit Dauer, Startpreis und Erfolgskriterien. Dann bauen wir den Ablauf, testen mit echten Fällen und führen ihn sauber ein.",
+  },
+];
+---
+
+<Base
+  title="KI Automatisierungen für Gründer, mehr Output ohne neue Leute | Codariq"
+  description="KI Automatisierungen, Agenten und Assistenten für Gründer. Automatisiere Postfach, Dokumente, Angebote, Rechnungen und Übergaben zwischen Tools, damit du schneller skalierst ohne Daten-Chaos."
+  keywords="KI Automatisierung für Gründer, KI Agenten für Gründer, AI Agents Startup, Startup Automatisierung, Backoffice automatisieren, Inbox automatisieren, Angebote automatisieren, Rechnungen automatisieren, Dokumente organisieren"
+  ogImage="/images/hero/hero2.webp"
+>
+  <BreadcrumbSchema
+    items={[{ name: "KI Automatisierungen für Gründer", url: "https://codariq.de/automatisierung-gruender" }]}
+  />
+  <FAQSchema faqs={faqs} />
+
+  <Hero
+    title="KI Automatisierungen für Gründer, damit du schneller skalieren kannst"
+    subtitle="Ich kenne das Spiel: Du willst bauen und verkaufen, aber vergessene Tasks und Admin-Aufgaben ziehen dich ständig raus. Ich setze dir KI Agenten und Assistenten auf, die Postfach, Dokumente, Angebote und Rechnungen übernehmen, damit du schneller vorankommst."
+    heroImage="/images/hero/hero2.webp"
+    primaryCTA="Jetzt Termin buchen"
+    primaryCTALink="#final-cta"
+    secondaryCTA="Beispiele ansehen"
+    secondaryCTALink="#use-cases"
+    primaryTextClass="text-gray-800"
+    secondaryTextClass="text-gray-800"
+    subtextClass="text-gray-800"
+  />
+
+  <section id="fuer-wen" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Für wen das passt</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Wenn du gründest oder gerade skalierst und das Tagesgeschäft dich mit Postfach, Dateien und manuellen Übergaben ausbremst, ist das hier der schnellste Startpunkt.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Für wen
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Gründer, die ohne neue Mitarbeitende mehr Output schaffen müssen</li>
+            <li>Gründer, die Organisation, Ablage und Übergaben stabil brauchen</li>
+            <li>Startups und Studios mit Angeboten, Rechnungen und Projekt Ablage</li>
+            <li>Gründer, die einen internen Assistenten aus eigenem Wissen nutzen wollen</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Wann es nicht passt
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Wenn du nur ein neues Tool suchst, aber keine Abläufe festlegen willst</li>
+            <li>Wenn es keine Verantwortlichkeit für den Betrieb und die Pflege gibt</li>
+            <li>Wenn alles bewusst ad hoc bleibt und nichts standardisierbar ist</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-sm sm:text-base font-semibold text-gray-700 text-center mt-6">
+        Ziel ist nicht mehr Tools, sondern weniger Handarbeit durch klare Übergaben.
+      </p>
+    </div>
+  </section>
+
+  <section id="value-focus" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">
+          Gründen ohne Daten-Chaos
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Wenn Admin Aufgaben laufen, gewinnst du spürbar Kapazität für Kunden, Produkt und Umsatz.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Angebote und Rechnungen ohne Ping Pong
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Dokumente werden automatisch erstellt, abgelegt und mit dem Kundenkontext verknüpft.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Ablage, die im Hintergrund läuft
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Anhänge aus E Mails und Chats werden sauber benannt und im richtigen Ordner abgelegt.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Übergaben mit Kontext
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Aufgaben entstehen automatisch, inklusive nächstem Schritt und klarer Verantwortung.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <UseCaseGrid
+    title="3 Use Cases für Gründer"
+    subtitle="Pragmatische Automationen und Agenten, die sofort messbar entlasten."
+    useCases={useCases}
+  />
+
+  <section id="sicherheit-daten" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Sicherheit und Daten</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          E Mail, Dokumente und Buchhaltungsdaten sind sensibel. Deshalb sind Zugriff, Speicherung und Übergaben von Anfang an sauber geregelt.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Zugriffsrechte
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Rollen und Freigaben sorgen dafür, dass nur die richtigen Personen auf Daten zugreifen.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            EU Hosting und AVV
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Hosting in der EU ist möglich, inklusive AVV und klarer Regelung der Auftragsverarbeitung.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Protokolle & Ausnahmen
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Übergaben werden nachvollziehbar dokumentiert, Sonderfälle laufen über klare Freigaben.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="py-10 sm:py-12 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div class="text-center mb-8 sm:mb-10">
+        <h2 class="section-title mb-3 sm:mb-4">
+          Ablauf für Automatisierung bei Gründern
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Strukturiert starten, schnell Wirkung sehen, sauber skalieren.
+        </p>
+      </div>
+
+      <div class="space-y-3 sm:space-y-4">
+        {processSteps.map((step, index) => (
+          <details
+            class="group/compact rounded-xl border border-gray-200 bg-gray-50 p-4 sm:p-5"
+            open={index === 0}
+          >
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <div>
+                <p class="text-xs sm:text-sm font-semibold text-orange-600 mb-1">
+                  Schritt {step.number} · {step.duration}
+                </p>
+                <h3 class="text-base sm:text-lg font-black text-gray-900">
+                  {step.title}
+                </h3>
+              </div>
+              <svg
+                class="w-5 h-5 text-gray-400 mt-1 transition-transform duration-200 group-open/compact:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+
+            <div class="pt-3 sm:pt-4">
+              <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed mb-3">
+                {step.description}
+              </p>
+              <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+                {step.details.map((detail) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 h-1.5 w-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-4 border-t border-gray-200 pt-3">
+                <p class="text-sm sm:text-base font-semibold text-gray-900">Ergebnis:</p>
+                <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+                  {step.result}
+                </p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+    <FinalCTA
+    title="Lass uns deine Arbeitstage spürbar entlasten"
+    description="Wir finden den besten Startpunkt, bauen den ersten Prozess stabil und zeigen dir, wie schnell Automatisierung im Alltag Wirkung zeigt."
+  />
+
+  <FAQ
+    title="FAQ für Gründer"
+    subtitle="Die wichtigsten Fragen, kurz beantwortet."
+    faqs={faqs}
+  />
+</Base>

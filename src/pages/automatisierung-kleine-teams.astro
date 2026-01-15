@@ -1,0 +1,260 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import TrustBar from "../components/TrustBar.astro";
+import UseCaseGrid from "../components/UseCaseGrid.astro";
+import FAQ from "../components/FAQ.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+import FAQSchema from "../components/FAQSchema.astro";
+
+const useCases = [
+  {
+    title: "Status Updates automatisch bündeln",
+    description:
+      "Updates werden aus euren Tools gesammelt und als kurzer Überblick erstellt, damit ihr weniger Abstimmung braucht.",
+    outcome: "Weniger Meetings, bessere Übersicht.",
+    icon: "book",
+  },
+  {
+    title: "Übergaben zwischen Tools automatisieren",
+    description:
+      "Aufgaben wandern automatisch zwischen CRM, Projekttool und Postfach, ohne manuelle Copy Paste Schritte.",
+    outcome: "Saubere Abläufe ohne Brüche.",
+    icon: "link",
+  },
+  {
+    title: "Interner KI Assistent aus eurem Wissen",
+    description:
+      "Wissen aus E Mails, Dokumenten und Tickets wird auffindbar. Auf Wunsch beantwortet ein Assistent Fragen aus euren eigenen Inhalten.",
+    outcome: "Schnelleres Onboarding und weniger Rückfragen.",
+    icon: "document",
+  },
+];
+
+const processSteps = [
+  {
+    number: 1,
+    title: "Reibung finden",
+    description:
+      "Wir schauen, wo dein Team täglich Zeit verliert, zum Beispiel bei Abstimmung, Aufgabenübergaben oder doppelter Pflege.",
+    details: [
+      "Übersicht der wichtigsten Abläufe",
+      "Identifikation von Bruchstellen",
+      "Definition von klaren Zuständigkeiten",
+    ],
+    duration: "3 bis 5 Tage",
+    result: "Ein klarer Überblick über die wichtigsten Engpässe.",
+  },
+  {
+    number: 2,
+    title: "Systeme verbinden",
+    description:
+      "Wir verbinden eure Tools und automatisieren Übergaben und Status Updates. Dann testen wir mit echten Fällen.",
+    details: [
+      "Tools verbinden ohne Brüche",
+      "Automatische Status Berichte",
+      "Tests mit realen Abläufen",
+    ],
+    duration: "2 bis 4 Wochen",
+    result: "Ein stabiler Ablauf mit klaren Zuständigkeiten.",
+  },
+  {
+    number: 3,
+    title: "Stabilisieren und skalieren",
+    description:
+      "Wir optimieren Sonderfälle und erweitern den Ablauf auf weitere Bereiche.",
+    details: [
+      "Feintuning für Sonderfälle",
+      "Kurze Einweisung fürs Team",
+      "Optional: Ausbau weiterer Workflows",
+    ],
+    duration: "2 bis 6 Wochen Begleitung",
+    result: "Weniger Chaos, mehr Fokus im Alltag.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Wie hilft Automatisierung kleinen Teams?",
+    answer:
+      "Durch weniger Abstimmung, klare Übergaben und automatische Status Updates. So muss seltener nachgefragt werden und Arbeit bleibt nicht liegen.",
+  },
+  {
+    question: "Was passiert, wenn Prozesse sich ändern?",
+    answer:
+      "Wir bauen so, dass Anpassungen möglich sind. Änderungen lassen sich in der Regel schnell einpflegen.",
+  },
+  {
+    question: "Müssen alle Tools ersetzt werden?",
+    answer:
+      "Nein, wir verbinden vorhandene Tools. Ziel ist weniger Tool-Wechsel, nicht ein kompletter Neustart.",
+  },
+  {
+    question: "Wie entstehen automatische Status Updates?",
+    answer:
+      "Wir bündeln Daten aus deinen Systemen und erstellen automatisch klare Zusammenfassungen.",
+  },
+  {
+    question: "Wie bleibt das Team eingebunden?",
+    answer:
+      "Wir führen die Automatisierung schrittweise ein und geben klare Einweisungen, damit jeder weiß, was passiert.",
+  },
+  {
+    question: "Wie bleibt das DSGVO konform?",
+    answer:
+      "Zugriffsrechte, Datenflüsse und Speicherorte werden klar geregelt. Auf Wunsch EU Hosting und AVV.",
+  },
+];
+---
+
+<Base
+  title="Automatisierung für kleine Teams, Prozesse und Workflows mit KI | Codariq"
+  description="Automatisierung für kleine Teams: Prozesse automatisieren, Status Updates automatisch erstellen und Übergaben zwischen Tools verbinden. Weniger Abstimmung, mehr Output, ohne neue Mitarbeitende."
+  keywords="Automatisierung für kleine Teams, Prozesse automatisieren, Workflow Automatisierung, Team Koordination, operatives Chaos reduzieren, Status Updates automatisieren, Übergaben automatisieren, Tools verbinden, zentrale Organisation kleines Team"
+  ogImage="/images/hero/hero2.webp"
+>
+  <BreadcrumbSchema
+    items={[{ name: "Automatisierung für kleine Teams", url: "https://codariq.de/automatisierung-kleine-teams" }]}
+  />
+  <FAQSchema faqs={faqs} />
+
+  <Hero
+    title="Automatisierung für kleine Teams, weniger Abstimmung, mehr Output"
+    subtitle="Wenn dein Team ständig nachfragt, Dinge doppelt einträgt oder Status Updates in Meetings erklärt, kostet das jeden Tag Zeit. Wir verbinden eure Tools und automatisieren Übergaben und Updates, damit ihr schneller umsetzt."
+    heroImage="/images/hero/hero2.webp"
+    primaryCTA="Jetzt Termin buchen"
+    primaryCTALink="/#kontakt"
+    secondaryCTA="Use Cases ansehen"
+    secondaryCTALink="#use-cases"
+    primaryTextClass="text-gray-800"
+    secondaryTextClass="text-gray-800"
+    subtextClass="text-gray-800"
+  />
+
+  <TrustBar />
+
+  <section id="value-focus" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">
+          Weniger Abstimmung, mehr Umsetzung
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Wenn du Prozesse automatisieren willst, ist das oft der schnellste Hebel: klare Übergaben und automatische Status Updates. So entsteht zentrale Organisation, ohne mehr Meetings.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Weniger Meetings
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Status Updates laufen automatisch, statt in täglichen Abstimmungen.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Klare Übergaben
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Aufgaben wandern automatisch an die richtigen Personen oder Systeme.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Bessere Übersicht
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Weniger Suche, mehr Klarheit über den aktuellen Stand.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <UseCaseGrid
+    title="3 Use Cases für kleine Teams"
+    subtitle="Beispiele für Team Koordination, Status Updates und Übergaben zwischen Tools."
+    useCases={useCases}
+  />
+
+  <section id="process" class="py-10 sm:py-12 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div class="text-center mb-8 sm:mb-10">
+        <h2 class="section-title mb-3 sm:mb-4">
+          Unser Ablauf für stabile Workflows
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          So bringen wir Ordnung in Abläufe, ohne dein Team zu überfordern.
+        </p>
+      </div>
+
+      <div class="space-y-3 sm:space-y-4">
+        {processSteps.map((step, index) => (
+          <details
+            class="group/compact rounded-xl border border-gray-200 bg-gray-50 p-4 sm:p-5"
+            open={index === 0}
+          >
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <div>
+                <p class="text-xs sm:text-sm font-semibold text-orange-600 mb-1">
+                  Schritt {step.number} · {step.duration}
+                </p>
+                <h3 class="text-base sm:text-lg font-black text-gray-900">
+                  {step.title}
+                </h3>
+              </div>
+              <svg
+                class="w-5 h-5 text-gray-400 mt-1 transition-transform duration-200 group-open/compact:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+
+            <div class="pt-3 sm:pt-4">
+              <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed mb-3">
+                {step.description}
+              </p>
+              <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+                {step.details.map((detail) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 h-1.5 w-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-4 border-t border-gray-200 pt-3">
+                <p class="text-sm sm:text-base font-semibold text-gray-900">Ergebnis:</p>
+                <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+                  {step.result}
+                </p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="Lass uns deine Workflows im Team vereinfachen"
+    description="Wir finden die größten Reibungsverluste und setzen Automatisierungen um, die Abstimmung reduzieren und eure Tools sauber verbinden."
+  />
+
+
+  <FAQ
+    title="FAQ: Automatisierung für kleine Teams"
+    subtitle="Kurz erklärt, damit du die nächsten Schritte kennst."
+    faqs={faqs}
+  />
+</Base>

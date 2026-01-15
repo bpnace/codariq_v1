@@ -4,6 +4,7 @@ import "../styles/global.css";
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
   ogImage?: string;
   forceNavSolid?: boolean;
 }
@@ -11,6 +12,7 @@ export interface Props {
 const {
   title,
   description = "Wir bauen KI Agenten, die Support, Backoffice und HR entlasten – damit Sie mehr Zeit für Kunden und Entscheidungen haben",
+  keywords = "KI Automatisierung Selbstständige, kleine Teams automatisieren, Freelancer KI Tools, bis 50 Mitarbeiter Automatisierung, Prozesse automatisieren kleine Teams, Support entlasten Selbstständige, Backoffice automatisieren Freelancer, E-Mail Automatisierung, DSGVO konform, Solopreneur Automatisierung",
   ogImage,
   forceNavSolid = false,
 } = Astro.props;
@@ -46,7 +48,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <!-- Performance optimizations -->
     <link
       rel="preload"
-      href="/images/hero/hero2.webp"
+      href="/images/hero/hero1.webp"
       as="image"
       type="image/webp"
     />
@@ -82,7 +84,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <meta name="author" content="Codariq" />
     <meta
       name="keywords"
-      content="KI Automatisierung Selbstständige, kleine Teams automatisieren, Freelancer KI Tools, bis 50 Mitarbeiter Automatisierung, Prozesse automatisieren kleine Teams, Support entlasten Selbstständige, Backoffice automatisieren Freelancer, E-Mail Automatisierung, DSGVO konform, Solopreneur Automatisierung"
+      content={keywords}
     />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="de" />
@@ -775,7 +777,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12"
         >
           <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6 lg:gap-8"
           >
             <!-- Column 1: Logo + Beschreibung -->
             <div class="text-left">
@@ -834,7 +836,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             <div class="text-left">
               <div class="mb-6">
                 <h4 class="font-semibold text-gray-100 mb-3 text-sm">
-                  Zertifizierungen
+                  Unsere Werte
                 </h4>
                 <div
                   class="flex flex-wrap justify-start gap-2 md:gap-3 mb-4"
@@ -842,21 +844,21 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                   <img
                     src="/images/badges/climate-friendly.webp"
                     alt="Klimafreundlich"
-                    class="h-10 md:h-12 w-auto"
+                    class="h-15 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
                   />
                   <img
                     src="/images/badges/gdpr-ready.webp"
                     alt="DSGVO konform"
-                    class="h-10 md:h-12 w-auto"
+                    class="h-10 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
                   />
                   <img
                     src="/images/badges/remote-only.webp"
                     alt="Remote verfügbar"
-                    class="h-10 md:h-12 w-auto"
+                    class="h-10 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
                   />
@@ -865,7 +867,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
               <div>
                 <span class="text-gray-400 text-xs mb-2 block"
-                  >Zertifiziert durch:</span
+                  >In zusammenarbeit mit:</span
                 >
                 <div
                   class="flex items-center justify-start space-x-2 md:space-x-3"
@@ -956,7 +958,37 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
               </ul>
             </div>
 
-            <!-- Column 4: Kontakt + Newsletter -->
+            <!-- Column 4: Für wen -->
+            <div class="text-left">
+              <h4 class="font-semibold text-gray-100 mb-3 text-sm">
+                Für wen
+              </h4>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>
+                  <a
+                    href="/automatisierung-selbststaendige"
+                    class="hover:text-orange-400 transition-colors duration-200"
+                    >für Selbstständige</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/automatisierung-gruender"
+                    class="hover:text-orange-400 transition-colors duration-200"
+                    >für Gründer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/automatisierung-kleine-teams"
+                    class="hover:text-orange-400 transition-colors duration-200"
+                    >für kleine Teams</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 5: Kontakt + Newsletter -->
             <div class="text-left">
               <!-- Kontakt Section -->
               <div class="mb-6">
