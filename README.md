@@ -189,7 +189,6 @@ Package pricing in Process section maintains specific pricing for transparency.
 - **Domain:** codariq.de (configured for German market)
 - **Hosting:** Strato Web Hosting
 - **SSL:** Automatically managed
-- **SSH:** 5017709652.ssh.w2.strato.hosting
 
 ### Deployment Process
 
