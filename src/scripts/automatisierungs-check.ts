@@ -302,10 +302,10 @@ const init = () => {
         },
         {
           icon: "👔",
-          title: "Done4You",
+          title: "Ready2Use",
           subtitle:
             "Ich möchte nicht selbst lernen. Ich möchte jemanden der das für mich umsetzt",
-          value: "done_for_you",
+          value: "ready_to_use",
         },
       ],
     },
@@ -736,6 +736,7 @@ const init = () => {
     elements.question.textContent = step.question;
     elements.subtitle.textContent = step.subtitle || "";
     elements.options.dataset.layout = step.type;
+    elements.options.dataset.step = step.id;
     setHint("");
     setError("");
     clearOptions();

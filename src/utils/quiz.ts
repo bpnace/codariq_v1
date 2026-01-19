@@ -132,7 +132,7 @@ export function calculateResults(answers: QuizAnswers): QuizResults {
 }
 
 function determineProductFit(goalAnswer: string, budgetScore: number): string {
-  if (goalAnswer === "done_for_you" && budgetScore >= 90) {
+  if (goalAnswer === "ready_to_use" && budgetScore >= 90) {
     return "premium";
   }
   if (goalAnswer === "learn_implement" && budgetScore >= 70) {

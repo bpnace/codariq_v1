@@ -24,7 +24,7 @@ const pageDescription =
           </div>
 
           <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl leading-tight text-gray-900 max-w-5xl mx-auto">
-            Finde in 2 Minuten die Automatisierung mit dem größten Nutzen.
+            Finde in 2 Minuten die Automatisierung mit dem größten Nutzen für dich.
           </h1>
           <p class="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
             10 kurze Fragen. 2 schnelle Capture Steps. Direkt danach erhältst du deine Auswertung zu
@@ -413,6 +413,9 @@ const pageDescription =
     .quiz-options[data-layout="multiple_choice"] > .quiz-multi + .quiz-multi {
       border-top: 1px solid var(--quiz-divider-color);
     }
+    .quiz-options[data-step="q10_budget"] .quiz-card {
+      padding: 14px;
+    }
     .quiz-options[data-layout="visual_cards"] > .quiz-card:nth-child(2n),
     .quiz-options[data-layout="icon_options"] > .quiz-option:nth-child(2n) {
       border-right: 0;
@@ -432,7 +435,7 @@ const pageDescription =
       gap: 12px;
       cursor: pointer;
       transition: box-shadow 0.2s ease, border-color 0.2s ease;
-      min-height: 190px;
+      min-height: 150px;
       height: 100%;
       box-shadow: none;
       border-right: 1px solid var(--quiz-divider-color);
@@ -447,7 +450,7 @@ const pageDescription =
       background: rgba(237, 37, 78, 0.04);
     }
     .quiz-card-media {
-      height: 96px;
+      height: 64px;
       border-radius: 14px;
       background: transparent;
       border: 0;
@@ -548,6 +551,16 @@ const pageDescription =
     }
     .quiz-options[data-layout="multiple_choice"] .quiz-option-text {
       text-align: left;
+    }
+    body[data-force-nav-solid="true"] header {
+      background: var(--color-nav-bg-scrolled);
+      border-color: var(--color-nav-border-scrolled) !important;
+      box-shadow: 0 10px 30px var(--color-nav-shadow-scrolled);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    body[data-force-nav-solid="true"] header #mobile-menu-button {
+      color: #374151 !important;
     }
     .quiz-hint {
       font-size: 0.85rem;
@@ -713,9 +726,6 @@ const pageDescription =
       background: #fff7ed;
       color: #9a3412;
       font-weight: 700;
-    }
-    .hidden {
-      display: none;
     }
     .honeypot-field {
       position: absolute;
