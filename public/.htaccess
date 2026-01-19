@@ -1,6 +1,8 @@
 RewriteEngine On
+RewriteBase /
 
-# Force non-www on HTTPS
+# Force HTTPS and non-www
+RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
 RewriteRule ^(.*)$ https://codariq.de/$1 [R=301,L]
 
@@ -10,15 +12,15 @@ RewriteRule ^(.*)$ https://codariq.de/$1? [R=301,L]
 
 # Remove trailing slash (except root)
 RewriteCond %{REQUEST_URI} .+/$
-RewriteRule ^(.+)/$ https://codariq.de/$1 [R=301,L]
+RewriteRule ^(.+)/$ /$1 [R=301,L]
 
 # Redirect .html to clean URL
 RewriteCond %{THE_REQUEST} \s/([^\s]+)\.html [NC]
 RewriteRule ^ %1 [R=301,L]
 
 # Pretty URL rewrites for file-based output
+RewriteRule ^$ index.html [L]
+RewriteRule ^blog$ blog.html [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^$ /index.html [L]
-RewriteRule ^blog$ /blog.html [L]
-RewriteRule ^(.+)$ /$1.html [L]
+RewriteRule ^(.+)$ $1.html [L]
