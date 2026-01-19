@@ -1,8 +1,100 @@
-import { calculateResults, isStepValid } from "../utils/quiz";
+import {
+  calculateResults,
+  isStepValid,
+  type QuizResults,
+  type QuizState,
+} from "../utils/quiz";
 import { isValidEmail } from "../utils/validation";
 
+type QuizCard = {
+  title: string;
+  value: string;
+  subtitle?: string;
+  emoji?: string;
+  icon?: string;
+  image?: string;
+};
+
+type QuizOption = {
+  text: string;
+  value: string;
+  icon?: string;
+};
+
+type BaseStep = {
+  id: string;
+  question: string;
+  subtitle?: string;
+};
+
+type VisualCardStep = BaseStep & {
+  type: "visual_cards";
+  cards: QuizCard[];
+};
+
+type IconOptionStep = BaseStep & {
+  type: "icon_options";
+  options: QuizOption[];
+};
+
+type MultipleChoiceStep = BaseStep & {
+  type: "multiple_choice";
+  options: QuizOption[];
+  maxSelections: number;
+};
+
+type NameCaptureStep = BaseStep & {
+  type: "name_capture";
+};
+
+type ContactCaptureStep = BaseStep & {
+  type: "contact_capture";
+};
+
+type QuizStep =
+  | VisualCardStep
+  | IconOptionStep
+  | MultipleChoiceStep
+  | NameCaptureStep
+  | ContactCaptureStep;
+
+type QuizRunState = QuizState & {
+  currentStep: number;
+};
+
+type QuizElements = {
+  stepLabel: HTMLSpanElement;
+  progressFill: HTMLDivElement;
+  progressPercent: HTMLSpanElement;
+  progressMessage: HTMLSpanElement;
+  question: HTMLHeadingElement;
+  subtitle: HTMLParagraphElement;
+  options: HTMLDivElement;
+  hint: HTMLParagraphElement;
+  back: HTMLButtonElement;
+  next: HTMLButtonElement;
+  error: HTMLParagraphElement;
+  result: HTMLDivElement;
+  resultPotential: HTMLSpanElement;
+  resultLevel: HTMLParagraphElement;
+  resultTime: HTMLSpanElement;
+  resultRoi: HTMLSpanElement;
+  resultRecommendations: HTMLUListElement;
+  quizShell: HTMLDivElement;
+};
+
+const getElement = <T extends HTMLElement>(id: string): T => {
+  const element = document.getElementById(id);
+  if (!element) {
+    throw new Error(`Missing quiz element: ${id}`);
+  }
+  return element as T;
+};
+
 const init = () => {
-  const quizQuestions = [
+  const quizQuestions: Array<
+    VisualCardStep | IconOptionStep | MultipleChoiceStep
+  > = [
     {
       id: "q1_automation_attitude",
       question: "Wie stehst du zum Thema Automatisierung?",
@@ -348,7 +440,7 @@ const init = () => {
     },
   ];
 
-  const captureSteps = [
+  const captureSteps: Array<NameCaptureStep | ContactCaptureStep> = [
     {
       id: "capture_name",
       question: "Wie dürfen wir dich ansprechen?",
@@ -364,17 +456,17 @@ const init = () => {
     },
   ];
 
-  const progressMessages = [
+  const progressMessages: Array<{ at: number; text: string }> = [
     { at: 30, text: "🔥 Du machst das großartig!" },
     { at: 50, text: "💪 Hälfte geschafft!" },
     { at: 80, text: "🎯 Fast am Ziel!" },
   ];
 
-  const steps = [...quizQuestions, ...captureSteps];
+  const steps: QuizStep[] = [...quizQuestions, ...captureSteps];
   const totalSteps = steps.length;
   const storageKey = "codariq_quiz_v1";
 
-  const state = {
+  const state: QuizRunState = {
     currentStep: 0,
     answers: {},
     userInfo: {
@@ -385,25 +477,25 @@ const init = () => {
     },
   };
 
-  const elements = {
-    stepLabel: document.getElementById("quiz-step-label"),
-    progressFill: document.getElementById("quiz-progress-fill"),
-    progressPercent: document.getElementById("quiz-progress-percent"),
-    progressMessage: document.getElementById("quiz-progress-message"),
-    question: document.getElementById("quiz-question"),
-    subtitle: document.getElementById("quiz-subtitle"),
-    options: document.getElementById("quiz-options"),
-    hint: document.getElementById("quiz-hint"),
-    back: document.getElementById("quiz-back"),
-    next: document.getElementById("quiz-next"),
-    error: document.getElementById("quiz-error"),
-    result: document.getElementById("quiz-result"),
-    resultPotential: document.getElementById("result-potential"),
-    resultLevel: document.getElementById("result-level"),
-    resultTime: document.getElementById("result-time"),
-    resultRoi: document.getElementById("result-roi"),
-    resultRecommendations: document.getElementById("result-recommendations"),
-    quizShell: document.getElementById("quiz-app"),
+  const elements: QuizElements = {
+    stepLabel: getElement<HTMLSpanElement>("quiz-step-label"),
+    progressFill: getElement<HTMLDivElement>("quiz-progress-fill"),
+    progressPercent: getElement<HTMLSpanElement>("quiz-progress-percent"),
+    progressMessage: getElement<HTMLSpanElement>("quiz-progress-message"),
+    question: getElement<HTMLHeadingElement>("quiz-question"),
+    subtitle: getElement<HTMLParagraphElement>("quiz-subtitle"),
+    options: getElement<HTMLDivElement>("quiz-options"),
+    hint: getElement<HTMLParagraphElement>("quiz-hint"),
+    back: getElement<HTMLButtonElement>("quiz-back"),
+    next: getElement<HTMLButtonElement>("quiz-next"),
+    error: getElement<HTMLParagraphElement>("quiz-error"),
+    result: getElement<HTMLDivElement>("quiz-result"),
+    resultPotential: getElement<HTMLSpanElement>("result-potential"),
+    resultLevel: getElement<HTMLParagraphElement>("result-level"),
+    resultTime: getElement<HTMLSpanElement>("result-time"),
+    resultRoi: getElement<HTMLSpanElement>("result-roi"),
+    resultRecommendations: getElement<HTMLUListElement>("result-recommendations"),
+    quizShell: getElement<HTMLDivElement>("quiz-app"),
   };
 
   function saveState() {
@@ -414,11 +506,11 @@ const init = () => {
     }
   }
 
-  function setError(message) {
+  function setError(message: string) {
     elements.error.textContent = message || "";
   }
 
-  function setHint(message) {
+  function setHint(message: string) {
     elements.hint.textContent = message || "";
   }
 
@@ -439,7 +531,11 @@ const init = () => {
     elements.options.innerHTML = "";
   }
 
-  function createCard(option, stepId, isSelected) {
+  function createCard(
+    option: QuizCard,
+    stepId: string,
+    isSelected: boolean
+  ): HTMLButtonElement {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `quiz-card${isSelected ? " is-selected" : ""}`;
@@ -457,7 +553,7 @@ const init = () => {
     if (option.icon || option.emoji) {
       const icon = document.createElement("span");
       icon.className = "quiz-card-icon";
-      icon.textContent = option.icon || option.emoji;
+      icon.textContent = option.icon ?? option.emoji ?? "";
       media.appendChild(icon);
     } else {
       const text = document.createElement("span");
@@ -481,7 +577,11 @@ const init = () => {
     return button;
   }
 
-  function createOption(option, stepId, isSelected) {
+  function createOption(
+    option: QuizOption,
+    stepId: string,
+    isSelected: boolean
+  ): HTMLButtonElement {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `quiz-option${isSelected ? " is-selected" : ""}`;
@@ -491,7 +591,7 @@ const init = () => {
 
     const icon = document.createElement("span");
     icon.className = "quiz-option-icon";
-    icon.textContent = option.icon;
+    icon.textContent = option.icon || "";
     button.appendChild(icon);
 
     const text = document.createElement("span");
@@ -502,7 +602,11 @@ const init = () => {
     return button;
   }
 
-  function createMulti(option, stepId, isSelected) {
+  function createMulti(
+    option: QuizOption,
+    stepId: string,
+    isSelected: boolean
+  ): HTMLButtonElement {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `quiz-multi${isSelected ? " is-selected" : ""}`;
@@ -523,7 +627,7 @@ const init = () => {
     return button;
   }
 
-  function renderInputs(step) {
+  function renderInputs(step: NameCaptureStep | ContactCaptureStep) {
     clearOptions();
     elements.options.dataset.layout = step.type;
 
@@ -538,8 +642,9 @@ const init = () => {
       input.type = "text";
       input.placeholder = "z.B. Marcel";
       input.value = state.userInfo.name;
-      input.addEventListener("input", (event) => {
-        state.userInfo.name = event.target.value.trim();
+      input.addEventListener("input", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.name = target.value.trim();
         saveState();
         updateNextState();
       });
@@ -559,8 +664,9 @@ const init = () => {
       emailInput.type = "email";
       emailInput.placeholder = "du@unternehmen.de";
       emailInput.value = state.userInfo.email;
-      emailInput.addEventListener("input", (event) => {
-        state.userInfo.email = event.target.value.trim();
+      emailInput.addEventListener("input", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.email = target.value.trim();
         saveState();
         updateNextState();
       });
@@ -577,8 +683,9 @@ const init = () => {
       phoneInput.type = "tel";
       phoneInput.placeholder = "+49 170 1234567";
       phoneInput.value = state.userInfo.phone;
-      phoneInput.addEventListener("input", (event) => {
-        state.userInfo.phone = event.target.value.trim();
+      phoneInput.addEventListener("input", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.phone = target.value.trim();
         saveState();
       });
       phoneField.appendChild(phoneLabel);
@@ -590,8 +697,9 @@ const init = () => {
       consentInput.type = "checkbox";
       consentInput.id = "quiz-consent";
       consentInput.checked = Boolean(state.userInfo.consent);
-      consentInput.addEventListener("change", (event) => {
-        state.userInfo.consent = event.target.checked;
+      consentInput.addEventListener("change", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.consent = target.checked;
         saveState();
         updateNextState();
       });
@@ -633,7 +741,10 @@ const init = () => {
     clearOptions();
 
     if (step.type === "visual_cards") {
-      const selected = state.answers[step.id];
+      const selected =
+        typeof state.answers[step.id] === "string"
+          ? state.answers[step.id]
+          : "";
       step.cards.forEach((card) => {
         const isSelected = selected === card.value;
         const cardEl = createCard(card, step.id, isSelected);
@@ -648,7 +759,10 @@ const init = () => {
     }
 
     if (step.type === "icon_options") {
-      const selected = state.answers[step.id];
+      const selected =
+        typeof state.answers[step.id] === "string"
+          ? state.answers[step.id]
+          : "";
       step.options.forEach((option) => {
         const isSelected = selected === option.value;
         const optionEl = createOption(option, step.id, isSelected);
@@ -663,13 +777,25 @@ const init = () => {
     }
 
     if (step.type === "multiple_choice") {
-      const selectedValues = new Set(state.answers[step.id] || []);
+      const selectedValues = new Set(
+        Array.isArray(state.answers[step.id])
+          ? (state.answers[step.id] as string[]).filter(
+              (value): value is string => typeof value === "string"
+            )
+          : []
+      );
       setHint(`Du kannst bis zu ${step.maxSelections} Optionen wählen.`);
       step.options.forEach((option) => {
         const isSelected = selectedValues.has(option.value);
         const multiEl = createMulti(option, step.id, isSelected);
         multiEl.addEventListener("click", () => {
-          const current = new Set(state.answers[step.id] || []);
+          const current = new Set(
+            Array.isArray(state.answers[step.id])
+              ? (state.answers[step.id] as string[]).filter(
+                  (value): value is string => typeof value === "string"
+                )
+              : []
+          );
           if (current.has(option.value)) {
             current.delete(option.value);
           } else if (current.size < step.maxSelections) {
@@ -704,7 +830,7 @@ const init = () => {
     elements.next.disabled = !isStepValid(step, state);
   }
 
-  function goToStep(stepIndex) {
+  function goToStep(stepIndex: number) {
     state.currentStep = Math.min(Math.max(stepIndex, 0), totalSteps - 1);
     saveState();
     renderStep();
@@ -712,7 +838,9 @@ const init = () => {
 
   async function submitQuiz() {
     setError("");
-    const honeypot = document.getElementById("quiz-website");
+    const honeypot = document.getElementById(
+      "quiz-website"
+    ) as HTMLInputElement | null;
     if (honeypot && honeypot.value.trim()) {
       showResults(calculateResults(state.answers));
       return;
@@ -764,13 +892,13 @@ const init = () => {
     }
   }
 
-  function showResults(results) {
+  function showResults(results: QuizResults) {
     elements.quizShell.classList.add("hidden");
     elements.result.classList.remove("hidden");
     elements.resultPotential.textContent = `${results.automationPotential}%`;
     elements.resultLevel.textContent = results.level;
-    elements.resultTime.textContent = results.timeSavingsPotential;
-    elements.resultRoi.textContent = results.roiEstimate;
+    elements.resultTime.textContent = String(results.timeSavingsPotential);
+    elements.resultRoi.textContent = String(results.roiEstimate);
     elements.resultRecommendations.innerHTML = "";
     results.recommendations.forEach((rec) => {
       const item = document.createElement("li");
@@ -796,9 +924,13 @@ const init = () => {
     const step = steps[state.currentStep];
     if (!step) return;
     setError("");
-    if (step.type === "multiple_choice" && (state.answers[step.id] || []).length === 0) {
-      setError("Bitte wähle mindestens eine Option.");
-      return;
+    if (step.type === "multiple_choice") {
+      const rawSelected = state.answers[step.id];
+      const selected = Array.isArray(rawSelected) ? rawSelected : [];
+      if (selected.length === 0) {
+        setError("Bitte wähle mindestens eine Option.");
+        return;
+      }
     }
     if (step.type === "name_capture" && !state.userInfo.name.trim()) {
       setError("Bitte gib deinen Namen an.");
