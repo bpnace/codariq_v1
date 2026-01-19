@@ -1,0 +1,725 @@
+---
+import Base from "../layouts/Base.astro";
+import quizScript from "../scripts/automatisierungs-check.ts?url";
+
+const pageTitle = "Codariq KI-Automatisierungs-Check";
+const pageDescription =
+  "Beantworte 10 kurze Fragen und erhalte eine individuelle Einschätzung zu Automatisierungspotenzial, Zeitersparnis und passenden nächsten Schritten.";
+---
+
+<Base title={pageTitle} description={pageDescription} forceNavSolid={true}>
+  <main id="main-content" class="pt-0">
+    <section class="relative overflow-hidden pb-0 pt-20 sm:pt-24 lg:pt-28">
+      <div class="absolute inset-0" aria-hidden="true">
+        <div class="hero-glow hero-glow-left"></div>
+        <div class="hero-glow hero-glow-right"></div>
+        <div class="hero-grid"></div>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center text-center gap-6 sm:gap-8">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-bold text-gray-700 shadow-sm">
+            <span class="inline-flex h-2 w-2 rounded-full bg-[color:var(--color-brand-light)]"></span>
+            Kostenloser KI-Automatisierungs-Check
+          </div>
+
+          <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl leading-tight text-gray-900 max-w-4xl mx-auto">
+            Finde in 2 Minuten die Automatisierung mit dem größten Hebel.
+          </h1>
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            10 kurze Fragen. 2 schnelle Capture Steps. Direkt danach erhältst du deine Auswertung zu
+            Potenzial, Zeitersparnis und ROI. DSGVO konform und praxisnah.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <a
+              href="#quiz"
+              class="cta-button bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-6 py-3 rounded-full text-base sm:text-lg font-bold shadow-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 text-center"
+            >
+              Check starten
+            </a>
+            <a
+              href="/#final-cta"
+              class="cta-button bg-white/90 text-gray-900 px-6 py-3 rounded-full text-base sm:text-lg font-bold shadow-md hover:bg-white transition-all duration-200 text-center"
+            >
+              Lieber persönlich sprechen
+            </a>
+          </div>
+
+          <p class="text-xs sm:text-sm text-gray-600">
+            Dauer: ca. 2 Minuten. Keine Vorkenntnisse nötig.
+          </p>
+        </div>
+
+        <div class="mt-8 sm:mt-10">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-sm sm:text-base text-gray-700 max-w-4xl mx-auto">
+            <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
+              <span class="text-lg">⚡</span>
+              Sofortige Empfehlung für deine nächsten Schritte
+            </div>
+            <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
+              <span class="text-lg">🛡️</span>
+              DSGVO konforme Verarbeitung
+            </div>
+            <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
+              <span class="text-lg">🧭</span>
+              Abgestimmt auf dein aktuelles Level
+            </div>
+            <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
+              <span class="text-lg">📊</span>
+              Zeit- und ROI Schätzung inklusive
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="quiz" class="relative mt-12 sm:mt-16 pb-20 sm:pb-28">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="quiz-shell" id="quiz-app">
+            <div class="quiz-header">
+              <div class="quiz-meta">
+                <div class="quiz-meta-item">
+                  <span class="quiz-meta-number">10</span>
+                  <span class="quiz-meta-label">Fragen</span>
+                  <span class="quiz-meta-sub">Damit wir dich wirklich verstehen</span>
+                </div>
+                <div class="quiz-meta-item">
+                  <span class="quiz-meta-number">2</span>
+                  <span class="quiz-meta-label">Capture Steps</span>
+                  <span class="quiz-meta-sub">Nur Name und Kontakt nötig</span>
+                </div>
+                <div class="quiz-meta-item">
+                  <span class="quiz-meta-number">100%</span>
+                  <span class="quiz-meta-label">Individuell</span>
+                  <span class="quiz-meta-sub">Passend zu Ziel und Budget</span>
+                </div>
+              </div>
+              <div class="quiz-step">
+                <span class="quiz-step-label" id="quiz-step-label">Schritt 1 von 12</span>
+                <span class="quiz-step-meta">Dauer: ca. 2 Minuten</span>
+              </div>
+              <div class="quiz-progress">
+                <div class="quiz-progress-track">
+                  <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                </div>
+                <div class="quiz-progress-row">
+                  <span class="quiz-progress-percent" id="quiz-progress-percent">8%</span>
+                  <span class="quiz-progress-message" id="quiz-progress-message"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quiz-body" aria-live="polite">
+              <h2 class="quiz-question" id="quiz-question"></h2>
+              <p class="quiz-subtitle" id="quiz-subtitle"></p>
+              <div class="quiz-options" id="quiz-options" data-layout="visual_cards"></div>
+              <p class="quiz-hint" id="quiz-hint"></p>
+            </div>
+
+            <div class="quiz-actions">
+              <button class="quiz-button quiz-button-ghost" type="button" id="quiz-back">
+                Zurück
+              </button>
+              <button class="quiz-button quiz-button-primary" type="button" id="quiz-next">
+                Weiter
+              </button>
+            </div>
+            <p class="quiz-error" id="quiz-error" role="alert"></p>
+            <div class="quiz-privacy">
+              <span class="quiz-privacy-icon">🔒</span>
+              Deine Daten bleiben bei Codariq
+            </div>
+          </div>
+
+        <div class="quiz-result hidden" id="quiz-result">
+          <div class="quiz-result-card">
+            <div class="quiz-result-header">
+              <span class="quiz-result-badge">Dein Ergebnis</span>
+              <h2 class="text-3xl sm:text-4xl font-black text-gray-900">
+                Dein Automatisierungspotenzial liegt bei
+                <span class="text-[color:var(--color-brand-light)]" id="result-potential">0%</span>.
+              </h2>
+              <p class="text-base sm:text-lg text-gray-600 max-w-2xl">
+                Basierend auf deinen Antworten haben wir die nächsten Schritte
+                priorisiert. Alles ist auf deine Situation abgestimmt.
+              </p>
+            </div>
+
+            <div class="quiz-result-grid">
+              <div class="quiz-result-metric">
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-[0.2em]">Level</p>
+                <p class="text-2xl font-black text-gray-900" id="result-level">-</p>
+              </div>
+              <div class="quiz-result-metric">
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-[0.2em]">Zeit pro Woche</p>
+                <p class="text-2xl font-black text-gray-900">
+                  <span id="result-time">0</span> Std.
+                </p>
+              </div>
+              <div class="quiz-result-metric">
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-[0.2em]">ROI pro Monat</p>
+                <p class="text-2xl font-black text-gray-900">
+                  <span id="result-roi">0</span> Euro
+                </p>
+              </div>
+            </div>
+
+            <div class="quiz-result-recommendations">
+              <h3 class="text-xl font-black text-gray-900">Top Empfehlungen</h3>
+              <ul id="result-recommendations" class="quiz-result-list"></ul>
+            </div>
+
+            <div class="quiz-result-actions">
+              <a
+                href="/#final-cta"
+                class="cta-button bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-6 py-3 rounded-full text-base font-bold shadow-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200"
+              >
+                Ergebnis besprechen
+              </a>
+              <a
+                href="/"
+                class="cta-button bg-white text-gray-900 px-6 py-3 rounded-full text-base font-bold shadow-md hover:bg-gray-50 transition-all duration-200"
+              >
+                Zur Startseite
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <noscript>
+          <div class="quiz-noscript">
+            Bitte aktiviere JavaScript, um den KI-Automatisierungs-Check zu nutzen.
+          </div>
+        </noscript>
+      </div>
+    </section>
+    </section>
+  </main>
+
+  <style>
+    .hero-glow {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      filter: blur(80px);
+      opacity: 0.25;
+    }
+    .hero-glow-left {
+      top: -180px;
+      left: -120px;
+      background: radial-gradient(circle, rgba(237, 37, 78, 0.8), transparent 65%);
+    }
+    .hero-glow-right {
+      top: -140px;
+      right: -160px;
+      background: radial-gradient(circle, rgba(45, 12, 27, 0.7), transparent 65%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+          90deg,
+          rgba(15, 23, 42, 0.05) 1px,
+          transparent 1px
+        ),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.2;
+    }
+    .quiz-shell {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.98),
+        rgba(249, 250, 251, 0.95)
+      );
+      border-radius: 28px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 32px 80px rgba(15, 23, 42, 0.16);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-shell::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(237, 37, 78, 0.22), transparent 65%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .quiz-header {
+      display: grid;
+      gap: 16px;
+      text-align: center;
+    }
+    .quiz-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
+    .quiz-meta-item {
+      border-radius: 18px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: #ffffff;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+    }
+    .quiz-meta-number {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--color-brand-dark);
+    }
+    .quiz-meta-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #111827;
+    }
+    .quiz-meta-sub {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6b7280;
+    }
+    .quiz-step {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+    }
+    .quiz-step-label {
+      font-weight: 800;
+      color: #111827;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+    }
+    .quiz-step-meta {
+      color: #6b7280;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .quiz-progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      overflow: hidden;
+    }
+    .quiz-progress {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(
+        120deg,
+        var(--color-brand-light),
+        var(--color-brand-dark)
+      );
+      transition: width 0.4s ease;
+    }
+    .quiz-progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #6b7280;
+      font-weight: 600;
+    }
+    .quiz-progress-message {
+      color: #111827;
+      font-weight: 700;
+    }
+    .quiz-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+    }
+    .quiz-question {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #111827;
+      line-height: 1.2;
+      max-width: 32ch;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .quiz-subtitle {
+      color: #6b7280;
+      font-size: 1rem;
+      font-weight: 600;
+      max-width: 52ch;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .quiz-options {
+      display: grid;
+      gap: 16px;
+      margin-top: 12px;
+      width: 100%;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      align-items: stretch;
+    }
+    .quiz-options[data-layout="visual_cards"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .quiz-options[data-layout="icon_options"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .quiz-options[data-layout="multiple_choice"] {
+      grid-template-columns: 1fr;
+      max-width: 640px;
+    }
+    .quiz-card {
+      border-radius: 18px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: #ffffff;
+      padding: 16px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      min-height: 190px;
+      height: 100%;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+    .quiz-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.14);
+      border-color: rgba(15, 23, 42, 0.18);
+    }
+    .quiz-card.is-selected {
+      border-color: var(--color-brand-light);
+      box-shadow: 0 22px 38px rgba(237, 37, 78, 0.2);
+      background: rgba(237, 37, 78, 0.04);
+    }
+    .quiz-card-media {
+      height: 96px;
+      border-radius: 14px;
+      background: linear-gradient(
+        130deg,
+        rgba(237, 37, 78, 0.16),
+        rgba(45, 12, 27, 0.12)
+      );
+      border: 1px solid rgba(237, 37, 78, 0.2);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #111827;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-card-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.12));
+    }
+    .quiz-card-icon {
+      font-size: 2rem;
+    }
+    .quiz-card-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #111827;
+    }
+    .quiz-card-subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      font-weight: 600;
+    }
+    .quiz-option {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 14px 16px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+    }
+    .quiz-option:hover {
+      transform: translateY(-2px);
+      border-color: rgba(15, 23, 42, 0.16);
+      box-shadow: 0 16px 28px rgba(15, 23, 42, 0.12);
+    }
+    .quiz-option.is-selected {
+      border-color: var(--color-brand-light);
+      box-shadow: 0 18px 32px rgba(237, 37, 78, 0.18);
+      background: rgba(237, 37, 78, 0.04);
+    }
+    .quiz-option-icon {
+      font-size: 1.5rem;
+    }
+    .quiz-option-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #111827;
+    }
+    .quiz-multi {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 14px 16px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+    }
+    .quiz-multi:hover {
+      transform: translateY(-2px);
+      border-color: rgba(15, 23, 42, 0.16);
+      box-shadow: 0 16px 28px rgba(15, 23, 42, 0.12);
+    }
+    .quiz-multi.is-selected {
+      border-color: var(--color-brand-light);
+      box-shadow: 0 18px 32px rgba(237, 37, 78, 0.18);
+      background: rgba(237, 37, 78, 0.04);
+    }
+    .quiz-multi-indicator {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #d1d5db;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .quiz-multi.is-selected .quiz-multi-indicator {
+      border-color: var(--color-brand-light);
+      background: var(--color-brand-light);
+    }
+    .quiz-hint {
+      font-size: 0.85rem;
+      color: #6b7280;
+      font-weight: 600;
+      min-height: 1.2rem;
+      text-align: center;
+    }
+    .quiz-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .quiz-field label {
+      font-weight: 700;
+      color: #111827;
+    }
+    .quiz-field input {
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.15);
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111827;
+      background: #ffffff;
+    }
+    .quiz-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #4b5563;
+      font-weight: 600;
+    }
+    .quiz-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .quiz-button {
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-weight: 800;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .quiz-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .quiz-button-primary {
+      background: linear-gradient(
+        120deg,
+        var(--color-brand-light),
+        var(--color-brand-dark)
+      );
+      color: #ffffff;
+      box-shadow: 0 16px 30px rgba(45, 12, 27, 0.2);
+    }
+    .quiz-button-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+    .quiz-button-ghost {
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: #ffffff;
+      color: #111827;
+    }
+    .quiz-error {
+      min-height: 1.2rem;
+      color: #dd3a44;
+      font-weight: 700;
+      text-align: center;
+    }
+    .quiz-privacy {
+      align-self: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: rgba(15, 23, 42, 0.04);
+      color: #6b7280;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .quiz-privacy-icon {
+      font-size: 0.85rem;
+    }
+    .quiz-result {
+      margin-top: 32px;
+    }
+    .quiz-result-card {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.98),
+        rgba(249, 250, 251, 0.95)
+      );
+      border-radius: 28px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 32px 80px rgba(15, 23, 42, 0.16);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .quiz-result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(237, 37, 78, 0.12);
+      color: #111827;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+    .quiz-result-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .quiz-result-metric {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 18px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+    }
+    .quiz-result-recommendations {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .quiz-result-list {
+      display: grid;
+      gap: 12px;
+    }
+    .quiz-result-item {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+    }
+    .quiz-result-icon {
+      font-size: 1.5rem;
+    }
+    .quiz-result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .quiz-noscript {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-weight: 700;
+    }
+    .hidden {
+      display: none;
+    }
+    .honeypot-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 639px) {
+      .quiz-options[data-layout="visual_cards"],
+      .quiz-options[data-layout="icon_options"] {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .quiz-options[data-layout="icon_options"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 640px) {
+      .quiz-actions {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .quiz-result-actions {
+        flex-direction: row;
+      }
+    }
+  </style>
+
+  <script type="module" src={quizScript}></script>
+</Base>

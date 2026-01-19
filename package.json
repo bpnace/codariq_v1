@@ -13,7 +13,11 @@
     "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "lint-staged": {
     "*.{js,ts,astro}": [
@@ -31,15 +35,19 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.6.0",
+    "@playwright/test": "^1.57.0",
+    "@testing-library/dom": "^10.4.1",
     "@typescript-eslint/eslint-plugin": "^8.49.0",
     "@typescript-eslint/parser": "^8.49.0",
     "astro-compress": "^2.3.8",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
+    "happy-dom": "^20.3.1",
     "husky": "^8.0.0",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
-    "vite-imagetools": "^7.1.0"
+    "vite-imagetools": "^7.1.0",
+    "vitest": "^4.0.17"
   }
 }
