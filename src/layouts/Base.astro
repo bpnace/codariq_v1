@@ -26,7 +26,7 @@ if (pathname.endsWith(".html")) {
 if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
-const canonicalURL = new URL(pathname, Astro.site ?? "http://codariq.de");
+const canonicalURL = new URL(pathname, Astro.site ?? "https://codariq.de");
 const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 ---
 

@@ -1,17 +1,16 @@
 RewriteEngine On
 
-# Force non-www and HTTP (Strato static hosting)
-RewriteCond %{HTTPS} on [OR]
+# Force non-www on HTTPS
 RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
-RewriteRule ^(.*)$ http://codariq.de/$1 [R=301,L]
+RewriteRule ^(.*)$ https://codariq.de/$1 [R=301,L]
 
 # Strip ?search= query params to canonical URL
 RewriteCond %{QUERY_STRING} (^|&)search= [NC]
-RewriteRule ^(.*)$ http://codariq.de/$1? [R=301,L]
+RewriteRule ^(.*)$ https://codariq.de/$1? [R=301,L]
 
 # Remove trailing slash (except root)
 RewriteCond %{REQUEST_URI} .+/$
-RewriteRule ^(.+)/$ http://codariq.de/$1 [R=301,L]
+RewriteRule ^(.+)/$ https://codariq.de/$1 [R=301,L]
 
 # Redirect .html to clean URL
 RewriteCond %{THE_REQUEST} \s/([^\s]+)\.html [NC]
