@@ -194,4 +194,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://codariq.de/sitemap-index.xml
+Sitemap: http://codariq.de/sitemap-index.xml

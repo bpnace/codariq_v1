@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://codariq.de",
+  site: "http://codariq.de",
   base: "/",
   trailingSlash: "never",
   build: {
@@ -43,7 +43,7 @@ export default defineConfig({
           item.priority = 0.7;
         }
         // Homepage (recently updated with pricing changes)
-        else if (url === 'https://codariq.de/' || url === 'https://codariq.de') {
+        else if (url === 'http://codariq.de/' || url === 'http://codariq.de') {
           item.lastmod = now.toISOString();
           item.changefreq = 'weekly';
           item.priority = 1.0;

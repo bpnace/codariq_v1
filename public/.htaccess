@@ -1,125 +1,25 @@
-# Force HTTPS and www to non-www in one step (avoid redirect chains)
 RewriteEngine On
 
-# Disable mod_dir's automatic directory slash handling
-DirectorySlash Off
+# Force non-www and HTTP (Strato static hosting)
+RewriteCond %{HTTPS} on [OR]
+RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
+RewriteRule ^(.*)$ http://codariq.de/$1 [R=301,L]
 
-# Disable Apache MultiViews (can cause duplicate URL variants)
-Options -MultiViews
+# Strip ?search= query params to canonical URL
+RewriteCond %{QUERY_STRING} (^|&)search= [NC]
+RewriteRule ^(.*)$ http://codariq.de/$1? [R=301,L]
 
-# Enable directory indexes
-DirectoryIndex index.html index.htm
+# Remove trailing slash (except root)
+RewriteCond %{REQUEST_URI} .+/$
+RewriteRule ^(.+)/$ http://codariq.de/$1 [R=301,L]
 
-# ============================================
-# 301 Redirects for Old Blog URLs (renamed posts)
-# ============================================
-# Redirect old blog post URLs to new ones
-RewriteRule ^blog/teams-erfolgreich-auf-ki-vorbereiten/?$ https://codariq.de/blog/ki-teams-vorbereiten [R=301,L,NE]
-RewriteRule ^blog/roi-von-prozessautomatisierung-maximieren/?$ https://codariq.de/blog/automatisierung-roi-maximieren [R=301,L,NE]
+# Redirect .html to clean URL
+RewriteCond %{THE_REQUEST} \s/([^\s]+)\.html [NC]
+RewriteRule ^ %1 [R=301,L]
 
-# ============================================
-# Canonical URL Enforcement (HTTPS + non-www)
-# ============================================
-# Combined redirect: www OR non-HTTPS to canonical HTTPS non-www (single redirect)
-# This ensures only ONE redirect happens for all variants
-RewriteCond %{HTTP_HOST} ^www\.codariq\.de [NC,OR]
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} ^(?:www\.)?codariq\.de$ [NC]
-RewriteCond %{REQUEST_URI} !^/.well-known/
-RewriteRule ^(.*)$ https://codariq.de/$1 [L,R=301,NE]
-
-# ============================================
-# Canonicalize explicit .html URLs
-# ============================================
-# /index.html -> /
-RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[?\s] [NC]
-RewriteRule ^(.*/)?index\.html$ $1 [R=301,L,NE]
-
-# /path.html -> /path (only if the file exists)
-RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[?\s] [NC]
-RewriteCond %{DOCUMENT_ROOT}/%1.html -f
-RewriteRule ^(.+)\.html$ $1 [R=301,L,NE]
-
-# ============================================
-# Pretty URLs for static .html output
-# ============================================
-# Serve /path as /path.html if it exists (internal rewrite, no redirect)
-# This is important because sitemap + canonicals use extensionless URLs.
-RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
-RewriteRule ^(.+?)/?$ $1.html [L,END]
-
-# ============================================
-# Directory Index Handling (NO external redirects)
-# ============================================
-# Serve /directory/ as /directory/index.html internally WITHOUT redirect
-# This prevents Google from seeing redirect chains
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.+)/?$ %{DOCUMENT_ROOT}/$1/index.html [L,END]
-
-# Only redirect trailing slashes for file-like URLs (no extension, not a directory)
-# This handles cases where someone manually types /page/ in their browser
-# But won't affect crawlers following /blog/ links since those are directories
+# Pretty URL rewrites for file-based output
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} (.+)/$
-RewriteCond %{REQUEST_URI} !^/$
-RewriteRule ^(.*)/$ https://codariq.de/$1 [L,R=301,NE]
-
-
-# Security headers
-<IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    Header always set X-Content-Type-Options nosniff
-    Header always set X-Frame-Options DENY
-    Header always set X-XSS-Protection "1; mode=block"
-    Header always set Referrer-Policy "strict-origin-when-cross-origin"
-</IfModule>
-
-# Cache control
-<IfModule mod_expires.c>
-    ExpiresActive on
-
-    # HTML - shorter cache for content updates
-    ExpiresByType text/html "access plus 1 day"
-
-    # CSS, JS - longer cache but with revalidation
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType application/x-javascript "access plus 1 month"
-
-    # Images - long cache, don't change often
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/svg+xml "access plus 1 year"
-    ExpiresByType image/x-icon "access plus 1 year"
-
-    # Fonts - long cache
-    ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType font/ttf "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-
-    # JSON and XML files
-    ExpiresByType application/json "access plus 1 month"
-    ExpiresByType application/xml "access plus 1 month"
-    ExpiresByType text/xml "access plus 1 month"
-
-    # Default fallback
-    ExpiresDefault "access plus 1 month"
-</IfModule>
-
-# Additional cache headers
-<IfModule mod_headers.c>
-    # Add cache control headers for better performance
-    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff2|ttf|woff|json|xml)$">
-        Header set Cache-Control "public, max-age=31536000, immutable"
-    </FilesMatch>
-
-    # HTML files - shorter cache
-    <FilesMatch "\.(html|htm)$">
-        Header set Cache-Control "public, max-age=86400"
-    </FilesMatch>
-</IfModule>
+RewriteRule ^$ /index.html [L]
+RewriteRule ^blog$ /blog.html [L]
+RewriteRule ^(.+)$ /$1.html [L]

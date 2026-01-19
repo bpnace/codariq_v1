@@ -16,7 +16,7 @@ const {
   ogImage,
   forceNavSolid = false,
 } = Astro.props;
-// Normalize canonical URL: remove trailing slashes and .html extension
+// Normalize canonical URL: remove trailing slashes, .html extension, and query params
 let pathname = Astro.url.pathname;
 // Remove .html extension if present
 if (pathname.endsWith(".html")) {
@@ -26,7 +26,8 @@ if (pathname.endsWith(".html")) {
 if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
-const canonicalURL = new URL(pathname, "https://codariq.de");
+const canonicalURL = new URL(pathname, Astro.site ?? "http://codariq.de");
+const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 ---
 
 <!doctype html>
@@ -86,7 +87,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       name="keywords"
       content={keywords}
     />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={shouldNoIndex ? "noindex, follow" : "index, follow"} />
     <meta name="language" content="de" />
     <meta name="revisit-after" content="7 days" />
 
@@ -100,7 +101,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       content={ogImage
         ? ogImage.startsWith("http")
           ? ogImage
-          : `https://codariq.de${ogImage}`
+          : `${canonicalURL.origin}${ogImage}`
         : `${canonicalURL.origin}/images/hero/hero2.webp`}
     />
     <meta property="og:image:width" content="1536" />
@@ -119,7 +120,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
       content={ogImage
         ? ogImage.startsWith("http")
           ? ogImage
-          : `https://codariq.de${ogImage}`
+          : `${canonicalURL.origin}${ogImage}`
         : `${canonicalURL.origin}/images/hero/hero2.webp`}
     />
     <meta
