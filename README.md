@@ -5,6 +5,9 @@
 [![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
 [![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
 [![Compliance](https://img.shields.io/badge/DSGVO-Compliant-green)]()
+[![Tests](https://img.shields.io/badge/Tests-Vitest%20%2B%20Playwright-brightgreen)]()
+[![Coverage](https://img.shields.io/badge/Coverage-Manual-yellow)]()
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-Manual-orange)]()
 
 ## 🎯 Project Overview
 
@@ -66,34 +69,139 @@ npm run lint           # → ESLint + Prettier
 npm run format         # → Auto-fix formatting
 ```
 
-### 3. Project Structure
+### 3. Testing
+
+> **Note:** CI/CD is currently manual - GitHub Actions pipeline is not yet configured.
+
+#### Test Commands
+
+```bash
+# Unit tests (Vitest)
+npm run test           # → Watch mode for development
+npm run test:run       # → Single run (ideal for CI/CD)
+
+# E2E tests (Playwright)
+npm run test:e2e       # → Headless browser tests
+npm run test:e2e:ui    # → Interactive UI for debugging
+```
+
+#### Testing Setup
+
+**Vitest (Unit Tests)**
+- **Environment**: happy-dom (browser-like DOM)
+- **Location**: `src/**/*.test.{js,ts,jsx,tsx}`
+- **Configuration**: [vitest.config.ts](vitest.config.ts)
+- **Setup**: [src/test/setup.ts](src/test/setup.ts)
+
+**Playwright (E2E Tests)**
+- **Environment**: Chromium (headless)
+- **Location**: `src/test/**/*.spec.ts`
+- **Configuration**: [playwright.config.ts](playwright.config.ts)
+- **Features**: Auto-start dev server, trace on retry
+
+**Test Files**:
+- [src/test/helpers.test.ts](src/test/helpers.test.ts) - Utility function tests
+- [src/test/quiz.spec.ts](src/test/quiz.spec.ts) - Quiz component E2E
+- [src/test/quiz-flow.spec.ts](src/test/quiz-flow.spec.ts) - Complete quiz flow
+- [src/test/home.spec.ts](src/test/home.spec.ts) - Homepage E2E
+
+### 4. Ordnerstruktur (Project Structure)
 
 ```
-codariq_v1/
+codariq/
 ├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── Hero.astro      # Main hero section with dual CTA
-│   │   ├── TrustBar.astro  # Trust badges (TÜV, ISO, DSGVO)
-│   │   ├── PainList.astro  # Problem identification with animated counters
-│   │   ├── Benefits.astro  # 4-column features grid
-│   │   ├── Testimonials.astro # Social proof with randomuser.me photos
-│   │   ├── Process.astro   # 4-step timeline with redesigned layout
-│   │   └── FinalCTA.astro  # Calendly booking widget integration
+│   ├── components/              # 14 Reusable UI components
+│   │   ├── Hero.astro          # Main hero with dual CTA
+│   │   ├── TrustBar.astro      # Trust badges (TÜV, ISO, DSGVO)
+│   │   ├── PainList.astro      # Problem identification
+│   │   ├── Benefits.astro      # 4-column features grid
+│   │   ├── Testimonials.astro  # Social proof with photos
+│   │   ├── Process.astro       # 4-step timeline
+│   │   ├── FinalCTA.astro      # Calendly booking widget
+│   │   ├── FAQ.astro           # Accordion FAQ
+│   │   ├── FAQSchema.astro     # Structured data for FAQ
+│   │   ├── BreadcrumbSchema.astro # Breadcrumb schema
+│   │   ├── BlogPreview.astro   # Blog post previews
+│   │   ├── BlogCTA.astro       # Blog CTA component
+│   │   ├── BlogCtaSection.astro # Blog CTA wrapper
+│   │   └── UseCaseGrid.astro   # Use case grid
+│   │
 │   ├── layouts/
-│   │   └── Base.astro      # Main layout with milky glass navigation
+│   │   └── Base.astro          # Main layout with navigation
+│   │
 │   ├── pages/
-│   │   ├── index.astro     # Landing page
-│   │   ├── datenschutz.astro # DSGVO-compliant privacy policy
-│   │   ├── impressum.astro # DDG-compliant legal notice
-│   │   ├── faq.astro       # AI automation FAQ
-│   │   ├── agb.astro       # B2B service terms
-│   │   └── cookie-richtlinien.astro # TTDSG cookie policy
+│   │   ├── index.astro         # Landing page
+│   │   ├── faq.astro           # FAQ page
+│   │   ├── datenschutz.astro   # Privacy policy (DSGVO)
+│   │   ├── impressum.astro     # Legal notice (DDG)
+│   │   ├── agb.astro           # Terms of service
+│   │   ├── cookie-richtlinien.astro # Cookie policy
+│   │   ├── automatisierungs-check.astro # Interactive quiz
+│   │   ├── automatisierung-selbststaendige.astro
+│   │   ├── automatisierung-kleine-teams.astro
+│   │   ├── automatisierung-gruender.astro
+│   │   │
+│   │   ├── api/                # Server-side endpoints
+│   │   │   ├── newsletter.ts   # Newsletter signup
+│   │   │   ├── dashboard-waitlist.ts # Waitlist signup
+│   │   │   └── submit.ts       # Quiz submission
+│   │   │
+│   │   └── blog/               # Blog system (5 posts)
+│   │       ├── index.astro     # Blog listing
+│   │       ├── [slug].astro    # Dynamic template
+│   │       ├── ki-teams-vorbereiten.astro
+│   │       ├── automatisierung-roi-maximieren.astro
+│   │       ├── ki-integration-5-schritte.astro
+│   │       ├── ki-compliance-2025.astro
+│   │       └── ki-projekte-retten.astro
+│   │
+│   ├── utils/                  # Utility functions
+│   │   ├── quiz.ts            # Quiz logic & calculations
+│   │   ├── validation.ts      # Form validation
+│   │   └── submit.ts          # Form submission helpers
+│   │
+│   ├── lib/
+│   │   └── drupal.ts          # Drupal integration
+│   │
+│   ├── scripts/                # Client-side scripts
+│   │   └── automatisierungs-check.ts # Quiz behavior
+│   │
+│   ├── test/                   # Test files
+│   │   ├── setup.ts           # Vitest setup
+│   │   ├── helpers.test.ts    # Unit tests
+│   │   ├── home.spec.ts       # Homepage E2E
+│   │   ├── quiz.spec.ts       # Quiz E2E
+│   │   └── quiz-flow.spec.ts  # Quiz flow E2E
+│   │
 │   └── styles/
-│       └── global.css      # Global styles & animations
-├── public/                 # Static assets
-│   ├── images/logos/codariqLogo1.svg # Main company logo
-│   └── images/            # Trust badges and hero assets
-└── dist/                  # Build output (generated)
+│       └── global.css         # Global styles & animations
+│
+├── public/                     # Static assets
+│   ├── images/
+│   │   ├── logos/             # Company logos
+│   │   ├── badges/            # Trust badges
+│   │   ├── hero/              # Hero images
+│   │   ├── dashboard/         # Dashboard mockups
+│   │   └── testimonials/      # Testimonial photos
+│   ├── fonts/
+│   │   ├── Satoshi-Variable.woff2
+│   │   └── Satoshi-Variable.ttf
+│   ├── .htaccess              # Server config
+│   ├── robots.txt             # SEO directives
+│   ├── manifest.json          # PWA manifest
+│   └── [favicons]             # Various icon sizes
+│
+├── Configuration Files
+│   ├── astro.config.mjs       # Astro framework
+│   ├── tailwind.config.js     # Tailwind CSS
+│   ├── vitest.config.ts       # Unit testing
+│   ├── playwright.config.ts   # E2E testing
+│   ├── tsconfig.json          # TypeScript
+│   ├── eslint.config.js       # Linting rules
+│   ├── package.json           # Dependencies
+│   └── .env                   # Environment vars (not in git)
+│
+└── dist/                       # Build output (generated)
 ```
 
 ## 🎨 Design System
@@ -180,6 +288,59 @@ Package pricing in Process section maintains specific pricing for transparency.
 - **Meta Tags** - Comprehensive OpenGraph and Twitter cards
 - **German Language** - Proper hreflang and locale settings
 - **Performance** - Core Web Vitals optimized
+
+## ⚙️ Configuration Files
+
+### Testing Configuration
+
+**[vitest.config.ts](vitest.config.ts)** - Unit test configuration
+```typescript
+{
+  environment: "happy-dom",     // Browser-like DOM
+  globals: true,                 // Global test APIs
+  include: ["src/**/*.test.{js,ts,jsx,tsx}"],
+  exclude: ["src/**/*.spec.{js,ts,jsx,tsx}"],
+  setupFiles: ["src/test/setup.ts"]
+}
+```
+
+**[playwright.config.ts](playwright.config.ts)** - E2E test configuration
+```typescript
+{
+  testDir: "src/test",
+  testMatch: "**/*.spec.ts",
+  baseURL: "http://localhost:4321",
+  webServer: {
+    command: "npm run dev",      // Auto-start dev server
+    reuseExistingServer: true
+  }
+}
+```
+
+### Framework Configuration
+
+**[astro.config.mjs](astro.config.mjs)** - Astro framework settings
+- Site URL: `https://codariq.de`
+- Sitemap generation with German locale (de-DE)
+- Trailing slash: `never` (clean URLs)
+- Build format: `file` (generates .html files)
+- Vite integration with Tailwind CSS plugin
+
+**[tailwind.config.js](tailwind.config.js)** - Tailwind CSS customization
+- Content paths: All Astro, HTML, JS, TS files in `src/`
+- Custom fonts: Satoshi Variable font family
+- Extended theme with custom typography
+
+**[tsconfig.json](tsconfig.json)** - TypeScript compiler options
+- Extends: `astro/tsconfigs/strict`
+- Includes: `.astro/types.d.ts` and all source files
+- Excludes: `dist/` build output
+
+**[eslint.config.js](eslint.config.js)** - Code quality rules
+- Parser: TypeScript ESLint parser
+- Plugins: TypeScript ESLint
+- Rules: Unused vars detection, no-console warnings, prefer-const
+- Ignores: `dist/`, `.astro/`, and `.astro` files
 
 ## 🚢 Deployment
 

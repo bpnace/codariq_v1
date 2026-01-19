@@ -842,11 +842,10 @@ const init = () => {
     const honeypot = document.getElementById(
       "quiz-website"
     ) as HTMLInputElement | null;
-    if (honeypot && honeypot.value.trim()) {
-      showResults(calculateResults(state.answers));
+    if (!state.userInfo.name.trim()) {
+      setError("Bitte gib deinen Namen an.");
       return;
     }
-
     if (!isValidEmail(state.userInfo.email)) {
       setError("Bitte gib eine gültige E-Mail-Adresse ein.");
       return;
@@ -855,34 +854,79 @@ const init = () => {
       setError("Bitte bestätige die Datenschutzerklärung.");
       return;
     }
+    if (honeypot && honeypot.value.trim()) {
+      setError("Deine Anfrage wurde als Spam erkannt.");
+      return;
+    }
 
     const results = calculateResults(state.answers);
+    const answersSummary = Object.entries(state.answers)
+      .map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return `${key}: ${value.join(", ")}`;
+        }
+        if (typeof value === "string") {
+          return `${key}: ${value}`;
+        }
+        return `${key}: ${JSON.stringify(value)}`;
+      })
+      .join(" | ");
+    const recommendationsSummary = results.recommendations
+      .map((rec) => rec.title)
+      .join(", ");
+    const message = [
+      `Quiz Antworten: ${answersSummary || "keine"}.`,
+      `Automatisierungspotenzial: ${results.automationPotential}%, Level: ${results.level}.`,
+      `Top Empfehlungen: ${recommendationsSummary || "keine"}.`,
+    ].join(" ");
     const payload = {
+      name: state.userInfo.name,
+      company: "Quiz (Automatisierungs-Check)",
+      email: state.userInfo.email,
+      phone: state.userInfo.phone,
+      message,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      source: "codariq_quiz",
       answers: state.answers,
-      userInfo: {
-        name: state.userInfo.name,
-        email: state.userInfo.email,
-        phone: state.userInfo.phone,
-      },
       results,
       honeypot: honeypot ? honeypot.value : "",
     };
 
     try {
+      const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL;
+      const webhookAuth = import.meta.env.PUBLIC_N8N_WEBHOOK_AUTH;
+      if (!webhookUrl || !webhookAuth) {
+        setError("Die Auswertung ist aktuell nicht verfügbar. Bitte versuche es später erneut.");
+        return;
+      }
       elements.next.disabled = true;
       elements.next.textContent = "Senden...";
-      const response = await fetch("/api/submit", {
+      const response = await fetch(webhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: webhookAuth,
         },
         body: JSON.stringify(payload),
       });
-      if (!response.ok) {
-        throw new Error("Submission failed");
+      if (response.status === 200) {
+        showResults(results);
+        localStorage.removeItem(storageKey);
+        return;
       }
-      showResults(results);
-      localStorage.removeItem(storageKey);
+      if (response.status === 400) {
+        setError("Bitte füll alle Pflichtfelder korrekt aus.");
+      } else if (response.status === 403) {
+        setError("Deine Anfrage wurde als Spam erkannt.");
+      } else if (response.status === 429) {
+        setError("Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.");
+      } else {
+        setError("Es gab ein Problem beim Senden. Bitte versuche es erneut.");
+      }
+      elements.next.disabled = false;
+      elements.next.textContent = "Auswertung anfordern";
+      return;
     } catch (error) {
       console.error(error);
       setError(

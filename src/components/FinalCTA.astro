@@ -480,15 +480,18 @@ const {
             };
 
             // n8n webhook for contact form submissions
-            const webhookUrl =
-              "https://automation.codariq.de/webhook/505861af-3734-43ab-bc87-b00b13338db6";
+            const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL;
+            const webhookAuth = import.meta.env.PUBLIC_N8N_WEBHOOK_AUTH;
+            if (!webhookUrl || !webhookAuth) {
+              throw new Error("Webhook not configured");
+            }
 
             // Send to n8n webhook
             response = await fetch(webhookUrl, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "Basic YWRtaW46cmF6eG9jLWtZenhvdy1qZWpidTk=",
+                Authorization: webhookAuth,
               },
               body: JSON.stringify(payload),
             });
