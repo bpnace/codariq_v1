@@ -1,10 +1,25 @@
 ---
+import { build } from "esbuild";
+import path from "node:path";
 import Base from "../layouts/Base.astro";
-import quizScript from "../scripts/automatisierungs-check.ts?url";
 
 const pageTitle = "Codariq KI-Automatisierungs-Check";
 const pageDescription =
   "Beantworte 10 kurze Fragen und erhalte eine individuelle Einschätzung zu Automatisierungspotenzial, Zeitersparnis und passenden nächsten Schritten.";
+const quizEntry = path.resolve(
+  process.cwd(),
+  "src/scripts/automatisierungs-check.ts",
+);
+const quizBundle = await build({
+  entryPoints: [quizEntry],
+  bundle: true,
+  format: "esm",
+  platform: "browser",
+  target: "es2020",
+  write: false,
+  sourcemap: false,
+});
+const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 ---
 
 <Base title={pageTitle} description={pageDescription} forceNavSolid={true}>
@@ -778,5 +793,5 @@ const pageDescription =
     }
   </style>
 
-  <script type="module" src={quizScript}></script>
+  <script type="module" is:inline set:html={quizScript}></script>
 </Base>

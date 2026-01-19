@@ -1,10 +1,24 @@
 RewriteEngine On
 RewriteBase /
 
+# Ensure correct MIME types for module scripts and assets
+AddType application/javascript .js .mjs
+AddType text/css .css
+AddType application/wasm .wasm
+AddType application/json .json
+AddType image/svg+xml .svg
+AddType font/woff2 .woff2
+AddType font/woff .woff
+
 # Force HTTPS and non-www
 RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
 RewriteRule ^(.*)$ https://codariq.de/$1 [R=301,L]
+
+# Skip rewrites for static assets and the Astro build output
+RewriteRule ^_astro/ - [L]
+RewriteRule ^(images|fonts)/ - [L]
+RewriteRule \.(css|js|mjs|map|json|png|jpg|jpeg|gif|svg|webp|woff2?|ico|txt|xml)$ - [L]
 
 # Strip ?search= query params to canonical URL
 RewriteCond %{QUERY_STRING} (^|&)search= [NC]
