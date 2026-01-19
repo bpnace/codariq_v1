@@ -4,6 +4,7 @@ import "../styles/global.css";
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
   ogImage?: string;
   forceNavSolid?: boolean;
 }
@@ -11,6 +12,7 @@ export interface Props {
 const {
   title,
   description = "Wir bauen KI Agenten, die Support, Backoffice und HR entlasten – damit Sie mehr Zeit für Kunden und Entscheidungen haben",
+  keywords = "KI Automatisierung Selbstständige, kleine Teams automatisieren, Freelancer KI Tools, bis 50 Mitarbeiter Automatisierung, Prozesse automatisieren kleine Teams, Support entlasten Selbstständige, Backoffice automatisieren Freelancer, E-Mail Automatisierung, DSGVO konform, Solopreneur Automatisierung",
   ogImage,
   forceNavSolid = false,
 } = Astro.props;
@@ -46,7 +48,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <!-- Performance optimizations -->
     <link
       rel="preload"
-      href="/images/hero/hero2.webp"
+      href="/images/hero/hero1.webp"
       as="image"
       type="image/webp"
     />
@@ -82,7 +84,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
     <meta name="author" content="Codariq" />
     <meta
       name="keywords"
-      content="KI Automatisierung Selbstständige, kleine Teams automatisieren, Freelancer KI Tools, bis 50 Mitarbeiter Automatisierung, Prozesse automatisieren kleine Teams, Support entlasten Selbstständige, Backoffice automatisieren Freelancer, E-Mail Automatisierung, DSGVO konform, Solopreneur Automatisierung"
+      content={keywords}
     />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="de" />
@@ -694,9 +696,12 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                 aria-label="LinkedIn Profil besuchen"
                 class="text-gray-700 hover:text-orange-500 transition-colors duration-200"
               >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-                </svg>
+                <img
+                  src="/images/logos/LinkedIn_icon.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="w-5 h-5"
+                />
               </a>
 
               <!-- Instagram Icon -->
@@ -707,11 +712,12 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                 aria-label="Instagram Profil besuchen"
                 class="text-gray-700 hover:text-orange-500 transition-colors duration-200"
               >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
+                <img
+                  src="/images/logos/Instagram_logo_2016.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="w-5 h-5"
+                />
               </a>
             </div>
 
@@ -771,7 +777,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12"
         >
           <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6 lg:gap-8"
           >
             <!-- Column 1: Logo + Beschreibung -->
             <div class="text-left">
@@ -799,9 +805,12 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                     aria-label="LinkedIn Profil besuchen"
                     class="text-gray-400 hover:text-orange-400 transition-colors duration-200"
                   >
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-                    </svg>
+                    <img
+                      src="/images/logos/LinkedIn_icon.svg"
+                      alt=""
+                      aria-hidden="true"
+                      class="w-6 h-6"
+                    />
                   </a>
 
                   <!-- Instagram -->
@@ -812,11 +821,12 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                     aria-label="Instagram Profil besuchen"
                     class="text-gray-400 hover:text-orange-400 transition-colors duration-200"
                   >
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
+                    <img
+                      src="/images/logos/Instagram_logo_2016.svg"
+                      alt=""
+                      aria-hidden="true"
+                      class="w-6 h-6"
+                    />
                   </a>
                 </div>
               </div>
@@ -826,7 +836,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
             <div class="text-left">
               <div class="mb-6">
                 <h4 class="font-semibold text-gray-100 mb-3 text-sm">
-                  Zertifizierungen
+                  Unsere Werte
                 </h4>
                 <div
                   class="flex flex-wrap justify-start gap-2 md:gap-3 mb-4"
@@ -834,21 +844,21 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
                   <img
                     src="/images/badges/climate-friendly.webp"
                     alt="Klimafreundlich"
-                    class="h-10 md:h-12 w-auto"
+                    class="h-15 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
                   />
                   <img
                     src="/images/badges/gdpr-ready.webp"
                     alt="DSGVO konform"
-                    class="h-10 md:h-12 w-auto"
+                    class="h-10 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
                   />
                   <img
                     src="/images/badges/remote-only.webp"
                     alt="Remote verfügbar"
-                    class="h-10 md:h-12 w-auto"
+                    class="h-10 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
                   />
@@ -857,7 +867,7 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
 
               <div>
                 <span class="text-gray-400 text-xs mb-2 block"
-                  >Zertifiziert durch:</span
+                  >In zusammenarbeit mit:</span
                 >
                 <div
                   class="flex items-center justify-start space-x-2 md:space-x-3"
@@ -948,7 +958,37 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
               </ul>
             </div>
 
-            <!-- Column 4: Kontakt + Newsletter -->
+            <!-- Column 4: Für wen -->
+            <div class="text-left">
+              <h4 class="font-semibold text-gray-100 mb-3 text-sm">
+                Für wen
+              </h4>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>
+                  <a
+                    href="/automatisierung-selbststaendige"
+                    class="hover:text-orange-400 transition-colors duration-200"
+                    >für Selbstständige</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/automatisierung-gruender"
+                    class="hover:text-orange-400 transition-colors duration-200"
+                    >für Gründer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/automatisierung-kleine-teams"
+                    class="hover:text-orange-400 transition-colors duration-200"
+                    >für kleine Teams</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 5: Kontakt + Newsletter -->
             <div class="text-left">
               <!-- Kontakt Section -->
               <div class="mb-6">
@@ -1316,11 +1356,11 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           }
 
           // Navigation color change on scroll past hero section or article header
-          const header = document.querySelector("header");
-          const heroSection = document.querySelector("#hero");
-          const footer = document.querySelector("footer");
-          const articleHeader = document.querySelector(".article-header"); // Blog article header
-          const parallaxImage = document.querySelector("[data-parallax]");
+          const header = document.querySelector<HTMLElement>("header");
+          const heroSection = document.querySelector<HTMLElement>("#hero");
+          const footer = document.querySelector<HTMLElement>("footer");
+          const articleHeader = document.querySelector<HTMLElement>(".article-header"); // Blog article header
+          const parallaxImage = document.querySelector<HTMLElement>("[data-parallax]");
 
           const forceNavSolid =
             document.body.dataset.forceNavSolid === "true";
@@ -1335,39 +1375,45 @@ const canonicalURL = new URL(pathname, "https://codariq.de");
           const targetSection = heroSection || articleHeader;
 
           if (header && targetSection) {
+            const safeHeader = header;
+            const safeTargetSection = targetSection;
+            const safeFooter = footer;
+            const safeHeroSection = heroSection;
+            const safeParallaxImage = parallaxImage;
             let ticking = false;
 
             function updateNavColor() {
-              const sectionBottom = targetSection.getBoundingClientRect().bottom;
+              const sectionBottom = safeTargetSection.getBoundingClientRect().bottom;
 
               // Check if we're in the footer area
               let inFooter = false;
-              if (footer) {
-                const footerTop = footer.getBoundingClientRect().top;
-                const headerHeight = header.offsetHeight;
+              if (safeFooter) {
+                const footerTop = safeFooter.getBoundingClientRect().top;
+                const headerHeight = safeHeader.offsetHeight;
                 // If footer is touching or overlapping with header
                 inFooter = footerTop <= headerHeight;
               }
 
               // Toggle class based on whether we've scrolled past the section AND not in footer
               if (sectionBottom <= 0 && !inFooter) {
-                header.classList.add("nav-scrolled");
+                safeHeader.classList.add("nav-scrolled");
               } else {
-                header.classList.remove("nav-scrolled");
+                safeHeader.classList.remove("nav-scrolled");
               }
 
               ticking = false;
             }
 
             function updateParallax() {
-              if (parallaxImage && heroSection) {
+              if (safeParallaxImage && safeHeroSection) {
                 const scrollY = window.scrollY;
-                const heroBottom = heroSection.getBoundingClientRect().bottom + scrollY;
+                const heroBottom =
+                  safeHeroSection.getBoundingClientRect().bottom + scrollY;
 
                 // Only apply parallax while hero section is visible
                 if (scrollY < heroBottom) {
                   const parallaxOffset = scrollY * 0.25; // 25% = subtle effect
-                  parallaxImage.style.transform = `translateY(${parallaxOffset}px)`;
+                  safeParallaxImage.style.transform = `translateY(${parallaxOffset}px)`;
                 }
               }
             }

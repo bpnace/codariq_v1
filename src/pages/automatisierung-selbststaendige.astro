@@ -1,0 +1,362 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import UseCaseGrid from "../components/UseCaseGrid.astro";
+import FAQ from "../components/FAQ.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+import FAQSchema from "../components/FAQSchema.astro";
+
+const useCases = [
+  {
+    title: "Postfach und E Mail Workflows automatisieren",
+    description:
+      "Anfragen werden automatisch sortiert, markiert und als nächste Schritte vorbereitet. Du prüfst kurz und gibst frei, statt alles manuell zu sortieren.",
+    outcome: "Weniger Reaktionsdruck, schnellere Antworten.",
+    icon: "mail",
+  },
+  {
+    title: "Lead-Follow-up, das wirklich läuft",
+    description:
+      "Angebote, Nachfassen und Terminabstimmungen laufen automatisch, ohne dass du an jede Erinnerung denken musst.",
+    outcome: "Mehr Abschlüsse ohne mehr Aufwand.",
+    icon: "link",
+  },
+  {
+    title: "Dokumente und Rechnungen automatisieren",
+    description:
+      "Rechnungen, Angebote und Belege werden ausgelesen, korrekt abgelegt und sauber an dein System übergeben.",
+    outcome: "Weniger Admin, sauberer Monatsabschluss.",
+    icon: "document",
+  },
+];
+
+const processSteps = [
+  {
+    number: 1,
+    title: "Engpass identifizieren",
+    description:
+      "Wir schauen, wo du als Selbstständiger täglich am meisten Zeit verlierst und definieren den besten Startpunkt.",
+    details: [
+      "15 Minuten Intake zu deinem Alltag",
+      "Klarer Startpunkt mit messbarem Ziel",
+      "Abstimmung der Tools und Datenquellen",
+    ],
+    duration: "2 bis 4 Tage",
+    result: "Du hast einen klaren Plan, was zuerst automatisiert wird.",
+  },
+  {
+    number: 2,
+    title: "Automatisierung aufsetzen",
+    description:
+      "Wir bauen den Ablauf, verbinden deine Tools und testen mit echten Fällen aus deinem Alltag.",
+    details: [
+      "Automatisierung mit Regeln",
+      "KI versteht Kontext und macht Vorschläge",
+      "Tests mit echten Anfragen und Dokumenten",
+      "Feinschliff für Sonderfälle",
+    ],
+    duration: "1 bis 3 Wochen",
+    result: "Der Prozess läuft und nimmt dir Routinearbeit ab.",
+  },
+  {
+    number: 3,
+    title: "Einführen und stabilisieren",
+    description:
+      "Du bekommst eine kurze Einweisung und wir sorgen dafür, dass es stabil im Alltag läuft.",
+    details: [
+      "Kurze Übergabe ohne Fachchinesisch",
+      "Feintuning anhand der ersten Ergebnisse",
+      "Optionaler Support für Anpassungen",
+    ],
+    duration: "2 Wochen Begleitung",
+    result: "Stabile Automatisierung, die du jederzeit verstehst und steuerst.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Was kann ich als Selbstständiger sinnvoll automatisieren?",
+    answer:
+      "Alles, was jede Woche wiederkommt: Postfach und E Mail Workflows, Follow ups, Angebots und Rechnungsprozesse, Terminabstimmung, Dokumentenablage und Übergaben zwischen Tools. Wir starten dort, wo du heute am meisten Zeit verlierst.",
+  },
+  {
+    question: "Welche Tools lassen sich verbinden?",
+    answer:
+      "Workflows folgen klaren Regeln. KI Agenten verstehen zusätzlich den Kontext, machen Vorschläge und bereiten Aufgaben über mehrere Tools hinweg vor, immer innerhalb fester Grenzen und mit Freigaben, wenn es sinnvoll ist.",
+  },
+  {
+    question: "Wie schnell sehe ich erste Entlastung?",
+    answer:
+      "Oft innerhalb der ersten 2-4 Wochen. Du bekommst früh einen funktionierenden Ablauf und wir optimieren danach schrittweise.",
+  },
+  {
+    question: "Wie läuft die Umsetzung ab?",
+    answer:
+      "Erst definieren wir den Startpunkt, dann bauen wir den Ablauf, testen mit echten Fällen und führen ihn gemeinsam ein. Du bekommst eine kurze, verständliche Übergabe.",
+  },
+  {
+    question: "Wie bleibt das DSGVO-konform?",
+    answer:
+      "Wir beschränken Datenzugriffe, setzen klare Rollenrechte und können EU-Hosting sowie AVV bereitstellen. Du behältst die Kontrolle, welche Daten verarbeitet werden.",
+  },
+  {
+    question: "Muss ich technisches Know-how mitbringen?",
+    answer:
+      "Nein. Du lieferst nur Kontext und Beispiele, wir übernehmen den Rest. Am Ende verstehst du den Ablauf und kannst ihn selbst steuern.",
+  },
+];
+---
+
+<Base
+  title="KI Automatisierung für Selbstständige, Backoffice und Postfach automatisieren | Codariq"
+  description="KI Automatisierung für Selbstständige: Backoffice, Postfach und E Mail Workflows automatisieren mit KI Assistenten und KI Agenten. Routineaufgaben automatisieren, Zeit sparen als Selbstständiger, mehr Output ohne neue Mitarbeitende."
+  keywords="KI Automatisierung für Selbstständige, Automatisierung für Selbstständige, Backoffice automatisieren, Postfach automatisieren, E Mail Workflow automatisieren, Routineaufgaben automatisieren, Zeit sparen als Selbstständiger, mehr Output ohne neue Mitarbeitende, Follow ups automatisieren, Angebote automatisieren, Rechnungen automatisieren"
+  ogImage="/images/hero/hero2.webp"
+>
+  <BreadcrumbSchema
+    items={[{ name: "Automatisierung für Selbstständige", url: "https://codariq.de/automatisierung-selbststaendige" }]}
+  />
+  <FAQSchema faqs={faqs} />
+
+  <Hero
+    title="KI Automatisierung für Selbstständige, mehr Output ohne neue Mitarbeiter"
+    subtitle="Du willst Zeit sparen als Selbstständiger, aber Postfach und Backoffice fressen den Tag. Ich setze dir KI Assistenten und KI Agenten auf, die E Mail Workflows automatisieren, Follow ups erinnern und Angebote, Rechnungen und Ablage sauber erledigen."
+    heroImage="/images/hero/hero2.webp"
+    primaryCTA="Termin vereinbaren"
+    primaryCTALink="/#final-cta"
+    secondaryCTA="Beispiele ansehen"
+    secondaryCTALink="#use-cases"
+    primaryTextClass="text-gray-800"
+    secondaryTextClass="text-gray-800"
+    subtextClass="text-gray-800"
+  />
+
+
+  <section id="fuer-wen" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Für wen das passt</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Wenn dir Aufgaben wie Postfach, Follow-ups, Ablage und Übergaben regelmäßig Zeit klauen, ist das hier der schnellste Weg zu spürbar mehr Kapazität.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <p class="micro-title text-orange-600 mb-2">Für wen</p>
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Selbstständige und kleine Setups
+          </h3>
+      <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+        <li>Wenn dein Postfach dich ständig unterbricht und du schneller antworten willst</li>
+        <li>Wenn Follow ups, Termine und Nachfassen dir Kopfzeit klauen</li>
+        <li>Wenn Angebote, Rechnungen und Belege noch zu viel Handarbeit sind</li>
+        <li>Wenn du Übergaben zwischen Tools automatisieren willst, ohne Chaos</li>
+      </ul>
+        </div>
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <p class="micro-title text-orange-600 mb-2">Wann es nicht passt</p>
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Wenn du nur ein Tool suchst
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Wenn du ein neues Tool willst, aber keine Abläufe festlegen möchtest</li>
+            <li>Wenn du nur ein Experiment ohne klare Verantwortung und Pflege planst</li>
+            <li>Wenn du maximale Automatisierung willst, aber nichts freigeben möchtest</li>
+            <li>Wenn dein Setup jede Woche komplett anders läuft und nichts standardisierbar ist</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-sm sm:text-base font-semibold text-gray-700 text-center mt-6">
+        Ziel ist nicht mehr Tools, sondern weniger Handarbeit, damit du mehr Zeit für Kunden und Umsatz hast.
+      </p>
+    </div>
+  </section>
+
+  <section id="value-focus" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">
+          Mehr Fokus, weniger Admin
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Für Selbstständige zählt jede Stunde. Wenn du Routineaufgaben automatisieren willst, ist das der schnellste Weg, um Zeit zu sparen als Selbstständiger, ohne dein System neu zu erfinden.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Klarer Tagesabschluss
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Anfragen werden sortiert, als Aufgaben abgelegt und gehen nicht mehr im Postfach unter.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Weniger Kontextwechsel
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Übergaben zwischen Tools laufen automatisch, E-Mail zu Aufgabe, Aufgabe zu Projekt, Projekt zu Ablage, ohne Copy-Paste.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Mehr planbare Kapazität
+          </h3>
+          <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            Du gewinnst planbare Kapazität zurück, weil Routinearbeit nicht mehr ständig dazwischen funkt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <UseCaseGrid
+    title="3 Use Cases für Selbstständige"
+    subtitle="Beispiele für Postfach, E Mail Workflows und Backoffice, die sofort im Alltag spürbar sind."
+    useCases={useCases}
+  />
+
+  <section id="sicherheit-daten" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Sicherheit und Daten</h2>
+        <p class="section-subtitle max-w-4xl mx-auto">
+          Du behältst die Kontrolle. Wir automatisieren nur das, was du freigibst, und bauen den Ablauf so, dass er im Alltag stabil und nachvollziehbar bleibt.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-gray-50 rounded-xl p-6 sm:p-7 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-4">Was wir absichern</h3>
+          <ul class="space-y-2 sm:space-y-3 text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Minimale Datenweitergabe: nur die Felder, die für den Ablauf nötig sind</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Klare Rollen und Rechte: wer darf sehen, wer darf auslösen, wer darf freigeben</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Nachvollziehbarkeit: Logs, Status und klare Übergaben statt Blackbox</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Ausnahmen: wenn etwas unklar ist, wird es markiert statt blind ausgeführt</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-6 sm:p-7 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-4">Typische Setup Optionen</h3>
+          <ul class="space-y-2 sm:space-y-3 text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>EU Hosting und Zugriffsschutz je nach Tool Stack</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Auf Wunsch AV Vertrag bei passenden Komponenten</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Keine Nutzung deiner Inhalte zum Training öffentlich verfügbarer Modelle</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"></span>
+              <span>Saubere Trennung: Test, Live, und klare Zuständigkeiten</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-sm sm:text-base font-semibold text-gray-700 text-center mt-6">
+        Ergebnis: weniger Risiko, weniger Chaos, und eine Automatisierung, die du verstehst.
+      </p>
+    </div>
+  </section>
+
+  <section id="process" class="py-10 sm:py-12 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div class="text-center mb-8 sm:mb-10">
+        <h2 class="section-title mb-3 sm:mb-4">Unser Ablauf: Wir bringen schnelle Entlastung</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Drei Schritte, damit du ohne Technikstress spürbar Zeit zurückgewinnst.
+        </p>
+      </div>
+
+      <div class="space-y-3 sm:space-y-4">
+        {processSteps.map((step, index) => (
+          <details
+            class="group/compact rounded-xl border border-gray-200 bg-gray-50 p-4 sm:p-5"
+            open={index === 0}
+          >
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <div>
+                <p class="text-xs sm:text-sm font-semibold text-orange-600 mb-1">
+                  Schritt {step.number} · {step.duration}
+                </p>
+                <h3 class="text-base sm:text-lg font-black text-gray-900">
+                  {step.title}
+                </h3>
+              </div>
+              <svg
+                class="w-5 h-5 text-gray-400 mt-1 transition-transform duration-200 group-open/compact:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+
+            <div class="pt-3 sm:pt-4">
+              <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed mb-3">
+                {step.description}
+              </p>
+              <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+                {step.details.map((detail) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 h-1.5 w-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-4 border-t border-gray-200 pt-3">
+                <p class="text-sm sm:text-base font-semibold text-gray-900">Ergebnis:</p>
+                <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed">
+                  {step.result}
+                </p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+
+  <FinalCTA
+    title="Lass uns deinen Alltag messbar entlasten"
+    description="In 30 Minuten finden wir den besten Startpunkt für deine Automatisierung. Klar, verständlich und ohne Technikstress."
+  />
+
+  <FAQ
+    title="FAQ für Selbstständige"
+    subtitle="Kurz beantwortet, damit du schnell entscheiden kannst, ob es passt."
+    faqs={faqs}
+  />
+
+</Base>

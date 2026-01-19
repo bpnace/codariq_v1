@@ -7,6 +7,9 @@ export interface Props {
   primaryCTALink?: string;
   secondaryCTALink?: string;
   heroImage?: string;
+  primaryTextClass?: string;
+  secondaryTextClass?: string;
+  subtextClass?: string;
   stats?: Array<{
     value: string;
     label: string;
@@ -14,17 +17,16 @@ export interface Props {
 }
 
 const {
-  title = "Weniger Klickarbeit. Mehr Ergebnis.",
+  title = "Automatisiere deinen Alltag einfacher, als du denkst.",
   subtitle = "Wir bauen intelligente Automatisierungen, die E Mails, Leads, Dokumente und Routineaufgaben sauber verbinden. DSGVO konform, verständlich erklärt, in wenigen Wochen spürbar.",
   primaryCTA = "Kostenloses Erstgespräch",
   secondaryCTA = "Beispiele ansehen",
   primaryCTALink = "#final-cta",
   secondaryCTALink = "#benefits",
-  heroImage = "/images/hero/hero2.webp",
-  stats = [
-    { value: "40%", label: "Effizienzsteigerung" },
-    { value: "60h", label: "Zeitersparnis/Monat" },
-  ],
+  heroImage = "/images/hero/hero1.webp",
+  primaryTextClass = "text-gray-900",
+  secondaryTextClass = "text-white",
+  subtextClass = "text-white",
 } = Astro.props;
 ---
 
@@ -44,30 +46,24 @@ const {
       decoding="async"
       style="height: calc(100% + 4rem);"
     />
-     <!--   <div
-      class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/60 via-black/35 to-black/60 lg:bg-gradient-to-r lg:from-black/60 lg:via-black/10 lg:to-transparent"
-      aria-hidden="true"
-    ></div>
- Overlay for text readability
-    <div class="absolute inset-0 bg-white/10" style="mix-blend-mode:screen;"></div>-->
   </div>
 
   <div
-    class="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
+    class="h-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative z-10"
   >
-    <div class="grid lg:grid-cols-1 gap-8 items-center">
+    <div class="grid lg:grid-cols-1 gap-10 items-center">
       <!-- LEFT COLUMN: Existing text content -->
-      <div class="text-center w-full max-w-4xl mx-auto">
+      <div class="text-center w-full max-w-8xl mx-auto">
 
       <h1
-        class="hero-title hero-animate font-headline font-black text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white mb-4 leading-tight max-w-5xl"
+        class="hero-title hero-animate font-headline font-black text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white mb-10 sm:mb-12 md:mb-14 leading-tight max-w-5xl mx-auto -mt-8 sm:-mt-10 lg:-mt-12"
         style="animation-delay: 0.1s; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);"
       >
         {title}
       </h1>
 
       <p
-        class="hero-subtitle hero-animate font-medium text-base sm:text-lg md:text-xl text-white/90 mb-7 max-w-4xl leading-normal"
+        class="hero-subtitle hero-animate font-medium text-base sm:text-lg md:text-xl text-white/90 mb-7 max-w-4xl mx-auto leading-normal"
         style="animation-delay: 0.25s"
       >
         {subtitle}
@@ -76,12 +72,12 @@ const {
       <!-- CTA Button with Benefits -->
       <div class="hero-animate" style="animation-delay: 0.8s">
         <div
-          class="flex flex-col lg:flex-row items-center justify-center gap-4 mb-3 sm:mb-4 md:mb-2 px-6 sm:px-4"
+          class="flex flex-col lg:flex-row items-center justify-center gap-5 mb-3 sm:mb-4 md:mb-2 px-6 sm:px-4"
         >
           <!-- CTA Button -->
           <a
             href={primaryCTALink}
-            class="group bg-white text-gray-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-bold text-base sm:text-lg shadow-1xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-80 md:w-96 text-center cta-button cta-pulse"
+            class={`group bg-white ${primaryTextClass} px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-all duration-200 font-bold text-base sm:text-lg shadow-1xl focus:outline-none focus:ring-4 focus:ring-white/30 w-full sm:w-80 md:w-96 text-center cta-button cta-pulse`}
             aria-label={primaryCTA}
           >
             <span class="flex flex-wrap items-center justify-center gap-2">
@@ -104,7 +100,7 @@ const {
 
           <a
             href={secondaryCTALink}
-            class="group bg-white/10 text-white border border-white/30 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-white/15 hover:border-white/50 transition-all duration-200 font-bold text-base sm:text-lg backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/20 w-full sm:w-80 md:w-96 text-center cta-button"
+            class={`group bg-white/10 ${secondaryTextClass} border border-white/30 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-white/15 hover:border-white/50 transition-all duration-200 font-bold text-base sm:text-lg backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/20 w-full sm:w-80 md:w-96 text-center cta-button`}
             aria-label={secondaryCTA}
           >
             <span class="flex flex-wrap items-center justify-center gap-2">
@@ -128,10 +124,10 @@ const {
 
         <!-- Risk Reduction Text -->
         <p
-          class="text-white text-sm mb-2 max-w-xs sm:max-w-sm mx-auto text-center"
+          class={`${subtextClass} text-sm mb-2 max-w-l sm:max-w-l mx-auto text-center`}
           style="font-weight: 800 !important;"
         >
-          Wir prüfen gemeinsam, welche Lösung in Ihrem Unternehmen am schnellsten Wirkung zeigt.
+          Wir prüfen gemeinsam, welche Lösung in deinem Unternehmen am schnellsten Wirkung zeigt.
         </p>
       </div>
       </div>
