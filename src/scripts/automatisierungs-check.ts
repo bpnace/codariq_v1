@@ -808,7 +808,7 @@ const init = () => {
       submitQuiz();
       return;
     }
-    if (!state.answers[step.id]) {
+    if (step.type !== "name_capture" && !state.answers[step.id]) {
       setError("Bitte wähle eine Option.");
       return;
     }
