@@ -53,6 +53,19 @@ function extractCoverUrl(included: any[] | undefined, rel: any): string | undefi
   return normalizeUrl(rawUrl);
 }
 
+// Helper function to extract field values with fallback chain
+function getFieldValue(
+  attrs: any,
+  fieldNames: string[],
+  fallback: string = ""
+): string {
+  for (const field of fieldNames) {
+    const value = attrs?.[field]?.processed || attrs?.[field]?.value || attrs?.[field];
+    if (value) return value;
+  }
+  return fallback;
+}
+
 function mapNode(node: any, included: any[]): DrupalPost {
   const attrs = node.attributes || {};
   const relationships = node.relationships || {};
@@ -61,23 +74,10 @@ function mapNode(node: any, included: any[]): DrupalPost {
   const alias: string = attrs?.path?.alias || "";
   const slug = alias.replace(/^\/+/, "").replace(/^blog\//, "") || node.id;
 
-  const mainBody =
-    attrs?.field_body_content?.processed ||
-    attrs?.body?.processed ||
-    attrs?.field_body_content?.value ||
-    attrs?.body?.value ||
-    "";
-
-  const introText =
-    attrs?.field_intro_text?.processed ||
-    attrs?.field_intro_text?.value ||
-    "";
-
-  const mainSummary =
-    attrs?.field_body_content?.summary ||
-    attrs?.body?.summary ||
-    mainBody.slice(0, 200) ||
-    "";
+  const mainBody = getFieldValue(attrs, ['field_body_content', 'body']);
+  const introText = getFieldValue(attrs, ['field_intro_text']);
+  const mainSummary = getFieldValue(attrs, ['field_body_content.summary', 'body.summary'])
+    || mainBody.slice(0, 200);
 
   return {
     id: node.id,

@@ -1,4 +1,6 @@
 ---
+import ArrowRight from './icons/ArrowRight.astro';
+
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -82,19 +84,7 @@ const {
           >
             <span class="flex flex-wrap items-center justify-center gap-2">
               <span>{primaryCTA}</span>
-              <svg
-                class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <title>Arrow Right Icon</title>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
+              <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </a>
 
@@ -105,19 +95,7 @@ const {
           >
             <span class="flex flex-wrap items-center justify-center gap-2">
               <span>{secondaryCTA}</span>
-              <svg
-                class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <title>Arrow Right Icon</title>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
+              <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </a>
         </div>

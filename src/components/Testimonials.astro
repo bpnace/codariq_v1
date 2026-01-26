@@ -275,57 +275,15 @@ const {
 </section>
 
 <style>
-  /* Light gradient for Row 1 (cards 1-2) - Slight overlay */
-  .testimonial-gradient-light {
-    position: relative;
-  }
-
-  .testimonial-gradient-light::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(249, 250, 251, 0.2) 30%,
-      rgba(249, 250, 251, 0.4) 60%,
-      rgba(249, 250, 251, 0.6) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Medium gradient for Row 2 (cards 3-4) - Medium overlay */
-  .testimonial-gradient-medium {
-    position: relative;
-  }
-
-  .testimonial-gradient-medium::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(249, 250, 251, 0.4) 20%,
-      rgba(249, 250, 251, 0.65) 50%,
-      rgba(249, 250, 251, 0.85) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Heavy gradient for Row 3 (cards 5-6) - Heavy overlay */
+  /* Base testimonial gradient structure */
+  .testimonial-gradient-light,
+  .testimonial-gradient-medium,
   .testimonial-gradient-heavy {
     position: relative;
   }
 
+  .testimonial-gradient-light::before,
+  .testimonial-gradient-medium::before,
   .testimonial-gradient-heavy::before {
     content: "";
     position: absolute;
@@ -336,11 +294,38 @@ const {
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(249, 250, 251, 0.6) 15%,
-      rgba(249, 250, 251, 0.85) 35%,
-      rgba(249, 250, 251, 1) 100%
+      rgba(249, 250, 251, var(--opacity-1, 0.2)) var(--stop-1, 30%),
+      rgba(249, 250, 251, var(--opacity-2, 0.4)) var(--stop-2, 60%),
+      rgba(249, 250, 251, var(--opacity-3, 0.6)) 100%
     );
     pointer-events: none;
     z-index: 1;
+  }
+
+  /* Light gradient for Row 1 (cards 1-2) - Slight overlay */
+  .testimonial-gradient-light::before {
+    --opacity-1: 0.2;
+    --stop-1: 30%;
+    --opacity-2: 0.4;
+    --stop-2: 60%;
+    --opacity-3: 0.6;
+  }
+
+  /* Medium gradient for Row 2 (cards 3-4) - Medium overlay */
+  .testimonial-gradient-medium::before {
+    --opacity-1: 0.4;
+    --stop-1: 20%;
+    --opacity-2: 0.65;
+    --stop-2: 50%;
+    --opacity-3: 0.85;
+  }
+
+  /* Heavy gradient for Row 3 (cards 5-6) - Heavy overlay */
+  .testimonial-gradient-heavy::before {
+    --opacity-1: 0.6;
+    --stop-1: 15%;
+    --opacity-2: 0.85;
+    --stop-2: 35%;
+    --opacity-3: 1;
   }
 </style>

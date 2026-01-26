@@ -18,13 +18,10 @@ RewriteRule ^_astro/ - [L]
 RewriteRule ^(images|fonts)/ - [L]
 RewriteRule \.(css|js|mjs|map|json|png|jpg|jpeg|gif|svg|webp|woff2?|ico|txt|xml)$ - [L]
 
-# Remove www (before HTTPS enforcement to minimize redirect chains)
-RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
-RewriteRule ^(.*)$ https://codariq.de/$1 [R=301,L]
-
-# Force HTTPS (after www removal)
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# Force HTTPS and remove www in one redirect (reduces redirect hops)
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://codariq.de%{REQUEST_URI} [R=301,L]
 
 # Strip ?search= query params to canonical URL
 RewriteCond %{QUERY_STRING} (^|&)search= [NC]

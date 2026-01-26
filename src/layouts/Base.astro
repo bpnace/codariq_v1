@@ -663,7 +663,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               aria-expanded="false"
             >
               <svg
-                class="w-6 h-6"
+                class="menu-icon w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -673,6 +673,18 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+              <svg
+                class="close-icon hidden w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
           </div>
@@ -1150,10 +1162,10 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               const errors: string[] = [];
 
               // Validate email
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
               if (
                 !email?.value?.trim() ||
-                !emailRegex.test(email.value.trim())
+                !isValidEmail(email.value.trim())
               ) {
                 errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
                 const errorElement = document.getElementById(
@@ -1241,6 +1253,9 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           const mobileMenu = document.getElementById("mobile-menu");
 
           if (mobileMenuButton && mobileMenu) {
+            const menuIcon = mobileMenuButton.querySelector('.menu-icon');
+            const closeIcon = mobileMenuButton.querySelector('.close-icon');
+
             mobileMenuButton.addEventListener("click", function () {
               const isExpanded =
                 mobileMenuButton.getAttribute("aria-expanded") === "true";
@@ -1248,13 +1263,13 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               if (isExpanded) {
                 mobileMenu.classList.add("hidden");
                 mobileMenuButton.setAttribute("aria-expanded", "false");
-                mobileMenuButton.innerHTML =
-                  '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                menuIcon?.classList.remove('hidden');
+                closeIcon?.classList.add('hidden');
               } else {
                 mobileMenu.classList.remove("hidden");
                 mobileMenuButton.setAttribute("aria-expanded", "true");
-                mobileMenuButton.innerHTML =
-                  '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                menuIcon?.classList.add('hidden');
+                closeIcon?.classList.remove('hidden');
               }
             });
 
@@ -1264,8 +1279,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               link.addEventListener("click", function () {
                 mobileMenu.classList.add("hidden");
                 mobileMenuButton.setAttribute("aria-expanded", "false");
-                mobileMenuButton.innerHTML =
-                  '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                menuIcon?.classList.remove('hidden');
+                closeIcon?.classList.add('hidden');
               });
             });
           }
@@ -1294,8 +1309,10 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     mobileMenu.classList.add("hidden");
                     if (mobileMenuButton) {
                       mobileMenuButton.setAttribute("aria-expanded", "false");
-                      mobileMenuButton.innerHTML =
-                        '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                      const menuIcon = mobileMenuButton.querySelector('.menu-icon');
+                      const closeIcon = mobileMenuButton.querySelector('.close-icon');
+                      menuIcon?.classList.remove('hidden');
+                      closeIcon?.classList.add('hidden');
                     }
                   }
 

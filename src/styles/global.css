@@ -282,12 +282,6 @@ html {
   will-change: transform, opacity;
 }
 
-.animate-element {
-  opacity: 0;
-  animation: elementSlideUp 0.6s ease-out forwards;
-  will-change: transform, opacity;
-}
-
 /* Intersection Observer based animations for better performance */
 .animate-on-scroll {
   opacity: 0;

@@ -320,21 +320,7 @@ const {
   </div>
 
   <style>
-    /* Consistent CTA button animation */
-    .cta-button {
-      transform-origin: center;
-      transition:
-        transform 0.2s ease,
-        background 0.5s ease;
-      will-change: transform;
-      backface-visibility: hidden;
-    }
-
-    .cta-button:hover:not(:disabled) {
-      transform: scale(1.02);
-    }
-
-    /* Success state */
+    /* Success state for CTA button */
     .cta-button.success {
       background: linear-gradient(to bottom right, #22c55e, #16a34a) !important;
     }
@@ -419,8 +405,8 @@ const {
           }
 
           // Validate email
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+          const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+          if (!email.value.trim() || !isValidEmail(email.value.trim())) {
             errors.push("Bitte gib eine gültige E Mail Adresse ein");
             document.getElementById("email-error").textContent =
               "Bitte gib eine gültige E Mail Adresse ein";

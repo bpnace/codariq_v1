@@ -133,23 +133,28 @@ const {
     >
       {
         benefits.map((benefit, index) => {
+          // Theme configuration map for cleaner logic
+          const THEME_CONFIG = {
+            blue: {
+              cardStyle: "background: linear-gradient(135deg, var(--color-pack-blue), var(--color-neutral-gray-900)); border-color: var(--color-pack-blue);",
+              iconWrapperStyle: "background: var(--color-neutral-gray-100);",
+              iconWrapperClass: "bg-white/10"
+            },
+            default: {
+              cardStyle: "background: linear-gradient(135deg, var(--color-brand-light), var(--color-brand-dark)); border-color: var(--color-brand-light);",
+              iconWrapperStyle: undefined,
+              iconWrapperClass: "bg-white/10"
+            }
+          };
+
           const isTeamTier = benefit.colorTheme === "blue" || benefit.icon === "growth";
+          const theme = benefit.highlight ? (isTeamTier ? "blue" : "default") : null;
 
-          const teamGradient =
-            "linear-gradient(135deg, var(--color-pack-blue), var(--color-neutral-gray-900))";
-          const highlightGradient =
-            "linear-gradient(135deg, var(--color-brand-light), var(--color-brand-dark))";
-
-          const cardStyle = benefit.highlight
-            ? isTeamTier
-              ? `background: ${teamGradient}; border-color: var(--color-pack-blue);`
-              : `background: ${highlightGradient}; border-color: var(--color-brand-light);`
-            : undefined;
-
-          const iconWrapperStyle = isTeamTier
-            ? "background: var(--color-neutral-gray-100);"
-            : undefined;
-          const iconWrapperThemeClasses = benefit.highlight ? "bg-white/10" : "bg-gray-100";
+          const cardStyle = theme ? THEME_CONFIG[theme].cardStyle : undefined;
+          const iconWrapperStyle = theme ? THEME_CONFIG[theme].iconWrapperStyle : undefined;
+          const iconWrapperThemeClasses = benefit.highlight
+            ? (theme ? THEME_CONFIG[theme].iconWrapperClass : "bg-white/10")
+            : "bg-gray-100";
 
           return (
             <div
@@ -429,20 +434,3 @@ const {
     </div>
   </div>
 </section>
-
-
-<style>
-  /* Consistent CTA button animation */
-  .cta-button {
-    transform-origin: center;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  .cta-button:hover {
-    transform: scale(1.02);
-  }
-</style>
