@@ -46,14 +46,6 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Codariq" />
 
-    <!-- Performance optimizations -->
-    <link
-      rel="preload"
-      href="/images/hero/hero1.webp"
-      as="image"
-      type="image/webp"
-    />
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -145,7 +137,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       href="/fonts/Satoshi-Variable.woff2"
       as="font"
       type="font/woff2"
-      crossorigin
+      crossorigin="anonymous"
     />
 
     <!-- Global Styles -->
@@ -572,8 +564,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
     ></script>
 
     <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-6TLXVYD8V2"></script>
-    <script is:inline>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-6TLXVYD8V2" crossorigin="anonymous"></script>
+    <script is:inline crossorigin="anonymous">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());

@@ -1,6 +1,9 @@
 RewriteEngine On
 RewriteBase /
 
+# Disable DirectorySlash to prevent trailing slash conflicts with mod_dir
+DirectorySlash Off
+
 # Ensure correct MIME types for module scripts and assets
 AddType application/javascript .js .mjs
 AddType text/css .css
@@ -10,31 +13,37 @@ AddType image/svg+xml .svg
 AddType font/woff2 .woff2
 AddType font/woff .woff
 
-# Force HTTPS and non-www
-RewriteCond %{HTTPS} !=on [OR]
-RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
-RewriteRule ^(.*)$ https://codariq.de/$1 [R=301,L]
-
-# Skip rewrites for static assets and the Astro build output
+# Skip rewrites for static assets and the Astro build output (must be first)
 RewriteRule ^_astro/ - [L]
 RewriteRule ^(images|fonts)/ - [L]
 RewriteRule \.(css|js|mjs|map|json|png|jpg|jpeg|gif|svg|webp|woff2?|ico|txt|xml)$ - [L]
 
+# Remove www (before HTTPS enforcement to minimize redirect chains)
+RewriteCond %{HTTP_HOST} ^www\.codariq\.de$ [NC]
+RewriteRule ^(.*)$ https://codariq.de/$1 [R=301,L]
+
+# Force HTTPS (after www removal)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 # Strip ?search= query params to canonical URL
 RewriteCond %{QUERY_STRING} (^|&)search= [NC]
-RewriteRule ^(.*)$ https://codariq.de/$1? [R=301,L]
+RewriteRule ^(.*)$ %{REQUEST_URI}? [R=301,L]
 
-# Remove trailing slash (except root)
+# Remove trailing slash (except root) - now safe with DirectorySlash Off
 RewriteCond %{REQUEST_URI} .+/$
 RewriteRule ^(.+)/$ /$1 [R=301,L]
 
-# Redirect .html to clean URL
+# Redirect explicit .html requests to clean URLs
 RewriteCond %{THE_REQUEST} \s/([^\s]+)\.html [NC]
-RewriteRule ^ %1 [R=301,L]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# Special handling: /blog → blog.html (before directory check)
+# This prevents Apache from treating /blog as directory access (403 Forbidden)
+RewriteRule ^blog$ blog.html [L]
 
 # Pretty URL rewrites for file-based output
-RewriteRule ^$ index.html [L]
-RewriteRule ^blog$ blog.html [L]
+# Serve files: /about → about.html, etc.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ $1.html [L]
+RewriteRule ^(.*)$ $1.html [L]

@@ -33,13 +33,13 @@ export default defineConfig({
         }
         // Other blog posts get higher priority and more frequent updates
         else if (url.includes('/blog/') && !url.endsWith('/blog')) {
-          item.lastmod = new Date('2025-01-01').toISOString();
+          item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.8;
         }
         // Blog index page (updated with newest post)
         else if (url.endsWith('/blog')) {
-          item.lastmod = new Date('2025-01-09').toISOString();
+          item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 0.7;
         }
@@ -49,9 +49,15 @@ export default defineConfig({
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 1.0;
         }
+        // Automation landing pages and quiz - high priority conversion pages
+        else if (url.includes('/automatisierung-') || url.includes('/automatisierungs-check')) {
+          item.lastmod = now.toISOString();
+          item.changefreq = EnumChangefreq.WEEKLY;
+          item.priority = 0.8;
+        }
         // Other pages (legal, FAQ, etc.)
         else {
-          item.lastmod = new Date('2025-01-01').toISOString();
+          item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.5;
         }

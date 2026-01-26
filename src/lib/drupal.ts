@@ -9,31 +9,34 @@ export type DrupalPost = {
   date?: string;
   category?: string | string[];
   readTime?: number;
+  featured?: boolean;
 };
 
 const API_BASE =
-  import.meta.env.DRUPAL_API_BASE || "http://217.154.85.224:8081";
+  import.meta.env.DRUPAL_API_BASE || "https://cms.codariq.de";
 
 const POSTS_ENDPOINT = `${API_BASE}/jsonapi/node/codariq_blog`;
 
-const apiOrigin = (() => {
-  try {
-    return new URL(API_BASE).origin;
-  } catch {
-    return API_BASE;
-  }
-})();
-
-function normalizeUrl(url: string | undefined) {
+function normalizeUrl(url: string | undefined): string | undefined {
   if (!url) return undefined;
-  if (url.startsWith("http")) return url;
-  if (url.startsWith("//")) return `http:${url}`;
-  if (url.startsWith("/")) return `${apiOrigin}${url}`;
-  return url;
+
+  // Already a complete URL - return as is
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+
+  // Absolute path - prepend API base
+  if (url.startsWith("/")) return `${API_BASE}${url}`;
+
+  // Drupal internal URI like "public://images/cover.webp"
+  if (url.startsWith("public://")) {
+    return `${API_BASE}/sites/default/files/${url.slice(9)}`;
+  }
+
+  return undefined;
 }
 
-function extractCoverUrl(included: any[] | undefined, rel: any) {
+function extractCoverUrl(included: any[] | undefined, rel: any): string | undefined {
   if (!included || !rel?.data) return undefined;
+
   const relData = Array.isArray(rel.data) ? rel.data[0] : rel.data;
   const file = included.find(
     (item) => item.type === relData?.type && item.id === relData?.id,
@@ -41,13 +44,13 @@ function extractCoverUrl(included: any[] | undefined, rel: any) {
 
   if (!file?.attributes) return undefined;
 
-  // Drupal can expose uri.url or url; prefer uri.url.
-  return normalizeUrl(
+  // Check common Drupal URL patterns
+  const rawUrl =
     file.attributes?.uri?.url ||
-      file.attributes?.url ||
-      file.attributes?.uri?.value ||
-      undefined,
-  );
+    file.attributes?.url ||
+    file.attributes?.uri?.value;
+
+  return normalizeUrl(rawUrl);
 }
 
 function mapNode(node: any, included: any[]): DrupalPost {
@@ -60,25 +63,20 @@ function mapNode(node: any, included: any[]): DrupalPost {
 
   const mainBody =
     attrs?.field_body_content?.processed ||
-    attrs?.field_body_content?.value ||
     attrs?.body?.processed ||
+    attrs?.field_body_content?.value ||
     attrs?.body?.value ||
-    attrs?.body?.summary ||
     "";
 
   const introText =
     attrs?.field_intro_text?.processed ||
     attrs?.field_intro_text?.value ||
-    attrs?.field_intro_text ||
     "";
 
   const mainSummary =
     attrs?.field_body_content?.summary ||
     attrs?.body?.summary ||
-    attrs?.field_body_content?.processed ||
-    attrs?.field_body_content?.value ||
-    attrs?.body?.processed ||
-    attrs?.body?.value ||
+    mainBody.slice(0, 200) ||
     "";
 
   return {
@@ -92,6 +90,7 @@ function mapNode(node: any, included: any[]): DrupalPost {
     date: attrs?.field_datum,
     category: attrs?.field_kategorie,
     readTime: attrs?.field_read_time,
+    featured: attrs?.field_featured || false,
   };
 }
 
@@ -100,12 +99,14 @@ export async function fetchDrupalPosts(limit = 6): Promise<DrupalPost[]> {
 
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`Drupal API error: ${res.status}`);
+    if (!res.ok) {
+      throw new Error(`Drupal API error: ${res.status}`);
+    }
     const data = await res.json();
     const included = data?.included || [];
     return (data?.data || []).map((node: any) => mapNode(node, included));
   } catch (err) {
-    console.error("Failed to fetch Drupal posts", err);
+    console.error("[Drupal] Failed to fetch posts:", err);
     return [];
   }
 }
@@ -113,22 +114,21 @@ export async function fetchDrupalPosts(limit = 6): Promise<DrupalPost[]> {
 export async function fetchDrupalPostBySlug(
   slug: string,
 ): Promise<DrupalPost | null> {
-  // Try direct filter by alias
   const alias = `/blog/${slug}`;
-  const url = `${POSTS_ENDPOINT}?filter[path][alias]=${encodeURIComponent(
-    alias,
-  )}&include=field_cover&fields[node--codariq_blog]=title,body,field_cover,field_datum,field_kategorie,field_read_time,path&fields[file--file]=uri,url`;
+  const url = `${POSTS_ENDPOINT}?filter[path.alias]=${encodeURIComponent(alias)}&include=field_cover`;
 
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Drupal API error: ${res.status}`);
+
     const data = await res.json();
-    const included = data?.included || [];
     const node = data?.data?.[0];
     if (!node) return null;
+
+    const included = data?.included || [];
     return mapNode(node, included);
   } catch (err) {
-    console.error("Failed to fetch Drupal post by slug", err);
+    console.error("[Drupal] Failed to fetch post by slug:", err);
     const posts = await fetchDrupalPosts(50);
     return posts.find((p) => p.slug === slug) || null;
   }
