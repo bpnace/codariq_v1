@@ -264,29 +264,34 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
       /* Dark mode for navigation when scrolled past hero */
       header.nav-scrolled #main-nav .nav-link {
-        color: var(--color-nav-link) !important;
+        color: var(--color-neutral-gray-700) !important;
       }
 
       header.nav-scrolled #main-nav svg {
-        color: var(--color-nav-link) !important;
+        color: var(--color-neutral-gray-700) !important;
         stroke: currentColor;
       }
 
       header.nav-scrolled #main-nav button {
-        color: var(--color-nav-link) !important;
+        color: var(--color-neutral-gray-700) !important;
       }
 
       /* Keep hover states working in both modes */
       header.nav-scrolled #main-nav .nav-link:hover {
-        color: var(--color-neutral-gray-600) !important;
+        color: var(--color-neutral-gray-900) !important;
       }
 
       header.nav-scrolled #main-nav button:hover {
-        color: var(--color-neutral-gray-600) !important;
+        color: var(--color-neutral-gray-900) !important;
       }
 
-      /* Logo shows natural dark color when scrolled */
+      /* Logo stays bright on hero, switches to dark on scroll */
+      #nav-logo {
+        filter: brightness(0) invert(1);
+      }
+
       header.nav-scrolled #nav-logo {
+        filter: none;
         opacity: 1;
       }
 
