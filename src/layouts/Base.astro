@@ -1107,7 +1107,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
       <!-- Mobile Menu and Smooth Scrolling JavaScript -->
       <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", async function () {
           // Newsletter form elements (footer)
           const footerNewsletterForm =
             document.getElementById("newsletter-form");
@@ -1141,14 +1141,22 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             footerNewsletterErrors &&
             footerNewsletterErrorList
           ) {
+            // Import form helpers dynamically
+            const { showFieldError, hideFieldError, setButtonLoading, submitFormData } =
+              await import('/src/utils/formHelpers.ts');
+
             footerNewsletterForm.addEventListener("submit", async function (e) {
               e.preventDefault();
 
               // Reset error states
               if (footerNewsletterErrors)
                 footerNewsletterErrors.classList.add("hidden");
-              if (footerNewsletterErrorList)
-                footerNewsletterErrorList.innerHTML = "";
+              if (footerNewsletterErrorList) {
+                // Clear error list safely
+                while (footerNewsletterErrorList.firstChild) {
+                  footerNewsletterErrorList.removeChild(footerNewsletterErrorList.firstChild);
+                }
+              }
 
               // Get email field
               const email = document.getElementById(
@@ -1168,20 +1176,10 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 !isValidEmail(email.value.trim())
               ) {
                 errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
-                const errorElement = document.getElementById(
-                  "footer-newsletter-email-error",
-                );
-                if (errorElement) {
-                  errorElement.textContent =
-                    "Bitte geben Sie eine gültige E-Mail-Adresse ein";
-                  errorElement.classList.remove("hidden");
-                }
+                showFieldError("footer-newsletter-email", "Bitte geben Sie eine gültige E-Mail-Adresse ein");
                 hasErrors = true;
               } else {
-                const errorElement = document.getElementById(
-                  "footer-newsletter-email-error",
-                );
-                if (errorElement) errorElement.classList.add("hidden");
+                hideFieldError("footer-newsletter-email");
               }
 
               // If there are errors, show error messages
@@ -1199,33 +1197,22 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
               // Set loading state
               if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = "Wird gesendet...";
+                setButtonLoading(submitButton, true, "Wird gesendet...");
               }
 
               try {
                 // Send to server-side API endpoint
-                const response = await fetch("/api/newsletter", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: email.value.trim(),
-                    source: "footer_newsletter",
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent,
-                  }),
+                await submitFormData("/api/newsletter", {
+                  email: email.value.trim(),
+                  source: "footer_newsletter",
+                  timestamp: new Date().toISOString(),
+                  userAgent: navigator.userAgent,
                 });
 
-                if (response.ok) {
-                  // Show success message
-                  if (footerNewsletterSuccess) {
-                    footerNewsletterSuccess.classList.remove("hidden");
-                    footerNewsletterForm.style.display = "none";
-                  }
-                } else {
-                  throw new Error("Newsletter-Anmeldung fehlgeschlagen");
+                // Show success message
+                if (footerNewsletterSuccess) {
+                  footerNewsletterSuccess.classList.remove("hidden");
+                  footerNewsletterForm.style.display = "none";
                 }
               } catch (error) {
                 console.error("Newsletter subscription error:", error);
@@ -1240,8 +1227,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               } finally {
                 // Reset loading state
                 if (submitButton) {
-                  submitButton.disabled = false;
-                  submitButton.textContent = "Abonnieren";
+                  setButtonLoading(submitButton, false, "Abonnieren");
                 }
               }
             });
@@ -1338,118 +1324,9 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             );
           });
 
-          // Intersection Observer for scroll animations
-          if ("IntersectionObserver" in window) {
-            const observerOptions = {
-              threshold: 0.1,
-              rootMargin: "0px 0px -50px 0px",
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("is-visible");
-                  observer.unobserve(entry.target); // Only animate once
-                }
-              });
-            }, observerOptions);
-
-            // Observe all elements with animate-on-scroll class
-            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
-              observer.observe(el);
-            });
-          } else {
-            // Fallback for browsers without IntersectionObserver
-            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
-              el.classList.add("is-visible");
-            });
-          }
-
-          // Navigation color change on scroll past hero section or article header
-          const header = document.querySelector<HTMLElement>("header");
-          const heroSection = document.querySelector<HTMLElement>("#hero");
-          const footer = document.querySelector<HTMLElement>("footer");
-          const articleHeader = document.querySelector<HTMLElement>(".article-header"); // Blog article header
-          const parallaxImage = document.querySelector<HTMLElement>("[data-parallax]");
-
-          const forceNavSolid =
-            document.body.dataset.forceNavSolid === "true";
-
-          // Force solid nav (e.g., blog pages without hero)
-          if (forceNavSolid && header) {
-            header.classList.add("nav-scrolled");
-            return;
-          }
-
-          // Use whichever section exists (hero for homepage, article-header for blog)
-          const targetSection = heroSection || articleHeader;
-
-          if (header && targetSection) {
-            const safeHeader = header;
-            const safeTargetSection = targetSection;
-            const safeFooter = footer;
-            const safeHeroSection = heroSection;
-            const safeParallaxImage = parallaxImage;
-            let ticking = false;
-
-            function updateNavColor() {
-              const sectionBottom = safeTargetSection.getBoundingClientRect().bottom;
-
-              // Check if we're in the footer area
-              let inFooter = false;
-              if (safeFooter) {
-                const footerTop = safeFooter.getBoundingClientRect().top;
-                const headerHeight = safeHeader.offsetHeight;
-                // If footer is touching or overlapping with header
-                inFooter = footerTop <= headerHeight;
-              }
-
-              // Toggle class based on whether we've scrolled past the section AND not in footer
-              if (sectionBottom <= 0 && !inFooter) {
-                safeHeader.classList.add("nav-scrolled");
-              } else {
-                safeHeader.classList.remove("nav-scrolled");
-              }
-
-              ticking = false;
-            }
-
-            function updateParallax() {
-              if (safeParallaxImage && safeHeroSection) {
-                const scrollY = window.scrollY;
-                const heroBottom =
-                  safeHeroSection.getBoundingClientRect().bottom + scrollY;
-
-                // Only apply parallax while hero section is visible
-                if (scrollY < heroBottom) {
-                  const parallaxOffset = scrollY * 0.25; // 25% = subtle effect
-                  safeParallaxImage.style.transform = `translateY(${parallaxOffset}px)`;
-                }
-              }
-            }
-
-            // Combined update function
-            function updateScrollEffects() {
-              updateNavColor();
-              updateParallax();
-            }
-
-            // Use requestAnimationFrame for smooth performance
-            function onScroll() {
-              if (!ticking) {
-                window.requestAnimationFrame(updateScrollEffects);
-                ticking = true;
-              }
-            }
-
-            // Initial check
-            updateScrollEffects();
-
-            // Listen to scroll events
-            window.addEventListener("scroll", onScroll, { passive: true });
-            // Also listen to resize events to update on window size changes
-            window.addEventListener("resize", updateScrollEffects);
-          }
+          // Initialize scroll effects (extracted to separate module)
+          const { initAllScrollEffects } = await import('/src/scripts/scrollEffects.ts');
+          initAllScrollEffects();
         });
       </script>
     </div>
