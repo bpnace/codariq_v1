@@ -10,9 +10,14 @@ const author = "Codariq Research Team";
 const publishedTime = "2026-01-02T10:00:00+01:00";
 const image = "/images/hero/hero2.webp";
 
-const allPosts: DrupalPost[] = await fetchDrupalPosts(6);
-// Filter out test posts
-const drupalPosts = allPosts.filter(post => !post.slug.includes('test_slug'));
+const allPosts: DrupalPost[] = await fetchDrupalPosts(10);
+// Filter out posts with literal 'test_slug' in the slug
+// Keep all real posts, even if they match featured slugs (Drupal is source of truth)
+const drupalPosts = allPosts.filter(post =>
+  !post.slug.includes('test_slug')
+);
+
+console.log(`[Blog Index] Fetched ${allPosts.length} posts from Drupal, showing ${drupalPosts.length} after filtering`);
 
 const formatDate = (value?: string) => {
   if (!value) return "";
@@ -91,146 +96,6 @@ const formatCategory = (value: string | string[] | undefined) => {
 <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Blog Post 1 - Project Rescue -->
-        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-          <a href="/blog/ki-projekte-retten" class="block">
-            <div class="p-6">
-              <div class="mb-4">
-                <div class="w-full h-32 bg-gradient-to-br from-red-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
-                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                  </svg>
-                </div>
-                <span class="text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded">
-                  Projektrettung
-                </span>
-              </div>
-              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-red-600 transition-colors line-clamp-2">
-                KI Projekt retten: 3 Praxisbeispiele, wie es wieder stabil läuft
-              </h2>
-              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                Wenn Automatisierung im Alltag nicht stabil läuft: typische Ursachen, schnelle Checks und ein klarer Plan, damit es genutzt wird.
-              </p>
-              <div class="flex items-center justify-between text-xs text-gray-500">
-                <span>10 Min. Lesezeit</span>
-                <span>9. Januar 2025</span>
-              </div>
-            </div>
-          </a>
-        </article>
-
-        <!-- Blog Post 2 - Compliance Blog -->
-        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-          <a href="/blog/ki-compliance-2025" class="block">
-            <div class="p-6">
-              <div class="mb-4">
-                <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
-                  <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
-                  KI-Compliance
-                </span>
-              </div>
-              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
-                KI und Datenschutz in Deutschland: das Wichtigste ohne Juristendeutsch
-              </h2>
-              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                DSGVO, AVV, Hosting und Zugriffsschutz, kurz und verständlich. Damit du weißt, worauf es vor dem Start wirklich ankommt.
-              </p>
-              <div class="flex items-center justify-between text-xs text-gray-500">
-                <span>15 Min. Lesezeit</span>
-                <span>15. Januar 2025</span>
-              </div>
-            </div>
-          </a>
-        </article>
-
-        <!-- Blog Post 2 -->
-        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-          <a href="/blog/ki-integration-5-schritte" class="block">
-            <div class="p-6">
-              <div class="mb-4">
-                <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
-                  <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                  </svg>
-                </div>
-                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
-                  Einstieg
-                </span>
-              </div>
-              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
-                Automatisierung starten in 5 Schritten
-              </h2>
-              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                Ein klarer Ablauf für den Einstieg, ohne Tool Chaos. Du siehst, wie du den richtigen Startpunkt wählst und Fortschritt messbar machst.
-              </p>
-              <div class="flex items-center justify-between text-xs text-gray-500">
-                <span>8 Min. Lesezeit</span>
-                <span>15. Dezember 2024</span>
-              </div>
-            </div>
-          </a>
-        </article>
-
-    <!-- Blog Post 3 -->
-    <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-      <a href="/blog/automatisierung-roi-maximieren" class="block">
-        <div class="p-6">
-          <div class="mb-4">
-            <div class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </div>
-            <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
-              Automatisierung
-            </span>
-          </div>
-          <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-            ROI von Prozessautomatisierung: So rechnet es sich
-          </h2>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-            Eine einfache Rechenlogik, um zu entscheiden, ob sich ein Ablauf lohnt. Mit Beispielen aus E Mails, Dokumenten, Leads und Recruiting.
-          </p>
-          <div class="flex items-center justify-between text-xs text-gray-500">
-            <span>12 Min. Lesezeit</span>
-            <span>2. Januar 2026</span>
-          </div>
-        </div>
-      </a>
-    </article>
-
-    <!-- Blog Post 4 -->
-        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-          <a href="/blog/ki-teams-vorbereiten" class="block">
-            <div class="p-6">
-              <div class="mb-4">
-                <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
-              </svg>
-            </div>
-            <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
-              Alltag
-            </span>
-          </div>
-          <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
-            Teams und Abläufe so vorbereiten, dass es genutzt wird
-          </h2>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-            Technik allein reicht nicht. So bringst du Automatisierung in deinen Alltag, ohne dass sie umgangen wird oder nebenher ausstirbt.
-          </p>
-          <div class="flex items-center justify-between text-xs text-gray-500">
-            <span>10 Min. Lesezeit</span>
-            <span>15. Dezember 2024</span>
-          </div>
-        </div>
-      </a>
-        </article>
-
         {
           drupalPosts.map((post) => {
             const displayCategory = formatCategory(post.category);
@@ -240,12 +105,20 @@ const formatCategory = (value: string | string[] | undefined) => {
               .replace(/\s+/g, " ")
               .trim()
               .slice(0, 140);
+            const isFeatured = post.featured === true;
             return (
-              <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+              <article class={`bg-white rounded-xl border overflow-hidden hover:shadow-lg transition-all duration-300 group ${isFeatured ? 'border-orange-400 ring-2 ring-orange-200' : 'border-gray-200'}`}>
                 <a href={`/blog/${post.slug}`} class="block">
                   <div class="p-6">
+                    {isFeatured && (
+                      <div class="mb-3">
+                        <span class="inline-block bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                          ⭐ Featured
+                        </span>
+                      </div>
+                    )}
                     <div class="mb-4">
-                      <div class="w-full h-32 rounded-lg overflow-hidden mb-4 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                      <div class="w-full h-32 rounded-lg overflow-hidden mb-4 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center relative">
                         {
                           post.coverUrl ? (
                             <img
@@ -254,18 +127,19 @@ const formatCategory = (value: string | string[] | undefined) => {
                               class="w-full h-full object-cover"
                               loading="lazy"
                               decoding="async"
+                              onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';"
                             />
-                          ) : (
-                            <svg
-                              class="w-8 h-8 text-orange-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                          )
+                          ) : null
                         }
+                        <svg
+                          class="w-8 h-8 text-orange-600"
+                          style={post.coverUrl ? "display: none;" : ""}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
                       </div>
                       <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
                         {displayCategory}
@@ -290,6 +164,146 @@ const formatCategory = (value: string | string[] | undefined) => {
           })
         }
 
+        <!-- Blog Post 1 - Compliance (Dezember 2025) -->
+        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+          <a href="/blog/ki-compliance-2025" class="block">
+            <div class="p-6">
+              <div class="mb-4">
+                <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+                  KI-Compliance
+                </span>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
+                KI und Datenschutz in Deutschland: das Wichtigste ohne Juristendeutsch
+              </h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                DSGVO, AVV, Hosting und Zugriffsschutz, kurz und verständlich. Damit du weißt, worauf es vor dem Start wirklich ankommt.
+              </p>
+              <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>15 Min. Lesezeit</span>
+                <span>15. Dezember 2025</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog Post 2 - Teams (November 2025) -->
+        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+          <a href="/blog/ki-teams-vorbereiten" class="block">
+            <div class="p-6">
+              <div class="mb-4">
+                <div class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                  </svg>
+                </div>
+                <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                  Change Management
+                </span>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                Teams erfolgreich auf KI vorbereiten: Change Management Guide 2025
+              </h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                Praxiserprobter Leitfaden für erfolgreiches Change Management bei KI-Einführung. Mitarbeiterschulungen, Kommunikationsstrategien und bewährte Methoden.
+              </p>
+              <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>10 Min. Lesezeit</span>
+                <span>12. November 2025</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog Post 3 - Project Rescue (Oktober 2025) -->
+        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+          <a href="/blog/ki-projekte-retten" class="block">
+            <div class="p-6">
+              <div class="mb-4">
+                <div class="w-full h-32 bg-gradient-to-br from-red-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                  </svg>
+                </div>
+                <span class="text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded">
+                  Projektrettung
+                </span>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-red-600 transition-colors line-clamp-2">
+                KI Projekt retten: 3 Praxisbeispiele, wie es wieder stabil läuft
+              </h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                Wenn Automatisierung im Alltag nicht stabil läuft: typische Ursachen, schnelle Checks und ein klarer Plan, damit es genutzt wird.
+              </p>
+              <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>10 Min. Lesezeit</span>
+                <span>9. Oktober 2025</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog Post 4 - Integration 5 Schritte (September 2025) -->
+        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+          <a href="/blog/ki-integration-5-schritte" class="block">
+            <div class="p-6">
+              <div class="mb-4">
+                <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                </div>
+                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">
+                  Einstieg
+                </span>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
+                Automatisierung starten in 5 Schritten
+              </h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                Ein klarer Ablauf für den Einstieg, ohne Tool Chaos. Du siehst, wie du den richtigen Startpunkt wählst und Fortschritt messbar machst.
+              </p>
+              <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>8 Min. Lesezeit</span>
+                <span>15. September 2025</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog Post 5 - ROI (August 2025) -->
+        <article class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+          <a href="/blog/automatisierung-roi-maximieren" class="block">
+            <div class="p-6">
+              <div class="mb-4">
+                <div class="w-full h-32 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
+                  ROI
+                </span>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
+                ROI von Prozessautomatisierung: So rechnet es sich für Selbstständige und kleine Teams
+              </h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                Wie du Automatisierung so aufsetzt, dass sie sich wirklich rechnet: klare Rechenlogik, typische Zeitfresser und Beispiele für Selbstständige und kleine Teams in DACH.
+              </p>
+              <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>12 Min. Lesezeit</span>
+                <span>15. August 2025</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
       </div>
 
   <!-- Newsletter CTA -->
@@ -301,7 +315,7 @@ const formatCategory = (value: string | string[] | undefined) => {
       Hol dir ab und zu einen kurzen Impuls: konkrete Beispiele, klare Abläufe und Dinge, die dir wirklich Zeit sparen.
     </p>
     <!-- Newsletter Form -->
-    <form id="blog-newsletter-form" class="max-w-md mx-auto flex gap-3">
+    <form id="blog-newsletter-form" class="max-w-sm mx-auto flex gap-2">
       <div class="flex-1">
         <label for="blog-newsletter-email" class="sr-only">E-Mail-Adresse</label>
         <input
@@ -310,13 +324,13 @@ const formatCategory = (value: string | string[] | undefined) => {
           name="email"
           required
           autocomplete="email"
-          placeholder="E-Mail"
-          class="w-full px-4 py-3 border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm placeholder-gray-500"
+          placeholder="Deine E-Mail"
+          class="w-full px-3 py-2.5 border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm placeholder-gray-500"
         />
       </div>
       <button
         type="submit"
-        class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-6 py-3 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] font-medium text-sm transition-all duration-200 cta-button whitespace-nowrap"
+        class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-6 py-2.5 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] font-medium text-sm transition-all duration-200 cta-button whitespace-nowrap"
       >
         Abonnieren
       </button>
@@ -408,8 +422,11 @@ const formatCategory = (value: string | string[] | undefined) => {
       blogNewsletterForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const emailInput = document.getElementById('blog-newsletter-email');
-        const submitButton = blogNewsletterForm.querySelector('button[type="submit"]');
+        const emailInput = document.getElementById('blog-newsletter-email') as HTMLInputElement | null;
+        const submitButton = blogNewsletterForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+        if (!emailInput) return;
+
         const email = emailInput.value.trim();
 
         // Hide previous messages
@@ -420,7 +437,8 @@ const formatCategory = (value: string | string[] | undefined) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email || !emailRegex.test(email)) {
           if (blogNewsletterError) {
-            blogNewsletterError.querySelector('p').textContent = 'Bitte gib eine gültige E Mail Adresse ein.';
+            const errorText = blogNewsletterError.querySelector('p');
+            if (errorText) errorText.textContent = 'Bitte gib eine gültige E Mail Adresse ein.';
             blogNewsletterError.classList.remove('hidden');
           }
           return;
@@ -460,7 +478,8 @@ const formatCategory = (value: string | string[] | undefined) => {
         } catch (error) {
           console.error('Newsletter subscription error:', error);
           if (blogNewsletterError) {
-            blogNewsletterError.querySelector('p').textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+            const errorText = blogNewsletterError.querySelector('p');
+            if (errorText) errorText.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
             blogNewsletterError.classList.remove('hidden');
           }
         } finally {

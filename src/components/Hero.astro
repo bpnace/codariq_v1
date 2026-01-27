@@ -1,4 +1,6 @@
 ---
+import ArrowRight from './icons/ArrowRight.astro';
+
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -19,11 +21,11 @@ export interface Props {
 const {
   title = "Automatisiere deinen Alltag einfacher, als du denkst.",
   subtitle = "Wir bauen intelligente Automatisierungen, die E Mails, Leads, Dokumente und Routineaufgaben sauber verbinden. DSGVO konform, verständlich erklärt, in wenigen Wochen spürbar.",
-  primaryCTA = "Kostenloses Erstgespräch",
-  secondaryCTA = "Beispiele ansehen",
+  primaryCTA = "Jetzt Termin buchen",
+  secondaryCTA = "Interaktives Quiz starten",
   primaryCTALink = "#final-cta",
   secondaryCTALink = "#benefits",
-  heroImage = "/images/hero/hero1.webp",
+  heroImage = "/images/hero/hero2.webp",
   primaryTextClass = "text-gray-900",
   secondaryTextClass = "text-white",
   subtextClass = "text-white",
@@ -82,42 +84,18 @@ const {
           >
             <span class="flex flex-wrap items-center justify-center gap-2">
               <span>{primaryCTA}</span>
-              <svg
-                class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <title>Arrow Right Icon</title>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
+              <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </a>
 
           <a
             href={secondaryCTALink}
-            class={`group bg-white/10 ${secondaryTextClass} border border-white/30 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-white/15 hover:border-white/50 transition-all duration-200 font-bold text-base sm:text-lg backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/20 w-full sm:w-80 md:w-96 text-center cta-button`}
+            class={`group bg-white/10 ${secondaryTextClass} border border-white/30 px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full hover:bg-white/15 hover:border-white/50 transition-all duration-200 font-bold text-base sm:text-lg backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/20 w-full sm:w-80 md:w-96 text-center cta-button cta-secondary-prominent`}
             aria-label={secondaryCTA}
           >
             <span class="flex flex-wrap items-center justify-center gap-2">
               <span>{secondaryCTA}</span>
-              <svg
-                class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <title>Arrow Right Icon</title>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
+              <ArrowRight class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </a>
         </div>
@@ -129,6 +107,15 @@ const {
         >
           Wir prüfen gemeinsam, welche Lösung in deinem Unternehmen am schnellsten Wirkung zeigt.
         </p>
+
+        <div
+          class="hero-scroll-cue hero-animate"
+          style="animation-delay: 1.1s"
+          aria-hidden="true"
+        >
+          <span class="hero-scroll-label">Scroll</span>
+          <span class="hero-scroll-arrow"></span>
+        </div>
       </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ describe("calculateResults", () => {
       q9_time_waste: "critical",
       q10_budget: "premium",
       q7_urgency: "asap",
-      q6_goal: "done_for_you",
+      q6_goal: "ready_to_use",
       q5_use_cases: ["customer_support", "invoicing"],
     };
 
@@ -46,7 +46,9 @@ describe("calculateResults", () => {
     expect(results.roiEstimate).toBe(200);
     expect(results.productFit).toBe("workshop");
     expect(
-      results.recommendations.some((rec) => rec.title.includes("Einstiegs-Workshop"))
+      results.recommendations.some((rec) =>
+        rec.title.includes("Einstiegs-Workshop")
+      )
     ).toBe(true);
   });
 });

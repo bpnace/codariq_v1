@@ -45,32 +45,32 @@ export function isStepValid(step: QuizStep, state: QuizState): boolean {
 }
 
 export function calculateResults(answers: QuizAnswers): QuizResults {
-  const motivationScores = {
+  const motivationScores: Record<string, number> = {
     very_motivated: 100,
     motivated: 75,
     low_motivated: 40,
     not_motivated: 10,
   };
-  const experienceScores = {
+  const experienceScores: Record<string, number> = {
     beginner: 30,
     novice: 50,
     user: 75,
     advanced: 90,
   };
-  const timeWasteScores = {
+  const timeWasteScores: Record<string, number> = {
     low: 30,
     medium: 60,
     high: 85,
     critical: 100,
   };
-  const budgetScores = {
+  const budgetScores: Record<string, number> = {
     free: 20,
     starter: 40,
     learning: 70,
     intensive: 90,
     premium: 100,
   };
-  const urgencyScores = {
+  const urgencyScores: Record<string, number> = {
     asap: 100,
     soon: 70,
     no_rush: 30,
@@ -99,7 +99,7 @@ export function calculateResults(answers: QuizAnswers): QuizResults {
     (motivation + experience + timeWaste + budget + urgency) / 5
   );
 
-  const hoursLookup = {
+  const hoursLookup: Record<string, number> = {
     low: 2,
     medium: 5,
     high: 10,
@@ -132,7 +132,7 @@ export function calculateResults(answers: QuizAnswers): QuizResults {
 }
 
 function determineProductFit(goalAnswer: string, budgetScore: number): string {
-  if (goalAnswer === "done_for_you" && budgetScore >= 90) {
+  if (goalAnswer === "ready_to_use" && budgetScore >= 90) {
     return "premium";
   }
   if (goalAnswer === "learn_implement" && budgetScore >= 70) {

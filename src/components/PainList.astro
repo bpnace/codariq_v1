@@ -33,12 +33,12 @@ const iconMeta: Record<string, { title: string; d: string }> = {
 
 const defaultProblems = [
   {
-    title: "Nachrichten Postfächer",
+    title: "Nachfassen und Termine im Recruiting",
     description:
-      "Das Postfach wird nie leer. Standardfragen wiederholen sich. Kunden warten, während das Team nur noch reagiert.",
-    outcome: "Schnellere Antworten, weniger Druck im Team.",
+      "Du jagst Kandidaten und Entscheider hinterher. Status Updates und Terminabstimmung ziehen sich und fressen jeden Tag Zeit.",
+    outcome: "Weniger Nachhalten, schnellere Zusagen, klarer Überblick.",
     solution:
-      "KI sortiert, priorisiert und erstellt Antwortentwürfe, auf Wunsch mit Ticketanlage.",
+      "Automationen erinnern ans Nachfassen, schicken Status Updates, schlagen Termine vor und dokumentieren alles sauber.",
     icon: "mail",
   },
   {
@@ -72,7 +72,7 @@ const defaultProblems = [
 
 const {
   title = "Kommt dir das bekannt vor?",
-  subtitle = "Wenn Abläufe manuell laufen, zahlen Sie jeden Tag mit Zeit, Nerven und Umsatz. Wir bringen Ordnung rein und automatisieren genau dort, wo es im Alltag am meisten entlastet. DSGVO konform, verständlich, ohne neues IT Team.",
+  subtitle = "Wenn Abläufe manuell laufen, zahlst du jeden Tag mit Zeit und Nerven. Wir bringen Ordnung rein und automatisieren dort, wo es im Alltag wirklich entlastet. DSGVO konform, verständlich, ohne neues IT Team.",
   closingText = "Wir starten dort, wo der Aufwand heute am größten ist, und bauen dann Schritt für Schritt weiter aus, ohne euren Betrieb auf den Kopf zu stellen.",
   problems = defaultProblems,
 } = Astro.props;
@@ -116,8 +116,11 @@ const {
               <div class="flip-inner">
                 {/* Front */}
                 <label
-                  for={`pain-card-${index}`}
+                  data-flip-toggle={`pain-card-${index}`}
                   class="flip-face flip-front bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col cursor-pointer"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="false"
                 >
                   {/* Icon */}
                   <div class="mb-3 sm:mb-4">
@@ -167,8 +170,11 @@ const {
 
                 {/* Back */}
                 <label
-                  for={`pain-card-${index}`}
+                  data-flip-toggle={`pain-card-${index}`}
                   class="flip-face flip-back bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col text-center cursor-pointer"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="false"
                 >
                   <div class="mb-3 sm:mb-4">
                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-50 flex items-center justify-center">
@@ -216,6 +222,38 @@ const {
     </p>
   </div>
 </section>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".flip-card").forEach((card) => {
+      const toggle = card.querySelector(".flip-toggle");
+      if (!(toggle instanceof HTMLInputElement)) return;
+      const triggers = card.querySelectorAll("[data-flip-toggle]");
+      const updateAria = () => {
+        triggers.forEach((trigger) => {
+          if (trigger instanceof HTMLElement) {
+            trigger.setAttribute("aria-pressed", String(toggle.checked));
+          }
+        });
+      };
+      const handleToggle = (event) => {
+        event.preventDefault();
+        toggle.checked = !toggle.checked;
+        updateAria();
+      };
+      triggers.forEach((trigger) => {
+        trigger.addEventListener("click", handleToggle);
+        trigger.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            handleToggle(event);
+          }
+        });
+      });
+      updateAria();
+    });
+  });
+</script>
 
 <style>
   .flip-card {

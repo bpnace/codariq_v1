@@ -106,17 +106,6 @@ const {
       duration: "",
       icon: "included",
     },
-    {
-      title: "Live Dashboard",
-      subtitle: "Verfügbar ab Q2 2026",
-      description:
-        "Sieh, was die Automatisierung bringt: Zeitersparnis, weniger Tickets, schnellere Antworten und kürzere Durchlaufzeiten.",
-      features: [],
-      price: "",
-      duration: "",
-      icon: "dashboard",
-      comingSoon: true,
-    },
   ],
 } = Astro.props;
 ---
@@ -144,23 +133,28 @@ const {
     >
       {
         benefits.map((benefit, index) => {
+          // Theme configuration map for cleaner logic
+          const THEME_CONFIG = {
+            blue: {
+              cardStyle: "background: linear-gradient(135deg, var(--color-pack-blue), var(--color-neutral-gray-900)); border-color: var(--color-pack-blue);",
+              iconWrapperStyle: "background: var(--color-neutral-gray-100);",
+              iconWrapperClass: "bg-white/10"
+            },
+            default: {
+              cardStyle: "background: linear-gradient(135deg, var(--color-brand-light), var(--color-brand-dark)); border-color: var(--color-brand-light);",
+              iconWrapperStyle: undefined,
+              iconWrapperClass: "bg-white/10"
+            }
+          };
+
           const isTeamTier = benefit.colorTheme === "blue" || benefit.icon === "growth";
+          const theme = benefit.highlight ? (isTeamTier ? "blue" : "default") : null;
 
-          const teamGradient =
-            "linear-gradient(135deg, var(--color-pack-blue), var(--color-neutral-gray-900))";
-          const highlightGradient =
-            "linear-gradient(135deg, var(--color-brand-light), var(--color-brand-dark))";
-
-          const cardStyle = benefit.highlight
-            ? isTeamTier
-              ? `background: ${teamGradient}; border-color: var(--color-pack-blue);`
-              : `background: ${highlightGradient}; border-color: var(--color-brand-light);`
-            : undefined;
-
-          const iconWrapperStyle = isTeamTier
-            ? "background: var(--color-neutral-gray-100);"
-            : undefined;
-          const iconWrapperThemeClasses = benefit.highlight ? "bg-white/10" : "bg-gray-100";
+          const cardStyle = theme ? THEME_CONFIG[theme].cardStyle : undefined;
+          const iconWrapperStyle = theme ? THEME_CONFIG[theme].iconWrapperStyle : undefined;
+          const iconWrapperThemeClasses = benefit.highlight
+            ? (theme ? THEME_CONFIG[theme].iconWrapperClass : "bg-white/10")
+            : "bg-gray-100";
 
           return (
             <div
@@ -377,13 +371,13 @@ const {
     <div class="mt-12 sm:mt-16 md:mt-20">
       <!-- Additional Services -->
       <div class="max-w-5xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="grid grid-cols-1 gap-6 mb-12">
           {
-            additionalServices.map((service, index) => {
+            additionalServices.map((service) => {
               // Included features card - Enhanced prominence
               if (service.icon === "included") {
                 return (
-                  <div class="md:col-span-2">
+                  <div>
                     <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto text-center">
                       <h4 class="content-title mb-2">{service.title}</h4>
                       <p class="content-subtitle max-w-3xl mx-auto">
@@ -432,158 +426,6 @@ const {
                 );
               }
 
-              // Special design for Live-Dashboard with waitlist form
-              if (service.title === "Live-Dashboard") {
-                return (
-                  <div class="hidden md:block bg-white rounded-2xl p-6 shadow-sm border border-gray-200 h-full flex flex-col">
-                    {/* Icon & Title */}
-                    <div class="flex items-center gap-3 mb-3">
-                      <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg
-                          class="w-5 h-5 text-purple-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <title>Live Dashboard Icon</title>
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-lg font-black text-gray-900">
-                          {service.title}
-                        </h4>
-                        <span class="text-sm font-medium text-gray-500">
-                          {service.subtitle}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p class="text-sm sm:text-base font-medium text-gray-600 mb-4 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    {/* Dashboard Screenshot Gallery */}
-                    <div class="mb-4 relative overflow-hidden rounded-lg bg-gray-50 border border-gray-200" id="dashboard-gallery">
-                      {/* Gallery Images */}
-                      <div class="relative w-full" style="aspect-ratio: 16/10;">
-                        <img
-                          src="/images/dashboard/1.webp"
-                          alt="Dashboard Analytics - Zeitersparnis und Automatisierungsrate"
-                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500"
-                          data-slide="0"
-                          loading="lazy"
-                        />
-                        <img
-                          src="/images/dashboard/2.webp"
-                          alt="ROI Prognose - Automatisierungsvorteile und Break-Even Analyse"
-                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500 opacity-0"
-                          data-slide="1"
-                          loading="lazy"
-                        />
-                        <img
-                          src="/images/dashboard/3.webp"
-                          alt="Aufgaben Management - Zeitersparnis pro Prozess"
-                          class="dashboard-slide absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-500 opacity-0"
-                          data-slide="2"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Waitlist Form */}
-                    <div class="mt-auto">
-                      <form id="dashboard-waitlist-form" class="flex gap-2">
-                        <input
-                          type="email"
-                          id="dashboard-email"
-                          name="email"
-                          placeholder="E-Mail-Adresse"
-                          required
-                          class="flex-1 px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-all duration-200"
-                        />
-                        <button
-                          type="submit"
-                          class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-4 py-2 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 text-base shadow-lg cta-button whitespace-nowrap"
-                          aria-label="Zur Warteliste für KI-Dashboard anmelden"
-                        >
-                          Beitreten
-                        </button>
-                      </form>
-
-                        {/* Success Message */}
-                        <div
-                          id="dashboard-success"
-                          class="hidden mt-2 p-3 bg-green-50 border border-green-200 rounded-lg"
-                        >
-                          <div class="flex items-center gap-2">
-                            <svg
-                              class="w-4 h-4 text-green-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                            <div>
-                              <p class="font-medium text-green-800 text-sm">
-                                Erfolgreich eingetragen!
-                              </p>
-                              <p class="text-green-600 text-xs">
-                                Du bekommst gleich eine Bestätigungs Mail
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Error Message */}
-                        <div
-                          id="dashboard-error"
-                          class="hidden mt-2 p-3 bg-red-50 border border-red-200 rounded-lg"
-                        >
-                          <div class="flex items-center gap-2">
-                            <svg
-                              class="w-4 h-4 text-red-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <div>
-                              <p class="font-medium text-red-800 text-sm">
-                                Fehler bei der Anmeldung
-                              </p>
-                              <p
-                                id="dashboard-error-text"
-                                class="text-red-600 text-xs"
-                              >
-                                Bitte versuchen Sie es erneut
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-              }
-
               return null;
             })
           }
@@ -592,292 +434,3 @@ const {
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Dashboard Gallery Slideshow
-    const gallery = document.getElementById("dashboard-gallery");
-    if (gallery) {
-      const slides = gallery.querySelectorAll(".dashboard-slide") as NodeListOf<HTMLElement>;
-      let currentSlide = 0;
-      let slideInterval: number | null = null;
-      let isPaused = false;
-
-      // Function to show a specific slide
-      function showSlide(index: number): void {
-        // Hide all slides
-        slides.forEach((slide) => {
-          slide.style.opacity = "0";
-          slide.style.pointerEvents = "none";
-        });
-
-        // Show current slide
-        slides[index].style.opacity = "1";
-        slides[index].style.pointerEvents = "auto";
-        currentSlide = index;
-      }
-
-      // Function to go to next slide
-      function nextSlide(): void {
-        const next = (currentSlide + 1) % slides.length;
-        showSlide(next);
-      }
-
-      // Start auto-advance
-      function startSlideshow(): void {
-        if (!slideInterval && !isPaused) {
-          slideInterval = window.setInterval(nextSlide, 4000);
-        }
-      }
-
-      // Stop auto-advance
-      function stopSlideshow(): void {
-        if (slideInterval) {
-          clearInterval(slideInterval);
-          slideInterval = null;
-        }
-      }
-
-      // Pause on hover
-      gallery.addEventListener("mouseenter", () => {
-        isPaused = true;
-        stopSlideshow();
-      });
-
-      // Resume on mouse leave
-      gallery.addEventListener("mouseleave", () => {
-        isPaused = false;
-        startSlideshow();
-      });
-
-      // Respect prefers-reduced-motion
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (!prefersReducedMotion.matches) {
-        // Initialize slideshow
-        showSlide(0);
-        startSlideshow();
-      } else {
-        // Just show first slide without animation
-        showSlide(0);
-      }
-    }
-
-    // Dashboard Waitlist Form
-    const dashboardForm = document.getElementById(
-      "dashboard-waitlist-form",
-    ) as HTMLFormElement | null;
-    const emailInput = document.getElementById(
-      "dashboard-email",
-    ) as HTMLInputElement | null;
-    const successMessage = document.getElementById(
-      "dashboard-success",
-    ) as HTMLElement | null;
-    const errorMessage = document.getElementById(
-      "dashboard-error",
-    ) as HTMLElement | null;
-    const errorText = document.getElementById(
-      "dashboard-error-text",
-    ) as HTMLElement | null;
-    const submitButton = dashboardForm?.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement | null;
-
-    if (
-      !dashboardForm ||
-      !emailInput ||
-      !successMessage ||
-      !errorMessage ||
-      !submitButton ||
-      !errorText
-    ) {
-      console.warn("KI-Dashboard waitlist form elements not found");
-      return;
-    }
-
-    // Email validation function
-    function isValidEmail(email: string): boolean {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-
-    // Hide messages function
-    function hideMessages(): void {
-      if (successMessage) successMessage.classList.add("hidden");
-      if (errorMessage) errorMessage.classList.add("hidden");
-    }
-
-    // Show loading state
-    function setLoading(loading: boolean): void {
-      if (!submitButton) return;
-
-      if (loading) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Wird gesendet...";
-      } else {
-        submitButton.disabled = false;
-        submitButton.textContent = "Auf die Liste";
-      }
-    }
-
-    // Handle form submission
-    dashboardForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const email = emailInput.value.trim();
-
-      // Hide previous messages
-      hideMessages();
-
-      // Validate email
-      if (!email) {
-        errorMessage.classList.remove("hidden");
-        errorText.textContent = "Bitte gib eine E Mail Adresse ein";
-        emailInput.focus();
-        return;
-      }
-
-      if (!isValidEmail(email)) {
-        errorMessage.classList.remove("hidden");
-        errorText.textContent =
-          "Bitte gib eine gültige E Mail Adresse ein";
-        emailInput.focus();
-        return;
-      }
-
-      // Set loading state
-      setLoading(true);
-
-      try {
-        // Send data to server-side API endpoint
-        const response = await fetch("/api/dashboard-waitlist", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            timestamp: new Date().toISOString(),
-            userAgent: navigator.userAgent,
-          }),
-        });
-
-        // Parse the response content
-        const responseData = await response.text();
-        let responseJson: any = {};
-
-        try {
-          responseJson = JSON.parse(responseData);
-        } catch (e) {
-          // If it's not JSON, treat as plain text
-          responseJson = { message: responseData };
-        }
-
-        // Handle different response scenarios based on status and HTTP code
-        if (
-          response.status === 201 &&
-          responseJson.status === "ok" &&
-          responseJson.action === "subscribed"
-        ) {
-          // HTTP 201 - Success: Email added to waitlist
-          successMessage.classList.remove("hidden");
-          dashboardForm.reset();
-
-          // Auto-hide success message after 5 seconds
-          setTimeout(() => {
-            successMessage.classList.add("hidden");
-          }, 5000);
-        } else if (
-          response.status === 200 &&
-          responseJson.status === "ok" &&
-          responseJson.action === "already_subscribed"
-        ) {
-          // HTTP 200 - Already exists: Email already on waitlist
-          errorMessage.classList.remove("hidden");
-          errorText.textContent =
-            "Diese E Mail Adresse ist schon eingetragen.";
-
-          // Auto-hide error message after 5 seconds
-          setTimeout(() => {
-            errorMessage.classList.add("hidden");
-          }, 5000);
-        } else if (
-          response.status === 400 &&
-          responseJson.status === "error" &&
-          responseJson.code === "MISSING_EMAIL"
-        ) {
-          // HTTP 400 - Missing email
-          errorMessage.classList.remove("hidden");
-          errorText.textContent = "E Mail Adresse ist erforderlich.";
-
-          // Auto-hide error message after 5 seconds
-          setTimeout(() => {
-            errorMessage.classList.add("hidden");
-          }, 5000);
-        } else if (!response.ok) {
-          // Handle other HTTP errors
-          let errorMsg = responseJson.message || response.statusText;
-
-          // Handle specific error cases
-          if (
-            typeof responseData === "string" &&
-            responseData.includes("Authorization data is wrong")
-          ) {
-            errorMsg =
-              "Webhook Fehler. Bitte melde dich bei uns.";
-          }
-
-          throw new Error(`HTTP ${response.status}: ${errorMsg}`);
-        } else if (response.ok && responseJson.status === "ok") {
-          // Handle any other successful responses that we didn't explicitly handle above
-          successMessage.classList.remove("hidden");
-          dashboardForm.reset();
-
-          // Auto-hide success message after 5 seconds
-          setTimeout(() => {
-            successMessage.classList.add("hidden");
-          }, 5000);
-        } else {
-          // Unexpected response format only for non-successful cases
-          throw new Error(
-            responseJson.message || "Unbekannte Antwort vom Server.",
-          );
-        }
-      } catch (error: any) {
-        console.error("Error submitting dashboard waitlist form:", error);
-        errorMessage.classList.remove("hidden");
-        errorText.textContent =
-          error.message ||
-          "Es ist ein Fehler passiert. Bitte versuch es später erneut.";
-      } finally {
-        // Reset loading state
-        setLoading(false);
-      }
-    });
-
-    // Clear messages when user starts typing
-    emailInput.addEventListener("input", function () {
-      if (
-        !successMessage.classList.contains("hidden") ||
-        !errorMessage.classList.contains("hidden")
-      ) {
-        hideMessages();
-      }
-    });
-  });
-</script>
-
-<style>
-  /* Consistent CTA button animation */
-  .cta-button {
-    transform-origin: center;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  .cta-button:hover {
-    transform: scale(1.02);
-  }
-</style>

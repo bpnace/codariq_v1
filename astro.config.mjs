@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import { EnumChangefreq } from "sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
@@ -27,31 +28,37 @@ export default defineConfig({
         // Newest blog post (ki-projekte-retten) - just published
         if (url.includes('/blog/ki-projekte-retten')) {
           item.lastmod = new Date('2025-01-09').toISOString();
-          item.changefreq = 'monthly';
+          item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.9;
         }
         // Other blog posts get higher priority and more frequent updates
         else if (url.includes('/blog/') && !url.endsWith('/blog')) {
-          item.lastmod = new Date('2025-01-01').toISOString();
-          item.changefreq = 'monthly';
+          item.lastmod = now.toISOString();
+          item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.8;
         }
         // Blog index page (updated with newest post)
         else if (url.endsWith('/blog')) {
-          item.lastmod = new Date('2025-01-09').toISOString();
-          item.changefreq = 'weekly';
+          item.lastmod = now.toISOString();
+          item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 0.7;
         }
         // Homepage (recently updated with pricing changes)
         else if (url === 'https://codariq.de/' || url === 'https://codariq.de') {
           item.lastmod = now.toISOString();
-          item.changefreq = 'weekly';
+          item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 1.0;
+        }
+        // Automation landing pages and quiz - high priority conversion pages
+        else if (url.includes('/automatisierung-') || url.includes('/automatisierungs-check')) {
+          item.lastmod = now.toISOString();
+          item.changefreq = EnumChangefreq.WEEKLY;
+          item.priority = 0.8;
         }
         // Other pages (legal, FAQ, etc.)
         else {
-          item.lastmod = new Date('2025-01-01').toISOString();
-          item.changefreq = 'monthly';
+          item.lastmod = now.toISOString();
+          item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.5;
         }
 

@@ -282,12 +282,6 @@ html {
   will-change: transform, opacity;
 }
 
-.animate-element {
-  opacity: 0;
-  animation: elementSlideUp 0.6s ease-out forwards;
-  will-change: transform, opacity;
-}
-
 /* Intersection Observer based animations for better performance */
 .animate-on-scroll {
   opacity: 0;
@@ -335,6 +329,10 @@ html {
 
 /* ===== Hero Section Styles ===== */
 
+#hero-parallax-container {
+  z-index: 1;
+}
+
 /* Smooth background transitions for header */
 header {
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -361,6 +359,69 @@ header.nav-scrolled {
 .hero-animate {
   opacity: 0;
   animation: heroFadeInUp 0.8s ease-out forwards;
+}
+
+.cta-secondary-prominent {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
+
+.cta-secondary-prominent:hover {
+  background: rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+.hero-scroll-cue {
+  margin-top: 1.2rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+}
+
+.hero-scroll-arrow {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.hero-scroll-arrow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.hero-scroll-cue {
+  animation:
+    heroFadeInUp 0.8s ease-out forwards,
+    heroScrollFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes heroScrollFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
 }
 
 /* Parallax performance optimization */

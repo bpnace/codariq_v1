@@ -35,6 +35,7 @@ pnpm-debug.log*
 .env.production
 .env.local
 .playwright-mcp
+test-results/
 
 # macOS-specific files
 .DS_Store
