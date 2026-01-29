@@ -6,6 +6,13 @@ export interface Props {
   description?: string;
   keywords?: string;
   ogImage?: string;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    section?: string;
+    tags?: string[];
+  };
   forceNavSolid?: boolean;
 }
 
@@ -14,6 +21,7 @@ const {
   description = "Wir bauen KI Agenten, die Support, Backoffice und HR entlasten – damit Sie mehr Zeit für Kunden und Entscheidungen haben",
   keywords = "KI Automatisierung Selbstständige, kleine Teams automatisieren, Freelancer KI Tools, bis 50 Mitarbeiter Automatisierung, Prozesse automatisieren kleine Teams, Support entlasten Selbstständige, Backoffice automatisieren Freelancer, E-Mail Automatisierung, DSGVO konform, Solopreneur Automatisierung",
   ogImage,
+  article,
   forceNavSolid = false,
 } = Astro.props;
 // Normalize canonical URL: remove trailing slashes, .html extension, and query params
@@ -27,6 +35,42 @@ if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
 const canonicalURL = new URL(pathname, Astro.site ?? "https://codariq.de");
+const canonicalHref =
+  canonicalURL.pathname === "/" ? canonicalURL.origin : canonicalURL.toString();
+const resolvedOgImage = ogImage
+  ? ogImage.startsWith("http")
+    ? ogImage
+    : `${canonicalURL.origin}${ogImage}`
+  : `${canonicalURL.origin}/images/hero/hero2.webp`;
+const isArticle = Boolean(article);
+const ogType = isArticle ? "article" : "website";
+const articleAuthor = article?.author || "Codariq Team";
+const articleSchema = isArticle
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: title,
+      description,
+      image: [resolvedOgImage],
+      datePublished: article?.publishedTime,
+      dateModified: article?.modifiedTime || article?.publishedTime,
+      author: {
+        "@type": "Person",
+        name: articleAuthor,
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalHref,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Codariq",
+        url: canonicalURL.origin,
+      },
+      articleSection: article?.section,
+      keywords: article?.tags?.length ? article.tags.join(", ") : undefined,
+    }
+  : null;
 const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 ---
 
@@ -68,13 +112,13 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       content="/android-chrome-192x192.png"
     />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={canonicalHref} />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content="Codariq" />
+    <meta name="author" content={article?.author ?? "Codariq"} />
     <meta
       name="keywords"
       content={keywords}
@@ -84,36 +128,44 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
     <meta name="revisit-after" content="7 days" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalHref} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta
       property="og:image"
-      content={ogImage
-        ? ogImage.startsWith("http")
-          ? ogImage
-          : `${canonicalURL.origin}${ogImage}`
-        : `${canonicalURL.origin}/images/hero/hero2.webp`}
+      content={resolvedOgImage}
     />
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
     <meta property="og:image:type" content="image/webp" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="Codariq" />
+    {isArticle && article?.publishedTime && (
+      <meta property="article:published_time" content={article.publishedTime} />
+    )}
+    {isArticle && article?.modifiedTime && (
+      <meta property="article:modified_time" content={article.modifiedTime} />
+    )}
+    {isArticle && article?.author && (
+      <meta property="article:author" content={article.author} />
+    )}
+    {isArticle && article?.section && (
+      <meta property="article:section" content={article.section} />
+    )}
+    {isArticle &&
+      article?.tags?.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:url" content={canonicalHref} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content={ogImage
-        ? ogImage.startsWith("http")
-          ? ogImage
-          : `${canonicalURL.origin}${ogImage}`
-        : `${canonicalURL.origin}/images/hero/hero2.webp`}
+      content={resolvedOgImage}
     />
     <meta
       name="twitter:image:alt"
@@ -509,8 +561,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         "name": "Kostenlose KI-Automatisierung Strategieberatung",
         "text": "Erhalten Sie eine kostenlose 45-minütige Strategieberatung zur Identifikation Ihrer besten KI-Automatisierungsmöglichkeiten. Unverbindlich und ohne Risiko.",
         "category": "https://www.wikidata.org/wiki/Q186386",
-        "datePosted": "2024-12-28",
-        "expires": "2025-12-31",
+        "datePosted": "2026-01-29",
+        "expires": "2026-12-31",
         "spatialCoverage": {
           "@type": "Country",
           "name": "Deutschland"
@@ -553,6 +605,13 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         "serviceType": "Business Automation and AI Services"
       }
     </script>
+
+    {articleSchema && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(articleSchema)}
+      />
+    )}
 
     <!-- Cookiebot Consent Management -->
     <script
@@ -1143,7 +1202,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           ) {
             // Import form helpers dynamically
             const { showFieldError, hideFieldError, setButtonLoading, submitFormData } =
-              await import('/src/utils/formHelpers.ts');
+              await import("../utils/formHelpers.ts");
 
             footerNewsletterForm.addEventListener("submit", async function (e) {
               e.preventDefault();
@@ -1325,7 +1384,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           });
 
           // Initialize scroll effects (extracted to separate module)
-          const { initAllScrollEffects } = await import('/src/scripts/scrollEffects.ts');
+          const { initAllScrollEffects } = await import("../scripts/scrollEffects.ts");
           initAllScrollEffects();
         });
       </script>

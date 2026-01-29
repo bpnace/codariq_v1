@@ -501,8 +501,8 @@ const init = () => {
   function saveState() {
     try {
       localStorage.setItem(storageKey, JSON.stringify(state));
-    } catch (error) {
-      console.error("Quiz state save failed", error);
+    } catch {
+      // Ignore save errors (e.g., storage unavailable).
     }
   }
 
@@ -927,8 +927,7 @@ const init = () => {
       elements.next.disabled = false;
       elements.next.textContent = "Auswertung anfordern";
       return;
-    } catch (error) {
-      console.error(error);
+    } catch {
       setError(
         "Es gab ein Problem beim Senden. Bitte versuche es erneut."
       );
@@ -994,8 +993,8 @@ const init = () => {
 
   try {
     localStorage.removeItem(storageKey);
-  } catch (error) {
-    console.error("Quiz state reset failed", error);
+  } catch {
+    // Ignore reset errors (e.g., storage unavailable).
   }
   renderStep();
 };

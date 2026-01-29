@@ -32,8 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const data = await response.text();
     return new Response(data, { status: 200 });
-  } catch (error) {
-    console.error('Newsletter API error:', error);
+  } catch {
     return new Response(JSON.stringify({ error: 'Internal error' }), {
       status: 500,
     });

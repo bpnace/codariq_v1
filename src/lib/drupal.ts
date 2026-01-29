@@ -175,8 +175,7 @@ export async function fetchDrupalPosts(limit = 6): Promise<DrupalPost[]> {
     const data: DrupalApiResponse = await res.json();
     const included = data?.included || [];
     return (data?.data || []).map((node) => mapNode(node, included));
-  } catch (err) {
-    console.error("[Drupal] Failed to fetch posts:", err);
+  } catch {
     return [];
   }
 }
@@ -197,8 +196,7 @@ export async function fetchDrupalPostBySlug(
 
     const included = data?.included || [];
     return mapNode(node, included);
-  } catch (err) {
-    console.error("[Drupal] Failed to fetch post by slug:", err);
+  } catch {
     const posts = await fetchDrupalPosts(50);
     return posts.find((p) => p.slug === slug) || null;
   }

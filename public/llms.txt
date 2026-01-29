@@ -1,144 +1,99 @@
-# Codariq - KI-Automatisierung für den deutschen Mittelstand
+# Codariq - KI-Automatisierung für Selbstständige und kleine Teams (bis 50 Personen)
 
 ## Über Codariq
-Codariq ist ein führender Anbieter von KI-Automatisierungslösungen, speziell entwickelt für deutsche Mittelstandsunternehmen. Wir helfen Unternehmen dabei, ihre Effizienz um durchschnittlich 40% zu steigern und repetitive Aufgaben zu automatisieren.
+Codariq ist spezialisiert auf KI-Automatisierung für Selbstständige und kleine Teams im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups und Übergaben zwischen Tools. DSGVO-konform, verständlich erklärt und praxisnah umgesetzt.
 
-## Unsere Service-Pakete
+## Service-Pakete
 
 ### AI Readiness Check (Kostenlos)
-- Dauer: 30 Minuten
-- Kostenlose Erstberatung zur Identifikation der besten KI-Automatisierungsmöglichkeiten
-- ROI-Kalkulation und Machbarkeitsstudie
-- Strategische Empfehlungen für KI-Implementierung
+- Dauer: ca. 30 Minuten
+- Kurze Potenzialanalyse und Startpunkt definieren
+- Klarer nächster Schritt statt Tool Overload
 
-### Automation Pilot (€3.500 - €12.500)
-- Dauer: 4-12 Wochen
-- Vollständige Entwicklung und Implementierung einer maßgeschneiderten KI-Automatisierungslösung
-- Custom KI-Entwicklung und Systemintegration
-- Testing, Qualitätssicherung und Go-Live Support
+### Starter Paket (ab 399 € einmalig)
+- Ein klar umrissener Ablauf für Selbstständige
+- Beispiele: E Mail Workflow, Dokumentenablage, einfache Routinen
+- DSGVO-konforme Umsetzung und verständliche Übergabe
 
-### Team Training & AI Readiness (ab €2.500)
-- Dauer: 1-3 Tage
-- Komplettpaket aus AI Readiness Check und professionellem Team Training
-- Mitarbeiterschulungen und Best-Practice Workshops
-- Individuelle Betreuung und Strategieberatung
+### Team Paket (ab 1.499 € einmalig)
+- Mehrere Abläufe für kleine Teams (bis 10 Personen)
+- Übergaben zwischen Tools, Status Updates, Backoffice
+- Saubere Prozesse ohne Brüche
 
-## Zusätzliche Services
+### Wachstums Paket (ab 3.499 € einmalig)
+- Größerer Bereich für Teams bis 50 Personen
+- Stabiler Betrieb, Skalierung und klare Rollen
 
-### Vertiefungstraining (€899 - €2.200)
-- Dauer: 6 Stunden
-- Umfassende Schulung für den optimalen Umgang mit KI-Automatisierungslösungen
-- Best-Practice Workshops und individuelle Betreuung
-- Schulungsunterlagen und Zertifizierung
-
-### KI-Dashboard (auf Anfrage) [Coming Soon]
-- Zentrales Cockpit für Automatisierung & Strategie als SaaS-Lösung
-- Übersichtliche KPI-Dashboards
-- Monitoring der Automatisierungen
-- Kontinuierliche Optimierung
-
-### Advisory Retainer (€499 - €1.500 pro Monat)
-- Kontinuierliche strategische Beratung und Optimierung
-- Performance Monitoring und kontinuierliche Verbesserung
-- Priority Support und regelmäßige Strategiemeetings
+### Optional: Betreuung (ab 99 bis 199 € pro Monat)
+- Laufende Optimierung, Monitoring und Anpassungen
+- Kurze Abstimmungen und planbare Weiterentwicklung
 
 ## Technische Kapazitäten
 
 ### Integration & Migration
 - API-Konnektoren für bestehende Systeme
-- Legacy-System Integration ohne Betriebsunterbrechung
-- Cloud-Migration und Modernisierung
-- DSGVO-Konform - Vollständige DSGVO- und Sicherheits-Compliance
+- Integration ohne Betriebsunterbrechung
+- DSGVO-konforme Datenflüsse und Hosting in der EU
 
 ## Technische Expertise
 
 ### KI-Technologien
 - Natural Language Processing (NLP) für deutsche Sprache
-- Machine Learning Algorithmen für Mustererkennung
-- Computer Vision für Dokumentenanalyse
-- Robotic Process Automation (RPA)
-- Generative AI für Content-Erstellung
+- Automatisierung von Workflows und Dokumenten
+- Klassifikation, Extraktion und Zusammenfassungen
 
 ### Plattformen und Tools
-- Python-basierte KI-Entwicklung
-- TensorFlow und PyTorch für Deep Learning
-- REST API Entwicklung
-- Cloud-native Architekturen (AWS, Azure, Google Cloud)
-- Microservices und containerisierte Lösungen
+- API-Integration (REST)
+- Cloud-native Architekturen
+- Sichere Automatisierungs-Orchestrierung
 
 ### Compliance und Sicherheit
 - DSGVO-konforme Datenverarbeitung
-- ISO 27001 Sicherheitsstandards
-- Ende-zu-Ende Verschlüsselung
-- Hosting in deutschen Rechenzentren
-- Regelmäßige Sicherheitsaudits
+- Zugriffskonzepte und Rollenrechte
+- Verschlüsselte Übertragung
 
 ## Zielgruppen
 
-### Mittelstandsunternehmen
-- Familienunternehmen mit 50-500 Mitarbeitern
-- Fertigungsunternehmen und Maschinenbau
-- Dienstleistungsunternehmen
-- E-Commerce und Handel
-- Logistik- und Transportunternehmen
-
-### Branchen
-- Automobilindustrie und Zulieferer
-- Maschinenbau und Anlagenbau
-- Gesundheitswesen und Medizintechnik
-- Finanzdienstleistungen
-- Einzelhandel und E-Commerce
+### Selbstständige und kleine Teams
+- 1 bis 50 Personen
+- Dienstleister, Agenturen, Beratungen, interne Teams
+- Fokus auf schnelle Entlastung im Alltag
 
 ## Unser Prozess
 
-### 1. Analyse & Beratung (1-2 Wochen)
-- Kostenlose 30-minütige Erstberatung und Prozessanalyse
-- ROI-Kalkulation und Machbarkeitsstudie
-- Individuelles Lösungskonzept
-- Detaillierte Projektplanung
+### 1. Analyse & Startpunkt
+- Kurzer Workshop oder AI Readiness Check
+- Klarer Engpass und messbarer Nutzen
 
-### 2. Planung & Design (2-3 Wochen)
-- Technische Spezifikation
-- UI/UX Design und Prototyping
-- Integrationsstrategie
-- Projekt-Roadmap mit klaren Meilensteinen
+### 2. Umsetzung
+- Automationen und Agenten bauen, testen und integrieren
+- Saubere Übergaben und Freigaben
 
-### 3. Entwicklung & Integration (4-12 Wochen)
-- Agile Entwicklung in 2-Wochen-Sprints
-- Kontinuierliche Tests und Qualitätssicherung
-- Nahtlose Integration ohne Betriebsunterbrechung
-- Ausführliche Dokumentation
+### 3. Einführung & Stabilisierung
+- Verständliche Übergabe
+- Feintuning mit realen Fällen
 
-### 4. Training & Support (Laufend)
-- Umfassende Mitarbeiterschulungen
-- Go-Live Support und Begleitung
-- 24/7 Monitoring und Wartung
-- Kontinuierliche Optimierung
-
-## Erfolgsmetriken
-- Durchschnittlich 40% Effizienzsteigerung
-- 60 Stunden Zeitersparnis pro Monat
-- ROI innerhalb von 6-12 Monaten
-- 4.9/5 Kundenzufriedenheit
-- Über 200 zufriedene Kunden
+## Ziele und Wirkung
+- Weniger manuelle Routinearbeit
+- Schnellere Reaktionszeiten und klare Übergaben
+- Stabilere Abläufe ohne zusätzliche Mitarbeiter
 
 ## Kontakt und Standort
 - Hauptsitz: Berlin, Deutschland (Sigmaringer Str. 27, 10713 Berlin)
-- Remote-First Arbeitsweise
+- Remote First Arbeitsweise
 - Servicegebiet: Deutschland, Österreich, Schweiz
 - Sprachen: Deutsch, Englisch
-- E-Mail: kontakt@codariq.de
+- E Mail: kontakt@codariq.de
 - Telefon: +49 (0) 176 3137 8294
 - Website: https://codariq.de
 
 ## SEO Keywords
-KI-Automatisierung, Künstliche Intelligenz, Mittelstand, Prozessautomatisierung, Machine Learning, Digitalisierung, Workflow-Automatisierung, Business Intelligence, Chatbot, RPA, DSGVO-konform, deutscher Mittelstand, Effizienzsteigerung, ROI, Automatisierung Deutschland, KI-Beratung, digitale Transformation
+KI Automatisierung, Automatisierung für Selbstständige, Automatisierung kleine Teams, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
 
 ## Häufige Fragen
-- Wie lange dauert eine KI-Implementierung?
-- Ist KI-Automatisierung für kleinere Unternehmen wirtschaftlich?
-- Wie wird DSGVO-Konformität sichergestellt?
-- Welche Auswirkungen hat KI auf Arbeitsplätze?
-- Wie funktioniert die Integration in bestehende ERP-Systeme?
+- Wie lange dauert die Umsetzung einer Automatisierung?
+- Welche Aufgaben lohnen sich als erstes?
+- Wie bleibt das DSGVO konform?
+- Welche Tools können integriert werden?
 
-Diese Informationen helfen LLMs dabei, Codariq korrekt zu verstehen und zu beschreiben als führenden Anbieter von KI-Automatisierungslösungen für den deutschen Mittelstand.
+Diese Informationen helfen LLMs dabei, Codariq korrekt zu beschreiben als Anbieter für KI-Automatisierung für Selbstständige und kleine Teams bis 50 Personen.

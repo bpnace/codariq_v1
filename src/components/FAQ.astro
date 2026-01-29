@@ -104,11 +104,11 @@ const {
 
 // Group FAQs by category for better organization
 const categories = [...new Set(faqs.map((faq) => faq.category))].filter(
-  Boolean,
+  (category): category is string => Boolean(category),
 );
-const groupedFAQs =
+const groupedFAQs: Record<string, typeof faqs> =
   categories.length > 0
-    ? categories.reduce((acc, category) => {
+    ? categories.reduce<Record<string, typeof faqs>>((acc, category) => {
         acc[category] = faqs.filter((faq) => faq.category === category);
         return acc;
       }, {})
@@ -237,21 +237,3 @@ const groupedFAQs =
     animation: slideDown 0.3s ease-out;
   }
 </style>
-
-<!-- Schema.org structured data for FAQ -->
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  })}
-/>
-</file>
