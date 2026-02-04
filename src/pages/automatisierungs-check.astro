@@ -148,15 +148,6 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
         <div class="quiz-result hidden" id="quiz-result">
           <div class="quiz-result-card">
-            <div
-              class="quiz-success-banner hidden"
-              id="quiz-success-banner"
-              role="status"
-              aria-live="polite"
-            >
-              <span class="quiz-success-icon">✅</span>
-              <span class="quiz-success-text">Gesendet! Dein Ergebnis erscheint direkt hier.</span>
-              <span class="quiz-success-arrow">↓</span>
             </div>
             <div class="quiz-result-header">
               <span class="quiz-result-badge">Dein Ergebnis</span>
@@ -599,6 +590,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       display: flex;
       flex-direction: column;
       gap: 12px;
+      align-items: flex-start;
     }
     .quiz-field label {
       font-weight: 700;
@@ -612,6 +604,8 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       font-weight: 600;
       color: #111827;
       background: #ffffff;
+      width: 100%;
+      max-width: 420px;
     }
     .quiz-consent {
       display: flex;
@@ -620,6 +614,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       font-size: 0.9rem;
       color: #4b5563;
       font-weight: 600;
+      max-width: 520px;
     }
     .quiz-actions {
       display: flex;
