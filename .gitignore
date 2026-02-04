@@ -36,6 +36,8 @@ pnpm-debug.log*
 .env.local
 .playwright-mcp
 test-results/
+public/webhook-proxy.config.php
+public/webhook-proxy.php
 
 # macOS-specific files
 .DS_Store

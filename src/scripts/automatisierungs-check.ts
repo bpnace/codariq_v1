@@ -894,33 +894,40 @@ const init = () => {
     };
 
     try {
-      const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL;
-      const webhookAuth = import.meta.env.PUBLIC_N8N_WEBHOOK_AUTH;
-      if (!webhookUrl || !webhookAuth) {
-        setError("Die Auswertung ist aktuell nicht verfügbar. Bitte versuche es später erneut.");
-        return;
-      }
+      const webhookUrl = "/webhook-proxy.php";
       elements.next.disabled = true;
       elements.next.textContent = "Senden...";
       const response = await fetch(webhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: webhookAuth,
         },
         body: JSON.stringify(payload),
       });
       if (response.status === 200) {
+        elements.next.textContent = "Gesendet ✓";
         showResults(results);
         localStorage.removeItem(storageKey);
         return;
+      }
+      let serverMessage = "";
+      try {
+        const data = await response.json();
+        if (data && typeof data.message === "string") {
+          serverMessage = data.message;
+        }
+      } catch {
+        // Ignore parse errors for non-JSON responses.
       }
       if (response.status === 400) {
         setError("Bitte füll alle Pflichtfelder korrekt aus.");
       } else if (response.status === 403) {
         setError("Deine Anfrage wurde als Spam erkannt.");
       } else if (response.status === 429) {
-        setError("Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.");
+        setError(
+          serverMessage ||
+            "Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut."
+        );
       } else {
         setError("Es gab ein Problem beim Senden. Bitte versuche es erneut.");
       }
@@ -939,6 +946,7 @@ const init = () => {
   function showResults(results: QuizResults) {
     elements.quizShell.classList.add("hidden");
     elements.result.classList.remove("hidden");
+    elements.result.classList.add("is-revealed");
     elements.resultPotential.textContent = `${results.automationPotential}%`;
     elements.resultLevel.textContent = results.level;
     elements.resultTime.textContent = String(results.timeSavingsPotential);
@@ -956,6 +964,12 @@ const init = () => {
       `;
       elements.resultRecommendations.appendChild(item);
     });
+
+    const successBanner = document.getElementById("quiz-success-banner");
+    if (successBanner) {
+      successBanner.classList.remove("hidden");
+    }
+    elements.result.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   elements.back.addEventListener("click", () => {

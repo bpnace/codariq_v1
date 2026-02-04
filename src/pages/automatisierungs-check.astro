@@ -148,6 +148,16 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
         <div class="quiz-result hidden" id="quiz-result">
           <div class="quiz-result-card">
+            <div
+              class="quiz-success-banner hidden"
+              id="quiz-success-banner"
+              role="status"
+              aria-live="polite"
+            >
+              <span class="quiz-success-icon">✅</span>
+              <span class="quiz-success-text">Gesendet! Dein Ergebnis erscheint direkt hier.</span>
+              <span class="quiz-success-arrow">↓</span>
+            </div>
             <div class="quiz-result-header">
               <span class="quiz-result-badge">Dein Ergebnis</span>
               <h2 class="text-3xl sm:text-4xl font-black text-gray-900">
@@ -429,7 +439,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       border-top: 1px solid var(--quiz-divider-color);
     }
     .quiz-options[data-step="q10_budget"] .quiz-card {
-      padding: 14px;
+      padding: 12px;
     }
     .quiz-options[data-layout="visual_cards"] > .quiz-card:nth-child(2n),
     .quiz-options[data-layout="icon_options"] > .quiz-option:nth-child(2n) {
@@ -443,14 +453,14 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       border-radius: 0;
       border: 0;
       background: #ffffff;
-      padding: 16px;
+      padding: 12px;
       text-align: left;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
       cursor: pointer;
       transition: box-shadow 0.2s ease, border-color 0.2s ease;
-      min-height: 150px;
+      min-height: 120px;
       height: 100%;
       box-shadow: none;
       border-right: 1px solid var(--quiz-divider-color);
@@ -465,13 +475,13 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       background: rgba(237, 37, 78, 0.04);
     }
     .quiz-card-media {
-      height: 64px;
+      height: 48px;
       border-radius: 14px;
       background: transparent;
       border: 0;
       display: grid;
       place-items: center;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 800;
       color: #111827;
       position: relative;
@@ -481,15 +491,16 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       content: none;
     }
     .quiz-card-icon {
-      font-size: 2rem;
+      font-size: 1.6rem;
     }
     .quiz-card-title {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 800;
       color: #111827;
     }
     .quiz-card-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      line-height: 1.2;
       color: #6b7280;
       font-weight: 600;
     }
@@ -668,6 +679,9 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     .quiz-result {
       margin-top: 32px;
     }
+    .quiz-result.is-revealed .quiz-result-card {
+      animation: quizResultReveal 0.5s ease-out both;
+    }
     .quiz-result-card {
       background: linear-gradient(
         180deg,
@@ -681,6 +695,29 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       display: flex;
       flex-direction: column;
       gap: 28px;
+    }
+    .quiz-success-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #065f46;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.01em;
+      box-shadow: 0 10px 20px rgba(34, 197, 94, 0.12);
+    }
+    .quiz-success-icon {
+      font-size: 1rem;
+    }
+    .quiz-success-text {
+      flex: 1;
+    }
+    .quiz-success-arrow {
+      font-size: 1.1rem;
+      animation: quizScrollPulse 1.2s ease-in-out infinite;
     }
     .quiz-result-badge {
       display: inline-flex;
@@ -748,6 +785,29 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       width: 1px;
       height: 1px;
       overflow: hidden;
+    }
+
+    @keyframes quizScrollPulse {
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(4px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes quizResultReveal {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 639px) {

@@ -38,3 +38,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 };
+
+export const GET: APIRoute = async () => {
+  return new Response(JSON.stringify({ error: "Method not allowed" }), {
+    status: 405,
+    headers: { "Content-Type": "application/json" },
+  });
+};

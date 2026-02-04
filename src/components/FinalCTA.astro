@@ -465,19 +465,14 @@ const {
               source: "final_cta",
             };
 
-            // n8n webhook for contact form submissions
-            const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL;
-            const webhookAuth = import.meta.env.PUBLIC_N8N_WEBHOOK_AUTH;
-            if (!webhookUrl || !webhookAuth) {
-              throw new Error("Webhook not configured");
-            }
+            // PHP proxy for contact form submissions (static hosting)
+            const webhookUrl = "/webhook-proxy.php";
 
             // Send to n8n webhook
             response = await fetch(webhookUrl, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: webhookAuth,
               },
               body: JSON.stringify(payload),
             });
@@ -526,9 +521,11 @@ const {
               return; // Silent fail
             } else if (response.status === 429) {
               // Too many requests / Rate limit
-              errors.push(
-                "Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.",
-              );
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.";
+              errors.push(serverMessage);
               formErrors.classList.remove("hidden");
               const li = document.createElement("li");
               li.textContent = errors[0];
