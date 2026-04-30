@@ -7,8 +7,7 @@ export interface Props {
 
 const {
   title = "Von manuell zu planbar in kleinen Schritten",
-  subtitle =
-    "Artikel für Selbstständige und kleine Teams in DACH. Du siehst, wo du starten solltest, wie du den Effekt misst und was du beim Datenschutz beachten musst.",
+  subtitle = "Artikel für Selbstständige und kleine Teams in DACH. Du siehst, wo du starten solltest, wie du den Effekt misst und was du beim Datenschutz beachten musst.",
   showAllLink = true,
 } = Astro.props;
 ---
@@ -17,9 +16,7 @@ const {
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2
-        class="section-title mb-3 sm:mb-4 animate-on-scroll"
-      >
+      <h2 class="section-title mb-3 sm:mb-4 animate-on-scroll">
         {title}
       </h2>
       <p
@@ -33,11 +30,105 @@ const {
     <!-- Blog Posts Grid -->
     <div class="max-w-6xl mx-auto">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Blog Post 1 - Newest: Project Rescue -->
+        <!-- Blog Post 1 - Newest: KI Integration -->
         <article
           class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
         >
-          <a href="/blog/ki-projekte-retten" class="block">
+          <a href="/blog/ki-integration-bestehende-systeme" class="block">
+            <div class="mb-4">
+              <div
+                class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  ></path>
+                </svg>
+              </div>
+              <span
+                class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded"
+              >
+                KI-Integration
+              </span>
+            </div>
+            <h4
+              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors"
+            >
+              KI-Integration in bestehende Systeme
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Wie du KI sauber mit CRM, E-Mail, Kalender und Buchhaltung
+              verbindest, ohne neue manuelle Arbeit oder Tool-Chaos zu erzeugen.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs text-gray-500"
+            >
+              <span>11 Min. Lesezeit</span>
+              <span class="text-blue-600 font-semibold">Neu</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog Post 2 - Teamfeedback -->
+        <article
+          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
+        >
+          <a href="/blog/ki-mitarbeiterumfragen-automatisieren" class="block">
+            <div class="mb-4">
+              <div
+                class="w-full h-32 bg-gradient-to-br from-purple-100 to-blue-200 rounded-lg flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"
+                  ></path>
+                </svg>
+              </div>
+              <span
+                class="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded"
+              >
+                Teamfeedback
+              </span>
+            </div>
+            <h4
+              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors"
+            >
+              KI-Mitarbeiterumfragen automatisieren
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Wie kleine Teams Freitextantworten clustern, Risiken erkennen und
+              aus Feedback konkrete Maßnahmen machen.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs text-gray-500"
+            >
+              <span>10 Min. Lesezeit</span>
+              <span class="text-purple-600 font-semibold">Neu</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog Post 3 - Remediation -->
+        <article
+          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
+        >
+          <a href="/blog/ki-remediation-projekte-retten" class="block">
             <div class="mb-4">
               <div
                 class="w-full h-32 bg-gradient-to-br from-red-100 to-orange-200 rounded-lg flex items-center justify-center mb-4"
@@ -52,119 +143,30 @@ const {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M5.636 5.636l3.536 3.536m0 5.656l-3.536 3.536M9.172 9.172a4 4 0 015.656 0 4 4 0 010 5.656 4 4 0 01-5.656 0 4 4 0 010-5.656z"
+                  ></path>
                 </svg>
               </div>
               <span
                 class="text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded"
               >
-                Projektrettung
+                KI-Remediation
               </span>
             </div>
             <h4
               class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
             >
-              Wenn Automatisierung hängen bleibt: so bekommst du sie wieder ans Laufen
+              Festgefahrene KI-Projekte wieder in Betrieb bringen
             </h4>
             <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Viele Vorhaben bleiben stecken, weil der Ablauf zu kompliziert wird oder niemand Zeit hat. Hier siehst du, wie du die häufigsten Stolpersteine erkennst und wieder vorankommst.
+              Ein Reparaturplan für Projekte, die nicht genutzt werden,
+              unzuverlässig arbeiten oder im Betrieb hängen bleiben.
             </p>
             <div
               class="flex items-center justify-between text-xs text-gray-500"
             >
-              <span>18 Min. Lesezeit</span>
+              <span>12 Min. Lesezeit</span>
               <span class="text-red-600 font-semibold">Neu</span>
-            </div>
-          </a>
-        </article>
-
-        <!-- Blog Post 2 - Compliance Guide -->
-        <article
-          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
-        >
-          <a href="/blog/ki-compliance-2025" class="block">
-            <div class="mb-4">
-              <div
-                class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-orange-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <span
-                class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded"
-              >
-                KI-Compliance
-              </span>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
-            >
-              KI und Datenschutz in Deutschland 2025: das Wichtigste ohne Juristendeutsch
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Du willst automatisieren, aber ohne Bauchschmerzen bei Datenschutz und Sicherheit. Dieser Artikel fasst die wichtigsten Punkte zusammen, damit du weißt, worauf es wirklich ankommt.
-            </p>
-            <div
-              class="flex items-center justify-between text-xs text-gray-500"
-            >
-              <span>15 Min. Lesezeit</span>
-              <span>Beliebt</span>
-            </div>
-          </a>
-        </article>
-
-        <!-- Blog Post 3 - Integration Guide -->
-        <article
-          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
-        >
-          <a href="/blog/ki-integration-5-schritte" class="block">
-            <div class="mb-4">
-              <div
-                class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-orange-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                  ></path>
-                </svg>
-              </div>
-              <span
-                class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded"
-              >
-                Einstieg
-              </span>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
-            >
-              Automatisierung starten in 5 Schritten
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Ein klarer Ablauf für den Einstieg, ohne Tool Chaos. Du bekommst Beispiele, woran du einen guten Startpunkt erkennst und wie du Fortschritt messen kannst.
-            </p>
-            <div
-              class="flex items-center justify-between text-xs text-gray-500"
-            >
-              <span>8 Min. Lesezeit</span>
-              <span>Beliebt</span>
             </div>
           </a>
         </article>
