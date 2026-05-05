@@ -5,8 +5,8 @@ let initialized = false;
 
 const PANEL_BASE_ROTATION_X = -2;
 const PANEL_BASE_ROTATION_Y = -5;
-const PANEL_MAX_ROTATION_X = 7;
-const PANEL_MAX_ROTATION_Y = 10;
+const PANEL_MAX_ROTATION_X = 4.5;
+const PANEL_MAX_ROTATION_Y = 6.5;
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);
@@ -78,12 +78,12 @@ export function initEnterpriseMotion(): void {
     const x = clamp((event.clientX - rect.left) / rect.width - 0.5, -0.5, 0.5);
     const y = clamp((event.clientY - rect.top) / rect.height - 0.5, -0.5, 0.5);
 
-    panelControls.x(x * 14);
-    panelControls.y(y * 10);
-    panelControls.z(18);
+    panelControls.x(x * 10);
+    panelControls.y(y * 7);
+    panelControls.z(12);
     panelControls.rotationX(PANEL_BASE_ROTATION_X - y * PANEL_MAX_ROTATION_X);
     panelControls.rotationY(PANEL_BASE_ROTATION_Y + x * PANEL_MAX_ROTATION_Y);
-    panelControls.scale(1.014);
+    panelControls.scale(1.008);
     panelControls.lightX(58 + x * 42);
     panelControls.lightY(28 + y * 38);
   };
@@ -147,7 +147,7 @@ export function initEnterpriseMotion(): void {
     );
 
     gsap.fromTo(
-      ".audit-stream p",
+      ".handover-stream p",
       { autoAlpha: 0, x: -12 },
       {
         autoAlpha: 1,

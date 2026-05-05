@@ -16,7 +16,7 @@ export interface Props {
 }
 
 const {
-  title = "KI-Agenten, die deinen Alltag wirklich entlasten.",
+  title = "KI-Agenten, die deinen Alltag tatsächlich entlasten.",
   subtitle = "Wir bauen kontrollierbare KI-Agenten und KI-Integrationen, die E-Mails, Leads, Dokumente und bestehende Systeme sauber verbinden. DSGVO-konform, verständlich erklärt, in wenigen Wochen spürbar.",
   primaryCTA = "Jetzt Termin buchen",
   secondaryCTA = "Agenten-Potenzial prüfen",
@@ -25,15 +25,23 @@ const {
 } = Astro.props;
 
 const trustSignals = [
-  "DSGVO-konforme Datenflüsse",
-  "Freigabe vor Aktion",
-  "Auditierbare Agenten-Logs",
+  "Automatisch vorsortiert",
+  "Freigabe bei wichtigen Schritten",
+  "Saubere Übergabe ans Team",
 ];
 
-const pipelineItems = [
-  { label: "Eingang", value: "48 neue Vorgänge", state: "klassifiziert" },
-  { label: "Policy", value: "7 sensitive Treffer", state: "zur Freigabe" },
-  { label: "Agent", value: "31 Entwürfe bereit", state: "prüfbar" },
+const briefingItems = [
+  { label: "Erledigt", value: "23 E-Mails sortiert", state: "ohne Rückfrage" },
+  {
+    label: "Vorbereitet",
+    value: "5 Antworten als Entwurf",
+    state: "prüfbereit",
+  },
+  {
+    label: "Priorisiert",
+    value: "2 Entscheidungen offen",
+    state: "Chef-Fokus",
+  },
 ];
 ---
 
@@ -52,8 +60,7 @@ const pipelineItems = [
   <div class="secure-hero__inner">
     <div class="secure-hero__copy enterprise-reveal">
       <div class="secure-hero__kicker">
-        <span class="secure-dot" aria-hidden="true"></span>
-        KI-Agenten für KMU mit Data Control Layer
+        KI-Agenten bereiten vor, du entscheidest
       </div>
       <h1>{title}</h1>
       <p>{subtitle}</p>
@@ -81,7 +88,7 @@ const pipelineItems = [
         </a>
       </div>
 
-      <ul class="secure-hero__trust" aria-label="Sicherheitsmerkmale">
+      <ul class="secure-hero__trust" aria-label="Arbeitsweise des KI-Agenten">
         {
           trustSignals.map((signal) => (
             <li>
@@ -95,20 +102,20 @@ const pipelineItems = [
 
     <aside
       class="secure-console enterprise-reveal"
-      aria-label="Beispielhafte Oberfläche eines sicheren KI-Agenten-Setups"
+      aria-label="Geschäftsführer-Briefing eines KI-Agenten"
     >
       <div class="secure-console__topbar">
         <div>
-          <span>Agent Operations</span>
-          <strong>Control Room</strong>
+          <span>KI-Agent meldet</span>
+          <strong>Morgen-Briefing</strong>
         </div>
-        <p>EU Workspace</p>
+        <p>08:15 Uhr</p>
       </div>
 
       <div class="secure-console__status">
         <div>
-          <span>Security posture</span>
-          <strong>Protected</strong>
+          <span>Heute vom Team genommen</span>
+          <strong>4,6 Std.</strong>
         </div>
         <div class="secure-console__ring" aria-hidden="true">
           <span></span>
@@ -117,7 +124,7 @@ const pipelineItems = [
 
       <div class="secure-console__pipeline">
         {
-          pipelineItems.map((item) => (
+          briefingItems.map((item) => (
             <article class="pipeline-card">
               <span>{item.label}</span>
               <strong>{item.value}</strong>
@@ -127,22 +134,26 @@ const pipelineItems = [
         }
       </div>
 
-      <div class="approval-panel">
+      <div class="decision-panel">
         <div>
-          <span>Human approval required</span>
-          <strong>Antwort an Großkunde wartet</strong>
+          <span>Nächster sinnvoller Schritt</span>
+          <strong>Kundenthemen mit Umsatzbezug prüfen</strong>
           <p>
-            Agent schlägt Antwort und CRM-Update vor. Senden erst nach Freigabe.
+            Der Agent hat Kontext, Vorschlag und nächste Aktion vorbereitet. Du
+            entscheidest nur noch, was rausgeht.
           </p>
         </div>
-        <button type="button">Freigabe prüfen</button>
+        <button type="button">Entscheidung ansehen</button>
       </div>
 
-      <div class="audit-stream" aria-label="Audit Log">
-        <span>Audit stream</span>
-        <p><strong>policy.check</strong> Personenbezogene Daten erkannt</p>
-        <p><strong>agent.draft</strong> Antwort mit Quellen vorbereitet</p>
-        <p><strong>human.review</strong> Freigabe angefordert</p>
+      <div
+        class="handover-stream"
+        aria-label="Vom KI-Agenten übernommene Arbeit"
+      >
+        <span>Agent hat übernommen</span>
+        <p><strong>Posteingang</strong> Anfragen erkannt und priorisiert</p>
+        <p><strong>CRM</strong> Kontakte ergänzt und Follow-ups vorbereitet</p>
+        <p><strong>Team</strong> Aufgaben gebündelt statt weitergereicht</p>
       </div>
     </aside>
   </div>
@@ -396,8 +407,8 @@ const pipelineItems = [
 
   .secure-console__topbar,
   .secure-console__status,
-  .approval-panel,
-  .audit-stream {
+  .decision-panel,
+  .handover-stream {
     background: rgba(248, 250, 252, 0.86);
     border: 1px solid rgba(15, 23, 42, 0.08);
     border-radius: 12px;
@@ -413,8 +424,8 @@ const pipelineItems = [
   .secure-console__topbar span,
   .secure-console__status span,
   .pipeline-card span,
-  .approval-panel span,
-  .audit-stream > span {
+  .decision-panel span,
+  .handover-stream > span {
     display: block;
     color: #64748b;
     font-size: 0.72rem;
@@ -512,7 +523,7 @@ const pipelineItems = [
     font-weight: 850;
   }
 
-  .approval-panel {
+  .decision-panel {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 1rem;
@@ -521,7 +532,7 @@ const pipelineItems = [
     padding: 1.1rem;
   }
 
-  .approval-panel strong {
+  .decision-panel strong {
     display: block;
     margin-top: 0.45rem;
     color: #0b1220;
@@ -529,7 +540,7 @@ const pipelineItems = [
     font-weight: 900;
   }
 
-  .approval-panel p {
+  .decision-panel p {
     margin-top: 0.45rem;
     max-width: 30rem;
     color: #475569;
@@ -538,7 +549,7 @@ const pipelineItems = [
     line-height: 1.45;
   }
 
-  .approval-panel button {
+  .decision-panel button {
     min-height: 2.7rem;
     padding: 0.75rem 0.95rem;
     color: #f8fafc;
@@ -546,22 +557,23 @@ const pipelineItems = [
     border: 0;
     border-radius: 8px;
     font-weight: 900;
+    white-space: nowrap;
   }
 
-  .audit-stream {
+  .handover-stream {
     display: grid;
     gap: 0.6rem;
     margin-top: 0.85rem;
     padding: 1rem;
   }
 
-  .audit-stream p {
+  .handover-stream p {
     color: #475569;
     font-size: 0.86rem;
     font-weight: 650;
   }
 
-  .audit-stream strong {
+  .handover-stream strong {
     color: #0b1220;
     font-weight: 900;
   }
@@ -580,12 +592,12 @@ const pipelineItems = [
 
     .secure-hero__actions,
     .secure-button,
-    .approval-panel {
+    .decision-panel {
       width: 100%;
     }
 
     .secure-console__pipeline,
-    .approval-panel {
+    .decision-panel {
       grid-template-columns: 1fr;
     }
   }
