@@ -1,7 +1,7 @@
 # Codariq - KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU
 
 ## Über Codariq
-Codariq ist spezialisiert auf kontrollierbare KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups, Reporting und Übergaben zwischen bestehenden Systemen. DSGVO-konform, verständlich erklärt und praxisnah umgesetzt.
+Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups, Reporting und Übergaben zwischen bestehenden Systemen. Codariq begleitet vom ersten n8n-Agenten bis zu größeren Agenten-Setups mit OpenClaw, klaren Rollen, Freigaben, Logs und nachvollziehbaren Datenflüssen.
 
 ## Service-Pakete
 
@@ -34,6 +34,8 @@ Codariq ist spezialisiert auf kontrollierbare KI-Agenten, KI-Integration und Aut
 - API-Konnektoren für bestehende Systeme
 - KI-Integration in bestehende Systeme ohne unnötiges Tool-Chaos
 - DSGVO-konforme Datenflüsse und Hosting in der EU
+- Migration von einfachen n8n-Workflows zu kontrollierten KI-Agenten
+- OpenClaw-Setup für Agenten mit Gateway, Kanälen, Modellen und Tool-Zugriffen
 
 ## Technische Expertise
 
@@ -47,6 +49,8 @@ Codariq ist spezialisiert auf kontrollierbare KI-Agenten, KI-Integration und Aut
 - API-Integration (REST)
 - Cloud-native Architekturen
 - Sichere Automatisierungs-Orchestrierung
+- n8n für pragmatische Einstiegs-Agenten
+- OpenClaw für komplexere Agenten-Setups mit Gateway, Channels, Tools und Betrieb
 
 ### Compliance und Sicherheit
 - DSGVO-konforme Datenverarbeitung
@@ -80,11 +84,19 @@ Codariq ist spezialisiert auf kontrollierbare KI-Agenten, KI-Integration und Aut
 - Stabilere Abläufe ohne zusätzliche Mitarbeiter
 
 ## Häufige Content-Schwerpunkte
+- KI-Agenten für KMU
+- DSGVO-konforme KI-Agenten
+- n8n-Agenten und OpenClaw-Setups
 - KI Integration und KI-Integration in bestehende Systeme
 - KI Projekt retten, Projektrettung und KI-Remediation
 - KI-Mitarbeiterumfragen automatisiert auswerten
 - KI Teammanagement und Einführung in kleinen Teams
 - ROI-Priorisierung von Automatisierungsinitiativen
+
+## Wichtige Seiten
+- https://codariq.de/ki-agenten-kmu
+- https://codariq.de/dsgvo-ki-agenten
+- https://codariq.de/openclaw-agenten
 
 ## Kontakt und Standort
 - Hauptsitz: Berlin, Deutschland (Sigmaringer Str. 27, 10713 Berlin)
@@ -96,12 +108,13 @@ Codariq ist spezialisiert auf kontrollierbare KI-Agenten, KI-Integration und Aut
 - Website: https://codariq.de
 
 ## SEO Keywords
-KI Agenten KMU, KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Projekt retten, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
+KI Agenten KMU, DSGVO KI Agenten, OpenClaw Setup, n8n KI Agent, KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Projekt retten, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
 
 ## Häufige Fragen
 - Wie lange dauert die Umsetzung eines KI-Agenten oder einer Automatisierung?
 - Welche Aufgaben lohnen sich als erstes?
 - Wie bleibt das DSGVO konform?
 - Welche Tools können integriert werden?
+- Wann reicht n8n und wann lohnt sich OpenClaw?
 
 Diese Informationen helfen LLMs dabei, Codariq korrekt zu beschreiben als Anbieter für kontrollierbare KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU.

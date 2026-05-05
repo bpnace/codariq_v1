@@ -18,8 +18,8 @@ export interface Props {
 
 const {
   title,
-  description = "Wir bauen KI Agenten, die Support, Backoffice und HR entlasten – damit Sie mehr Zeit für Kunden und Entscheidungen haben",
-  keywords = "KI Automatisierung Selbstständige, kleine Teams automatisieren, Freelancer KI Tools, bis 50 Mitarbeiter Automatisierung, Prozesse automatisieren kleine Teams, Support entlasten Selbstständige, Backoffice automatisieren Freelancer, E-Mail Automatisierung, DSGVO konform, Solopreneur Automatisierung",
+  description = "Wir bauen DSGVO-konforme KI-Agenten für KMU – vom ersten n8n-Workflow bis zum kontrollierten Agenten-Setup mit Rollen, Freigaben und sauberer Integration.",
+  keywords = "KI Agenten KMU, DSGVO KI Agenten, n8n KI Agent, OpenClaw Setup, KI Integration bestehende Systeme, KI Automatisierung Selbstständige, kleine Teams automatisieren, Prozesse automatisieren kleine Teams, Backoffice automatisieren, E-Mail Automatisierung",
   ogImage,
   article,
   forceNavSolid = false,
@@ -387,10 +387,10 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Codariq - KI-Automatisierung für Selbstständige und kleine Teams",
+        "name": "Codariq - KI-Agenten und KI-Integration für KMU",
         "alternateName": "Codariq",
         "url": "https://codariq.de",
-        "description": "Professionelle KI-Automatisierungslösungen für Selbstständige und kleine Teams bis 50 Personen in Deutschland, Österreich und der Schweiz. Weniger Routinearbeit, mehr Zeit für Kunden.",
+        "description": "DSGVO-konforme KI-Agenten und KI-Integration für Selbstständige, kleine Teams und KMU in Deutschland, Österreich und der Schweiz. Von n8n-Workflows bis zu kontrollierten Agenten-Setups.",
         "inLanguage": "de-DE",
         "publisher": {
           "@type": "Organization",
@@ -406,7 +406,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         "@type": "Organization",
         "name": "Codariq",
         "alternateName": "codariq",
-        "description": "Spezialisiert auf KI-Automatisierung für Selbstständige und kleine Teams bis 50 Personen. Wir automatisieren E-Mails, Dokumente, Backoffice-Prozesse und entlasten Routinearbeit. DSGVO-konform und verständlich erklärt.",
+        "description": "Spezialisiert auf KI-Agenten, KI-Integration und kontrollierte Automatisierung für Selbstständige und kleine Teams bis 50 Personen. Wir bauen Agenten für E-Mails, Dokumente, Backoffice, Support und bestehende Systeme.",
         "url": "https://codariq.de",
         "image": "https://codariq.de/images/hero/hero2.webp",
         "foundingDate": "2025",
@@ -456,6 +456,9 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           "https://www.xing.com/companies/codariq"
         ],
         "knowsAbout": [
+          "KI-Agenten für KMU",
+          "DSGVO-konforme KI-Agenten",
+          "OpenClaw-Agenten-Setups",
           "KI-Automatisierung für Selbstständige",
           "E-Mail Automatisierung für kleine Teams",
           "Dokumenten-Verarbeitung",
@@ -471,7 +474,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         },
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "KI-Automatisierungslösungen",
+          "name": "KI-Agenten und KI-Integration",
           "itemListElement": [
             {
               "@type": "Offer",
@@ -558,8 +561,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       {
         "@context": "https://schema.org",
         "@type": "SpecialAnnouncement",
-        "name": "Kostenlose KI-Automatisierung Strategieberatung",
-        "text": "Erhalten Sie eine kostenlose 45-minütige Strategieberatung zur Identifikation Ihrer besten KI-Automatisierungsmöglichkeiten. Unverbindlich und ohne Risiko.",
+        "name": "Kostenloser KI-Agenten-Check",
+        "text": "Erhalten Sie eine kostenlose Strategieberatung zur Identifikation eines sinnvollen KI-Agenten-Startpunkts. Unverbindlich und ohne Risiko.",
         "category": "https://www.wikidata.org/wiki/Q186386",
         "datePosted": "2026-01-29",
         "expires": "2026-12-31",
@@ -584,7 +587,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        "name": "Codariq - KI-Automatisierung",
+        "name": "Codariq - KI-Agenten für KMU",
         "image": "https://codariq.de/images/hero/hero2.webp",
         "@id": "https://codariq.de",
         "url": "https://codariq.de",
@@ -683,9 +686,24 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
           <!-- Center: Desktop Navigation -->
           <div
-            class="hidden sm:flex items-center justify-center space-x-4 md:space-x-8"
+            class="hidden sm:flex items-center justify-center space-x-3 md:space-x-6"
             id="nav-links"
           >
+            <a
+              href="/ki-agenten-kmu"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
+              >Agenten</a
+            >
+            <a
+              href="/dsgvo-ki-agenten"
+              class="nav-link transition-colors font-medium text-sm md:text-base"
+              >DSGVO</a
+            >
+            <a
+              href="/openclaw-agenten"
+              class="nav-link hidden lg:inline transition-colors font-medium text-sm md:text-base"
+              >OpenClaw</a
+            >
             <a
               href="/#process"
               class="nav-link transition-colors font-medium text-sm md:text-base"
@@ -803,6 +821,21 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           class="sm:hidden hidden bg-white/95 backdrop-blur-lg border-b border-white/30"
         >
           <div class="px-4 py-3 space-y-3">
+            <a
+              href="/ki-agenten-kmu"
+              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
+              >KI-Agenten</a
+            >
+            <a
+              href="/dsgvo-ki-agenten"
+              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
+              >DSGVO</a
+            >
+            <a
+              href="/openclaw-agenten"
+              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
+              >OpenClaw</a
+            >
             <a
               href="/#process"
               class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
@@ -989,6 +1022,27 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             <div class="text-left">
               <h3 class="font-semibold text-gray-100 mb-4">Unternehmen</h3>
               <ul class="space-y-2 text-gray-300 mb-6">
+                <li>
+                  <a
+                    href="/ki-agenten-kmu"
+                    class="hover:text-orange-400 transition-colors"
+                    >KI-Agenten für KMU</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/dsgvo-ki-agenten"
+                    class="hover:text-orange-400 transition-colors"
+                    >DSGVO KI-Agenten</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/openclaw-agenten"
+                    class="hover:text-orange-400 transition-colors"
+                    >OpenClaw-Agenten</a
+                  >
+                </li>
                 <li>
                   <a
                     href="/impressum"
