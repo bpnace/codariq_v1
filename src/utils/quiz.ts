@@ -156,9 +156,9 @@ function generateRecommendations(
 
   if (useCases.includes("customer_support")) {
     recommendations.push({
-      title: "KI-Chatbot für Kundenanfragen",
+      title: "Support-Agent für Kundenanfragen",
       description:
-        "Automatisiere die Beantwortung häufiger Kundenfragen mit einem intelligenten Chatbot. Spart bis zu 80% der Support-Zeit.",
+        "Ein kontrollierbarer KI-Agent sortiert Anfragen, bereitet Antworten vor und markiert Fälle, die ein Mensch prüfen sollte.",
       icon: "💬",
       priority: 10,
     });
@@ -166,9 +166,9 @@ function generateRecommendations(
 
   if (useCases.includes("invoicing")) {
     recommendations.push({
-      title: "Automatische Rechnungsstellung",
+      title: "Backoffice-Agent für Rechnungen und Dokumente",
       description:
-        "Erstelle und versende Rechnungen automatisch nach Projektabschluss. Integriert mit deiner Buchhaltungssoftware.",
+        "Dokumente werden ausgelesen, sauber abgelegt und für Buchhaltung oder Rückfragen vorbereitet.",
       icon: "📄",
       priority: 9,
     });
@@ -176,9 +176,9 @@ function generateRecommendations(
 
   if (useCases.includes("marketing")) {
     recommendations.push({
-      title: "Lead-Generierung automatisieren",
+      title: "Vertriebs-Agent für Leads und Follow-ups",
       description:
-        "Automatische Lead-Erfassung, Qualifizierung und Follow-up-Kampagnen. Steigere deine Conversion-Rate um 40%.",
+        "Neue Leads werden qualifiziert, im CRM vorbereitet und mit passenden nächsten Schritten versehen.",
       icon: "🎯",
       priority: 8,
     });
@@ -186,11 +186,21 @@ function generateRecommendations(
 
   if (useCases.includes("data_automation")) {
     recommendations.push({
-      title: "Dashboard und Reporting",
+      title: "Reporting-Agent für bessere Entscheidungen",
       description:
-        "Automatische Datenerfassung und Echtzeit-Dashboards für bessere Entscheidungen.",
+        "Ein Agent sammelt Status, Zahlen und offene Punkte aus deinen Tools und bereitet eine verständliche Übersicht vor.",
       icon: "📊",
       priority: 7,
+    });
+  }
+
+  if (useCases.includes("process_automation") || useCases.includes("ai_strategy")) {
+    recommendations.push({
+      title: "KI-Integration in bestehende Systeme prüfen",
+      description:
+        "Wir prüfen, welche Tools verbunden werden müssen, wo Freigaben nötig sind und welcher Agenten-Workflow zuerst messbar entlastet.",
+      icon: "🔗",
+      priority: 8,
     });
   }
 
@@ -200,9 +210,9 @@ function generateRecommendations(
       : "";
   if (experienceLevel === "beginner" || experienceLevel === "novice") {
     recommendations.push({
-      title: "Einstiegs-Workshop buchen",
+      title: "Agenten-Readiness klären",
       description:
-        "Lerne die Grundlagen der Automatisierung in einem 2-stündigen Hands-on Workshop. Perfekt für Einsteiger.",
+        "Starte mit einem klaren Überblick über Prozesse, Daten, Tool-Stack und sinnvolle erste KI-Agenten.",
       icon: "🎓",
       priority: 10,
     });
@@ -210,9 +220,9 @@ function generateRecommendations(
 
   if (experienceLevel === "advanced" && totalScore >= 70) {
     recommendations.push({
-      title: "Custom Workflow-Entwicklung",
+      title: "Agenten-Workflow entwickeln",
       description:
-        "Maßgeschneiderte Automatisierungslösungen für komplexe Geschäftsprozesse.",
+        "Baue einen kontrollierbaren Agenten-Workflow mit Rollen, Logs, Freigaben und Integration in deine bestehenden Systeme.",
       icon: "⚙️",
       priority: 9,
     });

@@ -1157,9 +1157,17 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             </div>
           </div>
           <div
-            class="border-t border-gray-600 mt-6 pt-6 text-center text-gray-400"
+            class="border-t border-gray-600 mt-6 pt-6 text-center text-gray-400 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
           >
             <p>&copy; 2025 Codariq. Alle Rechte vorbehalten.</p>
+            <a
+              href="https://stackwerkhaus.de/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-orange-400 transition-colors"
+            >
+              Design by Stackwerkhaus
+            </a>
           </div>
         </div>
       </footer>

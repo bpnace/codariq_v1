@@ -3,9 +3,9 @@ import { build } from "esbuild";
 import path from "node:path";
 import Base from "../layouts/Base.astro";
 
-const pageTitle = "Codariq KI-Automatisierungs-Check";
+const pageTitle = "Codariq KI-Agenten- und Automatisierungs-Check";
 const pageDescription =
-  "Beantworte 10 kurze Fragen und erhalte eine individuelle Einschätzung zu Automatisierungspotenzial, Zeitersparnis und passenden nächsten Schritten.";
+  "Beantworte 10 kurze Fragen und erhalte eine individuelle Einschätzung zu KI-Agenten, KI-Integration, Automatisierungspotenzial, Zeitersparnis und passenden nächsten Schritten.";
 const quizEntry = path.resolve(
   process.cwd(),
   "src/scripts/automatisierungs-check.ts",
@@ -35,15 +35,15 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
         <div class="flex flex-col items-center text-center gap-6 sm:gap-8">
           <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-bold text-gray-700 shadow-sm">
             <span class="inline-flex h-2 w-2 rounded-full bg-[color:var(--color-brand-light)]"></span>
-            Kostenloser KI-Automatisierungs-Check
+            Kostenloser KI-Agenten- und Automatisierungs-Check
           </div>
 
           <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl leading-tight text-gray-900 max-w-5xl mx-auto">
-            Finde in 2 Minuten die Automatisierung mit dem größten Nutzen für dich.
+            Finde in 2 Minuten heraus, welcher KI-Agent oder welche KI-Integration bei dir den größten Nutzen bringt.
           </h1>
           <p class="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
             10 kurze Fragen. 2 schnelle Capture Steps. Direkt danach erhältst du deine Auswertung zu
-            Potenzial, Zeitersparnis und ROI. DSGVO konform und praxisnah.
+            Agenten-Readiness, KI-Integration, Zeitersparnis und ROI. DSGVO konform und praxisnah.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
@@ -70,7 +70,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-sm sm:text-base text-gray-700 max-w-4xl mx-auto">
             <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
               <span class="text-lg">⚡</span>
-              Sofortige Empfehlung für deine nächsten Schritte
+              Sofortige Empfehlung für Agenten-Workflows und nächste Schritte
             </div>
             <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
               <span class="text-lg">🛡️</span>
@@ -78,11 +78,11 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
             </div>
             <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
               <span class="text-lg">🧭</span>
-              Abgestimmt auf dein aktuelles Level
+              Abgestimmt auf Tool-Stack, Prozessklarheit und aktuelles Level
             </div>
             <div class="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-sm">
               <span class="text-lg">📊</span>
-              Zeit- und ROI Schätzung inklusive
+              Zeit-, ROI- und Integrationsschätzung inklusive
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
                 <div class="quiz-meta-item">
                   <span class="quiz-meta-number">10</span>
                   <span class="quiz-meta-label">Fragen</span>
-                  <span class="quiz-meta-sub">Damit wir dich wirklich verstehen</span>
+                  <span class="quiz-meta-sub">Für Agenten-Readiness und Integrationspotenzial</span>
                 </div>
                 <div class="quiz-meta-item">
                   <span class="quiz-meta-number">2</span>
@@ -152,11 +152,11 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
             <div class="quiz-result-header">
               <span class="quiz-result-badge">Dein Ergebnis</span>
               <h2 class="text-3xl sm:text-4xl font-black text-gray-900">
-                Dein Automatisierungspotenzial liegt bei
+                Dein Agenten- und Automatisierungspotenzial liegt bei
                 <span class="text-[color:var(--color-brand-light)]" id="result-potential">0%</span>.
               </h2>
               <p class="text-base sm:text-lg text-gray-600 max-w-2xl">
-                Basierend auf deinen Antworten haben wir die nächsten Schritte
+                Basierend auf deinen Antworten haben wir die nächsten Agenten- und Integrationsschritte
                 priorisiert. Alles ist auf deine Situation abgestimmt.
               </p>
             </div>
@@ -204,7 +204,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
         <noscript>
           <div class="quiz-noscript">
-            Bitte aktiviere JavaScript, um den KI-Automatisierungs-Check zu nutzen.
+            Bitte aktiviere JavaScript, um den KI-Agenten- und Automatisierungs-Check zu nutzen.
           </div>
         </noscript>
       </div>

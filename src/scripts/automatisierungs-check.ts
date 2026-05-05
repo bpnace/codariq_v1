@@ -97,17 +97,17 @@ const init = () => {
   > = [
     {
       id: "q1_automation_attitude",
-      question: "Wie stehst du zum Thema Automatisierung?",
-      subtitle: "Wir fragen das, um deine Motivation besser zu verstehen.",
+      question: "Wie stehst du zu KI-Agenten und Automatisierung?",
+      subtitle: "Wir fragen das, um deine Motivation und deine Offenheit für KI-Integration besser zu verstehen.",
       type: "visual_cards",
       cards: [
         {
-          title: "Mega - Automatisierung ist die Zukunft",
+          title: "Mega - KI-Agenten und Automatisierung sind die Zukunft",
           value: "enthusiast",
           emoji: "🚀",
         },
         {
-          title: "Überzeugt. Ich möchte automatisieren",
+          title: "Überzeugt. Ich möchte Prozesse mit KI verbessern",
           value: "convinced",
           emoji: "✅",
         },
@@ -117,7 +117,7 @@ const init = () => {
           emoji: "🙂",
         },
         {
-          title: "Skeptisch - brauche erst Beweise",
+          title: "Skeptisch - ich brauche erst Kontrolle und Beweise",
           value: "skeptical",
           emoji: "🧐",
         },
@@ -132,7 +132,7 @@ const init = () => {
       options: [
         {
           icon: "🚀",
-          text: "Ich will endlich mit Automatisierung starten",
+          text: "Ich will endlich mit KI-Integration starten",
           value: "getting_started",
         },
         {
@@ -142,7 +142,7 @@ const init = () => {
         },
         {
           icon: "💡",
-          text: "Mein Team ist mit den Tools überfordert",
+          text: "Mein Team ist mit Tools und Übergaben überfordert",
           value: "team_overwhelmed",
         },
         {
@@ -197,7 +197,7 @@ const init = () => {
     },
     {
       id: "q4_experience_level",
-      question: "Wo stehst du aktuell beim Thema Automatisierung?",
+      question: "Wo stehst du aktuell bei KI-Integration und Automatisierung?",
       subtitle:
         "Damit wir dir die perfekte Lösung an dein aktuelles Niveau anpassen können.",
       type: "visual_cards",
@@ -227,7 +227,7 @@ const init = () => {
           icon: "🎓",
           title: "Fortgeschritten",
           subtitle:
-            "Ich nutze Automatisierung täglich und kenne die gängigsten Tools. Ich möchte tiefer aber noch eintauchen.",
+            "Ich nutze Automatisierung täglich und kenne die gängigsten Tools. Ich möchte tiefer in KI-Agenten, Integrationen und sichere Workflows eintauchen.",
           value: "advanced",
         },
       ],
@@ -235,14 +235,14 @@ const init = () => {
     {
       id: "q5_use_cases",
       question:
-        "Hast du schon eine konkrete Vorstellung wie Automatisierung dich unterstützen kann?",
+        "Hast du schon eine konkrete Vorstellung, wo ein KI-Agent dich unterstützen kann?",
       subtitle:
-        "Wir fragen das damit wir dir relevante Lösungen zeigen können.",
+        "Wir fragen das, damit wir dir relevante Agenten-Workflows und Integrationslösungen zeigen können.",
       type: "multiple_choice",
       maxSelections: 3,
       options: [
         {
-          text: "Einen soliden Einstieg in Automatisierung finden",
+          text: "Einen soliden Einstieg in KI-Agenten finden",
           value: "getting_started",
         },
         {
@@ -254,7 +254,7 @@ const init = () => {
           value: "invoicing",
         },
         {
-          text: "Geschäftsprozesse digitalisieren und optimieren",
+          text: "Geschäftsprozesse mit KI-Integration verbinden",
           value: "process_automation",
         },
         {
@@ -266,7 +266,7 @@ const init = () => {
           value: "data_automation",
         },
         {
-          text: "KI strategisch ins Business integrieren",
+          text: "KI strategisch in bestehende Systeme integrieren",
           value: "ai_strategy",
         },
         {
@@ -290,21 +290,21 @@ const init = () => {
         {
           icon: "🚀",
           title: "Einstieg",
-          subtitle: "Einen klaren Einstieg ins Thema Automatisierung finden",
+          subtitle: "Einen klaren Einstieg in KI-Agenten und Automatisierung finden",
           value: "getting_started",
         },
         {
           icon: "📖",
           title: "Lernen & Umsetzen",
           subtitle:
-            "Automatisierung richtig lernen, verstehen, anwenden und implementieren",
+            "KI-Agenten und Automatisierung richtig verstehen, anwenden und implementieren",
           value: "learn_implement",
         },
         {
           icon: "👔",
           title: "Ready2Use",
           subtitle:
-            "Ich möchte nicht selbst lernen. Ich möchte jemanden der das für mich umsetzt",
+            "Ich möchte nicht selbst bauen. Ich möchte einen kontrollierbaren KI-Agenten, der für mich umgesetzt wird",
           value: "ready_to_use",
         },
       ],
@@ -368,9 +368,9 @@ const init = () => {
     {
       id: "q9_time_waste",
       question:
-        "Hand aufs Herz: Wie viel Zeit fressen manuelle Routinen (E-Mails, Verwaltung, Datenerfassung) aktuell pro Woche?",
+        "Hand aufs Herz: Wie viel Zeit fressen manuelle Routinen (E-Mails, Verwaltung, Datenerfassung, Übergaben) aktuell pro Woche?",
       subtitle:
-        "Wir fragen das Damit wir einschätzen können, wie viel Potenzial KI bei dir freisetzen kann.",
+        "Wir fragen das, damit wir einschätzen können, wie viel Potenzial KI-Agenten und Automatisierung bei dir freisetzen können.",
       type: "visual_cards",
       cards: [
         {
@@ -876,12 +876,12 @@ const init = () => {
       .join(", ");
     const message = [
       `Quiz Antworten: ${answersSummary || "keine"}.`,
-      `Automatisierungspotenzial: ${results.automationPotential}%, Level: ${results.level}.`,
+      `Agenten- und Automatisierungspotenzial: ${results.automationPotential}%, Level: ${results.level}.`,
       `Top Empfehlungen: ${recommendationsSummary || "keine"}.`,
     ].join(" ");
     const payload = {
       name: state.userInfo.name,
-      company: "Quiz (Automatisierungs-Check)",
+      company: "Quiz (KI-Agenten- und Automatisierungs-Check)",
       email: state.userInfo.email,
       phone: state.userInfo.phone,
       message,

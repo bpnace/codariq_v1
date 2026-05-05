@@ -1,0 +1,578 @@
+---
+import Base from '../../layouts/Base.astro';
+import BlogCtaSection from '../../components/BlogCtaSection.astro';
+
+const title = "KI Projekt retten: 3 Praxisbeispiele, wie Automatisierung wieder stabil läuft";
+const description =
+  "Dein KI Projekt ist fast fertig, aber im Alltag läuft es nicht sauber? Hier siehst du typische Ursachen, drei Praxisbeispiele für Projektrettung und einen klaren Plan, damit es genutzt wird und stabil bleibt.";
+const keywords =
+  "KI Projekt retten, KI-Projekt retten, Projektrettung, KI-Remediation, KI Projekt gescheitert, Automatisierung hängt fest, Prozessautomatisierung, Workflow automatisieren, E Mail automatisieren, Dokumente automatisieren, Rechnungen automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, DSGVO konforme Automatisierung, RAG, LLM Support";
+const author = "Codariq";
+const publishedTime = "2025-01-09T10:00:00+01:00";
+const modifiedTime = "2026-05-05T17:00:00+02:00";
+const image = "/images/hero/hero2.webp";
+const tags = keywords.split(",").map((tag) => tag.trim()).filter(Boolean);
+---
+
+<Base
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage={image}
+  article={{ publishedTime, modifiedTime, author, section: "Blog", tags }}
+  forceNavSolid={true}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li>
+          <a href="/#insights" class="text-gray-600 hover:text-orange-600">Insights</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">KI Projekt retten</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header bg-gradient-to-r from-red-50 to-orange-100 py-8 sm:py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">
+            Projektrettung
+          </span>
+          <span class="text-gray-500 text-sm">•</span>
+          <span class="text-gray-600 text-sm">10 Min. Lesezeit</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+          KI Projekt <span class="text-orange-600">retten</span>: 3 Praxisbeispiele
+        </h1>
+
+        <p class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+          {description}
+        </p>
+
+        <div class="flex items-center justify-center gap-4 text-sm text-gray-600">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+            {author}
+          </span>
+          <span>•</span>
+          <time datetime={publishedTime}>
+            {new Date(publishedTime).toLocaleDateString('de-DE', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Content -->
+  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
+    <!-- Introduction -->
+    <div class="prose prose-sm sm:prose-base md:prose-lg prose-orange max-w-none mb-10 sm:mb-12">
+      <p class="lead text-base sm:text-lg md:text-xl text-gray-700 font-medium">
+        Dein KI Projekt ist fast fertig, aber es wird nicht genutzt, liefert zu viele Fehler oder hängt in Endlosschleifen? In der Praxis ist das selten ein einzelner Bug. Meist ist es eine Mischung aus Daten, Einbindung in den Ablauf, Zuständigkeiten und fehlender Messbarkeit.
+      </p>
+
+      <p>
+        In diesem Beitrag zeige ich dir drei anonymisierte Projektrettungen aus unserer Arbeit. Du siehst, welche Ursachen wirklich dahinterstecken, wie wir sie schnell eingrenzen und wie man die Umsetzung so dreht, dass sie im Alltag funktioniert. Wenn das Projekt schon live war und wieder stabilisiert werden muss, ist der nächste Schritt oft eine gezielte KI-Remediation.
+      </p>
+
+      <p>
+        Wenn du eher am Einstieg interessiert bist, lies auch unseren <a href="/blog/ki-integration-5-schritte" class="text-orange-600 hover:text-orange-700 underline">Leitfaden zum Start</a>.
+      </p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 mb-12 border border-orange-200/50 shadow-sm">
+      <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Inhaltsverzeichnis</h2>
+      <ol class="space-y-2 text-gray-700 text-sm sm:text-base">
+        <li>
+          <a href="#symptome" class="hover:text-orange-600 transition-colors">1. Typische Symptome und was sie bedeuten</a>
+        </li>
+        <li>
+          <a href="#fallstudien" class="hover:text-orange-600 transition-colors">2. 3 Praxisbeispiele: So haben wir Projekte gerettet</a>
+        </li>
+        <li>
+          <a href="#vorgehen" class="hover:text-orange-600 transition-colors">3. Unser Vorgehen: Audit, Fix, Rollout</a>
+        </li>
+        <li>
+          <a href="#entscheidung" class="hover:text-orange-600 transition-colors">4. Reparieren oder neu bauen: Wann lohnt sich was?</a>
+        </li>
+        <li>
+          <a href="#start" class="hover:text-orange-600 transition-colors">5. Was wir für einen schnellen Start brauchen</a>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Section 1: Symptome -->
+    <section id="symptome" class="mb-14 md:mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+          <span class="text-orange-600 font-bold text-lg">1</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Typische Symptome und was sie bedeuten</h2>
+      </div>
+
+      <div class="prose prose-sm sm:prose-base md:prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Wenn ein KI Projekt scheitert, sieht man oft nur das Symptom. Die Ursache liegt meist eine Ebene tiefer. Diese Muster begegnen uns am häufigsten:
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Wird nicht genutzt</h3>
+          <p class="text-gray-700 text-sm">
+            Meist fehlt die Einbindung in deinen Ablauf, Zuständigkeiten sind unklar oder der Nutzen ist nicht sichtbar, weil niemand misst, ob es Zeit spart.
+          </p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Zu viele Fehlentscheidungen</h3>
+          <p class="text-gray-700 text-sm">
+            Häufige Ursachen sind schlechte Daten, zu wenig Tests mit echten Fällen, fehlende Schutzregeln und keine klare Eskalation, wenn etwas unsicher ist.
+          </p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">In der Demo gut, im Alltag schlecht</h3>
+          <p class="text-gray-700 text-sm">
+            Typisch bei instabilen Integrationen, fehlender Überwachung und wenn nur mit perfekten Beispielen getestet wurde.
+          </p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 mb-2">Kosten und Aufwand laufen aus dem Ruder</h3>
+          <p class="text-gray-700 text-sm">
+            Ursachen sind falscher Umfang, fehlende Priorisierung, zu viele Sonderfälle und keine klaren Abnahmekriterien.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-yellow-50 border-l-4 border-yellow-600 p-5 sm:p-6 mt-8">
+        <h4 class="font-bold text-gray-900 mb-2">Schneller Reality Check</h4>
+        <p class="text-gray-700 text-sm sm:text-base">
+          Wenn du aktuell keine belastbaren Zahlen zu <strong>Nutzung</strong>, <strong>Qualität</strong> und <strong>Zeit oder Kosteneffekt</strong> hast, ist das schon ein Hauptproblem. Wir starten deshalb fast immer mit einem kompakten Audit.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Fallstudien -->
+    <section id="fallstudien" class="mb-14 md:mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+          <span class="text-orange-600 font-bold text-lg">2</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">3 Praxisbeispiele: So haben wir Projekte gerettet</h2>
+      </div>
+
+      <div class="prose prose-sm sm:prose-base md:prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Die folgenden Beispiele sind anonymisiert. Sie passen zu Selbstständigen und kleinen Teams, die weniger Routinearbeit wollen und trotzdem sauber arbeiten müssen.
+        </p>
+      </div>
+
+      <!-- Case Study 1 -->
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 md:p-8 mb-6 border border-blue-200/70 border-l-4 border-l-blue-500 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-start gap-3 sm:gap-4 mb-5">
+          <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-bold text-gray-900 text-lg sm:text-xl">Fall 1: Leads und Terminbuchungen</h3>
+            <p class="text-sm text-gray-700">Problem: Der Ablauf existiert, aber am Ende wird wieder manuell nachgefasst.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-white/80 rounded-lg p-4 border border-blue-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Ausgangslage</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Leads aus Formularen und Ads</li>
+              <li>• Follow up passiert unregelmäßig</li>
+              <li>• CRM wird nicht konsequent gepflegt</li>
+            </ul>
+          </div>
+          <div class="bg-white/80 rounded-lg p-4 border border-blue-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Unsere Diagnose</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Kein klarer Besitzer für den Ablauf</li>
+              <li>• Sonderfälle fehlen, nichts ist verbindlich</li>
+              <li>• Keine Messung, ob es wirklich hilft</li>
+            </ul>
+          </div>
+          <div class="bg-white/80 rounded-lg p-4 border border-blue-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Was wir umgesetzt haben</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Klare Regeln für Status und nächste Schritte</li>
+              <li>• Automatische Übergabe an CRM und Kalender</li>
+              <li>• Kurze Auswertung: Nutzung, Antwortquote, Nacharbeit</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 mt-4 border border-blue-200">
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-2xl font-bold text-blue-700">3 bis 6 h</div>
+              <div class="text-xs text-gray-600">pro Woche weniger Nacharbeit</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-blue-700">klar</div>
+              <div class="text-xs text-gray-600">nächster Schritt je Lead</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-blue-700">wenige Wochen</div>
+              <div class="text-xs text-gray-600">bis stabil im Alltag</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 2 -->
+      <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 md:p-8 mb-6 border border-green-200/70 border-l-4 border-l-green-500 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-start gap-3 sm:gap-4 mb-5">
+          <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-bold text-gray-900 text-lg sm:text-xl">Fall 2: Postfach und Support Antworten</h3>
+            <p class="text-sm text-gray-700">Problem: Antworten sind inkonsistent, Vertrauen ist weg.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-white/80 rounded-lg p-4 border border-green-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Ausgangslage</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Viele ähnliche Anfragen per E Mail</li>
+              <li>• Wissen liegt in Docs und alten Threads</li>
+              <li>• Antworten wirken mal gut, mal daneben</li>
+            </ul>
+          </div>
+          <div class="bg-white/80 rounded-lg p-4 border border-green-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Unsere Diagnose</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Wissen ist nicht gepflegt und nicht versioniert</li>
+              <li>• Keine Regeln, wann eskaliert werden muss</li>
+              <li>• Zu wenig Tests mit echten Anfragen</li>
+            </ul>
+          </div>
+          <div class="bg-white/80 rounded-lg p-4 border border-green-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Was wir umgesetzt haben</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Wissen sortiert, gepflegt, mit klarer Quelle</li>
+              <li>• Antwortentwürfe statt Autopilot</li>
+              <li>• Eskalation, wenn etwas unsicher ist</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 mt-4 border border-green-200">
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-2xl font-bold text-green-700">weniger</div>
+              <div class="text-xs text-gray-600">Nachfragen und Rückläufer</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-green-700">klar</div>
+              <div class="text-xs text-gray-600">wann ein Mensch übernimmt</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-green-700">stabil</div>
+              <div class="text-xs text-gray-600">nach echten Tests</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 3 -->
+      <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 md:p-8 border border-purple-200/70 border-l-4 border-l-purple-500 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-start gap-3 sm:gap-4 mb-5">
+          <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-bold text-gray-900 text-lg sm:text-xl">Fall 3: Rechnungen und Belege</h3>
+            <p class="text-sm text-gray-700">Problem: Die Automatisierung erzeugt mehr Nacharbeit als vorher.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-white/80 rounded-lg p-4 border border-purple-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Ausgangslage</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• PDFs kommen aus vielen Quellen</li>
+              <li>• Belege sind unterschiedlich formatiert</li>
+              <li>• Korrekturen fressen Zeit</li>
+            </ul>
+          </div>
+          <div class="bg-white/80 rounded-lg p-4 border border-purple-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Unsere Diagnose</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Input Qualität schwankt stark</li>
+              <li>• Ein paar Lieferanten machen den Großteil aus</li>
+              <li>• Keine Regeln, wann geprüft werden muss</li>
+            </ul>
+          </div>
+          <div class="bg-white/80 rounded-lg p-4 border border-purple-200/60">
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm">Was wir umgesetzt haben</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Klare Standards für Upload und Scan</li>
+              <li>• Regeln je Lieferant, wo es Sinn ergibt</li>
+              <li>• Review nur bei Unsicherheit, nicht immer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 mt-4 border border-purple-200">
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-2xl font-bold text-purple-700">weniger</div>
+              <div class="text-xs text-gray-600">Nacharbeit pro Monat</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-700">sicher</div>
+              <div class="text-xs text-gray-600">Freigaben bleiben nachvollziehbar</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-700">ruhiger</div>
+              <div class="text-xs text-gray-600">Monatsabschluss</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Vorgehen -->
+    <section id="vorgehen" class="mb-14 md:mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+          <span class="text-orange-600 font-bold text-lg">3</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Unser Vorgehen: Audit, Fix, Rollout</h2>
+      </div>
+
+      <div class="prose prose-sm sm:prose-base md:prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Projektrettung funktioniert, wenn man schnell Klarheit schafft und dann konsequent umsetzt. Unser Prozess ist bewusst pragmatisch, mit messbaren Zwischenzielen statt langen Dokumenten.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-white border border-orange-200 rounded-xl p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Phase 1: Audit (48 Stunden)</h3>
+          <p class="text-sm text-gray-700 mb-3">Wir identifizieren Ursachen, Risiken und die schnellsten Hebel.</p>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• Check: Nutzung, Qualität, Impact</li>
+            <li>• Review von Integrationen, Logs und Abläufen</li>
+            <li>• Daten und Wissensquelle prüfen</li>
+            <li>• Plan: Reparieren oder neu bauen</li>
+          </ul>
+        </div>
+        <div class="bg-white border border-blue-200 rounded-xl p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Phase 2: Stabilisieren (2 bis 4 Wochen)</h3>
+          <p class="text-sm text-gray-700 mb-3">Wir liefern eine erste Version, die im Alltag funktioniert.</p>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• Schutzregeln und Eskalation</li>
+            <li>• Einbindung in CRM, Helpdesk, Mail oder Dateiablage</li>
+            <li>• Tests mit echten Fällen</li>
+            <li>• Monitoring und klare Zuständigkeit</li>
+          </ul>
+        </div>
+        <div class="bg-white border border-green-200 rounded-xl p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Phase 3: Qualität und Kosten (2 bis 6 Wochen)</h3>
+          <p class="text-sm text-gray-700 mb-3">Wir verbessern Treffer, Aufwand und Sonderfälle systematisch.</p>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• Evaluation und Iteration mit echten Daten</li>
+            <li>• Tuning von Prompts, Quellen und Regeln</li>
+            <li>• Kosten und Laufzeit optimieren</li>
+            <li>• DSGVO und Zugriffsschutz prüfen</li>
+          </ul>
+        </div>
+        <div class="bg-white border border-purple-200 rounded-xl p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Phase 4: Rollout und Nutzung</h3>
+          <p class="text-sm text-gray-700 mb-3">Wir sorgen dafür, dass es genutzt wird und bleibt.</p>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• Kurze Einweisung, klare Erwartung</li>
+            <li>• Feedback Schleifen mit echten Fällen</li>
+            <li>• Messwerte sichtbar machen</li>
+            <li>• Nachbessern, bis es stabil sitzt</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Entscheidung -->
+    <section id="entscheidung" class="mb-14 md:mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+          <span class="text-orange-600 font-bold text-lg">4</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Reparieren oder neu bauen: Wann lohnt sich was?</h2>
+      </div>
+
+      <div class="prose prose-sm sm:prose-base md:prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Manchmal ist ein Projekt nicht kaputt, sondern nur unpraktisch gebaut. Wir treffen die Entscheidung anhand von Aufwand, Risiko und dem erwarteten Effekt im Alltag.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl border-2 border-green-300 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Reparieren</h3>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li>• Die Kernidee stimmt, Probleme sind klar lokalisierbar</li>
+            <li>• Zugriff auf Code, Daten oder Logs ist möglich</li>
+            <li>• Integrationen lassen sich nachziehen</li>
+            <li>• Oft 4 bis 12 Wochen bis produktiv</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl border-2 border-red-300 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Neu bauen</h3>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li>• Architektur ist nicht wartbar oder nicht sicher</li>
+            <li>• Kein Zugriff auf Source oder Verträge blockieren</li>
+            <li>• Reparatur kostet fast so viel wie Neubau</li>
+            <li>• Oft 3 bis 6 Monate, dafür sauber und stabil</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Start -->
+    <section id="start" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+          <span class="text-orange-600 font-bold text-lg">5</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Was wir für einen schnellen Start brauchen</h2>
+      </div>
+
+      <div class="prose prose-sm sm:prose-base md:prose-lg prose-orange max-w-none">
+        <p>
+          Damit wir in kurzer Zeit eine belastbare Diagnose liefern können, reichen meist wenige Dinge. Je schneller wir an echte Fälle kommen, desto schneller wird es stabil.
+        </p>
+        <ul>
+          <li>
+            <strong>10 bis 20 echte Beispiele:</strong> Tickets, Dokumente, Dialoge oder Ausgaben, gern anonymisiert.
+          </li>
+          <li>
+            <strong>Ziel und Ablauf:</strong> Wer nutzt es, an welcher Stelle, und woran erkennst du Erfolg?
+          </li>
+          <li>
+            <strong>Zugriff:</strong> am besten lesend auf Logs oder eine kurze technische Session mit deinem Team.
+          </li>
+          <li>
+            <strong>Integration:</strong> Wo muss es hinein, zum Beispiel CRM, Helpdesk, Mail, Dateiablage, Buchhaltung.
+          </li>
+        </ul>
+        <p>
+          Wenn du willst, starten wir mit einem kurzen Erstgespräch und klären, ob Reparieren sinnvoll ist oder ob ein sauberer Neubau schneller zum Ziel führt.
+        </p>
+      </div>
+    </section>
+
+    <BlogCtaSection
+      accent="orange"
+      id="audit"
+      title="KI Projekt Check: In 30 Minuten Klarheit"
+      buttonText="Termin anfragen"
+    >
+      <p>
+        Wir schauen auf deinen Ablauf und die aktuelle Umsetzung. Danach weißt du, was der beste nächste Schritt ist und woran es bisher hängt.
+      </p>
+      <p>
+        Du bekommst eine klare Empfehlung: reparieren, neu bauen oder zuerst den Ablauf vereinfachen. Ohne Tool Gelaber, dafür so, dass du es im Alltag umsetzen kannst.
+      </p>
+    </BlogCtaSection>
+
+    <!-- Navigation Links -->
+    <section class="mt-12 pt-8 border-t border-gray-200 mb-16">
+      <div class="flex items-center mb-8">
+        <a href="/blog" class="inline-flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Zurück zu allen Artikeln
+        </a>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Verwandte Artikel</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/blog/ki-integration-5-schritte" class="group">
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 h-full flex flex-col">
+            <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded mb-3 inline-block">Einstieg</span>
+            <h4 class="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors mb-2 flex-grow">
+              Automatisierung starten in 5 Schritten
+            </h4>
+            <p class="text-gray-600 text-sm">Ein klarer Ablauf, damit du sauber startest und nicht im Tool Chaos landest.</p>
+          </div>
+        </a>
+
+        <a href="/blog/ki-teams-vorbereiten" class="group">
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 h-full flex flex-col">
+            <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded mb-3 inline-block">Alltag</span>
+            <h4 class="font-semibold text-gray-900 group-hover:text-green-600 transition-colors mb-2 flex-grow">
+              Teams und Abläufe so vorbereiten, dass es genutzt wird
+            </h4>
+            <p class="text-gray-600 text-sm">Technik allein reicht nicht. So bringst du es in deinen Alltag, ohne dass es umgangen wird.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "KI Projekt retten: 3 Praxisbeispiele, wie Automatisierung wieder stabil läuft",
+  "description": "Dein KI Projekt ist fast fertig, aber im Alltag läuft es nicht sauber? Typische Ursachen, drei Praxisbeispiele für Projektrettung und ein klarer Plan, damit es genutzt wird und stabil bleibt.",
+  "image": "/images/hero/hero2.webp",
+  "author": {
+    "@type": "Organization",
+    "name": "Codariq",
+    "url": "https://codariq.de"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Codariq",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/Logo1.svg"
+    }
+  },
+  "datePublished": "2025-01-09T10:00:00+01:00",
+  "dateModified": "2026-05-05T17:00:00+02:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://codariq.de/blog/ki-projekte-retten"
+  },
+  "keywords": "KI Projekt retten, KI-Projekt retten, Projektrettung, KI-Remediation, KI Projekt gescheitert, Automatisierung hängt fest, Prozessautomatisierung, Workflow automatisieren, E Mail automatisieren, Dokumente automatisieren, Rechnungen automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, DSGVO konforme Automatisierung",
+  "articleSection": "Projektrettung",
+  "wordCount": "2100"
+}
+</script>

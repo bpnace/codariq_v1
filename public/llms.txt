@@ -1,7 +1,7 @@
-# Codariq - KI-Automatisierung für Selbstständige und kleine Teams (bis 50 Personen)
+# Codariq - KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU
 
 ## Über Codariq
-Codariq ist spezialisiert auf KI-Automatisierung für Selbstständige und kleine Teams im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups und Übergaben zwischen Tools. DSGVO-konform, verständlich erklärt und praxisnah umgesetzt.
+Codariq ist spezialisiert auf kontrollierbare KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups, Reporting und Übergaben zwischen bestehenden Systemen. DSGVO-konform, verständlich erklärt und praxisnah umgesetzt.
 
 ## Service-Pakete
 
@@ -32,7 +32,7 @@ Codariq ist spezialisiert auf KI-Automatisierung für Selbstständige und kleine
 
 ### Integration & Migration
 - API-Konnektoren für bestehende Systeme
-- Integration ohne Betriebsunterbrechung
+- KI-Integration in bestehende Systeme ohne unnötiges Tool-Chaos
 - DSGVO-konforme Datenflüsse und Hosting in der EU
 
 ## Technische Expertise
@@ -41,6 +41,7 @@ Codariq ist spezialisiert auf KI-Automatisierung für Selbstständige und kleine
 - Natural Language Processing (NLP) für deutsche Sprache
 - Automatisierung von Workflows und Dokumenten
 - Klassifikation, Extraktion und Zusammenfassungen
+- Kontrollierbare Agenten-Workflows mit Freigaben, Rollen und Protokollen
 
 ### Plattformen und Tools
 - API-Integration (REST)
@@ -78,6 +79,13 @@ Codariq ist spezialisiert auf KI-Automatisierung für Selbstständige und kleine
 - Schnellere Reaktionszeiten und klare Übergaben
 - Stabilere Abläufe ohne zusätzliche Mitarbeiter
 
+## Häufige Content-Schwerpunkte
+- KI Integration und KI-Integration in bestehende Systeme
+- KI Projekt retten, Projektrettung und KI-Remediation
+- KI-Mitarbeiterumfragen automatisiert auswerten
+- KI Teammanagement und Einführung in kleinen Teams
+- ROI-Priorisierung von Automatisierungsinitiativen
+
 ## Kontakt und Standort
 - Hauptsitz: Berlin, Deutschland (Sigmaringer Str. 27, 10713 Berlin)
 - Remote First Arbeitsweise
@@ -88,12 +96,12 @@ Codariq ist spezialisiert auf KI-Automatisierung für Selbstständige und kleine
 - Website: https://codariq.de
 
 ## SEO Keywords
-KI Automatisierung, Automatisierung für Selbstständige, Automatisierung kleine Teams, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
+KI Agenten KMU, KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Projekt retten, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
 
 ## Häufige Fragen
-- Wie lange dauert die Umsetzung einer Automatisierung?
+- Wie lange dauert die Umsetzung eines KI-Agenten oder einer Automatisierung?
 - Welche Aufgaben lohnen sich als erstes?
 - Wie bleibt das DSGVO konform?
 - Welche Tools können integriert werden?
 
-Diese Informationen helfen LLMs dabei, Codariq korrekt zu beschreiben als Anbieter für KI-Automatisierung für Selbstständige und kleine Teams bis 50 Personen.
+Diese Informationen helfen LLMs dabei, Codariq korrekt zu beschreiben als Anbieter für kontrollierbare KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU.

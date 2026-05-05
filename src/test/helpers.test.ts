@@ -23,7 +23,7 @@ describe("calculateResults", () => {
     expect(results.productFit).toBe("premium");
     expect(results.recommendations.length).toBe(3);
     expect(
-      results.recommendations.some((rec) => rec.title.includes("KI-Chatbot"))
+      results.recommendations.some((rec) => rec.title.includes("Support-Agent"))
     ).toBe(true);
   });
 
@@ -47,7 +47,7 @@ describe("calculateResults", () => {
     expect(results.productFit).toBe("workshop");
     expect(
       results.recommendations.some((rec) =>
-        rec.title.includes("Einstiegs-Workshop")
+        rec.title.includes("Agenten-Readiness")
       )
     ).toBe(true);
   });

@@ -18,79 +18,73 @@ export interface Props {
 
 const {
   title = "So fühlt sich Entlastung im Alltag an",
-  subtitle = "Anonymisierte Rückmeldungen und typische Aussagen aus Projekten und Gesprächen mit Selbstständigen und kleinen Teams. Damit du schnell einschätzen kannst, was bei dir möglich ist.",
+  subtitle = "Typische Beispielszenarien aus Gesprächen mit Selbstständigen, kleinen Teams und KMU. Keine erfundenen Kundenstimmen, sondern realistische Muster, damit du einschätzen kannst, was bei dir möglich ist.",
   testimonials = [
     {
       quote:
-        "Als Solo Selbstständiger hatte ich das Gefühl, ich mache jeden Tag die gleiche Büroarbeit: Anfragen, Angebote, Ablage, Nachfassen. Jetzt laufen die wiederkehrenden Schritte automatisch im Hintergrund. Ich prüfe nur noch kurz und kann mich viel mehr auf Kunden und Umsatz konzentrieren.",
-      name: "Kevin Neumann",
-      position: "Selbstständiger Dienstleister",
-      company: "Beratung und Umsetzung",
-      image: "https://randomuser.me/api/portraits/men/41.jpg",
+        "Als Solo-Selbstständiger fühlt es sich schnell so an, als würde jeden Tag dieselbe Büroarbeit warten: Anfragen, Angebote, Ablage, Nachfassen. Ein sinnvoller Agenten-Workflow bereitet diese Schritte vor, während du die wichtigen Entscheidungen behältst.",
+      name: "Beispiel: Solo-Dienstleister",
+      position: "Anfragen, Angebote, Ablage",
+      company: "Typisches Szenario",
       results: {
-        metric: "8 h",
-        improvement: "pro Woche zurück",
+        metric: "1",
+        improvement: "klarer Workflow",
       },
       featured: true,
     },
     {
       quote:
-        "Unser Support kann sich endlich auf die kniffligen Fälle konzentrieren. Standard Anfragen werden zu 70 Prozent automatisch beantwortet, meist in unter 2 Minuten.",
-      name: "Dr. Michael Weber",
-      position: "CTO",
-      company: "B2B SaaS Anbieter",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+        "Im Support lohnt sich kein blinder Autopilot. Sinnvoller ist ein KI-Agent, der Anfragen sortiert, Antwortentwürfe vorbereitet und unsichere Fälle zur Freigabe an Menschen gibt.",
+      name: "Beispiel: Support-Team",
+      position: "Triage und Antwortentwürfe",
+      company: "Typisches Szenario",
       results: {
-        metric: "70%",
-        improvement: "Standardanfragen erledigt",
+        metric: "klar",
+        improvement: "Freigaben",
       },
     },
     {
       quote:
-        "Von 800 Rechnungen im Monat laufen 650 automatisch durch. Die Fehlerquote liegt unter 2 Prozent und die Durchlaufzeit ist 45 Prozent schneller.",
-      name: "Thomas Schneider",
-      position: "Leiter Operations",
-      company: "Steuerkanzlei und Buchhaltungsservice",
-      image: "https://randomuser.me/api/portraits/men/28.jpg",
+        "Bei Rechnungen und Dokumenten geht es nicht nur um Auslesen. Entscheidend ist, dass Dateien korrekt benannt, abgelegt und mit dem passenden nächsten Schritt verbunden werden.",
+      name: "Beispiel: Backoffice",
+      position: "Dokumente und Rechnungen",
+      company: "Typisches Szenario",
       results: {
-        metric: "45%",
-        improvement: "schnellerer Durchlauf",
+        metric: "weniger",
+        improvement: "Nacharbeit",
       },
     },
     {
       quote:
-        "Nach 6 Monaten und 85.000 Euro hatten wir nur Frust und kein funktionierendes System. Codariq hat das Projekt analysiert, aufgeräumt und in 3 Monaten produktiv gemacht.",
-      name: "Petra Richter",
-      position: "Finanzleiterin",
-      company: "Immobilienverwaltung und Hausverwaltung",
-      image: "https://randomuser.me/api/portraits/women/52.jpg",
+        "Wenn ein KI-Projekt festhängt, hilft oft kein weiteres Feature. Erst Scope, Daten, Prompts und Zuständigkeiten klären, dann kann aus Projektrettung wieder ein stabiler Ablauf werden.",
+      name: "Beispiel: KI-Remediation",
+      position: "Festgefahrenes Projekt",
+      company: "Typisches Szenario",
       results: {
-        metric: "3 Monate",
-        improvement: "bis produktiv",
+        metric: "Scope",
+        improvement: "geklärt",
       },
     },
     {
       quote:
-        "Neue Mitarbeitende finden Antworten sofort im internen Assistenten. Er greift auf 4 Jahre Doku zu und reduziert wiederkehrende Fragen um 85 Prozent.",
-      name: "Sarah Müller",
-      position: "Leiterin Kundenservice",
-      company: "E Commerce Händler (D2C)",
-      image: "https://randomuser.me/api/portraits/women/38.jpg",
+        "Ein Wissens-Agent ist nützlich, wenn er Quellen zeigt, Zugriffe respektiert und nicht so tut, als wüsste er alles. Dann finden Teams Antworten schneller und lernen trotzdem sauber weiter.",
+      name: "Beispiel: Wissens-Agent",
+      position: "Interne Fragen und Quellen",
+      company: "Typisches Szenario",
       results: {
-        metric: "85%",
-        improvement: "Weniger Rückfragen",
+        metric: "mit",
+        improvement: "Quellen",
       },
     },
     {
       quote:
-        "Über mehrere Bereiche hinweg haben wir messbare Verbesserungen. Von HR über Einkauf bis Controlling liegt der Effizienzgewinn im Schnitt bei 30 Prozent.",
-      name: "Dr. Anna Schmidt",
-      position: "Geschäftsführerin",
-      company: "Produktion und Handwerk",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
+        "Bei kleinen Unternehmen und KMU zählt nicht der größte KI-Stack. Entscheidend ist ein Agent, der bestehende Systeme verbindet und einen wiederkehrenden Prozess zuverlässig vorbereitet.",
+      name: "Beispiel: KMU-Prozess",
+      position: "Tool-Stack und Übergaben",
+      company: "Typisches Szenario",
       results: {
-        metric: "30%",
-        improvement: "Effizienzgewinn",
+        metric: "1",
+        improvement: "Startprozess",
       },
     },
   ],
@@ -247,7 +241,7 @@ const {
           class="text-sm sm:text-xl font-regular text-gray-600 mb-4 sm:mb-6 max-w-3xl leading-relaxed animate-on-scroll"
           style="transition-delay: 0.15s"
         >
-         In 30 Minuten schauen wir auf deinen Arbeitsalltag und finden ein bis zwei Stellen, an denen Automatisierung dir konkret Zeit, Nerven und Routinearbeit abnimmt.
+         In 30 Minuten schauen wir auf deinen Arbeitsalltag und finden ein bis zwei Stellen, an denen ein KI-Agent oder eine einfache KI-Integration konkret Zeit, Nerven und Routinearbeit abnimmt.
         </p>
         <div class="animate-on-scroll" style="transition-delay: 0.3s">
           <a
