@@ -168,7 +168,7 @@ const pipelineItems = [
       ),
       linear-gradient(135deg, #f7fafc 0%, #edf4f8 52%, #f6fbf8 100%);
     color: #0b1220;
-    padding: 7.2rem 0 4.5rem;
+    padding: 2rem 0 4.5rem;
   }
 
   .secure-hero__ambient {
@@ -203,6 +203,8 @@ const pipelineItems = [
     grid-template-columns: minmax(0, 0.9fr) minmax(30rem, 1fr);
     gap: clamp(2.4rem, 5vw, 6rem);
     align-items: center;
+    perspective: 1400px;
+    perspective-origin: 74% 42%;
   }
 
   .secure-hero__copy {
@@ -327,13 +329,23 @@ const pipelineItems = [
   }
 
   .secure-console {
+    --console-light-x: 58;
+    --console-light-y: 28;
     position: relative;
     padding: clamp(1rem, 1.6vw, 1.35rem);
     background: rgba(255, 255, 255, 0.78);
     border: 1px solid rgba(15, 23, 42, 0.1);
     border-radius: 18px;
-    box-shadow: 0 28px 90px rgba(15, 23, 42, 0.16);
+    box-shadow:
+      0 28px 90px rgba(15, 23, 42, 0.16),
+      -26px 32px 80px rgba(20, 184, 166, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.74);
     backdrop-filter: blur(18px);
+    transform: rotateX(-2deg) rotateY(-5deg);
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    isolation: isolate;
     will-change: transform;
   }
 
@@ -351,8 +363,35 @@ const pipelineItems = [
     pointer-events: none;
   }
 
+  .secure-console::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        circle at calc(var(--console-light-x) * 1%)
+          calc(var(--console-light-y) * 1%),
+        rgba(255, 255, 255, 0.62),
+        transparent 28%
+      ),
+      linear-gradient(
+        118deg,
+        rgba(255, 255, 255, 0.16),
+        transparent 38%,
+        rgba(20, 184, 166, 0.14) 82%,
+        rgba(37, 99, 235, 0.11)
+      );
+    opacity: 0.78;
+    pointer-events: none;
+    z-index: 1;
+    transform: translateZ(34px);
+  }
+
   .secure-console > * {
     position: relative;
+    z-index: 2;
+    transform: translateZ(24px);
   }
 
   .secure-console__topbar,
@@ -453,6 +492,7 @@ const pipelineItems = [
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(15, 23, 42, 0.08);
     border-radius: 12px;
+    transform: translateZ(34px);
   }
 
   .pipeline-card strong {
@@ -529,6 +569,7 @@ const pipelineItems = [
   @media (max-width: 1040px) {
     .secure-hero__inner {
       grid-template-columns: 1fr;
+      perspective-origin: 50% 48%;
     }
   }
 
