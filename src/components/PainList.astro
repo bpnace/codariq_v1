@@ -12,25 +12,6 @@ export interface Props {
   }>;
 }
 
-const iconMeta: Record<string, { title: string; d: string }> = {
-  mail: {
-    title: "Email Icon",
-    d: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-  },
-  document: {
-    title: "Document Icon",
-    d: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-  },
-  book: {
-    title: "Book Icon",
-    d: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
-  },
-  link: {
-    title: "Link Icon",
-    d: "M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1",
-  },
-};
-
 const defaultProblems = [
   {
     title: "Anfragen bleiben im Postfach hängen",
@@ -38,7 +19,7 @@ const defaultProblems = [
       "Kundenanfragen, Bewerbungen und interne Rückfragen kommen rein, aber niemand sieht sofort, was wichtig ist, was warten kann und wer reagieren muss.",
     outcome: "Schneller priorisieren, weniger Nachfassen.",
     solution:
-      "Ein Postfach-Agent erkennt Anliegen, Dringlichkeit und nächste Schritte. Er erstellt Antwortentwürfe, Aufgaben und Übergaben, während kritische Nachrichten zur Freigabe bei dir bleiben.",
+      "Postfach-Agent mit Triage, Antwortentwürfen, Übergaben und Freigabe für kritische Nachrichten.",
     icon: "mail",
   },
   {
@@ -47,7 +28,7 @@ const defaultProblems = [
       "Rechnungen, Verträge, Formulare und Anhänge liegen in verschiedenen Ordnern. Prüfen, benennen, ablegen und nachfragen passiert immer noch manuell.",
     outcome: "Weniger Copy Paste, sauberere Übergaben.",
     solution:
-      "Ein Backoffice-Agent liest Dokumente aus, erkennt fehlende Angaben, schlägt Ablageorte vor und übergibt Daten an Buchhaltung, CRM oder Projekttool.",
+      "Backoffice-Agent mit Dokumentenerkennung, fehlenden Angaben und Übergabe an Buchhaltung, CRM oder Projekttool.",
     icon: "document",
   },
   {
@@ -56,7 +37,7 @@ const defaultProblems = [
       "Antworten stecken in Mails, Chats, PDFs, Notizen und Köpfen. Neue Mitarbeitende fragen nach, Kunden warten und Entscheidungen dauern länger.",
     outcome: "Schnellere Antworten mit Quellen.",
     solution:
-      "Ein Wissens-Agent durchsucht freigegebene Inhalte, beantwortet Fragen mit Quellen und zeigt Lücken, statt unsicher zu raten.",
+      "Wissens-Agent mit freigegebenen Quellen, Zugriffsschutz und klaren Grenzen, wenn Informationen fehlen.",
     icon: "book",
   },
   {
@@ -65,7 +46,7 @@ const defaultProblems = [
       "Ein kleiner n8n-Workflow startet gut, aber dann kommen Sonderfälle, mehr Tools, mehr Daten und die Frage: Wer darf eigentlich was automatisch tun?",
     outcome: "Vom Workflow zum kontrollierten Agenten.",
     solution:
-      "Wir bauen erst den kleinsten sinnvollen Agenten und skalieren bei Bedarf zu einem Agenten-Setup mit Rollen, Logs, Freigaben, DSGVO-konformen Datenflüssen und OpenClaw-Infrastruktur.",
+      "Vom n8n-Agenten zu Rollen, Logs, Freigaben, DSGVO-konformen Datenflüssen und OpenClaw-Infrastruktur.",
     icon: "link",
   },
 ];
@@ -78,264 +59,192 @@ const {
 } = Astro.props;
 ---
 
-<section id="pain-points" class="py-12 sm:py-16 md:py-20 bg-gray-50">
-  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2
-        class="section-title mb-3 sm:mb-4 animate-on-scroll"
-      >
-        {title}
-      </h2>
-      <p
-        class="section-subtitle max-w-3xl mx-auto animate-on-scroll"
-        style="transition-delay: 0.15s"
-      >
-        {subtitle}
-      </p>
+<section id="pain-points" data-enterprise-section class="usecase-suite">
+  <div class="saas-container">
+    <div class="saas-heading enterprise-reveal">
+      <span>Sichere Use Cases</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
     </div>
 
-    <!-- Problem Cards Grid -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 max-w-7xl mx-auto px-2 sm:px-3 md:px-4"
-    >
+    <div class="usecase-suite__grid">
       {
-        problems.map((problem, index) => (
-          <div
-            class="group animate-fade-in-up h-full"
-            style={`animation-delay: ${(index + 1) * 150}ms`}
-          >
-            <div class="flip-card h-full">
-              <input
-                type="checkbox"
-                id={`pain-card-${index}`}
-                class="flip-toggle"
-                aria-label={`Lösung anzeigen: ${problem.title}`}
-              />
-
-              <div class="flip-inner">
-                {/* Front */}
-                <label
-                  data-flip-toggle={`pain-card-${index}`}
-                  class="flip-face flip-front bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col cursor-pointer"
-                  role="button"
-                  tabindex="0"
-                  aria-pressed="false"
-                >
-                  {/* Icon */}
-                  <div class="mb-3 sm:mb-4">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-300">
-                      {
-                        iconMeta[problem.icon] && (
-                          <svg
-                            class="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <title>{iconMeta[problem.icon].title}</title>
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d={iconMeta[problem.icon].d}
-                            />
-                          </svg>
-                        )
-                      }
-                    </div>
-                  </div>
-
-                  <div class="flex-1">
-                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2 sm:mb-3">
-                      {problem.title}
-                    </h3>
-                    <p class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed mb-4">
-                      {problem.description}
-                    </p>
-                  </div>
-
-                  <div class="pt-3 border-t border-gray-100">
-                    <p class="text-sm sm:text-base font-semibold text-gray-900">
-                      Ergebnis:{" "}
-                      <span class="font-medium text-gray-700">
-                        {problem.outcome}
-                      </span>
-                    </p>
-                    <p class="mt-2 text-sm sm:text-base font-black text-[color:var(--color-brand-light)]">
-                      Klick für die Lösung
-                    </p>
-                  </div>
-                </label>
-
-                {/* Back */}
-                <label
-                  data-flip-toggle={`pain-card-${index}`}
-                  class="flip-face flip-back bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 h-full flex flex-col text-center cursor-pointer"
-                  role="button"
-                  tabindex="0"
-                  aria-pressed="false"
-                >
-                  <div class="mb-3 sm:mb-4">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-50 flex items-center justify-center">
-                      {
-                        iconMeta[problem.icon] && (
-                          <svg
-                            class="w-7 h-7 sm:w-8 sm:h-8 text-green-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <title>{iconMeta[problem.icon].title}</title>
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d={iconMeta[problem.icon].d}
-                            />
-                          </svg>
-                        )
-                      }
-                    </div>
-                  </div>
-                  <div class="flex-1 flex flex-col items-center justify-center">
-                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
-                      {problem.title}
-                    </h3>
-                    <p class="text-sm sm:text-base font-normal text-gray-600 leading-relaxed">
-                      {problem.solution}
-                    </p>
-                    <p class="mt-5 text-sm sm:text-base font-bold text-[color:var(--color-brand-light)]">
-                      Zurück
-                    </p>
-                  </div>
-                </label>
+        problems.map((problem) => (
+          <article class="usecase-card enterprise-card">
+            <div class="usecase-card__top">
+              <div class="usecase-icon" aria-hidden="true">
+                <span />
               </div>
+              <p>{problem.outcome}</p>
             </div>
-          </div>
+            <h3>{problem.title}</h3>
+            <p class="usecase-card__description">{problem.description}</p>
+            <div class="usecase-card__solution">
+              <strong>Agenten-Setup</strong>
+              <span>{problem.solution}</span>
+            </div>
+          </article>
         ))
       }
     </div>
 
-    <p class="mt-8 sm:mt-10 text-center text-sm sm:text-base text-gray-700 max-w-4xl mx-auto px-4 animate-on-scroll">
-      {closingText}
-    </p>
+    <div class="usecase-suite__closing enterprise-reveal">
+      <div>
+        <strong>Kontrolliert starten</strong>
+        <p>{closingText}</p>
+      </div>
+      <a href="/#final-cta">Startpunkt prüfen</a>
+    </div>
   </div>
 </section>
 
-<script type="module">
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".flip-card").forEach((card) => {
-      const toggle = card.querySelector(".flip-toggle");
-      if (!(toggle instanceof HTMLInputElement)) return;
-      const triggers = card.querySelectorAll("[data-flip-toggle]");
-      const updateAria = () => {
-        triggers.forEach((trigger) => {
-          if (trigger instanceof HTMLElement) {
-            trigger.setAttribute("aria-pressed", String(toggle.checked));
-          }
-        });
-      };
-      const handleToggle = (event) => {
-        event.preventDefault();
-        toggle.checked = !toggle.checked;
-        updateAria();
-      };
-      triggers.forEach((trigger) => {
-        trigger.addEventListener("click", handleToggle);
-        trigger.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            handleToggle(event);
-          }
-        });
-      });
-      updateAria();
-    });
-  });
-</script>
-
 <style>
-  .flip-card {
-    perspective: 1000px;
-    position: relative;
-    min-height: 360px;
+  .usecase-suite {
+    background: #f4f8fb;
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
   }
 
-  .flip-toggle {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .flip-inner {
-    position: relative;
+  .usecase-suite__grid {
     display: grid;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
   }
 
-  .flip-face {
-    grid-area: 1 / 1;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+  .usecase-card {
+    min-height: 25rem;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.07);
   }
 
-  .flip-back {
-    transform: rotateY(180deg);
+  .usecase-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
-  .flip-toggle:checked ~ .flip-inner {
-    transform: rotateY(180deg);
+  .usecase-icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 10px;
+    background: linear-gradient(
+      135deg,
+      rgba(20, 184, 166, 0.16),
+      rgba(37, 99, 235, 0.08)
+    );
   }
 
-  /* Focus ring on the whole card when tabbing */
-  .flip-toggle:focus-visible ~ .flip-inner .flip-front,
-  .flip-toggle:focus-visible ~ .flip-inner .flip-back {
-    outline: 2px solid rgba(232, 80, 2, 0.8);
-    outline-offset: 4px;
+  .usecase-icon span {
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 4px;
+    background: #14b8a6;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .flip-inner {
-      transition: none;
+  .usecase-card__top p {
+    max-width: 9rem;
+    color: #0f766e;
+    text-align: right;
+    font-size: 0.78rem;
+    font-weight: 900;
+    line-height: 1.25;
+  }
+
+  .usecase-card h3 {
+    margin-top: 2rem;
+    color: #0b1220;
+    font-size: clamp(1.35rem, 1.9vw, 1.95rem);
+    font-weight: 920;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+  }
+
+  .usecase-card__description {
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.98rem;
+    font-weight: 570;
+    line-height: 1.5;
+  }
+
+  .usecase-card__solution {
+    margin-top: auto;
+    padding-top: 1.2rem;
+  }
+
+  .usecase-card__solution strong {
+    display: block;
+    color: #0b1220;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .usecase-card__solution span {
+    display: block;
+    margin-top: 0.4rem;
+    color: #475569;
+    font-size: 0.92rem;
+    font-weight: 620;
+    line-height: 1.45;
+  }
+
+  .usecase-suite__closing {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.4rem;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 1.25rem;
+    background: #0b1220;
+    color: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  }
+
+  .usecase-suite__closing strong {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 900;
+  }
+
+  .usecase-suite__closing p {
+    margin-top: 0.35rem;
+    color: #cbd5e1;
+    font-size: 0.98rem;
+    font-weight: 560;
+    line-height: 1.45;
+  }
+
+  .usecase-suite__closing a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.85rem;
+    padding: 0.8rem 1rem;
+    background: #14b8a6;
+    color: #052e2b;
+    border-radius: 8px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 1180px) {
+    .usecase-suite__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (min-width: 1024px) {
-    .flip-card {
-      min-height: 420px;
+  @media (max-width: 700px) {
+    .usecase-suite__grid,
+    .usecase-suite__closing {
+      grid-template-columns: 1fr;
     }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  /* Intersection Observer will add is-visible class */
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
-  }
-
-  .animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 </style>

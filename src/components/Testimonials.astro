@@ -26,10 +26,7 @@ const {
       name: "Beispiel: Solo-Dienstleister",
       position: "Anfragen, Angebote, Ablage",
       company: "Typisches Szenario",
-      results: {
-        metric: "1",
-        improvement: "klarer Workflow",
-      },
+      results: { metric: "1", improvement: "klarer Workflow" },
       featured: true,
     },
     {
@@ -38,10 +35,7 @@ const {
       name: "Beispiel: Support-Team",
       position: "Triage und Antwortentwürfe",
       company: "Typisches Szenario",
-      results: {
-        metric: "klar",
-        improvement: "Freigaben",
-      },
+      results: { metric: "klar", improvement: "Freigaben" },
     },
     {
       quote:
@@ -49,10 +43,7 @@ const {
       name: "Beispiel: Backoffice",
       position: "Dokumente und Rechnungen",
       company: "Typisches Szenario",
-      results: {
-        metric: "weniger",
-        improvement: "Nacharbeit",
-      },
+      results: { metric: "weniger", improvement: "Nacharbeit" },
     },
     {
       quote:
@@ -60,10 +51,7 @@ const {
       name: "Beispiel: KI-Remediation",
       position: "Festgefahrenes Projekt",
       company: "Typisches Szenario",
-      results: {
-        metric: "Scope",
-        improvement: "geklärt",
-      },
+      results: { metric: "Scope", improvement: "geklärt" },
     },
     {
       quote:
@@ -71,10 +59,7 @@ const {
       name: "Beispiel: Wissens-Agent",
       position: "Interne Fragen und Quellen",
       company: "Typisches Szenario",
-      results: {
-        metric: "mit",
-        improvement: "Quellen",
-      },
+      results: { metric: "mit", improvement: "Quellen" },
     },
     {
       quote:
@@ -82,244 +67,187 @@ const {
       name: "Beispiel: KMU-Prozess",
       position: "Tool-Stack und Übergaben",
       company: "Typisches Szenario",
-      results: {
-        metric: "1",
-        improvement: "Startprozess",
-      },
+      results: { metric: "1", improvement: "Startprozess" },
     },
   ],
 } = Astro.props;
 ---
 
-<section id="testimonials" class="py-12 sm:py-16 md:py-20 bg-white">
-  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2
-        class="section-title mb-3 sm:mb-4 animate-on-scroll"
-      >
-        {title}
-      </h2>
-      <p
-        class="section-subtitle max-w-3xl mx-auto animate-on-scroll"
-        style="transition-delay: 0.15s"
-      >
-        {subtitle}
-      </p>
+<section id="testimonials" data-enterprise-section class="proof-suite">
+  <div class="saas-container">
+    <div class="saas-heading saas-heading--center enterprise-reveal">
+      <span>Use Case Evidence</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
     </div>
 
-    <!-- Testimonials Grid -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 max-w-8xl mx-auto px-2 sm:px-3 md:px-4 relative"
-    >
+    <div class="proof-suite__grid">
       {
-        testimonials.map((testimonial, index) => {
-          // Progressive gradient classes based on row
-          const getGradientClass = (idx) => {
-            if (idx < 2) return "testimonial-gradient-light";   // Row 1: cards 1-2
-            if (idx < 4) return "testimonial-gradient-medium";  // Row 2: cards 3-4
-            return "testimonial-gradient-heavy";                // Row 3: cards 5-6
-          };
-          const gradientClass = getGradientClass(index);
-          const isHiddenOnMobile = index >= 2; // Hide testimonials 3-6 on mobile
-          return (
-            <div
-              class={`group animate-fade-in-up relative ${gradientClass} ${isHiddenOnMobile ? "hidden md:block" : ""}`}
-              style={`animation-delay: ${(index + 1) * 150}ms`}
-            >
-              {/* Testimonial Card */}
-              <div
-                class={`
-              rounded-xl p-4 sm:p-5 md:p-6 shadow-sm border h-full flex flex-col transition-all duration-300
-              bg-white border-gray-200 hover:shadow-md
-            `}
-              >
-                {/* Quote Icon */}
-                <div class="mb-3 sm:mb-4">
-                  <svg
-                    class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
-                </div>
-
-                {/* Quote Text */}
-                <blockquote class="mb-4 sm:mb-5 leading-relaxed text-sm sm:text-base flex-1 text-gray-700">
-                  "{testimonial.quote}"
-                </blockquote>
-
-                {/* Author Info */}
-                <div class="flex items-center gap-3 sm:gap-4">
-                  {/* Avatar */}
-                  <div class="flex-shrink-0">
-                    <div class="rounded-full overflow-hidden border-2 w-12 h-12 sm:w-14 sm:h-14 border-gray-200">
-                      {testimonial.image ? (
-                        <img
-                          src={testimonial.image}
-                          alt={`${testimonial.name}, ${testimonial.position}`}
-                          class="w-full h-full object-cover"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : (
-                        <div class="w-full h-full flex items-center justify-center text-white font-bold text-sm bg-gray-400">
-                          {testimonial.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div class="flex-1 min-w-0">
-                    {/* Author Details */}
-                    <div class="mb-2">
-                      <div class="font-bold text-sm sm:text-base text-gray-900">
-                        {testimonial.name}
-                      </div>
-                      <div class="text-xs sm:text-sm text-gray-600">
-                        {testimonial.position}
-                      </div>
-                      <div class="text-xs sm:text-sm font-medium text-gray-500">
-                        {testimonial.company}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Results Badge */}
-                  {testimonial.results && (
-                    <div class="text-center px-3 py-2 rounded-lg border flex-shrink-0 border-gray-200 bg-gray-50">
-                      <div class="font-bold text-lg sm:text-xl text-gray-900">
-                        {testimonial.results.metric}
-                      </div>
-                      <div class="text-xs font-medium text-gray-600">
-                        {testimonial.results.improvement}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Decorative Element */}
-                <div class="absolute bottom-4 right-4 opacity-5 transition-opacity duration-300">
-                  <svg
-                    class="w-8 h-8 sm:w-12 sm:h-12 text-gray-500"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-                  </svg>
-                </div>
-              </div>
+        testimonials.map((testimonial) => (
+          <article
+            class={`proof-card enterprise-card ${testimonial.featured ? "proof-card--featured" : ""}`}
+          >
+            <div class="proof-card__meta">
+              <span>{testimonial.company}</span>
+              <strong>{testimonial.name}</strong>
+              <p>{testimonial.position}</p>
             </div>
-          );
-        })
+            <blockquote>{testimonial.quote}</blockquote>
+            {testimonial.results && (
+              <div class="proof-card__result">
+                <strong>{testimonial.results.metric}</strong>
+                <span>{testimonial.results.improvement}</span>
+              </div>
+            )}
+          </article>
+        ))
       }
-
-      <!-- Gradient Overlay for Second Row -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div
-          class="absolute top-1/2 left-0 right-0 bottom-0 bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent"
-        >
-        </div>
-      </div>
     </div>
 
-    <!-- Call to Action -->
-    <div class="text-center -mt-16 sm:-mt-20 md:-mt-24 relative z-20 px-4">
-      <div
-        class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-200 max-w-4xl mx-auto animate-on-scroll"
-      >
-        <h3
-          class="text-xl sm:text-3xl font-black text-gray-900 mb-3 sm:mb-4 animate-on-scroll"
-        >
-          Klingt nach Entlastung? Lass uns kurz sprechen.
-        </h3>
-        <p
-          class="text-sm sm:text-xl font-regular text-gray-600 mb-4 sm:mb-6 max-w-3xl leading-relaxed animate-on-scroll"
-          style="transition-delay: 0.15s"
-        >
-         In 30 Minuten schauen wir auf deinen Arbeitsalltag und finden ein bis zwei Stellen, an denen ein KI-Agent oder eine einfache KI-Integration konkret Zeit, Nerven und Routinearbeit abnimmt.
+    <div class="proof-suite__cta enterprise-reveal">
+      <div>
+        <strong>Klingt nach Entlastung?</strong>
+        <p>
+          In 30 Minuten schauen wir auf deinen Arbeitsalltag und finden ein bis
+          zwei Stellen, an denen ein KI-Agent oder eine sichere KI-Integration
+          konkret hilft.
         </p>
-        <div class="animate-on-scroll" style="transition-delay: 0.3s">
-          <a
-            href="#final-cta"
-            class="inline-flex items-center gap-2 bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 font-medium text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-[color:var(--color-cta-primary-ring)] shadow-lg cta-button"
-          >
-            Termin buchen
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-          </a>
-        </div>
       </div>
+      <a href="#final-cta">Termin buchen</a>
     </div>
   </div>
 </section>
 
 <style>
-  /* Base testimonial gradient structure */
-  .testimonial-gradient-light,
-  .testimonial-gradient-medium,
-  .testimonial-gradient-heavy {
-    position: relative;
+  .proof-suite {
+    background: #ffffff;
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
   }
 
-  .testimonial-gradient-light::before,
-  .testimonial-gradient-medium::before,
-  .testimonial-gradient-heavy::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(249, 250, 251, var(--opacity-1, 0.2)) var(--stop-1, 30%),
-      rgba(249, 250, 251, var(--opacity-2, 0.4)) var(--stop-2, 60%),
-      rgba(249, 250, 251, var(--opacity-3, 0.6)) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
+  .proof-suite__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
   }
 
-  /* Light gradient for Row 1 (cards 1-2) - Slight overlay */
-  .testimonial-gradient-light::before {
-    --opacity-1: 0.2;
-    --stop-1: 30%;
-    --opacity-2: 0.4;
-    --stop-2: 60%;
-    --opacity-3: 0.6;
+  .proof-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 22rem;
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
   }
 
-  /* Medium gradient for Row 2 (cards 3-4) - Medium overlay */
-  .testimonial-gradient-medium::before {
-    --opacity-1: 0.4;
-    --stop-1: 20%;
-    --opacity-2: 0.65;
-    --stop-2: 50%;
-    --opacity-3: 0.85;
+  .proof-card--featured {
+    background: linear-gradient(135deg, #ecfdf5, #eff6ff);
   }
 
-  /* Heavy gradient for Row 3 (cards 5-6) - Heavy overlay */
-  .testimonial-gradient-heavy::before {
-    --opacity-1: 0.6;
-    --stop-1: 15%;
-    --opacity-2: 0.85;
-    --stop-2: 35%;
-    --opacity-3: 1;
+  .proof-card__meta span {
+    color: #0f766e;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .proof-card__meta strong {
+    display: block;
+    margin-top: 0.55rem;
+    color: #0b1220;
+    font-size: 1.16rem;
+    font-weight: 900;
+  }
+
+  .proof-card__meta p {
+    margin-top: 0.18rem;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 620;
+  }
+
+  .proof-card blockquote {
+    margin-top: 1.3rem;
+    color: #334155;
+    font-size: 1rem;
+    font-weight: 590;
+    line-height: 1.55;
+  }
+
+  .proof-card__result {
+    margin-top: auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.2rem;
+  }
+
+  .proof-card__result strong {
+    color: #0b1220;
+    font-size: 1.55rem;
+    font-weight: 950;
+    letter-spacing: -0.05em;
+  }
+
+  .proof-card__result span {
+    color: #0f766e;
+    text-align: right;
+    font-size: 0.86rem;
+    font-weight: 850;
+  }
+
+  .proof-suite__cta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.2rem;
+    align-items: center;
+    margin-top: 1rem;
+    background: #0b1220;
+    color: #f8fafc;
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.13);
+  }
+
+  .proof-suite__cta strong {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  .proof-suite__cta p {
+    margin-top: 0.35rem;
+    color: #cbd5e1;
+    font-weight: 570;
+    line-height: 1.45;
+  }
+
+  .proof-suite__cta a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.85rem;
+    padding: 0.8rem 1rem;
+    background: #14b8a6;
+    color: #052e2b;
+    border-radius: 8px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 1040px) {
+    .proof-suite__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .proof-suite__grid,
+    .proof-suite__cta {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -10,211 +10,167 @@ const {
   subtitle = "Artikel für Selbstständige, kleine Teams und KMU in DACH. Du siehst, wie KI-Integration in bestehende Systeme gelingt, wann KI-Remediation sinnvoll ist und wie du Prozesse nach ROI priorisierst.",
   showAllLink = true,
 } = Astro.props;
+
+const posts = [
+  {
+    href: "/blog/ki-integration-bestehende-systeme",
+    label: "KI-Integration",
+    title: "KI-Integration in bestehende Systeme",
+    description:
+      "Wie du KI sauber mit CRM, E-Mail, Kalender und Buchhaltung verbindest, statt durch neue Software für KI-Cloud-Integration zusätzliches Tool-Chaos zu erzeugen.",
+    time: "11 Min.",
+  },
+  {
+    href: "/blog/ki-mitarbeiterumfragen-automatisieren",
+    label: "Teamfeedback",
+    title: "KI-Mitarbeiterumfragen automatisiert auswerten",
+    description:
+      "Wie kleine Teams Mitarbeiterumfragen automatisiert auswerten, Risiken erkennen und aus Feedback konkrete Maßnahmen machen.",
+    time: "10 Min.",
+  },
+  {
+    href: "/blog/ki-remediation-projekte-retten",
+    label: "KI-Remediation",
+    title: "Festgefahrene KI-Projekte wieder in Betrieb bringen",
+    description:
+      "Ein Reparaturplan für KI-Projektrettung, KI-Remediation und Projekte, die nicht genutzt werden oder im Betrieb hängen bleiben.",
+    time: "12 Min.",
+  },
+];
 ---
 
-<section id="insights" class="py-12 sm:py-16 md:py-20 bg-gray-50">
-  <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-    <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2 class="section-title mb-3 sm:mb-4 animate-on-scroll">
-        {title}
-      </h2>
-      <p
-        class="section-subtitle max-w-3xl mx-auto animate-on-scroll"
-        style="transition-delay: 0.15s"
-      >
-        {subtitle}
-      </p>
+<section id="insights" data-enterprise-section class="resource-suite">
+  <div class="saas-container">
+    <div class="saas-heading enterprise-reveal">
+      <span>Knowledge Base</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
     </div>
 
-    <!-- Blog Posts Grid -->
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Blog Post 1 - Newest: KI Integration -->
-        <article
-          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
-        >
-          <a href="/blog/ki-integration-bestehende-systeme" class="block">
-            <div class="mb-4">
-              <div
-                class="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-blue-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                  ></path>
-                </svg>
-              </div>
-              <span
-                class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded"
-              >
-                KI-Integration
-              </span>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors"
-            >
-              KI-Integration in bestehende Systeme
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Wie du KI sauber mit CRM, E-Mail, Kalender und Buchhaltung
-              verbindest, statt durch neue Software für KI-Cloud-Integration
-              zusätzliches Tool-Chaos zu erzeugen.
-            </p>
-            <div
-              class="flex items-center justify-between text-xs text-gray-500"
-            >
-              <span>11 Min. Lesezeit</span>
-              <span class="text-blue-600 font-semibold">Neu</span>
-            </div>
-          </a>
-        </article>
-
-        <!-- Blog Post 2 - Teamfeedback -->
-        <article
-          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
-        >
-          <a href="/blog/ki-mitarbeiterumfragen-automatisieren" class="block">
-            <div class="mb-4">
-              <div
-                class="w-full h-32 bg-gradient-to-br from-purple-100 to-blue-200 rounded-lg flex items-center justify-center mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-purple-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"
-                  ></path>
-                </svg>
-              </div>
-              <span
-                class="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded"
-              >
-                Teamfeedback
-              </span>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors"
-            >
-              KI-Mitarbeiterumfragen automatisiert auswerten
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Wie kleine Teams Mitarbeiterumfragen automatisiert auswerten,
-              Risiken erkennen und aus Feedback konkrete Maßnahmen machen.
-            </p>
-            <div
-              class="flex items-center justify-between text-xs text-gray-500"
-            >
-              <span>10 Min. Lesezeit</span>
-              <span class="text-purple-600 font-semibold">Neu</span>
-            </div>
-          </a>
-        </article>
-
-        <!-- Blog Post 3 - Remediation -->
-        <article
-          class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 group"
-        >
-          <a href="/blog/ki-remediation-projekte-retten" class="block">
-            <div class="mb-4">
-              <div
-                class="w-full h-32 bg-gradient-to-br from-red-100 to-orange-200 rounded-lg flex items-center justify-center mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-red-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M5.636 5.636l3.536 3.536m0 5.656l-3.536 3.536M9.172 9.172a4 4 0 015.656 0 4 4 0 010 5.656 4 4 0 01-5.656 0 4 4 0 010-5.656z"
-                  ></path>
-                </svg>
-              </div>
-              <span
-                class="text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded"
-              >
-                KI-Remediation
-              </span>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
-            >
-              Festgefahrene KI-Projekte wieder in Betrieb bringen
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-              Ein Reparaturplan für KI-Projektrettung, KI-Remediation und
-              Projekte, die nicht genutzt werden oder im Betrieb hängen bleiben.
-            </p>
-            <div
-              class="flex items-center justify-between text-xs text-gray-500"
-            >
-              <span>12 Min. Lesezeit</span>
-              <span class="text-red-600 font-semibold">Neu</span>
-            </div>
-          </a>
-        </article>
-      </div>
-
-      <!-- View All Link -->
+    <div class="resource-suite__grid">
       {
-        showAllLink && (
-          <div class="text-center">
-            <a
-              href="/blog"
-              class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 text-gray-700 font-medium"
-            >
-              Alle Artikel ansehen
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+        posts.map((post) => (
+          <article class="resource-card enterprise-card">
+            <a href={post.href}>
+              <span>{post.label}</span>
+              <h3>{post.title}</h3>
+              <p>{post.description}</p>
+              <strong>{post.time} Lesezeit</strong>
             </a>
-          </div>
-        )
+          </article>
+        ))
       }
     </div>
+
+    {
+      showAllLink && (
+        <div class="resource-suite__all enterprise-reveal">
+          <a href="/blog">Alle Artikel ansehen</a>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
-  /* Blog post hover animations */
-  article:hover {
-    transform: translateY(-2px);
+  .resource-suite {
+    background: #f7fafc;
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
   }
 
-  /* Smooth transitions for all interactive elements */
-  article a {
-    transition: all 0.3s ease;
+  .resource-suite__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
   }
 
-  article a:hover {
-    transform: translateY(-1px);
+  .resource-card {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .resource-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 30px 70px rgba(15, 23, 42, 0.1);
+  }
+
+  .resource-card a {
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    padding: 1.25rem;
+  }
+
+  .resource-card span {
+    color: #0f766e;
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .resource-card h3 {
+    margin-top: 1rem;
+    color: #0b1220;
+    font-size: clamp(1.35rem, 1.9vw, 2rem);
+    font-weight: 920;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .resource-card p {
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.98rem;
+    font-weight: 570;
+    line-height: 1.5;
+  }
+
+  .resource-card strong {
+    margin-top: auto;
+    color: #0f766e;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .resource-suite__all {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .resource-suite__all a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.82rem 1rem;
+    background: #0b1220;
+    color: #f8fafc;
+    border-radius: 8px;
+    font-weight: 900;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .resource-suite__all a:hover {
+    background: #14332f;
+  }
+
+  .resource-suite__all a:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  @media (max-width: 960px) {
+    .resource-suite__grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

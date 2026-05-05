@@ -15,77 +15,142 @@ const {
       name: "DSGVO konform",
       icon: "gdpr-ready",
       description:
-        "Hosting und Datenverarbeitung in der EU auf Wunsch auch in Deutschland, damit eure Daten dort bleiben, wo sie hingehören.",
+        "Datenverarbeitung, Rollen und Freigaben werden vor dem Agenten-Livegang dokumentiert.",
     },
     {
       name: "EU-gehostet",
       icon: "EU-hosted",
       description:
-        "Hosting und Datenverarbeitung in der EU auf Wunsch auch in Deutschland, damit eure Daten dort bleiben, wo sie hingehören.",
+        "Setups werden so geplant, dass sensible Daten in passenden EU-Umgebungen bleiben.",
     },
     {
-      name: "Remote verfügbar",
+      name: "Auditierbar",
       icon: "remote-only",
       description:
-        "Hosting und Datenverarbeitung in der EU auf Wunsch auch in Deutschland, damit eure Daten dort bleiben, wo sie hingehören.",
+        "Agenten-Aktionen, Übergaben und Freigaben bleiben nachvollziehbar statt Blackbox.",
     },
   ],
-  showLogos = true,
   className = "",
 } = Astro.props;
 ---
 
-<section id="trust-bar" class={`py-12 sm:py-16 bg-white ${className}`}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-row md:items-stretch md:justify-center gap-4 sm:gap-6 md:gap-0 max-w-4xl mx-auto px-4"
-    >
+<section
+  id="trust-bar"
+  data-enterprise-section
+  class={`trust-cloud ${className}`}
+>
+  <div class="trust-cloud__inner enterprise-reveal">
+    <div class="trust-cloud__label">
+      <span>Security baseline</span>
+      <strong>Für kleine Teams gebaut, aber mit Konzern-Disziplin.</strong>
+    </div>
+    <div class="trust-cloud__items">
       {
-        badges.map((badge, index) => (
-          <div
-            class={`relative ${index === 2 ? "sm:col-span-2 md:col-span-1" : ""} md:flex-1`}
-          >
-            <div
-              class="flex flex-col items-center group transition-all duration-300 bg-white rounded-xl p-4 sm:p-6 animate-fade-in-up h-full"
-              style={`animation-delay: ${index * 150}ms`}
-            >
-              {/* Badge Image - Made smaller */}
-              <div class="mb-3 sm:mb-4 transition-transform duration-300">
-                <img
-                  src={`/images/badges/${badge.icon}.webp`}
-                  alt={badge.name}
-                  class={`w-12 h-16 sm:w-16 sm:h-24 ${badge.icon === "EU-hosted" ? "object-cover" : "object-contain"}`}
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Badge Text */}
-              <div class="text-center">
-                <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-1 sm:mb-2">
-                  {badge.name}
-                </h3>
-                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {badge.description}
-                </p>
-              </div>
+        badges.map((badge) => (
+          <article class="trust-pill enterprise-card">
+            <img
+              src={`/images/badges/${badge.icon}.webp`}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+            <div>
+              <h3>{badge.name}</h3>
+              <p>{badge.description}</p>
             </div>
-
-            {
-              index < badges.length - 1 && (
-                <div
-                  class="hidden md:block absolute top-1/2 -translate-y-1/2 w-px h-[50px] bg-gray-200 right-[-0.5px]"
-                  aria-hidden="true"
-                ></div>
-              )
-            }
-          </div>
+          </article>
         ))
       }
     </div>
+  </div>
 </section>
 
 <style>
-  .group:hover * {
-    animation-play-state: paused;
+  .trust-cloud {
+    background: #f7fafc;
+    padding: 2rem 1rem 4.5rem;
+  }
+
+  .trust-cloud__inner {
+    width: min(100%, 1440px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.48fr 1fr;
+    gap: 1.2rem;
+    align-items: stretch;
+  }
+
+  .trust-cloud__label,
+  .trust-pill {
+    background: rgba(255, 255, 255, 0.76);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  }
+
+  .trust-cloud__label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.4rem;
+  }
+
+  .trust-cloud__label span {
+    color: #0f766e;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .trust-cloud__label strong {
+    display: block;
+    margin-top: 0.55rem;
+    color: #0b1220;
+    font-size: clamp(1.28rem, 2vw, 2.1rem);
+    font-weight: 920;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+  }
+
+  .trust-cloud__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .trust-pill {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.15rem;
+  }
+
+  .trust-pill img {
+    width: 2.2rem;
+    height: 2.8rem;
+    object-fit: contain;
+  }
+
+  .trust-pill h3 {
+    color: #0b1220;
+    font-size: 1.02rem;
+    font-weight: 900;
+  }
+
+  .trust-pill p {
+    margin-top: 0.42rem;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 590;
+    line-height: 1.44;
+  }
+
+  @media (max-width: 960px) {
+    .trust-cloud__inner,
+    .trust-cloud__items {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

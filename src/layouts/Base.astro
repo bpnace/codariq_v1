@@ -75,15 +75,15 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 ---
 
 <!doctype html>
-<html lang="de" class="scroll-smooth bg-white">
+<html lang="de" class="scroll-smooth bg-[#f7fafc]">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#1d4ed8" />
-    <meta name="msapplication-TileColor" content="#1d4ed8" />
+    <meta name="theme-color" content="#f7fafc" />
+    <meta name="msapplication-TileColor" content="#f7fafc" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,11 +119,11 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={article?.author ?? "Codariq"} />
+    <meta name="keywords" content={keywords} />
     <meta
-      name="keywords"
-      content={keywords}
+      name="robots"
+      content={shouldNoIndex ? "noindex, follow" : "index, follow"}
     />
-    <meta name="robots" content={shouldNoIndex ? "noindex, follow" : "index, follow"} />
     <meta name="language" content="de" />
     <meta name="revisit-after" content="7 days" />
 
@@ -132,41 +132,48 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
     <meta property="og:url" content={canonicalHref} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta
-      property="og:image"
-      content={resolvedOgImage}
-    />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
     <meta property="og:image:type" content="image/webp" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="Codariq" />
-    {isArticle && article?.publishedTime && (
-      <meta property="article:published_time" content={article.publishedTime} />
-    )}
-    {isArticle && article?.modifiedTime && (
-      <meta property="article:modified_time" content={article.modifiedTime} />
-    )}
-    {isArticle && article?.author && (
-      <meta property="article:author" content={article.author} />
-    )}
-    {isArticle && article?.section && (
-      <meta property="article:section" content={article.section} />
-    )}
-    {isArticle &&
-      article?.tags?.map((tag) => (
-        <meta property="article:tag" content={tag} />
-      ))}
+    {
+      isArticle && article?.publishedTime && (
+        <meta
+          property="article:published_time"
+          content={article.publishedTime}
+        />
+      )
+    }
+    {
+      isArticle && article?.modifiedTime && (
+        <meta property="article:modified_time" content={article.modifiedTime} />
+      )
+    }
+    {
+      isArticle && article?.author && (
+        <meta property="article:author" content={article.author} />
+      )
+    }
+    {
+      isArticle && article?.section && (
+        <meta property="article:section" content={article.section} />
+      )
+    }
+    {
+      isArticle &&
+        article?.tags?.map((tag) => (
+          <meta property="article:tag" content={tag} />
+        ))
+    }
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalHref} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta
-      name="twitter:image"
-      content={resolvedOgImage}
-    />
+    <meta name="twitter:image" content={resolvedOgImage} />
     <meta
       name="twitter:image:alt"
       content="Codariq KI-Automatisierung Dashboard für deutsche Unternehmen"
@@ -204,18 +211,18 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
       html {
         font-family: "Satoshi", system-ui, sans-serif;
-        background-color: white;
+        background-color: #f7fafc;
       }
 
       body {
-        background-color: white;
+        background-color: #f7fafc;
       }
 
       /* Enhanced focus styles for EAA compliance */
       :focus-visible {
-        outline: 3px solid var(--color-nav-focus);
-        outline-offset: 2px;
-        border-radius: 4px;
+        outline: 3px solid #14b8a6;
+        outline-offset: 3px;
+        border-radius: 0;
       }
 
       /* High contrast mode support */
@@ -237,7 +244,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       }
 
       .cta-button:hover {
-        transform: scale(1.02);
+        transform: translateY(-1px);
       }
 
       /* Navigation link hover effect with growing underline (desktop only) */
@@ -250,14 +257,16 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       /* Underline hover effect only on desktop (md breakpoint and up) */
       @media (min-width: 768px) {
         .nav-link::after {
-          content: '';
+          content: "";
           position: absolute;
           width: 0;
           height: 2px;
           bottom: -4px;
           left: 50%;
           background-color: var(--color-nav-underline);
-          transition: width 0.3s ease, left 0.3s ease;
+          transition:
+            width 0.3s ease,
+            left 0.3s ease;
         }
 
         .nav-link:hover::after {
@@ -271,7 +280,10 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       #main-nav svg,
       #main-nav button,
       #nav-logo {
-        transition: color 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
+        transition:
+          color 0.3s ease,
+          stroke 0.3s ease,
+          opacity 0.3s ease;
       }
 
       /* Default: no header background, dark elements */
@@ -286,7 +298,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
           backdrop-filter 500ms cubic-bezier(0.16, 1, 0.3, 1),
           -webkit-backdrop-filter 500ms cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: background-color, border-color, box-shadow, backdrop-filter;
+        will-change:
+          background-color, border-color, box-shadow, backdrop-filter;
       }
 
       #main-nav .nav-link {
@@ -609,12 +622,14 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       }
     </script>
 
-    {articleSchema && (
-      <script
-        type="application/ld+json"
-        set:html={JSON.stringify(articleSchema)}
-      />
-    )}
+    {
+      articleSchema && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(articleSchema)}
+        />
+      )
+    }
 
     <!-- Cookiebot Consent Management -->
     <script
@@ -622,17 +637,22 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       src="https://consent.cookiebot.com/uc.js"
       data-cbid="5b61b27b-4228-425d-8a66-0601f96037a1"
       data-blockingmode="auto"
-      type="text/javascript"
-    ></script>
+      type="text/javascript"></script>
 
     <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-6TLXVYD8V2" crossorigin="anonymous"></script>
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-6TLXVYD8V2"
+      crossorigin="anonymous"></script>
     <script is:inline crossorigin="anonymous">
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-6TLXVYD8V2');
+      gtag("config", "G-6TLXVYD8V2");
     </script>
 
     <!-- Calendly Link-Widget -->
@@ -644,18 +664,17 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       is:inline
       src="https://assets.calendly.com/assets/external/widget.js"
       type="text/javascript"
-      defer
-    ></script>
+      defer></script>
   </head>
 
   <body
-    class="bg-white text-gray-900 antialiased overscroll-behavior-y-contain"
+    class="bg-[#f7fafc] text-[#0b1220] antialiased overscroll-behavior-y-contain"
     data-force-nav-solid={forceNavSolid}
   >
     <!-- Skip Links for accessibility -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white p-3 z-50 focus:z-50 rounded"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-[#0b1220] text-white p-3 z-50 focus:z-50"
     >
       Zum Hauptinhalt springen
     </a>
@@ -720,7 +739,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           <div class="absolute left-1/2 -translate-x-1/2 sm:hidden">
             <button
               id="mobile-menu-button"
-              class="p-2 text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg"
+              class="p-2 text-[#0b1220] hover:text-[#0f766e] focus:outline-none focus:ring-2 focus:ring-[#14b8a6] rounded-md"
               aria-label="Menu öffnen"
               aria-expanded="false"
             >
@@ -761,7 +780,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profil besuchen"
-                class="text-gray-700 hover:text-orange-500 transition-colors duration-200"
+                class="text-gray-700 hover:text-[#0f766e] transition-colors duration-200"
               >
                 <img
                   src="/images/logos/LinkedIn_icon.svg"
@@ -777,7 +796,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram Profil besuchen"
-                class="text-gray-700 hover:text-orange-500 transition-colors duration-200"
+                class="text-gray-700 hover:text-[#0f766e] transition-colors duration-200"
               >
                 <img
                   src="/images/logos/Instagram_logo_2016.svg"
@@ -791,7 +810,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             <!-- CTA Button -->
             <a
               href="/#final-cta"
-              class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-3 sm:px-4 md:px-6 py-2 rounded-full hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] transition-all duration-200 font-bold text-xs sm:text-sm md:text-base shadow-lg cta-button"
+              class="bg-[#0b1220] text-white px-3 sm:px-4 md:px-6 py-2 rounded-md hover:bg-[#14332f] transition-colors duration-200 font-black text-xs sm:text-sm md:text-base cta-button"
               aria-label="Strategiegespräch vereinbaren"
             >
               <span class="hidden sm:inline">Termin buchen</span>
@@ -803,7 +822,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         <!-- Mobile Menu -->
         <div
           id="mobile-menu"
-          class="sm:hidden hidden bg-white/95 backdrop-blur-lg border-b border-white/30"
+          class="sm:hidden hidden bg-[#f7fafc]/95 backdrop-blur-lg border-b border-slate-200/70"
         >
           <div class="px-4 py-3 space-y-3">
             <a
@@ -839,7 +858,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         <slot />
       </main>
 
-      <footer class="bg-gray-800 border-t border-gray-700" role="contentinfo">
+      <footer class="bg-[#0b1220] border-t border-white/10" role="contentinfo">
         <div
           class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 py-8 sm:py-10 md:py-12"
         >
@@ -859,7 +878,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 <p
                   class="text-gray-300 text-sm leading-relaxed max-w-sm md:mx-0"
                 >
-                  Intelligente Automatisierungen für Selbstständige und kleine Teams.
+                  Kontrollierbare KI-Agenten für Selbstständige und kleine
+                  Teams.
                 </p>
 
                 <!-- Social Media Links -->
@@ -870,7 +890,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn Profil besuchen"
-                    class="text-gray-400 hover:text-orange-400 transition-colors duration-200"
+                    class="text-gray-400 hover:text-[#5eead4] transition-colors duration-200"
                   >
                     <img
                       src="/images/logos/LinkedIn_icon.svg"
@@ -886,7 +906,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram Profil besuchen"
-                    class="text-gray-400 hover:text-orange-400 transition-colors duration-200"
+                    class="text-gray-400 hover:text-[#5eead4] transition-colors duration-200"
                   >
                     <img
                       src="/images/logos/Instagram_logo_2016.svg"
@@ -905,9 +925,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 <h4 class="font-semibold text-gray-100 mb-3 text-sm">
                   Unsere Werte
                 </h4>
-                <div
-                  class="flex flex-wrap justify-start gap-2 md:gap-3 mb-4"
-                >
+                <div class="flex flex-wrap justify-start gap-2 md:gap-3 mb-4">
                   <img
                     src="/images/badges/climate-friendly.webp"
                     alt="Klimafreundlich"
@@ -995,51 +1013,51 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 <li>
                   <a
                     href="/ki-agenten-kmu"
-                    class="hover:text-orange-400 transition-colors"
+                    class="hover:text-[#5eead4] transition-colors"
                     >KI-Agenten für KMU</a
                   >
                 </li>
                 <li>
                   <a
                     href="/dsgvo-ki-agenten"
-                    class="hover:text-orange-400 transition-colors"
+                    class="hover:text-[#5eead4] transition-colors"
                     >DSGVO KI-Agenten</a
                   >
                 </li>
                 <li>
                   <a
                     href="/openclaw-agenten"
-                    class="hover:text-orange-400 transition-colors"
+                    class="hover:text-[#5eead4] transition-colors"
                     >OpenClaw-Agenten</a
                   >
                 </li>
                 <li>
                   <a
                     href="/impressum"
-                    class="hover:text-orange-400 transition-colors">Impressum</a
+                    class="hover:text-[#5eead4] transition-colors">Impressum</a
                   >
                 </li>
                 <li>
                   <a
                     href="/datenschutz"
-                    class="hover:text-orange-400 transition-colors"
+                    class="hover:text-[#5eead4] transition-colors"
                     >Datenschutzerklärung</a
                   >
                 </li>
                 <li>
                   <a
                     href="/cookie-richtlinien"
-                    class="hover:text-orange-400 transition-colors"
+                    class="hover:text-[#5eead4] transition-colors"
                     >Cookie-Richtlinien</a
                   >
                 </li>
                 <li>
-                  <a href="/faq" class="hover:text-orange-400 transition-colors"
+                  <a href="/faq" class="hover:text-[#5eead4] transition-colors"
                     >FAQ</a
                   >
                 </li>
                 <li>
-                  <a href="/agb" class="hover:text-orange-400 transition-colors"
+                  <a href="/agb" class="hover:text-[#5eead4] transition-colors"
                     >AGB</a
                   >
                 </li>
@@ -1048,28 +1066,26 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
             <!-- Column 4: Für wen -->
             <div class="text-left">
-              <h4 class="font-semibold text-gray-100 mb-3 text-sm">
-                Für wen
-              </h4>
+              <h4 class="font-semibold text-gray-100 mb-3 text-sm">Für wen</h4>
               <ul class="space-y-2 text-sm text-gray-300">
                 <li>
                   <a
                     href="/automatisierung-selbststaendige"
-                    class="hover:text-orange-400 transition-colors duration-200"
+                    class="hover:text-[#5eead4] transition-colors duration-200"
                     >für Selbstständige</a
                   >
                 </li>
                 <li>
                   <a
                     href="/automatisierung-gruender"
-                    class="hover:text-orange-400 transition-colors duration-200"
+                    class="hover:text-[#5eead4] transition-colors duration-200"
                     >für Gründer</a
                   >
                 </li>
                 <li>
                   <a
                     href="/automatisierung-kleine-teams"
-                    class="hover:text-orange-400 transition-colors duration-200"
+                    class="hover:text-[#5eead4] transition-colors duration-200"
                     >für kleine Teams</a
                   >
                 </li>
@@ -1083,7 +1099,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 <h3 class="font-semibold text-gray-100 mb-3">Kontakt</h3>
                 <ul class="space-y-2 text-gray-300 text-sm">
                   <li>kontakt@codariq.de</li>
-                  <li>Made in Berlin ❤️</li>
+                  <li>Made in Berlin</li>
                 </ul>
               </div>
 
@@ -1097,7 +1113,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                   id="newsletter-success"
                   role="alert"
                   aria-live="polite"
-                  class="hidden mb-3 p-2 bg-green-900/20 border border-green-600 rounded-lg"
+                  class="hidden mb-3 p-2 bg-green-900/20 border border-green-600 rounded-md"
                 >
                   <div class="flex items-center">
                     <svg
@@ -1126,7 +1142,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                   id="newsletter-errors"
                   role="alert"
                   aria-live="polite"
-                  class="hidden mb-3 p-2 bg-red-900/20 border border-red-600 rounded-lg"
+                  class="hidden mb-3 p-2 bg-red-900/20 border border-red-600 rounded-md"
                 >
                   <p class="font-medium text-red-300 text-xs mb-1">
                     Bitte korrigieren:
@@ -1152,7 +1168,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                       autocomplete="email"
                       placeholder="ihre@email.de"
                       aria-describedby="footer-newsletter-email-error"
-                      class="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm placeholder-gray-400"
+                      class="w-full px-3 py-2 border border-white/15 bg-white/8 text-white rounded-md focus:ring-2 focus:ring-[#14b8a6] focus:border-transparent transition-all text-sm placeholder-gray-400"
                     />
                     <div
                       id="footer-newsletter-email-error"
@@ -1165,7 +1181,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
                   <button
                     type="submit"
-                    class="bg-gradient-to-br from-[color:var(--color-cta-primary-from)] to-[color:var(--color-cta-primary-to)] text-white px-4 py-2 rounded-lg hover:from-[color:var(--color-cta-primary-hover)] hover:to-[color:var(--color-cta-primary-to)] font-medium text-sm transition-all duration-200 shadow-md cta-button whitespace-nowrap"
+                    class="bg-[#14b8a6] text-[#052e2b] px-4 py-2 rounded-md hover:bg-[#5eead4] font-black text-sm transition-colors duration-200 cta-button whitespace-nowrap"
                   >
                     Abonnieren
                   </button>
@@ -1173,7 +1189,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
                 <p class="text-xs text-gray-400 mt-2">
                   Kostenlos und jederzeit kündbar.
-                  <a href="/datenschutz" class="underline hover:text-orange-400"
+                  <a href="/datenschutz" class="underline hover:text-[#5eead4]"
                     >Datenschutz</a
                   >
                 </p>
@@ -1188,7 +1204,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               href="https://stackwerkhaus.de/"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-orange-400 transition-colors"
+              class="hover:text-[#5eead4] transition-colors"
             >
               Design by Stackwerkhaus
             </a>
@@ -1233,8 +1249,12 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             footerNewsletterErrorList
           ) {
             // Import form helpers dynamically
-            const { showFieldError, hideFieldError, setButtonLoading, submitFormData } =
-              await import("../utils/formHelpers.ts");
+            const {
+              showFieldError,
+              hideFieldError,
+              setButtonLoading,
+              submitFormData,
+            } = await import("../utils/formHelpers.ts");
 
             footerNewsletterForm.addEventListener("submit", async function (e) {
               e.preventDefault();
@@ -1245,7 +1265,9 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               if (footerNewsletterErrorList) {
                 // Clear error list safely
                 while (footerNewsletterErrorList.firstChild) {
-                  footerNewsletterErrorList.removeChild(footerNewsletterErrorList.firstChild);
+                  footerNewsletterErrorList.removeChild(
+                    footerNewsletterErrorList.firstChild,
+                  );
                 }
               }
 
@@ -1261,13 +1283,14 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               const errors: string[] = [];
 
               // Validate email
-              const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-              if (
-                !email?.value?.trim() ||
-                !isValidEmail(email.value.trim())
-              ) {
+              const isValidEmail = (email: string) =>
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+              if (!email?.value?.trim() || !isValidEmail(email.value.trim())) {
                 errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
-                showFieldError("footer-newsletter-email", "Bitte geben Sie eine gültige E-Mail-Adresse ein");
+                showFieldError(
+                  "footer-newsletter-email",
+                  "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+                );
                 hasErrors = true;
               } else {
                 hideFieldError("footer-newsletter-email");
@@ -1330,8 +1353,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           const mobileMenu = document.getElementById("mobile-menu");
 
           if (mobileMenuButton && mobileMenu) {
-            const menuIcon = mobileMenuButton.querySelector('.menu-icon');
-            const closeIcon = mobileMenuButton.querySelector('.close-icon');
+            const menuIcon = mobileMenuButton.querySelector(".menu-icon");
+            const closeIcon = mobileMenuButton.querySelector(".close-icon");
 
             mobileMenuButton.addEventListener("click", function () {
               const isExpanded =
@@ -1340,13 +1363,13 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               if (isExpanded) {
                 mobileMenu.classList.add("hidden");
                 mobileMenuButton.setAttribute("aria-expanded", "false");
-                menuIcon?.classList.remove('hidden');
-                closeIcon?.classList.add('hidden');
+                menuIcon?.classList.remove("hidden");
+                closeIcon?.classList.add("hidden");
               } else {
                 mobileMenu.classList.remove("hidden");
                 mobileMenuButton.setAttribute("aria-expanded", "true");
-                menuIcon?.classList.add('hidden');
-                closeIcon?.classList.remove('hidden');
+                menuIcon?.classList.add("hidden");
+                closeIcon?.classList.remove("hidden");
               }
             });
 
@@ -1356,8 +1379,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               link.addEventListener("click", function () {
                 mobileMenu.classList.add("hidden");
                 mobileMenuButton.setAttribute("aria-expanded", "false");
-                menuIcon?.classList.remove('hidden');
-                closeIcon?.classList.add('hidden');
+                menuIcon?.classList.remove("hidden");
+                closeIcon?.classList.add("hidden");
               });
             });
           }
@@ -1386,10 +1409,12 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     mobileMenu.classList.add("hidden");
                     if (mobileMenuButton) {
                       mobileMenuButton.setAttribute("aria-expanded", "false");
-                      const menuIcon = mobileMenuButton.querySelector('.menu-icon');
-                      const closeIcon = mobileMenuButton.querySelector('.close-icon');
-                      menuIcon?.classList.remove('hidden');
-                      closeIcon?.classList.add('hidden');
+                      const menuIcon =
+                        mobileMenuButton.querySelector(".menu-icon");
+                      const closeIcon =
+                        mobileMenuButton.querySelector(".close-icon");
+                      menuIcon?.classList.remove("hidden");
+                      closeIcon?.classList.add("hidden");
                     }
                   }
 
@@ -1416,8 +1441,13 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           });
 
           // Initialize scroll effects (extracted to separate module)
-          const { initAllScrollEffects } = await import("../scripts/scrollEffects.ts");
+          const { initAllScrollEffects } =
+            await import("../scripts/scrollEffects.ts");
           initAllScrollEffects();
+
+          const { initEnterpriseMotion } =
+            await import("../scripts/enterpriseMotion.ts");
+          initEnterpriseMotion();
         });
       </script>
     </div>

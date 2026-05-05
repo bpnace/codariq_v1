@@ -5,8 +5,8 @@
    ======================================== */
 @theme {
   /* === BRAND COLORS === */
-  --color-brand-light: #ED254E;
-  --color-brand-dark: #2D0C1B;
+  --color-brand-light: #14b8a6;
+  --color-brand-dark: #0b1220;
 
   /* === NEUTRAL SCALE === */
   --color-neutral-white: #ffffff;
@@ -24,8 +24,8 @@
   /* === SEMANTIC COLORS === */
 
   --color-pack-purple: #611fd1;
-  --color-pack-blue: #081a40;
-  --color-pack-green: #22c9a2;
+  --color-pack-blue: #122033;
+  --color-pack-green: #14b8a6;
 
   --color-semantic-success: #16a34a;
   --color-semantic-error: #dd3a44;
@@ -47,8 +47,8 @@
   --color-nav-link-hover: var(--color-neutral-gray-900);
   --color-nav-underline: var(--color-brand-light);
   --color-nav-focus: var(--color-brand-dark);
-  --color-nav-bg-scrolled: rgba(255, 255, 255, 0.78);
-  --color-nav-border-scrolled: rgba(17, 24, 39, 0.08);
+  --color-nav-bg-scrolled: rgba(247, 250, 252, 0.86);
+  --color-nav-border-scrolled: rgba(15, 23, 42, 0.08);
   --color-nav-shadow-scrolled: rgba(0, 0, 0, 0.08);
 
   /* Package Icons */
@@ -68,7 +68,7 @@
   --color-process-bullet: var(--color-brand-light);
 
   /* === CTA PULSE RGB === */
-  --cta-pulse-brand-rgb: 237, 37, 78;
+  --cta-pulse-brand-rgb: 20, 184, 166;
 }
 
 /* Codec Pro (Logo) */
@@ -177,13 +177,16 @@ body {
 
 /* Pulsing brand outline animation for CTA button in hero and testimonials */
 @keyframes pulse-outline {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.7),
-                0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4);
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.7),
+      0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4),
-                0 0 0 8px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.1);
+    box-shadow:
+      0 0 0 4px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4),
+      0 0 0 8px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.1);
   }
 }
 
@@ -335,7 +338,9 @@ html {
 
 /* Smooth background transitions for header */
 header {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* Light frosted background when scrolled past hero */
@@ -442,5 +447,76 @@ header.nav-scrolled {
   /* Disable parallax effect for users with motion sensitivity */
   [data-parallax] {
     transform: none !important;
+  }
+}
+
+/* Enterprise SaaS redesign primitives */
+.saas-container {
+  width: min(100% - 2rem, 1440px);
+  margin-inline: auto;
+}
+
+.saas-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(18rem, 0.52fr);
+  gap: clamp(1.2rem, 4vw, 4rem);
+  align-items: end;
+}
+
+.saas-heading--center {
+  max-width: 58rem;
+  margin-inline: auto;
+  display: block;
+  text-align: center;
+}
+
+.saas-heading > span,
+.saas-heading--center > span {
+  display: inline-flex;
+  width: fit-content;
+  color: #0f766e;
+  background: rgba(20, 184, 166, 0.1);
+  border-radius: 7px;
+  padding: 0.42rem 0.56rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.saas-heading h2,
+.saas-heading--center h2 {
+  margin-top: 1rem;
+  max-width: 13ch;
+  color: #0b1220;
+  font-size: clamp(2.25rem, 3.7vw, 4.15rem);
+  font-weight: 940;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.saas-heading--center h2 {
+  margin-inline: auto;
+}
+
+.saas-heading p,
+.saas-heading--center p {
+  color: #64748b;
+  font-size: clamp(1rem, 1.25vw, 1.18rem);
+  font-weight: 580;
+  line-height: 1.55;
+}
+
+.saas-heading--center p {
+  margin-top: 1rem;
+}
+
+.enterprise-card {
+  will-change: transform, opacity;
+}
+
+@media (max-width: 900px) {
+  .saas-heading {
+    grid-template-columns: 1fr;
   }
 }

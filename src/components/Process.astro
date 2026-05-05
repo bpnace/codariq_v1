@@ -22,14 +22,14 @@ const {
       description:
         "Wir verstehen deinen Ablauf, wählen den besten Startpunkt für einen Agenten-Workflow und legen gemeinsam fest, woran der größte Erfolg gemessen wird.",
       details: [
-        "Erstes Gespräch über aktuelle Engpässe und Möglichkeiten",
-        "Visuelle Skizze: So läuft es aktuell",
-        "Tool-, Daten- und Integrations-Check: Was nutzt du, wo liegen Infos",
-        "1 bis 2 Messwerte: zum Beispiel Zeitersparnis oder schnellere Reaktionszeit",
-        "Konkreter Umsetzungsplan mit Dauer, Kostenaufstellung und benötigte Tools",
+        "Engpässe, Datenquellen und Zuständigkeiten erfassen",
+        "Tool-, Daten- und Integrations-Check",
+        "Sicherheitsrahmen: Zugriffe, Freigaben und Logs",
+        "Messwerte für Wirkung und Risiko definieren",
       ],
       duration: "3 bis 5 Tage",
-      result: "Du weißt genau, was gebaut wird, warum es sich lohnt und wie der nächste Schritt aussieht.",
+      result:
+        "Du weißt genau, was gebaut wird, welche Daten betroffen sind und wie sicher gestartet wird.",
     },
     {
       number: 2,
@@ -37,14 +37,14 @@ const {
       description:
         "Wir bauen den KI-Agenten und verbinden deine Systeme, damit Aufgaben vorbereitet, weitergegeben und bei Bedarf freigegeben werden.",
       details: [
-        "Wir setzen den Ablauf um und binden die nötigen Tools an",
-        "Je nach Paket: KI-Funktionen wie Sortierung, Antwortentwürfe, Zusammenfassungen oder Datenextraktion",
-        "Wir testen mit echten Beispielen und fangen Sonderfälle ab",
-        "Zugriffe, Protokolle und Datenflüsse richten wir so ein, dass alles DSGVO konform bleibt",
-        "Kurze, verständliche Doku für Überblick und Übergabe",
+        "n8n-Agent oder agentisches Setup als kleinster sinnvoller Start",
+        "Anbindung an E-Mail, CRM, Kalender, Dokumente oder Wissensquellen",
+        "Policies für personenbezogene Daten und sensible Schritte",
+        "Tests mit echten Beispielen aus deinem Alltag",
       ],
       duration: "2 bis 6 Wochen",
-      result: "Der Agenten-Workflow läuft, ist nachvollziehbar und nimmt dir spürbar Arbeit ab.",
+      result:
+        "Der Agent läuft nachvollziehbar, bereitet Arbeit vor und bleibt unter menschlicher Kontrolle.",
     },
     {
       number: 3,
@@ -52,381 +52,149 @@ const {
       description:
         "Wir bringen die Lösung gemeinsam mit dir in den Alltag. Du bekommst eine klare Einweisung, damit du jederzeit weißt, was der Agent tut und wie du eingreifen kannst.",
       details: [
-        "Einführung in Stufen, damit dein Betrieb entspannt weiterläuft",
-        "Kurze Einweisung für dich und dein Team, ohne Fachchinesisch",
-        "Wir beobachten die ersten Wochen und justieren nach",
-        "Anpassungen, wenn sich Prozesse oder Daten ändern",
-        "Optional: laufende Betreuung, wenn du das dauerhaft auslagern willst",
+        "Pilotbetrieb mit Review-Schleifen",
+        "Einweisung für Team, Freigaben und Sonderfälle",
+        "Monitoring von Fehlern, Datenqualität und Wirkung",
+        "Optionaler Ausbau Richtung OpenClaw-Agenten-Setup",
       ],
       duration: "2 bis 8 Wochen Begleitung",
-      result: "Stabiler Agenten-Workflow, der im Team genutzt wird und dich messbar entlastet.",
+      result:
+        "Ein stabiler Agenten-Workflow, der genutzt wird und später kontrolliert skalieren kann.",
     },
   ],
 } = Astro.props;
 ---
 
-<section id="process" class="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden">
-  <div
-    class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 relative"
-  >
-    <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-      <h2
-        class="section-title mb-3 sm:mb-4 animate-on-scroll"
-      >
-        {title}
-      </h2>
-      <p
-        class="section-subtitle max-w-3xl mx-auto animate-on-scroll"
-        style="transition-delay: 0.15s"
-      >
-        {subtitle}
-      </p>
+<section id="process" data-enterprise-section class="deployment-flow">
+  <div class="saas-container">
+    <div class="saas-heading saas-heading--center enterprise-reveal">
+      <span>Delivery Framework</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
     </div>
 
-    <!-- Process Steps -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      {/* Desktop: Vertical Slideshow (hidden on mobile) */}
-      <div class="hidden lg:flex gap-8 items-stretch">
-        {/* Left: Step Navigation */}
-        <div class="w-80 flex-shrink-0 flex flex-col justify-center gap-6 min-h-[560px]">
-          {
-            steps.map((step, index) => (
-              <button
-                class="step-nav-btn w-full p-4 text-left flex items-center gap-4 bg-white rounded-xl border-2 border-gray-200 transition-all duration-300 hover:border-gray-300 hover:shadow-sm"
-                data-step-nav={index}
-                data-active={index === 0 ? "true" : "false"}
-              >
-                {/* Step Number */}
-                <div
-                  class="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg flex-shrink-0 transition-all duration-300"
-                  data-step-badge={index}
-                  style={index === 0 ? "background: linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55)); color: white;" : "background-color: rgb(243 244 246); color: rgb(107 114 128);"}
-                >
-                  {step.number}
-                </div>
-
-                {/* Title */}
-                <div class="flex-1 min-w-0">
-                  <h3
-                    class="text-lg font-black leading-tight transition-colors duration-300"
-                    data-step-title={index}
-                    style={index === 0 ? "color: rgb(17 24 39);" : "color: rgb(107 114 128);"}
-                  >
-                    {step.title}
-                  </h3>
-                </div>
-              </button>
-            ))
-          }
-        </div>
-
-        {/* Right: Content Area */}
-        <div class="flex-1 bg-white rounded-xl border-2 border-gray-200 shadow-xl relative min-h-[560px] overflow-hidden">
-          {
-            steps.map((step, index) => (
-              <div
-                class="step-content absolute top-0 left-0 right-0 p-6 transition-opacity duration-300"
-                data-step-content={index}
-                style={index === 0 ? "opacity: 1; pointer-events: auto;" : "opacity: 0; pointer-events: none;"}
-              >
-                {/* Header */}
-                <div class="mb-4">
-                  <h3 class="content-title mb-1.5">
-                    {step.title}
-                  </h3>
-                  <div class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs font-semibold">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {step.duration}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p class="body-muted mb-4">
-                  {step.description}
-                </p>
-
-                {/* Details */}
-                <div class="mb-4">
-                  <h4 class="micro-title mb-3">Was ist enthalten:</h4>
-                  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
-                    {step.details.map((detail) => (
-                      <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3 border border-gray-200">
-                        <div class="w-1.5 h-1.5 bg-orange-500 rounded-full flex-shrink-0 mt-1.5" />
-                        <span class="text-sm sm:text-base font-medium text-gray-700 leading-snug">
-                          {detail}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Result */}
-                <div class="bg-gray-100 rounded-lg p-3 border border-gray-200">
-                  <div class="flex items-start gap-2">
-                    <svg class="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <div class="flex-1">
-                      <span class="text-sm sm:text-base font-black text-gray-900 block mb-1">
-                        Ergebnis:
-                      </span>
-                      <p class="text-sm sm:text-base font-medium text-gray-700 leading-relaxed">
-                        {step.result}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
-      {/* Mobile: Vertical Slideshow (shown only on mobile) */}
-      <div class="lg:hidden flex flex-col gap-6">
-        {/* Step Navigation */}
-        <div class="flex overflow-x-auto gap-2 pb-2 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
-          {
-            steps.map((step, index) => (
-              <button
-                class="step-nav-btn-mobile flex-shrink-0 p-3 text-left flex items-center gap-3 bg-white rounded-xl border-2 border-gray-200 transition-all duration-300 snap-start min-w-[280px]"
-                data-step-nav-mobile={index}
-                data-active-mobile={index === 0 ? "true" : "false"}
-              >
-                {/* Step Number */}
-                <div
-                  class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg flex-shrink-0 transition-all duration-300"
-                  data-step-badge-mobile={index}
-                  style={index === 0 ? "background: linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55)); color: white;" : "background-color: rgb(243 244 246); color: rgb(107 114 128);"}
-                >
-                  {step.number}
-                </div>
-
-                {/* Title */}
-                <div class="flex-1 min-w-0">
-                  <h3
-                    class="text-base font-black leading-tight transition-colors duration-300"
-                    data-step-title-mobile={index}
-                    style={index === 0 ? "color: rgb(17 24 39);" : "color: rgb(107 114 128);"}
-                  >
-                    {step.title}
-                  </h3>
-                </div>
-              </button>
-            ))
-          }
-        </div>
-
-        {/* Content Area */}
-        <div class="bg-white rounded-xl border-2 border-gray-200 shadow-xl relative transition-all duration-300" style="min-height: 440px;">
-          {
-            steps.map((step, index) => (
-              <div
-                class="step-content-mobile absolute top-0 left-0 right-0 p-5 transition-opacity duration-300"
-                data-step-content-mobile={index}
-                style={index === 0 ? "opacity: 1; pointer-events: auto;" : "opacity: 0; pointer-events: none;"}
-              >
-                {/* Header */}
-                <div class="mb-3">
-                  <h3 class="text-lg font-black text-gray-900 mb-1.5">
-                    {step.title}
-                  </h3>
-                  <div class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs font-semibold">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {step.duration}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p class="body-muted mb-3">
-                  {step.description}
-                </p>
-
-                {/* Details */}
-                <div class="mb-3">
-                  <h4 class="micro-title mb-2.5">Was ist enthalten:</h4>
-                  <div class="space-y-2">
-                    {step.details.map((detail) => (
-                      <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3 border border-gray-200">
-                        <div class="w-1.5 h-1.5 bg-orange-500 rounded-full flex-shrink-0 mt-1.5" />
-                        <span class="text-sm sm:text-base font-medium text-gray-700 leading-snug">
-                          {detail}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Result */}
-                <div class="bg-gray-100 rounded-lg p-3 border border-gray-200">
-                  <div class="flex items-start gap-2">
-                    <svg class="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <div class="flex-1">
-                      <span class="text-sm sm:text-base font-black text-gray-900 block mb-1">
-                        Ergebnis:
-                      </span>
-                      <p class="text-sm sm:text-base font-medium text-gray-700 leading-relaxed">
-                        {step.result}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
+    <div class="deployment-flow__shell enterprise-card">
+      {
+        steps.map((step) => (
+          <article class="deploy-phase enterprise-reveal">
+            <div class="deploy-phase__header">
+              <span>{step.duration}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+            <ul>
+              {step.details.map((detail) => (
+                <li>{detail}</li>
+              ))}
+            </ul>
+            <strong>{step.result}</strong>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Desktop: Step navigation slideshow
-    const navButtons = document.querySelectorAll<HTMLElement>("[data-step-nav]");
+<style>
+  .deployment-flow {
+    background: #ffffff;
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+  }
 
-    navButtons.forEach((button) => {
-      button.addEventListener("click", function (this: HTMLElement) {
-        const clickedIndex = this.getAttribute("data-step-nav");
+  .deployment-flow__shell {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
+    padding: 1rem;
+    background: linear-gradient(
+      135deg,
+      rgba(248, 250, 252, 0.98),
+      rgba(236, 246, 244, 0.78)
+    );
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.08);
+  }
 
-        // Update all nav buttons and content
-        navButtons.forEach((navBtn, i) => {
-          const index = i.toString();
-          const isActive = index === clickedIndex;
-          const badge = document.querySelector<HTMLElement>(`[data-step-badge="${index}"]`);
-          const title = document.querySelector<HTMLElement>(`[data-step-title="${index}"]`);
-          const content = document.querySelector<HTMLElement>(`[data-step-content="${index}"]`);
+  .deploy-phase {
+    display: flex;
+    flex-direction: column;
+    min-height: 32rem;
+    padding: 1.35rem;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    border-radius: 14px;
+  }
 
-          // Update nav button state
-          navBtn.setAttribute("data-active", isActive ? "true" : "false");
+  .deploy-phase__header span {
+    display: inline-flex;
+    color: #0f766e;
+    background: rgba(20, 184, 166, 0.1);
+    border-radius: 7px;
+    padding: 0.38rem 0.52rem;
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
 
-          // Update badge
-          if (badge) {
-            if (isActive) {
-              badge.style.background = "linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55))";
-              badge.style.color = "white";
-            } else {
-              badge.style.background = "rgb(243 244 246)";
-              badge.style.color = "rgb(107 114 128)";
-            }
-          }
+  .deploy-phase h3 {
+    margin-top: 1.1rem;
+    color: #0b1220;
+    font-size: clamp(1.45rem, 2.1vw, 2.25rem);
+    font-weight: 920;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
 
-          // Update title color
-          if (title) {
-            title.style.color = isActive ? "rgb(17 24 39)" : "rgb(107 114 128)";
-          }
+  .deploy-phase p,
+  .deploy-phase li,
+  .deploy-phase strong {
+    color: #64748b;
+    font-size: 0.96rem;
+    font-weight: 580;
+    line-height: 1.48;
+  }
 
-          // Show/hide content with smooth fade
-          if (content) {
-            if (isActive) {
-              content.style.opacity = "1";
-              content.style.pointerEvents = "auto";
-            } else {
-              content.style.opacity = "0";
-              content.style.pointerEvents = "none";
-            }
-          }
-        });
-      });
-    });
+  .deploy-phase p {
+    margin-top: 0.9rem;
+  }
 
-    // Mobile: Step navigation slideshow
-    const navButtonsMobile = document.querySelectorAll<HTMLElement>("[data-step-nav-mobile]");
-    const mobileContainer = document.querySelector<HTMLElement>(".step-content-mobile")?.parentElement;
+  .deploy-phase ul {
+    display: grid;
+    gap: 0.72rem;
+    margin-top: 1.4rem;
+  }
 
-    // Function to update mobile container height
-    function updateMobileContainerHeight() {
-      if (!mobileContainer) return;
+  .deploy-phase li {
+    position: relative;
+    padding-left: 1.35rem;
+  }
 
-      const activeContent = mobileContainer.querySelector<HTMLElement>('[data-step-content-mobile][style*="opacity: 1"]');
-      if (activeContent) {
-        const contentHeight = activeContent.scrollHeight;
-        mobileContainer.style.height = `${contentHeight}px`;
-      }
+  .deploy-phase li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.58rem;
+    height: 0.58rem;
+    border-radius: 3px;
+    background: #14b8a6;
+  }
+
+  .deploy-phase strong {
+    display: block;
+    margin-top: auto;
+    color: #0b1220;
+    font-weight: 850;
+  }
+
+  @media (max-width: 980px) {
+    .deployment-flow__shell {
+      grid-template-columns: 1fr;
     }
 
-    // Set initial height
-    updateMobileContainerHeight();
-
-    navButtonsMobile.forEach((button) => {
-      button.addEventListener("click", function (this: HTMLElement) {
-        const clickedIndex = this.getAttribute("data-step-nav-mobile");
-
-        // Update all mobile nav buttons and content
-        navButtonsMobile.forEach((navBtn, i) => {
-          const index = i.toString();
-          const isActive = index === clickedIndex;
-          const badge = document.querySelector<HTMLElement>(`[data-step-badge-mobile="${index}"]`);
-          const title = document.querySelector<HTMLElement>(`[data-step-title-mobile="${index}"]`);
-          const content = document.querySelector<HTMLElement>(`[data-step-content-mobile="${index}"]`);
-
-          // Update nav button state
-          navBtn.setAttribute("data-active-mobile", isActive ? "true" : "false");
-
-          // Update badge
-          if (badge) {
-            if (isActive) {
-              badge.style.background = "linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55))";
-              badge.style.color = "white";
-            } else {
-              badge.style.background = "rgb(243 244 246)";
-              badge.style.color = "rgb(107 114 128)";
-            }
-          }
-
-          // Update title color
-          if (title) {
-            title.style.color = isActive ? "rgb(17 24 39)" : "rgb(107 114 128)";
-          }
-
-          // Show/hide content with smooth fade
-          if (content) {
-            if (isActive) {
-              content.style.opacity = "1";
-              content.style.pointerEvents = "auto";
-            } else {
-              content.style.opacity = "0";
-              content.style.pointerEvents = "none";
-            }
-          }
-        });
-
-        // Update container height after content change
-        setTimeout(updateMobileContainerHeight, 50);
-      });
-    });
-  });
-</script>
-
-<style>
-  /* Hide scrollbar for mobile navigation */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Consistent CTA button animation */
-  .cta-button {
-    transform-origin: center;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  .cta-button:hover {
-    transform: scale(1.02);
+    .deploy-phase {
+      min-height: auto;
+    }
   }
 </style>
