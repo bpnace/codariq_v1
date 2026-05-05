@@ -33,47 +33,47 @@ const iconMeta: Record<string, { title: string; d: string }> = {
 
 const defaultProblems = [
   {
-    title: "Nachfassen und Termine im Recruiting",
+    title: "Anfragen bleiben im Postfach hängen",
     description:
-      "Du jagst Kandidaten und Entscheider hinterher. Status Updates und Terminabstimmung ziehen sich und fressen jeden Tag Zeit.",
-    outcome: "Weniger Nachhalten, schnellere Zusagen, klarer Überblick.",
+      "Kundenanfragen, Bewerbungen und interne Rückfragen kommen rein, aber niemand sieht sofort, was wichtig ist, was warten kann und wer reagieren muss.",
+    outcome: "Schneller priorisieren, weniger Nachfassen.",
     solution:
-      "Ein Anfrage- oder Recruiting-Agent erinnert ans Nachfassen, bereitet Status Updates vor, schlägt Termine vor und dokumentiert alles sauber.",
+      "Ein Postfach-Agent erkennt Anliegen, Dringlichkeit und nächste Schritte. Er erstellt Antwortentwürfe, Aufgaben und Übergaben, während kritische Nachrichten zur Freigabe bei dir bleiben.",
     icon: "mail",
   },
   {
-    title: "Rechnungen & Dokumente",
+    title: "Dokumente kosten jeden Monat Fokus",
     description:
-      "PDFs kommen von überall. Prüfen, abtippen, ablegen, nachfragen. Der Monatsabschluss zieht sich und Fehler passieren genau dann, wenn es brennt.",
-    outcome: "Weniger Aufwand, sauberere Abläufe.",
+      "Rechnungen, Verträge, Formulare und Anhänge liegen in verschiedenen Ordnern. Prüfen, benennen, ablegen und nachfragen passiert immer noch manuell.",
+    outcome: "Weniger Copy Paste, sauberere Übergaben.",
     solution:
-      "Ein Backoffice-Agent liest Dokumente aus, benennt korrekt, legt ab und übergibt Daten an Buchhaltung oder ERP.",
+      "Ein Backoffice-Agent liest Dokumente aus, erkennt fehlende Angaben, schlägt Ablageorte vor und übergibt Daten an Buchhaltung, CRM oder Projekttool.",
     icon: "document",
   },
   {
-    title: "Verstreutes Wissen",
+    title: "Wissen ist überall, nur nicht abrufbar",
     description:
-      "Infos stecken in Mails, Anhängen, Chats und Ordnern. Niemand findet schnell die richtige Antwort und neue Mitarbeitende brauchen zu lange, um reinzukommen.",
-    outcome: "Antworten schneller, Wissen endlich auffindbar.",
+      "Antworten stecken in Mails, Chats, PDFs, Notizen und Köpfen. Neue Mitarbeitende fragen nach, Kunden warten und Entscheidungen dauern länger.",
+    outcome: "Schnellere Antworten mit Quellen.",
     solution:
-      "Ein Wissens-Agent durchsucht eure Inhalte und beantwortet Fragen mit Quellen und Zugriffsschutz.",
+      "Ein Wissens-Agent durchsucht freigegebene Inhalte, beantwortet Fragen mit Quellen und zeigt Lücken, statt unsicher zu raten.",
     icon: "book",
   },
   {
-    title: "App-Chaos",
+    title: "Einfache Workflows werden zu komplex",
     description:
-      "CRM, Ticketsystem, Buchhaltung, Kalender. Alles ist da, aber nichts greift ineinander. Ergebnis ist Copy Paste und doppelte Arbeit.",
-    outcome: "Ein durchgängiger Ablauf statt Insellösungen.",
+      "Ein kleiner n8n-Workflow startet gut, aber dann kommen Sonderfälle, mehr Tools, mehr Daten und die Frage: Wer darf eigentlich was automatisch tun?",
+    outcome: "Vom Workflow zum kontrollierten Agenten.",
     solution:
-      "Wir verbinden eure Systeme, damit Daten automatisch fließen, Agenten Aufgaben vorbereiten und Menschen bei Ausnahmen freigeben.",
+      "Wir bauen erst den kleinsten sinnvollen Agenten und skalieren bei Bedarf zu einem Agenten-Setup mit Rollen, Logs, Freigaben, DSGVO-konformen Datenflüssen und OpenClaw-Infrastruktur.",
     icon: "link",
   },
 ];
 
 const {
-  title = "Kommt dir das bekannt vor?",
-  subtitle = "Wenn Abläufe manuell laufen, zahlst du jeden Tag mit Zeit und Nerven. Wir bringen Ordnung rein und bauen KI-Agenten dort, wo sie im Alltag wirklich entlasten: kontrollierbar, DSGVO-konform und ohne neues IT-Team.",
-  closingText = "Wir starten dort, wo der Aufwand heute am größten ist, und bauen dann Schritt für Schritt kontrollierbare Agenten-Workflows, ohne euren Betrieb auf den Kopf zu stellen.",
+  title = "Wo KI-Agenten im Alltag wirklich helfen",
+  subtitle = "Nicht jeder Ablauf braucht sofort ein großes System. Aber wenn Postfach, Dokumente, Wissen und Tool-Übergaben täglich Zeit ziehen, kann ein kontrollierbarer KI-Agent aus Routinearbeit einen sauberen Ablauf machen.",
+  closingText = "Wir starten klein, meistens mit einem klaren n8n-Agenten. Wenn der Use Case wächst, bauen wir daraus ein stabiles Agenten-Setup mit Freigaben, Protokollen und DSGVO-konformer Integration.",
   problems = defaultProblems,
 } = Astro.props;
 ---
@@ -163,7 +163,7 @@ const {
                       </span>
                     </p>
                     <p class="mt-2 text-sm sm:text-base font-black text-[color:var(--color-brand-light)]">
-                      Click für die Lösung
+                      Klick für die Lösung
                     </p>
                   </div>
                 </label>
