@@ -8,6 +8,9 @@ const PANEL_BASE_ROTATION_Y = -5;
 const PANEL_MAX_ROTATION_X = 4.5;
 const PANEL_MAX_ROTATION_Y = 6.5;
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
+const CONFETTI_EFFECT_SIZE = 112;
+const CONFETTI_STROKE_WIDTH = 3.2;
+const CONFETTI_DURATION = 0.6;
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);
@@ -22,13 +25,7 @@ type ConnectionParticle = {
   angle: number;
   offsetX: number;
   offsetY: number;
-  bend: number;
-  flyX: number;
-  flyY: number;
-  spin: number;
-  size: number;
   length: number;
-  origin: ConnectionPoint;
 };
 
 const formatPoint = ({ x, y }: ConnectionPoint): string =>
@@ -117,46 +114,30 @@ function initAgentConnectionMotion(): (() => void) | null {
   const drawPath = createSvgPath("agent-connection-path");
   const particleSeeds = [
     {
-      angle: -152,
-      bend: -0.18,
-      offsetX: -44,
-      offsetY: -18,
-      flyX: -24,
-      flyY: -12,
-      size: 24,
-      spin: -4,
+      angle: 135,
+      offsetX: -20,
+      offsetY: 2,
     },
     {
-      angle: -42,
-      bend: 0.18,
-      offsetX: 36,
-      offsetY: -22,
-      flyX: 32,
-      flyY: -16,
-      size: 24,
-      spin: 4,
+      angle: 45,
+      offsetX: 20,
+      offsetY: 2,
     },
     {
-      angle: 8,
-      bend: -0.14,
-      offsetX: 72,
-      offsetY: -10,
-      flyX: 36,
-      flyY: -6,
-      size: 22,
-      spin: 3,
+      angle: 90,
+      offsetX: 40,
+      offsetY: 3,
     },
   ];
   const particles: ConnectionParticle[] = particleSeeds.map((seed) => ({
     ...seed,
     path: createSvgPath("agent-connection-confetti"),
     length: 1,
-    origin: { x: 0, y: 0 },
   }));
   let pathLength = 1;
   let activeProgress = 0;
   let confettiPlayed = false;
-  let particleTweens: gsap.core.Tween[] = [];
+  let particleTweens: gsap.core.Animation[] = [];
 
   svg.setAttribute("class", "agent-connection-layer");
   svg.setAttribute("aria-hidden", "true");
@@ -178,42 +159,54 @@ function initAgentConnectionMotion(): (() => void) | null {
   svg.append(defs, drawPath, ...particles.map(({ path }) => path));
   main.prepend(svg);
 
-  const renderParticle = (
-    particle: ConnectionParticle,
-    progress: number,
-  ): void => {
-    const safeProgress = clamp(progress, 0, 1);
-    const reveal = clamp(safeProgress / 0.42, 0, 1);
-    const movement = 1 - Math.pow(1 - safeProgress, 2.6);
-    const fade = clamp((safeProgress - 0.54) / 0.46, 0, 1);
-    const opacity = safeProgress < 0.02 ? 0 : 1 - Math.pow(fade, 0.9);
-
-    particle.path.style.opacity = `${opacity}`;
-    particle.path.style.strokeDashoffset = `${particle.length * (1 - reveal)}`;
-    particle.path.setAttribute(
-      "transform",
-      `translate(${(particle.flyX * movement).toFixed(1)} ${(particle.flyY * movement).toFixed(1)}) rotate(${(particle.spin * movement).toFixed(1)} ${particle.origin.x.toFixed(1)} ${particle.origin.y.toFixed(1)})`,
-    );
+  const resetParticle = (particle: ConnectionParticle): void => {
+    gsap.set(particle.path, {
+      opacity: 0,
+      strokeDasharray: `1, ${particle.length}`,
+      strokeDashoffset: 0,
+      strokeWidth: 0,
+    });
   };
 
   const hideParticles = (): void => {
     particleTweens.forEach((tween) => tween.kill());
     particleTweens = [];
-    particles.forEach((particle) => renderParticle(particle, 0));
+    particles.forEach(resetParticle);
   };
 
   const playConfetti = (): void => {
     hideParticles();
-    particleTweens = particles.map((particle, index) => {
-      const state = { progress: 0 };
-
-      return gsap.to(state, {
-        progress: 1,
-        duration: 0.46,
-        delay: 0.1 + index * 0.032,
-        ease: "none",
-        onUpdate: () => renderParticle(particle, state.progress),
+    particleTweens = particles.map((particle) => {
+      gsap.set(particle.path, {
+        opacity: 1,
+        strokeDasharray: `1, ${particle.length}`,
+        strokeDashoffset: 0,
+        strokeWidth: CONFETTI_STROKE_WIDTH,
       });
+
+      return gsap
+        .timeline()
+        .to(particle.path, {
+          strokeDasharray: `${particle.length}, ${particle.length}`,
+          strokeDashoffset: -particle.length,
+          duration: CONFETTI_DURATION,
+          ease: "power1.out",
+        })
+        .to(
+          particle.path,
+          {
+            strokeWidth: 0,
+            duration: CONFETTI_DURATION * 0.4,
+            ease: "linear",
+          },
+          CONFETTI_DURATION * 0.6,
+        )
+        .set(particle.path, {
+          opacity: 0,
+          strokeDasharray: `1, ${particle.length}`,
+          strokeDashoffset: 0,
+          strokeWidth: 0,
+        });
     });
   };
 
@@ -223,9 +216,9 @@ function initAgentConnectionMotion(): (() => void) | null {
     );
     const mainTop = getMainTop(main);
     const start = getPoint(startEl, mainTop, 0.5, 0.55);
-    const target = getPoint(targetEl, mainTop, 0.5, 0.2);
+    const target = getPoint(targetEl, mainTop, 0.5, 0.5);
     const targetTop = getPoint(targetEl, mainTop, 0.5, 0);
-    const confettiOrigin = { x: target.x, y: targetTop.y - 6 };
+    const confettiOrigin = target;
     const height = Math.ceil(
       Math.max(main.scrollHeight, targetTop.y + 220, window.innerHeight),
     );
@@ -272,58 +265,36 @@ function initAgentConnectionMotion(): (() => void) | null {
 
     particles.forEach((particle) => {
       const radians = (particle.angle * Math.PI) / 180;
-      const direction = {
-        x: Math.cos(radians),
-        y: Math.sin(radians),
-      };
-      const normal = {
-        x: -direction.y,
-        y: direction.x,
-      };
-      const half = particle.size / 2;
-      const center = {
+      const startRadius = CONFETTI_EFFECT_SIZE * 0.1;
+      const endRadius = CONFETTI_EFFECT_SIZE * 0.5;
+      const curveOffset = CONFETTI_EFFECT_SIZE * 0.05;
+      const startPoint: ConnectionPoint = {
         x: confettiOrigin.x + particle.offsetX,
         y: confettiOrigin.y + particle.offsetY,
       };
-      const startPoint = {
-        x: center.x - direction.x * half,
-        y: center.y - direction.y * half,
+      const endPoint: ConnectionPoint = {
+        x: startPoint.x + (endRadius - startRadius) * Math.cos(radians),
+        y: startPoint.y - (endRadius - startRadius) * Math.sin(radians),
       };
-      const endPoint = {
-        x: center.x + direction.x * half,
-        y: center.y + direction.y * half,
+      const midPoint: ConnectionPoint = {
+        x: (startPoint.x + endPoint.x) / 2,
+        y: (startPoint.y + endPoint.y) / 2,
       };
-      const firstControl = {
-        x:
-          center.x -
-          direction.x * half * 0.34 +
-          normal.x * particle.size * particle.bend,
-        y:
-          center.y -
-          direction.y * half * 0.34 +
-          normal.y * particle.size * particle.bend,
-      };
-      const secondControl = {
-        x:
-          center.x +
-          direction.x * half * 0.26 -
-          normal.x * particle.size * particle.bend * 0.7,
-        y:
-          center.y +
-          direction.y * half * 0.26 -
-          normal.y * particle.size * particle.bend * 0.7,
+      const controlPoint: ConnectionPoint = {
+        x: midPoint.x + curveOffset * Math.cos(radians + Math.PI / 2),
+        y: midPoint.y - curveOffset * Math.sin(radians + Math.PI / 2),
       };
 
-      particle.origin = center;
       particle.path.setAttribute(
         "d",
         `M ${formatPoint(startPoint)} ` +
-          `C ${formatPoint(firstControl)} ` +
-          `${formatPoint(secondControl)} ` +
-          `${formatPoint(endPoint)}`,
+          `Q ${formatPoint(controlPoint)} ` +
+          `${formatPoint(midPoint)} ` +
+          `T ${formatPoint(endPoint)}`,
       );
       particle.length = Math.max(particle.path.getTotalLength(), 1);
-      particle.path.style.strokeDasharray = `${particle.length}`;
+      particle.path.style.strokeDasharray = `1, ${particle.length}`;
+      particle.path.style.strokeDashoffset = "0";
     });
 
     confettiPlayed = false;

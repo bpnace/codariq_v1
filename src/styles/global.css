@@ -550,7 +550,7 @@ header.nav-scrolled {
 
 .agent-connection-confetti {
   stroke: #0f766e;
-  stroke-width: 2.7;
+  stroke-width: 3.2;
   opacity: 0;
 }
 
@@ -563,10 +563,6 @@ header.nav-scrolled {
 @media (max-width: 700px) {
   .agent-connection-path {
     stroke-width: 2.75;
-  }
-
-  .agent-connection-confetti {
-    stroke-width: 2.25;
   }
 }
 

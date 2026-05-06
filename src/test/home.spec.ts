@@ -163,7 +163,7 @@ test("agent connection line links the two framework badges", async ({
     if (!last) {
       return null;
     }
-    const targetEntryY = targetRect.top + targetRect.height * 0.2;
+    const targetEntryY = targetRect.top + targetRect.height * 0.5;
 
     return {
       firstInsideStart:
@@ -176,9 +176,9 @@ test("agent connection line links the two framework badges", async ({
         last.x <= targetRect.right &&
         last.y >= targetRect.top &&
         last.y <= targetRect.bottom,
-      lastInTargetUpperBand:
-        last.y >= targetRect.top + targetRect.height * 0.08 &&
-        last.y <= targetRect.top + targetRect.height * 0.3,
+      lastInTargetCenterBand:
+        last.y >= targetRect.top + targetRect.height * 0.42 &&
+        last.y <= targetRect.top + targetRect.height * 0.58,
       targetDeltaX: Math.abs(last.x - (targetRect.left + targetRect.width / 2)),
       targetDeltaY: Math.abs(last.y - targetEntryY),
       lastAboveTargetBottomBy: targetRect.bottom - last.y,
@@ -187,10 +187,10 @@ test("agent connection line links the two framework badges", async ({
   expect(pathAnchors).not.toBeNull();
   expect(pathAnchors?.firstInsideStart).toBe(true);
   expect(pathAnchors?.lastInsideTarget).toBe(true);
-  expect(pathAnchors?.lastInTargetUpperBand).toBe(true);
+  expect(pathAnchors?.lastInTargetCenterBand).toBe(true);
   expect(pathAnchors?.targetDeltaX).toBeLessThan(1);
   expect(pathAnchors?.targetDeltaY).toBeLessThan(4);
-  expect(pathAnchors?.lastAboveTargetBottomBy).toBeGreaterThan(20);
+  expect(pathAnchors?.lastAboveTargetBottomBy).toBeGreaterThan(8);
 
   const lineShape = await line.evaluate((path) => {
     const d = path.getAttribute("d") ?? "";
@@ -228,35 +228,105 @@ test("agent connection line links the two framework badges", async ({
 
   const confettiBasePosition = await page.evaluate(() => {
     const target = document.querySelector("[data-agent-connection-target]");
-    const particle = document.querySelector(".agent-connection-confetti");
+    const particles = Array.from(
+      document.querySelectorAll<SVGPathElement>(".agent-connection-confetti"),
+    );
     if (
       !(target instanceof HTMLElement) ||
-      !(particle instanceof SVGPathElement)
+      particles.some((particle) => !(particle instanceof SVGPathElement))
     ) {
       return null;
     }
 
     const targetRect = target.getBoundingClientRect();
-    const particleBox = particle.getBBox();
-    const matrix = particle.getScreenCTM();
-    const svg = particle.ownerSVGElement;
-    if (!matrix || !svg) {
+    const particleShapes = particles.map((particle) => {
+      const matrix = particle.getScreenCTM();
+      const svg = particle.ownerSVGElement;
+      if (!matrix || !svg) {
+        return null;
+      }
+      const toScreenPoint = (point: DOMPoint): DOMPoint => {
+        const svgPoint = svg.createSVGPoint();
+        svgPoint.x = point.x;
+        svgPoint.y = point.y;
+        return svgPoint.matrixTransform(matrix);
+      };
+      const length = particle.getTotalLength();
+      const startPoint = toScreenPoint(particle.getPointAtLength(0));
+      const endPoint = toScreenPoint(particle.getPointAtLength(length));
+      return {
+        d: particle.getAttribute("d") ?? "",
+        length,
+        strokeDasharray: getComputedStyle(particle).strokeDasharray,
+        strokeDashoffset: getComputedStyle(particle).strokeDashoffset,
+        startPoint: { x: startPoint.x, y: startPoint.y },
+        endPoint: { x: endPoint.x, y: endPoint.y },
+      };
+    });
+    if (particleShapes.some((shape) => !shape)) {
       return null;
     }
-    const bottomPoint = svg.createSVGPoint();
-    bottomPoint.x = particleBox.x + particleBox.width / 2;
-    bottomPoint.y = particleBox.y + particleBox.height;
-    const particleBottom = bottomPoint.matrixTransform(matrix).y;
+    const safeParticleShapes = particleShapes.filter(
+      (shape): shape is NonNullable<typeof shape> => Boolean(shape),
+    );
 
     return {
-      particleBottom,
+      particleShapes: safeParticleShapes,
+      targetEntryY: targetRect.top + targetRect.height * 0.5,
+      targetRect: {
+        left: targetRect.left,
+        right: targetRect.right,
+        top: targetRect.top,
+        bottom: targetRect.bottom,
+      },
       targetTop: targetRect.top,
     };
   });
   expect(confettiBasePosition).not.toBeNull();
-  expect(confettiBasePosition?.particleBottom).toBeLessThan(
-    (confettiBasePosition?.targetTop ?? 0) - 5,
-  );
+  expect(
+    confettiBasePosition?.particleShapes.every(({ d }) =>
+      /^M .* Q .* T .*$/.test(d),
+    ),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(({ d }) => !/\sC\s/.test(d)),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(
+      ({ length }) => Math.abs(length - 48.071) < 0.4,
+    ),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(
+      ({ strokeDasharray }) =>
+        strokeDasharray.startsWith("1px,") || strokeDasharray.startsWith("1,"),
+    ),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(
+      ({ strokeDashoffset }) => Number.parseFloat(strokeDashoffset) === 0,
+    ),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(
+      ({ startPoint }) =>
+        startPoint.x >= (confettiBasePosition?.targetRect.left ?? 0) &&
+        startPoint.x <= (confettiBasePosition?.targetRect.right ?? 0) &&
+        startPoint.y >= (confettiBasePosition?.targetRect.top ?? 0) &&
+        startPoint.y <= (confettiBasePosition?.targetRect.bottom ?? 0),
+    ),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(
+      ({ startPoint }) =>
+        Math.abs(startPoint.y - (confettiBasePosition?.targetEntryY ?? 0)) < 8,
+    ),
+  ).toBe(true);
+  expect(
+    confettiBasePosition?.particleShapes.every(
+      ({ endPoint }) => endPoint.y < (confettiBasePosition?.targetTop ?? 0) - 8,
+    ),
+  ).toBe(true);
 
   const tipPositions = await page.evaluate(async () => {
     const start = document.querySelector("[data-agent-connection-start]");
@@ -348,6 +418,7 @@ test("agent connection line links the two framework badges", async ({
       { timeout: 800 },
     )
     .toBe(3);
+  await page.waitForTimeout(120);
 
   const visibleConfettiPosition = await page.evaluate(() => {
     const target = document.querySelector("[data-agent-connection-target]");
@@ -361,15 +432,31 @@ test("agent connection line links the two framework badges", async ({
     )
       .map((particle) => ({
         opacity: Number.parseFloat(getComputedStyle(particle).opacity),
+        strokeWidth: Number.parseFloat(getComputedStyle(particle).strokeWidth),
+        dashOffset: Number.parseFloat(
+          getComputedStyle(particle).strokeDashoffset,
+        ),
+        dashArray: getComputedStyle(particle).strokeDasharray,
+        length: particle.getTotalLength(),
         rect: particle.getBoundingClientRect(),
       }))
-      .filter(({ opacity }) => opacity > 0.25);
+      .filter(({ opacity, strokeWidth }) => opacity > 0.25 && strokeWidth > 1);
     const sideGap = 10;
 
     return {
       visibleCount: visibleParticles.length,
-      allAboveButton: visibleParticles.every(
-        ({ rect }) => rect.bottom < targetTop - 3,
+      allStrokeWidthNearLavandai: visibleParticles.every(
+        ({ strokeWidth }) => strokeWidth > 2.8 && strokeWidth <= 3.2,
+      ),
+      allDrawingForward: visibleParticles.every(
+        ({ dashArray, dashOffset }) =>
+          Number.parseFloat(dashArray) > 5 && dashOffset < -3,
+      ),
+      allEmergingFromButton: visibleParticles.every(
+        ({ rect }) => rect.bottom > targetTop,
+      ),
+      allReachAboveButton: visibleParticles.every(
+        ({ rect }) => rect.top < targetTop - 8,
       ),
       noMainLineTouch: visibleParticles.every(
         ({ rect }) =>
@@ -382,11 +469,6 @@ test("agent connection line links the two framework badges", async ({
       rightCount: visibleParticles.filter(
         ({ rect }) => rect.left > targetCenterX + sideGap,
       ).length,
-      minGapAboveButton: visibleParticles.length
-        ? Math.min(
-            ...visibleParticles.map(({ rect }) => targetTop - rect.bottom),
-          )
-        : null,
       minSideGap: visibleParticles.length
         ? Math.min(
             ...visibleParticles.map(({ rect }) =>
@@ -400,14 +482,16 @@ test("agent connection line links the two framework badges", async ({
   });
   expect(visibleConfettiPosition).not.toBeNull();
   expect(visibleConfettiPosition?.visibleCount).toBe(3);
-  expect(visibleConfettiPosition?.allAboveButton).toBe(true);
+  expect(visibleConfettiPosition?.allStrokeWidthNearLavandai).toBe(true);
+  expect(visibleConfettiPosition?.allDrawingForward).toBe(true);
+  expect(visibleConfettiPosition?.allEmergingFromButton).toBe(true);
+  expect(visibleConfettiPosition?.allReachAboveButton).toBe(true);
   expect(visibleConfettiPosition?.noMainLineTouch).toBe(true);
   expect(visibleConfettiPosition?.leftCount).toBe(1);
   expect(visibleConfettiPosition?.rightCount).toBe(2);
-  expect(visibleConfettiPosition?.minGapAboveButton).toBeLessThan(70);
   expect(visibleConfettiPosition?.minSideGap).toBeGreaterThan(10);
 
-  await page.waitForTimeout(820);
+  await page.waitForTimeout(720);
 
   const scrolledDashOffset = await line.evaluate((path) =>
     Number.parseFloat(getComputedStyle(path).strokeDashoffset),
@@ -426,7 +510,8 @@ test("agent connection line links the two framework badges", async ({
         viewportHeight: window.innerHeight,
         hiddenConfetti: confetti.every(
           (particle) =>
-            Number.parseFloat(getComputedStyle(particle).opacity) < 0.08,
+            Number.parseFloat(getComputedStyle(particle).opacity) < 0.08 &&
+            Number.parseFloat(getComputedStyle(particle).strokeWidth) < 0.1,
         ),
       };
     });
