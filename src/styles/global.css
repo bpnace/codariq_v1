@@ -451,6 +451,10 @@ header.nav-scrolled {
 }
 
 /* Enterprise SaaS redesign primitives */
+#main-content {
+  position: relative;
+}
+
 .saas-container {
   width: min(100% - 2rem, 1440px);
   margin-inline: auto;
@@ -474,8 +478,8 @@ header.nav-scrolled {
 .saas-heading--center > span {
   display: inline-flex;
   width: fit-content;
-  color: #0f766e;
-  background: rgba(20, 184, 166, 0.1);
+  color: #ecfeff;
+  background: #0f766e;
   border-radius: 7px;
   padding: 0.42rem 0.56rem;
   font-size: 0.78rem;
@@ -515,8 +519,65 @@ header.nav-scrolled {
   will-change: transform, opacity;
 }
 
+#main-content .secure-hero__inner,
+#main-content .trust-cloud__inner,
+#main-content [data-enterprise-section] > .saas-container {
+  position: relative;
+  z-index: 2;
+}
+
+.agent-connection-layer {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  width: 100%;
+  height: var(--agent-connection-height, 100%);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.agent-connection-layer path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.agent-connection-path {
+  stroke: url("#agent-connection-gradient");
+  stroke-width: 3.25;
+}
+
+.agent-connection-confetti {
+  stroke: #0f766e;
+  stroke-width: 2.7;
+  opacity: 0;
+}
+
+[data-agent-connection-start],
+[data-agent-connection-target] {
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 700px) {
+  .agent-connection-path {
+    stroke-width: 2.75;
+  }
+
+  .agent-connection-confetti {
+    stroke-width: 2.25;
+  }
+}
+
 @media (max-width: 900px) {
   .saas-heading {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-connection-layer {
+    display: none;
   }
 }

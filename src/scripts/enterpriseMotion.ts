@@ -7,9 +7,384 @@ const PANEL_BASE_ROTATION_X = -2;
 const PANEL_BASE_ROTATION_Y = -5;
 const PANEL_MAX_ROTATION_X = 4.5;
 const PANEL_MAX_ROTATION_Y = 6.5;
+const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);
+
+type ConnectionPoint = {
+  x: number;
+  y: number;
+};
+
+type ConnectionParticle = {
+  path: SVGPathElement;
+  angle: number;
+  offsetX: number;
+  offsetY: number;
+  bend: number;
+  flyX: number;
+  flyY: number;
+  spin: number;
+  size: number;
+  length: number;
+  origin: ConnectionPoint;
+};
+
+const formatPoint = ({ x, y }: ConnectionPoint): string =>
+  `${x.toFixed(1)} ${y.toFixed(1)}`;
+
+const getMainTop = (main: HTMLElement): number =>
+  main.getBoundingClientRect().top + window.scrollY;
+
+const getTransformOffset = (element: HTMLElement): ConnectionPoint => {
+  const offset: ConnectionPoint = { x: 0, y: 0 };
+  let current: HTMLElement | null = element;
+
+  while (current) {
+    const transform = getComputedStyle(current).transform;
+
+    if (transform && transform !== "none") {
+      const matrix = new DOMMatrixReadOnly(transform);
+      offset.x += matrix.m41;
+      offset.y += matrix.m42;
+    }
+
+    if (current.id === "main-content") {
+      break;
+    }
+
+    current = current.parentElement;
+  }
+
+  return offset;
+};
+
+const getPoint = (
+  element: HTMLElement,
+  mainTop: number,
+  xRatio = 0.5,
+  yRatio = 0.5,
+): ConnectionPoint => {
+  const rect = element.getBoundingClientRect();
+  const transform = getTransformOffset(element);
+
+  return {
+    x: rect.left + window.scrollX - transform.x + rect.width * xRatio,
+    y: rect.top + window.scrollY - mainTop - transform.y + rect.height * yRatio,
+  };
+};
+
+const createSvgPath = (className: string): SVGPathElement => {
+  const path = document.createElementNS(SVG_NAMESPACE, "path");
+  path.setAttribute("class", className);
+  return path;
+};
+
+const shapeConnectionProgress = (progress: number): number => {
+  const safeProgress = clamp(progress, 0, 1);
+
+  if (safeProgress < 0.28) {
+    const local = safeProgress / 0.28;
+    return (1 - Math.pow(1 - local, 3)) * 0.4;
+  }
+
+  if (safeProgress < 0.66) {
+    const local = (safeProgress - 0.28) / 0.38;
+    return 0.4 + ((1 - Math.cos(Math.PI * local)) / 2) * 0.26;
+  }
+
+  const local = (safeProgress - 0.66) / 0.34;
+  return 0.66 + Math.pow(local, 0.82) * 0.34;
+};
+
+function initAgentConnectionMotion(): (() => void) | null {
+  const main = document.querySelector<HTMLElement>("#main-content");
+  const startEl = document.querySelector<HTMLElement>(
+    "[data-agent-connection-start]",
+  );
+  const targetEl = document.querySelector<HTMLElement>(
+    "[data-agent-connection-target]",
+  );
+
+  if (!main || !startEl || !targetEl) {
+    return null;
+  }
+
+  const svg = document.createElementNS(SVG_NAMESPACE, "svg");
+  const defs = document.createElementNS(SVG_NAMESPACE, "defs");
+  const gradient = document.createElementNS(SVG_NAMESPACE, "linearGradient");
+  const drawPath = createSvgPath("agent-connection-path");
+  const particleSeeds = [
+    {
+      angle: -152,
+      bend: -0.18,
+      offsetX: -44,
+      offsetY: -18,
+      flyX: -24,
+      flyY: -12,
+      size: 24,
+      spin: -4,
+    },
+    {
+      angle: -42,
+      bend: 0.18,
+      offsetX: 36,
+      offsetY: -22,
+      flyX: 32,
+      flyY: -16,
+      size: 24,
+      spin: 4,
+    },
+    {
+      angle: 8,
+      bend: -0.14,
+      offsetX: 72,
+      offsetY: -10,
+      flyX: 36,
+      flyY: -6,
+      size: 22,
+      spin: 3,
+    },
+  ];
+  const particles: ConnectionParticle[] = particleSeeds.map((seed) => ({
+    ...seed,
+    path: createSvgPath("agent-connection-confetti"),
+    length: 1,
+    origin: { x: 0, y: 0 },
+  }));
+  let pathLength = 1;
+  let activeProgress = 0;
+  let confettiPlayed = false;
+  let particleTweens: gsap.core.Tween[] = [];
+
+  svg.setAttribute("class", "agent-connection-layer");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  gradient.setAttribute("id", "agent-connection-gradient");
+  gradient.setAttribute("gradientUnits", "userSpaceOnUse");
+  [
+    { offset: "0%", color: "#ccfbf1" },
+    { offset: "52%", color: "#2dd4bf" },
+    { offset: "100%", color: "#0f766e" },
+  ].forEach(({ offset, color }) => {
+    const stop = document.createElementNS(SVG_NAMESPACE, "stop");
+    stop.setAttribute("offset", offset);
+    stop.setAttribute("stop-color", color);
+    gradient.append(stop);
+  });
+  defs.append(gradient);
+  drawPath.setAttribute("stroke", "url(#agent-connection-gradient)");
+  svg.append(defs, drawPath, ...particles.map(({ path }) => path));
+  main.prepend(svg);
+
+  const renderParticle = (
+    particle: ConnectionParticle,
+    progress: number,
+  ): void => {
+    const safeProgress = clamp(progress, 0, 1);
+    const reveal = clamp(safeProgress / 0.42, 0, 1);
+    const movement = 1 - Math.pow(1 - safeProgress, 2.6);
+    const fade = clamp((safeProgress - 0.54) / 0.46, 0, 1);
+    const opacity = safeProgress < 0.02 ? 0 : 1 - Math.pow(fade, 0.9);
+
+    particle.path.style.opacity = `${opacity}`;
+    particle.path.style.strokeDashoffset = `${particle.length * (1 - reveal)}`;
+    particle.path.setAttribute(
+      "transform",
+      `translate(${(particle.flyX * movement).toFixed(1)} ${(particle.flyY * movement).toFixed(1)}) rotate(${(particle.spin * movement).toFixed(1)} ${particle.origin.x.toFixed(1)} ${particle.origin.y.toFixed(1)})`,
+    );
+  };
+
+  const hideParticles = (): void => {
+    particleTweens.forEach((tween) => tween.kill());
+    particleTweens = [];
+    particles.forEach((particle) => renderParticle(particle, 0));
+  };
+
+  const playConfetti = (): void => {
+    hideParticles();
+    particleTweens = particles.map((particle, index) => {
+      const state = { progress: 0 };
+
+      return gsap.to(state, {
+        progress: 1,
+        duration: 0.46,
+        delay: 0.1 + index * 0.032,
+        ease: "none",
+        onUpdate: () => renderParticle(particle, state.progress),
+      });
+    });
+  };
+
+  const updatePath = (): void => {
+    const width = Math.ceil(
+      Math.max(main.clientWidth, document.documentElement.clientWidth),
+    );
+    const mainTop = getMainTop(main);
+    const start = getPoint(startEl, mainTop, 0.5, 0.55);
+    const target = getPoint(targetEl, mainTop, 0.5, 0.2);
+    const targetTop = getPoint(targetEl, mainTop, 0.5, 0);
+    const confettiOrigin = { x: target.x, y: targetTop.y - 6 };
+    const height = Math.ceil(
+      Math.max(main.scrollHeight, targetTop.y + 220, window.innerHeight),
+    );
+    const pathDrop = Math.max(target.y - start.y, 680);
+    const horizontalReach = clamp(width * 0.2, 150, 310);
+    const firstSwerve = {
+      x: clamp(target.x + horizontalReach, width * 0.2, width * 0.84),
+      y: start.y + pathDrop * 0.23,
+    };
+    const secondSwerve = {
+      x: clamp(target.x - horizontalReach * 1.45, width * 0.1, width * 0.52),
+      y: start.y + pathDrop * 0.48,
+    };
+    const thirdSwerve = {
+      x: clamp(target.x + horizontalReach * 0.26, width * 0.24, width * 0.74),
+      y: start.y + pathDrop * 0.69,
+    };
+    const finalDrop = Math.min(180, pathDrop * 0.22);
+
+    const pathData =
+      `M ${formatPoint(start)} ` +
+      `C ${formatPoint({ x: start.x + (firstSwerve.x - start.x) * 0.58, y: start.y + pathDrop * 0.07 })} ` +
+      `${formatPoint({ x: firstSwerve.x + horizontalReach * 0.08, y: firstSwerve.y - pathDrop * 0.15 })} ` +
+      `${formatPoint(firstSwerve)} ` +
+      `C ${formatPoint({ x: firstSwerve.x - horizontalReach * 0.08, y: firstSwerve.y + pathDrop * 0.15 })} ` +
+      `${formatPoint({ x: secondSwerve.x + horizontalReach * 0.12, y: secondSwerve.y - pathDrop * 0.15 })} ` +
+      `${formatPoint(secondSwerve)} ` +
+      `C ${formatPoint({ x: secondSwerve.x - horizontalReach * 0.05, y: secondSwerve.y + pathDrop * 0.16 })} ` +
+      `${formatPoint({ x: thirdSwerve.x - horizontalReach * 0.12, y: thirdSwerve.y - pathDrop * 0.14 })} ` +
+      `${formatPoint(thirdSwerve)} ` +
+      `C ${formatPoint({ x: thirdSwerve.x + horizontalReach * 0.08, y: thirdSwerve.y + pathDrop * 0.13 })} ` +
+      `${formatPoint({ x: target.x - horizontalReach * 0.08, y: target.y - finalDrop })} ` +
+      `${formatPoint(target)}`;
+
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.style.setProperty("--agent-connection-height", `${height}px`);
+    gradient.setAttribute("x1", "0");
+    gradient.setAttribute("x2", "0");
+    gradient.setAttribute("y1", String(start.y));
+    gradient.setAttribute("y2", String(target.y));
+    drawPath.setAttribute("d", pathData);
+    pathLength = Math.max(drawPath.getTotalLength(), 1);
+    drawPath.style.strokeDasharray = `${pathLength}`;
+
+    particles.forEach((particle) => {
+      const radians = (particle.angle * Math.PI) / 180;
+      const direction = {
+        x: Math.cos(radians),
+        y: Math.sin(radians),
+      };
+      const normal = {
+        x: -direction.y,
+        y: direction.x,
+      };
+      const half = particle.size / 2;
+      const center = {
+        x: confettiOrigin.x + particle.offsetX,
+        y: confettiOrigin.y + particle.offsetY,
+      };
+      const startPoint = {
+        x: center.x - direction.x * half,
+        y: center.y - direction.y * half,
+      };
+      const endPoint = {
+        x: center.x + direction.x * half,
+        y: center.y + direction.y * half,
+      };
+      const firstControl = {
+        x:
+          center.x -
+          direction.x * half * 0.34 +
+          normal.x * particle.size * particle.bend,
+        y:
+          center.y -
+          direction.y * half * 0.34 +
+          normal.y * particle.size * particle.bend,
+      };
+      const secondControl = {
+        x:
+          center.x +
+          direction.x * half * 0.26 -
+          normal.x * particle.size * particle.bend * 0.7,
+        y:
+          center.y +
+          direction.y * half * 0.26 -
+          normal.y * particle.size * particle.bend * 0.7,
+      };
+
+      particle.origin = center;
+      particle.path.setAttribute(
+        "d",
+        `M ${formatPoint(startPoint)} ` +
+          `C ${formatPoint(firstControl)} ` +
+          `${formatPoint(secondControl)} ` +
+          `${formatPoint(endPoint)}`,
+      );
+      particle.length = Math.max(particle.path.getTotalLength(), 1);
+      particle.path.style.strokeDasharray = `${particle.length}`;
+    });
+
+    confettiPlayed = false;
+    hideParticles();
+    renderProgress(activeProgress);
+  };
+
+  function renderProgress(progress: number): void {
+    activeProgress = clamp(progress, 0, 1);
+    const drawProgress = shapeConnectionProgress(activeProgress);
+    drawPath.style.strokeDashoffset = `${pathLength * (1 - drawProgress)}`;
+
+    if (drawProgress >= 0.995 && !confettiPlayed) {
+      confettiPlayed = true;
+      playConfetti();
+    } else if (drawProgress < 0.97 && confettiPlayed) {
+      confettiPlayed = false;
+      hideParticles();
+    }
+  }
+
+  updatePath();
+
+  const trigger = ScrollTrigger.create({
+    trigger: startEl,
+    start: "center 76%",
+    endTrigger: targetEl,
+    end: "center 76%",
+    invalidateOnRefresh: true,
+    onUpdate: (self) => renderProgress(self.progress),
+    onRefresh: (self) => {
+      updatePath();
+      renderProgress(self.progress);
+    },
+  });
+
+  const handleResize = (): void => {
+    ScrollTrigger.refresh();
+  };
+
+  const refreshAfterLayout = (): void => {
+    ScrollTrigger.refresh();
+  };
+
+  window.addEventListener("resize", handleResize);
+  window.addEventListener("load", refreshAfterLayout, { once: true });
+  requestAnimationFrame(() => {
+    requestAnimationFrame(refreshAfterLayout);
+  });
+  document.fonts?.ready.then(refreshAfterLayout).catch(() => {
+    // Font loading status is non-critical; resize/load refreshes still cover layout.
+  });
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+    window.removeEventListener("load", refreshAfterLayout);
+    hideParticles();
+    trigger.kill();
+    svg.remove();
+  };
+}
 
 export function initEnterpriseMotion(): void {
   if (initialized || typeof window === "undefined") return;
@@ -209,6 +584,8 @@ export function initEnterpriseMotion(): void {
       });
   }, document.documentElement);
 
+  const agentConnectionCleanup = initAgentConnectionMotion();
+
   if (consoleEl && window.matchMedia("(pointer: fine)").matches) {
     consoleEl.addEventListener("pointermove", handlePointerMove);
     consoleEl.addEventListener("pointerleave", handlePointerLeave);
@@ -218,6 +595,7 @@ export function initEnterpriseMotion(): void {
     consoleEl?.removeEventListener("pointermove", handlePointerMove);
     consoleEl?.removeEventListener("pointerleave", handlePointerLeave);
     if (consoleEl) gsap.killTweensOf(consoleEl);
+    agentConnectionCleanup?.();
     ctx.revert();
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     initialized = false;
