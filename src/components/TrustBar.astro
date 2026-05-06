@@ -32,6 +32,22 @@ const {
   ],
   className = "",
 } = Astro.props;
+
+const normalizeVariant = (icon: string) =>
+  icon.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+const iconSources: Record<string, string> = {
+  "gdpr-ready": "https://img.icons8.com/metro/52/security-checked.png",
+  "eu-hosted": "https://img.icons8.com/ios-filled/100/cloud.png",
+  "remote-only": "https://img.icons8.com/ios-filled/100/settings.png",
+};
+
+const trustBadges = badges.map((badge) => ({
+  ...badge,
+  variant: normalizeVariant(badge.icon),
+  iconSrc:
+    iconSources[normalizeVariant(badge.icon)] ?? iconSources["remote-only"],
+}));
 ---
 
 <section
@@ -46,15 +62,21 @@ const {
     </div>
     <div class="trust-cloud__items">
       {
-        badges.map((badge) => (
-          <article class="trust-pill enterprise-card">
-            <img
-              src={`/images/badges/${badge.icon}.webp`}
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-            />
-            <div>
+        trustBadges.map((badge) => (
+          <article
+            class={`trust-pill trust-pill--${badge.variant} enterprise-card`}
+          >
+            <div class="trust-pill__visual" aria-hidden="true">
+              <img
+                class="trust-pill__icon"
+                src={badge.iconSrc}
+                width="96"
+                height="96"
+                alt=""
+                loading="lazy"
+              />
+            </div>
+            <div class="trust-pill__content">
               <h3>{badge.name}</h3>
               <p>{badge.description}</p>
             </div>
@@ -109,7 +131,7 @@ const {
     color: #0b1220;
     font-size: clamp(1.28rem, 2vw, 2.1rem);
     font-weight: 920;
-    letter-spacing: -0.045em;
+    letter-spacing: 0;
     line-height: 1.02;
   }
 
@@ -121,16 +143,84 @@ const {
 
   .trust-pill {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-    align-items: start;
-    padding: 1.15rem;
+    grid-template-columns: minmax(4.55rem, 25%) 1fr;
+    align-items: stretch;
+    min-height: 8.45rem;
+    overflow: hidden;
   }
 
-  .trust-pill img {
-    width: 2.2rem;
-    height: 2.8rem;
+  .trust-pill__visual {
+    position: relative;
+    display: grid;
+    min-height: 100%;
+    place-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    border-right: 1px solid rgba(15, 23, 42, 0.08);
+    color: #f8fafc;
+  }
+
+  .trust-pill__visual::before,
+  .trust-pill__visual::after {
+    position: absolute;
+    content: "";
+  }
+
+  .trust-pill__visual::before {
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 25% 18%,
+        rgba(255, 255, 255, 0.34),
+        transparent 28%
+      ),
+      linear-gradient(180deg, #0f766e 0%, #14b8a6 100%);
+  }
+
+  .trust-pill__visual::after {
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 58%),
+      radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1.2px);
+    background-size:
+      auto,
+      0.62rem 0.62rem;
+    opacity: 0.48;
+  }
+
+  .trust-pill--eu-hosted .trust-pill__visual::before {
+    background:
+      radial-gradient(
+        circle at 26% 18%,
+        rgba(255, 255, 255, 0.28),
+        transparent 29%
+      ),
+      linear-gradient(180deg, #0b1220 0%, #1f6f8b 100%);
+  }
+
+  .trust-pill--remote-only .trust-pill__visual::before {
+    background:
+      radial-gradient(
+        circle at 28% 18%,
+        rgba(255, 255, 255, 0.26),
+        transparent 30%
+      ),
+      linear-gradient(180deg, #1e293b 0%, #64748b 100%);
+  }
+
+  .trust-pill__icon {
+    position: relative;
+    z-index: 1;
+    width: clamp(2rem, 3.2vw, 2.55rem);
+    height: clamp(2rem, 3.2vw, 2.55rem);
     object-fit: contain;
+    opacity: 0.96;
+    filter: brightness(0) invert(1)
+      drop-shadow(0 0.75rem 1.25rem rgba(15, 23, 42, 0.24));
+  }
+
+  .trust-pill__content {
+    padding: 1.15rem;
   }
 
   .trust-pill h3 {

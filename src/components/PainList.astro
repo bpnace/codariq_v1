@@ -52,7 +52,7 @@ const defaultProblems = [
 ];
 
 const {
-  title = "Wo KI-Agenten im Alltag wirklich helfen",
+  title = "Wo KI-Agenten im Alltag erleichtern können?",
   subtitle = "Nicht jeder Ablauf braucht sofort ein großes System. Aber wenn Postfach, Dokumente, Wissen und Tool-Übergaben täglich Zeit ziehen, kann ein kontrollierbarer KI-Agent aus Routinearbeit einen sauberen Ablauf machen.",
   closingText = "Wir starten klein, meistens mit einem klaren n8n-Agenten. Wenn der Use Case wächst, bauen wir daraus ein stabiles Agenten-Setup mit Freigaben, Protokollen und DSGVO-konformer Integration.",
   problems = defaultProblems,
@@ -101,7 +101,31 @@ const {
 <style>
   .usecase-suite {
     background: #f4f8fb;
-    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    padding: clamp(5rem, 5vw, 7rem) 0;
+  }
+
+  .usecase-suite .saas-heading {
+    grid-template-columns: minmax(0, 0.78fr) minmax(20rem, 0.62fr);
+    align-items: start;
+    row-gap: clamp(1.25rem, 2.2vw, 2rem);
+  }
+
+  .usecase-suite .saas-heading > span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .usecase-suite .saas-heading h2 {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+  }
+
+  .usecase-suite .saas-heading p {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 43rem;
+    margin-top: 0.3rem;
   }
 
   .usecase-suite__grid {
@@ -132,9 +156,9 @@ const {
   .usecase-icon {
     display: grid;
     place-items: center;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 6px;
     background: linear-gradient(
       135deg,
       rgba(20, 184, 166, 0.16),
@@ -143,8 +167,8 @@ const {
   }
 
   .usecase-icon span {
-    width: 1.05rem;
-    height: 1.05rem;
+    width: 0.8rem;
+    height: 0.8rem;
     border-radius: 4px;
     background: #14b8a6;
   }
@@ -245,6 +269,21 @@ const {
     .usecase-suite__grid,
     .usecase-suite__closing {
       grid-template-columns: 1fr;
+    }
+
+    .usecase-suite .saas-heading {
+      grid-template-columns: 1fr;
+    }
+
+    .usecase-suite .saas-heading > span,
+    .usecase-suite .saas-heading h2,
+    .usecase-suite .saas-heading p {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .usecase-suite .saas-heading p {
+      margin-top: 0;
     }
   }
 </style>
