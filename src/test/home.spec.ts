@@ -37,6 +37,105 @@ test("pain list uses agent reframing", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("delivery framework cards rise from blur in a staged sequence", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const cards = page.locator("[data-delivery-card]");
+  await expect(cards).toHaveCount(3);
+  await expect(page.locator("[data-delivery-card-inner]")).toHaveCount(0);
+  await expect(cards.nth(0)).toHaveAttribute("data-delivery-card-step", "1");
+  await expect(cards.nth(1)).toHaveAttribute("data-delivery-card-step", "2");
+  await expect(cards.nth(2)).toHaveAttribute("data-delivery-card-step", "3");
+
+  const readCardStates = async () =>
+    cards.evaluateAll((elements) =>
+      elements.map((element) => {
+        const style = getComputedStyle(element);
+        const matrix = new DOMMatrixReadOnly(
+          style.transform === "none" ? undefined : style.transform,
+        );
+        const blur = style.filter.match(/blur\((-?\d+(?:\.\d+)?)px\)/);
+
+        return {
+          blur: blur ? Number.parseFloat(blur[1]) : 0,
+          opacity: Number.parseFloat(style.opacity),
+          transform: style.transform,
+          y: matrix.m42,
+          visibility: style.visibility,
+        };
+      }),
+    );
+
+  await expect(page.locator(".agent-connection-path")).toHaveCount(1);
+
+  await page.evaluate(() => {
+    const shell = document.querySelector("[data-delivery-framework]");
+    if (!(shell instanceof HTMLElement)) {
+      throw new Error("Delivery framework shell not found.");
+    }
+
+    document.documentElement.style.scrollBehavior = "auto";
+    document.body.style.scrollBehavior = "auto";
+    const shellTop = shell.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, shellTop - window.innerHeight * 0.8);
+  });
+  await expect
+    .poll(
+      async () =>
+        (await readCardStates()).every(
+          ({ opacity, visibility }) => opacity === 0 && visibility === "hidden",
+        ),
+      { timeout: 3000 },
+    )
+    .toBe(true);
+
+  const initialStates = await readCardStates();
+  expect(initialStates.every(({ blur }) => blur > 16)).toBe(true);
+  expect(initialStates.every(({ opacity }) => opacity === 0)).toBe(true);
+  expect(initialStates.every(({ y }) => y > 52)).toBe(true);
+  expect(initialStates.every(({ visibility }) => visibility === "hidden")).toBe(
+    true,
+  );
+
+  await page.evaluate(() => {
+    const shell = document.querySelector("[data-delivery-framework]");
+    if (!(shell instanceof HTMLElement)) {
+      throw new Error("Delivery framework shell not found.");
+    }
+
+    const shellTop = shell.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, shellTop - window.innerHeight * 0.72);
+  });
+
+  await page.waitForTimeout(300);
+  const earlyStates = await readCardStates();
+  expect(earlyStates[0].opacity).toBeGreaterThan(0.35);
+  expect(earlyStates[0].blur).toBeLessThan(initialStates[0].blur);
+  expect(earlyStates[0].y).toBeLessThan(initialStates[0].y);
+  expect(earlyStates[0].opacity).toBeGreaterThan(earlyStates[1].opacity + 0.2);
+  expect(earlyStates[0].opacity).toBeGreaterThan(earlyStates[2].opacity + 0.2);
+
+  await page.waitForTimeout(420);
+  const middleStates = await readCardStates();
+  expect(middleStates[1].opacity).toBeGreaterThan(0.35);
+  expect(middleStates[1].blur).toBeLessThan(initialStates[1].blur);
+  expect(middleStates[1].y).toBeLessThan(initialStates[1].y);
+  expect(middleStates[1].opacity).toBeGreaterThan(
+    middleStates[2].opacity + 0.1,
+  );
+
+  await page.waitForTimeout(1200);
+  const finalStates = await readCardStates();
+  expect(finalStates.every(({ opacity }) => opacity === 1)).toBe(true);
+  expect(finalStates.every(({ blur }) => blur === 0)).toBe(true);
+  expect(finalStates.every(({ y }) => Math.abs(y) < 1)).toBe(true);
+  expect(finalStates.every(({ visibility }) => visibility === "visible")).toBe(
+    true,
+  );
+});
+
 test("mouse clicks draw the Lavandai-style wavy burst", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".agent-connection-path")).toHaveCount(1);

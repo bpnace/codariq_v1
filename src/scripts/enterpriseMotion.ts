@@ -485,6 +485,39 @@ function initClickWavyEffect(): () => void {
   };
 }
 
+function initDeliveryFrameworkReveal(): void {
+  const shell = document.querySelector<HTMLElement>(
+    "[data-delivery-framework]",
+  );
+  if (!shell) return;
+
+  const cards = Array.from(
+    shell.querySelectorAll<HTMLElement>("[data-delivery-card]"),
+  );
+  if (!cards.length) return;
+
+  gsap.set(cards, {
+    autoAlpha: 0,
+    filter: "blur(18px)",
+    y: 56,
+    force3D: true,
+  });
+
+  gsap.to(cards, {
+    autoAlpha: 1,
+    filter: "blur(0px)",
+    y: 0,
+    duration: 0.84,
+    stagger: 0.24,
+    ease: "power4.out",
+    scrollTrigger: {
+      trigger: shell,
+      start: "top 76%",
+      once: true,
+    },
+  });
+}
+
 export function initEnterpriseMotion(): void {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
@@ -681,6 +714,8 @@ export function initEnterpriseMotion(): void {
           },
         );
       });
+
+    initDeliveryFrameworkReveal();
   }, document.documentElement);
 
   const agentConnectionCleanup = initAgentConnectionMotion();

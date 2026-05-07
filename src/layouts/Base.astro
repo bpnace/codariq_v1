@@ -22,7 +22,7 @@ const {
   keywords = "KI Agenten KMU, DSGVO KI Agenten, n8n KI Agent, OpenClaw Setup, KI Integration bestehende Systeme, KI Automatisierung Selbstständige, kleine Teams automatisieren, Prozesse automatisieren kleine Teams, Backoffice automatisieren, E-Mail Automatisierung",
   ogImage,
   article,
-  forceNavSolid = false,
+  forceNavSolid: requestedForceNavSolid = false,
 } = Astro.props;
 // Normalize canonical URL: remove trailing slashes, .html extension, and query params
 let pathname = Astro.url.pathname;
@@ -34,6 +34,15 @@ if (pathname.endsWith(".html")) {
 if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
+const solidNavBackgroundRoutes = new Set([
+  "/impressum",
+  "/datenschutz",
+  "/cookie-richtlinien",
+  "/agb",
+  "/faq",
+]);
+const useSolidNavBackground = solidNavBackgroundRoutes.has(pathname);
+const forceNavSolid = requestedForceNavSolid || useSolidNavBackground;
 const canonicalURL = new URL(pathname, Astro.site ?? "https://codariq.de");
 const canonicalHref =
   canonicalURL.pathname === "/" ? canonicalURL.origin : canonicalURL.toString();
@@ -368,6 +377,14 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         -webkit-backdrop-filter: blur(16px);
       }
 
+      body[data-solid-nav-background="true"] header.nav-scrolled {
+        background: #f7fafc !important;
+        border-color: rgba(15, 23, 42, 0.1) !important;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
       /* Mobile menu button color transition */
       #mobile-menu-button {
         transition: color 0.3s ease;
@@ -670,6 +687,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
   <body
     class="bg-[#f7fafc] text-[#0b1220] antialiased overscroll-behavior-y-contain"
     data-force-nav-solid={forceNavSolid}
+    data-solid-nav-background={useSolidNavBackground}
   >
     <!-- Skip Links for accessibility -->
     <a
@@ -1012,27 +1030,6 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               <ul class="space-y-2 text-gray-300 mb-6">
                 <li>
                   <a
-                    href="/ki-agenten-kmu"
-                    class="hover:text-[#5eead4] transition-colors"
-                    >KI-Agenten für KMU</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/dsgvo-ki-agenten"
-                    class="hover:text-[#5eead4] transition-colors"
-                    >DSGVO KI-Agenten</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/openclaw-agenten"
-                    class="hover:text-[#5eead4] transition-colors"
-                    >OpenClaw-Agenten</a
-                  >
-                </li>
-                <li>
-                  <a
                     href="/impressum"
                     class="hover:text-[#5eead4] transition-colors">Impressum</a
                   >
@@ -1089,6 +1086,27 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     >für kleine Teams</a
                   >
                 </li>
+                <li>
+                  <a
+                    href="/ki-agenten-kmu"
+                    class="hover:text-[#5eead4] transition-colors duration-200"
+                    >für KMU</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/dsgvo-ki-agenten"
+                    class="hover:text-[#5eead4] transition-colors duration-200"
+                    >für DSGVO</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/openclaw-agenten"
+                    class="hover:text-[#5eead4] transition-colors duration-200"
+                    >mit OpenClaw</a
+                  >
+                </li>
               </ul>
             </div>
 
@@ -1098,7 +1116,13 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
               <div class="mb-6">
                 <h3 class="font-semibold text-gray-100 mb-3">Kontakt</h3>
                 <ul class="space-y-2 text-gray-300 text-sm">
-                  <li>kontakt@codariq.de</li>
+                  <li>
+                    <a
+                      href="mailto:kontakt@codariq.de"
+                      class="hover:text-[#5eead4] transition-colors"
+                      >kontakt@codariq.de</a
+                    >
+                  </li>
                   <li>Made in Berlin</li>
                 </ul>
               </div>
@@ -1316,7 +1340,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
               try {
                 // Send to server-side API endpoint
-                await submitFormData("/api/newsletter", {
+                await submitFormData("/newsletter-proxy.php", {
                   email: email.value.trim(),
                   source: "footer_newsletter",
                   timestamp: new Date().toISOString(),

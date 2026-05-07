@@ -430,7 +430,7 @@ const formatCategory = (value: string | string[] | undefined) => {
         </svg>
         <div>
           <p class="font-medium text-green-800 text-sm">Erfolgreich angemeldet!</p>
-          <p class="text-green-700 text-xs">Du erhältst eine Bestätigungs E Mail</p>
+          <p class="text-green-700 text-xs">Du erhältst eine Bestätigungs-E-Mail</p>
         </div>
       </div>
     </div>
@@ -499,7 +499,7 @@ const formatCategory = (value: string | string[] | undefined) => {
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  const initBlogNewsletter = () => {
     const blogNewsletterForm = document.getElementById('blog-newsletter-form');
     const blogNewsletterSuccess = document.getElementById('blog-newsletter-success');
     const blogNewsletterError = document.getElementById('blog-newsletter-error');
@@ -538,7 +538,7 @@ const formatCategory = (value: string | string[] | undefined) => {
 
         try {
           // Send to newsletter API endpoint
-          const response = await fetch('/api/newsletter', {
+          const response = await fetch('/newsletter-proxy.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -577,7 +577,13 @@ const formatCategory = (value: string | string[] | undefined) => {
         }
       });
     }
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBlogNewsletter);
+  } else {
+    initBlogNewsletter();
+  }
 </script>
 
 <script type="application/ld+json">

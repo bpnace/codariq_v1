@@ -38,6 +38,7 @@ pnpm-debug.log*
 test-results/
 public/webhook-proxy.config.php
 public/webhook-proxy.php
+public/newsletter-proxy.config.php
 
 # macOS-specific files
 .DS_Store

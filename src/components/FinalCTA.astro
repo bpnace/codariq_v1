@@ -127,14 +127,24 @@ const {
             </div>
 
             <div class="secure-field secure-field--wide">
-              <label for="message">Was soll der Agent zuerst übernehmen?</label>
+              <label for="message"
+                >Was soll der Agent zuerst übernehmen? *</label
+              >
               <textarea
                 id="message"
                 name="message"
+                required
+                aria-describedby="message-error"
                 rows="4"
                 placeholder="Zum Beispiel E-Mails sortieren, Dokumente auslesen, CRM pflegen, Projekt retten"
               ></textarea>
-              <div class="secure-error hidden"></div>
+              <div
+                id="message-error"
+                role="alert"
+                aria-live="polite"
+                class="secure-error hidden"
+              >
+              </div>
             </div>
           </div>
 
@@ -195,7 +205,7 @@ const {
         ),
         linear-gradient(135deg, #0b1220, #122033 58%, #14332f);
       color: #f8fafc;
-    padding: clamp(4.5rem, 2vw, 7rem) 0;
+      padding: clamp(4.5rem, 2vw, 7rem) 0;
     }
 
     .secure-contact__ambient {
@@ -531,6 +541,17 @@ const {
             hasErrors = true;
           } else {
             document.getElementById("email-error").classList.add("hidden");
+          }
+
+          // Validate message
+          if (!message.value.trim()) {
+            errors.push("Bitte sag kurz, was der Agent zuerst übernehmen soll");
+            document.getElementById("message-error").textContent =
+              "Bitte sag kurz, was der Agent zuerst übernehmen soll";
+            document.getElementById("message-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("message-error").classList.add("hidden");
           }
 
           // Spam protection: Check honeypot field

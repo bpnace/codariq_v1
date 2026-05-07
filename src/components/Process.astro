@@ -73,10 +73,14 @@ const {
       <p>{subtitle}</p>
     </div>
 
-    <div class="deployment-flow__shell enterprise-card">
+    <div class="deployment-flow__shell enterprise-card" data-delivery-framework>
       {
         steps.map((step) => (
-          <article class="deploy-phase enterprise-reveal">
+          <article
+            class="deploy-phase"
+            data-delivery-card
+            data-delivery-card-step={step.number}
+          >
             <div class="deploy-phase__header">
               <span>{step.duration}</span>
               <h3>{step.title}</h3>
@@ -122,9 +126,11 @@ const {
     flex-direction: column;
     min-height: 32rem;
     padding: 1.35rem;
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.86);
     border: 1px solid rgba(15, 23, 42, 0.07);
     border-radius: 14px;
+    transform-origin: 50% 100%;
+    will-change: transform, opacity, filter;
   }
 
   .deploy-phase__header span {
@@ -194,6 +200,15 @@ const {
 
     .deploy-phase {
       min-height: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deploy-phase {
+      filter: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
   }
 </style>
