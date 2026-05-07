@@ -78,7 +78,7 @@ const {
         "Zugriffsschutz, Rollen und Protokolle",
         "Fehler, Wirkung und Datenflüsse beobachten",
         "Begleitung nach dem ersten Einsatz",
-        "Optional: Betreuung ab 649 € pro Monat",
+        "Optional: Betreuungs Preis nach Umfang",
       ],
       price: "ab 3.899 €",
       duration: "einmalig",
@@ -92,7 +92,7 @@ const {
       title: "Immer enthalten",
       subtitle: "",
       description:
-        "Ziel, Daten, Zuständigkeiten und Grenzen werden vorab geklärt.",
+        "Unabhängig vom Umfang bleibt der Ablauf nachvollziehbar: Ziel, Daten, Zuständigkeiten und Grenzen werden vor der Umsetzung festgelegt.",
       features: [
         "Klarer Startpunkt statt Tool-Auswahl",
         "Plan mit Dauer, Ergebnis und Zuständigkeiten",
@@ -101,7 +101,7 @@ const {
         "Übergabe ohne technische Abhängigkeit",
         "Betrieb mit Sonderfall- und Fehlerpfaden",
       ],
-      note: "Kein IT-Wissen nötig. Wir klären Prozess und Verantwortung.",
+      note: "Du musst kein IT-Wissen mitbringen. Wichtig ist, dass Prozess und Verantwortung sauber geklärt sind.",
       price: "",
       duration: "",
       icon: "included",
@@ -159,37 +159,31 @@ const {
       }
     </div>
 
-    <div class="benefits-support-grid">
-      {
-        additionalServices.map((service) => (
-          <aside class="included-panel enterprise-card enterprise-reveal">
-            <div>
-              <span>Grundlage</span>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              {service.note && <strong>{service.note}</strong>}
-            </div>
-            <ul>
-              {service.features.map((feature) => (
-                <li>{feature}</li>
-              ))}
-            </ul>
-          </aside>
-        ))
-      }
-
-      <div class="custom-offer-panel enterprise-card enterprise-reveal">
-        <div>
-          <span>Individuell</span>
-          <h3>Individuelles Angebot benötigt?</h3>
-          <p>
-            Wenn mehrere Teams, Systeme oder Freigaben betroffen sind, klären
-            wir Umfang, Reihenfolge und Verantwortung direkt.
-          </p>
-        </div>
-        <a href="/#final-cta">Umfang klären</a>
+    <div class="custom-offer-panel enterprise-card enterprise-reveal">
+      <div>
+        <span>Individuell</span>
+        <h3>Individuelles Angebot benötigt?</h3>
       </div>
+      <a href="/#final-cta">Umfang klären</a>
     </div>
+
+    {
+      additionalServices.map((service) => (
+        <aside class="included-panel enterprise-card enterprise-reveal">
+          <div>
+            <span>Grundlage</span>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+          <ul>
+            {service.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+          {service.note && <strong>{service.note}</strong>}
+        </aside>
+      ))
+    }
   </div>
 </section>
 
@@ -487,19 +481,12 @@ const {
     }
   }
 
-  .benefits-support-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.62fr) minmax(20rem, 0.72fr);
-    gap: 1rem;
-    align-items: stretch;
-    margin-top: 1rem;
-  }
-
   .custom-offer-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 1.4rem;
+    align-items: center;
+    margin-top: 1rem;
     padding: 1.25rem 1.35rem;
     overflow: hidden;
     background: #0b1220;
@@ -529,6 +516,7 @@ const {
   }
 
   .custom-offer-panel p {
+    max-width: 68rem;
     margin-top: 0.55rem;
     color: #cbd5e1;
     font-size: 0.98rem;
@@ -540,7 +528,6 @@ const {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: fit-content;
     min-height: 3rem;
     padding: 0.82rem 1rem;
     border-radius: 8px;
@@ -563,8 +550,9 @@ const {
 
   .included-panel {
     display: grid;
-    grid-template-columns: minmax(13rem, 0.52fr) minmax(0, 1fr);
+    grid-template-columns: 0.58fr 1fr 0.55fr;
     gap: 1.4rem;
+    margin-top: 1rem;
     padding: 1.35rem;
     background: #ffffff;
     border: 1px solid rgba(15, 23, 42, 0.08);
@@ -607,8 +595,6 @@ const {
   }
 
   .included-panel strong {
-    display: block;
-    margin-top: 0.85rem;
     color: #0b1220;
     font-weight: 850;
   }
@@ -632,7 +618,7 @@ const {
     }
 
     .pricing-suite__grid,
-    .benefits-support-grid,
+    .custom-offer-panel,
     .included-panel {
       grid-template-columns: 1fr;
     }
