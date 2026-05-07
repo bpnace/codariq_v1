@@ -14,7 +14,7 @@ const CONFETTI_DURATION = 0.6;
 const CLICK_WAVY_EFFECT_SIZE = 100;
 const CLICK_WAVY_STROKE_WIDTH = 3;
 const CLICK_WAVY_DURATION = 0.6;
-const CLICK_WAVY_COLOR = "#fcd718";
+const CLICK_WAVY_COLOR = "#0f766e";
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);

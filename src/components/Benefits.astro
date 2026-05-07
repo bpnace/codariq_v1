@@ -112,7 +112,7 @@ const {
 
 <section id="benefits" data-enterprise-section class="pricing-suite">
   <div class="saas-container">
-    <div class="saas-heading enterprise-reveal">
+    <div class="pricing-suite__heading enterprise-reveal">
       <span>Packages</span>
       <h2>{title}</h2>
       <p>{subtitle}</p>
@@ -169,6 +169,52 @@ const {
   .pricing-suite {
     background: #f7fafc;
     padding: clamp(4.5rem, 2vw, 7rem) 0;
+  }
+
+  .pricing-suite__heading {
+    display: grid;
+    grid-template-columns: minmax(20rem, 0.64fr) minmax(22rem, 0.58fr);
+    grid-template-areas:
+      "eyebrow ."
+      "title copy";
+    gap: 1rem clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    justify-content: center;
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  .pricing-suite__heading > span {
+    display: inline-flex;
+    grid-area: eyebrow;
+    width: fit-content;
+    color: #ecfeff;
+    background: #0f766e;
+    border-radius: 7px;
+    padding: 0.42rem 0.56rem;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pricing-suite__heading h2 {
+    grid-area: title;
+    max-width: 23ch;
+    color: #0b1220;
+    font-size: clamp(2.25rem, 3.7vw, 4.15rem);
+    font-weight: 940;
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+
+  .pricing-suite__heading p {
+    grid-area: copy;
+    max-width: 42rem;
+    color: #64748b;
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    font-weight: 580;
+    line-height: 1.55;
   }
 
   .pricing-suite__grid {
@@ -368,6 +414,16 @@ const {
   }
 
   @media (max-width: 1040px) {
+    .pricing-suite__heading {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "eyebrow"
+        "title"
+        "copy";
+      max-width: 42rem;
+      text-align: left;
+    }
+
     .pricing-suite__grid,
     .included-panel {
       grid-template-columns: 1fr;

@@ -98,7 +98,7 @@ test("mouse clicks draw the Lavandai-style wavy burst", async ({ page }) => {
   expect(initialBurst.paths.every(({ linecap }) => linecap === "round")).toBe(
     true,
   );
-  expect(initialBurst.paths.every(({ stroke }) => stroke === "#fcd718")).toBe(
+  expect(initialBurst.paths.every(({ stroke }) => stroke === "#0f766e")).toBe(
     true,
   );
   expect(
