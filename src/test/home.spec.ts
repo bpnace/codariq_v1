@@ -5,6 +5,118 @@ test("home loads", async ({ page }) => {
   await expect(page).toHaveTitle(/Codariq/);
 });
 
+test("home keeps a fixed bottom blur gradient over the viewport", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const veil = page.locator("[data-home-scroll-blur]");
+  await expect(veil).toHaveCount(1);
+
+  const initialVeil = await veil.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const style = getComputedStyle(element);
+    const layers = Array.from(element.querySelectorAll("span")).map((layer) => {
+      const layerStyle = getComputedStyle(layer);
+
+      return {
+        backdropFilter: layerStyle.backdropFilter,
+        maskImage: layerStyle.maskImage,
+        webkitBackdropFilter: layerStyle.getPropertyValue(
+          "-webkit-backdrop-filter",
+        ),
+        webkitMaskImage: layerStyle.getPropertyValue("-webkit-mask-image"),
+      };
+    });
+    const beforeStyle = getComputedStyle(element, "::before");
+    const afterStyle = getComputedStyle(element, "::after");
+
+    return {
+      afterBackground: afterStyle.backgroundImage,
+      afterContent: afterStyle.content,
+      beforeBackground: beforeStyle.backgroundImage,
+      beforeContent: beforeStyle.content,
+      beforeMaskImage: beforeStyle.maskImage,
+      beforeOpacity: beforeStyle.opacity,
+      bottom: rect.bottom,
+      borderTopColor: style.borderTopColor,
+      borderTopStyle: style.borderTopStyle,
+      borderTopWidth: style.borderTopWidth,
+      boxShadow: style.boxShadow,
+      height: rect.height,
+      left: rect.left,
+      overflow: style.overflow,
+      pointerEvents: style.pointerEvents,
+      position: style.position,
+      right: rect.right,
+      viewportHeight: window.innerHeight,
+      viewportWidth: window.innerWidth,
+      zIndex: style.zIndex,
+      layers,
+    };
+  });
+
+  expect(initialVeil.position).toBe("fixed");
+  expect(initialVeil.overflow).toBe("hidden");
+  expect(initialVeil.pointerEvents).toBe("none");
+  expect(initialVeil.zIndex).toBe("40");
+  expect(initialVeil.borderTopWidth).toBe("0px");
+  expect(initialVeil.boxShadow).toBe("none");
+  expect(initialVeil.left).toBe(0);
+  expect(initialVeil.right).toBe(initialVeil.viewportWidth);
+  expect(initialVeil.bottom).toBe(initialVeil.viewportHeight);
+  expect(
+    Math.abs(initialVeil.height - initialVeil.viewportHeight * 0.125),
+  ).toBeLessThanOrEqual(1);
+  expect(initialVeil.afterContent).toBe('""');
+  expect(initialVeil.afterBackground).toContain("linear-gradient");
+  expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18");
+  expect(initialVeil.afterBackground).not.toContain("247, 250, 252");
+  expect(initialVeil.beforeContent).toBe("none");
+  expect(initialVeil.beforeBackground).toBe("none");
+  expect(initialVeil.beforeMaskImage).toBe("none");
+  expect(initialVeil.beforeOpacity).toBe("1");
+  expect(initialVeil.layers).toHaveLength(3);
+  expect(initialVeil.layers[0].backdropFilter).toContain("blur(0px)");
+  expect(initialVeil.layers[1].backdropFilter).toContain("blur(4px)");
+  expect(initialVeil.layers[2].backdropFilter).toContain("blur(10px)");
+  expect(
+    initialVeil.layers.every(
+      ({ maskImage, webkitMaskImage }) =>
+        maskImage.includes("linear-gradient") &&
+        webkitMaskImage.includes("linear-gradient") &&
+        !maskImage.includes("rgb(0, 0, 0) 12%") &&
+        !maskImage.includes("rgb(0, 0, 0) 6%"),
+    ),
+  ).toBe(true);
+
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = "auto";
+    document.body.style.scrollBehavior = "auto";
+    window.scrollTo(0, 900);
+  });
+
+  const scrolledVeil = await veil.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+
+    return {
+      bottom: rect.bottom,
+      height: rect.height,
+      left: rect.left,
+      right: rect.right,
+      top: rect.top,
+    };
+  });
+
+  expect(scrolledVeil.left).toBe(initialVeil.left);
+  expect(scrolledVeil.right).toBe(initialVeil.right);
+  expect(scrolledVeil.height).toBe(initialVeil.height);
+  expect(scrolledVeil.bottom).toBe(initialVeil.bottom);
+  expect(scrolledVeil.top).toBe(
+    initialVeil.viewportHeight - initialVeil.height,
+  );
+});
+
 test("desktop nav stays on homepage anchors", async ({ page }) => {
   await page.goto("/");
   const nav = page.locator("#main-nav");

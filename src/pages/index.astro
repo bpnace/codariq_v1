@@ -49,4 +49,66 @@ import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
 
   <!-- Short FAQ -->
   <HomeFAQ />
+
+  <div class="home-scroll-blur" data-home-scroll-blur aria-hidden="true">
+    <span class="home-scroll-blur__layer home-scroll-blur__layer--soft"></span>
+    <span class="home-scroll-blur__layer home-scroll-blur__layer--mid"></span>
+    <span class="home-scroll-blur__layer home-scroll-blur__layer--deep"></span>
+  </div>
 </Base>
+
+<style>
+  .home-scroll-blur {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    height: clamp(5rem, 12.5svh, 9rem);
+    overflow: hidden;
+    pointer-events: none;
+    isolation: isolate;
+  }
+
+  .home-scroll-blur::after {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    content: "";
+    background: linear-gradient(
+      to top,
+      rgba(3, 7, 18, 0.22) 0%,
+      rgba(3, 7, 18, 0.15) 22%,
+      rgba(3, 7, 18, 0.08) 48%,
+      rgba(3, 7, 18, 0.025) 76%,
+      rgba(3, 7, 18, 0) 100%
+    );
+  }
+
+  .home-scroll-blur__layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .home-scroll-blur__layer--soft {
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    mask-image: linear-gradient(to top, #000 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%);
+  }
+
+  .home-scroll-blur__layer--mid {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    mask-image: linear-gradient(to top, #000 0%, transparent 68%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 68%);
+  }
+
+  .home-scroll-blur__layer--deep {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: linear-gradient(to top, #000 0%, transparent 42%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 42%);
+  }
+</style>
