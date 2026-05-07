@@ -2,11 +2,12 @@
 export interface Props {
   title?: string;
   subtitle?: string;
-  testimonials?: Array<{
-    quote: string;
-    name: string;
-    position: string;
-    company: string;
+  items?: Array<{
+    kind: "feedback" | "useCase";
+    body: string;
+    heading: string;
+    context: string;
+    label: string;
     image?: string;
     results?: {
       metric: string;
@@ -17,57 +18,57 @@ export interface Props {
 }
 
 const {
-  title = "So fühlt sich Entlastung im Alltag an",
-  subtitle = "Typische Beispielszenarien aus Gesprächen mit Selbstständigen, kleinen Teams und KMU. Keine erfundenen Kundenstimmen, sondern realistische Muster, damit du einschätzen kannst, was bei dir möglich ist.",
-  testimonials = [
+  title = "Wo Agenten Teams wirklich entlasten können",
+  subtitle = "Zwei anonymisierte Rückmeldungen und konkrete Einsatzpunkte für Teams, Geschäftsführung und Selbstständige. Nicht als Showpiece, sondern dort, wo Büroarbeit jeden Tag liegen bleibt.",
+  items = [
     {
-      quote:
-        "Als Solo-Selbstständiger fühlt es sich schnell so an, als würde jeden Tag dieselbe Büroarbeit warten: Anfragen, Angebote, Ablage, Nachfassen. Ein sinnvoller Agenten-Workflow bereitet diese Schritte vor, während du die wichtigen Entscheidungen behältst.",
-      name: "Beispiel: Solo-Dienstleister",
-      position: "Anfragen, Angebote, Ablage",
-      company: "Typisches Szenario",
-      results: { metric: "1", improvement: "klarer Workflow" },
+      kind: "feedback",
+      body: '"Vor Terminen war bei uns immer die gleiche Sucherei... Letzte Mail, offene Punkte, fehlende Unterlagen. Wenn das vorher als kurze Zusammenfassung bereit liegt, gehen wir deutlich ruhiger ins Gespräch."',
+      heading: "Terminmappe vor dem Gespräch",
+      context: "Mails, Notizen, offene Punkte",
+      label: "Rückmeldung von Kunden",
+      results: { metric: "Termin", improvement: "strukturiert vorbereitet" },
       featured: true,
     },
     {
-      quote:
-        "Im Support lohnt sich kein blinder Autopilot. Sinnvoller ist ein KI-Agent, der Anfragen sortiert, Antwortentwürfe vorbereitet und unsichere Fälle zur Freigabe an Menschen gibt.",
-      name: "Beispiel: Support-Team",
-      position: "Triage und Antwortentwürfe",
-      company: "Typisches Szenario",
-      results: { metric: "klar", improvement: "Freigaben" },
+      kind: "useCase",
+      body: "Wenn Informationen in Mails, PDFs, Tickets und Köpfen verteilt sind, unterbricht jede Rückfrage den Arbeitstag. Der Agent sucht in freigegebenen Quellen, nennt den Fundort und bereitet eine ausführliche Antwort vor.",
+      heading: "Teamwissen ohne Zuruf",
+      context: "Mails, PDFs, Tickets, Übergaben",
+      label: "Nutzen für Teams",
+      results: { metric: "Antwort", improvement: "sauber erfasst" },
     },
     {
-      quote:
-        "Bei Rechnungen und Dokumenten geht es nicht nur um Auslesen. Entscheidend ist, dass Dateien korrekt benannt, abgelegt und mit dem passenden nächsten Schritt verbunden werden.",
-      name: "Beispiel: Backoffice",
-      position: "Dokumente und Rechnungen",
-      company: "Typisches Szenario",
-      results: { metric: "weniger", improvement: "Nacharbeit" },
+      kind: "useCase",
+      body: "Neue Anfragen sind selten sofort entscheidungsreif. Der Agent ergänzt Firmendaten, bisherigen Kontakt, offene Fragen und eine nächste Handlung, bevor jemand zurückruft oder ein Angebot schreibt.",
+      heading: "Anfragen sauber einordnen",
+      context: "Firma, Kontakt, nächste Handlung",
+      label: "Nutzen für Selbstständige",
+      results: { metric: "Anfrage", improvement: "ergänzt" },
     },
     {
-      quote:
-        "Wenn ein KI-Projekt festhängt, hilft oft kein weiteres Feature. Erst Scope, Daten, Prompts und Zuständigkeiten klären, dann kann aus Projektrettung wieder ein stabiler Ablauf werden.",
-      name: "Beispiel: KI-Remediation",
-      position: "Festgefahrenes Projekt",
-      company: "Typisches Szenario",
-      results: { metric: "Scope", improvement: "geklärt" },
+      kind: "useCase",
+      body: "Für die Geschäftsführung zählt nicht jede einzelne Mail, sondern der Stand von offenen Freigaben, blockierten Aufgaben, wichtigen Rückmeldungen und Risiken, die nicht bis Freitag liegen bleiben dürfen.",
+      heading: "Entscheidungen mit vorbereitetem Stand",
+      context: "Freigaben, Blocker, Risiken",
+      label: "Nutzen für Geschäftsführung",
+      results: { metric: "Stand", improvement: "immer sichtbar" },
     },
     {
-      quote:
-        "Ein Wissens-Agent ist nützlich, wenn er Quellen zeigt, Zugriffe respektiert und nicht so tut, als wüsste er alles. Dann finden Teams Antworten schneller und lernen trotzdem sauber weiter.",
-      name: "Beispiel: Wissens-Agent",
-      position: "Interne Fragen und Quellen",
-      company: "Typisches Szenario",
-      results: { metric: "mit", improvement: "Quellen" },
+      kind: "feedback",
+      body: '"Ich brauche morgens nicht noch ein Dashboard. Ich brauche eine klare Liste, was neu ist, was hängt, was ich freigeben muss und wo eine Entscheidung ansteht. Ich will nicht mehr nachfragen müssen, sondern direkt loslegen können."',
+      heading: "Chef-Überblick ohne Nachfragen",
+      context: "Freigaben, Rückfragen, offene Aufgaben",
+      label: "Rückmeldung von Kunden",
+      results: { metric: "Überblick", improvement: "vorbereitet" },
     },
     {
-      quote:
-        "Bei kleinen Unternehmen und KMU zählt nicht der größte KI-Stack. Entscheidend ist ein Agent, der bestehende Systeme verbindet und einen wiederkehrenden Prozess zuverlässig vorbereitet.",
-      name: "Beispiel: KMU-Prozess",
-      position: "Tool-Stack und Übergaben",
-      company: "Typisches Szenario",
-      results: { metric: "1", improvement: "Startprozess" },
+      kind: "useCase",
+      body: "Listen, Rechnungen und Formulare kommen aus Postfach, Exporten und Ordnern. Der Agent findet Dubletten, fehlende Angaben und falsche Ablageorte, bevor daraus Nacharbeit wird.",
+      heading: "Daten und Unterlagen vorsortieren",
+      context: "Listen, Rechnungen, Ablage",
+      label: "Nutzen für Backoffice",
+      results: { metric: "Ablage", improvement: "nützlich vorbereitet" },
     },
   ],
 } = Astro.props;
@@ -76,27 +77,32 @@ const {
 <section id="testimonials" data-enterprise-section class="proof-suite">
   <div class="saas-container">
     <div class="saas-heading saas-heading--center enterprise-reveal">
-      <span>Use Case Evidence</span>
+      <span>Typische Engpässe</span>
       <h2>{title}</h2>
       <p>{subtitle}</p>
     </div>
 
     <div class="proof-suite__grid">
       {
-        testimonials.map((testimonial) => (
+        items.map((item) => (
           <article
-            class={`proof-card enterprise-card ${testimonial.featured ? "proof-card--featured" : ""}`}
+            class={`proof-card enterprise-card ${item.kind === "feedback" || item.featured ? "proof-card--featured" : ""}`}
+            data-proof-kind={item.kind}
           >
             <div class="proof-card__meta">
-              <span>{testimonial.company}</span>
-              <strong>{testimonial.name}</strong>
-              <p>{testimonial.position}</p>
+              <span>{item.label}</span>
+              <strong>{item.heading}</strong>
+              <p>{item.context}</p>
             </div>
-            <blockquote>{testimonial.quote}</blockquote>
-            {testimonial.results && (
+            {item.kind === "feedback" ? (
+              <blockquote class="proof-card__body">{item.body}</blockquote>
+            ) : (
+              <p class="proof-card__body">{item.body}</p>
+            )}
+            {item.results && (
               <div class="proof-card__result">
-                <strong>{testimonial.results.metric}</strong>
-                <span>{testimonial.results.improvement}</span>
+                <strong>{item.results.metric}</strong>
+                <span>{item.results.improvement}</span>
               </div>
             )}
           </article>
@@ -106,14 +112,13 @@ const {
 
     <div class="proof-suite__cta enterprise-reveal">
       <div>
-        <strong>Klingt nach Entlastung?</strong>
+        <strong>Erkennst du mindestens einen dieser Fälle?</strong>
         <p>
-          In 30 Minuten schauen wir auf deinen Arbeitsalltag und finden ein bis
-          zwei Stellen, an denen ein KI-Agent oder eine sichere KI-Integration
-          konkret hilft.
+          Wir schauen auf einen konkreten Prozess und klären, ob ein Agent dort
+          vorbereiten, sortieren oder mit Freigabe handeln sollte.
         </p>
       </div>
-      <a href="#final-cta">Termin buchen</a>
+      <a href="#final-cta">Fall einordnen</a>
     </div>
   </div>
 </section>
@@ -173,7 +178,7 @@ const {
     font-weight: 620;
   }
 
-  .proof-card blockquote {
+  .proof-card__body {
     margin-top: 1.3rem;
     color: #334155;
     font-size: 1rem;

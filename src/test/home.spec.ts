@@ -295,6 +295,67 @@ test("pain list uses agent reframing", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("testimonials mix two feedback quotes with team use cases", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const section = page.locator("#testimonials");
+  await expect(
+    section.getByRole("heading", {
+      name: "Wo Agenten Teams wirklich entlasten können",
+    }),
+  ).toBeVisible();
+  await expect(
+    section.getByText("Typische Engpässe", { exact: true }),
+  ).toBeVisible();
+  await expect(section.locator(".proof-card__meta span")).toHaveText([
+    "Rückmeldung von Kunden",
+    "Nutzen für Teams",
+    "Nutzen für Selbstständige",
+    "Nutzen für Geschäftsführung",
+    "Rückmeldung von Kunden",
+    "Nutzen für Backoffice",
+  ]);
+  await expect(section.locator(".proof-card__meta strong")).toHaveText([
+    "Terminmappe vor dem Gespräch",
+    "Teamwissen ohne Zuruf",
+    "Anfragen sauber einordnen",
+    "Entscheidungen mit vorbereitetem Stand",
+    "Chef-Überblick ohne Nachfragen",
+    "Daten und Unterlagen vorsortieren",
+  ]);
+  await expect(section.getByText("Terminmappe vor dem Gespräch")).toBeVisible();
+  await expect(section.getByText("Anfragen sauber einordnen")).toBeVisible();
+  await expect(
+    section.getByText("Daten und Unterlagen vorsortieren"),
+  ).toBeVisible();
+
+  await expect(section.locator(".proof-card__body")).toHaveCount(6);
+  await expect(section.locator('[data-proof-kind="feedback"]')).toHaveCount(2);
+  await expect(section.locator('[data-proof-kind="useCase"]')).toHaveCount(4);
+  await expect(
+    section.locator('[data-proof-kind="feedback"].proof-card--featured'),
+  ).toHaveCount(2);
+
+  const quotes = await section
+    .locator("blockquote.proof-card__body")
+    .allTextContents();
+  expect(quotes).toHaveLength(2);
+  expect(
+    quotes.filter((quote) => quote.startsWith('"') && quote.endsWith('"')),
+  ).toHaveLength(2);
+
+  await expect(
+    section.getByRole("link", { name: "Fall einordnen" }),
+  ).toBeVisible();
+  await expect(section.locator(".proof-card")).toHaveCount(6);
+  await expect(section.getByText("Triage")).toHaveCount(0);
+  await expect(section.getByText("Scope")).toHaveCount(0);
+  await expect(section.getByText("Prompts")).toHaveCount(0);
+  await expect(section.getByText("Logging")).toHaveCount(0);
+});
+
 test("featured benefits system card has a subtle animated highlight", async ({
   page,
 }) => {
