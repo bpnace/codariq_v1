@@ -302,9 +302,7 @@ test("featured benefits system card has a subtle animated highlight", async ({
 
   const systemCard = page.locator('[data-benefit-system-card="true"]');
   await expect(systemCard).toHaveCount(1);
-  await expect(
-    systemCard.getByText("Mehrere Abläufe als System"),
-  ).toBeVisible();
+  await expect(systemCard.getByText("Kontrolliert nutzbar")).toBeVisible();
 
   const motion = await systemCard.evaluate((card) => {
     const badge = card.querySelector(".pricing-card__badge");
@@ -320,6 +318,8 @@ test("featured benefits system card has a subtle animated highlight", async ({
     }
 
     const badgeRect = badge.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const cardAfter = getComputedStyle(card, "::after");
     const labelBefore = getComputedStyle(label, "::before");
     const labelRect = label.getBoundingClientRect();
     const ctaBefore = getComputedStyle(cta, "::before");
@@ -329,13 +329,17 @@ test("featured benefits system card has a subtle animated highlight", async ({
         badgeRect.left >= labelRect.right || labelRect.left >= badgeRect.right
       ),
       badgePosition: getComputedStyle(badge).position,
+      cardAfterAnimation: cardAfter.animationName,
+      cardAfterBackground: cardAfter.backgroundImage,
+      cardAfterContent: cardAfter.content,
+      cardAfterFilter: cardAfter.filter,
+      cardAfterPointerEvents: cardAfter.pointerEvents,
+      cardAfterTopRatio: parseFloat(cardAfter.top) / cardRect.height,
       cardBeforeAnimation: getComputedStyle(card, "::before").animationName,
       cardBeforeContent: getComputedStyle(card, "::before").content,
       ctaAnimation: ctaBefore.animationName,
       ctaBackgroundColor: ctaBefore.backgroundColor,
-      ctaBorderTopWidth: ctaBefore.borderTopWidth,
       ctaContent: ctaBefore.content,
-      ctaFilter: ctaBefore.filter,
       labelAnimation: labelBefore.animationName,
       labelBackground: labelBefore.backgroundImage,
       labelContent: labelBefore.content,
@@ -343,19 +347,23 @@ test("featured benefits system card has a subtle animated highlight", async ({
     };
   });
 
-  expect(motion.labelText).toBe("Mehrere Abläufe als System");
+  expect(motion.labelText).toBe("Kontrolliert nutzbar");
   expect(motion.badgePosition).toBe("absolute");
   expect(motion.badgeOverlapsLabel).toBe(false);
   expect(motion.cardBeforeAnimation).toBe("none");
   expect(motion.cardBeforeContent).toBe("none");
+  expect(motion.cardAfterContent).toBe('""');
+  expect(motion.cardAfterAnimation).toBe("pricing-system-panel-pulse");
+  expect(motion.cardAfterTopRatio).toBeGreaterThanOrEqual(0.46);
+  expect(motion.cardAfterBackground).toContain("rgba(94, 234, 212");
+  expect(motion.cardAfterFilter).toBe("blur(26px)");
+  expect(motion.cardAfterPointerEvents).toBe("none");
   expect(motion.labelContent).toBe('""');
   expect(motion.labelAnimation).toBe("pricing-system-label-glow");
   expect(motion.labelBackground).toContain("rgba(94, 234, 212");
-  expect(motion.ctaContent).toBe('""');
-  expect(motion.ctaAnimation).toBe("pricing-system-cta-halo");
-  expect(motion.ctaBackgroundColor).toBe("rgba(94, 234, 212, 0.24)");
-  expect(motion.ctaBorderTopWidth).toBe("0px");
-  expect(motion.ctaFilter).toBe("blur(8px)");
+  expect(motion.ctaContent).toBe("none");
+  expect(motion.ctaAnimation).toBe("none");
+  expect(motion.ctaBackgroundColor).toBe("rgba(0, 0, 0, 0)");
 });
 
 test("delivery framework cards rise from blur in a staged sequence", async ({

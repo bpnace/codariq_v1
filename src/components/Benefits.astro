@@ -28,80 +28,80 @@ export interface Props {
 }
 
 const {
-  title = "Pakete für KI-Agenten und Integration",
-  subtitle = "Du bekommst einen klaren Rahmen für Umfang und Kosten. Die Umsetzung wird an deinen Ablauf, deinen Tool-Stack und die nötigen Freigaben angepasst. Wir kümmern uns um Datenschutz und saubere Abläufe.",
+  title = "Drei Wege zum sicheren Agenten",
+  subtitle = "Die Arbeit beginnt nicht mit einem Tool. Wir grenzen den Ablauf ein, klären Daten, Zugriffe und Freigaben und bauen nur, was im Betrieb verantwortbar ist.",
   benefits = [
     {
-      title: "Starter Paket",
+      title: "Prozess-Check",
       description:
-        "Für Selbstständige und kleine Teams, die einen Ablauf spürbar entlasten wollen. Auch wenn du allein bist: Automationen übernehmen Aufgaben wie ein zusätzliches Teammitglied.",
+        "Für einen konkreten Ablauf, bei dem erst Daten, Rollen und Freigaben geklärt werden müssen, bevor etwas gebaut wird.",
       icon: "starter",
       features: [
-        "1 klarer Ablauf oder Agenten-Workflow",
-        "Anbindung an vorhandene Tools",
-        "Regeln für Sonderfälle und Freigaben",
-        "Kurze Doku und Übergabe",
+        "1 Ablauf mit Daten- und Freigabeprüfung",
+        "Quellen, Übergaben und Stopppunkte erfassen",
+        "Machbarkeit und Risiko einordnen",
+        "Kurzer Plan für den ersten Einsatz",
         "Optional: Betreuung ab 25 € pro Monat",
       ],
       price: "ab 399 €",
       duration: "einmalig",
       isProduct: true,
-      additionalInfo: "Ein Bereich oder Prozess",
+      additionalInfo: "Ein Ablauf",
       colorTheme: "green",
     },
     {
-      title: "Team Paket",
+      title: "Erster Einsatz",
       description:
-        "Für Selbstständige und kleine Teams, die mehrere Abläufe verbinden wollen, ohne dass es kompliziert wird. Deine Automationen und Agenten arbeiten wie ein eingespieltes Team im Hintergrund.",
+        "Für Teams, die einen begrenzten Ablauf kontrolliert in den Arbeitsalltag bringen wollen, ohne Verantwortung an ein Tool abzugeben.",
       icon: "growth",
       features: [
-        "Bis zu 3 verbundene Agenten-Workflows",
-        "Automatische Übergaben zwischen Tools",
+        "Bis zu 3 verbundene Arbeitsschritte",
+        "Anbindung an vorhandene Systeme",
+        "Freigaben und Sonderfälle festlegen",
         "Tests mit echten Beispielen",
-        "Einweisung für dich und dein Team",
         "Optional: Betreuung ab 59 € pro Monat",
       ],
       price: "ab 1.499 €",
       duration: "einmalig",
       highlight: true,
       isProduct: true,
-      additionalInfo: "Mehrere Abläufe als System",
+      additionalInfo: "Kontrolliert nutzbar",
       colorTheme: "blue",
     },
     {
-      title: "Wachstums Paket",
+      title: "Betrieb sichern",
       description:
-        "Für Selbstständige und Teams bis 50 Personen, die einen Bereich stabil und dauerhaft automatisieren wollen. So schaffst du mehr Volumen, ohne ständig neue Leute zu brauchen.",
+        "Für einen Bereich wie Support oder Backoffice, der stabil laufen, dokumentiert bleiben und später gezielt erweitert werden soll.",
       icon: "scale",
       features: [
-        "Ein kompletter Bereich wie Support oder Backoffice",
+        "Ein Bereich wie Support oder Backoffice",
         "Zugriffsschutz, Rollen und Protokolle",
-        "Wirkungs- und Risikoauswertung",
-        "Begleitung in den ersten Wochen",
+        "Fehler, Wirkung und Datenflüsse beobachten",
+        "Begleitung nach dem ersten Einsatz",
         "Optional: Betreuung ab 99 € pro Monat",
       ],
       price: "ab 3.499 €",
       duration: "einmalig",
       isProduct: true,
-      additionalInfo: "Bereich mit Skalierungspotenzial",
+      additionalInfo: "Dauerhaft betreut",
       colorTheme: "green",
     },
   ],
   additionalServices = [
     {
-      title: "Jedes Mal mit dabei",
+      title: "Immer enthalten",
       subtitle: "",
       description:
-        "Damit du dich nicht durch Technik kämpfen musst, sind diese Punkte immer inklusive, egal welches Paket du nimmst.",
+        "Unabhängig vom Umfang bleibt der Ablauf nachvollziehbar: Ziel, Daten, Zuständigkeiten und Grenzen werden vor der Umsetzung festgelegt.",
       features: [
-        "Klarer Startpunkt mit Agenten-Potenzial",
-        "Fester Plan mit Dauer, Ergebnis und nötigen Tools",
-        "Datenschutz sauber gelöst: Zugriffe, Datenfluss und Freigaben",
-        "Tests mit echten Beispielen aus deinem Alltag",
-        "Verständliche Übergabe statt technischer Abhängigkeit",
-        "Betrieb so gebaut, dass Sonderfälle nicht untergehen",
+        "Klarer Startpunkt statt Tool-Auswahl",
+        "Plan mit Dauer, Ergebnis und Zuständigkeiten",
+        "Datenfluss, Zugriffe und Freigaben dokumentiert",
+        "Tests mit echten Beispielen",
+        "Übergabe ohne technische Abhängigkeit",
+        "Betrieb mit Sonderfall- und Fehlerpfaden",
       ],
-      note: "Du musst kein IT-Wissen mitbringen. Wir erarbeiten zusammen das Ziel und kümmern uns um den Rest.",
+      note: "Du musst kein IT-Wissen mitbringen. Wichtig ist, dass Prozess und Verantwortung sauber geklärt sind.",
       price: "",
       duration: "",
       icon: "included",
@@ -113,7 +113,7 @@ const {
 <section id="benefits" data-enterprise-section class="pricing-suite">
   <div class="saas-container">
     <div class="pricing-suite__heading enterprise-reveal">
-      <span>Packages</span>
+      <span>Leistungen</span>
       <h2>{title}</h2>
       <p>{subtitle}</p>
     </div>
@@ -152,7 +152,7 @@ const {
               href="/#final-cta"
               data-benefit-system-cta={benefit.highlight ? "true" : undefined}
             >
-              Setup prüfen
+              Ablauf einordnen
             </a>
           </article>
         ))
@@ -163,7 +163,7 @@ const {
       additionalServices.map((service) => (
         <aside class="included-panel enterprise-card enterprise-reveal">
           <div>
-            <span>Included baseline</span>
+            <span>Grundlage</span>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
           </div>
@@ -187,14 +187,14 @@ const {
 
   .pricing-suite__heading {
     display: grid;
-    grid-template-columns: minmax(20rem, 0.64fr) minmax(22rem, 0.58fr);
+    grid-template-columns: minmax(18rem, 0.64fr) minmax(28rem, 1fr);
     grid-template-areas:
       "eyebrow ."
       "title copy";
     gap: 1rem clamp(2rem, 5vw, 5rem);
     align-items: center;
     justify-content: center;
-    max-width: 72rem;
+    max-width: 78rem;
     margin-inline: auto;
   }
 
@@ -251,10 +251,42 @@ const {
   }
 
   .pricing-card--featured {
+    overflow: hidden;
+    isolation: isolate;
     background: linear-gradient(180deg, #0b1220 0%, #14332f 100%);
     color: #f8fafc;
     transform: translateY(-0.8rem);
     box-shadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+  }
+
+  .pricing-card--featured::after {
+    position: absolute;
+    inset: 47% 6% 0;
+    z-index: 0;
+    content: "";
+    pointer-events: none;
+    border-radius: 50% 50% 0 0;
+    background: radial-gradient(
+      ellipse at 50% 88%,
+      rgba(94, 234, 212, 0.3) 0%,
+      rgba(20, 184, 166, 0.17) 28%,
+      rgba(20, 184, 166, 0.07) 52%,
+      rgba(20, 184, 166, 0) 76%
+    );
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 88% 88%;
+    filter: blur(26px);
+    opacity: 0.32;
+    animation: pricing-system-panel-pulse 4.6s ease-in-out infinite;
+  }
+
+  .pricing-card--featured .pricing-card__head,
+  .pricing-card--featured .pricing-card__description,
+  .pricing-card--featured ul,
+  .pricing-card--featured a {
+    position: relative;
+    z-index: 1;
   }
 
   .pricing-card__badge {
@@ -399,21 +431,6 @@ const {
     isolation: isolate;
   }
 
-  .pricing-card__cta--system::before {
-    position: absolute;
-    inset: -0.28rem;
-    z-index: -1;
-    content: "";
-    border: 0;
-    border-radius: 13px;
-    background: rgba(94, 234, 212, 0.24);
-    filter: blur(8px);
-    opacity: 0.2;
-    transform: scale(0.96);
-    transform-origin: center;
-    animation: pricing-system-cta-halo 3.4s ease-out infinite;
-  }
-
   .pricing-card a:hover {
     background: #14332f;
   }
@@ -439,20 +456,20 @@ const {
     }
   }
 
-  @keyframes pricing-system-cta-halo {
+  @keyframes pricing-system-panel-pulse {
     0% {
-      opacity: 0.26;
-      transform: scale(0.96);
+      opacity: 0.18;
+      background-size: 78% 78%;
     }
 
-    58% {
-      opacity: 0.08;
-      transform: scale(1.12);
+    48% {
+      opacity: 0.44;
+      background-size: 112% 112%;
     }
 
     100% {
-      opacity: 0;
-      transform: scale(1.16);
+      opacity: 0.2;
+      background-size: 86% 86%;
     }
   }
 
@@ -509,7 +526,7 @@ const {
 
   @media (prefers-reduced-motion: reduce) {
     .pricing-card__system-label::before,
-    .pricing-card__cta--system::before {
+    .pricing-card--featured::after {
       animation: none;
     }
   }
