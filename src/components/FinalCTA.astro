@@ -10,38 +10,33 @@ export interface Props {
 }
 
 const {
-  title = "Lass uns deinen ersten KI-Agenten finden.",
-  description = "Schildere mir kurz deine aktuelle Situation. In 30 Minuten finden wir ein bis zwei Stellen, an denen ein kontrollierbarer KI-Agent oder eine KI-Integration dir konkret Zeit, Nerven und Routinearbeit abnehmen kann.",
-  primaryCTA = "Termin anfragen",
+  title = "Lass uns deinen ersten KI-Agenten entwerfen.",
+  description = "Erzähle uns, was dein persönlicher Agent können sollte. Egal ob Anfragen vorbereiten, Wissen abrufen oder Daten prüfen. Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung zurück.",
+  primaryCTA = "Anfrage senden",
 } = Astro.props;
+
+const bookingUrl =
+  "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
 ---
 
 <section id="final-cta" data-enterprise-section class="secure-contact">
   <div class="secure-contact__ambient" aria-hidden="true"></div>
   <div class="secure-contact__inner">
     <div class="secure-contact__copy enterprise-reveal">
-      <span>Secure onboarding</span>
+      <span class="secure-contact__eyebrow">Jetzt wird es ernst</span>
       <h2>{title}</h2>
       <p>{description}</p>
       <div class="secure-contact__assurance">
-        <strong>Unverbindlich</strong>
-        <strong>Antwort innerhalb von 24 Stunden</strong>
-        <strong>Keine Tool-Bindung</strong>
+        <strong>30 Minuten</strong>
+        <strong>Keine Verpflichtungen</strong>
+        <strong>DSGVO & EU AI Act</strong>
       </div>
-      <a
-        href="https://calendly.com/kontakt-codariq/30min"
-        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/kontakt-codariq/30min'});return false;"
-        class="secure-contact__calendly"
-        aria-label="30 min Potenzialgespräch über Calendly buchen"
-      >
-        30 min Potenzialgespräch
-      </a>
     </div>
 
     <div class="secure-contact__form enterprise-card enterprise-reveal">
-      <form action="#" method="POST" id="contact-form">
+      <form action="#" method="POST" id="contact-form" novalidate>
         <fieldset>
-          <legend>Kontakt aufnehmen</legend>
+          <legend>Problemfälle schildern</legend>
 
           <input
             type="text"
@@ -127,16 +122,14 @@ const {
             </div>
 
             <div class="secure-field secure-field--wide">
-              <label for="message"
-                >Was soll der Agent zuerst übernehmen? *</label
-              >
+              <label for="message">Was soll der Agent können? *</label>
               <textarea
                 id="message"
                 name="message"
                 required
                 aria-describedby="message-error"
                 rows="4"
-                placeholder="Zum Beispiel E-Mails sortieren, Dokumente auslesen, CRM pflegen, Projekt retten"
+                placeholder="Termine vorbereiten, Leads anreichern, interne Daten durchsuchen, ..."
               ></textarea>
               <div
                 id="message-error"
@@ -148,40 +141,28 @@ const {
             </div>
           </div>
 
-          <button type="submit" class="secure-submit cta-button">
-            <span class="cta-button-text">{primaryCTA}</span>
-          </button>
+          <div class="secure-action-row">
+            <button type="submit" class="secure-submit cta-button">
+              <span class="cta-button-text">{primaryCTA}</span>
+            </button>
 
-          <a
-            href="https://calendly.com/kontakt-codariq/30min"
-            onclick="Calendly.initPopupWidget({url: 'https://calendly.com/kontakt-codariq/30min'});return false;"
-            class="secure-contact__calendly secure-contact__calendly--mobile"
-            aria-label="30 min Potenzialgespräch über Calendly buchen"
-          >
-            30 min Potenzialgespräch
-          </a>
-
-          <div class="secure-messages" style="min-height: 64px">
-            <div
-              id="form-success"
-              role="alert"
-              aria-live="polite"
-              class="hidden secure-message secure-message--success"
-            >
-              <h3>Danke! Ich melde mich bei dir.</h3>
-              <p>Du bekommst innerhalb von 24 Stunden eine Rückmeldung.</p>
-            </div>
+            <div class="secure-action-divider" aria-hidden="true"></div>
 
             <div
-              id="form-errors"
-              role="alert"
-              aria-live="polite"
-              class="hidden secure-message secure-message--error"
+              class="secure-calendar-action"
+              data-calendar-schedule-url={bookingUrl}
             >
-              <h3>Bitte korrigiere Folgendes:</h3>
-              <ul id="error-list"></ul>
+              <span data-calendar-button-target></span>
             </div>
           </div>
+
+          <p
+            id="form-status"
+            class="secure-status"
+            role="status"
+            aria-live="polite"
+          >
+          </p>
 
           <p class="secure-privacy">
             Mit dem Absenden stimmst du unserer <a href="/datenschutz"
@@ -230,7 +211,7 @@ const {
       align-items: start;
     }
 
-    .secure-contact__copy span,
+    .secure-contact__eyebrow,
     .secure-contact__form legend {
       color: #5eead4;
       font-size: 0.78rem;
@@ -274,7 +255,6 @@ const {
       font-weight: 850;
     }
 
-    .secure-contact__calendly,
     .secure-submit {
       display: inline-flex;
       justify-content: center;
@@ -292,12 +272,10 @@ const {
         background-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .secure-contact__calendly:hover,
     .secure-submit:hover {
       background: #5eead4;
     }
 
-    .secure-contact__calendly:active,
     .secure-submit:active {
       transform: translateY(1px) scale(0.985);
     }
@@ -324,8 +302,13 @@ const {
     .secure-form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.15rem;
+      column-gap: 1.15rem;
+      row-gap: 1.55rem;
       margin-top: 1.4rem;
+    }
+
+    .secure-field {
+      position: relative;
     }
 
     .secure-field--wide {
@@ -367,14 +350,29 @@ const {
     }
 
     .secure-error {
-      margin-top: 0.45rem;
+      position: absolute;
+      top: calc(100% + 0.3rem);
+      left: 0;
+      z-index: 2;
+      max-width: min(100%, 28rem);
+      margin-top: 0;
       color: #dc2626;
       font-size: 0.84rem;
       font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .secure-action-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(12.5rem, 0.82fr);
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 1.8rem;
     }
 
     .secure-submit {
       width: 100%;
+      margin-top: 0;
       cursor: pointer;
     }
 
@@ -383,43 +381,100 @@ const {
       opacity: 0.74;
     }
 
-    .secure-contact__calendly--mobile {
-      display: none;
-      width: 100%;
+    .secure-submit.loading,
+    .secure-submit.success {
+      background: #14b8a6;
+      color: #052e2b;
     }
 
-    .secure-messages {
-      margin-top: 1rem;
+    .secure-submit.success:disabled {
+      opacity: 1;
     }
 
-    .secure-message {
-      padding: 0.85rem;
-      border-radius: 10px;
+    .secure-submit.error {
+      background: #fee2e2;
+      color: #991b1b;
+      box-shadow: inset 0 0 0 1px rgba(153, 27, 27, 0.12);
     }
 
-    .secure-message h3 {
-      font-weight: 900;
+    .secure-submit.response-positive {
+      animation: securePositiveLift 620ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .secure-message p,
-    .secure-message li {
-      margin-top: 0.35rem;
-      font-size: 0.9rem;
-      font-weight: 620;
+    .secure-submit.response-error {
+      animation: secureErrorShake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
     }
 
-    .secure-message--success {
-      background: rgba(20, 184, 166, 0.12);
-      color: #0f766e;
+    .secure-action-divider {
+      width: 1px;
+      min-height: 3rem;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(15, 118, 110, 0.28),
+        transparent
+      );
     }
 
-    .secure-message--error {
-      background: rgba(220, 38, 38, 0.1);
-      color: #b91c1c;
+    .secure-calendar-action {
+      display: flex;
+      align-items: center;
+      min-height: 3rem;
+      min-width: 0;
+    }
+
+    .secure-calendar-action :global(button) {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.55rem !important;
+      min-height: 3rem !important;
+      width: 100% !important;
+      border: 1px solid rgba(15, 118, 110, 0.28) !important;
+      border-radius: 8px !important;
+      background: #ffffff !important;
+      color: #0f766e !important;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08) !important;
+      font-family: inherit !important;
+      font-size: 0.95rem !important;
+      font-weight: 900 !important;
+      white-space: nowrap !important;
+      transition:
+        background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 170ms cubic-bezier(0.23, 1, 0.32, 1) !important;
+    }
+
+    .secure-calendar-action :global(button:hover) {
+      background: #f0fdfa !important;
+      border-color: rgba(15, 118, 110, 0.42) !important;
+    }
+
+    .secure-calendar-action :global(button:active) {
+      transform: translateY(1px) scale(0.985) !important;
+    }
+
+    .secure-calendar-action :global(.secure-calendar-action__icon) {
+      width: 1.5rem;
+      height: 1.5rem;
+      flex: 0 0 auto;
+      object-fit: contain;
+    }
+
+    .secure-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .secure-privacy {
-      margin-top: 1rem;
+      margin-top: clamp(0.9rem, 1vw, 1.15rem);
       color: #64748b;
       font-size: 0.82rem;
       font-weight: 620;
@@ -444,30 +499,159 @@ const {
       opacity: 0;
     }
 
+    @keyframes securePositiveLift {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      36% {
+        transform: translateY(-2px) scale(1.003);
+      }
+
+      68% {
+        transform: translateY(0.5px) scale(0.999);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes secureErrorShake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      22% {
+        transform: translateX(-4px);
+      }
+
+      44% {
+        transform: translateX(4px);
+      }
+
+      66% {
+        transform: translateX(-3px);
+      }
+
+      82% {
+        transform: translateX(2px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .secure-submit.response-positive,
+      .secure-submit.response-error {
+        animation: none;
+      }
+    }
+
     @media (max-width: 980px) {
       .secure-contact__inner,
-      .secure-form-grid {
+      .secure-form-grid,
+      .secure-action-row {
         grid-template-columns: 1fr;
       }
 
-      .secure-contact__calendly:not(.secure-contact__calendly--mobile) {
-        display: none;
+      .secure-form-grid {
+        row-gap: 1.75rem;
       }
 
-      .secure-contact__calendly--mobile {
-        display: inline-flex;
+      .secure-action-divider {
+        width: 100%;
+        min-height: 1px;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(15, 118, 110, 0.24),
+          transparent
+        );
+      }
+
+      .secure-calendar-action {
+        width: 100%;
       }
     }
   </style>
 
-  <script type="module">
+  <script type="module" data-cookieconsent="ignore">
+    function initCalendarSchedulingButton() {
+      const container = document.querySelector(".secure-calendar-action");
+      const target = container?.querySelector("[data-calendar-button-target]");
+
+      if (!(container instanceof HTMLElement)) return;
+      if (!(target instanceof HTMLElement)) return;
+      if (container.dataset.calendarButtonLoaded === "true") return;
+
+      const scheduleUrl = container.dataset.calendarScheduleUrl;
+      if (!scheduleUrl) return;
+
+      const normalizeCalendarButton = () => {
+        container.querySelectorAll("button").forEach((button) => {
+          button.setAttribute("type", "button");
+          if (!button.querySelector(".secure-calendar-action__icon")) {
+            const icon = document.createElement("img");
+            icon.src =
+              "https://img.icons8.com/color/96/google-calendar--v2.png";
+            icon.alt = "";
+            icon.width = 96;
+            icon.height = 96;
+            icon.decoding = "async";
+            icon.setAttribute("aria-hidden", "true");
+            icon.className = "secure-calendar-action__icon";
+            button.prepend(icon);
+          }
+        });
+      };
+
+      if (window.MutationObserver) {
+        const observer = new MutationObserver(normalizeCalendarButton);
+        observer.observe(container, {
+          childList: true,
+          subtree: true,
+        });
+      }
+
+      function loadCalendarButton() {
+        if (container.dataset.calendarButtonLoaded === "true") {
+          return;
+        }
+
+        if (
+          window.calendar &&
+          window.calendar.schedulingButton &&
+          typeof window.calendar.schedulingButton.load === "function"
+        ) {
+          container.dataset.calendarButtonLoaded = "true";
+          window.calendar.schedulingButton.load({
+            url: scheduleUrl,
+            color: "#0B8043",
+            label: "Termin buchen",
+            target,
+          });
+          normalizeCalendarButton();
+          return;
+        }
+
+        window.setTimeout(loadCalendarButton, 120);
+      }
+
+      loadCalendarButton();
+    }
+
     // Handle contact form submission with spam protection
-    document.addEventListener("DOMContentLoaded", function () {
+    function initSecureContactForm() {
+      initCalendarSchedulingButton();
+
       const form = document.getElementById("contact-form");
-      const formErrors = document.getElementById("form-errors");
-      const errorList = document.getElementById("error-list");
-      const successDiv = document.getElementById("form-success");
+      if (!(form instanceof HTMLFormElement)) return;
+      if (form.dataset.secureContactBound === "true") return;
+      form.dataset.secureContactBound = "true";
+
       const submitButton = form?.querySelector('button[type="submit"]');
+      const statusText = document.getElementById("form-status");
 
       // Track form load time for spam protection
       const formLoadTime = Date.now();
@@ -477,13 +661,82 @@ const {
       const originalButtonText =
         submitButton?.querySelector(".cta-button-text")?.textContent || "";
 
+      const compactButtonMessage = (message, fallback) => {
+        const cleaned =
+          typeof message === "string"
+            ? message.trim().replace(/\s+/g, " ")
+            : "";
+        if (!cleaned) return fallback;
+        return cleaned.length <= 38 ? cleaned : fallback;
+      };
+
+      const setSubmitState = (message, state = "idle", disabled = false) => {
+        if (statusText) {
+          statusText.textContent = message;
+        }
+
+        if (!(submitButton instanceof HTMLButtonElement)) return;
+
+        const buttonText = submitButton.querySelector(".cta-button-text");
+        submitButton.classList.remove(
+          "loading",
+          "success",
+          "error",
+          "response-positive",
+          "response-error",
+        );
+        if (state !== "idle") {
+          submitButton.classList.add(state);
+        }
+        submitButton.disabled = disabled;
+
+        if (buttonText) {
+          buttonText.textContent = message;
+        }
+
+        const reduceResponseMotion =
+          window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ??
+          false;
+
+        if (
+          (state === "success" || state === "error") &&
+          !reduceResponseMotion
+        ) {
+          const motionClass =
+            state === "success" ? "response-positive" : "response-error";
+          void submitButton.offsetWidth;
+          submitButton.classList.add(motionClass);
+        }
+      };
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.addEventListener("animationend", (event) => {
+          if (
+            event.animationName === "securePositiveLift" ||
+            event.animationName === "secureErrorShake"
+          ) {
+            submitButton.classList.remove(
+              "response-positive",
+              "response-error",
+            );
+          }
+        });
+      }
+
+      const resetSubmitState = () => {
+        setSubmitState(originalButtonText, "idle", false);
+        if (statusText) {
+          statusText.textContent = "";
+        }
+      };
+
       // Clear messages when user starts typing
       const formInputs = form?.querySelectorAll("input, textarea");
       formInputs?.forEach((input) => {
         input.addEventListener("input", () => {
-          formErrors?.classList.add("hidden");
-          successDiv?.classList.add("hidden");
-          errorList.innerHTML = "";
+          if (!submitButton?.classList.contains("success")) {
+            resetSubmitState();
+          }
         });
       });
 
@@ -493,8 +746,7 @@ const {
           e.preventDefault();
 
           // Reset error states
-          formErrors.classList.add("hidden");
-          errorList.innerHTML = "";
+          resetSubmitState();
 
           // Get form fields
           const name = document.getElementById("name");
@@ -571,23 +823,15 @@ const {
 
           // If there are client-side errors, show them and stop
           if (hasErrors) {
-            formErrors.classList.remove("hidden");
-            errors.forEach((error) => {
-              const li = document.createElement("li");
-              li.textContent = error;
-              errorList.appendChild(li);
-            });
+            setSubmitState("Bitte Angaben prüfen", "error", false);
+            if (statusText) {
+              statusText.textContent = errors.join(". ");
+            }
             return;
           }
 
           // Show loading state
-          if (submitButton) {
-            submitButton.disabled = true;
-            const buttonText = submitButton.querySelector(".cta-button-text");
-            if (buttonText) {
-              buttonText.textContent = "Wird gesendet...";
-            }
-          }
+          setSubmitState("Wird gesendet...", "loading", true);
 
           let response; // Declare outside try block for finally access
           try {
@@ -627,33 +871,33 @@ const {
             // Handle response based on status code
             if (response.status === 200) {
               // Success - Lead accepted
-              successDiv.classList.remove("hidden");
-
-              // Update button to success state with smooth fade animation
-              const buttonText = submitButton.querySelector(".cta-button-text");
-
-              // Fade out text
-              buttonText.classList.add("fade-out");
-
-              // Wait for fade out, then update content and fade in
-              setTimeout(() => {
-                buttonText.textContent = "Gesendet!";
-                submitButton.classList.add("success");
-                submitButton.disabled = true;
-
-                // Fade text back in
-                buttonText.classList.remove("fade-out");
-              }, 300); // Match CSS transition duration
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "";
+              setSubmitState(
+                compactButtonMessage(
+                  serverMessage,
+                  "Gesendet - wir melden uns",
+                ),
+                "success",
+                true,
+              );
             } else if (response.status === 400) {
               // Validation error - missing required fields
-              errors.push("Bitte füll alle Pflichtfelder korrekt aus.");
-              formErrors.classList.remove("hidden");
-              const li = document.createElement("li");
-              li.textContent = errors[0];
-              errorList.appendChild(li);
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Bitte füll alle Pflichtfelder korrekt aus.";
+              setSubmitState(
+                compactButtonMessage(serverMessage, "Bitte Angaben prüfen"),
+                "error",
+                false,
+              );
             } else if (response.status === 403) {
               // Spam detected
               console.warn("Spam detected by server");
+              resetSubmitState();
               return; // Silent fail
             } else if (response.status === 429) {
               // Too many requests / Rate limit
@@ -661,52 +905,41 @@ const {
                 result && typeof result.message === "string"
                   ? result.message
                   : "Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.";
-              errors.push(serverMessage);
-              formErrors.classList.remove("hidden");
-              const li = document.createElement("li");
-              li.textContent = errors[0];
-              errorList.appendChild(li);
+              setSubmitState(
+                compactButtonMessage(serverMessage, "Kurz warten"),
+                "error",
+                false,
+              );
             } else {
               // Other errors
-              errors.push(
-                "Es ist ein Fehler passiert. Bitte versuch es erneut.",
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Es ist ein Fehler passiert. Bitte versuch es erneut.";
+              setSubmitState(
+                compactButtonMessage(serverMessage, "Senden fehlgeschlagen"),
+                "error",
+                false,
               );
-              formErrors.classList.remove("hidden");
-              const li = document.createElement("li");
-              li.textContent = errors[0];
-              errorList.appendChild(li);
-            }
-
-            // Auto-hide error messages after 5 seconds
-            if (errors.length > 0) {
-              setTimeout(() => {
-                formErrors.classList.add("hidden");
-              }, 5000);
             }
           } catch (error) {
             console.error("Form submission error:", error);
-            formErrors.classList.remove("hidden");
-            const li = document.createElement("li");
-            li.textContent =
-              "Es ist ein Netzwerkfehler passiert. Bitte prüf deine Internetverbindung.";
-            errorList.appendChild(li);
-
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-              formErrors.classList.add("hidden");
-            }, 5000);
+            setSubmitState("Netzwerkfehler - erneut versuchen", "error", false);
           } finally {
-            // Reset button state only if not successful
             if (submitButton && response && response.status !== 200) {
-              const buttonText = submitButton.querySelector(".cta-button-text");
               submitButton.disabled = false;
-              if (buttonText) {
-                buttonText.textContent = originalButtonText;
-              }
             }
           }
         });
       }
-    });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initSecureContactForm, {
+        once: true,
+      });
+    } else {
+      initSecureContactForm();
+    }
   </script>
 </section>

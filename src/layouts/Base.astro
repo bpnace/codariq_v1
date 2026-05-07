@@ -672,16 +672,16 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       gtag("config", "G-6TLXVYD8V2");
     </script>
 
-    <!-- Calendly Link-Widget -->
+    <!-- Google Calendar Appointment Scheduling -->
     <link
-      href="https://assets.calendly.com/assets/external/widget.css"
+      href="https://calendar.google.com/calendar/scheduling-button-script.css"
       rel="stylesheet"
     />
     <script
       is:inline
-      src="https://assets.calendly.com/assets/external/widget.js"
-      type="text/javascript"
-      defer></script>
+      data-cookieconsent="ignore"
+      src="https://calendar.google.com/calendar/scheduling-button-script.js"
+      async></script>
   </head>
 
   <body

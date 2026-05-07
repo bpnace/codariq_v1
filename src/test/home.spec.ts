@@ -287,11 +287,13 @@ test("pain list uses agent reframing", async ({ page }) => {
   await page.goto("/");
   await expect(
     page.getByRole("heading", {
-      name: "Wo KI-Agenten im Alltag erleichtern können?",
+      name: "Deine Prozesse sind noch nicht bereit für sichere KI-Agenten.",
     }),
   ).toBeVisible();
   await expect(
-    page.getByText("Vom Workflow zum kontrollierten Agenten"),
+    page.getByText(
+      "Tools, Daten und Abläufe sind vorhanden. Aber solange Datenflüsse, Freigaben, Sonderfälle und Verantwortlichkeiten offen sind, wird ein Agent im echten Betrieb zum Risiko.",
+    ),
   ).toBeVisible();
 });
 
@@ -354,6 +356,359 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   await expect(section.getByText("Scope")).toHaveCount(0);
   await expect(section.getByText("Prompts")).toHaveCount(0);
   await expect(section.getByText("Logging")).toHaveCount(0);
+});
+
+test("final cta keeps form submit separate from calendar booking", async ({
+  page,
+}) => {
+  const scheduleUrl =
+    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
+  let submittedPayload: Record<string, unknown> | null = null;
+
+  const installCalendarSchedulingMock = () => {
+    const browserWindow = window as unknown as {
+      __calendarSchedulingLoads: Array<{
+        color: string;
+        label: string;
+        url: string;
+      }>;
+      calendar: unknown;
+    };
+
+    browserWindow.__calendarSchedulingLoads = [];
+    browserWindow.calendar = {
+      schedulingButton: {
+        load(options) {
+          browserWindow.__calendarSchedulingLoads.push({
+            url: options.url,
+            color: options.color,
+            label: options.label,
+          });
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = options.label;
+          button.dataset.calendarUrl = options.url;
+          button.className = "calendar-scheduling-button";
+          options.target.replaceWith(button);
+        },
+      },
+    };
+  };
+
+  await page.addInitScript(installCalendarSchedulingMock);
+
+  await page.route(
+    "**/calendar/scheduling-button-script.css",
+    async (route) => {
+      await route.fulfill({ status: 200, contentType: "text/css", body: "" });
+    },
+  );
+  await page.route("**/calendar/scheduling-button-script.js", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body: "",
+    });
+  });
+  await page.route("**/webhook-proxy.php", async (route) => {
+    submittedPayload = route.request().postDataJSON() as Record<
+      string,
+      unknown
+    >;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        success: true,
+        code: "LEAD_ACCEPTED",
+        message: "Anfrage angekommen",
+      }),
+    });
+  });
+
+  await page.goto("/");
+
+  const section = page.locator("#final-cta");
+  const form = section.locator("#contact-form");
+  const formCardReady = () =>
+    form.evaluate((element) => {
+      const card = element.closest(".secure-contact__form");
+      if (!(card instanceof HTMLElement)) return false;
+
+      const styles = window.getComputedStyle(card);
+      return styles.visibility === "visible" && Number(styles.opacity) > 0.99;
+    });
+  const readFinalCtaGeometry = () =>
+    form.evaluate((formElement) => {
+      const rectOfElement = (element: Element | null, name: string) => {
+        if (!(element instanceof HTMLElement)) {
+          throw new Error(`Missing ${name}`);
+        }
+
+        const rect = element.getBoundingClientRect();
+        return {
+          bottom: rect.bottom,
+          height: rect.height,
+          top: rect.top,
+        };
+      };
+
+      const card = formElement.closest(".secure-contact__form");
+
+      return {
+        actionRow: rectOfElement(
+          formElement.querySelector(".secure-action-row"),
+          "action row",
+        ),
+        calendar: rectOfElement(
+          formElement.querySelector(".secure-calendar-action"),
+          "calendar action",
+        ),
+        card: rectOfElement(card, "form card"),
+        privacy: rectOfElement(
+          formElement.querySelector(".secure-privacy"),
+          "privacy text",
+        ),
+        submit: rectOfElement(
+          formElement.querySelector('button[type="submit"]'),
+          "submit button",
+        ),
+      };
+    });
+
+  await section.scrollIntoViewIfNeeded();
+  await expect.poll(formCardReady).toBe(true);
+
+  await expect(section.getByRole("heading")).toBeVisible();
+  await expect(form).toBeVisible();
+  await expect(
+    section.getByLabel("Was soll der Agent können? *"),
+  ).toHaveAttribute(
+    "placeholder",
+    /Termine vorbereiten, Leads anreichern, interne Daten durchsuchen/,
+  );
+
+  const submitButton = form.locator('button[type="submit"]');
+  await expect(submitButton).toHaveCount(1);
+  await expect(submitButton).toBeVisible();
+  await expect(submitButton).toHaveClass(/secure-submit/);
+  const positiveLiftKeyframes = await page.evaluate(() => {
+    for (const stylesheet of Array.from(document.styleSheets)) {
+      try {
+        for (const rule of Array.from(stylesheet.cssRules)) {
+          if (
+            rule instanceof CSSKeyframesRule &&
+            rule.name === "securePositiveLift"
+          ) {
+            return rule.cssText;
+          }
+        }
+      } catch {
+        // Ignore cross-origin sheets injected by third-party scripts.
+      }
+    }
+
+    return "";
+  });
+  expect(positiveLiftKeyframes).toContain("translateY(-2px)");
+  expect(positiveLiftKeyframes).not.toContain("translateY(-4px)");
+
+  await expect(
+    page.locator(
+      'link[href="https://calendar.google.com/calendar/scheduling-button-script.css"]',
+    ),
+  ).toHaveCount(1);
+  await expect(
+    page.locator(
+      'script[src="https://calendar.google.com/calendar/scheduling-button-script.js"]',
+    ),
+  ).toHaveCount(1);
+
+  const schedulingButton = form.getByRole("button", {
+    name: "Termin buchen",
+  });
+  await expect(schedulingButton).toBeVisible();
+  await expect(schedulingButton).toHaveAttribute("type", "button");
+  await expect(schedulingButton).toHaveAttribute(
+    "data-calendar-url",
+    scheduleUrl,
+  );
+  await expect(
+    schedulingButton.locator("img.secure-calendar-action__icon"),
+  ).toHaveAttribute(
+    "src",
+    "https://img.icons8.com/color/96/google-calendar--v2.png",
+  );
+  await expect(
+    schedulingButton.locator("img.secure-calendar-action__icon"),
+  ).toHaveCSS("width", "24px");
+  await expect(schedulingButton).toHaveCSS(
+    "background-color",
+    "rgb(255, 255, 255)",
+  );
+  await expect(schedulingButton).toHaveCSS("color", "rgb(15, 118, 110)");
+  await expect(form.locator(".secure-action-divider")).toBeVisible();
+  await expect(form.locator(".secure-messages")).toHaveCount(0);
+  await expect(
+    form.locator('a[href*="calendar.google.com/calendar/appointments"]'),
+  ).toHaveCount(0);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (
+            window as unknown as {
+              __calendarSchedulingLoads?: Array<{
+                color: string;
+                label: string;
+                url: string;
+              }>;
+            }
+          ).__calendarSchedulingLoads?.[0],
+      ),
+    )
+    .toEqual({
+      color: "#0B8043",
+      label: "Termin buchen",
+      url: scheduleUrl,
+    });
+
+  await expect(
+    form.locator('button[type="submit"]', {
+      hasText: "Termin buchen",
+    }),
+  ).toHaveCount(0);
+
+  const errorAnimation = submitButton.evaluate(
+    (button) =>
+      new Promise<string>((resolve) => {
+        button.addEventListener(
+          "animationstart",
+          (event) => resolve(event.animationName),
+          { once: true },
+        );
+      }),
+  );
+  const beforeValidationGeometry = await readFinalCtaGeometry();
+  await submitButton.click();
+  expect(await errorAnimation).toBe("secureErrorShake");
+  await expect(submitButton).toHaveText("Bitte Angaben prüfen");
+  await expect(submitButton).toHaveClass(/error/);
+  await expect(submitButton).not.toHaveClass(/response-error/);
+  const afterValidationGeometry = await readFinalCtaGeometry();
+  expect(
+    Math.abs(
+      afterValidationGeometry.actionRow.top -
+        beforeValidationGeometry.actionRow.top,
+    ),
+  ).toBeLessThanOrEqual(1);
+  expect(
+    Math.abs(
+      afterValidationGeometry.privacy.top -
+        beforeValidationGeometry.privacy.top,
+    ),
+  ).toBeLessThanOrEqual(1);
+  expect(
+    Math.abs(
+      afterValidationGeometry.card.height -
+        beforeValidationGeometry.card.height,
+    ),
+  ).toBeLessThanOrEqual(1);
+
+  await form.locator("#name").fill("Tarik Test");
+  await form.locator("#company").fill("Codariq");
+  await form.locator("#email").fill("tarik@example.com");
+  await form.locator("#phone").fill("+49 30 123456");
+  await form
+    .locator("#message")
+    .fill("Bitte pruefen, welcher Agent Termine vorbereiten kann.");
+
+  await submitButton.scrollIntoViewIfNeeded();
+  await expect.poll(formCardReady).toBe(true);
+  await expect(submitButton).toBeVisible();
+  await page.waitForTimeout(3200);
+  const successAnimation = submitButton.evaluate(
+    (button) =>
+      new Promise<string>((resolve) => {
+        button.addEventListener(
+          "animationstart",
+          (event) => resolve(event.animationName),
+          { once: true },
+        );
+      }),
+  );
+  await submitButton.click();
+
+  await expect.poll(() => submittedPayload?.source).toBe("final_cta");
+  expect(submittedPayload).toMatchObject({
+    name: "Tarik Test",
+    company: "Codariq",
+    email: "tarik@example.com",
+    phone: "+49 30 123456",
+    message: "Bitte pruefen, welcher Agent Termine vorbereiten kann.",
+    source: "final_cta",
+  });
+  expect(typeof submittedPayload?.timestamp).toBe("string");
+  expect(typeof submittedPayload?.userAgent).toBe("string");
+  expect(await successAnimation).toBe("securePositiveLift");
+  await expect(submitButton).toHaveText("Anfrage angekommen");
+  await expect(submitButton).toBeDisabled();
+  await expect(form.getByText("Danke! Ich melde mich bei dir.")).toHaveCount(0);
+});
+
+test("final cta keeps response feedback static for reduced motion", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.route(
+    "**/calendar/scheduling-button-script.css",
+    async (route) => {
+      await route.fulfill({ status: 200, contentType: "text/css", body: "" });
+    },
+  );
+  await page.route("**/calendar/scheduling-button-script.js", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body: "",
+    });
+  });
+
+  await page.goto("/");
+
+  const section = page.locator("#final-cta");
+  const form = section.locator("#contact-form");
+  const submitButton = form.locator('button[type="submit"]');
+
+  await section.scrollIntoViewIfNeeded();
+  await expect(submitButton).toBeVisible();
+  await submitButton.click();
+
+  await expect(submitButton).toHaveText("Bitte Angaben prüfen");
+  await expect(submitButton).toHaveClass(/error/);
+  await expect(submitButton).not.toHaveClass(/response-error/);
+  await expect(submitButton).toHaveCSS("animation-name", "none");
+});
+
+test("legal pages describe external google calendar booking", async ({
+  page,
+}) => {
+  await page.goto("/datenschutz");
+  await expect(
+    page.getByRole("heading", { name: "Datenschutzerklärung" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Terminbuchung über Google Calendar"),
+  ).toBeVisible();
+  await expect(
+    page.getByText("eingebundenen Terminbutton von Google Calendar"),
+  ).toBeVisible();
+
+  await page.goto("/cookie-richtlinien");
+  await expect(
+    page.getByText("eingebundenen Google-Calendar-Button"),
+  ).toBeVisible();
+  await expect(page.getByText("Skript- und Style-Dateien")).toBeVisible();
 });
 
 test("featured benefits system card has a subtle animated highlight", async ({

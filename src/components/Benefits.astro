@@ -167,6 +167,7 @@ const {
               <span>Grundlage</span>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
+              {service.note && <strong>{service.note}</strong>}
             </div>
             <ul>
               {service.features.map((feature) => (

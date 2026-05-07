@@ -117,7 +117,7 @@ codariq/
 │   │   ├── Benefits.astro      # 4-column features grid
 │   │   ├── Testimonials.astro  # Social proof with photos
 │   │   ├── Process.astro       # 4-step timeline
-│   │   ├── FinalCTA.astro      # Calendly booking widget
+│   │   ├── FinalCTA.astro      # Contact form and calendar booking link
 │   │   ├── FAQ.astro           # Accordion FAQ
 │   │   ├── FAQSchema.astro     # Structured data for FAQ
 │   │   ├── BreadcrumbSchema.astro # Breadcrumb schema
@@ -225,7 +225,7 @@ codariq/
 - **Gradient CTA Buttons** - Orange gradient from top-left to bottom-right
 - **Process Component Redesign** - Numbers top-left, icons top-right, fixed heights
 - **Testimonial Real Photos** - Replaced SVG graphics with randomuser.me images
-- **Calendly Integration** - Non-scrollable booking widget in FinalCTA
+- **Google Calendar Booking** - External booking link in FinalCTA
 - **Card-based Layout** - Consistent spacing and text alignment
 
 ## 📄 Legal Pages
