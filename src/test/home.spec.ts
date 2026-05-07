@@ -583,10 +583,10 @@ test("agent connection line links the two framework badges", async ({
   await page.goto("/");
 
   await expect(page.locator("[data-agent-connection-start]")).toHaveText(
-    "Sichere Use Cases",
+    "Agenten-Readiness",
   );
   await expect(page.locator("[data-agent-connection-target]")).toHaveText(
-    "Das Delivery Framework",
+    "Sicherer Einsatz",
   );
   await expect(page.locator("[data-agent-connection-target]")).toHaveCSS(
     "background-color",
@@ -597,7 +597,7 @@ test("agent connection line links the two framework badges", async ({
     "rgb(236, 254, 255)",
   );
   await expect(page.locator("#process h2")).toHaveText(
-    "So läuft die Zusammenarbeit",
+    "Erst prüfen, dann Agenten bauen.",
   );
   await expect(
     page.locator("#process h2[data-agent-connection-target]"),

@@ -13,53 +13,53 @@ export interface Props {
 }
 
 const {
-  title = "So läuft die Zusammenarbeit",
-  subtitle = "Ein klarer Ablauf, damit dein erster KI-Agent schnell entlastet und kontrollierbar bleibt. DSGVO-konform, mit klaren Freigaben und ohne IT-Stress.",
+  title = "Erst prüfen, dann Agenten bauen.",
+  subtitle = "Ein KI-Agent wird nicht einfach an Postfach, CRM oder Dokumente gehängt. Wir klären Zweck, Datenfluss, Zugriffe und Freigaben, bauen einen begrenzten Ersteinsatz und stabilisieren ihn vor dem Betrieb.",
   steps = [
     {
       number: 1,
-      title: "Klarheit schaffen",
+      title: "Prüfen",
       description:
-        "Wir verstehen deinen Ablauf, wählen den besten Startpunkt für einen Agenten-Workflow und legen gemeinsam fest, woran der größte Erfolg gemessen wird.",
+        "Wir prüfen, ob der Use Case agentenfähig ist und welche Grenzen vor dem ersten produktiven Test stehen müssen.",
       details: [
-        "Engpässe, Datenquellen und Zuständigkeiten erfassen",
-        "Tool-, Daten- und Integrations-Check",
-        "Sicherheitsrahmen: Zugriffe, Freigaben und Logs",
-        "Messwerte für Wirkung und Risiko definieren",
+        "Zweck, Prozessgrenzen und Erfolgskriterien festlegen",
+        "Datenquellen, Speicherorte und Anbieter erfassen",
+        "Rollen, Zugriffe und Freigaben skizzieren",
+        "Risiken, Sonderfälle und Stopppunkte markieren",
       ],
       duration: "3 bis 5 Tage",
       result:
-        "Du weißt genau, was gebaut wird, welche Daten betroffen sind und wie sicher gestartet wird.",
+        "Du weißt, welcher Agent sinnvoll ist, welche Daten betroffen sind und wo Menschen prüfen müssen.",
     },
     {
       number: 2,
-      title: "Agenten-Workflow umsetzen und verbinden",
+      title: "Ersteinsatz bauen",
       description:
-        "Wir bauen den KI-Agenten und verbinden deine Systeme, damit Aufgaben vorbereitet, weitergegeben und bei Bedarf freigegeben werden.",
+        "Wir bauen den kleinsten Agenten-Workflow, der echte Arbeit vorbereitet, aber kritische Entscheidungen kontrolliert lässt.",
       details: [
-        "n8n-Agent oder agentisches Setup als kleinster sinnvoller Start",
-        "Anbindung an E-Mail, CRM, Kalender, Dokumente oder Wissensquellen",
-        "Policies für personenbezogene Daten und sensible Schritte",
+        "n8n-Agent oder Agenten-Workflow als kleinster stabiler Start",
+        "Anbindung an E-Mail, CRM, Kalender, Dokumente oder Wissen",
+        "Toolzugriffe, Prompts und Freigaben definieren",
         "Tests mit echten Beispielen aus deinem Alltag",
       ],
       duration: "2 bis 6 Wochen",
       result:
-        "Der Agent läuft nachvollziehbar, bereitet Arbeit vor und bleibt unter menschlicher Kontrolle.",
+        "Der Ersteinsatz zeigt, welche Aufgaben der Agent zuverlässig vorbereitet und wo Freigabe nötig bleibt.",
     },
     {
       number: 3,
-      title: "Einführen und stabilisieren",
+      title: "Stabilisieren & betreiben",
       description:
-        "Wir bringen die Lösung gemeinsam mit dir in den Alltag. Du bekommst eine klare Einweisung, damit du jederzeit weißt, was der Agent tut und wie du eingreifen kannst.",
+        "Der erste Einsatz wird mit echten Fällen gehärtet und danach so betreut, dass Änderungen an Tools, Daten oder Prozessen nicht zum Risiko werden.",
       details: [
-        "Pilotbetrieb mit Review-Schleifen",
-        "Einweisung für Team, Freigaben und Sonderfälle",
-        "Monitoring von Fehlern, Datenqualität und Wirkung",
-        "Optionaler Ausbau Richtung OpenClaw-Agenten-Setup",
+        "Review-Schleifen mit Team und Prozessverantwortlichen",
+        "Logging, Sonderfälle und Eskalationen nachschärfen",
+        "Monitoring von Wirkung, Fehlern und Datenflüssen",
+        "Anpassungen bei Tools, Feldern oder Anbieterwechseln",
       ],
-      duration: "2 bis 8 Wochen Begleitung",
+      duration: "Begleitung oder Betrieb",
       result:
-        "Ein stabiler Agenten-Workflow, der genutzt wird und später kontrolliert skalieren kann.",
+        "Der Agent bleibt nachvollziehbar, wartbar und kann erweitert werden, ohne die Kontrolle zu verlieren.",
     },
   ],
 } = Astro.props;
@@ -68,7 +68,7 @@ const {
 <section id="process" data-enterprise-section class="deployment-flow">
   <div class="saas-container">
     <div class="saas-heading saas-heading--center enterprise-reveal">
-      <span data-agent-connection-target>Das Delivery Framework</span>
+      <span data-agent-connection-target>Sicherer Einsatz</span>
       <h2>{title}</h2>
       <p>{subtitle}</p>
     </div>
