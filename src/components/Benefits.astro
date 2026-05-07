@@ -32,7 +32,7 @@ const {
   subtitle = "Die Arbeit beginnt nicht mit einem Tool. Wir grenzen den Ablauf ein, klären Daten, Zugriffe und Freigaben und bauen nur, was im Betrieb verantwortbar ist.",
   benefits = [
     {
-      title: "Prozess-Check",
+      title: "Ablauf einordnen",
       description:
         "Für einen konkreten Ablauf, bei dem erst Daten, Rollen und Freigaben geklärt werden müssen, bevor etwas gebaut wird.",
       icon: "starter",
@@ -41,9 +41,9 @@ const {
         "Quellen, Übergaben und Stopppunkte erfassen",
         "Machbarkeit und Risiko einordnen",
         "Kurzer Plan für den ersten Einsatz",
-        "Optional: Betreuung ab 25 € pro Monat",
+        "Optional: Betreuung ab 89 € pro Monat",
       ],
-      price: "ab 399 €",
+      price: "ab 219 €",
       duration: "einmalig",
       isProduct: true,
       additionalInfo: "Ein Ablauf",
@@ -59,9 +59,9 @@ const {
         "Anbindung an vorhandene Systeme",
         "Freigaben und Sonderfälle festlegen",
         "Tests mit echten Beispielen",
-        "Optional: Betreuung ab 59 € pro Monat",
+        "Optional: Betreuung ab 199 € pro Monat",
       ],
-      price: "ab 1.499 €",
+      price: "ab 1.899 €",
       duration: "einmalig",
       highlight: true,
       isProduct: true,
@@ -69,7 +69,7 @@ const {
       colorTheme: "blue",
     },
     {
-      title: "Betrieb sichern",
+      title: "Betrieb absichern",
       description:
         "Für einen Bereich wie Support oder Backoffice, der stabil laufen, dokumentiert bleiben und später gezielt erweitert werden soll.",
       icon: "scale",
@@ -78,9 +78,9 @@ const {
         "Zugriffsschutz, Rollen und Protokolle",
         "Fehler, Wirkung und Datenflüsse beobachten",
         "Begleitung nach dem ersten Einsatz",
-        "Optional: Betreuung ab 99 € pro Monat",
+        "Optional: Betreuung ab 649 € pro Monat",
       ],
-      price: "ab 3.499 €",
+      price: "ab 3.899 €",
       duration: "einmalig",
       isProduct: true,
       additionalInfo: "Dauerhaft betreut",
@@ -92,7 +92,7 @@ const {
       title: "Immer enthalten",
       subtitle: "",
       description:
-        "Unabhängig vom Umfang bleibt der Ablauf nachvollziehbar: Ziel, Daten, Zuständigkeiten und Grenzen werden vor der Umsetzung festgelegt.",
+        "Ziel, Daten, Zuständigkeiten und Grenzen werden vorab geklärt.",
       features: [
         "Klarer Startpunkt statt Tool-Auswahl",
         "Plan mit Dauer, Ergebnis und Zuständigkeiten",
@@ -101,7 +101,7 @@ const {
         "Übergabe ohne technische Abhängigkeit",
         "Betrieb mit Sonderfall- und Fehlerpfaden",
       ],
-      note: "Du musst kein IT-Wissen mitbringen. Wichtig ist, dass Prozess und Verantwortung sauber geklärt sind.",
+      note: "Kein IT-Wissen nötig. Wir klären Prozess und Verantwortung.",
       price: "",
       duration: "",
       icon: "included",
@@ -159,23 +159,37 @@ const {
       }
     </div>
 
-    {
-      additionalServices.map((service) => (
-        <aside class="included-panel enterprise-card enterprise-reveal">
-          <div>
-            <span>Grundlage</span>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </div>
-          <ul>
-            {service.features.map((feature) => (
-              <li>{feature}</li>
-            ))}
-          </ul>
-          {service.note && <strong>{service.note}</strong>}
-        </aside>
-      ))
-    }
+    <div class="benefits-support-grid">
+      {
+        additionalServices.map((service) => (
+          <aside class="included-panel enterprise-card enterprise-reveal">
+            <div>
+              <span>Grundlage</span>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              {service.note && <strong>{service.note}</strong>}
+            </div>
+            <ul>
+              {service.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </aside>
+        ))
+      }
+
+      <div class="custom-offer-panel enterprise-card enterprise-reveal">
+        <div>
+          <span>Individuell</span>
+          <h3>Individuelles Angebot benötigt?</h3>
+          <p>
+            Wenn mehrere Teams, Systeme oder Freigaben betroffen sind, klären
+            wir Umfang, Reihenfolge und Verantwortung direkt.
+          </p>
+        </div>
+        <a href="/#final-cta">Umfang klären</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -473,11 +487,84 @@ const {
     }
   }
 
+  .benefits-support-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.62fr) minmax(20rem, 0.72fr);
+    gap: 1rem;
+    align-items: stretch;
+    margin-top: 1rem;
+  }
+
+  .custom-offer-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 1.25rem 1.35rem;
+    overflow: hidden;
+    background: #0b1220;
+    color: #f8fafc;
+    border: 1px solid rgba(94, 234, 212, 0.18);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  }
+
+  .custom-offer-panel span {
+    display: inline-flex;
+    width: fit-content;
+    color: #5eead4;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .custom-offer-panel h3 {
+    margin-top: 0.45rem;
+    color: inherit;
+    font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+    font-weight: 930;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .custom-offer-panel p {
+    margin-top: 0.55rem;
+    color: #cbd5e1;
+    font-size: 0.98rem;
+    font-weight: 570;
+    line-height: 1.45;
+  }
+
+  .custom-offer-panel a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3rem;
+    padding: 0.82rem 1rem;
+    border-radius: 8px;
+    background: #14b8a6;
+    color: #052e2b;
+    font-weight: 900;
+    white-space: nowrap;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .custom-offer-panel a:hover {
+    background: #5eead4;
+  }
+
+  .custom-offer-panel a:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
   .included-panel {
     display: grid;
-    grid-template-columns: 0.58fr 1fr 0.55fr;
+    grid-template-columns: minmax(13rem, 0.52fr) minmax(0, 1fr);
     gap: 1.4rem;
-    margin-top: 1rem;
     padding: 1.35rem;
     background: #ffffff;
     border: 1px solid rgba(15, 23, 42, 0.08);
@@ -520,6 +607,8 @@ const {
   }
 
   .included-panel strong {
+    display: block;
+    margin-top: 0.85rem;
     color: #0b1220;
     font-weight: 850;
   }
@@ -543,8 +632,13 @@ const {
     }
 
     .pricing-suite__grid,
+    .benefits-support-grid,
     .included-panel {
       grid-template-columns: 1fr;
+    }
+
+    .custom-offer-panel a {
+      width: 100%;
     }
 
     .pricing-card--featured {

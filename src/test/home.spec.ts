@@ -303,6 +303,42 @@ test("featured benefits system card has a subtle animated highlight", async ({
   const systemCard = page.locator('[data-benefit-system-card="true"]');
   await expect(systemCard).toHaveCount(1);
   await expect(systemCard.getByText("Kontrolliert nutzbar")).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Individuelles Angebot benötigt?",
+    }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Umfang klären" })).toBeVisible();
+  await expect(
+    page.getByText(
+      "Kein IT-Wissen nötig. Wir klären Prozess und Verantwortung.",
+    ),
+  ).toBeVisible();
+
+  const supportLayout = await page.evaluate(() => {
+    const included = document.querySelector("#benefits .included-panel");
+    const custom = document.querySelector("#benefits .custom-offer-panel");
+
+    if (
+      !(included instanceof HTMLElement) ||
+      !(custom instanceof HTMLElement)
+    ) {
+      throw new Error("Benefits support panels missing.");
+    }
+
+    const includedRect = included.getBoundingClientRect();
+    const customRect = custom.getBoundingClientRect();
+
+    return {
+      customRightOfIncluded: customRect.left > includedRect.left,
+      includedLeftOfCustom: includedRect.right <= customRect.left,
+      sameRow: Math.abs(includedRect.top - customRect.top) < 2,
+    };
+  });
+
+  expect(supportLayout.sameRow).toBe(true);
+  expect(supportLayout.customRightOfIncluded).toBe(true);
+  expect(supportLayout.includedLeftOfCustom).toBe(true);
 
   const motion = await systemCard.evaluate((card) => {
     const badge = card.querySelector(".pricing-card__badge");
