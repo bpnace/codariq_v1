@@ -11,6 +11,10 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 const CONFETTI_EFFECT_SIZE = 112;
 const CONFETTI_STROKE_WIDTH = 3.2;
 const CONFETTI_DURATION = 0.6;
+const CLICK_WAVY_EFFECT_SIZE = 100;
+const CLICK_WAVY_STROKE_WIDTH = 3;
+const CLICK_WAVY_DURATION = 0.6;
+const CLICK_WAVY_COLOR = "#fcd718";
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);
@@ -26,6 +30,11 @@ type ConnectionParticle = {
   offsetX: number;
   offsetY: number;
   length: number;
+};
+
+type ClickWavyEffect = {
+  svg: SVGSVGElement;
+  timeline: gsap.core.Timeline;
 };
 
 const formatPoint = ({ x, y }: ConnectionPoint): string =>
@@ -76,6 +85,28 @@ const createSvgPath = (className: string): SVGPathElement => {
   const path = document.createElementNS(SVG_NAMESPACE, "path");
   path.setAttribute("class", className);
   return path;
+};
+
+const getWavyClickPathData = (angle: number): string => {
+  const center = CLICK_WAVY_EFFECT_SIZE * 0.5;
+  const startRadius = CLICK_WAVY_EFFECT_SIZE * 0.1;
+  const midRadius = CLICK_WAVY_EFFECT_SIZE * 0.3;
+  const endRadius = CLICK_WAVY_EFFECT_SIZE * 0.5;
+  const curveOffset = CLICK_WAVY_EFFECT_SIZE * 0.05;
+  const radians = (angle * Math.PI) / 180;
+  const pointAtRadius = (radius: number): ConnectionPoint => ({
+    x: center + radius * Math.cos(radians),
+    y: center - radius * Math.sin(radians),
+  });
+  const start = pointAtRadius(startRadius);
+  const mid = pointAtRadius(midRadius);
+  const end = pointAtRadius(endRadius);
+  const control = {
+    x: mid.x + curveOffset * Math.cos(radians + Math.PI / 2),
+    y: mid.y - curveOffset * Math.sin(radians + Math.PI / 2),
+  };
+
+  return `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${mid.x} ${mid.y} T ${end.x} ${end.y}`;
 };
 
 const shapeConnectionProgress = (progress: number): number => {
@@ -357,6 +388,103 @@ function initAgentConnectionMotion(): (() => void) | null {
   };
 }
 
+function initClickWavyEffect(): () => void {
+  const effects: ClickWavyEffect[] = [];
+  const angles = [45, 90, 135, 180];
+
+  const removeEffect = (effect: ClickWavyEffect): void => {
+    effect.timeline.kill();
+    effect.svg.remove();
+    const index = effects.indexOf(effect);
+    if (index !== -1) {
+      effects.splice(index, 1);
+    }
+  };
+
+  const handlePointerDown = (event: PointerEvent): void => {
+    if (event.pointerType !== "mouse" || event.button !== 0) {
+      return;
+    }
+
+    const svg = document.createElementNS(SVG_NAMESPACE, "svg");
+    const x = event.clientX + window.scrollX - CLICK_WAVY_EFFECT_SIZE / 2;
+    const y = event.clientY + window.scrollY - CLICK_WAVY_EFFECT_SIZE / 2;
+
+    svg.setAttribute("class", "codariq-click-wavy-effect");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    svg.style.left = `${x}px`;
+    svg.style.top = `${y}px`;
+
+    const paths = angles.map((angle) => {
+      const path = createSvgPath("codariq-click-wavy-stroke");
+      path.setAttribute("d", getWavyClickPathData(angle));
+      path.setAttribute("stroke", CLICK_WAVY_COLOR);
+      path.setAttribute("stroke-width", String(CLICK_WAVY_STROKE_WIDTH));
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("fill", "none");
+      svg.append(path);
+      return path;
+    });
+
+    document.body.append(svg);
+
+    let effect: ClickWavyEffect | null = null;
+    const timeline = gsap.timeline({
+      onComplete: () => {
+        if (effect) {
+          removeEffect(effect);
+        }
+      },
+    });
+    effect = { svg, timeline };
+    effects.push(effect);
+
+    paths.forEach((path) => {
+      const length = Math.max(path.getTotalLength(), 1);
+
+      gsap.set(path, {
+        opacity: 1,
+        strokeDasharray: `1, ${length}`,
+        strokeDashoffset: 0,
+        strokeWidth: CLICK_WAVY_STROKE_WIDTH,
+      });
+
+      timeline
+        .to(
+          path,
+          {
+            strokeDasharray: `${length}, ${length}`,
+            strokeDashoffset: -length,
+            duration: CLICK_WAVY_DURATION,
+            ease: "power1.out",
+          },
+          0,
+        )
+        .to(
+          path,
+          {
+            strokeWidth: 0,
+            duration: CLICK_WAVY_DURATION * 0.4,
+            ease: "linear",
+          },
+          CLICK_WAVY_DURATION * 0.6,
+        );
+    });
+  };
+
+  document.addEventListener("pointerdown", handlePointerDown, {
+    capture: true,
+  });
+
+  return () => {
+    document.removeEventListener("pointerdown", handlePointerDown, {
+      capture: true,
+    });
+    effects.splice(0).forEach(removeEffect);
+  };
+}
+
 export function initEnterpriseMotion(): void {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
@@ -556,6 +684,7 @@ export function initEnterpriseMotion(): void {
   }, document.documentElement);
 
   const agentConnectionCleanup = initAgentConnectionMotion();
+  const clickWavyCleanup = initClickWavyEffect();
 
   if (consoleEl && window.matchMedia("(pointer: fine)").matches) {
     consoleEl.addEventListener("pointermove", handlePointerMove);
@@ -567,6 +696,7 @@ export function initEnterpriseMotion(): void {
     consoleEl?.removeEventListener("pointerleave", handlePointerLeave);
     if (consoleEl) gsap.killTweensOf(consoleEl);
     agentConnectionCleanup?.();
+    clickWavyCleanup();
     ctx.revert();
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     initialized = false;

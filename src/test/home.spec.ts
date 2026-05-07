@@ -37,6 +37,126 @@ test("pain list uses agent reframing", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("mouse clicks draw the Lavandai-style wavy burst", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".agent-connection-path")).toHaveCount(1);
+  await expect(page.locator(".codariq-click-wavy-effect")).toHaveCount(0);
+
+  await page.mouse.move(220, 260);
+  await page.mouse.down();
+  const burst = page.locator(".codariq-click-wavy-effect").first();
+  await expect(burst).toHaveCount(1);
+
+  const initialBurst = await burst.evaluate((svg) => {
+    const rect = svg.getBoundingClientRect();
+    const paths = Array.from(svg.querySelectorAll<SVGPathElement>("path"));
+
+    return {
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        width: rect.width,
+        height: rect.height,
+      },
+      style: {
+        position: getComputedStyle(svg).position,
+        pointerEvents: getComputedStyle(svg).pointerEvents,
+        overflow: getComputedStyle(svg).overflow,
+      },
+      pathCount: paths.length,
+      paths: paths.map((path) => ({
+        d: path.getAttribute("d") ?? "",
+        fill: path.getAttribute("fill"),
+        linecap: path.getAttribute("stroke-linecap"),
+        length: path.getTotalLength(),
+        stroke: path.getAttribute("stroke"),
+        strokeWidth: path.getAttribute("stroke-width"),
+        dasharray: getComputedStyle(path).strokeDasharray,
+        dashoffset: getComputedStyle(path).strokeDashoffset,
+        computedStrokeWidth: getComputedStyle(path).strokeWidth,
+      })),
+    };
+  });
+  await page.mouse.up();
+
+  expect(Math.abs(initialBurst.rect.left - 170)).toBeLessThan(1);
+  expect(Math.abs(initialBurst.rect.top - 210)).toBeLessThan(1);
+  expect(initialBurst.rect.width).toBe(100);
+  expect(initialBurst.rect.height).toBe(100);
+  expect(initialBurst.style.position).toBe("absolute");
+  expect(initialBurst.style.pointerEvents).toBe("none");
+  expect(initialBurst.style.overflow).toBe("visible");
+  expect(initialBurst.pathCount).toBe(4);
+  expect(initialBurst.paths.every(({ d }) => /^M .* Q .* T .*$/.test(d))).toBe(
+    true,
+  );
+  expect(initialBurst.paths.every(({ d }) => !/\sC\s/.test(d))).toBe(true);
+  expect(
+    initialBurst.paths.every(({ length }) => Math.abs(length - 42.921) < 0.35),
+  ).toBe(true);
+  expect(initialBurst.paths.every(({ fill }) => fill === "none")).toBe(true);
+  expect(initialBurst.paths.every(({ linecap }) => linecap === "round")).toBe(
+    true,
+  );
+  expect(initialBurst.paths.every(({ stroke }) => stroke === "#fcd718")).toBe(
+    true,
+  );
+  expect(
+    initialBurst.paths.every(({ strokeWidth }) => strokeWidth === "3"),
+  ).toBe(true);
+  expect(
+    initialBurst.paths.every(
+      ({ dasharray }) =>
+        Number.parseFloat(dasharray) >= 1 && Number.parseFloat(dasharray) < 8,
+    ),
+  ).toBe(true);
+  expect(
+    initialBurst.paths.every(
+      ({ dashoffset, computedStrokeWidth }) =>
+        Number.parseFloat(dashoffset) <= 0 &&
+        Number.parseFloat(dashoffset) > -8 &&
+        Number.parseFloat(computedStrokeWidth) === 3,
+    ),
+  ).toBe(true);
+
+  await page.waitForTimeout(128);
+  const drawingBurst = await burst.evaluate((svg) =>
+    Array.from(svg.querySelectorAll<SVGPathElement>("path")).map((path) => ({
+      dasharray: Number.parseFloat(getComputedStyle(path).strokeDasharray),
+      dashoffset: Number.parseFloat(getComputedStyle(path).strokeDashoffset),
+      strokeWidth: Number.parseFloat(getComputedStyle(path).strokeWidth),
+    })),
+  );
+  expect(
+    drawingBurst.every(
+      ({ dasharray, dashoffset, strokeWidth }) =>
+        dasharray > 8 && dasharray < 34 && dashoffset < -8 && strokeWidth === 3,
+    ),
+  ).toBe(true);
+
+  await page.waitForTimeout(620);
+  await expect(page.locator(".codariq-click-wavy-effect")).toHaveCount(0);
+
+  await page.evaluate(() => {
+    document.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        button: 0,
+        clientX: 220,
+        clientY: 260,
+        pointerType: "touch",
+      }),
+    );
+  });
+  await page.waitForTimeout(80);
+  await expect(page.locator(".codariq-click-wavy-effect")).toHaveCount(0);
+
+  await page.mouse.click(220, 260, { button: "right" });
+  await page.mouse.click(220, 260, { button: "middle" });
+  await page.waitForTimeout(80);
+  await expect(page.locator(".codariq-click-wavy-effect")).toHaveCount(0);
+});
+
 test("agent connection line links the two framework badges", async ({
   page,
 }) => {
@@ -193,6 +313,10 @@ test("agent connection line links the two framework badges", async ({
   expect(pathAnchors?.lastAboveTargetBottomBy).toBeGreaterThan(8);
 
   const lineShape = await line.evaluate((path) => {
+    if (!(path instanceof SVGPathElement)) {
+      throw new Error("Expected agent connection line to be an SVG path.");
+    }
+
     const d = path.getAttribute("d") ?? "";
     const length = path.getTotalLength();
     const beforeEnd = path.getPointAtLength(length * 0.92);

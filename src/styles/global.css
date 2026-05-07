@@ -554,6 +554,25 @@ header.nav-scrolled {
   opacity: 0;
 }
 
+.codariq-click-wavy-effect {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  overflow: visible;
+  pointer-events: none;
+  transform: rotate(0deg);
+  transform-origin: center center;
+  z-index: 30;
+}
+
+.codariq-click-wavy-stroke {
+  fill: none;
+  stroke: #fcd718;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
 [data-agent-connection-start],
 [data-agent-connection-target] {
   position: relative;
