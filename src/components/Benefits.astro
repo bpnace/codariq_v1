@@ -123,12 +123,20 @@ const {
         benefits.map((benefit) => (
           <article
             class={`pricing-card enterprise-card ${benefit.highlight ? "pricing-card--featured" : ""}`}
+            data-benefit-system-card={benefit.highlight ? "true" : undefined}
           >
             {benefit.highlight && (
               <span class="pricing-card__badge">Empfohlen</span>
             )}
             <div class="pricing-card__head">
-              <p>{benefit.additionalInfo}</p>
+              <p
+                class={benefit.highlight ? "pricing-card__system-label" : ""}
+                data-benefit-system-label={
+                  benefit.highlight ? "true" : undefined
+                }
+              >
+                {benefit.additionalInfo}
+              </p>
               <h3>{benefit.title}</h3>
               <strong>{benefit.price}</strong>
               <span>{benefit.duration}</span>
@@ -139,7 +147,13 @@ const {
                 <li>{feature}</li>
               ))}
             </ul>
-            <a href="/#final-cta">Setup prüfen</a>
+            <a
+              class={`pricing-card__cta ${benefit.highlight ? "pricing-card__cta--system" : ""}`}
+              href="/#final-cta"
+              data-benefit-system-cta={benefit.highlight ? "true" : undefined}
+            >
+              Setup prüfen
+            </a>
           </article>
         ))
       }
@@ -245,8 +259,10 @@ const {
 
   .pricing-card__badge {
     position: absolute;
+    z-index: 2;
     top: 1.1rem;
     right: 1.1rem;
+    width: fit-content;
     padding: 0.42rem 0.58rem;
     background: #14b8a6;
     color: #052e2b;
@@ -266,6 +282,33 @@ const {
 
   .pricing-card--featured .pricing-card__head p {
     color: #5eead4;
+  }
+
+  .pricing-card__system-label {
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    margin-left: -0.42rem;
+    padding: 0.22rem 0.42rem;
+    overflow: hidden;
+    border-radius: 7px;
+    isolation: isolate;
+  }
+
+  .pricing-card__system-label::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    background: linear-gradient(
+      90deg,
+      rgba(20, 184, 166, 0.03) 0%,
+      rgba(94, 234, 212, 0.2) 52%,
+      rgba(20, 184, 166, 0.04) 100%
+    );
+    background-size: 220% 100%;
+    opacity: 0.72;
+    animation: pricing-system-label-glow 4.8s ease-in-out infinite;
   }
 
   .pricing-card h3 {
@@ -330,6 +373,7 @@ const {
   }
 
   .pricing-card a {
+    position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -350,6 +394,26 @@ const {
     color: #052e2b;
   }
 
+  .pricing-card__cta--system {
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  .pricing-card__cta--system::before {
+    position: absolute;
+    inset: -0.28rem;
+    z-index: -1;
+    content: "";
+    border: 0;
+    border-radius: 13px;
+    background: rgba(94, 234, 212, 0.24);
+    filter: blur(8px);
+    opacity: 0.2;
+    transform: scale(0.96);
+    transform-origin: center;
+    animation: pricing-system-cta-halo 3.4s ease-out infinite;
+  }
+
   .pricing-card a:hover {
     background: #14332f;
   }
@@ -360,6 +424,36 @@ const {
 
   .pricing-card a:active {
     transform: translateY(1px) scale(0.985);
+  }
+
+  @keyframes pricing-system-label-glow {
+    0%,
+    100% {
+      background-position: 100% 50%;
+      opacity: 0.52;
+    }
+
+    50% {
+      background-position: 0% 50%;
+      opacity: 0.86;
+    }
+  }
+
+  @keyframes pricing-system-cta-halo {
+    0% {
+      opacity: 0.26;
+      transform: scale(0.96);
+    }
+
+    58% {
+      opacity: 0.08;
+      transform: scale(1.12);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1.16);
+    }
   }
 
   .included-panel {
@@ -411,6 +505,13 @@ const {
   .included-panel strong {
     color: #0b1220;
     font-weight: 850;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card__system-label::before,
+    .pricing-card__cta--system::before {
+      animation: none;
+    }
   }
 
   @media (max-width: 1040px) {

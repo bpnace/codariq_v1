@@ -149,6 +149,69 @@ test("pain list uses agent reframing", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("featured benefits system card has a subtle animated highlight", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const systemCard = page.locator('[data-benefit-system-card="true"]');
+  await expect(systemCard).toHaveCount(1);
+  await expect(
+    systemCard.getByText("Mehrere Abläufe als System"),
+  ).toBeVisible();
+
+  const motion = await systemCard.evaluate((card) => {
+    const badge = card.querySelector(".pricing-card__badge");
+    const label = card.querySelector("[data-benefit-system-label]");
+    const cta = card.querySelector("[data-benefit-system-cta]");
+
+    if (
+      !(badge instanceof HTMLElement) ||
+      !(label instanceof HTMLElement) ||
+      !(cta instanceof HTMLElement)
+    ) {
+      throw new Error("Featured benefits highlight elements missing.");
+    }
+
+    const badgeRect = badge.getBoundingClientRect();
+    const labelBefore = getComputedStyle(label, "::before");
+    const labelRect = label.getBoundingClientRect();
+    const ctaBefore = getComputedStyle(cta, "::before");
+
+    return {
+      badgeOverlapsLabel: !(
+        badgeRect.left >= labelRect.right || labelRect.left >= badgeRect.right
+      ),
+      badgePosition: getComputedStyle(badge).position,
+      cardBeforeAnimation: getComputedStyle(card, "::before").animationName,
+      cardBeforeContent: getComputedStyle(card, "::before").content,
+      ctaAnimation: ctaBefore.animationName,
+      ctaBackgroundColor: ctaBefore.backgroundColor,
+      ctaBorderTopWidth: ctaBefore.borderTopWidth,
+      ctaContent: ctaBefore.content,
+      ctaFilter: ctaBefore.filter,
+      labelAnimation: labelBefore.animationName,
+      labelBackground: labelBefore.backgroundImage,
+      labelContent: labelBefore.content,
+      labelText: label.textContent?.trim(),
+    };
+  });
+
+  expect(motion.labelText).toBe("Mehrere Abläufe als System");
+  expect(motion.badgePosition).toBe("absolute");
+  expect(motion.badgeOverlapsLabel).toBe(false);
+  expect(motion.cardBeforeAnimation).toBe("none");
+  expect(motion.cardBeforeContent).toBe("none");
+  expect(motion.labelContent).toBe('""');
+  expect(motion.labelAnimation).toBe("pricing-system-label-glow");
+  expect(motion.labelBackground).toContain("rgba(94, 234, 212");
+  expect(motion.ctaContent).toBe('""');
+  expect(motion.ctaAnimation).toBe("pricing-system-cta-halo");
+  expect(motion.ctaBackgroundColor).toBe("rgba(94, 234, 212, 0.24)");
+  expect(motion.ctaBorderTopWidth).toBe("0px");
+  expect(motion.ctaFilter).toBe("blur(8px)");
+});
+
 test("delivery framework cards rise from blur in a staged sequence", async ({
   page,
 }) => {
