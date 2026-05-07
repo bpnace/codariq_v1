@@ -14,47 +14,47 @@ export interface Props {
 
 const defaultProblems = [
   {
-    title: "Anfragen bleiben im Postfach hängen",
+    title: "Tools sind da, aber Datenflüsse nicht",
     description:
-      "Kundenanfragen, Bewerbungen und interne Rückfragen kommen rein, aber niemand sieht sofort, was wichtig ist, was warten kann und wer reagieren muss.",
-    outcome: "Schneller priorisieren, weniger Nachfassen.",
+      "CRM, Postfach, Kalender, Cloud-Dokumente und Projekttools laufen nebeneinander. Für Menschen ist das gewohnt, für einen Agenten fehlen klare Quellen, Übergaben und Grenzen.",
+    outcome: "Erst Datenfluss klären.",
     solution:
-      "Postfach-Agent mit Triage, Antwortentwürfen, Übergaben und Freigabe für kritische Nachrichten.",
+      "Readiness-Check mit Quellen, Zwecken, Speicherorten und Übergaben, bevor ein Agent produktiv arbeitet.",
     icon: "mail",
   },
   {
-    title: "Dokumente kosten jeden Monat Fokus",
+    title: "KI wird ausprobiert, aber nicht geführt",
     description:
-      "Rechnungen, Verträge, Formulare und Anhänge liegen in verschiedenen Ordnern. Prüfen, benennen, ablegen und nachfragen passiert immer noch manuell.",
-    outcome: "Weniger Copy Paste, sauberere Übergaben.",
+      "Einzelne Tools liefern erste Ergebnisse, aber niemand hat festgelegt, welche Daten genutzt werden dürfen, wann Freigaben nötig sind und wer verantwortlich bleibt.",
+    outcome: "Kontrolle vor Einsatz.",
     solution:
-      "Backoffice-Agent mit Dokumentenerkennung, fehlenden Angaben und Übergabe an Buchhaltung, CRM oder Projekttool.",
+      "Agenten-Setup mit Rollen, Zugriffen, Human-in-the-loop und klaren Grenzen für jede Aktion.",
     icon: "document",
   },
   {
-    title: "Wissen ist überall, nur nicht abrufbar",
+    title: "Manuelle Übergaben halten Prozesse zusammen",
     description:
-      "Antworten stecken in Mails, Chats, PDFs, Notizen und Köpfen. Neue Mitarbeitende fragen nach, Kunden warten und Entscheidungen dauern länger.",
-    outcome: "Schnellere Antworten mit Quellen.",
+      "Anfragen, Dokumente und internes Wissen wandern über Mails, Chats und Zurufe weiter. Genau dort braucht ein Agent Struktur, sonst verstärkt er nur das bestehende Chaos.",
+    outcome: "Übergaben agentenfähig machen.",
     solution:
-      "Wissens-Agent mit freigegebenen Quellen, Zugriffsschutz und klaren Grenzen, wenn Informationen fehlen.",
+      "Support-, Backoffice- oder Wissens-Agent, der prüft, vorbereitet und Sonderfälle an Menschen übergibt.",
     icon: "book",
   },
   {
-    title: "Einfache Workflows werden zu komplex",
+    title: "Compliance kommt erst nach dem Workflow",
     description:
-      "Ein kleiner n8n-Workflow startet gut, aber dann kommen Sonderfälle, mehr Tools, mehr Daten und die Frage: Wer darf eigentlich was automatisch tun?",
-    outcome: "Vom Workflow zum kontrollierten Agenten.",
+      "Oft wird zuerst automatisiert und danach gefragt, ob Datenschutz, Anbieter, Logs und Freigaben passen. Für produktive KI-Agenten ist das die falsche Reihenfolge.",
+    outcome: "Sicherheit in die Architektur.",
     solution:
-      "Vom n8n-Agenten zu Rollen, Logs, Freigaben, DSGVO-konformen Datenflüssen und OpenClaw-Infrastruktur.",
+      "DSGVO- und EU-AI-Act-orientierte Datenlogik mit Logging, Freigaben und Anbieter-/Hosting-Check.",
     icon: "link",
   },
 ];
 
 const {
-  title = "Wo KI-Agenten im Alltag erleichtern können?",
-  subtitle = "Nicht jeder Ablauf braucht sofort ein großes System. Aber wenn Postfach, Dokumente, Wissen und Tool-Übergaben täglich Zeit ziehen, kann ein kontrollierbarer KI-Agent aus Routinearbeit einen sauberen Ablauf machen.",
-  closingText = "Wir starten klein, meistens mit einem klaren n8n-Agenten. Wenn der Use Case wächst, bauen wir daraus ein stabiles Agenten-Setup mit Freigaben, Protokollen und DSGVO-konformer Integration.",
+  title = "Deine Prozesse sind noch nicht bereit für sichere KI-Agenten.",
+  subtitle = "Tools, Daten und Abläufe sind vorhanden. Aber solange Datenflüsse, Freigaben, Sonderfälle und Verantwortlichkeiten offen sind, wird ein Agent im echten Betrieb zum Risiko.",
+  closingText = "Wir starten nicht mit dem Tool, sondern mit dem Prozess. Erst klären wir Datenflüsse, Rollen und Freigaben, dann bauen wir den kleinsten Agenten-Workflow, der sicher produktiv getestet werden kann.",
   problems = defaultProblems,
 } = Astro.props;
 ---
@@ -62,7 +62,7 @@ const {
 <section id="pain-points" data-enterprise-section class="usecase-suite">
   <div class="saas-container">
     <div class="saas-heading enterprise-reveal">
-      <span data-agent-connection-start>Sichere Use Cases</span>
+      <span data-agent-connection-start>Agenten-Readiness</span>
       <h2>{title}</h2>
       <p>{subtitle}</p>
     </div>
@@ -93,7 +93,7 @@ const {
         <strong>Kontrolliert starten</strong>
         <p>{closingText}</p>
       </div>
-      <a href="/#final-cta">Startpunkt prüfen</a>
+      <a href="/#final-cta">Ersten Agenten einordnen</a>
     </div>
   </div>
 </section>

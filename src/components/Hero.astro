@@ -102,6 +102,7 @@ const briefingItems = [
 
     <aside
       class="secure-console enterprise-reveal"
+      data-hero-agent-console
       aria-label="Geschäftsführer-Briefing eines KI-Agenten"
     >
       <div class="secure-console__topbar">
@@ -109,26 +110,43 @@ const briefingItems = [
           <span>KI-Agent meldet</span>
           <strong>Morgen-Briefing</strong>
         </div>
-        <p>08:15 Uhr</p>
+        <p data-hero-clock>08:15 Uhr</p>
       </div>
 
       <div class="secure-console__status">
         <div>
           <span>Heute vom Team genommen</span>
-          <strong>4,6 Std.</strong>
+          <strong data-hero-saved-time>4,6 Std.</strong>
         </div>
         <div class="secure-console__ring" aria-hidden="true">
           <span></span>
         </div>
       </div>
 
+      <div
+        class="secure-console__alert"
+        data-hero-alert
+        aria-live="polite"
+        aria-hidden="true"
+      >
+        <span data-hero-alert-label>Freigabe nötig</span>
+        <strong data-hero-alert-title>Rabatt-Anfrage prüfen</strong>
+        <p data-hero-alert-copy>
+          Agent stoppt vor dem Versand und wartet auf deine Entscheidung.
+        </p>
+      </div>
+
       <div class="secure-console__pipeline">
         {
-          briefingItems.map((item) => (
-            <article class="pipeline-card">
+          briefingItems.map((item, index) => (
+            <article class="pipeline-card" data-hero-pipeline-card>
               <span>{item.label}</span>
-              <strong>{item.value}</strong>
-              <p>{item.state}</p>
+              <strong data-hero-pipeline-value data-hero-pipeline-index={index}>
+                {item.value}
+              </strong>
+              <p data-hero-pipeline-state data-hero-pipeline-index={index}>
+                {item.state}
+              </p>
             </article>
           ))
         }
@@ -151,7 +169,10 @@ const briefingItems = [
         aria-label="Vom KI-Agenten übernommene Arbeit"
       >
         <span>Agent hat übernommen</span>
-        <p><strong>Posteingang</strong> Anfragen erkannt und priorisiert</p>
+        <p data-hero-live-row>
+          <strong data-hero-live-source>Posteingang</strong>
+          <span data-hero-live-copy>Anfragen erkannt und priorisiert</span>
+        </p>
         <p><strong>CRM</strong> Kontakte ergänzt und Follow-ups vorbereitet</p>
         <p><strong>Team</strong> Aufgaben gebündelt statt weitergereicht</p>
       </div>
@@ -399,7 +420,7 @@ const briefingItems = [
     transform: translateZ(34px);
   }
 
-  .secure-console > * {
+  .secure-console > :not(.secure-console__alert) {
     position: relative;
     z-index: 2;
     transform: translateZ(24px);
@@ -443,12 +464,15 @@ const briefingItems = [
   }
 
   .secure-console__topbar p {
+    min-width: 5.25rem;
     color: #14332f;
     background: rgba(20, 184, 166, 0.12);
     border-radius: 7px;
     padding: 0.42rem 0.55rem;
     font-size: 0.82rem;
     font-weight: 850;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
   }
 
   .secure-console__status {
@@ -464,11 +488,13 @@ const briefingItems = [
   .secure-console__status strong {
     display: block;
     margin-top: 0.3rem;
+    min-width: 7.4ch;
     color: #f8fafc;
     font-size: clamp(2rem, 4vw, 3.4rem);
     font-weight: 950;
     letter-spacing: -0.05em;
     line-height: 0.9;
+    font-variant-numeric: tabular-nums;
   }
 
   .secure-console__ring {
@@ -516,11 +542,67 @@ const briefingItems = [
     line-height: 1.02;
   }
 
+  [data-hero-clock],
+  [data-hero-saved-time],
+  [data-hero-pipeline-value] {
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
   .pipeline-card p {
     margin-top: 0.65rem;
     color: #0f766e;
     font-size: 0.86rem;
     font-weight: 850;
+  }
+
+  .secure-console__alert {
+    position: absolute;
+    top: clamp(5.2rem, 10vw, 6rem);
+    right: clamp(1rem, 1.6vw, 1.35rem);
+    z-index: 4;
+    width: min(20rem, calc(100% - 2rem));
+    padding: 0.82rem 0.9rem;
+    color: #451a03;
+    background: rgba(255, 251, 235, 0.95);
+    border: 1px solid rgba(245, 158, 11, 0.26);
+    border-radius: 12px;
+    box-shadow: 0 18px 44px rgba(120, 53, 15, 0.14);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, 0.75rem, 38px) scale(0.96);
+    visibility: hidden;
+  }
+
+  .secure-console__alert span {
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.22rem 0.42rem;
+    color: #78350f;
+    background: rgba(245, 158, 11, 0.14);
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .secure-console__alert strong {
+    display: block;
+    margin-top: 0.44rem;
+    color: #0b1220;
+    font-size: 0.96rem;
+    font-weight: 920;
+    line-height: 1.08;
+  }
+
+  .secure-console__alert p {
+    margin-top: 0.28rem;
+    color: #92400e;
+    font-size: 0.78rem;
+    font-weight: 720;
+    line-height: 1.35;
   }
 
   .decision-panel {
@@ -574,8 +656,13 @@ const briefingItems = [
   }
 
   .handover-stream strong {
+    display: inline-block;
     color: #0b1220;
     font-weight: 900;
+  }
+
+  .handover-stream [data-hero-live-copy] {
+    display: inline-block;
   }
 
   @media (max-width: 1040px) {

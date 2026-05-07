@@ -5,6 +5,152 @@ test("home loads", async ({ page }) => {
   await expect(page).toHaveTitle(/Codariq/);
 });
 
+test("hero agent panel cycles live metrics and review alerts", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const consolePanel = page.locator("[data-hero-agent-console]");
+  await expect(consolePanel).toHaveCount(1);
+  await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
+    "08:15 Uhr",
+  );
+  await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
+    "4,6 Std.",
+  );
+  await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
+    "Anfragen erkannt und priorisiert",
+  );
+  await expect(consolePanel.locator(".handover-stream p")).toHaveCount(3);
+  const initialPanelLayout = await consolePanel.evaluate((panel) => {
+    if (!(panel instanceof HTMLElement)) {
+      throw new Error("Hero agent panel is not an HTMLElement.");
+    }
+
+    return {
+      offsetHeight: panel.offsetHeight,
+      scrollHeight: panel.scrollHeight,
+    };
+  });
+
+  await page.waitForTimeout(2200);
+  await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
+    "08:15 Uhr",
+  );
+  await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
+    "4,6 Std.",
+  );
+  await expect(
+    consolePanel.locator("[data-hero-pipeline-value]").first(),
+  ).toHaveText("23 E-Mails sortiert");
+  await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
+    "Anfragen erkannt und priorisiert",
+  );
+  const heldInitialMotion = await consolePanel.evaluate((panel) => {
+    const savedTime = panel.querySelector("[data-hero-saved-time]");
+    const firstPipeline = panel.querySelector("[data-hero-pipeline-value]");
+
+    if (
+      !(savedTime instanceof HTMLElement) ||
+      !(firstPipeline instanceof HTMLElement)
+    ) {
+      throw new Error("Hero agent initial motion targets missing.");
+    }
+
+    return {
+      firstPipelineOpacity: Number.parseFloat(
+        getComputedStyle(firstPipeline).opacity,
+      ),
+      savedTimeOpacity: Number.parseFloat(getComputedStyle(savedTime).opacity),
+    };
+  });
+
+  expect(heldInitialMotion.firstPipelineOpacity).toBeGreaterThan(0.98);
+  expect(heldInitialMotion.savedTimeOpacity).toBeGreaterThan(0.98);
+
+  await expect
+    .poll(
+      async () =>
+        (
+          await consolePanel.locator("[data-hero-saved-time]").textContent()
+        )?.trim() ?? "",
+      { timeout: 7000 },
+    )
+    .toBe("5,1 Std.");
+
+  await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
+    "Lead-Kontext ergänzt",
+  );
+  await expect(
+    consolePanel.locator("[data-hero-pipeline-value]").first(),
+  ).toHaveText("31 E-Mails sortiert");
+
+  const alert = consolePanel.locator("[data-hero-alert]");
+  await expect
+    .poll(
+      async () =>
+        alert.evaluate((element) => {
+          const style = getComputedStyle(element);
+
+          return (
+            element.getAttribute("aria-hidden") === "false" &&
+            style.visibility !== "hidden" &&
+            Number.parseFloat(style.opacity) > 0.2
+          );
+        }),
+      { timeout: 7000 },
+    )
+    .toBe(true);
+
+  const panelMotion = await consolePanel.evaluate((panel, initialLayout) => {
+    if (!(panel instanceof HTMLElement)) {
+      throw new Error("Hero agent panel is not an HTMLElement.");
+    }
+
+    const alertElement = panel.querySelector("[data-hero-alert]");
+    const statusValue = panel.querySelector("[data-hero-saved-time]");
+
+    if (
+      !(alertElement instanceof HTMLElement) ||
+      !(statusValue instanceof HTMLElement)
+    ) {
+      throw new Error("Hero agent live-motion elements missing.");
+    }
+
+    const alertRect = alertElement.getBoundingClientRect();
+    const panelRect = panel.getBoundingClientRect();
+    const alertStyle = getComputedStyle(alertElement);
+
+    return {
+      alertAnimationOpacity: Number.parseFloat(alertStyle.opacity),
+      alertFitsPanel: alertRect.width <= panelRect.width,
+      alertPointerEvents: alertStyle.pointerEvents,
+      alertPosition: alertStyle.position,
+      alertTitle: alertElement
+        .querySelector("[data-hero-alert-title]")
+        ?.textContent?.trim(),
+      layoutHeightDelta: Math.abs(
+        panel.offsetHeight - initialLayout.offsetHeight,
+      ),
+      scrollHeightDelta: Math.abs(
+        panel.scrollHeight - initialLayout.scrollHeight,
+      ),
+      statusValueMinWidth: Number.parseFloat(
+        getComputedStyle(statusValue).minWidth,
+      ),
+    };
+  }, initialPanelLayout);
+
+  expect(panelMotion.alertTitle).toBe("Rabatt-Anfrage prüfen");
+  expect(panelMotion.alertAnimationOpacity).toBeGreaterThan(0.2);
+  expect(panelMotion.alertFitsPanel).toBe(true);
+  expect(panelMotion.alertPointerEvents).toBe("none");
+  expect(panelMotion.alertPosition).toBe("absolute");
+  expect(panelMotion.layoutHeightDelta).toBeLessThanOrEqual(2);
+  expect(panelMotion.scrollHeightDelta).toBeLessThanOrEqual(2);
+  expect(panelMotion.statusValueMinWidth).toBeGreaterThan(60);
+});
+
 test("home keeps a fixed bottom blur gradient over the viewport", async ({
   page,
 }) => {
@@ -78,7 +224,7 @@ test("home keeps a fixed bottom blur gradient over the viewport", async ({
   expect(initialVeil.beforeOpacity).toBe("1");
   expect(initialVeil.layers).toHaveLength(3);
   expect(initialVeil.layers[0].backdropFilter).toContain("blur(0px)");
-  expect(initialVeil.layers[1].backdropFilter).toContain("blur(4px)");
+  expect(initialVeil.layers[1].backdropFilter).toContain("blur(3px)");
   expect(initialVeil.layers[2].backdropFilter).toContain("blur(10px)");
   expect(
     initialVeil.layers.every(

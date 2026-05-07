@@ -15,6 +15,8 @@ const CLICK_WAVY_EFFECT_SIZE = 100;
 const CLICK_WAVY_STROKE_WIDTH = 3;
 const CLICK_WAVY_DURATION = 0.6;
 const CLICK_WAVY_COLOR = "#0f766e";
+const HERO_INITIAL_UPDATE_HOLD = 4.75;
+const HERO_REPEATING_UPDATE_HOLD = 2.25;
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);
@@ -36,6 +38,67 @@ type ClickWavyEffect = {
   svg: SVGSVGElement;
   timeline: gsap.core.Timeline;
 };
+
+type HeroPipelineItem = {
+  value: string;
+  state: string;
+};
+
+type HeroAlertState = {
+  label: string;
+  title: string;
+  copy: string;
+};
+
+type HeroConsoleState = {
+  clock: string;
+  savedTime: string;
+  pipeline: HeroPipelineItem[];
+  liveSource: string;
+  liveCopy: string;
+  alert?: HeroAlertState;
+};
+
+const HERO_CONSOLE_STATES: HeroConsoleState[] = [
+  {
+    clock: "08:15 Uhr",
+    savedTime: "4,6 Std.",
+    pipeline: [
+      { value: "23 E-Mails sortiert", state: "ohne Rückfrage" },
+      { value: "5 Antworten als Entwurf", state: "prüfbereit" },
+      { value: "2 Entscheidungen offen", state: "Chef-Fokus" },
+    ],
+    liveSource: "Posteingang",
+    liveCopy: "Anfragen erkannt und priorisiert",
+  },
+  {
+    clock: "08:16 Uhr",
+    savedTime: "5,1 Std.",
+    pipeline: [
+      { value: "31 E-Mails sortiert", state: "gebündelt" },
+      { value: "7 Antworten als Entwurf", state: "Ton geprüft" },
+      { value: "3 Entscheidungen offen", state: "Freigabe nötig" },
+    ],
+    liveSource: "CRM",
+    liveCopy: "Lead-Kontext ergänzt",
+    alert: {
+      label: "Freigabe nötig",
+      title: "Rabatt-Anfrage prüfen",
+      copy: "Agent stoppt vor dem Versand und wartet auf deine Entscheidung.",
+    },
+  },
+  {
+    clock: "08:17 Uhr",
+    savedTime: "5,4 Std.",
+    pipeline: [
+      { value: "42 E-Mails sortiert", state: "priorisiert" },
+      { value: "9 Antworten als Entwurf", state: "prüfbereit" },
+      { value: "1 Entscheidung offen", state: "Chef-Fokus" },
+    ],
+    liveSource: "Support",
+    liveCopy: "Antwort mit Verlauf vorbereitet",
+  },
+];
 
 const formatPoint = ({ x, y }: ConnectionPoint): string =>
   `${x.toFixed(1)} ${y.toFixed(1)}`;
@@ -518,6 +581,378 @@ function initDeliveryFrameworkReveal(): void {
   });
 }
 
+function initHeroConsoleLiveMotion(): gsap.core.Timeline | null {
+  const consoleEl = document.querySelector<HTMLElement>(
+    "[data-hero-agent-console]",
+  );
+  if (!consoleEl) return null;
+
+  const clockEl = consoleEl.querySelector<HTMLElement>("[data-hero-clock]");
+  const savedTimeEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-saved-time]",
+  );
+  const statusEl = consoleEl.querySelector<HTMLElement>(
+    ".secure-console__status",
+  );
+  const alertEl = consoleEl.querySelector<HTMLElement>("[data-hero-alert]");
+  const alertLabelEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-alert-label]",
+  );
+  const alertTitleEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-alert-title]",
+  );
+  const alertCopyEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-alert-copy]",
+  );
+  const liveRowEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-live-row]",
+  );
+  const liveSourceEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-live-source]",
+  );
+  const liveCopyEl = consoleEl.querySelector<HTMLElement>(
+    "[data-hero-live-copy]",
+  );
+  const pipelineCards = Array.from(
+    consoleEl.querySelectorAll<HTMLElement>("[data-hero-pipeline-card]"),
+  );
+  const pipelineValueEls = Array.from(
+    consoleEl.querySelectorAll<HTMLElement>("[data-hero-pipeline-value]"),
+  );
+  const pipelineStateEls = Array.from(
+    consoleEl.querySelectorAll<HTMLElement>("[data-hero-pipeline-state]"),
+  );
+
+  if (
+    !clockEl ||
+    !savedTimeEl ||
+    !statusEl ||
+    !alertEl ||
+    !alertLabelEl ||
+    !alertTitleEl ||
+    !alertCopyEl ||
+    !liveRowEl ||
+    !liveSourceEl ||
+    !liveCopyEl ||
+    pipelineCards.length !== HERO_CONSOLE_STATES[0].pipeline.length ||
+    pipelineValueEls.length !== HERO_CONSOLE_STATES[0].pipeline.length ||
+    pipelineStateEls.length !== HERO_CONSOLE_STATES[0].pipeline.length
+  ) {
+    return null;
+  }
+
+  const statusNumberTargets = [clockEl, savedTimeEl];
+  const liveTargets = [liveSourceEl, liveCopyEl];
+  const pipelineTargetGroups = pipelineValueEls.map((valueEl, index) => ({
+    valueEl,
+    stateEl: pipelineStateEls[index]!,
+  }));
+  const initialTextTargets = [
+    ...statusNumberTargets,
+    ...pipelineValueEls,
+    ...pipelineStateEls,
+    ...liveTargets,
+  ];
+
+  const setAlertVisibility = (visible: boolean): void => {
+    alertEl.setAttribute("aria-hidden", visible ? "false" : "true");
+  };
+
+  const applyStatusState = (state: HeroConsoleState): void => {
+    clockEl.textContent = state.clock;
+    savedTimeEl.textContent = state.savedTime;
+  };
+
+  const applyLiveState = (state: HeroConsoleState): void => {
+    liveSourceEl.textContent = state.liveSource;
+    liveCopyEl.textContent = state.liveCopy;
+  };
+
+  const applyPipelineItem = (state: HeroConsoleState, index: number): void => {
+    const item = state.pipeline[index];
+    const valueEl = pipelineValueEls[index];
+    const stateEl = pipelineStateEls[index];
+
+    if (!item) return;
+    valueEl.textContent = item.value;
+    stateEl.textContent = item.state;
+  };
+
+  const applyState = (state: HeroConsoleState): void => {
+    applyStatusState(state);
+    applyLiveState(state);
+    state.pipeline.forEach((_, index) => {
+      applyPipelineItem(state, index);
+    });
+  };
+
+  const applyAlert = (alert: HeroAlertState): void => {
+    alertLabelEl.textContent = alert.label;
+    alertTitleEl.textContent = alert.title;
+    alertCopyEl.textContent = alert.copy;
+    setAlertVisibility(true);
+  };
+
+  const hideAlert = (): void => {
+    setAlertVisibility(false);
+  };
+
+  applyState(HERO_CONSOLE_STATES[0]);
+  hideAlert();
+
+  gsap.set(initialTextTargets, {
+    autoAlpha: 1,
+    rotationX: 0,
+    y: 0,
+  });
+
+  gsap.set(alertEl, {
+    autoAlpha: 0,
+    y: 12,
+    scale: 0.96,
+    transformOrigin: "88% 0%",
+  });
+
+  const timeline = gsap.timeline({
+    repeat: -1,
+    repeatDelay: 0.8,
+    defaults: { ease: "power3.out" },
+  });
+  const queueTextUpdate = (
+    targets: HTMLElement[],
+    applyText: () => void,
+    position: string,
+  ): void => {
+    timeline
+      .to(
+        targets,
+        {
+          autoAlpha: 0,
+          y: -5,
+          duration: 0.16,
+          stagger: 0.035,
+          ease: "power2.in",
+        },
+        position,
+      )
+      .call(applyText, undefined, `${position}+=0.14`)
+      .fromTo(
+        targets,
+        { autoAlpha: 0, y: 7 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.3,
+          stagger: 0.04,
+          ease: "power4.out",
+          immediateRender: false,
+        },
+        `${position}+=0.17`,
+      );
+  };
+
+  const queueNumberFlipUpdate = (
+    targets: HTMLElement[],
+    applyText: () => void,
+    position: string,
+  ): void => {
+    timeline
+      .to(
+        targets,
+        {
+          autoAlpha: 0,
+          rotationX: -78,
+          y: 5,
+          duration: 0.22,
+          stagger: 0.075,
+          ease: "power2.in",
+          transformOrigin: "50% 100%",
+          transformPerspective: 700,
+        },
+        position,
+      )
+      .call(applyText, undefined, `${position}+=0.29`)
+      .fromTo(
+        targets,
+        {
+          autoAlpha: 0,
+          rotationX: 76,
+          y: -5,
+          transformOrigin: "50% 0%",
+          transformPerspective: 700,
+        },
+        {
+          autoAlpha: 1,
+          rotationX: 0,
+          y: 0,
+          duration: 0.34,
+          stagger: 0.075,
+          ease: "back.out(1.15)",
+          immediateRender: false,
+        },
+        `${position}+=0.31`,
+      );
+  };
+
+  const queuePipelineItemUpdate = (
+    valueEl: HTMLElement,
+    stateEl: HTMLElement,
+    applyText: () => void,
+    position: string,
+  ): void => {
+    timeline
+      .to(
+        valueEl,
+        {
+          autoAlpha: 0,
+          rotationX: -78,
+          y: 5,
+          duration: 0.22,
+          ease: "power2.in",
+          transformOrigin: "50% 100%",
+          transformPerspective: 700,
+        },
+        position,
+      )
+      .to(
+        stateEl,
+        {
+          autoAlpha: 0,
+          y: -4,
+          duration: 0.16,
+          ease: "power2.in",
+        },
+        `${position}+=0.04`,
+      )
+      .call(applyText, undefined, `${position}+=0.26`)
+      .fromTo(
+        valueEl,
+        {
+          autoAlpha: 0,
+          rotationX: 76,
+          y: -5,
+          transformOrigin: "50% 0%",
+          transformPerspective: 700,
+        },
+        {
+          autoAlpha: 1,
+          rotationX: 0,
+          y: 0,
+          duration: 0.34,
+          ease: "back.out(1.15)",
+          immediateRender: false,
+        },
+        `${position}+=0.28`,
+      )
+      .fromTo(
+        stateEl,
+        { autoAlpha: 0, y: 7 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power4.out",
+          immediateRender: false,
+        },
+        `${position}+=0.34`,
+      );
+  };
+  const cycleStates = [...HERO_CONSOLE_STATES.slice(1), HERO_CONSOLE_STATES[0]];
+
+  cycleStates.forEach((state, stateIndex) => {
+    const updateLabel = `hero-console-update-${stateIndex}`;
+    timeline.addLabel(
+      updateLabel,
+      `+=${stateIndex === 0 ? HERO_INITIAL_UPDATE_HOLD : HERO_REPEATING_UPDATE_HOLD}`,
+    );
+
+    queueNumberFlipUpdate(
+      statusNumberTargets,
+      () => {
+        applyStatusState(state);
+      },
+      updateLabel,
+    );
+    timeline.fromTo(
+      statusEl,
+      { scale: 0.988 },
+      { scale: 1, duration: 0.36, ease: "back.out(1.35)" },
+      `${updateLabel}+=0.14`,
+    );
+
+    pipelineTargetGroups.forEach(({ valueEl, stateEl }, index) => {
+      const cardLabel = `${updateLabel}+=${(0.14 + index * 0.1).toFixed(2)}`;
+      queuePipelineItemUpdate(
+        valueEl,
+        stateEl,
+        () => {
+          applyPipelineItem(state, index);
+        },
+        cardLabel,
+      );
+      timeline.fromTo(
+        pipelineCards[index],
+        { scale: 0.988 },
+        { scale: 1, duration: 0.32, ease: "back.out(1.35)" },
+        `${cardLabel}+=0.14`,
+      );
+    });
+
+    queueTextUpdate(
+      liveTargets,
+      () => {
+        applyLiveState(state);
+      },
+      `${updateLabel}+=0.5`,
+    );
+    timeline.fromTo(
+      liveRowEl,
+      { scale: 0.99 },
+      { scale: 1, duration: 0.32, ease: "back.out(1.25)" },
+      `${updateLabel}+=0.64`,
+    );
+
+    if (state.alert) {
+      timeline
+        .call(
+          () => {
+            if (state.alert) applyAlert(state.alert);
+          },
+          undefined,
+          `${updateLabel}+=0.72`,
+        )
+        .fromTo(
+          alertEl,
+          { autoAlpha: 0, y: 12, scale: 0.96 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.34,
+            ease: "back.out(1.55)",
+          },
+          `${updateLabel}+=0.72`,
+        )
+        .to(
+          alertEl,
+          {
+            autoAlpha: 0,
+            y: -8,
+            scale: 0.985,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: hideAlert,
+          },
+          `${updateLabel}+=2.62`,
+        );
+    } else {
+      timeline.call(hideAlert, undefined, `${updateLabel}+=0.72`);
+    }
+  });
+
+  return timeline;
+}
+
 export function initEnterpriseMotion(): void {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
@@ -599,6 +1034,8 @@ export function initEnterpriseMotion(): void {
     resetConsoleTilt();
   };
 
+  let heroConsoleLiveTimeline: gsap.core.Timeline | null = null;
+
   const ctx = gsap.context(() => {
     if (consoleEl) {
       gsap.set(consoleEl, {
@@ -673,6 +1110,8 @@ export function initEnterpriseMotion(): void {
       repeat: -1,
     });
 
+    heroConsoleLiveTimeline = initHeroConsoleLiveMotion();
+
     gsap.utils
       .toArray<HTMLElement>(".secure-hero__ambient, .secure-contact__ambient")
       .forEach((el, index) => {
@@ -729,6 +1168,7 @@ export function initEnterpriseMotion(): void {
   const cleanup = (): void => {
     consoleEl?.removeEventListener("pointermove", handlePointerMove);
     consoleEl?.removeEventListener("pointerleave", handlePointerLeave);
+    heroConsoleLiveTimeline?.kill();
     if (consoleEl) gsap.killTweensOf(consoleEl);
     agentConnectionCleanup?.();
     clickWavyCleanup();
