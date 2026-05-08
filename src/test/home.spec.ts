@@ -39,6 +39,30 @@ test("hero uses the local original image background with a diagonal white overla
   expect(heroBackground.overlay).toMatch(/to (right top|top right)|45deg/);
 });
 
+test("mobile hero uses the compact background and skips enterprise motion", async ({
+  page,
+}) => {
+  const enterpriseMotionRequests: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().includes("enterpriseMotion")) {
+      enterpriseMotionRequests.push(request.url());
+    }
+  });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.waitForTimeout(1200);
+
+  const heroBackground = await page.locator("#hero").evaluate((hero) => {
+    const before = getComputedStyle(hero, "::before");
+
+    return before.backgroundImage;
+  });
+
+  expect(heroBackground).toContain("/images/hero/hero2-mobile.webp");
+  expect(enterpriseMotionRequests).toEqual([]);
+});
+
 test("trust badges use local badge assets", async ({ page }) => {
   await page.goto("/");
 
@@ -86,6 +110,9 @@ test("hero agent panel cycles live metrics and review alerts", async ({
     throw new Error("Hero console motion contract is missing pipeline slots.");
   }
 
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
   await page.goto("/");
   await page.evaluate(() => {
     const target = window as Window & {
@@ -930,6 +957,30 @@ test("legal pages describe external google calendar booking", async ({
     page.getByText("kein Google-Calendar-Button-Skript mehr automatisch"),
   ).toBeVisible();
   await expect(page.getByText("Google Analytics 4")).toBeVisible();
+});
+
+test("footer keeps stackwerkhaus design credit", async ({ page }) => {
+  await page.goto("/");
+
+  const footer = page.locator("footer");
+  await expect(
+    footer.getByRole("link", { name: "Design by Stackwerkhaus", exact: true }),
+  ).toHaveAttribute("href", "https://stackwerkhaus.de/");
+  await expect(footer.getByRole("link", { name: "Zynapse.eu" })).toHaveCount(0);
+});
+
+test("impressum links stackwerkhaus and zynapse as codariq brands", async ({
+  page,
+}) => {
+  await page.goto("/impressum");
+
+  await expect(page.getByText("Marken von Codariq")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Stackwerkhaus", exact: true }),
+  ).toHaveAttribute("href", "https://stackwerkhaus.de/");
+  await expect(
+    page.getByRole("link", { name: "Zynapse.eu", exact: true }),
+  ).toHaveAttribute("href", "https://zynapse.eu/");
 });
 
 test("featured benefits system card has a subtle animated highlight", async ({

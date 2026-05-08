@@ -14,6 +14,9 @@ export interface Props {
     tags?: string[];
   };
   forceNavSolid?: boolean;
+  preloadHeroImage?: boolean;
+  heroPreloadImage?: string;
+  heroMobilePreloadImage?: string;
 }
 
 const {
@@ -23,6 +26,9 @@ const {
   ogImage,
   article,
   forceNavSolid: requestedForceNavSolid = false,
+  preloadHeroImage = false,
+  heroPreloadImage = "/images/hero/hero2.webp",
+  heroMobilePreloadImage = "/images/hero/hero2-mobile.webp",
 } = Astro.props;
 // Normalize canonical URL: remove trailing slashes, .html extension, and query params
 let pathname = Astro.url.pathname;
@@ -81,17 +87,13 @@ const articleSchema = isArticle
     }
   : null;
 const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
+const ccm19ScriptSrc =
+  "https://cloud.ccm19.de/app.js?apiKey=ca9c0009a731e6e5562d8332ea527ef38cb98c8bb9cce3c1&domain=69fe4855081b12d33000aec2";
 ---
 
 <!doctype html>
 <html lang="de" class="scroll-smooth bg-[#f7fafc]">
   <head>
-    <!-- CCM19 Consent Management -->
-    <script
-      is:inline
-      src="https://cloud.ccm19.de/app.js?apiKey=ca9c0009a731e6e5562d8332ea527ef38cb98c8bb9cce3c1&domain=69fe4855081b12d33000aec2"
-      referrerpolicy="origin"></script>
-
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -204,6 +206,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://cloud.ccm19.de" crossorigin />
 
     <!-- Fonts -->
     <link
@@ -213,6 +216,28 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       type="font/woff2"
       crossorigin="anonymous"
     />
+    {
+      preloadHeroImage && (
+        <>
+          <link
+            rel="preload"
+            href={heroMobilePreloadImage}
+            as="image"
+            type="image/webp"
+            media="(max-width: 720px)"
+            fetchpriority="high"
+          />
+          <link
+            rel="preload"
+            href={heroPreloadImage}
+            as="image"
+            type="image/webp"
+            media="(min-width: 721px)"
+            fetchpriority="high"
+          />
+        </>
+      )
+    }
 
     <!-- Global Styles -->
     <style>
@@ -744,8 +769,10 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 id="nav-logo"
                 src="/images/logos/codariqLogo1.svg"
                 alt="Codariq"
+                width="319"
+                height="87"
                 class="h-7 sm:h-8 w-auto"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
             </a>
@@ -859,7 +886,6 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             <a
               href="/#final-cta"
               class="bg-[#0b1220] text-white px-3 sm:px-4 md:px-6 py-2 rounded-md hover:bg-[#14332f] transition-colors duration-200 font-black text-xs sm:text-sm md:text-base cta-button"
-              aria-label="Strategiegespräch vereinbaren"
             >
               <span class="hidden sm:inline">Termin buchen</span>
               <span class="sm:hidden">Kontakt</span>
@@ -919,6 +945,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                 <img
                   src="/images/logos/codariqLogo1.svg"
                   alt="Codariq"
+                  width="319"
+                  height="87"
                   class="h-8 md:h-10 w-auto mb-4 footer-logo"
                   loading="lazy"
                   decoding="async"
@@ -944,6 +972,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                       src="/images/logos/LinkedIn_icon.svg"
                       alt=""
                       aria-hidden="true"
+                      width="72"
+                      height="72"
                       class="w-6 h-6"
                     />
                   </a>
@@ -960,6 +990,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                       src="/images/logos/Instagram_logo_2016.svg"
                       alt=""
                       aria-hidden="true"
+                      width="132"
+                      height="132"
                       class="w-6 h-6"
                     />
                   </a>
@@ -977,6 +1009,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                   <img
                     src="/images/badges/climate-friendly.webp"
                     alt="Klimafreundlich"
+                    width="128"
+                    height="200"
                     class="h-15 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
@@ -984,6 +1018,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                   <img
                     src="/images/badges/gdpr-ready.webp"
                     alt="DSGVO konform"
+                    width="128"
+                    height="200"
                     class="h-10 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
@@ -991,6 +1027,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                   <img
                     src="/images/badges/remote-only.webp"
                     alt="Remote verfügbar"
+                    width="128"
+                    height="200"
                     class="h-10 md:h-17 w-auto"
                     loading="lazy"
                     decoding="async"
@@ -1015,6 +1053,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     <img
                       src="/images/logos/google.svg"
                       alt="Google"
+                      width="800"
+                      height="800"
                       class="h-6 md:h-8 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
@@ -1030,6 +1070,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     <img
                       src="/images/logos/ibm.svg"
                       alt="IBM"
+                      width="1000"
+                      height="400"
                       class="h-8 md:h-10 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
@@ -1045,6 +1087,8 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
                     <img
                       src="/images/logos/openai.svg"
                       alt="OpenAI"
+                      width="1181"
+                      height="339"
                       class="h-6 md:h-8 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
                       loading="lazy"
                       decoding="async"
@@ -1251,7 +1295,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             </div>
           </div>
           <div
-            class="border-t border-gray-600 mt-6 pt-6 text-center text-gray-400 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
+            class="border-t border-gray-600 mt-6 pt-6 text-center text-gray-300 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
           >
             <p>&copy; 2025 Codariq. Alle Rechte vorbehalten.</p>
             <a
@@ -1302,16 +1346,15 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             footerNewsletterErrors &&
             footerNewsletterErrorList
           ) {
-            // Import form helpers dynamically
-            const {
-              showFieldError,
-              hideFieldError,
-              setButtonLoading,
-              submitFormData,
-            } = await import("../utils/formHelpers.ts");
-
             footerNewsletterForm.addEventListener("submit", async function (e) {
               e.preventDefault();
+
+              const {
+                showFieldError,
+                hideFieldError,
+                setButtonLoading,
+                submitFormData,
+              } = await import("../utils/formHelpers.ts");
 
               // Reset error states
               if (footerNewsletterErrors)
@@ -1499,10 +1542,44 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             await import("../scripts/scrollEffects.ts");
           initAllScrollEffects();
 
-          const { initEnterpriseMotion } =
-            await import("../scripts/enterpriseMotion.ts");
-          initEnterpriseMotion();
+          const canRunEnterpriseMotion =
+            window.matchMedia("(min-width: 768px)").matches &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+          if (canRunEnterpriseMotion) {
+            const { initEnterpriseMotion } =
+              await import("../scripts/enterpriseMotion.ts");
+            initEnterpriseMotion();
+          }
         });
+      </script>
+      <script is:inline define:vars={{ ccm19ScriptSrc }}>
+        (() => {
+          const loadCcm19 = () => {
+            if (document.querySelector("script[data-codariq-ccm19]")) return;
+
+            const script = document.createElement("script");
+            script.src = ccm19ScriptSrc;
+            script.referrerPolicy = "origin";
+            script.dataset.codariqCcm19 = "true";
+            document.head.append(script);
+          };
+
+          const scheduleCcm19 = () => {
+            if ("requestIdleCallback" in window) {
+              window.requestIdleCallback(loadCcm19, { timeout: 2800 });
+              return;
+            }
+
+            window.setTimeout(loadCcm19, 1200);
+          };
+
+          if (document.readyState === "complete") {
+            scheduleCcm19();
+          } else {
+            window.addEventListener("load", scheduleCcm19, { once: true });
+          }
+        })();
       </script>
     </div>
   </body>

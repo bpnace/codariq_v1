@@ -34,6 +34,10 @@ const allowedHeroImages = new Set([
 const safeHeroImage = allowedHeroImages.has(heroImage)
   ? heroImage
   : "/images/hero/hero2.webp";
+const safeMobileHeroImage =
+  safeHeroImage === "/images/hero/hero2.webp"
+    ? "/images/hero/hero2-mobile.webp"
+    : safeHeroImage;
 
 const trustSignals = [
   "Zugriff klar begrenzt",
@@ -49,7 +53,7 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
   id="hero"
   data-enterprise-section
   class="secure-hero"
-  style={`--secure-hero-image: url("${safeHeroImage}");`}
+  style={`--secure-hero-image: url("${safeHeroImage}"); --secure-hero-image-mobile: url("${safeMobileHeroImage}");`}
 >
   <div
     class="secure-hero__ambient secure-hero__ambient--green"
@@ -215,6 +219,7 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
 
 <style>
   .secure-hero {
+    --secure-hero-current-image: var(--secure-hero-image);
     position: relative;
     min-height: 100dvh;
     overflow: hidden;
@@ -247,7 +252,7 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
 
   .secure-hero::before {
     z-index: 0;
-    background-image: var(--secure-hero-image);
+    background-image: var(--secure-hero-current-image);
     background-position: center;
     background-size: cover;
   }
@@ -729,6 +734,10 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
   }
 
   @media (max-width: 1040px) {
+    .secure-hero {
+      --secure-hero-current-image: var(--secure-hero-image-mobile);
+    }
+
     .secure-hero__inner {
       grid-template-columns: 1fr;
       perspective-origin: 50% 48%;
