@@ -1,13 +1,18 @@
 import { expect, test } from "@playwright/test";
 
+type QuizSubmissionPayload = Record<string, unknown> & {
+  answerDetails: unknown[];
+  resultSummary: Record<string, unknown>;
+  emailDraft: Record<string, unknown>;
+};
+
 test("quiz flow completes and shows results", async ({ page }) => {
-  let submittedPayload: Record<string, unknown> | null = null;
+  const submittedPayloads: QuizSubmissionPayload[] = [];
 
   await page.route("**/webhook-proxy.php", async (route) => {
-    submittedPayload = route.request().postDataJSON() as Record<
-      string,
-      unknown
-    >;
+    submittedPayloads.push(
+      route.request().postDataJSON() as QuizSubmissionPayload,
+    );
     await route.fulfill({
       status: 200,
       contentType: "application/json",
@@ -43,13 +48,18 @@ test("quiz flow completes and shows results", async ({ page }) => {
 
   await expect(page.locator("#quiz-result")).toBeVisible();
   await expect(page.locator("#result-level")).not.toHaveText("-");
-  expect(submittedPayload).toMatchObject({
+  const payload = submittedPayloads[0];
+  if (!payload) {
+    throw new Error("Expected quiz submission payload.");
+  }
+
+  expect(payload).toMatchObject({
     source: "codariq_quiz",
     name: "Test Nutzer",
     company: "Codariq Test GmbH",
     email: "test@example.com",
   });
-  expect(submittedPayload?.answerDetails).toEqual(
+  expect(payload.answerDetails).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         id: "q1_task_area",
@@ -60,7 +70,7 @@ test("quiz flow completes and shows results", async ({ page }) => {
       }),
     ]),
   );
-  expect(submittedPayload?.resultSummary).toMatchObject({
+  expect(payload.resultSummary).toMatchObject({
     level: expect.any(String),
     outcomeTitle: expect.any(String),
     auditSignal: expect.stringMatching(/niedrig|mittel|hoch/),
@@ -71,7 +81,7 @@ test("quiz flow completes and shows results", async ({ page }) => {
     },
     recommendations: expect.any(Array),
   });
-  expect(submittedPayload?.emailDraft).toMatchObject({
+  expect(payload.emailDraft).toMatchObject({
     to: "test@example.com",
     subject: expect.stringContaining("Codariq Auswertung"),
     text: expect.stringContaining("Hallo Test"),

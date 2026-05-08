@@ -116,4 +116,12 @@ import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
     mask-image: linear-gradient(to top, #000 0%, transparent 22%);
     -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 22%);
   }
+
+  @media (max-width: 720px) {
+    .home-scroll-blur__layer--mid,
+    .home-scroll-blur__layer--deep {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
 </style>

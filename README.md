@@ -125,7 +125,6 @@ codariq/
 │   │   ├── FAQSchema.astro     # Structured data for FAQ
 │   │   ├── BreadcrumbSchema.astro # Breadcrumb schema
 │   │   ├── BlogInsightsSection.astro         # Blog post previews
-│   │   ├── BlogCTA.astro                    # Blog CTA card
 │   │   ├── BlogConversionSection.astro      # Blog CTA wrapper
 │   │   ├── SeoIntentEntryPointsSection.astro # Homepage SEO entry links
 │   │   ├── SeoLandingPageTemplate.astro     # SEO landing page template

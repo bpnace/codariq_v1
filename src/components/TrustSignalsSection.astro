@@ -5,7 +5,6 @@ export interface Props {
     icon: string;
     description: string;
   }>;
-  showLogos?: boolean;
   className?: string;
 }
 
@@ -26,8 +25,7 @@ const {
     {
       name: "Auditierbar",
       icon: "remote-only",
-      description:
-        "Aktionen, Übergaben und Freigaben bleiben dokumentiert.",
+      description: "Aktionen, Übergaben und Freigaben bleiben dokumentiert.",
     },
   ],
   className = "",
@@ -37,9 +35,9 @@ const normalizeVariant = (icon: string) =>
   icon.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 const iconSources: Record<string, string> = {
-  "gdpr-ready": "https://img.icons8.com/metro/52/security-checked.png",
-  "eu-hosted": "https://img.icons8.com/ios-filled/100/cloud.png",
-  "remote-only": "https://img.icons8.com/ios-filled/100/settings.png",
+  "gdpr-ready": "/images/badges/gdpr-ready.webp",
+  "eu-hosted": "/images/badges/EU-hosted.webp",
+  "remote-only": "/images/badges/remote-only.webp",
 };
 
 const trustBadges = badges.map((badge) => ({

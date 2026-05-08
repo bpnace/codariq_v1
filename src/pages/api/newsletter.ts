@@ -1,4 +1,4 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -7,13 +7,13 @@ export const POST: APIRoute = async ({ request }) => {
     // Server-side: Credentials from environment variables
     const webhookUrl = import.meta.env.WEBHOOK_URL;
     const credentials = btoa(
-      `${import.meta.env.WEBHOOK_USER}:${import.meta.env.WEBHOOK_PASS}`
+      `${import.meta.env.WEBHOOK_USER}:${import.meta.env.WEBHOOK_PASS}`,
     );
 
     const response = await fetch(webhookUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Basic ${credentials}`,
       },
       body: JSON.stringify({
@@ -25,7 +25,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (!response.ok) {
-      return new Response(JSON.stringify({ error: 'Webhook failed' }), {
+      return new Response(JSON.stringify({ error: "Webhook failed" }), {
         status: 500,
       });
     }
@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
     const data = await response.text();
     return new Response(data, { status: 200 });
   } catch {
-    return new Response(JSON.stringify({ error: 'Internal error' }), {
+    return new Response(JSON.stringify({ error: "Internal error" }), {
       status: 500,
     });
   }

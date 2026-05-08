@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'satoshi': ['"Satoshi"', 'system-ui', 'sans-serif'],
-        'headline': ['"Satoshi"', 'system-ui', 'sans-serif'],
+        satoshi: ['"Satoshi"', "system-ui", "sans-serif"],
+        headline: ['"Satoshi"', "system-ui", "sans-serif"],
       },
     },
   },

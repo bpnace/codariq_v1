@@ -30,7 +30,7 @@ export function hideFieldError(fieldId: string): void {
 export function setButtonLoading(
   button: HTMLButtonElement,
   loading: boolean,
-  loadingText: string = "Wird gesendet..."
+  loadingText: string = "Wird gesendet...",
 ): void {
   button.disabled = loading;
   if (loading) {
@@ -46,7 +46,7 @@ export function setButtonLoading(
  */
 export async function submitFormData<T = unknown>(
   url: string,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): Promise<T> {
   const response = await fetch(url, {
     method: "POST",
@@ -89,7 +89,7 @@ export function hideSuccessMessage(messageId: string): void {
 export function resetForm(
   form: HTMLFormElement,
   errorIds: string[] = [],
-  successIds: string[] = []
+  successIds: string[] = [],
 ): void {
   form.reset();
   errorIds.forEach(hideFieldError);

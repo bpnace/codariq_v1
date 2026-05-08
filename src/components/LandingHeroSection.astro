@@ -9,10 +9,6 @@ export interface Props {
   primaryCTALink?: string;
   secondaryCTALink?: string;
   heroImage?: string;
-  primaryTextClass?: string;
-  secondaryTextClass?: string;
-  subtextClass?: string;
-  stats?: Array<{ value: string; label: string }>;
 }
 
 const {
@@ -24,6 +20,15 @@ const {
   secondaryCTALink = "/agent-readiness",
   heroImage = "/images/hero/hero2.webp",
 } = Astro.props;
+
+const allowedHeroImages = new Set([
+  "/images/hero/hero1.webp",
+  "/images/hero/hero2.webp",
+  "/images/hero/hero3.webp",
+]);
+const safeHeroImage = allowedHeroImages.has(heroImage)
+  ? heroImage
+  : "/images/hero/hero2.webp";
 
 const trustSignals = [
   "Zugriff klar begrenzt",
@@ -50,7 +55,7 @@ const briefingItems = [
   id="hero"
   data-enterprise-section
   class="secure-hero"
-  style={`--secure-hero-image: url("${heroImage}");`}
+  style={`--secure-hero-image: url("${safeHeroImage}");`}
 >
   <div
     class="secure-hero__ambient secure-hero__ambient--green"
@@ -167,7 +172,7 @@ const briefingItems = [
             entscheidest nur noch, was rausgeht.
           </p>
         </div>
-        <button type="button">Entscheidung ansehen</button>
+        <a href="/agent-readiness">Entscheidung ansehen</a>
       </div>
 
       <div
@@ -388,11 +393,7 @@ const briefingItems = [
     width: 1rem;
     height: 1rem;
     border-radius: 4px;
-    background: linear-gradient(
-      135deg,
-      #05070c 0%,
-      #111827 100%
-    );
+    background: linear-gradient(135deg, #05070c 0%, #111827 100%);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
@@ -667,7 +668,10 @@ const briefingItems = [
     line-height: 1.45;
   }
 
-  .decision-panel button {
+  .decision-panel a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 2.7rem;
     padding: 0.75rem 0.95rem;
     color: #f8fafc;
@@ -675,6 +679,7 @@ const briefingItems = [
     border: 0;
     border-radius: 8px;
     font-weight: 900;
+    line-height: 1;
     white-space: nowrap;
   }
 

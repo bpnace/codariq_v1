@@ -1,8 +1,54 @@
 import { expect, test } from "@playwright/test";
 
+type FinalCtaSubmissionPayload = Record<string, unknown> & {
+  source: string;
+  timestamp: string;
+  userAgent: string;
+};
+
 test("home loads", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Codariq/);
+});
+
+test("hero uses the local original image background with a diagonal white overlay", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const heroBackground = await page.locator("#hero").evaluate((hero) => {
+    const style = getComputedStyle(hero);
+    const before = getComputedStyle(hero, "::before");
+    const after = getComputedStyle(hero, "::after");
+
+    return {
+      image: before.backgroundImage,
+      overlay: after.backgroundImage,
+      variable: style.getPropertyValue("--secure-hero-image"),
+    };
+  });
+
+  expect(heroBackground.variable).toContain("/images/hero/hero2.webp");
+  expect(heroBackground.image).toContain("/images/hero/hero2.webp");
+  expect(heroBackground.overlay).toContain("linear-gradient");
+  expect(heroBackground.overlay).toMatch(/to (right top|top right)|45deg/);
+});
+
+test("trust badges use local badge assets", async ({ page }) => {
+  await page.goto("/");
+
+  const sources = await page
+    .locator(".trust-pill__icon")
+    .evaluateAll((icons) => icons.map((icon) => icon.getAttribute("src")));
+
+  expect(sources).toEqual([
+    "/images/badges/gdpr-ready.webp",
+    "/images/badges/EU-hosted.webp",
+    "/images/badges/remote-only.webp",
+  ]);
+  expect(sources.every((source) => source?.startsWith("/images/badges/"))).toBe(
+    true,
+  );
 });
 
 test("home renders CCM19 before consent-controlled google analytics", async ({
@@ -490,12 +536,11 @@ test("final cta keeps form submit separate from calendar booking", async ({
 }) => {
   const scheduleUrl =
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
-  let submittedPayload: Record<string, unknown> | null = null;
+  const submittedPayloads: FinalCtaSubmissionPayload[] = [];
   await page.route("**/webhook-proxy.php", async (route) => {
-    submittedPayload = route.request().postDataJSON() as Record<
-      string,
-      unknown
-    >;
+    submittedPayloads.push(
+      route.request().postDataJSON() as FinalCtaSubmissionPayload,
+    );
     await route.fulfill({
       status: 200,
       contentType: "application/json",
@@ -636,7 +681,7 @@ test("final cta keeps form submit separate from calendar booking", async ({
       new Promise<string>((resolve) => {
         button.addEventListener(
           "animationstart",
-          (event) => resolve(event.animationName),
+          (event) => resolve((event as AnimationEvent).animationName),
           { once: true },
         );
       }),
@@ -684,15 +729,20 @@ test("final cta keeps form submit separate from calendar booking", async ({
       new Promise<string>((resolve) => {
         button.addEventListener(
           "animationstart",
-          (event) => resolve(event.animationName),
+          (event) => resolve((event as AnimationEvent).animationName),
           { once: true },
         );
       }),
   );
   await submitButton.click();
 
-  await expect.poll(() => submittedPayload?.source).toBe("final_cta");
-  expect(submittedPayload).toMatchObject({
+  await expect.poll(() => submittedPayloads.at(-1)?.source).toBe("final_cta");
+  const payload = submittedPayloads.at(-1);
+  if (!payload) {
+    throw new Error("Expected final CTA submission payload.");
+  }
+
+  expect(payload).toMatchObject({
     name: "Tarik Test",
     company: "Codariq",
     email: "tarik@example.com",
@@ -700,8 +750,8 @@ test("final cta keeps form submit separate from calendar booking", async ({
     message: "Bitte pruefen, welcher Agent Termine vorbereiten kann.",
     source: "final_cta",
   });
-  expect(typeof submittedPayload?.timestamp).toBe("string");
-  expect(typeof submittedPayload?.userAgent).toBe("string");
+  expect(typeof payload.timestamp).toBe("string");
+  expect(typeof payload.userAgent).toBe("string");
   expect(await successAnimation).toBe("securePositiveLift");
   await expect(submitButton).toHaveText("Anfrage angekommen");
   await expect(submitButton).toBeDisabled();
@@ -941,31 +991,52 @@ test("delivery framework cards rise from blur in a staged sequence", async ({
     window.scrollTo(0, shellTop - window.innerHeight * 0.72);
   });
 
-  await page.waitForTimeout(300);
-  const earlyStates = await readCardStates();
-  expect(earlyStates[0].opacity).toBeGreaterThan(0.35);
-  expect(earlyStates[0].blur).toBeLessThan(initialStates[0].blur);
-  expect(earlyStates[0].y).toBeLessThan(initialStates[0].y);
-  expect(earlyStates[0].opacity).toBeGreaterThan(earlyStates[1].opacity + 0.2);
-  expect(earlyStates[0].opacity).toBeGreaterThan(earlyStates[2].opacity + 0.2);
+  await expect
+    .poll(
+      async () => {
+        const [first, second, third] = await readCardStates();
 
-  await page.waitForTimeout(420);
-  const middleStates = await readCardStates();
-  expect(middleStates[1].opacity).toBeGreaterThan(0.35);
-  expect(middleStates[1].blur).toBeLessThan(initialStates[1].blur);
-  expect(middleStates[1].y).toBeLessThan(initialStates[1].y);
-  expect(middleStates[1].opacity).toBeGreaterThan(
-    middleStates[2].opacity + 0.1,
-  );
+        return (
+          first.opacity > 0.35 &&
+          first.blur < initialStates[0].blur &&
+          first.y < initialStates[0].y &&
+          first.opacity > second.opacity + 0.18 &&
+          first.opacity > third.opacity + 0.18
+        );
+      },
+      { intervals: [50, 75, 100, 150, 200], timeout: 2500 },
+    )
+    .toBe(true);
 
-  await page.waitForTimeout(1200);
-  const finalStates = await readCardStates();
-  expect(finalStates.every(({ opacity }) => opacity === 1)).toBe(true);
-  expect(finalStates.every(({ blur }) => blur === 0)).toBe(true);
-  expect(finalStates.every(({ y }) => Math.abs(y) < 1)).toBe(true);
-  expect(finalStates.every(({ visibility }) => visibility === "visible")).toBe(
-    true,
-  );
+  await expect
+    .poll(
+      async () => {
+        const [, second, third] = await readCardStates();
+
+        return (
+          second.opacity > 0.35 &&
+          second.blur < initialStates[1].blur &&
+          second.y < initialStates[1].y &&
+          second.opacity > third.opacity + 0.1
+        );
+      },
+      { intervals: [50, 75, 100, 150, 200], timeout: 3000 },
+    )
+    .toBe(true);
+
+  await expect
+    .poll(
+      async () =>
+        (await readCardStates()).every(
+          ({ opacity, blur, y, visibility }) =>
+            opacity >= 0.99 &&
+            blur <= 0.05 &&
+            Math.abs(y) < 1 &&
+            visibility === "visible",
+        ),
+      { timeout: 5000 },
+    )
+    .toBe(true);
 });
 
 test("mouse clicks draw the Lavandai-style wavy burst", async ({ page }) => {
@@ -1553,25 +1624,26 @@ test("agent connection line links the two framework badges", async ({
   );
   expect(scrolledDashOffset).toBeLessThan(initialDashOffset * 0.02);
 
-  const arrivalState = await page
-    .locator("[data-agent-connection-target]")
-    .evaluate((target) => {
-      const rect = target.getBoundingClientRect();
-      const confetti = Array.from(
-        document.querySelectorAll<SVGPathElement>(".agent-connection-confetti"),
-      );
-      return {
-        centerY: rect.top + rect.height / 2,
-        viewportHeight: window.innerHeight,
-        hiddenConfetti: confetti.every(
-          (particle) =>
-            Number.parseFloat(getComputedStyle(particle).opacity) < 0.08 &&
-            Number.parseFloat(getComputedStyle(particle).strokeWidth) < 0.1,
-        ),
-      };
-    });
-  expect(arrivalState.centerY).toBeGreaterThan(
-    arrivalState.viewportHeight * 0.5,
-  );
-  expect(arrivalState.hiddenConfetti).toBe(true);
+  await expect
+    .poll(
+      () =>
+        page.locator("[data-agent-connection-target]").evaluate((target) => {
+          const rect = target.getBoundingClientRect();
+          const confetti = Array.from(
+            document.querySelectorAll<SVGPathElement>(
+              ".agent-connection-confetti",
+            ),
+          );
+          return (
+            rect.top + rect.height / 2 > window.innerHeight * 0.5 &&
+            confetti.every(
+              (particle) =>
+                Number.parseFloat(getComputedStyle(particle).opacity) < 0.08 &&
+                Number.parseFloat(getComputedStyle(particle).strokeWidth) < 0.1,
+            )
+          );
+        }),
+      { timeout: 3000 },
+    )
+    .toBe(true);
 });

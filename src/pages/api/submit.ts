@@ -15,7 +15,7 @@ export const POST: APIRoute = async ({ request }) => {
         {
           status: validation.status,
           headers: jsonHeaders,
-        }
+        },
       );
     }
     if (validation.skipped) {
@@ -26,10 +26,13 @@ export const POST: APIRoute = async ({ request }) => {
     }
     const { payload } = validation;
     if (!payload) {
-      return new Response(JSON.stringify({ success: false, error: "Invalid data" }), {
-        status: 400,
-        headers: jsonHeaders,
-      });
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid data" }),
+        {
+          status: 400,
+          headers: jsonHeaders,
+        },
+      );
     }
     const { answers, userInfo, results } = payload;
 
@@ -40,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
         {
           status: 500,
           headers: jsonHeaders,
-        }
+        },
       );
     }
 
@@ -66,10 +69,13 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     void error;
-    return new Response(JSON.stringify({ success: false, error: "Failed to submit quiz" }), {
-      status: 500,
-      headers: jsonHeaders,
-    });
+    return new Response(
+      JSON.stringify({ success: false, error: "Failed to submit quiz" }),
+      {
+        status: 500,
+        headers: jsonHeaders,
+      },
+    );
   }
 };
 

@@ -8,7 +8,6 @@ dist/
 .cursor/
 .cursorrules
 .prettierrc
-.prettierignore
 .playwright*
 .venv/
 *.expect
