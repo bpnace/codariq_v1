@@ -3,9 +3,12 @@ import { build } from "esbuild";
 import path from "node:path";
 import Base from "../layouts/Base.astro";
 
-const pageTitle = "Codariq KI-Check: Bedarf, Agentenpotenzial und Prüfbedarf";
+const pageTitle =
+  "Codariq KI-Check: KI-Integration, Agentenpotenzial und Prüfbedarf";
 const pageDescription =
-  "Prüfe in sechs Fragen, ob KI in deinem Unternehmen sinnvoll ist, ein Agent Arbeit abnehmen kann und ob Datenschutz- oder EU-AI-Act-Fragen vor dem Betrieb geklärt werden müssen.";
+  "Prüfe in sechs Fragen, ob KI-Integration oder ein KI-Agent für E-Mail, Dokumente, CRM, Reporting oder Backoffice sinnvoll ist und welche DSGVO- oder EU-AI-Act-Fragen vorher geklärt werden müssen.";
+const pageKeywords =
+  "KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Integration Prozesse, CRM Integration mit bestehenden Tools, Automatisierungsinitiativen ROI priorisieren, KI Agenten Check, KI Agenten KMU";
 const quizEntry = path.resolve(
   process.cwd(),
   "src/scripts/automatisierungs-check.ts",
@@ -22,7 +25,12 @@ const quizBundle = await build({
 const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 ---
 
-<Base title={pageTitle} description={pageDescription} forceNavSolid={true}>
+<Base
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  forceNavSolid={true}
+>
   <main id="main-content" class="agent-check-page">
     <section
       id="quiz"
@@ -168,6 +176,91 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
           Bitte aktiviere JavaScript, um den Agenten-Check zu nutzen.
         </div>
       </noscript>
+    </section>
+
+    <section
+      id="ki-agenten-check-ergebnis"
+      class="quiz-seo-section"
+      aria-labelledby="quiz-seo-title"
+    >
+      <div class="quiz-seo-inner">
+        <p class="quiz-seo-kicker">Fragen und Outcome</p>
+        <h2 id="quiz-seo-title">
+          KI-Agenten-Check für E-Mail, Dokumente, CRM und Backoffice
+        </h2>
+        <p class="quiz-seo-lead">
+          Der Codariq KI-Check fragt nicht nach Tool-Neugier, sondern nach dem
+          konkreten Arbeitsstau: Postfach und Support vorsortieren, Dokumente
+          und Rechnungen prüfen, Leads und CRM-Follow-ups vorbereiten, Reporting
+          entlasten oder interne Übergaben sauber bündeln.
+        </p>
+
+        <div class="quiz-seo-grid" aria-label="Was der KI-Check prüft">
+          <article class="quiz-seo-card">
+            <h3>Welche Arbeit zuerst automatisiert werden sollte</h3>
+            <p>
+              Die Fragen zeigen, ob ein KI-Agent eher bei E-Mails, Verträgen,
+              Kundenanfragen, Datenpflege, Kalendern oder wiederkehrenden
+              Backoffice-Prozessen helfen kann.
+            </p>
+          </article>
+          <article class="quiz-seo-card">
+            <h3>Wie viel Freigabe und Kontrolle nötig bleibt</h3>
+            <p>
+              Du ordnest ein, ob ein digitaler Assistent nur sortieren, Entwürfe
+              vorbereiten, Daten aktualisieren oder erst nach menschlicher
+              Freigabe handeln sollte.
+            </p>
+          </article>
+          <article class="quiz-seo-card">
+            <h3>Welcher nächste Schritt realistisch ist</h3>
+            <p>
+              Das Ergebnis benennt KI-Bedarf, mögliche Entlastung pro Woche und
+              Prüfbedarf, damit aus einer Idee ein begrenzter Agenten-Workflow
+              mit Rollen, Freigaben und Protokollen wird.
+            </p>
+          </article>
+        </div>
+
+        <p class="quiz-seo-outcome">
+          Wenn du nach
+          <a href="/ki-agenten-kmu">KI-Agenten für kleine Unternehmen</a>,
+          <a href="/automatisierung-selbststaendige"
+            >KI-Automatisierung für Selbstständige</a
+          >,
+          <a href="/automatisierung-kleine-teams"
+            >Backoffice-Automatisierung für kleine Teams</a
+          >,
+          <a href="/dsgvo-ki-agenten">DSGVO-konformen KI-Agenten</a> oder
+          <a href="/openclaw-agenten">EU-AI-Act-fähigen Agenten-Workflows</a>
+          suchst, gibt dir der Check zuerst die bessere Frage: welcher Ablauf ist
+          wiederholbar genug, kontrollierbar genug und wichtig genug, um automatisiert
+          zu werden?
+        </p>
+
+        <div class="quiz-seo-routes" aria-label="Passende nächste Leitfäden">
+          <a href="/blog/ki-integration-5-schritte">
+            <span>KI-Integration</span>
+            <strong>KI in Prozesse integrieren</strong>
+          </a>
+          <a href="/blog/ki-integration-bestehende-systeme">
+            <span>Bestehende Systeme</span>
+            <strong>CRM, E-Mail und Cloud-Tools anbinden</strong>
+          </a>
+          <a href="/blog/automatisierung-roi-maximieren">
+            <span>ROI-Priorisierung</span>
+            <strong>Automatisierungsinitiativen richtig bewerten</strong>
+          </a>
+          <a href="/blog/ki-projekte-retten">
+            <span>Projektrettung</span>
+            <strong>KI-Projekt retten, wenn es im Betrieb hängt</strong>
+          </a>
+          <a href="/blog/ki-mitarbeiterumfragen-automatisieren">
+            <span>KI-Teammanagement</span>
+            <strong>Mitarbeiterumfragen automatisiert auswerten</strong>
+          </a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -1121,6 +1214,141 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       font-weight: 800;
     }
 
+    .quiz-seo-section {
+      width: min(100% - 1.5rem, 82rem);
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 0 clamp(2.8rem, 7vw, 5.5rem);
+    }
+
+    .quiz-seo-inner {
+      display: grid;
+      gap: clamp(1rem, 2.6vw, 1.45rem);
+      border-top: 1px solid var(--check-line);
+      padding-top: clamp(1.3rem, 3vw, 2.1rem);
+    }
+
+    .quiz-seo-kicker {
+      margin: 0;
+      color: var(--check-teal-dark);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .quiz-seo-inner h2 {
+      max-width: 22ch;
+      margin: 0;
+      color: var(--check-ink);
+      font-size: clamp(1.85rem, 3.5vw, 3.6rem);
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 0.96;
+    }
+
+    .quiz-seo-lead,
+    .quiz-seo-outcome {
+      max-width: 62rem;
+      margin: 0;
+      color: #334155;
+      font-size: clamp(1rem, 1.35vw, 1.16rem);
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .quiz-seo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      overflow: hidden;
+      border: 1px solid var(--check-line);
+      border-radius: 8px;
+      background: var(--check-line);
+      gap: 1px;
+    }
+
+    .quiz-seo-card {
+      min-height: 12.4rem;
+      background: #ffffff;
+      padding: clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .quiz-seo-card h3 {
+      max-width: 18ch;
+      margin: 0;
+      color: var(--check-ink);
+      font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.12;
+    }
+
+    .quiz-seo-card p {
+      margin: 0.75rem 0 0;
+      color: var(--check-muted);
+      font-size: 0.96rem;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .quiz-seo-outcome a {
+      color: #0f766e;
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-color: rgba(15, 118, 110, 0.28);
+      text-underline-offset: 0.18em;
+      transition:
+        color 160ms var(--check-ease),
+        text-decoration-color 160ms var(--check-ease);
+    }
+
+    .quiz-seo-outcome a:hover {
+      color: #0b1220;
+      text-decoration-color: rgba(15, 23, 42, 0.45);
+    }
+
+    .quiz-seo-routes {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      overflow: hidden;
+      border: 1px solid var(--check-line);
+      border-radius: 8px;
+      background: var(--check-line);
+      gap: 1px;
+    }
+
+    .quiz-seo-routes a {
+      display: grid;
+      align-content: start;
+      gap: 0.45rem;
+      min-height: 7.2rem;
+      background: #ffffff;
+      padding: 0.95rem;
+      transition:
+        background-color 160ms var(--check-ease),
+        color 160ms var(--check-ease);
+    }
+
+    .quiz-seo-routes a:hover {
+      background: #f8fafc;
+    }
+
+    .quiz-seo-routes span {
+      color: var(--check-teal-dark);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .quiz-seo-routes strong {
+      color: var(--check-ink);
+      font-size: 0.92rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.22;
+    }
+
     .honeypot-field {
       position: absolute;
       left: -9999px;
@@ -1297,6 +1525,18 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
         grid-row: auto;
         max-height: 42svh;
       }
+
+      .quiz-seo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-seo-card {
+        min-height: 0;
+      }
+
+      .quiz-seo-routes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 767px) {
@@ -1415,6 +1655,18 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       .agent-check-button,
       .quiz-button {
         width: 100%;
+      }
+
+      .quiz-seo-section {
+        width: min(100% - 1rem, 82rem);
+      }
+
+      .quiz-seo-routes {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-seo-routes a {
+        min-height: 0;
       }
     }
   </style>

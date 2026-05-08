@@ -152,7 +152,29 @@ const bookingUrl =
               class="secure-calendar-action"
               data-calendar-schedule-url={bookingUrl}
             >
-              <span data-calendar-button-target></span>
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="30 min Potenzialgespräch über Google Calendar buchen"
+              >
+                <svg
+                  class="secure-calendar-action__icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 2v3M17 2v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"></path>
+                  <path d="M8 13h3v3H8zM13 13h3v3h-3z" fill="currentColor"
+                  ></path>
+                </svg>
+                <span>Termin buchen</span>
+              </a>
             </div>
           </div>
 
@@ -423,42 +445,42 @@ const bookingUrl =
       min-width: 0;
     }
 
-    .secure-calendar-action :global(button) {
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 0.55rem !important;
-      min-height: 3rem !important;
-      width: 100% !important;
-      border: 1px solid rgba(15, 118, 110, 0.28) !important;
-      border-radius: 8px !important;
-      background: #ffffff !important;
-      color: #0f766e !important;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08) !important;
-      font-family: inherit !important;
-      font-size: 0.95rem !important;
-      font-weight: 900 !important;
-      white-space: nowrap !important;
+    .secure-calendar-action a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 3rem;
+      width: 100%;
+      border: 1px solid rgba(15, 118, 110, 0.28);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f766e;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
       transition:
         background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
         border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
-        transform 170ms cubic-bezier(0.23, 1, 0.32, 1) !important;
+        transform 170ms cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .secure-calendar-action :global(button:hover) {
-      background: #f0fdfa !important;
-      border-color: rgba(15, 118, 110, 0.42) !important;
+    .secure-calendar-action a:hover {
+      background: #f0fdfa;
+      border-color: rgba(15, 118, 110, 0.42);
     }
 
-    .secure-calendar-action :global(button:active) {
-      transform: translateY(1px) scale(0.985) !important;
+    .secure-calendar-action a:active {
+      transform: translateY(1px) scale(0.985);
     }
 
-    .secure-calendar-action :global(.secure-calendar-action__icon) {
+    .secure-calendar-action__icon {
       width: 1.5rem;
       height: 1.5rem;
       flex: 0 0 auto;
-      object-fit: contain;
     }
 
     .secure-status {
@@ -576,75 +598,9 @@ const bookingUrl =
     }
   </style>
 
-  <script type="module" data-cookieconsent="ignore">
-    function initCalendarSchedulingButton() {
-      const container = document.querySelector(".secure-calendar-action");
-      const target = container?.querySelector("[data-calendar-button-target]");
-
-      if (!(container instanceof HTMLElement)) return;
-      if (!(target instanceof HTMLElement)) return;
-      if (container.dataset.calendarButtonLoaded === "true") return;
-
-      const scheduleUrl = container.dataset.calendarScheduleUrl;
-      if (!scheduleUrl) return;
-
-      const normalizeCalendarButton = () => {
-        container.querySelectorAll("button").forEach((button) => {
-          button.setAttribute("type", "button");
-          if (!button.querySelector(".secure-calendar-action__icon")) {
-            const icon = document.createElement("img");
-            icon.src =
-              "https://img.icons8.com/color/96/google-calendar--v2.png";
-            icon.alt = "";
-            icon.width = 96;
-            icon.height = 96;
-            icon.decoding = "async";
-            icon.setAttribute("aria-hidden", "true");
-            icon.className = "secure-calendar-action__icon";
-            button.prepend(icon);
-          }
-        });
-      };
-
-      if (window.MutationObserver) {
-        const observer = new MutationObserver(normalizeCalendarButton);
-        observer.observe(container, {
-          childList: true,
-          subtree: true,
-        });
-      }
-
-      function loadCalendarButton() {
-        if (container.dataset.calendarButtonLoaded === "true") {
-          return;
-        }
-
-        if (
-          window.calendar &&
-          window.calendar.schedulingButton &&
-          typeof window.calendar.schedulingButton.load === "function"
-        ) {
-          container.dataset.calendarButtonLoaded = "true";
-          window.calendar.schedulingButton.load({
-            url: scheduleUrl,
-            color: "#0B8043",
-            label: "Termin buchen",
-            target,
-          });
-          normalizeCalendarButton();
-          return;
-        }
-
-        window.setTimeout(loadCalendarButton, 120);
-      }
-
-      loadCalendarButton();
-    }
-
+  <script type="module">
     // Handle contact form submission with spam protection
     function initSecureContactForm() {
-      initCalendarSchedulingButton();
-
       const form = document.getElementById("contact-form");
       if (!(form instanceof HTMLFormElement)) return;
       if (form.dataset.secureContactBound === "true") return;

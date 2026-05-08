@@ -1,16 +1,22 @@
 ---
-import Base from '../../layouts/Base.astro';
-import BlogCtaSection from '../../components/BlogCtaSection.astro';
+import Base from "../../layouts/Base.astro";
+import BlogCtaSection from "../../components/BlogCtaSection.astro";
 
 // SEO and meta data
-const title = "ROI von KI-Agenten: So rechnet sich ein kontrollierter Workflow (2026)";
-const description = "Wie du Agenten-Workflows anhand ihres ROI priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration, Freigaben und Beispiele für kleine Teams und KMU.";
-const keywords = "KI Agent ROI, Agenten Workflow ROI, KI Agent Kosten, KI Integration Prozesse, E Mail Triage, Rechnungen vorbereiten, Dokumente verarbeiten, Lead Follow up vorbereiten, Recruiting Agent, KI Agenten für Selbstständige, Agenten Workflows KMU, DSGVO KI Agent";
+const title =
+  "ROI von KI-Agenten: So rechnet sich ein kontrollierter Workflow (2026)";
+const description =
+  "Wie du Automatisierungsinitiativen anhand ihres ROI priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration, Freigaben und Beispiele für kleine Teams und KMU.";
+const keywords =
+  "KI Agent ROI, Agenten Workflow ROI, Automatisierungsinitiativen ROI priorisieren, ROI Priorisierung Automatisierung, KI Agent Kosten, KI Integration Prozesse, E Mail Triage, Rechnungen vorbereiten, Dokumente verarbeiten, Lead Follow up vorbereiten, Recruiting Agent, KI Agenten für Selbstständige, Agenten Workflows KMU, DSGVO KI Agent";
 const author = "Codariq";
 const publishedTime = "2024-12-15T11:00:00+01:00";
-const modifiedTime = "2026-05-05T17:00:00+02:00";
+const modifiedTime = "2026-05-08T22:45:00+02:00";
 const image = "/images/hero/hero2.webp";
-const tags = keywords.split(",").map((tag) => tag.trim()).filter(Boolean);
+const tags = keywords
+  .split(",")
+  .map((tag) => tag.trim())
+  .filter(Boolean);
 ---
 
 <Base
@@ -21,488 +27,751 @@ const tags = keywords.split(",").map((tag) => tag.trim()).filter(Boolean);
   article={{ publishedTime, modifiedTime, author, section: "Blog", tags }}
   forceNavSolid={true}
 >
-
-<!-- Breadcrumb Navigation -->
-<nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
-  <div class="max-w-4xl mx-auto px-4">
-    <ol class="flex items-center space-x-2 text-sm">
-      <li><a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a></li>
-      <li class="text-gray-400">/</li>
-      <li><a href="/#insights" class="text-gray-600 hover:text-orange-600">Insights</a></li>
-      <li class="text-gray-400">/</li>
-      <li class="text-gray-900 font-medium">ROI von Prozessautomatisierung maximieren</li>
-    </ol>
-  </div>
-</nav>
-
-<!-- Article Header -->
-<header class="article-header bg-gradient-to-r from-blue-50 to-blue-100 py-8 sm:py-12">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <div class="flex items-center justify-center gap-2 mb-4">
-        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-          Automatisierung
-        </span>
-        <span class="text-gray-500 text-sm">•</span>
-        <span class="text-gray-600 text-sm">12 Min. Lesezeit</span>
-      </div>
-
-      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-        ROI von Prozessautomatisierung: <span class="text-blue-600">So rechnet es sich</span> für Selbstständige und kleine Teams
-      </h1>
-
-      <p class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
-        {description}
-      </p>
-
-      <div class="flex items-center justify-center gap-4 text-sm text-gray-600">
-        <span class="flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-          </svg>
-          {author}
-        </span>
-        <span>•</span>
-        <time datetime={publishedTime}>
-          {new Date(publishedTime).toLocaleDateString('de-DE', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
-      </div>
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li>
+          <a href="/#insights" class="text-gray-600 hover:text-orange-600"
+            >Insights</a
+          >
+        </li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">
+          ROI von Prozessautomatisierung maximieren
+        </li>
+      </ol>
     </div>
-  </div>
-</header>
+  </nav>
 
-<!-- Article Content -->
-<article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-  <!-- Introduction -->
-  <div class="prose prose-lg prose-blue max-w-none mb-12">
-    <p class="lead text-xl text-gray-700 font-medium">
-      Automatisierung ist kein Spielzeug. Sie lohnt sich dann, wenn sie dir jede Woche messbar Zeit zurückgibt und weniger Fehler passieren.
-    </p>
-
-    <p>
-      Viele Selbstständige und kleine Teams starten mit dem falschen Ansatz: zu viele Tools, zu viele Sonderfälle, zu wenig Klarheit. Ergebnis: Es läuft irgendwie, aber niemand vertraut dem Ablauf und am Ende macht man es wieder manuell.
-    </p>
-
-    <p>
-      In diesem Artikel bekommst du eine einfache ROI Logik, mit der du schnell erkennst, ob sich ein Ablauf lohnt. Dazu Beispiele aus typischen Bereichen wie E Mails, Dokumente, Leads und Recruiting.
-    </p>
-  </div>
-
-  <!-- ROI Kurzcheck -->
-  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-12">
-    <h3 class="text-xl font-bold text-gray-900 mb-4">ROI Kurzcheck: Rechnet sich ein Ablauf?</h3>
-
-    <div class="grid md:grid-cols-3 gap-4">
-      <div class="bg-white rounded-lg p-4">
-        <div class="text-sm font-semibold text-gray-900 mb-1">1) Volumen</div>
-        <div class="text-sm text-gray-600">Wie oft passiert es pro Woche?</div>
-      </div>
-      <div class="bg-white rounded-lg p-4">
-        <div class="text-sm font-semibold text-gray-900 mb-1">2) Minuten</div>
-        <div class="text-sm text-gray-600">Wie viele Minuten sparst du pro Fall?</div>
-      </div>
-      <div class="bg-white rounded-lg p-4">
-        <div class="text-sm font-semibold text-gray-900 mb-1">3) Fehlerkosten</div>
-        <div class="text-sm text-gray-600">Was kostet dich ein Fehler oder ein Nachfassen?</div>
-      </div>
-    </div>
-
-    <p class="text-sm text-gray-600 mt-4">
-      Faustformel: <strong>(Fälle pro Woche × Minutenersparnis) ÷ 60 × interner Stundensatz</strong> plus vermiedene Fehlerkosten. Wenn das Ergebnis jeden Monat stabil höher ist als die Umsetzungskosten, ist der Ablauf ein guter Kandidat.
-    </p>
-  </div>
-
-  <!-- Table of Contents -->
-  <div class="bg-gray-50 rounded-xl p-6 mb-12">
-    <h2 class="text-xl font-bold text-gray-900 mb-4">Inhaltsverzeichnis</h2>
-    <ol class="space-y-2 text-gray-700">
-      <li><a href="#strategie" class="hover:text-blue-600 transition-colors">Die richtige Automatisierungsstrategie entwickeln</a></li>
-      <li><a href="#prozesse" class="hover:text-blue-600 transition-colors">Prozesse mit höchstem ROI-Potenzial identifizieren</a></li>
-      <li><a href="#implementierung" class="hover:text-blue-600 transition-colors">Implementierung mit Fokus auf Wirtschaftlichkeit</a></li>
-      <li><a href="#optimierung" class="hover:text-blue-600 transition-colors">Kontinuierliche Optimierung und Skalierung</a></li>
-      <li><a href="#messung" class="hover:text-blue-600 transition-colors">Erfolge messen und kommunizieren</a></li>
-      <li><a href="#fallstudien" class="hover:text-blue-600 transition-colors">Praxisbeispiele aus deutschen Unternehmen</a></li>
-    </ol>
-  </div>
-
-  <!-- Strategy Section -->
-  <section id="strategie" class="mb-16">
-    <div class="flex items-center gap-4 mb-6">
-      <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-        <span class="text-blue-600 font-bold text-lg">1</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Die richtige Automatisierungsstrategie entwickeln</h2>
-    </div>
-
-    <div class="prose prose-lg prose-blue max-w-none mb-8">
-      <p>
-        Nicht jeder Ablauf lohnt sich gleich. Der beste Startpunkt ist meist dort, wo du heute oft kopierst, nachfasst oder Informationen zwischen Tools hin und her trägst. Wenn du einen klaren Einstieg willst, schau dir auch unseren <a href="/blog/ki-integration-5-schritte" class="text-blue-600 hover:text-blue-700 underline">Leitfaden zum Start</a> an.
-      </p>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">ROI-Priorisierungsmatrix erstellen</h3>
-      <p>
-        Die Kernfrage lautet: Wie sollten Automatisierungsinitiativen anhand ihres ROI priorisiert werden? Entwickle dafür eine Matrix, die folgende Faktoren berücksichtigt:
-      </p>
-      <ul>
-        <li><strong>Automatisierungsgrad:</strong> Wie viel Prozent der Aufgabe kannst du automatisieren?</li>
-        <li><strong>Häufigkeit:</strong> Wie oft machst du den Ablauf?</li>
-        <li><strong>Komplexität:</strong> Wie aufwendig ist die Umsetzung?</li>
-        <li><strong>Business Impact:</strong> Wie spürbar ist die Entlastung?</li>
-      </ul>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Kosten Nutzen sauber rechnen</h3>
-      <p>
-        Rechne nicht nur die direkten Kosten, sondern auch die indirekten Vorteile:
-      </p>
-      <ul>
-        <li><strong>Direkte Einsparungen:</strong> Zeitersparnis und weniger manuelle Arbeit</li>
-        <li><strong>Indirekte Vorteile:</strong> Höhere Qualität, weniger Fehler, bessere Kundenzufriedenheit</li>
-        <li><strong>Zeit, die für wichtige Aufgaben frei wird</strong></li>
-        <li><strong>Mehr Volumen, ohne mehr Aufwand</strong></li>
-      </ul>
-      <p>
-        Wenn zusätzlich KI-Integration in bestehende Prozesse nötig ist, bewerte den Aufwand separat. Ein Agent, der Daten nur zusammenfasst, ist meist schneller umzusetzen als ein Workflow, der CRM, Buchhaltung und Kalender zuverlässig verbindet.
-      </p>
-    </div>
-  </section>
-
-  <!-- Process Identification -->
-  <section id="prozesse" class="mb-16">
-    <div class="flex items-center gap-4 mb-6">
-      <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-        <span class="text-green-600 font-bold text-lg">2</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Prozesse mit höchstem ROI-Potenzial identifizieren</h2>
-    </div>
-
-    <div class="prose prose-lg prose-blue max-w-none mb-8">
-      <p>
-        Nicht alle Prozesse sind gleichermaßen automatisierungsfreundlich. Konzentrieren Sie sich auf diejenigen, die den höchsten ROI versprechen und gleichzeitig technisch umsetzbar sind.
-      </p>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Die 5 besten Automatisierungskandidaten</h3>
-
-      <div class="grid md:grid-cols-1 gap-6 mb-8">
-        <div class="bg-white border border-gray-200 rounded-lg p-6">
-          <h4 class="font-semibold text-gray-900 mb-3">📩 Postfach und Anfragen</h4>
-          <p class="text-gray-700 text-sm mb-3">Sortieren, priorisieren, Antwortentwürfe, Übergabe an CRM oder Helpdesk</p>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-green-600 font-medium">ROI-Hebel: Hoch</span>
-            <span class="text-gray-500">Komplexität: Mittel</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-lg p-6">
-          <h4 class="font-semibold text-gray-900 mb-3">🧾 Dokumente und Rechnungen</h4>
-          <p class="text-gray-700 text-sm mb-3">Ablage, Benennung, Daten übernehmen, Rückfragen automatisch vorbereiten</p>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-green-600 font-medium">ROI-Hebel: Sehr hoch</span>
-            <span class="text-gray-500">Komplexität: Niedrig</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-lg p-6">
-          <h4 class="font-semibold text-gray-900 mb-3">🎯 Leads und Follow up</h4>
-          <p class="text-gray-700 text-sm mb-3">Anreicherung, Nachfassen, Terminlink, nächste Schritte ohne manuelles Nachhalten</p>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-green-600 font-medium">ROI-Hebel: Mittel bis hoch</span>
-            <span class="text-gray-500">Komplexität: Hoch</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-lg p-6">
-          <h4 class="font-semibold text-gray-900 mb-3">🗓️ Termine und Übergaben</h4>
-          <p class="text-gray-700 text-sm mb-3">Kalender, Erinnerungen, Aufgaben und Übergaben zwischen Tools</p>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-green-600 font-medium">ROI-Hebel: Hoch</span>
-            <span class="text-gray-500">Komplexität: Mittel-Hoch</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-lg p-6">
-          <h4 class="font-semibold text-gray-900 mb-3">🧑‍💻 Recruiting und Onboarding</h4>
-          <p class="text-gray-700 text-sm mb-3">Vorsortieren, Terminabstimmung, Updates, Checklisten und Dokumente</p>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-green-600 font-medium">ROI-Hebel: Mittel</span>
-            <span class="text-gray-500">Komplexität: Mittel</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Implementation -->
-  <section id="implementierung" class="mb-16">
-    <div class="flex items-center gap-4 mb-6">
-      <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-        <span class="text-purple-600 font-bold text-lg">3</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Implementierung mit Fokus auf Wirtschaftlichkeit</h2>
-    </div>
-
-    <div class="prose prose-lg prose-blue max-w-none mb-8">
-      <p>
-        Eine erfolgreiche Automatisierung zeichnet sich dadurch aus, dass sie nicht nur technisch funktioniert, sondern auch wirtschaftlich sinnvoll ist. Hier sind die wichtigsten Erfolgsfaktoren.
-      </p>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Klein starten, sauber bauen</h3>
-      <p>
-        Statt monatelanger Entwicklungsprojekte:
-      </p>
-      <ul>
-        <li><strong>Starte mit der einfachsten Version, die wirklich genutzt wird</strong></li>
-        <li><strong>Verbessere Schritt für Schritt mit echten Fällen aus deinem Alltag</strong></li>
-        <li><strong>Setze auf schnelle Entlastung, damit der Ablauf direkt Vertrauen gewinnt</strong></li>
-        <li><strong>Halte Sonderfälle im Blick, damit nichts verloren geht</strong></li>
-      </ul>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Change Management integrieren</h3>
-      <p>
-        Technik allein reicht nicht. Der Ablauf muss zu deinem Alltag passen, sonst wird er umgangen.
-      </p>
-      <ul>
-        <li><strong>Frühzeitige Kommunikation:</strong> Transparente Informationen über Veränderungen</li>
-        <li><strong>Schulungsprogramme:</strong> Qualifizierung für neue Arbeitsweisen</li>
-        <li><strong>Feedback-Schleifen:</strong> Regelmäßige Abfragen zur Akzeptanz</li>
-        <li><strong>Erfolgsgeschichten:</strong> Positive Beispiele teilen</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Optimization -->
-  <section id="optimierung" class="mb-16">
-    <div class="flex items-center gap-4 mb-6">
-      <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-        <span class="text-red-600 font-bold text-lg">4</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Kontinuierliche Optimierung und Skalierung</h2>
-    </div>
-
-    <div class="prose prose-lg prose-blue max-w-none mb-8">
-      <p>
-        Automatisierung ist kein einmaliges Projekt, sondern ein kontinuierlicher Prozess der Verbesserung und Erweiterung.
-      </p>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Performance Monitoring etablieren</h3>
-      <p>
-        Messen Sie kontinuierlich die Leistung Ihrer Automatisierungen:
-      </p>
-      <ul>
-        <li><strong>Durchlaufzeiten:</strong> Wie schnell werden Prozesse bearbeitet?</li>
-        <li><strong>Fehlerquoten:</strong> Wie hoch ist die Qualität der Ergebnisse?</li>
-        <li><strong>Kosteneffizienz:</strong> Welche Einsparungen werden erzielt?</li>
-        <li><strong>Nutzerzufriedenheit:</strong> Wie gut kommen die Lösungen an?</li>
-      </ul>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Skalierung planen</h3>
-      <p>
-        Vom ersten Ablauf zur verlässlichen Routine:
-      </p>
-      <ul>
-        <li><strong>Standardisierung:</strong> Einheitliche Prozesse und Technologien</li>
-        <li><strong>Integration:</strong> Nahtlose Anbindung an bestehende Systeme</li>
-        <li><strong>Governance:</strong> Klare Regeln für den Einsatz</li>
-        <li><strong>Kompetenzaufbau:</strong> Wissen intern multiplizieren</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Measurement -->
-  <section id="messung" class="mb-16">
-    <div class="flex items-center gap-4 mb-6">
-      <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-        <span class="text-indigo-600 font-bold text-lg">5</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Erfolge messen und kommunizieren</h2>
-    </div>
-
-    <div class="prose prose-lg prose-blue max-w-none mb-8">
-      <p>
-        Was nicht gemessen wird, kann nicht optimiert werden. Etablieren Sie ein systematisches Monitoring Ihrer Automatisierungsprojekte.
-      </p>
-
-      <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Wichtige KPIs definieren</h3>
-      <div class="grid md:grid-cols-2 gap-6 mb-8">
-        <div>
-          <h4 class="font-semibold text-gray-900 mb-3">📈 Quantitative KPIs</h4>
-          <ul class="space-y-2 text-sm">
-            <li><strong>ROI:</strong> Return on Investment in Prozent</li>
-            <li><strong>Cost Savings:</strong> Direkte Kosteneinsparungen</li>
-            <li><strong>Time Savings:</strong> Zeitersparnis in Stunden/Woche</li>
-            <li><strong>Error Reduction:</strong> Fehlerreduzierung in Prozent</li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold text-gray-900 mb-3">🎯 Qualitative KPIs</h4>
-          <ul class="space-y-2 text-sm">
-            <li><strong>User Satisfaction:</strong> Nutzerzufriedenheit</li>
-            <li><strong>Process Quality:</strong> Prozessqualität</li>
-            <li><strong>Scalability:</strong> Skalierbarkeit</li>
-            <li><strong>Innovation Impact:</strong> Innovationsförderung</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Praxisbeispiele -->
-  <section id="fallstudien" class="mb-16">
-    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Praxisbeispiele, die zu kleinen Teams passen</h2>
-
-    <div class="grid md:grid-cols-1 gap-8">
-      <div class="bg-white border border-gray-200 rounded-xl p-8">
-        <h3 class="font-semibold text-gray-900 mb-2">Beispiel 1: Selbstständige Recruiterin</h3>
-        <p class="text-gray-600 text-sm mb-6">Bewerbungen, Terminabstimmungen und Status Updates ohne manuelles Nachhalten</p>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-3">Vorher</h4>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li>• CVs aus mehreren Quellen, alles manuell sortiert</li>
-              <li>• Termine per Ping Pong in E Mails</li>
-              <li>• Kandidaten fragen nach dem Status</li>
-              <li>• Notizen und Aufgaben sind verteilt</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-3">Nachher</h4>
-            <ul class="space-y-2 text-sm text-green-600">
-              <li>• Vorsortierung nach klaren Kriterien</li>
-              <li>• Terminvorschläge und Erinnerungen automatisch</li>
-              <li>• Status Updates laufen verlässlich raus</li>
-              <li>• Alles landet in einem sauberen Ablauf</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-6 pt-6 border-t border-gray-200">
-          <p class="text-sm text-gray-700">
-            ROI Logik: Viele kleine Zeitfresser fallen weg. Wenn du pro Woche mehrere Stunden sparst, rechnet sich der Ablauf oft sehr schnell.
-          </p>
-        </div>
-      </div>
-
-      <div class="bg-white border border-gray-200 rounded-xl p-8">
-        <h3 class="font-semibold text-gray-900 mb-2">Beispiel 2: Hausverwaltung mit kleinem Team</h3>
-        <p class="text-gray-600 text-sm mb-6">Dokumente, Rechnungen, Freigaben und Rückfragen sauber in den Griff bekommen</p>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-3">Vorher</h4>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li>• PDFs werden manuell benannt und abgelegt</li>
-              <li>• Daten werden von Hand in Systeme übertragen</li>
-              <li>• Rückfragen ziehen sich</li>
-              <li>• Monatsabschluss ist stressig</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-3">Nachher</h4>
-            <ul class="space-y-2 text-sm text-green-600">
-              <li>• Automatische Ablage und klare Benennung</li>
-              <li>• Vorbefüllte Daten statt Copy Paste</li>
-              <li>• Rückfragen werden vorbereitet statt vergessen</li>
-              <li>• Abschluss wird planbarer</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-6 pt-6 border-t border-gray-200">
-          <p class="text-sm text-gray-700">
-            ROI Logik: Weniger Nachfassen und weniger Fehler sind oft der größte Hebel, nicht nur reine Minutenersparnis.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Conclusion -->
-  <BlogCtaSection
-    accent="blue"
-    title="Lass uns deinen ROI in 30 Minuten grob durchrechnen"
-    buttonText="Termin anfragen"
+  <!-- Article Header -->
+  <header
+    class="article-header bg-gradient-to-r from-blue-50 to-blue-100 py-8 sm:py-12"
   >
-      <p>
-        Der beste ROI entsteht fast immer durch einen klaren Startpunkt und einen Ablauf, dem du vertraust. Wenn du willst, schauen wir kurz auf deinen Alltag und rechnen grob durch, ob sich ein Ablauf lohnt.
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span
+            class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium"
+          >
+            Automatisierung
+          </span>
+          <span class="text-gray-500 text-sm">•</span>
+          <span class="text-gray-600 text-sm">12 Min. Lesezeit</span>
+        </div>
+
+        <h1
+          class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight"
+        >
+          ROI von Prozessautomatisierung: <span class="text-blue-600"
+            >So rechnet es sich</span
+          > für Selbstständige und kleine Teams
+        </h1>
+
+        <p
+          class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6"
+        >
+          {description}
+        </p>
+
+        <div
+          class="flex items-center justify-center gap-4 text-sm text-gray-600"
+        >
+          <span class="flex items-center gap-2">
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              ></path>
+            </svg>
+            {author}
+          </span>
+          <span>•</span>
+          <time datetime={publishedTime}>
+            {
+              new Date(publishedTime).toLocaleDateString("de-DE", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Content -->
+  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Introduction -->
+    <div class="prose prose-lg prose-blue max-w-none mb-12">
+      <p class="lead text-xl text-gray-700 font-medium">
+        Automatisierung ist kein Spielzeug. Sie lohnt sich dann, wenn sie dir
+        jede Woche messbar Zeit zurückgibt und weniger Fehler passieren.
       </p>
 
       <p>
-        Du bekommst danach eine klare Empfehlung: starten, später machen oder lieber lassen. Ohne Tool Gelaber, dafür mit Zahlen, die zu deinem Alltag passen.
+        Viele Selbstständige und kleine Teams starten mit dem falschen Ansatz:
+        zu viele Tools, zu viele Sonderfälle, zu wenig Klarheit. Ergebnis: Es
+        läuft irgendwie, aber niemand vertraut dem Ablauf und am Ende macht man
+        es wieder manuell.
       </p>
-  </BlogCtaSection>
 
-  <!-- Related Articles -->
-  <section class="mt-12 pt-8 border-t border-gray-200 mb-16">
-    <div class="flex items-center mb-8">
-      <a href="/blog" class="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
-        Zurück zu allen Artikeln
-      </a>
+      <p>
+        In diesem Artikel bekommst du eine einfache ROI Logik, mit der du
+        schnell erkennst, ob sich ein Ablauf lohnt. Dazu Beispiele aus typischen
+        Bereichen wie E Mails, Dokumente, Leads und Recruiting.
+      </p>
     </div>
-    <h3 class="text-xl font-bold text-gray-900 mb-6">Verwandte Artikel</h3>
-    <div class="grid md:grid-cols-2 gap-6">
-      <a href="/blog/ki-integration-5-schritte" class="group">
-        <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 h-full flex flex-col">
-          <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded mb-3 inline-block">KI-Strategie</span>
-          <h4 class="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors mb-2 flex-grow">
-            KI-Integration in 5 Schritten
-          </h4>
-          <p class="text-gray-600 text-sm">Wie du KI in Prozesse und bestehende Systeme integrierst, ohne Tool-Chaos zu erzeugen.</p>
-        </div>
-      </a>
 
-      <a href="/blog/ki-teams-vorbereiten" class="group">
-        <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 h-full flex flex-col">
-          <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded mb-3 inline-block">Change Management</span>
-          <h4 class="font-semibold text-gray-900 group-hover:text-green-600 transition-colors mb-2 flex-grow">
-            KI-Teammanagement: Teams auf KI vorbereiten
-          </h4>
-          <p class="text-gray-600 text-sm">Bewährte Strategien für Mitarbeiterschulung und kulturellen Wandel.</p>
+    <!-- ROI Kurzcheck -->
+    <div
+      class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-12"
+    >
+      <h3 class="text-xl font-bold text-gray-900 mb-4">
+        ROI Kurzcheck: Rechnet sich ein Ablauf?
+      </h3>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">1) Volumen</div>
+          <div class="text-sm text-gray-600">
+            Wie oft passiert es pro Woche?
+          </div>
         </div>
-      </a>
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">2) Minuten</div>
+          <div class="text-sm text-gray-600">
+            Wie viele Minuten sparst du pro Fall?
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">
+            3) Fehlerkosten
+          </div>
+          <div class="text-sm text-gray-600">
+            Was kostet dich ein Fehler oder ein Nachfassen?
+          </div>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600 mt-4">
+        Faustformel: <strong
+          >(Fälle pro Woche × Minutenersparnis) ÷ 60 × interner Stundensatz</strong
+        > plus vermiedene Fehlerkosten. Wenn das Ergebnis jeden Monat stabil höher
+        ist als die Umsetzungskosten, ist der Ablauf ein guter Kandidat.
+      </p>
     </div>
-  </section>
 
-</article>
+    <!-- Table of Contents -->
+    <div class="bg-gray-50 rounded-xl p-6 mb-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Inhaltsverzeichnis</h2>
+      <ol class="space-y-2 text-gray-700">
+        <li>
+          <a href="#strategie" class="hover:text-blue-600 transition-colors"
+            >Die richtige Automatisierungsstrategie entwickeln</a
+          >
+        </li>
+        <li>
+          <a href="#prozesse" class="hover:text-blue-600 transition-colors"
+            >Prozesse mit höchstem ROI-Potenzial identifizieren</a
+          >
+        </li>
+        <li>
+          <a
+            href="#implementierung"
+            class="hover:text-blue-600 transition-colors"
+            >Implementierung mit Fokus auf Wirtschaftlichkeit</a
+          >
+        </li>
+        <li>
+          <a href="#optimierung" class="hover:text-blue-600 transition-colors"
+            >Kontinuierliche Optimierung und Skalierung</a
+          >
+        </li>
+        <li>
+          <a href="#messung" class="hover:text-blue-600 transition-colors"
+            >Erfolge messen und kommunizieren</a
+          >
+        </li>
+        <li>
+          <a href="#fallstudien" class="hover:text-blue-600 transition-colors"
+            >Praxisbeispiele aus deutschen Unternehmen</a
+          >
+        </li>
+      </ol>
+    </div>
 
+    <!-- Strategy Section -->
+    <section id="strategie" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-blue-600 font-bold text-lg">1</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Die richtige Automatisierungsstrategie entwickeln
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-blue max-w-none mb-8">
+        <p>
+          Nicht jeder Ablauf lohnt sich gleich. Der beste Startpunkt ist meist
+          dort, wo du heute oft kopierst, nachfasst oder Informationen zwischen
+          Tools hin und her trägst. Wenn du einen klaren Einstieg willst, schau
+          dir auch unseren <a
+            href="/blog/ki-integration-5-schritte"
+            class="text-blue-600 hover:text-blue-700 underline"
+            >Leitfaden zum Start</a
+          > an.
+        </p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          ROI-Priorisierung von Automatisierungsinitiativen
+        </h3>
+        <p>
+          Die Kernfrage lautet: Wie sollten Automatisierungsinitiativen anhand
+          ihres ROI priorisiert werden? Entwickle dafür eine Matrix, die
+          folgende Faktoren berücksichtigt:
+        </p>
+        <ul>
+          <li>
+            <strong>Automatisierungsgrad:</strong> Wie viel Prozent der Aufgabe kannst
+            du automatisieren?
+          </li>
+          <li><strong>Häufigkeit:</strong> Wie oft machst du den Ablauf?</li>
+          <li>
+            <strong>Komplexität:</strong> Wie aufwendig ist die Umsetzung?
+          </li>
+          <li>
+            <strong>Business Impact:</strong> Wie spürbar ist die Entlastung?
+          </li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Kosten Nutzen sauber rechnen
+        </h3>
+        <p>
+          Rechne nicht nur die direkten Kosten, sondern auch die indirekten
+          Vorteile:
+        </p>
+        <ul>
+          <li>
+            <strong>Direkte Einsparungen:</strong> Zeitersparnis und weniger manuelle
+            Arbeit
+          </li>
+          <li>
+            <strong>Indirekte Vorteile:</strong> Höhere Qualität, weniger Fehler,
+            bessere Kundenzufriedenheit
+          </li>
+          <li><strong>Zeit, die für wichtige Aufgaben frei wird</strong></li>
+          <li><strong>Mehr Volumen, ohne mehr Aufwand</strong></li>
+        </ul>
+        <p>
+          Wenn zusätzlich KI-Integration in bestehende Prozesse nötig ist,
+          bewerte den Aufwand separat. Ein Agent, der Daten nur zusammenfasst,
+          ist meist schneller umzusetzen als ein Workflow, der CRM, Buchhaltung
+          und Kalender zuverlässig verbindet.
+        </p>
+      </div>
+    </section>
+
+    <!-- Process Identification -->
+    <section id="prozesse" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-green-600 font-bold text-lg">2</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Prozesse mit höchstem ROI-Potenzial identifizieren
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-blue max-w-none mb-8">
+        <p>
+          Nicht alle Prozesse sind gleichermaßen automatisierungsfreundlich.
+          Konzentrieren Sie sich auf diejenigen, die den höchsten ROI
+          versprechen und gleichzeitig technisch umsetzbar sind.
+        </p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Die 5 besten Automatisierungskandidaten
+        </h3>
+
+        <div class="grid md:grid-cols-1 gap-6 mb-8">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h4 class="font-semibold text-gray-900 mb-3">
+              📩 Postfach und Anfragen
+            </h4>
+            <p class="text-gray-700 text-sm mb-3">
+              Sortieren, priorisieren, Antwortentwürfe, Übergabe an CRM oder
+              Helpdesk
+            </p>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-green-600 font-medium">ROI-Hebel: Hoch</span>
+              <span class="text-gray-500">Komplexität: Mittel</span>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h4 class="font-semibold text-gray-900 mb-3">
+              🧾 Dokumente und Rechnungen
+            </h4>
+            <p class="text-gray-700 text-sm mb-3">
+              Ablage, Benennung, Daten übernehmen, Rückfragen automatisch
+              vorbereiten
+            </p>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-green-600 font-medium"
+                >ROI-Hebel: Sehr hoch</span
+              >
+              <span class="text-gray-500">Komplexität: Niedrig</span>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h4 class="font-semibold text-gray-900 mb-3">
+              🎯 Leads und Follow up
+            </h4>
+            <p class="text-gray-700 text-sm mb-3">
+              Anreicherung, Nachfassen, Terminlink, nächste Schritte ohne
+              manuelles Nachhalten
+            </p>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-green-600 font-medium"
+                >ROI-Hebel: Mittel bis hoch</span
+              >
+              <span class="text-gray-500">Komplexität: Hoch</span>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h4 class="font-semibold text-gray-900 mb-3">
+              🗓️ Termine und Übergaben
+            </h4>
+            <p class="text-gray-700 text-sm mb-3">
+              Kalender, Erinnerungen, Aufgaben und Übergaben zwischen Tools
+            </p>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-green-600 font-medium">ROI-Hebel: Hoch</span>
+              <span class="text-gray-500">Komplexität: Mittel-Hoch</span>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h4 class="font-semibold text-gray-900 mb-3">
+              🧑‍💻 Recruiting und Onboarding
+            </h4>
+            <p class="text-gray-700 text-sm mb-3">
+              Vorsortieren, Terminabstimmung, Updates, Checklisten und Dokumente
+            </p>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-green-600 font-medium">ROI-Hebel: Mittel</span>
+              <span class="text-gray-500">Komplexität: Mittel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation -->
+    <section id="implementierung" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-purple-600 font-bold text-lg">3</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Implementierung mit Fokus auf Wirtschaftlichkeit
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-blue max-w-none mb-8">
+        <p>
+          Eine erfolgreiche Automatisierung zeichnet sich dadurch aus, dass sie
+          nicht nur technisch funktioniert, sondern auch wirtschaftlich sinnvoll
+          ist. Hier sind die wichtigsten Erfolgsfaktoren.
+        </p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Klein starten, sauber bauen
+        </h3>
+        <p>Statt monatelanger Entwicklungsprojekte:</p>
+        <ul>
+          <li>
+            <strong
+              >Starte mit der einfachsten Version, die wirklich genutzt wird</strong
+            >
+          </li>
+          <li>
+            <strong
+              >Verbessere Schritt für Schritt mit echten Fällen aus deinem
+              Alltag</strong
+            >
+          </li>
+          <li>
+            <strong
+              >Setze auf schnelle Entlastung, damit der Ablauf direkt Vertrauen
+              gewinnt</strong
+            >
+          </li>
+          <li>
+            <strong
+              >Halte Sonderfälle im Blick, damit nichts verloren geht</strong
+            >
+          </li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Change Management integrieren
+        </h3>
+        <p>
+          Technik allein reicht nicht. Der Ablauf muss zu deinem Alltag passen,
+          sonst wird er umgangen.
+        </p>
+        <ul>
+          <li>
+            <strong>Frühzeitige Kommunikation:</strong> Transparente Informationen
+            über Veränderungen
+          </li>
+          <li>
+            <strong>Schulungsprogramme:</strong> Qualifizierung für neue Arbeitsweisen
+          </li>
+          <li>
+            <strong>Feedback-Schleifen:</strong> Regelmäßige Abfragen zur Akzeptanz
+          </li>
+          <li>
+            <strong>Erfolgsgeschichten:</strong> Positive Beispiele teilen
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Optimization -->
+    <section id="optimierung" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-red-600 font-bold text-lg">4</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Kontinuierliche Optimierung und Skalierung
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-blue max-w-none mb-8">
+        <p>
+          Automatisierung ist kein einmaliges Projekt, sondern ein
+          kontinuierlicher Prozess der Verbesserung und Erweiterung.
+        </p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Performance Monitoring etablieren
+        </h3>
+        <p>Messen Sie kontinuierlich die Leistung Ihrer Automatisierungen:</p>
+        <ul>
+          <li>
+            <strong>Durchlaufzeiten:</strong> Wie schnell werden Prozesse bearbeitet?
+          </li>
+          <li>
+            <strong>Fehlerquoten:</strong> Wie hoch ist die Qualität der Ergebnisse?
+          </li>
+          <li>
+            <strong>Kosteneffizienz:</strong> Welche Einsparungen werden erzielt?
+          </li>
+          <li>
+            <strong>Nutzerzufriedenheit:</strong> Wie gut kommen die Lösungen an?
+          </li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Skalierung planen
+        </h3>
+        <p>Vom ersten Ablauf zur verlässlichen Routine:</p>
+        <ul>
+          <li>
+            <strong>Standardisierung:</strong> Einheitliche Prozesse und Technologien
+          </li>
+          <li>
+            <strong>Integration:</strong> Nahtlose Anbindung an bestehende Systeme
+          </li>
+          <li><strong>Governance:</strong> Klare Regeln für den Einsatz</li>
+          <li>
+            <strong>Kompetenzaufbau:</strong> Wissen intern multiplizieren
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Measurement -->
+    <section id="messung" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-indigo-600 font-bold text-lg">5</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Erfolge messen und kommunizieren
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-blue max-w-none mb-8">
+        <p>
+          Was nicht gemessen wird, kann nicht optimiert werden. Etablieren Sie
+          ein systematisches Monitoring Ihrer Automatisierungsprojekte.
+        </p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Wichtige KPIs definieren
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-3">
+              📈 Quantitative KPIs
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li><strong>ROI:</strong> Return on Investment in Prozent</li>
+              <li><strong>Cost Savings:</strong> Direkte Kosteneinsparungen</li>
+              <li>
+                <strong>Time Savings:</strong> Zeitersparnis in Stunden/Woche
+              </li>
+              <li>
+                <strong>Error Reduction:</strong> Fehlerreduzierung in Prozent
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-3">
+              🎯 Qualitative KPIs
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li><strong>User Satisfaction:</strong> Nutzerzufriedenheit</li>
+              <li><strong>Process Quality:</strong> Prozessqualität</li>
+              <li><strong>Scalability:</strong> Skalierbarkeit</li>
+              <li><strong>Innovation Impact:</strong> Innovationsförderung</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Praxisbeispiele -->
+    <section id="fallstudien" class="mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
+        Praxisbeispiele, die zu kleinen Teams passen
+      </h2>
+
+      <div class="grid md:grid-cols-1 gap-8">
+        <div class="bg-white border border-gray-200 rounded-xl p-8">
+          <h3 class="font-semibold text-gray-900 mb-2">
+            Beispiel 1: Selbstständige Recruiterin
+          </h3>
+          <p class="text-gray-600 text-sm mb-6">
+            Bewerbungen, Terminabstimmungen und Status Updates ohne manuelles
+            Nachhalten
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Vorher</h4>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li>• CVs aus mehreren Quellen, alles manuell sortiert</li>
+                <li>• Termine per Ping Pong in E Mails</li>
+                <li>• Kandidaten fragen nach dem Status</li>
+                <li>• Notizen und Aufgaben sind verteilt</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Nachher</h4>
+              <ul class="space-y-2 text-sm text-green-600">
+                <li>• Vorsortierung nach klaren Kriterien</li>
+                <li>• Terminvorschläge und Erinnerungen automatisch</li>
+                <li>• Status Updates laufen verlässlich raus</li>
+                <li>• Alles landet in einem sauberen Ablauf</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200">
+            <p class="text-sm text-gray-700">
+              ROI Logik: Viele kleine Zeitfresser fallen weg. Wenn du pro Woche
+              mehrere Stunden sparst, rechnet sich der Ablauf oft sehr schnell.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-8">
+          <h3 class="font-semibold text-gray-900 mb-2">
+            Beispiel 2: Hausverwaltung mit kleinem Team
+          </h3>
+          <p class="text-gray-600 text-sm mb-6">
+            Dokumente, Rechnungen, Freigaben und Rückfragen sauber in den Griff
+            bekommen
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Vorher</h4>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li>• PDFs werden manuell benannt und abgelegt</li>
+                <li>• Daten werden von Hand in Systeme übertragen</li>
+                <li>• Rückfragen ziehen sich</li>
+                <li>• Monatsabschluss ist stressig</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Nachher</h4>
+              <ul class="space-y-2 text-sm text-green-600">
+                <li>• Automatische Ablage und klare Benennung</li>
+                <li>• Vorbefüllte Daten statt Copy Paste</li>
+                <li>• Rückfragen werden vorbereitet statt vergessen</li>
+                <li>• Abschluss wird planbarer</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200">
+            <p class="text-sm text-gray-700">
+              ROI Logik: Weniger Nachfassen und weniger Fehler sind oft der
+              größte Hebel, nicht nur reine Minutenersparnis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conclusion -->
+    <BlogCtaSection
+      accent="blue"
+      title="Lass uns deinen ROI in 30 Minuten grob durchrechnen"
+      buttonText="Termin anfragen"
+    >
+      <p>
+        Der beste ROI entsteht fast immer durch einen klaren Startpunkt und
+        einen Ablauf, dem du vertraust. Wenn du willst, schauen wir kurz auf
+        deinen Alltag und rechnen grob durch, ob sich ein Ablauf lohnt.
+      </p>
+
+      <p>
+        Du bekommst danach eine klare Empfehlung: starten, später machen oder
+        lieber lassen. Ohne Tool Gelaber, dafür mit Zahlen, die zu deinem Alltag
+        passen.
+      </p>
+    </BlogCtaSection>
+
+    <!-- Related Articles -->
+    <section class="mt-12 pt-8 border-t border-gray-200 mb-16">
+      <div class="flex items-center mb-8">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Zurück zu allen Artikeln
+        </a>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Verwandte Artikel</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/blog/ki-integration-5-schritte" class="group">
+          <div
+            class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 h-full flex flex-col"
+          >
+            <span
+              class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded mb-3 inline-block"
+              >KI-Strategie</span
+            >
+            <h4
+              class="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors mb-2 flex-grow"
+            >
+              KI-Integration in 5 Schritten
+            </h4>
+            <p class="text-gray-600 text-sm">
+              Wie du KI in Prozesse und bestehende Systeme integrierst, ohne
+              Tool-Chaos zu erzeugen.
+            </p>
+          </div>
+        </a>
+
+        <a href="/blog/ki-teams-vorbereiten" class="group">
+          <div
+            class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200 h-full flex flex-col"
+          >
+            <span
+              class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded mb-3 inline-block"
+              >Change Management</span
+            >
+            <h4
+              class="font-semibold text-gray-900 group-hover:text-green-600 transition-colors mb-2 flex-grow"
+            >
+              KI-Teammanagement: Teams auf KI vorbereiten
+            </h4>
+            <p class="text-gray-600 text-sm">
+              Bewährte Strategien für Mitarbeiterschulung und kulturellen
+              Wandel.
+            </p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </article>
 </Base>
 
-
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "ROI von Prozessautomatisierung: So rechnet es sich für Selbstständige und kleine Teams (2026)",
-  "description": "Wie du Automatisierung so aufsetzt, dass sie sich wirklich rechnet: klare Rechenlogik, typische Zeitfresser und Beispiele für kleine Teams in DACH.",
-  "image": "/images/hero/hero2.webp",
-  "author": {
-    "@type": "Organization",
-    "name": "Codariq",
-    "url": "https://codariq.de"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Codariq",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/Logo1.svg"
-    }
-  },
-  "datePublished": "2024-12-15T11:00:00+01:00",
-  "dateModified": "2026-05-05T17:00:00+02:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://codariq.de/blog/roi-von-prozessautomatisierung-maximieren"
-  },
-  "keywords": "Prozesse automatisieren, Prozessautomatisierung ROI, Workflow automatisieren, Automatisierung Kosten, E Mail automatisieren, Rechnungen automatisieren, Dokumente automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, Automatisierung für Selbstständige, Prozessautomatisierung KMU, DSGVO konforme Automatisierung",
-  "articleSection": "Automatisierung",
-  "wordCount": "2100"
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ROI von Prozessautomatisierung: So rechnet es sich für Selbstständige und kleine Teams (2026)",
+    "description": "Wie du Automatisierungsinitiativen anhand ihres ROI priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration, Freigaben und Beispiele für kleine Teams und KMU.",
+    "image": "/images/hero/hero2.webp",
+    "author": {
+      "@type": "Organization",
+      "name": "Codariq",
+      "url": "https://codariq.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Codariq",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/Logo1.svg"
+      }
+    },
+    "datePublished": "2024-12-15T11:00:00+01:00",
+    "dateModified": "2026-05-08T22:45:00+02:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://codariq.de/blog/roi-von-prozessautomatisierung-maximieren"
+    },
+    "keywords": "Prozesse automatisieren, Prozessautomatisierung ROI, Workflow automatisieren, Automatisierungsinitiativen ROI priorisieren, ROI Priorisierung Automatisierung, KI Integration Prozesse, Automatisierung Kosten, E Mail automatisieren, Rechnungen automatisieren, Dokumente automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, Automatisierung für Selbstständige, Prozessautomatisierung KMU, DSGVO konforme Automatisierung",
+    "articleSection": "Automatisierung",
+    "wordCount": "2100"
+  }
 </script>

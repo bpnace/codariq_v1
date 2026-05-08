@@ -5,6 +5,23 @@ test("home loads", async ({ page }) => {
   await expect(page).toHaveTitle(/Codariq/);
 });
 
+test("home renders CCM19 before consent-controlled google analytics", async ({
+  page,
+}) => {
+  const response = await page.goto("/");
+  const html = await response?.text();
+
+  expect(html).toBeTruthy();
+  expect(html).toContain("https://cloud.ccm19.de/app.js");
+  expect(html).not.toContain("Cookiebot");
+  expect(html).not.toContain("consent.cookiebot.com");
+  expect(html).toContain("G-PV0P0WH6KY");
+  expect(html).not.toContain("G-6TLXVYD8V2");
+  expect(html?.match(/G-PV0P0WH6KY/g)?.length ?? 0).toBe(2);
+  expect(html).toContain('type="text/x-ccm-loader"');
+  expect(html).toContain("data-ccm-loader-src");
+});
+
 test("hero agent panel cycles live metrics and review alerts", async ({
   page,
 }) => {
@@ -379,7 +396,10 @@ test("testimonial cards blur in with a randomized order", async ({ page }) => {
         return {
           blur: blur ? Number.parseFloat(blur[1]) : 0,
           opacity: Number.parseFloat(style.opacity),
-          order: Number.parseInt(card.dataset.testimonialRevealOrder ?? "-1", 10),
+          order: Number.parseInt(
+            card.dataset.testimonialRevealOrder ?? "-1",
+            10,
+          ),
           visibility: style.visibility,
           y: matrix.m42,
         };
@@ -468,52 +488,6 @@ test("final cta keeps form submit separate from calendar booking", async ({
   const scheduleUrl =
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
   let submittedPayload: Record<string, unknown> | null = null;
-
-  const installCalendarSchedulingMock = () => {
-    const browserWindow = window as unknown as {
-      __calendarSchedulingLoads: Array<{
-        color: string;
-        label: string;
-        url: string;
-      }>;
-      calendar: unknown;
-    };
-
-    browserWindow.__calendarSchedulingLoads = [];
-    browserWindow.calendar = {
-      schedulingButton: {
-        load(options) {
-          browserWindow.__calendarSchedulingLoads.push({
-            url: options.url,
-            color: options.color,
-            label: options.label,
-          });
-          const button = document.createElement("button");
-          button.type = "button";
-          button.textContent = options.label;
-          button.dataset.calendarUrl = options.url;
-          button.className = "calendar-scheduling-button";
-          options.target.replaceWith(button);
-        },
-      },
-    };
-  };
-
-  await page.addInitScript(installCalendarSchedulingMock);
-
-  await page.route(
-    "**/calendar/scheduling-button-script.css",
-    async (route) => {
-      await route.fulfill({ status: 200, contentType: "text/css", body: "" });
-    },
-  );
-  await page.route("**/calendar/scheduling-button-script.js", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/javascript",
-      body: "",
-    });
-  });
   await page.route("**/webhook-proxy.php", async (route) => {
     submittedPayload = route.request().postDataJSON() as Record<
       string,
@@ -621,30 +595,21 @@ test("final cta keeps form submit separate from calendar booking", async ({
     page.locator(
       'link[href="https://calendar.google.com/calendar/scheduling-button-script.css"]',
     ),
-  ).toHaveCount(1);
+  ).toHaveCount(0);
   await expect(
     page.locator(
       'script[src="https://calendar.google.com/calendar/scheduling-button-script.js"]',
     ),
-  ).toHaveCount(1);
+  ).toHaveCount(0);
 
-  const schedulingButton = form.getByRole("button", {
-    name: "Termin buchen",
+  const schedulingButton = form.getByRole("link", {
+    name: "30 min Potenzialgespräch über Google Calendar buchen",
   });
   await expect(schedulingButton).toBeVisible();
-  await expect(schedulingButton).toHaveAttribute("type", "button");
-  await expect(schedulingButton).toHaveAttribute(
-    "data-calendar-url",
-    scheduleUrl,
-  );
+  await expect(schedulingButton).toHaveAttribute("href", scheduleUrl);
+  await expect(schedulingButton).toHaveAttribute("target", "_blank");
   await expect(
-    schedulingButton.locator("img.secure-calendar-action__icon"),
-  ).toHaveAttribute(
-    "src",
-    "https://img.icons8.com/color/96/google-calendar--v2.png",
-  );
-  await expect(
-    schedulingButton.locator("img.secure-calendar-action__icon"),
+    schedulingButton.locator("svg.secure-calendar-action__icon"),
   ).toHaveCSS("width", "24px");
   await expect(schedulingButton).toHaveCSS(
     "background-color",
@@ -655,27 +620,7 @@ test("final cta keeps form submit separate from calendar booking", async ({
   await expect(form.locator(".secure-messages")).toHaveCount(0);
   await expect(
     form.locator('a[href*="calendar.google.com/calendar/appointments"]'),
-  ).toHaveCount(0);
-  await expect
-    .poll(() =>
-      page.evaluate(
-        () =>
-          (
-            window as unknown as {
-              __calendarSchedulingLoads?: Array<{
-                color: string;
-                label: string;
-                url: string;
-              }>;
-            }
-          ).__calendarSchedulingLoads?.[0],
-      ),
-    )
-    .toEqual({
-      color: "#0B8043",
-      label: "Termin buchen",
-      url: scheduleUrl,
-    });
+  ).toHaveCount(1);
 
   await expect(
     form.locator('button[type="submit"]', {
@@ -799,20 +744,20 @@ test("legal pages describe external google calendar booking", async ({
 }) => {
   await page.goto("/datenschutz");
   await expect(
-    page.getByRole("heading", { name: "Datenschutzerklärung" }),
+    page.getByRole("heading", { name: "Datenschutzerklärung", exact: true }),
   ).toBeVisible();
   await expect(
     page.getByText("Terminbuchung über Google Calendar"),
   ).toBeVisible();
   await expect(
-    page.getByText("eingebundenen Terminbutton von Google Calendar"),
+    page.getByText("Die Buchungsseite wird erst geöffnet"),
   ).toBeVisible();
 
   await page.goto("/cookie-richtlinien");
   await expect(
-    page.getByText("eingebundenen Google-Calendar-Button"),
+    page.getByText("kein Google-Calendar-Button-Skript mehr automatisch"),
   ).toBeVisible();
-  await expect(page.getByText("Skript- und Style-Dateien")).toBeVisible();
+  await expect(page.getByText("Google Analytics 4")).toBeVisible();
 });
 
 test("featured benefits system card has a subtle animated highlight", async ({

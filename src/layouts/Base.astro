@@ -86,6 +86,12 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
 <!doctype html>
 <html lang="de" class="scroll-smooth bg-[#f7fafc]">
   <head>
+    <!-- CCM19 Consent Management -->
+    <script
+      is:inline
+      src="https://cloud.ccm19.de/app.js?apiKey=ca9c0009a731e6e5562d8332ea527ef38cb98c8bb9cce3c1&domain=69fe4855081b12d33000aec2"
+      referrerpolicy="origin"></script>
+
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -650,40 +656,62 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
       )
     }
 
-    <!-- Cookiebot Consent Management -->
-    <script
-      id="Cookiebot"
-      src="https://consent.cookiebot.com/uc.js"
-      data-cbid="5b61b27b-4228-425d-8a66-0601f96037a1"
-      data-blockingmode="auto"
-      type="text/javascript"></script>
-
     <!-- Google tag (gtag.js) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+      });
+
+      const updateGoogleAnalyticsConsent = (consentEvent) => {
+        if (!consentEvent || typeof consentEvent !== "object") return;
+
+        const analyticsConsent = Object.entries(consentEvent).find(
+          ([key]) =>
+            key.startsWith("ccm19_") &&
+            /google analytics|ga4|google tag/i.test(key),
+        );
+
+        if (analyticsConsent) {
+          gtag("consent", "update", {
+            analytics_storage: analyticsConsent[1] ? "granted" : "denied",
+          });
+        }
+      };
+
+      const dataLayerPush = window.dataLayer.push.bind(window.dataLayer);
+      window.dataLayer.push = function (...items) {
+        items.forEach(updateGoogleAnalyticsConsent);
+        return dataLayerPush(...items);
+      };
+      window.dataLayer.forEach(updateGoogleAnalyticsConsent);
+    </script>
     <script
       is:inline
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-6TLXVYD8V2"
+      type="text/x-ccm-loader"
+      data-ccm-loader-group="Google Analytics"
+      data-ccm-loader-src="https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY"
       crossorigin="anonymous"></script>
-    <script is:inline crossorigin="anonymous">
+    <script
+      is:inline
+      type="text/x-ccm-loader"
+      data-ccm-loader-group="Google Analytics"
+      crossorigin="anonymous"
+    >
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
 
-      gtag("config", "G-6TLXVYD8V2");
+      gtag("config", "G-PV0P0WH6KY");
     </script>
-
-    <!-- Google Calendar Appointment Scheduling -->
-    <link
-      href="https://calendar.google.com/calendar/scheduling-button-script.css"
-      rel="stylesheet"
-    />
-    <script
-      is:inline
-      data-cookieconsent="ignore"
-      src="https://calendar.google.com/calendar/scheduling-button-script.js"
-      async></script>
   </head>
 
   <body
