@@ -29,24 +29,26 @@
     ]
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.4",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.3.1",
     "gsap": "^3.15.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.6.0",
-    "@playwright/test": "^1.57.0",
+    "@astrojs/sitemap": "^3.7.2",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
     "@testing-library/dom": "^10.4.1",
-    "@typescript-eslint/eslint-plugin": "^8.49.0",
-    "@typescript-eslint/parser": "^8.49.0",
-    "eslint": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
-    "happy-dom": "^20.3.1",
-    "husky": "^8.0.0",
-    "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
+    "globals": "^17.6.0",
+    "happy-dom": "^20.9.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.2",
+    "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
-    "vitest": "^4.0.17"
+    "vitest": "^4.1.5"
   }
 }

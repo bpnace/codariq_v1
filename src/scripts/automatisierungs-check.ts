@@ -93,6 +93,73 @@ const getElement = <T extends HTMLElement>(id: string): T => {
   return element as T;
 };
 
+const quizIconSvg: Record<string, string> = {
+  mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"></path><path d="m4 7 8 6 8-6"></path></svg>',
+  docs: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"></path><path d="M14 3v5h5"></path><path d="M9 13h6"></path><path d="M9 17h4"></path></svg>',
+  crm: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path><path d="M3 21a6 6 0 0 1 12 0"></path><path d="M17 10v6"></path><path d="M14 13h6"></path></svg>',
+  data: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"></path><path d="M7 16V9"></path><path d="M12 16V5"></path><path d="M17 16v-4"></path></svg>',
+  handoff:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h7a4 4 0 0 1 4 4v6"></path><path d="m13 14 3 3 3-3"></path><path d="M5 17h5"></path><path d="m8 14 3 3-3 3"></path></svg>',
+  question:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 9a3 3 0 1 1 4.6 2.5c-1.1.7-1.8 1.3-1.8 2.5"></path><path d="M12 18h.01"></path><circle cx="12" cy="12" r="9"></circle></svg>',
+  daily:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.9 4.9 6.3 6.3"></path><path d="m17.7 17.7 1.4 1.4"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m4.9 19.1 1.4-1.4"></path><path d="m17.7 6.3 1.4-1.4"></path></svg>',
+  repeat:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2l4 4-4 4"></path><path d="M3 11V9a3 3 0 0 1 3-3h15"></path><path d="m7 22-4-4 4-4"></path><path d="M21 13v2a3 3 0 0 1-3 3H3"></path></svg>',
+  calendar:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v15H5z"></path><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M5 10h14"></path><path d="M9 14h.01"></path><path d="M13 14h.01"></path><path d="M17 14h.01"></path></svg>',
+  rare: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12"></path><path d="M6 21h12"></path><path d="M8 3c0 5 8 5 8 10s-8 5-8 8"></path><path d="M16 3c0 5-8 5-8 10s8 5 8 8"></path></svg>',
+  sort: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M7 12h10"></path><path d="M10 18h4"></path></svg>',
+  prepare:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h6"></path><path d="M5 12h8"></path><path d="M5 18h5"></path><path d="m15 17 2 2 4-5"></path></svg>',
+  draft:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4l10-10-4-4L5 15z"></path><path d="m14 6 4 4"></path></svg>',
+  update:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5"></path><path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg>',
+  approval:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v6c0 4.3-2.9 7.4-7 9-4.1-1.6-7-4.7-7-9V6z"></path><path d="m9 12 2 2 4-5"></path></svg>',
+  none: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="m7 17 10-10"></path></svg>',
+  free: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"></path><path d="M18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9z"></path></svg>',
+  rules:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8l1 2h3v15H4V6h3z"></path><path d="M8 12h5"></path><path d="M8 16h3"></path><path d="m14 16 2 2 4-5"></path></svg>',
+  tools:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5 17 4l3 3-2.5 2.5"></path><path d="M4 20l7.5-7.5"></path><path d="M13 5a5 5 0 0 0 6 6L8 22 2 16z"></path></svg>',
+  logs: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"></path><path d="M15 3v4h4"></path><path d="m8 15 2 2 4-5"></path></svg>',
+  time: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v5l3 2"></path></svg>',
+  errors:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v6c0 4.3-2.9 7.4-7 9-4.1-1.6-7-4.7-7-9V6z"></path><path d="m9 12 2 2 4-5"></path></svg>',
+  fast: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 10-13h-7z"></path></svg>',
+  overview:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
+  test: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6"></path><path d="M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 18l-5-9V3"></path><path d="M8 16h8"></path></svg>',
+  customer:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M2 20a6 6 0 0 1 12 0"></path><path d="M17 11a2.5 2.5 0 1 0 0-5"></path><path d="M16 15a5 5 0 0 1 6 5"></path></svg>',
+  finance:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v18H7z"></path><path d="M9 7h6"></path><path d="M9 11h6"></path><path d="M9 15h4"></path><path d="M15 17h.01"></path></svg>',
+  business:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M9 5v14"></path><path d="M15 5v14"></path><path d="M6 9h1"></path><path d="M11 13h2"></path><path d="M17 9h1"></path></svg>',
+  people:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 0 1 4 4c0 3-4 5-4 10"></path><path d="M8 7a4 4 0 0 1 8 0"></path><path d="M8 13c0 3 1.6 6 4 8"></path><path d="M16 13c0 2-.7 4-2 6"></path></svg>',
+};
+
+const createQuizIcon = (
+  iconName: string | undefined,
+  className: string,
+): HTMLSpanElement => {
+  const icon = document.createElement("span");
+  icon.className = className;
+  icon.setAttribute("aria-hidden", "true");
+
+  const svg = iconName ? quizIconSvg[iconName] : undefined;
+  if (svg) {
+    icon.innerHTML = svg;
+  } else {
+    icon.textContent = iconName || "";
+  }
+
+  return icon;
+};
+
 const init = () => {
   const quizQuestions: Array<
     VisualCardStep | IconOptionStep | MultipleChoiceStep
@@ -105,32 +172,32 @@ const init = () => {
       type: "icon_options",
       options: [
         {
-          icon: "Mail",
+          icon: "mail",
           text: "E-Mails, Anfragen oder Support vorsortieren",
           value: "email_requests",
         },
         {
-          icon: "Docs",
+          icon: "docs",
           text: "Dokumente, Rechnungen oder Verträge prüfen",
           value: "documents_invoices",
         },
         {
-          icon: "CRM",
+          icon: "crm",
           text: "Leads, CRM oder Follow-ups vorbereiten",
           value: "crm_leads",
         },
         {
-          icon: "Data",
+          icon: "data",
           text: "Reporting, Listen oder Datenpflege entlasten",
           value: "reporting_data",
         },
         {
-          icon: "Team",
+          icon: "handoff",
           text: "Übergaben, Freigaben oder interne Rückfragen bündeln",
           value: "handoffs",
         },
         {
-          icon: "?",
+          icon: "question",
           text: "Noch unklar. Ich will den passenden Aufgabenraum finden",
           value: "unclear",
         },
@@ -143,15 +210,19 @@ const init = () => {
         "Je häufiger ein Ablauf kommt, desto eher lohnt sich ein kontrollierter Agent statt noch mehr Handarbeit.",
       type: "icon_options",
       options: [
-        { icon: "T", text: "Täglich oder fast täglich", value: "daily" },
+        { icon: "daily", text: "Täglich oder fast täglich", value: "daily" },
         {
-          icon: "W",
+          icon: "repeat",
           text: "Mehrmals pro Woche",
           value: "several_weekly",
         },
-        { icon: "1x", text: "Etwa wöchentlich", value: "weekly" },
-        { icon: "S", text: "Seltener, aber jedes Mal nervig", value: "rarely" },
-        { icon: "?", text: "Schwer einzuschätzen", value: "unknown" },
+        { icon: "calendar", text: "Etwa wöchentlich", value: "weekly" },
+        {
+          icon: "rare",
+          text: "Seltener, aber jedes Mal nervig",
+          value: "rarely",
+        },
+        { icon: "question", text: "Schwer einzuschätzen", value: "unknown" },
       ],
     },
     {
@@ -162,27 +233,27 @@ const init = () => {
       type: "icon_options",
       options: [
         {
-          icon: "1",
+          icon: "sort",
           text: "Nur sortieren, zusammenfassen oder markieren",
           value: "summarize",
         },
         {
-          icon: "2",
+          icon: "prepare",
           text: "Vorschläge und nächste Schritte vorbereiten",
           value: "prepare",
         },
         {
-          icon: "3",
+          icon: "draft",
           text: "Antworten, Notizen oder Dokumente als Entwurf erstellen",
           value: "draft",
         },
         {
-          icon: "4",
+          icon: "update",
           text: "Daten in Tools eintragen oder aktualisieren",
           value: "update_tools",
         },
         {
-          icon: "5",
+          icon: "approval",
           text: "Aktionen nach menschlicher Freigabe ausführen",
           value: "act_after_approval",
         },
@@ -196,24 +267,37 @@ const init = () => {
       type: "multiple_choice",
       maxSelections: 4,
       options: [
-        { text: "E-Mail oder Postfach", value: "email" },
-        { text: "Kundendaten oder Gesprächsverläufe", value: "customer_data" },
+        { icon: "mail", text: "E-Mail oder Postfach", value: "email" },
         {
-          text: "Verträge, Angebote oder interne Dokumente",
+          icon: "customer",
+          text: "Kundendaten oder Gesprächsverläufe",
+          value: "customer_data",
+        },
+        {
+          icon: "docs",
+          text: "Verträge, Angebote, interne Dokumente oder Wissen",
           value: "contracts",
         },
         {
+          icon: "finance",
           text: "Buchhaltung, Rechnungen oder Zahlungsdaten",
           value: "finance",
         },
-        { text: "CRM, Ticketsystem oder Projekttool", value: "business_tools" },
-        { text: "Kalender, Termine oder Aufgabenlisten", value: "calendar" },
         {
-          text: "Internes Wissen oder Prozessdokumentation",
-          value: "internal_knowledge",
+          icon: "business",
+          text: "CRM, Ticketsystem, Projekttool oder Kalender",
+          value: "business_tools",
         },
-        { text: "Personenbezogene oder sensible Daten", value: "people_data" },
-        { text: "Ich bin mir nicht sicher", value: "unknown" },
+        {
+          icon: "people",
+          text: "Personenbezogene oder sensible Daten",
+          value: "people_data",
+        },
+        {
+          icon: "question",
+          text: "Ich bin mir nicht sicher",
+          value: "unknown",
+        },
       ],
     },
     {
@@ -224,24 +308,24 @@ const init = () => {
       type: "icon_options",
       optional: true,
       options: [
-        { icon: "0", text: "Noch gar nicht", value: "none" },
+        { icon: "none", text: "Noch gar nicht", value: "none" },
         {
-          icon: "Frei",
+          icon: "free",
           text: "Einzelne Mitarbeitende nutzen Tools frei",
           value: "employees_free",
         },
         {
-          icon: "Regel",
+          icon: "rules",
           text: "Es gibt Regeln, aber noch keine Prüfung",
           value: "rules_no_review",
         },
         {
-          icon: "Tool",
+          icon: "tools",
           text: "Feste Tools, AVV oder interne Standards sind vorhanden",
           value: "approved_tools",
         },
         {
-          icon: "Log",
+          icon: "logs",
           text: "Produktive KI-Prozesse haben Freigaben und Protokolle",
           value: "logged_processes",
         },
@@ -255,29 +339,29 @@ const init = () => {
       type: "icon_options",
       optional: true,
       options: [
-        { icon: "Zeit", text: "Spürbar Zeit sparen", value: "save_time" },
+        { icon: "time", text: "Spürbar Zeit sparen", value: "save_time" },
         {
-          icon: "OK",
+          icon: "errors",
           text: "Weniger Fehler oder Nacharbeit",
           value: "fewer_errors",
         },
         {
-          icon: "Fix",
+          icon: "fast",
           text: "Schneller auf Anfragen reagieren",
           value: "faster_replies",
         },
         {
-          icon: "Blick",
+          icon: "overview",
           text: "Bessere Übersicht über offene Punkte",
           value: "better_overview",
         },
         {
-          icon: "Regel",
+          icon: "rules",
           text: "Saubere KI-Regeln und Freigaben",
           value: "clean_rules",
         },
         {
-          icon: "Test",
+          icon: "test",
           text: "Einen ersten Agenten begrenzt testen",
           value: "test_agent",
         },
@@ -303,7 +387,7 @@ const init = () => {
 
   const steps: QuizStep[] = [...quizQuestions, ...captureSteps];
   const totalSteps = steps.length;
-  const storageKey = "codariq_quiz_v2";
+  const storageKey = "codariq_quiz_v3";
 
   const state: QuizRunState = {
     currentStep: 0,
@@ -398,9 +482,10 @@ const init = () => {
       media.style.backgroundPosition = "center";
     }
     if (option.icon || option.emoji) {
-      const icon = document.createElement("span");
-      icon.className = "quiz-card-icon";
-      icon.textContent = option.icon ?? option.emoji ?? "";
+      const icon = createQuizIcon(
+        option.icon ?? option.emoji,
+        "quiz-card-icon",
+      );
       media.appendChild(icon);
     } else {
       const text = document.createElement("span");
@@ -436,10 +521,9 @@ const init = () => {
     button.dataset.step = stepId;
     button.setAttribute("aria-pressed", String(isSelected));
 
-    const icon = document.createElement("span");
-    icon.className = "quiz-option-icon";
-    icon.textContent = option.icon || "";
-    button.appendChild(icon);
+    if (option.icon) {
+      button.appendChild(createQuizIcon(option.icon, "quiz-option-icon"));
+    }
 
     const text = document.createElement("span");
     text.className = "quiz-option-text";
@@ -465,6 +549,10 @@ const init = () => {
     indicator.className = "quiz-multi-indicator";
     indicator.textContent = isSelected ? "✓" : "";
     button.appendChild(indicator);
+
+    if (option.icon) {
+      button.appendChild(createQuizIcon(option.icon, "quiz-option-icon"));
+    }
 
     const text = document.createElement("span");
     text.className = "quiz-option-text";
