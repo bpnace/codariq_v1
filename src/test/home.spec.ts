@@ -1,4 +1,9 @@
 import { expect, test } from "@playwright/test";
+import {
+  HERO_CONSOLE_MOTION_VERSION,
+  HERO_CONSOLE_STATES,
+  HERO_CONSOLE_TIMING,
+} from "../lib/heroMotionContract";
 
 type FinalCtaSubmissionPayload = Record<string, unknown> & {
   source: string;
@@ -71,20 +76,81 @@ test("home renders CCM19 before consent-controlled google analytics", async ({
 test("hero agent panel cycles live metrics and review alerts", async ({
   page,
 }) => {
+  const [initialState, firstUpdateState] = HERO_CONSOLE_STATES;
+  if (!initialState || !firstUpdateState?.alert) {
+    throw new Error("Hero console motion contract is missing required states.");
+  }
+  const initialFirstPipeline = initialState.pipeline[0];
+  const firstUpdateFirstPipeline = firstUpdateState.pipeline[0];
+  if (!initialFirstPipeline || !firstUpdateFirstPipeline) {
+    throw new Error("Hero console motion contract is missing pipeline slots.");
+  }
+
   await page.goto("/");
+  await page.evaluate(() => {
+    const target = window as Window & {
+      __heroLayoutShiftObserver?: PerformanceObserver;
+      __heroLayoutShiftScore?: number;
+    };
+    target.__heroLayoutShiftScore = 0;
+    target.__heroLayoutShiftObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        const shift = entry as PerformanceEntry & {
+          hadRecentInput?: boolean;
+          value?: number;
+        };
+        if (!shift.hadRecentInput) {
+          target.__heroLayoutShiftScore =
+            (target.__heroLayoutShiftScore ?? 0) + (shift.value ?? 0);
+        }
+      }
+    });
+    target.__heroLayoutShiftObserver.observe({
+      type: "layout-shift",
+      buffered: true,
+    });
+  });
 
   const consolePanel = page.locator("[data-hero-agent-console]");
   await expect(consolePanel).toHaveCount(1);
+  await expect(consolePanel).toHaveAttribute(
+    "data-hero-motion-contract",
+    HERO_CONSOLE_MOTION_VERSION,
+  );
+  await expect(consolePanel).toHaveAttribute(
+    "data-hero-snapshot",
+    initialState.id,
+  );
   await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
-    "08:15 Uhr",
+    initialState.clock,
   );
   await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
-    "4,6 Std.",
+    initialState.savedTime,
   );
   await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
-    "Anfragen erkannt und priorisiert",
+    initialState.liveCopy,
   );
-  await expect(consolePanel.locator(".handover-stream p")).toHaveCount(3);
+  await expect(consolePanel.locator("[data-hero-live-item]")).toHaveCount(3);
+  await expect(consolePanel.locator("[data-hero-pipeline-card]")).toHaveCount(
+    initialState.pipeline.length,
+  );
+  for (const item of initialState.pipeline) {
+    await expect(
+      consolePanel.locator(
+        `[data-hero-pipeline-card][data-hero-pipeline-slot="${item.slot}"]`,
+      ),
+    ).toHaveCount(1);
+    await expect(
+      consolePanel.locator(
+        `[data-hero-pipeline-value][data-hero-pipeline-slot="${item.slot}"]`,
+      ),
+    ).toHaveText(item.value);
+    await expect(
+      consolePanel.locator(
+        `[data-hero-pipeline-state][data-hero-pipeline-slot="${item.slot}"]`,
+      ),
+    ).toHaveText(item.state);
+  }
   const initialPanelLayout = await consolePanel.evaluate((panel) => {
     if (!(panel instanceof HTMLElement)) {
       throw new Error("LandingHeroSection agent panel is not an HTMLElement.");
@@ -98,16 +164,18 @@ test("hero agent panel cycles live metrics and review alerts", async ({
 
   await page.waitForTimeout(2200);
   await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
-    "08:15 Uhr",
+    initialState.clock,
   );
   await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
-    "4,6 Std.",
+    initialState.savedTime,
   );
   await expect(
-    consolePanel.locator("[data-hero-pipeline-value]").first(),
-  ).toHaveText("23 E-Mails sortiert");
+    consolePanel.locator(
+      `[data-hero-pipeline-value][data-hero-pipeline-slot="${initialFirstPipeline.slot}"]`,
+    ),
+  ).toHaveText(initialFirstPipeline.value);
   await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
-    "Anfragen erkannt und priorisiert",
+    initialState.liveCopy,
   );
   const heldInitialMotion = await consolePanel.evaluate((panel) => {
     const savedTime = panel.querySelector("[data-hero-saved-time]");
@@ -141,14 +209,20 @@ test("hero agent panel cycles live metrics and review alerts", async ({
         )?.trim() ?? "",
       { timeout: 7000 },
     )
-    .toBe("5,1 Std.");
+    .toBe(firstUpdateState.savedTime);
 
   await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
-    "Lead-Kontext ergänzt",
+    firstUpdateState.liveCopy,
   );
   await expect(
-    consolePanel.locator("[data-hero-pipeline-value]").first(),
-  ).toHaveText("31 E-Mails sortiert");
+    consolePanel.locator(
+      `[data-hero-pipeline-value][data-hero-pipeline-slot="${firstUpdateFirstPipeline.slot}"]`,
+    ),
+  ).toHaveText(firstUpdateFirstPipeline.value);
+  await expect(consolePanel).toHaveAttribute(
+    "data-hero-snapshot",
+    firstUpdateState.id,
+  );
 
   const alert = consolePanel.locator("[data-hero-alert]");
   await expect
@@ -206,7 +280,16 @@ test("hero agent panel cycles live metrics and review alerts", async ({
     };
   }, initialPanelLayout);
 
-  expect(panelMotion.alertTitle).toBe("Rabatt-Anfrage prüfen");
+  const layoutShiftScore = await page.evaluate(() => {
+    const target = window as Window & {
+      __heroLayoutShiftObserver?: PerformanceObserver;
+      __heroLayoutShiftScore?: number;
+    };
+    target.__heroLayoutShiftObserver?.disconnect();
+    return target.__heroLayoutShiftScore ?? 0;
+  });
+
+  expect(panelMotion.alertTitle).toBe(firstUpdateState.alert.title);
   expect(panelMotion.alertAnimationOpacity).toBeGreaterThan(0.2);
   expect(panelMotion.alertFitsPanel).toBe(true);
   expect(panelMotion.alertPointerEvents).toBe("none");
@@ -214,6 +297,42 @@ test("hero agent panel cycles live metrics and review alerts", async ({
   expect(panelMotion.layoutHeightDelta).toBeLessThanOrEqual(2);
   expect(panelMotion.scrollHeightDelta).toBeLessThanOrEqual(2);
   expect(panelMotion.statusValueMinWidth).toBeGreaterThan(60);
+  expect(layoutShiftScore).toBeLessThan(0.01);
+});
+
+test("hero motion contract stays static for reduced motion", async ({
+  page,
+}) => {
+  const [initialState] = HERO_CONSOLE_STATES;
+  if (!initialState) {
+    throw new Error("Hero console motion contract is missing initial state.");
+  }
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const consolePanel = page.locator("[data-hero-agent-console]");
+  await expect(consolePanel).toHaveAttribute(
+    "data-hero-motion-contract",
+    HERO_CONSOLE_MOTION_VERSION,
+  );
+  await expect(consolePanel).toHaveAttribute(
+    "data-hero-snapshot",
+    initialState.id,
+  );
+  await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
+    initialState.savedTime,
+  );
+  await page.waitForTimeout(
+    (HERO_CONSOLE_TIMING.initialUpdateHold + 0.7) * 1000,
+  );
+  await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
+    initialState.savedTime,
+  );
+  await expect(consolePanel.locator("[data-hero-alert]")).toHaveAttribute(
+    "aria-hidden",
+    "true",
+  );
 });
 
 test("home keeps a fixed bottom blur gradient over the viewport", async ({

@@ -1,5 +1,10 @@
 ---
 import ArrowRight from "./icons/ArrowRight.astro";
+import {
+  HERO_CONSOLE_INITIAL_STATE,
+  HERO_CONSOLE_MOTION_VERSION,
+  HERO_CONSOLE_STATES,
+} from "../lib/heroMotionContract";
 
 export interface Props {
   title?: string;
@@ -35,20 +40,9 @@ const trustSignals = [
   "Freigaben sauber geregelt",
   "Logs für den Betrieb sichtbar",
 ];
-
-const briefingItems = [
-  { label: "Erledigt", value: "23 E-Mails sortiert", state: "ohne Rückfrage" },
-  {
-    label: "Vorbereitet",
-    value: "5 Antworten als Entwurf",
-    state: "prüfbereit",
-  },
-  {
-    label: "Priorisiert",
-    value: "2 Entscheidungen offen",
-    state: "Chef-Fokus",
-  },
-];
+const initialHeroAlert = HERO_CONSOLE_STATES.find(
+  (state) => state.alert,
+)?.alert;
 ---
 
 <section
@@ -69,7 +63,7 @@ const briefingItems = [
   </div>
 
   <div class="secure-hero__inner">
-    <div class="secure-hero__copy enterprise-reveal">
+    <div class="secure-hero__copy enterprise-reveal" data-hero-entrance>
       <div class="secure-hero__kicker">
         KI-Agenten arbeiten vor, du bleibst Chef.
       </div>
@@ -114,6 +108,9 @@ const briefingItems = [
     <aside
       class="secure-console enterprise-reveal"
       data-hero-agent-console
+      data-hero-motion-contract={HERO_CONSOLE_MOTION_VERSION}
+      data-hero-snapshot={HERO_CONSOLE_INITIAL_STATE.id}
+      data-hero-entrance
       aria-label="Geschäftsführer-Briefing eines KI-Agenten"
     >
       <div class="secure-console__topbar">
@@ -121,15 +118,21 @@ const briefingItems = [
           <span>KI-Agent meldet</span>
           <strong>Morgen-Briefing</strong>
         </div>
-        <p data-hero-clock>08:15 Uhr</p>
+        <p data-hero-clock>{HERO_CONSOLE_INITIAL_STATE.clock}</p>
       </div>
 
-      <div class="secure-console__status">
+      <div class="secure-console__status" data-hero-status-card>
         <div>
           <span>Heute vom Team genommen</span>
-          <strong data-hero-saved-time>4,6 Std.</strong>
+          <strong data-hero-saved-time>
+            {HERO_CONSOLE_INITIAL_STATE.savedTime}
+          </strong>
         </div>
-        <div class="secure-console__ring" aria-hidden="true">
+        <div
+          class="secure-console__ring"
+          data-hero-progress-ring
+          aria-hidden="true"
+        >
           <span></span>
         </div>
       </div>
@@ -140,22 +143,33 @@ const briefingItems = [
         aria-live="polite"
         aria-hidden="true"
       >
-        <span data-hero-alert-label>Freigabe nötig</span>
-        <strong data-hero-alert-title>Rabatt-Anfrage prüfen</strong>
+        <span data-hero-alert-label>
+          {initialHeroAlert?.label}
+        </span>
+        <strong data-hero-alert-title>
+          {initialHeroAlert?.title}
+        </strong>
         <p data-hero-alert-copy>
-          Agent stoppt vor dem Versand und wartet auf deine Entscheidung.
+          {initialHeroAlert?.copy}
         </p>
       </div>
 
       <div class="secure-console__pipeline">
         {
-          briefingItems.map((item, index) => (
-            <article class="pipeline-card" data-hero-pipeline-card>
-              <span>{item.label}</span>
-              <strong data-hero-pipeline-value data-hero-pipeline-index={index}>
+          HERO_CONSOLE_INITIAL_STATE.pipeline.map((item) => (
+            <article
+              class="pipeline-card"
+              data-hero-pipeline-card
+              data-hero-pipeline-slot={item.slot}
+            >
+              <span data-hero-pipeline-label>{item.label}</span>
+              <strong
+                data-hero-pipeline-value
+                data-hero-pipeline-slot={item.slot}
+              >
                 {item.value}
               </strong>
-              <p data-hero-pipeline-state data-hero-pipeline-index={index}>
+              <p data-hero-pipeline-state data-hero-pipeline-slot={item.slot}>
                 {item.state}
               </p>
             </article>
@@ -180,12 +194,20 @@ const briefingItems = [
         aria-label="Vom KI-Agenten übernommene Arbeit"
       >
         <span>Agent hat übernommen</span>
-        <p data-hero-live-row>
-          <strong data-hero-live-source>Posteingang</strong>
-          <span data-hero-live-copy>Anfragen erkannt und priorisiert</span>
+        <p data-hero-live-item data-hero-live-row>
+          <strong data-hero-live-source>
+            {HERO_CONSOLE_INITIAL_STATE.liveSource}
+          </strong>
+          <span data-hero-live-copy>
+            {HERO_CONSOLE_INITIAL_STATE.liveCopy}
+          </span>
         </p>
-        <p><strong>CRM</strong> Kontakte ergänzt und Follow-ups vorbereitet</p>
-        <p><strong>Team</strong> Aufgaben gebündelt statt weitergereicht</p>
+        <p data-hero-live-item>
+          <strong>CRM</strong> Kontakte ergänzt und Follow-ups vorbereitet
+        </p>
+        <p data-hero-live-item>
+          <strong>Team</strong> Aufgaben gebündelt statt weitergereicht
+        </p>
       </div>
     </aside>
   </div>
