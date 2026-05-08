@@ -1,27 +1,32 @@
 ---
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import TrustBar from "../components/TrustBar.astro";
+import LandingHeroSection from "../components/LandingHeroSection.astro";
+import TrustSignalsSection from "../components/TrustSignalsSection.astro";
 import FAQ from "../components/FAQ.astro";
-import FinalCTA from "../components/FinalCTA.astro";
+import LeadCaptureSection from "../components/LeadCaptureSection.astro";
 import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
 import FAQSchema from "../components/FAQSchema.astro";
 
 const stackLevels = [
   {
     title: "n8n-Agent",
-    bestFor: "Ein klarer Workflow mit KI-Schritt, wenigen Tools und schneller Wirkung.",
-    examples: "Postfach sortieren, Leads zusammenfassen, Rechnungen vorbereiten.",
+    bestFor:
+      "Ein klarer Workflow mit KI-Schritt, wenigen Tools und schneller Wirkung.",
+    examples:
+      "Postfach sortieren, Leads zusammenfassen, Rechnungen vorbereiten.",
   },
   {
     title: "Agenten-Workflow",
     bestFor: "Mehrere Schritte, Tool-Zugriffe, Freigaben und Sonderfälle.",
-    examples: "Support-Triage, Reporting, Übergaben zwischen CRM, Kalender und Projekttool.",
+    examples:
+      "Support-Triage, Reporting, Übergaben zwischen CRM, Kalender und Projekttool.",
   },
   {
     title: "OpenClaw-Setup",
-    bestFor: "Dauerhaft laufende Agenten mit Gateway, Kanälen, Modellen, Tools und Betriebskonzept.",
-    examples: "Mehrkanal-Agent, persönlicher Team-Agent, Agenten mit Memory und kontrollierten Tools.",
+    bestFor:
+      "Dauerhaft laufende Agenten mit Gateway, Kanälen, Modellen, Tools und Betriebskonzept.",
+    examples:
+      "Mehrkanal-Agent, persönlicher Team-Agent, Agenten mit Memory und kontrollierten Tools.",
   },
 ];
 
@@ -75,11 +80,13 @@ const faqs = [
   ogImage="/images/hero/hero2.webp"
 >
   <BreadcrumbSchema
-    items={[{ name: "OpenClaw-Agenten", url: "https://codariq.de/openclaw-agenten" }]}
+    items={[
+      { name: "OpenClaw-Agenten", url: "https://codariq.de/openclaw-agenten" },
+    ]}
   />
   <FAQSchema faqs={faqs} />
 
-  <Hero
+  <LandingHeroSection
     title="Vom n8n-Workflow zum stabilen OpenClaw-Agenten."
     subtitle="Wenn ein einfacher Workflow nicht mehr reicht, planen und bauen wir Agenten-Setups mit Gateway, Kanälen, Modellen, Tools, Freigaben und Betriebskonzept. Pragmatisch, kontrolliert und DSGVO-orientiert."
     heroImage="/images/hero/hero2.webp"
@@ -92,30 +99,48 @@ const faqs = [
     subtextClass="text-gray-800"
   />
 
-  <TrustBar />
+  <TrustSignalsSection />
 
   <section id="vergleich" class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="text-center mb-10 sm:mb-12">
-        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3">
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
           Agenten-Reifegrad
         </p>
-        <h2 class="section-title mb-4">Nicht jeder Use Case braucht denselben Stack</h2>
+        <h2 class="section-title mb-4">
+          Nicht jeder Use Case braucht denselben Stack
+        </h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Wir wählen nicht das spannendste Tool, sondern die kleinste Architektur, die zuverlässig funktioniert. So bleibt dein Agent wartbar und bezahlbar.
+          Wir wählen nicht das spannendste Tool, sondern die kleinste
+          Architektur, die zuverlässig funktioniert. So bleibt dein Agent
+          wartbar und bezahlbar.
         </p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        {stackLevels.map((level) => (
-          <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
-            <h3 class="text-xl font-black text-gray-900 mb-3">{level.title}</h3>
-            <p class="text-sm font-bold uppercase tracking-wide text-orange-600 mb-2">Geeignet für</p>
-            <p class="text-gray-700 font-medium leading-relaxed mb-4">{level.bestFor}</p>
-            <p class="text-sm font-bold uppercase tracking-wide text-gray-500 mb-2">Beispiele</p>
-            <p class="text-gray-700 font-medium leading-relaxed">{level.examples}</p>
-          </div>
-        ))}
+        {
+          stackLevels.map((level) => (
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
+              <h3 class="text-xl font-black text-gray-900 mb-3">
+                {level.title}
+              </h3>
+              <p class="text-sm font-bold uppercase tracking-wide text-orange-600 mb-2">
+                Geeignet für
+              </p>
+              <p class="text-gray-700 font-medium leading-relaxed mb-4">
+                {level.bestFor}
+              </p>
+              <p class="text-sm font-bold uppercase tracking-wide text-gray-500 mb-2">
+                Beispiele
+              </p>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {level.examples}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -124,23 +149,30 @@ const faqs = [
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div>
-          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3">
+          <p
+            class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3"
+          >
             OpenClaw-Betrieb
           </p>
           <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
             Ein Agent ist nur so gut wie seine Grenzen.
           </h2>
           <p class="text-white/80 text-lg leading-relaxed">
-            OpenClaw-Setups können mächtig werden, weil Agenten über Kanäle, Tools und Modelle handeln. Genau deshalb planen wir Zugriff, Secrets, Freigaben, Protokolle und Updatefähigkeit von Anfang an mit.
+            OpenClaw-Setups können mächtig werden, weil Agenten über Kanäle,
+            Tools und Modelle handeln. Genau deshalb planen wir Zugriff,
+            Secrets, Freigaben, Protokolle und Updatefähigkeit von Anfang an
+            mit.
           </p>
         </div>
         <ul class="space-y-3">
-          {setupAreas.map((item) => (
-            <li class="flex gap-3 rounded-xl border border-white/15 bg-white/10 p-4">
-              <span class="mt-1 h-5 w-5 flex-none rounded-full bg-orange-400"></span>
-              <span class="text-white/85 font-medium">{item}</span>
-            </li>
-          ))}
+          {
+            setupAreas.map((item) => (
+              <li class="flex gap-3 rounded-xl border border-white/15 bg-white/10 p-4">
+                <span class="mt-1 h-5 w-5 flex-none rounded-full bg-orange-400" />
+                <span class="text-white/85 font-medium">{item}</span>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -148,17 +180,27 @@ const faqs = [
 
   <section class="py-12 sm:py-16 bg-white">
     <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
-      <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6 sm:p-8 md:p-10">
-        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3">
+      <div
+        class="rounded-2xl border border-gray-200 bg-gray-50 p-6 sm:p-8 md:p-10"
+      >
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
           Migration statt Neustart
         </p>
         <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4">
           Bestehende n8n-Workflows bleiben wertvoll.
         </h2>
         <p class="text-gray-700 text-lg leading-relaxed mb-4">
-          Wenn du bereits n8n nutzt, werfen wir nicht alles weg. Wir prüfen, welche Trigger, Datenflüsse und Integrationen stabil sind und welche Teile von einem Agenten mit mehr Kontext, Memory oder Kanal-Anbindung profitieren.
+          Wenn du bereits n8n nutzt, werfen wir nicht alles weg. Wir prüfen,
+          welche Trigger, Datenflüsse und Integrationen stabil sind und welche
+          Teile von einem Agenten mit mehr Kontext, Memory oder Kanal-Anbindung
+          profitieren.
         </p>
-        <a href="/ki-agenten-kmu" class="inline-flex items-center font-bold text-orange-700 hover:text-orange-800">
+        <a
+          href="/ki-agenten-kmu"
+          class="inline-flex items-center font-bold text-orange-700 hover:text-orange-800"
+        >
           Mehr zu KI-Agenten für KMU lesen →
         </a>
       </div>
@@ -171,7 +213,7 @@ const faqs = [
     faqs={faqs}
   />
 
-  <FinalCTA
+  <LeadCaptureSection
     title="Lass uns deinen Agenten-Stack richtig einordnen."
     description="Wir prüfen deinen Use Case, bestehende n8n-Workflows und die Frage, ob ein OpenClaw-Setup bereits sinnvoll ist oder ein kleinerer Agent besser startet."
   />

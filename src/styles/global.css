@@ -62,7 +62,7 @@
   --color-solution-icon-bg: var(--color-neutral-white);
   --color-solution-icon: var(--color-semantic-success);
 
-  /* Process */
+  /* DeliveryProcessSection */
   --color-process-badge-active-from: var(--color-neutral-gray-900);
   --color-process-badge-active-to: var(--color-neutral-gray-800);
   --color-process-bullet: var(--color-brand-light);
@@ -330,7 +330,7 @@ html {
   }
 }
 
-/* ===== Hero Section Styles ===== */
+/* ===== LandingHeroSection Section Styles ===== */
 
 #hero-parallax-container {
   z-index: 1;
@@ -436,7 +436,7 @@ header.nav-scrolled {
   transform: translateZ(0); /* Force GPU layer */
 }
 
-/* Hero section motion preferences */
+/* LandingHeroSection section motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .hero-animate {
     opacity: 1;

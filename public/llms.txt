@@ -1,11 +1,11 @@
-# Codariq - KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU
+# Codariq - KI-Agenten, KI-Integration und KI-Agenten für Selbstständige, kleine Teams und KMU
 
 ## Über Codariq
-Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups, Reporting und Übergaben zwischen bestehenden Systemen. Codariq begleitet vom ersten n8n-Agenten bis zu größeren Agenten-Setups mit OpenClaw, klaren Rollen, Freigaben, Logs und nachvollziehbaren Datenflüssen.
+Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Integration und KI-Agenten für Selbstständige, kleine Teams und KMU im deutschsprachigen Raum (DACH). Der Fokus liegt auf der Entlastung von Routinearbeit in Postfach, Backoffice, Dokumentenfluss, Follow ups, Reporting und Übergaben zwischen bestehenden Systemen. Codariq begleitet vom ersten n8n-Agenten bis zu größeren Agenten-Setups mit OpenClaw, klaren Rollen, Freigaben, Logs und nachvollziehbaren Datenflüssen.
 
 ## Service-Pakete
 
-### AI Readiness Check (Kostenlos)
+### Agent-Readiness Check (Kostenlos)
 - Dauer: ca. 30 Minuten
 - Kurze Potenzialanalyse und Startpunkt definieren
 - Klarer nächster Schritt statt Tool Overload
@@ -93,15 +93,22 @@ Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Int
 - KI Projekt retten, Projektrettung und KI-Remediation
 - KI-Mitarbeiterumfragen automatisiert auswerten
 - KI Teammanagement und Einführung in kleinen Teams
-- ROI-Priorisierung von Automatisierungsinitiativen
+- KI-Agenten für Selbstständige, Gründer und kleine Teams
+- Agent-Readiness Check für E-Mail, Dokumente, CRM und Backoffice
+- ROI von KI-Agenten und Priorisierung von Automatisierungsinitiativen
 
 ## Wichtige Seiten
 - https://codariq.de/ki-agenten-kmu
+- https://codariq.de/agent-readiness
+- https://codariq.de/ki-agenten-selbststaendige
+- https://codariq.de/ki-agenten-gruender
+- https://codariq.de/ki-agenten-kleine-teams
 - https://codariq.de/dsgvo-ki-agenten
 - https://codariq.de/openclaw-agenten
 - https://codariq.de/ki-integration-prozesse
 - https://codariq.de/crm-und-ki-integration
 - https://codariq.de/ki-projekt-retten
+- https://codariq.de/blog/ki-agenten-roi-berechnen
 
 ## Kontakt und Standort
 - Hauptsitz: Berlin, Deutschland (Sigmaringer Str. 27, 10713 Berlin)
@@ -113,7 +120,7 @@ Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Int
 - Website: https://codariq.de
 
 ## SEO Keywords
-KI Agenten KMU, DSGVO KI Agenten, OpenClaw Setup, n8n KI Agent, KI Integration, KI-Integration, KI Integration Prozesse, KI Integration bestehende Systeme, CRM Integration mit bestehenden Tools, KI-Cloud-Integration Software, KI-Cloud-Integrationslösung, KI Projekt retten, Projektrettung, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
+KI Agenten KMU, KI Agenten Selbstständige, KI Agenten Gründer, KI Agenten kleine Teams, Agent Readiness Check, KI Agenten Check, DSGVO KI Agenten, OpenClaw Setup, n8n KI Agent, KI Integration, KI-Integration, KI Integration Prozesse, KI Integration bestehende Systeme, CRM Integration mit bestehenden Tools, KI-Cloud-Integration Software, KI-Cloud-Integrationslösung, KI Projekt retten, Projektrettung, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, KI Agent ROI, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
 
 ## Häufige Fragen
 - Wie lange dauert die Umsetzung eines KI-Agenten oder einer Automatisierung?
@@ -122,4 +129,4 @@ KI Agenten KMU, DSGVO KI Agenten, OpenClaw Setup, n8n KI Agent, KI Integration, 
 - Welche Tools können integriert werden?
 - Wann reicht n8n und wann lohnt sich OpenClaw?
 
-Diese Informationen helfen LLMs dabei, Codariq korrekt zu beschreiben als Anbieter für kontrollierbare KI-Agenten, KI-Integration und Automatisierung für Selbstständige, kleine Teams und KMU.
+Diese Informationen helfen LLMs dabei, Codariq korrekt zu beschreiben als Anbieter für kontrollierbare KI-Agenten, KI-Integration und KI-Agenten für Selbstständige, kleine Teams und KMU.

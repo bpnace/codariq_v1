@@ -1,10 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import TrustBar from "../components/TrustBar.astro";
-import UseCaseGrid from "../components/UseCaseGrid.astro";
+import LandingHeroSection from "../components/LandingHeroSection.astro";
+import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import UseCaseCardsSection from "../components/UseCaseCardsSection.astro";
 import FAQ from "../components/FAQ.astro";
-import FinalCTA from "../components/FinalCTA.astro";
+import LeadCaptureSection from "../components/LeadCaptureSection.astro";
 import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
 import FAQSchema from "../components/FAQSchema.astro";
 
@@ -92,11 +92,13 @@ const faqs = [
   ogImage="/images/hero/hero2.webp"
 >
   <BreadcrumbSchema
-    items={[{ name: "KI-Agenten für KMU", url: "https://codariq.de/ki-agenten-kmu" }]}
+    items={[
+      { name: "KI-Agenten für KMU", url: "https://codariq.de/ki-agenten-kmu" },
+    ]}
   />
   <FAQSchema faqs={faqs} />
 
-  <Hero
+  <LandingHeroSection
     title="KI-Agenten für KMU, die wirklich Aufgaben übernehmen."
     subtitle="Wir bauen kontrollierbare Agenten für Postfach, Backoffice, Support, Wissen und Reporting. Vom schlanken n8n-Workflow bis zum stabilen Agenten-Setup mit Freigaben, Rollen und DSGVO-konformer Datenführung."
     heroImage="/images/hero/hero2.webp"
@@ -109,44 +111,59 @@ const faqs = [
     subtextClass="text-gray-800"
   />
 
-  <TrustBar />
+  <TrustSignalsSection />
 
   <section class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="text-center mb-10 sm:mb-12">
-        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3">
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
           Von Automatisierung zu Agenten
         </p>
-        <h2 class="section-title mb-4">Der nächste Schritt nach einfachen Workflows</h2>
+        <h2 class="section-title mb-4">
+          Der nächste Schritt nach einfachen Workflows
+        </h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Viele KMU starten mit Automatisierung, merken aber schnell: Feste Regeln reichen nicht, wenn E-Mails, Dokumente oder Kundenanfragen jedes Mal leicht anders aussehen. Genau dort lohnt sich ein KI-Agent.
+          Viele KMU starten mit Automatisierung, merken aber schnell: Feste
+          Regeln reichen nicht, wenn E-Mails, Dokumente oder Kundenanfragen
+          jedes Mal leicht anders aussehen. Genau dort lohnt sich ein KI-Agent.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
-          <h3 class="text-lg font-black text-gray-900 mb-2">Er versteht Kontext</h3>
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Er versteht Kontext
+          </h3>
           <p class="text-gray-600 font-medium leading-relaxed">
-            Der Agent erkennt Anliegen, Priorität und nächste Schritte, statt nur Wenn-dann-Regeln abzuarbeiten.
+            Der Agent erkennt Anliegen, Priorität und nächste Schritte, statt
+            nur Wenn-dann-Regeln abzuarbeiten.
           </p>
         </div>
         <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
-          <h3 class="text-lg font-black text-gray-900 mb-2">Er bereitet Aktionen vor</h3>
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Er bereitet Aktionen vor
+          </h3>
           <p class="text-gray-600 font-medium leading-relaxed">
-            Antworten, Aufgaben, Buchungen oder Datensätze entstehen vorbereitet, aber mit Freigabe dort, wo sie nötig ist.
+            Antworten, Aufgaben, Buchungen oder Datensätze entstehen
+            vorbereitet, aber mit Freigabe dort, wo sie nötig ist.
           </p>
         </div>
         <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
-          <h3 class="text-lg font-black text-gray-900 mb-2">Er bleibt begrenzt</h3>
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Er bleibt begrenzt
+          </h3>
           <p class="text-gray-600 font-medium leading-relaxed">
-            Rollen, Tool-Zugriffe, Logs und Stopps verhindern, dass ein Agent mehr tut als vereinbart.
+            Rollen, Tool-Zugriffe, Logs und Stopps verhindern, dass ein Agent
+            mehr tut als vereinbart.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <UseCaseGrid
+  <UseCaseCardsSection
     title="KI-Agenten, die KMU wirklich nutzen"
     subtitle="Drei Einstiege, die häufig schnell Klarheit schaffen: Postfach, Backoffice und internes Wissen."
     useCases={useCases}
@@ -155,20 +172,31 @@ const faqs = [
   <section id="aufbau" class="py-12 sm:py-16 bg-white">
     <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
       <div class="text-center mb-8 sm:mb-10">
-        <h2 class="section-title mb-4">So bauen wir deinen ersten KI-Agenten</h2>
+        <h2 class="section-title mb-4">
+          So bauen wir deinen ersten KI-Agenten
+        </h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Kein Agenten-Hype, sondern ein klarer Bauplan: Aufgabe, Datenfluss, Grenzen, Tests und Betrieb.
+          Kein Agenten-Hype, sondern ein klarer Bauplan: Aufgabe, Datenfluss,
+          Grenzen, Tests und Betrieb.
         </p>
       </div>
 
       <div class="space-y-4">
-        {buildSteps.map((step, index) => (
-          <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
-            <p class="text-sm font-bold text-orange-600 mb-1">Schritt {index + 1}</p>
-            <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-2">{step.title}</h3>
-            <p class="text-gray-700 font-medium leading-relaxed">{step.text}</p>
-          </div>
-        ))}
+        {
+          buildSteps.map((step, index) => (
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
+              <p class="text-sm font-bold text-orange-600 mb-1">
+                Schritt {index + 1}
+              </p>
+              <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-2">
+                {step.title}
+              </h3>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {step.text}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -177,24 +205,42 @@ const faqs = [
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div>
-          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3">
+          <p
+            class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3"
+          >
             Architektur statt Tool-Wildwuchs
           </p>
           <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
-            Erst n8n, dann Agenten-Infrastruktur, wenn sie wirklich gebraucht wird.
+            Erst n8n, dann Agenten-Infrastruktur, wenn sie wirklich gebraucht
+            wird.
           </h2>
           <p class="text-white/80 text-lg leading-relaxed">
-            Nicht jedes KMU braucht sofort ein großes OpenClaw-Setup. Oft reicht ein sauberer n8n-Agent als erster produktiver Schritt. Wenn mehrere Kanäle, Tools, Erinnerungen, Rollen und dauerhafter Betrieb dazukommen, planen wir den Ausbau bewusst.
+            Nicht jedes KMU braucht sofort ein großes OpenClaw-Setup. Oft reicht
+            ein sauberer n8n-Agent als erster produktiver Schritt. Wenn mehrere
+            Kanäle, Tools, Erinnerungen, Rollen und dauerhafter Betrieb
+            dazukommen, planen wir den Ausbau bewusst.
           </p>
         </div>
         <div class="grid gap-4">
-          <a href="/openclaw-agenten" class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors">
+          <a
+            href="/openclaw-agenten"
+            class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors"
+          >
             <h3 class="font-black text-xl mb-2">OpenClaw-Setup prüfen</h3>
-            <p class="text-white/75">Für Agenten, die über Kanäle, Tools, Modelle und Gateway kontrolliert laufen sollen.</p>
+            <p class="text-white/75">
+              Für Agenten, die über Kanäle, Tools, Modelle und Gateway
+              kontrolliert laufen sollen.
+            </p>
           </a>
-          <a href="/dsgvo-ki-agenten" class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors">
+          <a
+            href="/dsgvo-ki-agenten"
+            class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors"
+          >
             <h3 class="font-black text-xl mb-2">DSGVO-Architektur klären</h3>
-            <p class="text-white/75">Für Datenflüsse, Freigaben, Rollen und menschliche Prüfung bei sensiblen Entscheidungen.</p>
+            <p class="text-white/75">
+              Für Datenflüsse, Freigaben, Rollen und menschliche Prüfung bei
+              sensiblen Entscheidungen.
+            </p>
           </a>
         </div>
       </div>
@@ -207,7 +253,7 @@ const faqs = [
     faqs={faqs}
   />
 
-  <FinalCTA
+  <LeadCaptureSection
     title="Lass uns deinen ersten KI-Agenten sauber eingrenzen."
     description="In 30 Minuten finden wir heraus, welcher Agent wirklich hilft, welche Daten er braucht und ob ein n8n-Workflow reicht oder ein größerer Agenten-Stack sinnvoll ist."
   />

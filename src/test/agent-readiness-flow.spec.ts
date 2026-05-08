@@ -15,7 +15,7 @@ test("quiz flow completes and shows results", async ({ page }) => {
     });
   });
 
-  await page.goto("/automatisierungs-check");
+  await page.goto("/agent-readiness");
 
   const next = page.locator("#quiz-next");
   const question = page.locator("#quiz-question");
@@ -87,7 +87,7 @@ test("quiz flow completes and shows results", async ({ page }) => {
 test("quiz answers use svg icons and keep data-system step compact", async ({
   page,
 }) => {
-  await page.goto("/automatisierungs-check");
+  await page.goto("/agent-readiness");
 
   const next = page.locator("#quiz-next");
   const question = page.locator("#quiz-question");
@@ -143,51 +143,53 @@ test("quiz answers use svg icons and keep data-system step compact", async ({
 
 test("desktop quiz surface is wider and more readable", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/automatisierungs-check");
+  await page.goto("/agent-readiness");
   await expect(page.locator("#quiz-question")).toHaveText(
     "Wo frisst Arbeit gerade am meisten Zeit?",
   );
   await expect(page.locator(".quiz-option-text").first()).toBeVisible();
 
-  const metrics = await page.locator(".agent-quiz-section").evaluate((shell) => {
-    const quizBody = document.querySelector(".quiz-body");
-    const options = document.querySelector("#quiz-options");
-    const option = document.querySelector(".quiz-option");
-    const question = document.querySelector("#quiz-question");
-    const optionText = document.querySelector(".quiz-option-text");
-    const optionIcon = document.querySelector(".quiz-option-icon");
+  const metrics = await page
+    .locator(".agent-quiz-section")
+    .evaluate((shell) => {
+      const quizBody = document.querySelector(".quiz-body");
+      const options = document.querySelector("#quiz-options");
+      const option = document.querySelector(".quiz-option");
+      const question = document.querySelector("#quiz-question");
+      const optionText = document.querySelector(".quiz-option-text");
+      const optionIcon = document.querySelector(".quiz-option-icon");
 
-    if (
-      !quizBody ||
-      !options ||
-      !option ||
-      !question ||
-      !optionText ||
-      !optionIcon
-    ) {
-      throw new Error("Quiz desktop readability elements missing");
-    }
+      if (
+        !quizBody ||
+        !options ||
+        !option ||
+        !question ||
+        !optionText ||
+        !optionIcon
+      ) {
+        throw new Error("Quiz desktop readability elements missing");
+      }
 
-    return {
-      sectionWidth: shell.getBoundingClientRect().width,
-      bodyMinHeight: Number.parseFloat(
-        window.getComputedStyle(quizBody).minHeight,
-      ),
-      optionsMaxHeight: Number.parseFloat(
-        window.getComputedStyle(options).maxHeight,
-      ),
-      optionMinHeight: Number.parseFloat(
-        window.getComputedStyle(option).minHeight,
-      ),
-      questionFontSize: Number.parseFloat(
-        window.getComputedStyle(question).fontSize,
-      ),
-      optionFontSize: Number.parseFloat(
-        window.getComputedStyle(optionText).fontSize,
-      ),
-      iconWidth: optionIcon.getBoundingClientRect().width,
-    };
-  });
+      return {
+        sectionWidth: shell.getBoundingClientRect().width,
+        bodyMinHeight: Number.parseFloat(
+          window.getComputedStyle(quizBody).minHeight,
+        ),
+        optionsMaxHeight: Number.parseFloat(
+          window.getComputedStyle(options).maxHeight,
+        ),
+        optionMinHeight: Number.parseFloat(
+          window.getComputedStyle(option).minHeight,
+        ),
+        questionFontSize: Number.parseFloat(
+          window.getComputedStyle(question).fontSize,
+        ),
+        optionFontSize: Number.parseFloat(
+          window.getComputedStyle(optionText).fontSize,
+        ),
+        iconWidth: optionIcon.getBoundingClientRect().width,
+      };
+    });
 
   expect(metrics.sectionWidth).toBeGreaterThanOrEqual(1280);
   expect(metrics.bodyMinHeight).toBeLessThanOrEqual(368);

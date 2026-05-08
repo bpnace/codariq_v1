@@ -23,6 +23,14 @@ RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://codariq.de%{REQUEST_URI} [R=301,L]
 
+
+# Legacy route redirects after content-accurate rename pass
+RewriteRule ^automatisierungs-check$ /agent-readiness [R=301,L]
+RewriteRule ^automatisierung-selbststaendige$ /ki-agenten-selbststaendige [R=301,L]
+RewriteRule ^automatisierung-gruender$ /ki-agenten-gruender [R=301,L]
+RewriteRule ^automatisierung-kleine-teams$ /ki-agenten-kleine-teams [R=301,L]
+RewriteRule ^blog/automatisierung-roi-maximieren$ /blog/ki-agenten-roi-berechnen [R=301,L]
+
 # Strip ?search= query params to canonical URL
 RewriteCond %{QUERY_STRING} (^|&)search= [NC]
 RewriteRule ^(.*)$ %{REQUEST_URI}? [R=301,L]

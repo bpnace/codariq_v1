@@ -1,9 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
-import Hero from "./Hero.astro";
-import TrustBar from "./TrustBar.astro";
+import LandingHeroSection from "./LandingHeroSection.astro";
+import TrustSignalsSection from "./TrustSignalsSection.astro";
 import FAQ from "./FAQ.astro";
-import FinalCTA from "./FinalCTA.astro";
+import LeadCaptureSection from "./LeadCaptureSection.astro";
 import BreadcrumbSchema from "./BreadcrumbSchema.astro";
 import FAQSchema from "./FAQSchema.astro";
 
@@ -95,12 +95,10 @@ const {
   keywords={keywords}
   ogImage="/images/hero/hero2.webp"
 >
-  <BreadcrumbSchema
-    items={[{ name: breadcrumbName, url: breadcrumbUrl }]}
-  />
+  <BreadcrumbSchema items={[{ name: breadcrumbName, url: breadcrumbUrl }]} />
   <FAQSchema faqs={faqs} />
 
-  <Hero
+  <LandingHeroSection
     title={heroTitle}
     subtitle={heroSubtitle}
     heroImage="/images/hero/hero2.webp"
@@ -113,12 +111,14 @@ const {
     subtextClass="text-gray-800"
   />
 
-  <TrustBar />
+  <TrustSignalsSection />
 
   <section class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="text-center mb-10 sm:mb-12">
-        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3">
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
           {introEyebrow}
         </p>
         <h2 class="section-title mb-4">{introTitle}</h2>
@@ -126,12 +126,18 @@ const {
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-        {cards.map((card) => (
-          <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
-            <h3 class="text-lg font-black text-gray-900 mb-2">{card.title}</h3>
-            <p class="text-gray-700 font-medium leading-relaxed">{card.text}</p>
-          </div>
-        ))}
+        {
+          cards.map((card) => (
+            <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+              <h3 class="text-lg font-black text-gray-900 mb-2">
+                {card.title}
+              </h3>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {card.text}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -140,7 +146,9 @@ const {
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="grid lg:grid-cols-[0.8fr_1fr] gap-8 lg:gap-12 items-start">
         <div>
-          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3">
+          <p
+            class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3"
+          >
             {processEyebrow}
           </p>
           <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
@@ -150,37 +158,41 @@ const {
         </div>
 
         <div class="space-y-3">
-          {steps.map((step, index) => (
-            <details
-              class="group rounded-xl border border-white/15 bg-white/10 p-4 sm:p-5"
-              open={index === 0}
-            >
-              <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
-                <div>
-                  <p class="text-xs font-bold uppercase tracking-[0.18em] text-orange-200 mb-1">
-                    Schritt {index + 1}
+          {
+            steps.map((step, index) => (
+              <details
+                class="group rounded-xl border border-white/15 bg-white/10 p-4 sm:p-5"
+                open={index === 0}
+              >
+                <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-orange-200 mb-1">
+                      Schritt {index + 1}
+                    </p>
+                    <h3 class="text-lg font-black">{step.title}</h3>
+                  </div>
+                  <span class="text-white/50 group-open:rotate-45 transition-transform text-2xl leading-none">
+                    +
+                  </span>
+                </summary>
+                <div class="pt-3">
+                  <p class="text-white/78 font-medium leading-relaxed">
+                    {step.text}
                   </p>
-                  <h3 class="text-lg font-black">{step.title}</h3>
+                  {step.items && (
+                    <ul class="mt-3 space-y-2 text-white/72 text-sm font-medium">
+                      {step.items.map((item) => (
+                        <li class="flex gap-2">
+                          <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-orange-300" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <span class="text-white/50 group-open:rotate-45 transition-transform text-2xl leading-none">
-                  +
-                </span>
-              </summary>
-              <div class="pt-3">
-                <p class="text-white/78 font-medium leading-relaxed">{step.text}</p>
-                {step.items && (
-                  <ul class="mt-3 space-y-2 text-white/72 text-sm font-medium">
-                    {step.items.map((item) => (
-                      <li class="flex gap-2">
-                        <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-orange-300"></span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </details>
-          ))}
+              </details>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -188,21 +200,25 @@ const {
 
   <section class="py-12 sm:py-16 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-      <div class="rounded-2xl border border-orange-200 bg-orange-50 p-6 sm:p-8 md:p-10">
+      <div
+        class="rounded-2xl border border-orange-200 bg-orange-50 p-6 sm:p-8 md:p-10"
+      >
         <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4">
           {proofTitle}
         </h2>
         <p class="text-gray-700 text-lg leading-relaxed mb-6">{proofText}</p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {proofItems.map((item) => (
-            <div class="rounded-xl border border-orange-200/70 bg-white p-4 sm:p-5">
-              <h3 class="font-black text-gray-900 mb-2">{item.title}</h3>
-              <p class="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">
-                {item.text}
-              </p>
-            </div>
-          ))}
+          {
+            proofItems.map((item) => (
+              <div class="rounded-xl border border-orange-200/70 bg-white p-4 sm:p-5">
+                <h3 class="font-black text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">
+                  {item.text}
+                </p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -213,22 +229,27 @@ const {
       <div class="text-center mb-8 sm:mb-10">
         <h2 class="section-title mb-3">{linksTitle}</h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Vertiefe die passende Suchintention, statt alles in eine Seite zu pressen.
+          Vertiefe die passende Suchintention, statt alles in eine Seite zu
+          pressen.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class="block rounded-xl border border-gray-200 bg-white p-5 sm:p-6 hover:border-orange-300 hover:shadow-md transition-all"
-          >
-            <p class="text-sm font-bold uppercase tracking-[0.16em] text-orange-600 mb-2">
-              {link.label}
-            </p>
-            <p class="text-gray-700 font-medium leading-relaxed">{link.text}</p>
-          </a>
-        ))}
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="block rounded-xl border border-gray-200 bg-white p-5 sm:p-6 hover:border-orange-300 hover:shadow-md transition-all"
+            >
+              <p class="text-sm font-bold uppercase tracking-[0.16em] text-orange-600 mb-2">
+                {link.label}
+              </p>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {link.text}
+              </p>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -239,5 +260,5 @@ const {
     faqs={faqs}
   />
 
-  <FinalCTA title={finalTitle} description={finalDescription} />
+  <LeadCaptureSection title={finalTitle} description={finalDescription} />
 </Base>

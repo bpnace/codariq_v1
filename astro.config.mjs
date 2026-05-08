@@ -5,6 +5,14 @@ import { EnumChangefreq } from "sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
+const legacyRoutes = [
+  "/automatisierungs-check",
+  "/automatisierung-selbststaendige",
+  "/automatisierung-gruender",
+  "/automatisierung-kleine-teams",
+  "/blog/automatisierung-roi-maximieren",
+];
+
 export default defineConfig({
   site: "https://codariq.de",
   base: "/",
@@ -14,6 +22,10 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      filter(page) {
+        const pathname = new URL(page).pathname.replace(/\/$/, "");
+        return !legacyRoutes.includes(pathname);
+      },
       i18n: {
         defaultLocale: "de",
         locales: {
@@ -57,10 +69,10 @@ export default defineConfig({
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 1.0;
         }
-        // Automation landing pages and quiz - high priority conversion pages
+        // Agent landing pages and readiness quiz - high priority conversion pages
         else if (
-          url.includes("/automatisierung-") ||
-          url.includes("/automatisierungs-check")
+          url.includes("/ki-agenten-") ||
+          url.includes("/agent-readiness")
         ) {
           item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.WEEKLY;

@@ -41,7 +41,7 @@ test("hero agent panel cycles live metrics and review alerts", async ({
   await expect(consolePanel.locator(".handover-stream p")).toHaveCount(3);
   const initialPanelLayout = await consolePanel.evaluate((panel) => {
     if (!(panel instanceof HTMLElement)) {
-      throw new Error("Hero agent panel is not an HTMLElement.");
+      throw new Error("LandingHeroSection agent panel is not an HTMLElement.");
     }
 
     return {
@@ -71,7 +71,9 @@ test("hero agent panel cycles live metrics and review alerts", async ({
       !(savedTime instanceof HTMLElement) ||
       !(firstPipeline instanceof HTMLElement)
     ) {
-      throw new Error("Hero agent initial motion targets missing.");
+      throw new Error(
+        "LandingHeroSection agent initial motion targets missing.",
+      );
     }
 
     return {
@@ -121,7 +123,7 @@ test("hero agent panel cycles live metrics and review alerts", async ({
 
   const panelMotion = await consolePanel.evaluate((panel, initialLayout) => {
     if (!(panel instanceof HTMLElement)) {
-      throw new Error("Hero agent panel is not an HTMLElement.");
+      throw new Error("LandingHeroSection agent panel is not an HTMLElement.");
     }
 
     const alertElement = panel.querySelector("[data-hero-alert]");
@@ -131,7 +133,7 @@ test("hero agent panel cycles live metrics and review alerts", async ({
       !(alertElement instanceof HTMLElement) ||
       !(statusValue instanceof HTMLElement)
     ) {
-      throw new Error("Hero agent live-motion elements missing.");
+      throw new Error("LandingHeroSection agent live-motion elements missing.");
     }
 
     const alertRect = alertElement.getBoundingClientRect();
@@ -302,6 +304,7 @@ test("desktop nav stays on homepage anchors", async ({ page }) => {
 
 test("pain list uses agent reframing", async ({ page }) => {
   await page.goto("/");
+  await page.locator("#pain-points").scrollIntoViewIfNeeded();
   await expect(
     page.getByRole("heading", {
       name: "Deine Prozesse sind noch nicht bereit für sichere KI-Agenten.",
@@ -764,6 +767,7 @@ test("featured benefits system card has a subtle animated highlight", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.locator("#benefits").scrollIntoViewIfNeeded();
 
   const systemCard = page.locator('[data-benefit-system-card="true"]');
   await expect(systemCard).toHaveCount(1);
@@ -788,16 +792,14 @@ test("featured benefits system card has a subtle animated highlight", async ({
       !(included instanceof HTMLElement) ||
       !(custom instanceof HTMLElement)
     ) {
-      throw new Error("Benefits support panels missing.");
+      throw new Error("Pricing tier support panels missing.");
     }
 
-    const includedRect = included.getBoundingClientRect();
-    const customRect = custom.getBoundingClientRect();
-
     return {
-      customRightOfIncluded: customRect.left > includedRect.left,
-      includedLeftOfCustom: includedRect.right <= customRect.left,
-      sameRow: Math.abs(includedRect.top - customRect.top) < 2,
+      customRightOfIncluded: custom.offsetLeft > included.offsetLeft,
+      includedLeftOfCustom:
+        included.offsetLeft + included.offsetWidth <= custom.offsetLeft,
+      sameRow: Math.abs(included.offsetTop - custom.offsetTop) < 2,
     };
   });
 

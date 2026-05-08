@@ -1,15 +1,15 @@
 ---
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import TrustBar from "../components/TrustBar.astro";
-import PainList from "../components/PainList.astro";
-import Benefits from "../components/Benefits.astro";
-import Testimonials from "../components/Testimonials.astro";
-import Process from "../components/Process.astro";
-import BlogPreview from "../components/BlogPreview.astro";
-import SeoEntryPoints from "../components/SeoEntryPoints.astro";
-import HomeFAQ from "../components/HomeFAQ.astro";
-import FinalCTA from "../components/FinalCTA.astro";
+import LandingHeroSection from "../components/LandingHeroSection.astro";
+import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import AgentReadinessSection from "../components/AgentReadinessSection.astro";
+import PricingTiersSection from "../components/PricingTiersSection.astro";
+import UseCaseProofSection from "../components/UseCaseProofSection.astro";
+import DeliveryProcessSection from "../components/DeliveryProcessSection.astro";
+import BlogInsightsSection from "../components/BlogInsightsSection.astro";
+import SeoIntentEntryPointsSection from "../components/SeoIntentEntryPointsSection.astro";
+import HomeFAQSection from "../components/HomeFAQSection.astro";
+import LeadCaptureSection from "../components/LeadCaptureSection.astro";
 import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
 ---
 
@@ -21,39 +21,39 @@ import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
   <!-- Structured Data -->
   <BreadcrumbSchema />
 
-  <!-- Hero Section -->
-  <Hero
+  <!-- LandingHeroSection Section -->
+  <LandingHeroSection
     primaryCTA="Grenzen klären"
     secondaryCTA="Was darf ein Agent?"
-    secondaryCTALink="/automatisierungs-check"
+    secondaryCTALink="/agent-readiness"
   />
 
   <!-- Trust Bar -->
-  <TrustBar />
+  <TrustSignalsSection />
 
   <!-- Pain Points -->
-  <PainList />
+  <AgentReadinessSection />
 
-  <!-- Process -->
-  <Process />
+  <!-- DeliveryProcessSection -->
+  <DeliveryProcessSection />
 
-  <!-- Benefits -->
-  <Benefits />
+  <!-- PricingTiersSection -->
+  <PricingTiersSection />
 
   <!-- Search Intent Entry Points -->
-  <SeoEntryPoints />
+  <SeoIntentEntryPointsSection />
 
-  <!-- Testimonials -->
-  <Testimonials />
+  <!-- Use case proof -->
+  <UseCaseProofSection />
 
   <!-- Final CTA -->
-  <FinalCTA />
+  <LeadCaptureSection />
 
   <!-- Blog Preview -->
-  <BlogPreview />
+  <BlogInsightsSection />
 
   <!-- Short FAQ -->
-  <HomeFAQ />
+  <HomeFAQSection />
 
   <div class="home-scroll-blur" data-home-scroll-blur aria-hidden="true">
     <span class="home-scroll-blur__layer home-scroll-blur__layer--soft"></span>

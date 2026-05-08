@@ -88,21 +88,24 @@ npm run test:e2e:ui    # → Interactive UI for debugging
 #### Testing Setup
 
 **Vitest (Unit Tests)**
+
 - **Environment**: happy-dom (browser-like DOM)
 - **Location**: `src/**/*.test.{js,ts,jsx,tsx}`
 - **Configuration**: [vitest.config.ts](vitest.config.ts)
 - **Setup**: [src/test/setup.ts](src/test/setup.ts)
 
 **Playwright (E2E Tests)**
+
 - **Environment**: Chromium (headless)
 - **Location**: `src/test/**/*.spec.ts`
 - **Configuration**: [playwright.config.ts](playwright.config.ts)
 - **Features**: Auto-start dev server, trace on retry
 
 **Test Files**:
+
 - [src/test/helpers.test.ts](src/test/helpers.test.ts) - Utility function tests
-- [src/test/quiz.spec.ts](src/test/quiz.spec.ts) - Quiz component E2E
-- [src/test/quiz-flow.spec.ts](src/test/quiz-flow.spec.ts) - Complete quiz flow
+- [src/test/agent-readiness.spec.ts](src/test/agent-readiness.spec.ts) - Quiz component E2E
+- [src/test/agent-readiness-flow.spec.ts](src/test/agent-readiness-flow.spec.ts) - Complete quiz flow
 - [src/test/home.spec.ts](src/test/home.spec.ts) - Homepage E2E
 
 ### 4. Ordnerstruktur (Project Structure)
@@ -110,21 +113,24 @@ npm run test:e2e:ui    # → Interactive UI for debugging
 ```
 codariq/
 ├── src/
-│   ├── components/              # 14 Reusable UI components
-│   │   ├── Hero.astro          # Main hero with dual CTA
-│   │   ├── TrustBar.astro      # Trust badges (TÜV, ISO, DSGVO)
-│   │   ├── PainList.astro      # Problem identification
-│   │   ├── Benefits.astro      # 4-column features grid
-│   │   ├── Testimonials.astro  # Social proof with photos
-│   │   ├── Process.astro       # 4-step timeline
-│   │   ├── FinalCTA.astro      # Contact form and calendar booking link
+│   ├── components/              # Reusable UI components
+│   │   ├── LandingHeroSection.astro          # Main hero with dual CTA
+│   │   ├── TrustSignalsSection.astro         # Trust badges (DSGVO, EU AI Act, Hosting)
+│   │   ├── AgentReadinessSection.astro       # Problem and readiness framing
+│   │   ├── PricingTiersSection.astro         # Services and pricing tiers
+│   │   ├── UseCaseProofSection.astro         # Use cases and customer feedback
+│   │   ├── DeliveryProcessSection.astro      # Delivery timeline
+│   │   ├── LeadCaptureSection.astro          # Contact form and calendar booking link
 │   │   ├── FAQ.astro           # Accordion FAQ
 │   │   ├── FAQSchema.astro     # Structured data for FAQ
 │   │   ├── BreadcrumbSchema.astro # Breadcrumb schema
-│   │   ├── BlogPreview.astro   # Blog post previews
-│   │   ├── BlogCTA.astro       # Blog CTA component
-│   │   ├── BlogCtaSection.astro # Blog CTA wrapper
-│   │   └── UseCaseGrid.astro   # Use case grid
+│   │   ├── BlogInsightsSection.astro         # Blog post previews
+│   │   ├── BlogCTA.astro                    # Blog CTA card
+│   │   ├── BlogConversionSection.astro      # Blog CTA wrapper
+│   │   ├── SeoIntentEntryPointsSection.astro # Homepage SEO entry links
+│   │   ├── SeoLandingPageTemplate.astro     # SEO landing page template
+│   │   ├── RedirectPage.astro               # Static compatibility redirect
+│   │   └── UseCaseCardsSection.astro        # Use case grid
 │   │
 │   ├── layouts/
 │   │   └── Base.astro          # Main layout with navigation
@@ -136,10 +142,10 @@ codariq/
 │   │   ├── impressum.astro     # Legal notice (DDG)
 │   │   ├── agb.astro           # Terms of service
 │   │   ├── cookie-richtlinien.astro # Cookie policy
-│   │   ├── automatisierungs-check.astro # Interactive quiz
-│   │   ├── automatisierung-selbststaendige.astro
-│   │   ├── automatisierung-kleine-teams.astro
-│   │   ├── automatisierung-gruender.astro
+│   │   ├── agent-readiness.astro # Interactive quiz
+│   │   ├── ki-agenten-selbststaendige.astro
+│   │   ├── ki-agenten-kleine-teams.astro
+│   │   ├── ki-agenten-gruender.astro
 │   │   │
 │   │   ├── api/                # Server-side endpoints
 │   │   │   ├── newsletter.ts   # Newsletter signup
@@ -150,7 +156,7 @@ codariq/
 │   │       ├── index.astro     # Blog listing
 │   │       ├── [slug].astro    # Dynamic template
 │   │       ├── ki-teams-vorbereiten.astro
-│   │       ├── automatisierung-roi-maximieren.astro
+│   │       ├── ki-agenten-roi-berechnen.astro
 │   │       ├── ki-integration-5-schritte.astro
 │   │       ├── ki-compliance-2025.astro
 │   │       └── ki-projekte-retten.astro
@@ -164,14 +170,14 @@ codariq/
 │   │   └── drupal.ts          # Drupal integration
 │   │
 │   ├── scripts/                # Client-side scripts
-│   │   └── automatisierungs-check.ts # Quiz behavior
+│   │   └── agent-readiness.ts # Quiz behavior
 │   │
 │   ├── test/                   # Test files
 │   │   ├── setup.ts           # Vitest setup
 │   │   ├── helpers.test.ts    # Unit tests
 │   │   ├── home.spec.ts       # Homepage E2E
-│   │   ├── quiz.spec.ts       # Quiz E2E
-│   │   └── quiz-flow.spec.ts  # Quiz flow E2E
+│   │   ├── agent-readiness.spec.ts       # Quiz E2E
+│   │   └── agent-readiness-flow.spec.ts  # Quiz flow E2E
 │   │
 │   └── styles/
 │       └── global.css         # Global styles & animations
@@ -180,7 +186,7 @@ codariq/
 │   ├── images/
 │   │   ├── logos/             # Company logos
 │   │   ├── badges/            # Trust badges
-│   │   ├── hero/              # Hero images
+│   │   ├── hero/              # LandingHeroSection images
 │   │   ├── dashboard/         # Dashboard mockups
 │   │   └── testimonials/      # Testimonial photos
 │   ├── fonts/
@@ -223,9 +229,9 @@ codariq/
 
 - **Milky Glass Navigation** - Fixed header with backdrop blur
 - **Gradient CTA Buttons** - Orange gradient from top-left to bottom-right
-- **Process Component Redesign** - Numbers top-left, icons top-right, fixed heights
+- **DeliveryProcessSection Component Redesign** - Numbers top-left, icons top-right, fixed heights
 - **Testimonial Real Photos** - Replaced SVG graphics with randomuser.me images
-- **Google Calendar Booking** - External booking link in FinalCTA
+- **Google Calendar Booking** - External booking link in LeadCaptureSection
 - **Card-based Layout** - Consistent spacing and text alignment
 
 ## 📄 Legal Pages
@@ -255,7 +261,7 @@ The site uses **price ranges** instead of specific amounts:
 - **Cost savings:** Mid to high five-digit annual savings
 - **ROI:** Typically achieved within 6-12 months
 
-Package pricing in Process section maintains specific pricing for transparency.
+Package pricing in DeliveryProcessSection section maintains specific pricing for transparency.
 
 ## 🛠️ Technical Features
 
@@ -294,6 +300,7 @@ Package pricing in Process section maintains specific pricing for transparency.
 ### Testing Configuration
 
 **[vitest.config.ts](vitest.config.ts)** - Unit test configuration
+
 ```typescript
 {
   environment: "happy-dom",     // Browser-like DOM
@@ -305,6 +312,7 @@ Package pricing in Process section maintains specific pricing for transparency.
 ```
 
 **[playwright.config.ts](playwright.config.ts)** - E2E test configuration
+
 ```typescript
 {
   testDir: "src/test",
@@ -320,6 +328,7 @@ Package pricing in Process section maintains specific pricing for transparency.
 ### Framework Configuration
 
 **[astro.config.mjs](astro.config.mjs)** - Astro framework settings
+
 - Site URL: `https://codariq.de`
 - Sitemap generation with German locale (de-DE)
 - Trailing slash: `never` (clean URLs)
@@ -327,16 +336,19 @@ Package pricing in Process section maintains specific pricing for transparency.
 - Vite integration with Tailwind CSS plugin
 
 **[tailwind.config.js](tailwind.config.js)** - Tailwind CSS customization
+
 - Content paths: All Astro, HTML, JS, TS files in `src/`
 - Custom fonts: Satoshi Variable font family
 - Extended theme with custom typography
 
 **[tsconfig.json](tsconfig.json)** - TypeScript compiler options
+
 - Extends: `astro/tsconfigs/strict`
 - Includes: `.astro/types.d.ts` and all source files
 - Excludes: `dist/` build output
 
 **[eslint.config.js](eslint.config.js)** - Code quality rules
+
 - Parser: TypeScript ESLint parser
 - Plugins: TypeScript ESLint
 - Rules: Unused vars detection, no-console warnings, prefer-const
@@ -351,7 +363,7 @@ Package pricing in Process section maintains specific pricing for transparency.
 - **Hosting:** Strato Web Hosting
 - **SSL:** Automatically managed
 
-### Deployment Process
+### Deployment DeliveryProcessSection
 
 ```bash
 # Build for production
@@ -431,14 +443,14 @@ See [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) for detailed deployment test 
 ### Key Conversion Elements
 
 1. **Orange CTA buttons** - Consistent brand color
-2. **Social proof** - Testimonials with company references
-3. **Clear value props** - Benefits focused on SME pain points
+2. **Social proof** - use-case proof with company references
+3. **Clear value props** - PricingTiersSection focused on SME pain points
 4. **Trust signals** - Compliance badges and guarantees
 5. **Reduced friction** - Simple contact forms
 
 ### A/B Testing Opportunities
 
-- Hero headline variations (problem vs. solution focused)
+- LandingHeroSection headline variations (problem vs. solution focused)
 - CTA button text ("Termin buchen" vs. "Demo anfragen")
 - Trust badge placement and messaging
 - Testimonial layout and emphasis
@@ -472,7 +484,7 @@ See [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) for detailed deployment test 
 - **Enhanced Navigation** - Added "Insights" link to blog section
 - **Footer Redesign** - 4-column layout with newsletter signup
 - **Responsive Animations** - Scroll-triggered animations throughout
-- Process component redesign with fixed text alignment
+- DeliveryProcessSection component redesign with fixed text alignment
 - Testimonial photos from randomuser.me
 - Gradient CTA buttons with consistent styling
 - DSGVO/DDG/TTDSG compliance implementation
@@ -499,7 +511,7 @@ See [DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md) for detailed deployment test 
 ✅ https://codariq.de/faq                         → HTTP 200 (no redirect)
 ✅ https://codariq.de/impressum                   → HTTP 200 (no redirect)
 ✅ https://codariq.de/blog/ki-teams-vorbereiten   → HTTP 200 (no redirect)
-✅ https://codariq.de/blog/automatisierung-roi-maximieren → HTTP 200 (no redirect)
+✅ https://codariq.de/blog/ki-agenten-roi-berechnen → HTTP 200 (no redirect)
 
 ✅ https://codariq.de/faq/     → 301 → /faq (single redirect)
 ✅ https://www.codariq.de/faq  → 301 → /faq (single redirect)

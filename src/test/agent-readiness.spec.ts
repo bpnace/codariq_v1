@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("quiz starts at question 1", async ({ page }) => {
-  await page.goto("/automatisierungs-check");
+  await page.goto("/agent-readiness");
   const question = page.locator("#quiz-question");
   await expect(question).toHaveText("Wo frisst Arbeit gerade am meisten Zeit?");
 });
@@ -9,7 +9,7 @@ test("quiz starts at question 1", async ({ page }) => {
 test("quiz page shows the SEO outcome section below the quiz", async ({
   page,
 }) => {
-  await page.goto("/automatisierungs-check");
+  await page.goto("/agent-readiness");
 
   const seoSection = page.locator("#ki-agenten-check-ergebnis");
   await expect(seoSection).toBeVisible();
@@ -22,11 +22,11 @@ test("quiz page shows the SEO outcome section below the quiz", async ({
     "KI-Agenten für kleine Unternehmen",
   );
   await expect(
-    seoSection.locator('a[href="/automatisierung-selbststaendige"]'),
-  ).toHaveText("KI-Automatisierung für Selbstständige");
+    seoSection.locator('a[href="/ki-agenten-selbststaendige"]'),
+  ).toHaveText("KI-Agenten für Selbstständige");
   await expect(
-    seoSection.locator('a[href="/automatisierung-kleine-teams"]'),
-  ).toHaveText("Backoffice-Automatisierung für kleine Teams");
+    seoSection.locator('a[href="/ki-agenten-kleine-teams"]'),
+  ).toHaveText("KI-Agenten für kleine Teams");
   await expect(seoSection.locator('a[href="/dsgvo-ki-agenten"]')).toHaveText(
     "DSGVO-konformen KI-Agenten",
   );

@@ -34,14 +34,16 @@ const entryPoints = [
     </div>
 
     <div class="intent-entry__grid">
-      {entryPoints.map((item) => (
-        <a href={item.href} class="intent-entry__card enterprise-card">
-          <span>{item.eyebrow}</span>
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
-          <strong>Seite öffnen</strong>
-        </a>
-      ))}
+      {
+        entryPoints.map((item) => (
+          <a href={item.href} class="intent-entry__card enterprise-card">
+            <span>{item.eyebrow}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <strong>Seite öffnen</strong>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

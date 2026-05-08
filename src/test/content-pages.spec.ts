@@ -31,6 +31,22 @@ const pages = [
     title: /KI-Projekt retten/,
     heading: "Dein KI-Projekt hängt fest? Wir finden den Bruch.",
   },
+  {
+    path: "/ki-agenten-selbststaendige",
+    title: /KI-Agenten für Selbstständige/,
+    heading:
+      "KI-Agenten für Selbstständige, die vorarbeiten statt alles zu übernehmen",
+  },
+  {
+    path: "/ki-agenten-gruender",
+    title: /KI-Agenten für Gründer/,
+    heading: "KI-Agenten für Gründer, damit Admin nicht den Tag führt",
+  },
+  {
+    path: "/ki-agenten-kleine-teams",
+    title: /KI-Agenten für kleine Teams/,
+    heading: "KI-Agenten für kleine Teams, die Übergaben sauber vorbereiten",
+  },
 ];
 
 for (const pageInfo of pages) {
@@ -43,10 +59,27 @@ for (const pageInfo of pages) {
     await expect(
       page
         .getByRole("link", {
-          name: /Termin|Potenzial|Setup|prüfen|klären|Check/i,
+          name: /Termin|Potenzial|Setup|prüfen|klären|Check|Ablauf|Beispiele|Use Cases/i,
         })
         .first(),
     ).toBeVisible();
+  });
+}
+
+const legacyRoutes = [
+  ["/automatisierungs-check", "/agent-readiness"],
+  ["/automatisierung-selbststaendige", "/ki-agenten-selbststaendige"],
+  ["/automatisierung-gruender", "/ki-agenten-gruender"],
+  ["/automatisierung-kleine-teams", "/ki-agenten-kleine-teams"],
+  ["/blog/automatisierung-roi-maximieren", "/blog/ki-agenten-roi-berechnen"],
+] as const;
+
+for (const [legacyRoute, canonicalRoute] of legacyRoutes) {
+  test(`${legacyRoute} redirects to renamed canonical route`, async ({
+    page,
+  }) => {
+    await page.goto(legacyRoute);
+    await expect(page).toHaveURL(new RegExp(`${canonicalRoute}$`));
   });
 }
 
