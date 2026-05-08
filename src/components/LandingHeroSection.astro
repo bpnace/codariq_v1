@@ -17,11 +17,12 @@ export interface Props {
 
 const {
   title = "KI-Agenten, die deinen Alltag tatsächlich entlasten.",
-  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt. Wir bauen digitale Assistenten für echte Arbeit: lesen, sortieren, vorbereiten, stoppen und übergeben, wenn ein Mensch entscheiden muss.",
+  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt... Wir bauen digitale Assistenten für echte Arbeit. Lesen, sortieren und vorbereiten aber immer mit einem Menschen, der entscheiden muss.",
   primaryCTA = "Grenzen klären",
   secondaryCTA = "Was darf ein Agent?",
   primaryCTALink = "#final-cta",
   secondaryCTALink = "/agent-readiness",
+  heroImage = "/images/hero/hero2.webp",
 } = Astro.props;
 
 const trustSignals = [
@@ -45,7 +46,12 @@ const briefingItems = [
 ];
 ---
 
-<section id="hero" data-enterprise-section class="secure-hero">
+<section
+  id="hero"
+  data-enterprise-section
+  class="secure-hero"
+  style={`--secure-hero-image: url("${heroImage}");`}
+>
   <div
     class="secure-hero__ambient secure-hero__ambient--green"
     aria-hidden="true"
@@ -185,6 +191,7 @@ const briefingItems = [
     position: relative;
     min-height: 100dvh;
     overflow: hidden;
+    isolation: isolate;
     display: flex;
     align-items: flex-start;
     background:
@@ -203,8 +210,36 @@ const briefingItems = [
     padding: 2rem 0 4.5rem;
   }
 
+  .secure-hero::before,
+  .secure-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .secure-hero::before {
+    z-index: 0;
+    background-image: var(--secure-hero-image);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .secure-hero::after {
+    z-index: 1;
+    background: linear-gradient(
+      to top right,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.96) 20%,
+      rgba(255, 255, 255, 0.72) 42%,
+      rgba(255, 255, 255, 0.2) 64%,
+      rgba(255, 255, 255, 0) 82%
+    );
+  }
+
   .secure-hero__ambient {
     position: absolute;
+    z-index: 2;
     pointer-events: none;
     filter: blur(12px);
     opacity: 0.9;
@@ -229,6 +264,7 @@ const briefingItems = [
 
   .secure-hero__inner {
     position: relative;
+    z-index: 3;
     width: min(100% - 2rem, 1440px);
     margin: clamp(1.5rem, 4vw, 3.5rem) auto 0;
     display: grid;
@@ -354,10 +390,10 @@ const briefingItems = [
     border-radius: 4px;
     background: linear-gradient(
       135deg,
-      rgba(20, 184, 166, 0.95),
-      rgba(20, 51, 47, 0.9)
+      #05070c 0%,
+      #111827 100%
     );
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
   .secure-console {
