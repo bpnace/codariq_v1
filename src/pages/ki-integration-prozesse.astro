@@ -1,0 +1,129 @@
+---
+import SeoLandingPage from "../components/SeoLandingPage.astro";
+
+const faqs = [
+  {
+    question: "Was bedeutet KI-Integration in Prozesse konkret?",
+    answer:
+      "KI-Integration in Prozesse heißt: Die KI arbeitet nicht isoliert in einem Chatfenster, sondern liest relevante Daten, bereitet nächste Schritte vor und übergibt Ergebnisse an die Systeme, in denen dein Team ohnehin arbeitet.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Welche Prozesse eignen sich zuerst?",
+    answer:
+      "Gute Startpunkte sind wiederkehrende Abläufe mit klaren Quellen und sichtbarer Nacharbeit: Postfach-Triage, CRM-Übergaben, Dokumentenprüfung, Reporting, Support oder interne Rückfragen.",
+    category: "Eignung",
+  },
+  {
+    question: "Braucht KI-Integration sofort eine neue Plattform?",
+    answer:
+      "Nicht unbedingt. Oft reicht ein sauber begrenzter Workflow mit KI-Schritt. Eine größere KI-Cloud-Integrationsplattform lohnt sich erst, wenn mehrere Systeme, Rollen, Kanäle und Betriebsanforderungen zusammenkommen.",
+    category: "Architektur",
+  },
+  {
+    question: "Wie bleibt die Integration kontrollierbar?",
+    answer:
+      "Über klare Datenquellen, erlaubte Aktionen, Freigaben, Logs und Stopps. Kritische Ergebnisse werden vorbereitet, aber nicht blind ausgelöst.",
+    category: "Kontrolle",
+  },
+];
+---
+
+<SeoLandingPage
+  title="KI-Integration Prozesse: KI sauber in bestehende Abläufe integrieren | Codariq"
+  description="KI-Integration für Prozesse, die im Alltag funktionieren: Codariq verbindet Daten, Tools, Freigaben und Betrieb, damit KI-Agenten echte Arbeit vorbereiten."
+  keywords="KI Integration Prozesse, KI-Integration Prozesse, Integration KI, KI integrieren, künstliche Intelligenz Integration, Integration Strategy Entwicklung, IT-Integration für Unternehmen optimieren, KI Integration bestehende Systeme"
+  breadcrumbName="KI-Integration Prozesse"
+  breadcrumbUrl="https://codariq.de/ki-integration-prozesse"
+  heroTitle="KI-Integration, die in echte Prozesse passt."
+  heroSubtitle="Wir integrieren KI nicht als weiteres Tool, sondern als begrenzten Agenten im Ablauf: Daten lesen, Arbeit vorbereiten, Ergebnisse übergeben und bei Verantwortung stoppen."
+  primaryCTA="Integrationspunkt klären"
+  secondaryCTA="KI-Check starten"
+  secondaryCTALink="/automatisierungs-check"
+  introEyebrow="Integration Strategy Entwicklung"
+  introTitle="Der Prozess entscheidet, nicht das Tool"
+  introText="Viele KI-Projekte starten mit Modellwahl und Toolvergleich. Sinnvoller ist die Frage: Wo entsteht Arbeit, wo entsteht Nacharbeit und welches System muss am Ende stimmen?"
+  cards={[
+    {
+      title: "Datenfluss sichtbar machen",
+      text: "Wir klären, welche Informationen aus Postfach, CRM, Dokumenten, Kalender oder Projekttool wirklich gebraucht werden.",
+    },
+    {
+      title: "Agenten-Rolle begrenzen",
+      text: "Der Agent bekommt eine Aufgabe, erlaubte Aktionen und klare Stopps. So wird KI-Integration nicht zur Blackbox.",
+    },
+    {
+      title: "Betrieb mitdenken",
+      text: "Logs, Fehlerfälle und Verantwortlichkeiten werden geplant, bevor der Ablauf produktiv wird.",
+    },
+  ]}
+  processEyebrow="Von Prozess zu Pilot"
+  processTitle="So wird aus Integration KI, die wirklich genutzt wird."
+  processText="Wir starten nicht mit einem großen Architekturbild, sondern mit einem belastbaren Ablauf. Erst wenn der erste Prozess messbar funktioniert, lohnt sich der Ausbau."
+  steps={[
+    {
+      title: "Ablauf mit Reibung auswählen",
+      text: "Wir suchen den Prozess, der regelmäßig passiert, genug Volumen hat und heute sichtbare Nacharbeit erzeugt.",
+      items: [
+        "Postfach, Support, CRM, Reporting oder Dokumente",
+        "Zeitverlust und Fehlerkosten grob einordnen",
+        "Erfolgskriterium vor dem Bau festlegen",
+      ],
+    },
+    {
+      title: "Systemkarte bauen",
+      text: "Welche Quelle startet den Ablauf, welcher Kontext wird gebraucht und welches Zielsystem ist führend?",
+      items: [
+        "Datenquellen und Zugriffe erfassen",
+        "Freigaben und Sonderfälle markieren",
+        "Manuelle Schritte bewusst stehen lassen, wenn Verantwortung nötig ist",
+      ],
+    },
+    {
+      title: "Kleinen Pilot integrieren",
+      text: "Der Agent übernimmt einen Teilprozess, wird mit echten Fällen getestet und erst danach erweitert.",
+      items: [
+        "Tests mit realen Beispielen",
+        "Logs für Fehler und Qualität",
+        "Entscheidung: ausbauen, reparieren oder stoppen",
+      ],
+    },
+  ]}
+  proofTitle="Gute KI-Integration macht Arbeit messbar leichter."
+  proofText="Die beste KI-Integration erkennt man nicht an einer langen Tool-Liste. Man erkennt sie daran, dass weniger manuell kopiert, gesucht, sortiert und nachgefragt wird."
+  proofItems={[
+    {
+      title: "Weniger Copy Paste",
+      text: "Ergebnisse landen im richtigen System, statt als Text im Chat hängen zu bleiben.",
+    },
+    {
+      title: "Bessere Freigaben",
+      text: "Der Agent stoppt bei Entscheidungen, die nicht automatisiert werden sollten.",
+    },
+    {
+      title: "Klarer ROI",
+      text: "Volumen, Minutenersparnis und Fehlerkosten werden vor dem Ausbau geprüft.",
+    },
+  ]}
+  linksTitle="Weiterlesen zur KI-Integration"
+  links={[
+    {
+      href: "/blog/ki-integration-5-schritte",
+      label: "Guide",
+      text: "Die 5 Schritte von der Integration Strategy Entwicklung bis zum messbaren Pilot.",
+    },
+    {
+      href: "/blog/ki-integration-bestehende-systeme",
+      label: "Systeme",
+      text: "Wie KI in CRM, E-Mail, Kalender, Buchhaltung und Cloud-Tools eingebunden wird.",
+    },
+    {
+      href: "/blog/automatisierung-roi-maximieren",
+      label: "ROI",
+      text: "Wie du Automatisierungsinitiativen anhand ihres ROI priorisierst.",
+    },
+  ]}
+  faqs={faqs}
+  finalTitle="Lass uns deinen ersten Integrationspunkt sauber eingrenzen."
+  finalDescription="Wir prüfen, welcher Prozess genug Volumen hat, welche Systeme beteiligt sind und ob ein schlanker Workflow oder ein größerer Agenten-Stack sinnvoll ist."
+/>

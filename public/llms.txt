@@ -88,6 +88,8 @@ Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Int
 - DSGVO-konforme KI-Agenten
 - n8n-Agenten und OpenClaw-Setups
 - KI Integration und KI-Integration in bestehende Systeme
+- KI-Integration in Prozesse, Integration Strategy Entwicklung und IT-Integration für Unternehmen
+- CRM-Integration mit bestehenden Tools, E-Mail, Kalender und Cloud-Tools
 - KI Projekt retten, Projektrettung und KI-Remediation
 - KI-Mitarbeiterumfragen automatisiert auswerten
 - KI Teammanagement und Einführung in kleinen Teams
@@ -97,6 +99,9 @@ Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Int
 - https://codariq.de/ki-agenten-kmu
 - https://codariq.de/dsgvo-ki-agenten
 - https://codariq.de/openclaw-agenten
+- https://codariq.de/ki-integration-prozesse
+- https://codariq.de/crm-und-ki-integration
+- https://codariq.de/ki-projekt-retten
 
 ## Kontakt und Standort
 - Hauptsitz: Berlin, Deutschland (Sigmaringer Str. 27, 10713 Berlin)
@@ -108,7 +113,7 @@ Codariq ist spezialisiert auf kontrollierbare, DSGVO-konforme KI-Agenten, KI-Int
 - Website: https://codariq.de
 
 ## SEO Keywords
-KI Agenten KMU, DSGVO KI Agenten, OpenClaw Setup, n8n KI Agent, KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Projekt retten, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
+KI Agenten KMU, DSGVO KI Agenten, OpenClaw Setup, n8n KI Agent, KI Integration, KI-Integration, KI Integration Prozesse, KI Integration bestehende Systeme, CRM Integration mit bestehenden Tools, KI-Cloud-Integration Software, KI-Cloud-Integrationslösung, KI Projekt retten, Projektrettung, KI-Remediation, KI Mitarbeiterumfragen automatisiert, KI Teammanagement, Workflow Automatisierung, E Mail Automatisierung, Dokumentenautomatisierung, Backoffice automatisieren, DSGVO konform, KI Beratung DACH
 
 ## Häufige Fragen
 - Wie lange dauert die Umsetzung eines KI-Agenten oder einer Automatisierung?

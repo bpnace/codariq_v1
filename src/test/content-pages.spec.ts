@@ -16,6 +16,21 @@ const pages = [
     title: /OpenClaw-Agenten/,
     heading: "Vom n8n-Workflow zum stabilen OpenClaw-Agenten.",
   },
+  {
+    path: "/ki-integration-prozesse",
+    title: /KI-Integration Prozesse/,
+    heading: "KI-Integration, die in echte Prozesse passt.",
+  },
+  {
+    path: "/crm-und-ki-integration",
+    title: /CRM und KI-Integration/,
+    heading: "CRM und KI integrieren, ohne Vertrieb und Support zu verwirren.",
+  },
+  {
+    path: "/ki-projekt-retten",
+    title: /KI-Projekt retten/,
+    heading: "Dein KI-Projekt hängt fest? Wir finden den Bruch.",
+  },
 ];
 
 for (const pageInfo of pages) {
@@ -27,7 +42,9 @@ for (const pageInfo of pages) {
     );
     await expect(
       page
-        .getByRole("link", { name: /Termin|Potenzial|Setup|prüfen/i })
+        .getByRole("link", {
+          name: /Termin|Potenzial|Setup|prüfen|klären|Check/i,
+        })
         .first(),
     ).toBeVisible();
   });
@@ -36,13 +53,13 @@ for (const pageInfo of pages) {
 test("faq page uses compact question-first layout", async ({ page }) => {
   await page.goto("/faq");
 
-  await expect(page).toHaveTitle(/Häufige Fragen zu KI-Agenten/);
+  await expect(page).toHaveTitle(/FAQ zu KI-Agenten/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Noch Fragen?",
   );
   await expect(page.locator(".faq-page__intro")).toBeVisible();
   await expect(page.locator(".faq-page__intro")).not.toHaveClass(/hero/i);
-  await expect(page.locator(".faq-page__item")).toHaveCount(8);
+  await expect(page.locator(".faq-page__item")).toHaveCount(13);
   await expect(page.locator("[data-delivery-card-inner]")).toHaveCount(0);
   await expect(
     page.getByRole("heading", {
