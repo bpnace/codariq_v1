@@ -17,17 +17,17 @@ export interface Props {
 
 const {
   title = "KI-Agenten, die deinen Alltag tatsächlich entlasten.",
-  subtitle = "Wir bauen kontrollierbare KI-Agenten und KI-Integrationen, die E-Mails, Leads, Dokumente und bestehende Systeme sauber verbinden. DSGVO-konform, verständlich erklärt, in wenigen Wochen spürbar.",
+  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt. Wir bauen digitale Assistenten für echte Arbeit: lesen, sortieren, vorbereiten, stoppen und übergeben, wenn ein Mensch entscheiden muss.",
   primaryCTA = "Jetzt Termin buchen",
-  secondaryCTA = "Agenten-Potenzial prüfen",
+  secondaryCTA = "Was darf dein Agent?",
   primaryCTALink = "#final-cta",
   secondaryCTALink = "#benefits",
 } = Astro.props;
 
 const trustSignals = [
-  "Automatisch vorsortiert",
-  "Freigabe bei wichtigen Schritten",
-  "Saubere Übergabe ans Team",
+  "Zugriff klar begrenzt",
+  "Freigaben sauber geregelt",
+  "Logs für den Betrieb sichtbar",
 ];
 
 const briefingItems = [
@@ -60,7 +60,7 @@ const briefingItems = [
   <div class="secure-hero__inner">
     <div class="secure-hero__copy enterprise-reveal">
       <div class="secure-hero__kicker">
-        KI-Agenten bereiten vor, du entscheidest
+        KI-Agenten arbeiten vor, du bleibst Chef.
       </div>
       <h1>{title}</h1>
       <p>{subtitle}</p>

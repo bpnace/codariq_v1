@@ -82,11 +82,12 @@ const {
       <p>{subtitle}</p>
     </div>
 
-    <div class="proof-suite__grid">
+    <div class="proof-suite__grid" data-testimonial-reveal>
       {
         items.map((item) => (
           <article
             class={`proof-card enterprise-card ${item.kind === "feedback" || item.featured ? "proof-card--featured" : ""}`}
+            data-testimonial-card
             data-proof-kind={item.kind}
           >
             <div class="proof-card__meta">
@@ -149,6 +150,8 @@ const {
     border-radius: 16px;
     padding: 1.2rem;
     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+    transform-origin: 50% 82%;
+    will-change: transform, opacity, filter;
   }
 
   .proof-card--featured {

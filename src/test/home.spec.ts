@@ -225,7 +225,7 @@ test("home keeps a fixed bottom blur gradient over the viewport", async ({
   expect(initialVeil.layers).toHaveLength(3);
   expect(initialVeil.layers[0].backdropFilter).toContain("blur(0px)");
   expect(initialVeil.layers[1].backdropFilter).toContain("blur(3px)");
-  expect(initialVeil.layers[2].backdropFilter).toContain("blur(10px)");
+  expect(initialVeil.layers[2].backdropFilter).toContain("blur(20px)");
   expect(
     initialVeil.layers.every(
       ({ maskImage, webkitMaskImage }) =>
@@ -303,6 +303,7 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   await page.goto("/");
 
   const section = page.locator("#testimonials");
+  await section.scrollIntoViewIfNeeded();
   await expect(
     section.getByRole("heading", {
       name: "Wo Agenten Teams wirklich entlasten können",
@@ -356,6 +357,109 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   await expect(section.getByText("Scope")).toHaveCount(0);
   await expect(section.getByText("Prompts")).toHaveCount(0);
   await expect(section.getByText("Logging")).toHaveCount(0);
+});
+
+test("testimonial cards blur in with a randomized order", async ({ page }) => {
+  await page.goto("/");
+
+  const section = page.locator("#testimonials");
+  const cards = section.locator("[data-testimonial-card]");
+  await expect(cards).toHaveCount(6);
+
+  const readCardStates = async () =>
+    cards.evaluateAll((elements) =>
+      elements.map((element) => {
+        const card = element as HTMLElement;
+        const style = getComputedStyle(card);
+        const matrix = new DOMMatrixReadOnly(
+          style.transform === "none" ? undefined : style.transform,
+        );
+        const blur = style.filter.match(/blur\((-?\d+(?:\.\d+)?)px\)/);
+
+        return {
+          blur: blur ? Number.parseFloat(blur[1]) : 0,
+          opacity: Number.parseFloat(style.opacity),
+          order: Number.parseInt(card.dataset.testimonialRevealOrder ?? "-1", 10),
+          visibility: style.visibility,
+          y: matrix.m42,
+        };
+      }),
+    );
+
+  await expect
+    .poll(
+      async () =>
+        (await readCardStates()).every(
+          ({ order }) => Number.isInteger(order) && order >= 0,
+        ),
+      { timeout: 3000 },
+    )
+    .toBe(true);
+
+  const revealOrders = (await readCardStates()).map(({ order }) => order);
+  expect([...revealOrders].sort((a, b) => a - b)).toEqual([0, 1, 2, 3, 4, 5]);
+  expect(revealOrders).not.toEqual([0, 1, 2, 3, 4, 5]);
+
+  await page.evaluate(() => {
+    const grid = document.querySelector("[data-testimonial-reveal]");
+    if (!(grid instanceof HTMLElement)) {
+      throw new Error("Testimonial reveal grid not found.");
+    }
+
+    document.documentElement.style.scrollBehavior = "auto";
+    document.body.style.scrollBehavior = "auto";
+    const gridTop = grid.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, gridTop - window.innerHeight * 0.8);
+  });
+
+  await expect
+    .poll(
+      async () =>
+        (await readCardStates()).every(
+          ({ opacity, visibility }) => opacity === 0 && visibility === "hidden",
+        ),
+      { timeout: 3000 },
+    )
+    .toBe(true);
+
+  const initialStates = await readCardStates();
+  expect(initialStates.every(({ blur }) => blur > 16)).toBe(true);
+  expect(initialStates.every(({ opacity }) => opacity === 0)).toBe(true);
+  expect(initialStates.every(({ visibility }) => visibility === "hidden")).toBe(
+    true,
+  );
+  expect(initialStates.every(({ y }) => y > 44)).toBe(true);
+
+  await page.evaluate(() => {
+    const grid = document.querySelector("[data-testimonial-reveal]");
+    if (!(grid instanceof HTMLElement)) {
+      throw new Error("Testimonial reveal grid not found.");
+    }
+
+    const gridTop = grid.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, gridTop - window.innerHeight * 0.72);
+  });
+
+  await page.waitForTimeout(280);
+  const earlyStates = await readCardStates();
+  const firstCard = earlyStates.find(({ order }) => order === 0);
+  const lastCard = earlyStates.find(({ order }) => order === 5);
+  if (!firstCard || !lastCard) {
+    throw new Error("Testimonial reveal order was not assigned correctly.");
+  }
+
+  expect(firstCard.opacity).toBeGreaterThan(lastCard.opacity + 0.15);
+  expect(firstCard.blur).toBeLessThan(lastCard.blur);
+  expect(firstCard.y).toBeLessThan(lastCard.y);
+
+  await page.waitForTimeout(1300);
+  const finalStates = await readCardStates();
+  expect(finalStates.every(({ opacity }) => opacity > 0.98)).toBe(true);
+  expect(finalStates.every(({ blur }) => blur === 0)).toBe(true);
+  expect(finalStates.every(({ y }) => Math.abs(y) < 1)).toBe(true);
+  expect(finalStates.every(({ visibility }) => visibility === "visible")).toBe(
+    true,
+  );
 });
 
 test("final cta keeps form submit separate from calendar booking", async ({

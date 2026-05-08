@@ -21,6 +21,18 @@ const HERO_REPEATING_UPDATE_HOLD = 2.25;
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max);
 
+const getRandomRevealOrder = <T>(items: T[]): T[] => {
+  const shuffled = gsap.utils.shuffle(items.slice());
+  const isDomOrder = shuffled.every((item, index) => item === items[index]);
+
+  if (shuffled.length > 1 && isDomOrder) {
+    const first = shuffled.shift();
+    if (first !== undefined) shuffled.push(first);
+  }
+
+  return shuffled;
+};
+
 type ConnectionPoint = {
   x: number;
   y: number;
@@ -581,6 +593,45 @@ function initDeliveryFrameworkReveal(): void {
   });
 }
 
+function initTestimonialReveal(): void {
+  const grid = document.querySelector<HTMLElement>("[data-testimonial-reveal]");
+  if (!grid) return;
+
+  const cards = Array.from(
+    grid.querySelectorAll<HTMLElement>("[data-testimonial-card]"),
+  );
+  if (!cards.length) return;
+
+  const revealCards = getRandomRevealOrder(cards);
+  revealCards.forEach((card, revealOrder) => {
+    card.dataset.testimonialRevealOrder = String(revealOrder);
+  });
+
+  gsap.set(cards, {
+    autoAlpha: 0,
+    filter: "blur(18px)",
+    y: 48,
+    scale: 0.985,
+    force3D: true,
+  });
+
+  gsap.to(revealCards, {
+    autoAlpha: 1,
+    filter: "blur(0px)",
+    y: 0,
+    scale: 1,
+    duration: 0.78,
+    stagger: 0.09,
+    ease: "power4.out",
+    overwrite: "auto",
+    scrollTrigger: {
+      trigger: grid,
+      start: "top 76%",
+      once: true,
+    },
+  });
+}
+
 function initHeroConsoleLiveMotion(): gsap.core.Timeline | null {
   const consoleEl = document.querySelector<HTMLElement>(
     "[data-hero-agent-console]",
@@ -1132,7 +1183,7 @@ export function initEnterpriseMotion(): void {
       .toArray<HTMLElement>("[data-enterprise-section]")
       .forEach((section) => {
         const items = section.querySelectorAll<HTMLElement>(
-          ".enterprise-reveal, .enterprise-card",
+          ".enterprise-reveal, .enterprise-card:not([data-testimonial-card])",
         );
         if (!items.length || section.id === "hero") return;
 
@@ -1155,6 +1206,7 @@ export function initEnterpriseMotion(): void {
       });
 
     initDeliveryFrameworkReveal();
+    initTestimonialReveal();
   }, document.documentElement);
 
   const agentConnectionCleanup = initAgentConnectionMotion();
