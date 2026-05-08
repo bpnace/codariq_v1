@@ -25,6 +25,7 @@ type BaseStep = {
   id: string;
   question: string;
   subtitle?: string;
+  optional?: boolean;
 };
 
 type VisualCardStep = BaseStep & {
@@ -76,7 +77,8 @@ type QuizElements = {
   error: HTMLParagraphElement;
   result: HTMLDivElement;
   resultPotential: HTMLSpanElement;
-  resultLevel: HTMLParagraphElement;
+  resultLevel: HTMLSpanElement;
+  resultSummary: HTMLParagraphElement;
   resultTime: HTMLSpanElement;
   resultRoi: HTMLSpanElement;
   resultRecommendations: HTMLUListElement;
@@ -96,391 +98,219 @@ const init = () => {
     VisualCardStep | IconOptionStep | MultipleChoiceStep
   > = [
     {
-      id: "q1_automation_attitude",
-      question: "Wie stehst du zu Agenten und Automatisierung?",
+      id: "q1_task_area",
+      question: "Wo frisst Arbeit gerade am meisten Zeit?",
       subtitle:
-        "Es geht darum, wie offen du für klar begrenzte Agenten mit menschlicher Kontrolle bist.",
-      type: "visual_cards",
-      cards: [
-        {
-          title: "Klarer Bedarf. Ich will Agenten sinnvoll einsetzen",
-          value: "enthusiast",
-          icon: "01",
-        },
-        {
-          title: "Überzeugt, wenn Aufgabenraum und Grenzen sauber sind",
-          value: "convinced",
-          icon: "02",
-        },
-        {
-          title: "Offen, aber ich will erst konkrete Fälle sehen",
-          value: "neutral",
-          icon: "03",
-        },
-        {
-          title: "Skeptisch. Ohne Freigaben, Logs und Kontrolle nicht",
-          value: "skeptical",
-          icon: "04",
-        },
-      ],
-    },
-    {
-      id: "q2_biggest_hurdle",
-      question: "Wo liegt aktuell deine größte Herausforderung?",
-      subtitle:
-        "Damit die Empfehlung nicht nach Tool-Liste klingt, sondern zu deinem echten Arbeitsfluss passt.",
+        "Wähle den Bereich, bei dem du zuerst prüfen willst, ob KI oder ein Agent wirklich entlasten kann.",
       type: "icon_options",
       options: [
         {
-          icon: "Start",
-          text: "Ich will sauber mit Agenten und Automatisierung starten",
-          value: "getting_started",
+          icon: "Mail",
+          text: "E-Mails, Anfragen oder Support vorsortieren",
+          value: "email_requests",
         },
         {
-          icon: "Tempo",
-          text: "Unsere Abläufe sind zu langsam oder zu manuell",
-          value: "competition",
+          icon: "Docs",
+          text: "Dokumente, Rechnungen oder Verträge prüfen",
+          value: "documents_invoices",
+        },
+        {
+          icon: "CRM",
+          text: "Leads, CRM oder Follow-ups vorbereiten",
+          value: "crm_leads",
+        },
+        {
+          icon: "Data",
+          text: "Reporting, Listen oder Datenpflege entlasten",
+          value: "reporting_data",
         },
         {
           icon: "Team",
-          text: "Mein Team verliert Kontext zwischen Tools, Übergaben und Entscheidungen",
-          value: "team_overwhelmed",
+          text: "Übergaben, Freigaben oder interne Rückfragen bündeln",
+          value: "handoffs",
         },
         {
-          icon: "Zeit",
-          text: "Zu viel Zeit geht in wiederkehrende Aufgaben und Nachpflege",
-          value: "time_waste",
-        },
-        {
-          icon: "Use",
-          text: "Ich will herausfinden, welche Aufgaben Agenten wirklich übernehmen dürfen",
-          value: "exploration",
-        },
-        {
-          icon: "Info",
-          text: "Etwas anderes",
-          value: "other",
+          icon: "?",
+          text: "Noch unklar. Ich will den passenden Aufgabenraum finden",
+          value: "unclear",
         },
       ],
     },
     {
-      id: "q3_motivation",
-      question: "Wie klar ist dein Wille, daran wirklich etwas zu ändern?",
+      id: "q2_frequency",
+      question: "Wie oft wiederholt sich dieser Ablauf?",
       subtitle:
-        "Agenten bringen nur etwas, wenn Aufgaben, Datenfluss und Verantwortlichkeiten wirklich geklärt werden dürfen.",
-      type: "visual_cards",
-      cards: [
+        "Je häufiger ein Ablauf kommt, desto eher lohnt sich ein kontrollierter Agent statt noch mehr Handarbeit.",
+      type: "icon_options",
+      options: [
+        { icon: "T", text: "Täglich oder fast täglich", value: "daily" },
         {
-          title: "Sehr klar",
-          subtitle: "Wir wollen konkrete Abläufe umbauen",
-          value: "very_motivated",
-          icon: "01",
+          icon: "W",
+          text: "Mehrmals pro Woche",
+          value: "several_weekly",
         },
-        {
-          title: "Klar genug",
-          subtitle: "Wir wollen prüfen und dann umsetzen",
-          value: "motivated",
-          icon: "02",
-        },
-        {
-          title: "Noch offen",
-          subtitle: "Wir sammeln erst Orientierung",
-          value: "low_motivated",
-          icon: "03",
-        },
-        {
-          title: "Kein echter Auftrag",
-          subtitle: "Aktuell ist es eher ein Check von außen",
-          value: "not_motivated",
-          icon: "04",
-        },
+        { icon: "1x", text: "Etwa wöchentlich", value: "weekly" },
+        { icon: "S", text: "Seltener, aber jedes Mal nervig", value: "rarely" },
+        { icon: "?", text: "Schwer einzuschätzen", value: "unknown" },
       ],
     },
     {
-      id: "q4_experience_level",
-      question:
-        "Wo stehst du aktuell bei Agenten, Automatisierung und Integration?",
+      id: "q3_agent_permission",
+      question: "Wie viel dürfte ein Agent davon übernehmen?",
       subtitle:
-        "So können wir einschätzen, ob du Grundlagen, Workflow-Design oder robuste Agenten-Architektur brauchst.",
-      type: "visual_cards",
-      cards: [
-        {
-          icon: "0",
-          title: "Neuling",
-          subtitle:
-            "Ich kenne das Thema bisher nur grob und brauche eine saubere Einordnung.",
-          value: "beginner",
-        },
+        "Es geht um den erlaubten Handlungsspielraum. Kritische Entscheidungen sollten kontrolliert bleiben.",
+      type: "icon_options",
+      options: [
         {
           icon: "1",
-          title: "Anfänger",
-          subtitle:
-            "Ich habe erste Tools getestet, aber noch keinen belastbaren Ablauf gebaut.",
-          value: "novice",
+          text: "Nur sortieren, zusammenfassen oder markieren",
+          value: "summarize",
         },
         {
           icon: "2",
-          title: "Anwender",
-          subtitle:
-            "Ich kenne n8n, Zapier oder Make und habe schon praktisch damit gearbeitet.",
-          value: "user",
+          text: "Vorschläge und nächste Schritte vorbereiten",
+          value: "prepare",
         },
         {
           icon: "3",
-          title: "Fortgeschritten",
-          subtitle:
-            "Ich nutze Automatisierung regelmäßig und will Agenten mit Grenzen, Freigaben, Logs und Datenfluss sauber aufsetzen.",
-          value: "advanced",
+          text: "Antworten, Notizen oder Dokumente als Entwurf erstellen",
+          value: "draft",
+        },
+        {
+          icon: "4",
+          text: "Daten in Tools eintragen oder aktualisieren",
+          value: "update_tools",
+        },
+        {
+          icon: "5",
+          text: "Aktionen nach menschlicher Freigabe ausführen",
+          value: "act_after_approval",
         },
       ],
     },
     {
-      id: "q5_use_cases",
-      question:
-        "Hast du schon eine konkrete Aufgabe, die ein Agent übernehmen oder vorbereiten soll?",
+      id: "q4_data_systems",
+      question: "Welche Daten oder Systeme wären betroffen?",
       subtitle:
-        "Wähle bis zu drei Bereiche. Wichtig ist nicht nur die Aufgabe, sondern auch der erlaubte Handlungsspielraum.",
+        "Wähle bis zu vier. Das ist wichtig für DSGVO, EU AI Act, Freigaben und technische Anbindung.",
       type: "multiple_choice",
-      maxSelections: 3,
+      maxSelections: 4,
       options: [
+        { text: "E-Mail oder Postfach", value: "email" },
+        { text: "Kundendaten oder Gesprächsverläufe", value: "customer_data" },
         {
-          text: "Einen soliden Einstieg in Agenten und sichere Automatisierung finden",
-          value: "getting_started",
+          text: "Verträge, Angebote oder interne Dokumente",
+          value: "contracts",
         },
         {
-          text: "Kundenanfragen vorbereiten, beantworten oder an Menschen übergeben",
-          value: "customer_support",
+          text: "Buchhaltung, Rechnungen oder Zahlungsdaten",
+          value: "finance",
+        },
+        { text: "CRM, Ticketsystem oder Projekttool", value: "business_tools" },
+        { text: "Kalender, Termine oder Aufgabenlisten", value: "calendar" },
+        {
+          text: "Internes Wissen oder Prozessdokumentation",
+          value: "internal_knowledge",
+        },
+        { text: "Personenbezogene oder sensible Daten", value: "people_data" },
+        { text: "Ich bin mir nicht sicher", value: "unknown" },
+      ],
+    },
+    {
+      id: "q5_current_ai_use",
+      question: "Wie nutzt ihr KI heute schon?",
+      subtitle:
+        "Optional, aber hilfreich für die Einschätzung, ob DSGVO- und EU-AI-Act-Themen schon sauber angelegt sind.",
+      type: "icon_options",
+      optional: true,
+      options: [
+        { icon: "0", text: "Noch gar nicht", value: "none" },
+        {
+          icon: "Frei",
+          text: "Einzelne Mitarbeitende nutzen Tools frei",
+          value: "employees_free",
         },
         {
-          text: "Rechnungsstellung, Buchhaltung oder Belegflüsse strukturieren",
-          value: "invoicing",
+          icon: "Regel",
+          text: "Es gibt Regeln, aber noch keine Prüfung",
+          value: "rules_no_review",
         },
         {
-          text: "Geschäftsprozesse über Tools, Daten und Freigaben verbinden",
-          value: "process_automation",
+          icon: "Tool",
+          text: "Feste Tools, AVV oder interne Standards sind vorhanden",
+          value: "approved_tools",
         },
         {
-          text: "Marketing, Recherche oder Lead-Prozesse kontrolliert unterstützen",
-          value: "marketing",
-        },
-        {
-          text: "Datenerfassung, Reporting und Logs verlässlicher machen",
-          value: "data_automation",
-        },
-        {
-          text: "Agenten strategisch in bestehende Systeme integrieren",
-          value: "ai_strategy",
-        },
-        {
-          text: "Noch kein konkreter Fall, ich will den Aufgabenraum erst finden",
-          value: "no_idea",
+          icon: "Log",
+          text: "Produktive KI-Prozesse haben Freigaben und Protokolle",
+          value: "logged_processes",
         },
       ],
     },
     {
       id: "q6_goal",
-      question: "Was ist dein Ziel?",
+      question: "Was wäre in den nächsten 30 Tagen ein gutes Ergebnis?",
       subtitle:
-        "Sag uns, ob du Orientierung, eigenes Können oder eine umgesetzte Lösung brauchst.",
-      type: "visual_cards",
-      cards: [
-        {
-          icon: "Scan",
-          title: "Orientierung",
-          subtitle: "Erst prüfen, welche Aufgabenräume überhaupt sinnvoll sind",
-          value: "exploration",
-        },
-        {
-          icon: "Plan",
-          title: "Einstieg",
-          subtitle:
-            "Einen klaren Einstieg in Agenten, Automatisierung und Grenzen finden",
-          value: "getting_started",
-        },
-        {
-          icon: "Build",
-          title: "Lernen & Umsetzen",
-          subtitle:
-            "Agenten und Automatisierung verstehen, anwenden und kontrolliert implementieren",
-          value: "learn_implement",
-        },
-        {
-          icon: "Done",
-          title: "Umsetzung",
-          subtitle:
-            "Ich möchte nicht selbst bauen. Ich brauche einen umgesetzten Agenten mit klarer Kontrolle",
-          value: "ready_to_use",
-        },
-      ],
-    },
-    {
-      id: "q7_urgency",
-      question: "Wie dringend brauchst du Ergebnisse?",
-      subtitle:
-        "Damit wir Tempo, Risiko und Tiefe realistisch zusammenbringen.",
+        "Optional. Die Antwort hilft, deine Auswertung konkreter zu machen.",
       type: "icon_options",
+      optional: true,
       options: [
+        { icon: "Zeit", text: "Spürbar Zeit sparen", value: "save_time" },
         {
-          icon: "Now",
-          text: "Schnell. Ein erster belastbarer Ablauf soll zeitnah stehen",
-          value: "asap",
+          icon: "OK",
+          text: "Weniger Fehler oder Nacharbeit",
+          value: "fewer_errors",
         },
         {
-          icon: "Next",
-          text: "Zeitnah, in den nächsten 2 bis 3 Monaten",
-          value: "soon",
+          icon: "Fix",
+          text: "Schneller auf Anfragen reagieren",
+          value: "faster_replies",
         },
         {
-          icon: "Calm",
-          text: "Keine Eile. Ich will erst sauber verstehen und planen",
-          value: "no_rush",
-        },
-      ],
-    },
-    {
-      id: "q8_company_structure",
-      question: "Wie bist du aktuell aufgestellt?",
-      subtitle:
-        "Agenten brauchen andere Grenzen, wenn eine Person entscheidet oder mehrere Rollen beteiligt sind.",
-      type: "visual_cards",
-      cards: [
-        {
-          icon: "Solo",
-          title: "Solopreneur / Einzelkämpfer",
-          subtitle: "Ich entscheide und arbeite weitgehend allein",
-          value: "solopreneur",
+          icon: "Blick",
+          text: "Bessere Übersicht über offene Punkte",
+          value: "better_overview",
         },
         {
-          icon: "New",
-          title: "Ich gründe gerade erst",
-          subtitle: "Strukturen, Tools und Datenflüsse entstehen gerade",
-          value: "startup",
+          icon: "Regel",
+          text: "Saubere KI-Regeln und Freigaben",
+          value: "clean_rules",
         },
         {
-          icon: "Team",
-          title: "Kleines Team (2 bis 10 Mitarbeiter)",
-          subtitle:
-            "Wir brauchen klare Übergaben, Zuständigkeiten und Freigaben",
-          value: "small_team",
-        },
-        {
-          icon: "Org",
-          title: "Etabliertes Unternehmen (mehr als 10 Mitarbeiter)",
-          subtitle:
-            "Wir haben feste Strukturen, Systeme und Kontrollanforderungen",
-          value: "established",
-        },
-      ],
-    },
-    {
-      id: "q9_time_waste",
-      question:
-        "Wie viel Zeit geht aktuell pro Woche in manuelle Routinen, Übergaben, Datenpflege oder Nachkontrolle?",
-      subtitle:
-        "Das zeigt, ob ein Agent nur Komfort bringt oder echte Entlastung mit nachvollziehbaren Logs schaffen kann.",
-      type: "visual_cards",
-      cards: [
-        {
-          icon: "<2",
-          title: "Wenig (unter 2 Std.)",
-          subtitle: "Die wichtigsten Abläufe sind bereits stabil",
-          value: "low",
-        },
-        {
-          icon: "2-5",
-          title: "Geht so (2 bis 5 Std.)",
-          subtitle: "Es gibt klare Reibung, aber noch keinen großen Druck",
-          value: "medium",
-        },
-        {
-          icon: "5-10",
-          title: "Viel (5 bis 10 Std.)",
-          subtitle: "Hier lohnt sich ein sauber abgegrenzter Agenten-Workflow",
-          value: "high",
-        },
-        {
-          icon: "10+",
-          title: "Kritisch (über 10 Std.)",
-          subtitle: "Der Ablauf braucht Struktur, Kontrolle und Entlastung",
-          value: "critical",
-        },
-      ],
-    },
-    {
-      id: "q10_budget",
-      question: "Wie viel Budget steht dir zur Verfügung?",
-      subtitle:
-        "So bleibt die Empfehlung realistisch: Lernen, Prototyp, Umsetzung oder intensivere Begleitung.",
-      type: "visual_cards",
-      cards: [
-        {
-          icon: "0",
-          title: "0 Euro",
-          subtitle: "Erstmal Orientierung ohne Investition",
-          value: "free",
-        },
-        {
-          icon: "S",
-          title: "0 bis 200 Euro",
-          subtitle: "Kleines Budget für Grundlagen und erste Schritte",
-          value: "starter",
-        },
-        {
-          icon: "M",
-          title: "200 bis 1.000 Euro",
-          subtitle:
-            "Systematisch lernen oder einen ersten belastbaren Ablauf planen",
-          value: "learning",
-        },
-        {
-          icon: "L",
-          title: "1.000 bis 3.000 Euro",
-          subtitle:
-            "Intensivere Begleitung oder ein konkreter Workflow-Prototyp",
-          value: "intensive",
-        },
-        {
-          icon: "XL",
-          title: "über 3.000 Euro",
-          subtitle:
-            "Umsetzung mit sauberer Architektur, Kontrolle und Übergabe",
-          value: "premium",
+          icon: "Test",
+          text: "Einen ersten Agenten begrenzt testen",
+          value: "test_agent",
         },
       ],
     },
   ];
 
-  const captureSteps: Array<NameCaptureStep | ContactCaptureStep> = [
-    {
-      id: "capture_name",
-      question: "Wie dürfen wir dich ansprechen?",
-      subtitle: "Der Name landet nur in deiner Auswertung und Anfrage.",
-      type: "name_capture",
-    },
+  const captureSteps: Array<ContactCaptureStep> = [
     {
       id: "capture_contact",
-      question: "Wohin dürfen wir dir die Auswertung schicken?",
+      question: "Wohin dürfen wir die Auswertung schicken?",
       subtitle:
-        "Wir nutzen die Daten nur für diesen Check und die passende Rückmeldung. Kein Newsletter-Zwang.",
+        "E-Mail und Einwilligung sind Pflicht. Name, Unternehmen und Telefon bleiben optional.",
       type: "contact_capture",
     },
   ];
 
   const progressMessages: Array<{ at: number; text: string }> = [
-    { at: 30, text: "Die ersten Eckdaten stehen." },
-    { at: 50, text: "Halbzeit. Jetzt wird der Aufgabenraum klarer." },
-    { at: 80, text: "Fast fertig. Nur noch Kontakt und Auswertung." },
+    { at: 35, text: "Aufgabenraum steht." },
+    { at: 60, text: "Daten- und Freigaberahmen wird klarer." },
+    { at: 86, text: "Nur noch E-Mail für die Auswertung." },
   ];
 
   const steps: QuizStep[] = [...quizQuestions, ...captureSteps];
   const totalSteps = steps.length;
-  const storageKey = "codariq_quiz_v1";
+  const storageKey = "codariq_quiz_v2";
 
   const state: QuizRunState = {
     currentStep: 0,
     answers: {},
     userInfo: {
       name: "",
+      company: "",
       email: "",
       phone: "",
       consent: false,
@@ -501,7 +331,8 @@ const init = () => {
     error: getElement<HTMLParagraphElement>("quiz-error"),
     result: getElement<HTMLDivElement>("quiz-result"),
     resultPotential: getElement<HTMLSpanElement>("result-potential"),
-    resultLevel: getElement<HTMLParagraphElement>("result-level"),
+    resultLevel: getElement<HTMLSpanElement>("result-level"),
+    resultSummary: getElement<HTMLParagraphElement>("result-summary"),
     resultTime: getElement<HTMLSpanElement>("result-time"),
     resultRoi: getElement<HTMLSpanElement>("result-roi"),
     resultRecommendations: getElement<HTMLUListElement>(
@@ -528,7 +359,11 @@ const init = () => {
 
   function updateProgress() {
     const percent = Math.round(((state.currentStep + 1) / totalSteps) * 100);
-    elements.stepLabel.textContent = `Schritt ${state.currentStep + 1} von ${totalSteps}`;
+    const current = steps[state.currentStep];
+    elements.stepLabel.textContent =
+      current?.type === "contact_capture"
+        ? "Auswertung per E-Mail"
+        : `Frage ${state.currentStep + 1} von ${quizQuestions.length}`;
     elements.progressFill.style.width = `${percent}%`;
     elements.progressPercent.textContent = `${percent}%`;
     const message =
@@ -668,8 +503,44 @@ const init = () => {
     if (step.type === "contact_capture") {
       const nameField = document.createElement("div");
       nameField.className = "quiz-field";
+      const nameLabel = document.createElement("label");
+      nameLabel.textContent = "Name (optional)";
+      nameLabel.setAttribute("for", "quiz-name");
+      const nameInput = document.createElement("input");
+      nameInput.id = "quiz-name";
+      nameInput.type = "text";
+      nameInput.placeholder = "z.B. Mina";
+      nameInput.value = state.userInfo.name;
+      nameInput.addEventListener("input", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.name = target.value.trim();
+        saveState();
+      });
+      nameField.appendChild(nameLabel);
+      nameField.appendChild(nameInput);
+
+      const companyField = document.createElement("div");
+      companyField.className = "quiz-field";
+      const companyLabel = document.createElement("label");
+      companyLabel.textContent = "Unternehmen (optional)";
+      companyLabel.setAttribute("for", "quiz-company");
+      const companyInput = document.createElement("input");
+      companyInput.id = "quiz-company";
+      companyInput.type = "text";
+      companyInput.placeholder = "z.B. Beispiel GmbH";
+      companyInput.value = state.userInfo.company;
+      companyInput.addEventListener("input", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.company = target.value.trim();
+        saveState();
+      });
+      companyField.appendChild(companyLabel);
+      companyField.appendChild(companyInput);
+
+      const emailField = document.createElement("div");
+      emailField.className = "quiz-field";
       const emailLabel = document.createElement("label");
-      emailLabel.textContent = "E-Mail";
+      emailLabel.textContent = "E-Mail-Adresse";
       emailLabel.setAttribute("for", "quiz-email");
       const emailInput = document.createElement("input");
       emailInput.id = "quiz-email";
@@ -682,8 +553,8 @@ const init = () => {
         saveState();
         updateNextState();
       });
-      nameField.appendChild(emailLabel);
-      nameField.appendChild(emailInput);
+      emailField.appendChild(emailLabel);
+      emailField.appendChild(emailInput);
 
       const phoneField = document.createElement("div");
       phoneField.className = "quiz-field";
@@ -734,7 +605,9 @@ const init = () => {
       honeypotField.appendChild(honeypotLabel);
       honeypotField.appendChild(honeypotInput);
 
+      elements.options.appendChild(emailField);
       elements.options.appendChild(nameField);
+      elements.options.appendChild(companyField);
       elements.options.appendChild(phoneField);
       elements.options.appendChild(consentField);
       elements.options.appendChild(honeypotField);
@@ -832,7 +705,7 @@ const init = () => {
 
     elements.back.disabled = state.currentStep === 0;
     elements.next.textContent =
-      step.type === "contact_capture" ? "Auswertung anfordern" : "Weiter";
+      step.type === "contact_capture" ? "Auswertung senden" : "Weiter";
     updateNextState();
     updateProgress();
   }
@@ -841,6 +714,10 @@ const init = () => {
     const step = steps[state.currentStep];
     if (!step) return;
     elements.next.disabled = !isStepValid(step, state);
+    if (step.type !== "contact_capture") {
+      elements.next.textContent =
+        step.optional && !state.answers[step.id] ? "Überspringen" : "Weiter";
+    }
   }
 
   function goToStep(stepIndex: number) {
@@ -857,7 +734,7 @@ const init = () => {
     const fallback = {
       title: rec.title,
       description: rec.description,
-      icon: "Log",
+      icon: rec.icon,
     };
     const copyByTitle: Record<
       string,
@@ -961,7 +838,7 @@ const init = () => {
   ) {
     const firstName = state.userInfo.name.trim().split(/\s+/)[0] || "du";
     const topRecommendation =
-      recommendations[0]?.title || "Automatisierungspotenzial prüfen";
+      recommendations[0]?.title || "Ablauf in der Tiefe prüfen";
     const bookingUrl =
       "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
     const servicesUrl = "https://codariq.de/#benefits";
@@ -969,17 +846,18 @@ const init = () => {
 
     return {
       to: state.userInfo.email,
-      subject: `Deine Codariq Auswertung: ${topRecommendation}`,
-      previewText: `${results.automationPotential}% Automatisierungspotenzial. Nächster Schritt: den Ablauf in der Tiefe prüfen.`,
-      headline: `${firstName}, deine Auswertung ist da.`,
+      subject: `Deine Codariq Auswertung: ${results.outcomeTitle}`,
+      previewText: `${results.outcomeTitle}. Nächster Schritt: ${results.nextStep}.`,
+      headline: `${firstName}, deine Einschätzung ist da.`,
       text: [
         `Hallo ${firstName},`,
-        `dein Check zeigt ${results.automationPotential}% Automatisierungspotenzial (${results.level}).`,
+        `dein Check zeigt: ${results.outcomeTitle}.`,
+        results.outcomeSummary,
         "Der wichtigste Punkt ist gerade:",
         topRecommendation,
-        `Bei dir hängen etwa ${results.timeSavingsPotential} Stunden pro Woche in Routine, Übergabe oder Nachkontrolle. Das ist genug, um nicht bei einer groben Einschätzung stehen zu bleiben.`,
-        "Wir schauen uns deinen Arbeitsbereich in der Tiefe an: Aufgaben, Datenquellen, Entscheidungspunkte, Freigaben, Risiken und mögliche Testagenten. Danach bekommst du eine persönliche Empfehlung, welcher Ansatz funktioniert, wo ein Agent schon echte Arbeit anfassen darf und was vorher noch geklärt werden muss.",
-        "Dabei denken wir Datenschutz, EU AI Act, Kontrolle und saubere Übergaben von Anfang an mit.",
+        `In dem Ablauf stecken grob ${results.timeSavingsPotential} Stunden pro Woche, die ein sauber begrenzter Workflow oder Agent vorbereiten, sortieren oder nach Freigabe abarbeiten könnte.`,
+        "Für eine belastbare Entscheidung prüfen wir den Arbeitsbereich in der Tiefe: Aufgaben, Datenquellen, Entscheidungspunkte, Freigaben, Risiken und erste Testfälle. Danach weißt du, ob KI wirklich gebraucht wird, wo ein Agent Arbeit abnehmen darf und was vor dem Betrieb geklärt werden muss.",
+        "Diese Einschätzung ersetzt keine Rechtsberatung. Datenschutz, EU AI Act, Kontrolle und saubere Übergaben gehören aber von Anfang an in die Prüfung.",
         `Leistungen ansehen: ${servicesUrl}`,
         `Termin buchen: ${bookingUrl}`,
         `FAQ öffnen: ${faqUrl}`,
@@ -1011,10 +889,6 @@ const init = () => {
     const honeypot = document.getElementById(
       "quiz-website",
     ) as HTMLInputElement | null;
-    if (!state.userInfo.name.trim()) {
-      setError("Bitte gib deinen Namen an.");
-      return;
-    }
     if (!isValidEmail(state.userInfo.email)) {
       setError("Bitte gib eine gültige E-Mail-Adresse ein.");
       return;
@@ -1031,6 +905,16 @@ const init = () => {
     const results = calculateResults(state.answers);
     const answerDetails = buildAnswerDetails();
     const recommendations = results.recommendations.map(getRecommendationCopy);
+    const displayName = state.userInfo.name.trim() || "Interessent/in";
+    const displayCompany =
+      state.userInfo.company.trim() || "Quiz (KI- und Automatisierungs-Check)";
+    const missingOptionalInputs = [
+      state.userInfo.name.trim() ? "" : "name",
+      state.userInfo.company.trim() ? "" : "company",
+      state.userInfo.phone.trim() ? "" : "phone",
+      state.answers["q5_current_ai_use"] ? "" : "q5_current_ai_use",
+      state.answers["q6_goal"] ? "" : "q6_goal",
+    ].filter(Boolean);
     const answersSummary = answerDetails
       .map((answer) => `${answer.question}: ${answer.answers.join(", ")}`)
       .join(" | ");
@@ -1044,17 +928,25 @@ const init = () => {
       estimatedValuePerMonth: results.roiEstimate,
       productFit: results.productFit,
       urgencyScore: results.urgencyScore,
+      outcomeTitle: results.outcomeTitle,
+      outcomeSummary: results.outcomeSummary,
+      dimensions: results.dimensions,
+      auditSignal: results.auditSignal,
+      affectedDataClasses: results.affectedDataClasses,
+      agentPermissionLevel: results.agentPermissionLevel,
+      nextStep: results.nextStep,
+      missingOptionalInputs,
       recommendations,
     };
     const emailDraft = buildEmailDraft(results, recommendations);
     const message = [
       `Quiz Antworten: ${answersSummary || "keine"}.`,
-      `Agenten- und Automatisierungspotenzial: ${results.automationPotential}%, Level: ${results.level}.`,
+      `Einschätzung: ${results.outcomeTitle}. Score: ${results.automationPotential}%, Prüfbedarf: ${results.auditSignal}.`,
       `Empfohlene nächste Schritte: ${recommendationsSummary || "keine"}.`,
     ].join(" ");
     const payload = {
-      name: state.userInfo.name,
-      company: "Quiz (Agenten- und Automatisierungs-Check)",
+      name: displayName,
+      company: displayCompany,
       email: state.userInfo.email,
       phone: state.userInfo.phone,
       message,
@@ -1126,9 +1018,10 @@ const init = () => {
     elements.result.classList.remove("hidden");
     elements.result.classList.add("is-revealed");
     elements.resultPotential.textContent = `${results.automationPotential}%`;
-    elements.resultLevel.textContent = results.level;
+    elements.resultLevel.textContent = results.outcomeTitle;
+    elements.resultSummary.textContent = results.outcomeSummary;
     elements.resultTime.textContent = String(results.timeSavingsPotential);
-    elements.resultRoi.textContent = String(results.roiEstimate);
+    elements.resultRoi.textContent = results.auditSignal;
     elements.resultRecommendations.innerHTML = "";
     results.recommendations.forEach((rec) => {
       const recommendation = getRecommendationCopy(rec);
@@ -1148,7 +1041,6 @@ const init = () => {
     if (successBanner) {
       successBanner.classList.remove("hidden");
     }
-    elements.result.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   elements.back.addEventListener("click", () => {
@@ -1161,7 +1053,7 @@ const init = () => {
     const step = steps[state.currentStep];
     if (!step) return;
     setError("");
-    if (step.type === "multiple_choice") {
+    if (step.type === "multiple_choice" && !step.optional) {
       const rawSelected = state.answers[step.id];
       const selected = Array.isArray(rawSelected) ? rawSelected : [];
       if (selected.length === 0) {
@@ -1177,7 +1069,11 @@ const init = () => {
       submitQuiz();
       return;
     }
-    if (step.type !== "name_capture" && !state.answers[step.id]) {
+    if (
+      !step.optional &&
+      step.type !== "name_capture" &&
+      !state.answers[step.id]
+    ) {
       setError("Bitte wähle eine Option.");
       return;
     }

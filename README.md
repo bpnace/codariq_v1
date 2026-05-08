@@ -1,6 +1,6 @@
 # Codariq Landing Page
 
-> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für Selbstständige und kleine Teams bis 50 Personen"**
+> **Astro-powered landing page positioning Codariq as the partner for kontrollierbare KI-Agenten with clear data flows, approvals, logs, and human control.**
 
 [![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
 [![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
@@ -11,7 +11,7 @@
 
 ## 🎯 Project Overview
 
-**Codariq** is a KI-Automatisierung (AI automation) service provider specializing in self-employed professionals and small teams (1-50 people) across Germany, Austria, and Switzerland.
+**Codariq** builds controllable AI agents and agent workflows for self-employed professionals, small teams, and KMU across Germany, Austria, and Switzerland.
 
 ### Target Audience
 

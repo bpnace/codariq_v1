@@ -224,7 +224,7 @@ test("home keeps a fixed bottom blur gradient over the viewport", async ({
   expect(initialVeil.beforeOpacity).toBe("1");
   expect(initialVeil.layers).toHaveLength(3);
   expect(initialVeil.layers[0].backdropFilter).toContain("blur(0px)");
-  expect(initialVeil.layers[1].backdropFilter).toContain("blur(3px)");
+  expect(initialVeil.layers[1].backdropFilter).toContain("blur(4px)");
   expect(initialVeil.layers[2].backdropFilter).toContain("blur(20px)");
   expect(
     initialVeil.layers.every(
@@ -1147,7 +1147,7 @@ test("agent connection line links the two framework badges", async ({
   await page.goto("/");
 
   await expect(page.locator("[data-agent-connection-start]")).toHaveText(
-    "Agenten-Readiness",
+    "Agenten-Setup",
   );
   await expect(page.locator("[data-agent-connection-target]")).toHaveText(
     "Sicherer Einsatz",

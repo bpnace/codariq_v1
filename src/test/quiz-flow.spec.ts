@@ -21,10 +21,10 @@ test("quiz flow completes and shows results", async ({ page }) => {
   const question = page.locator("#quiz-question");
   const options = page.locator("#quiz-options button");
 
-  for (let step = 0; step < 10; step += 1) {
+  for (let step = 0; step < 6; step += 1) {
     await expect(question).not.toHaveText("");
     const count = await options.count();
-    if (step === 4 && count > 1) {
+    if (step === 3 && count > 1) {
       await options.nth(0).click();
       await options.nth(1).click();
     } else {
@@ -35,9 +35,7 @@ test("quiz flow completes and shows results", async ({ page }) => {
   }
 
   await page.fill("#quiz-name", "Test Nutzer");
-  await expect(next).toBeEnabled();
-  await next.click();
-
+  await page.fill("#quiz-company", "Codariq Test GmbH");
   await page.fill("#quiz-email", "test@example.com");
   await page.check("#quiz-consent");
   await expect(next).toBeEnabled();
@@ -47,21 +45,30 @@ test("quiz flow completes and shows results", async ({ page }) => {
   await expect(page.locator("#result-level")).not.toHaveText("-");
   expect(submittedPayload).toMatchObject({
     source: "codariq_quiz",
+    name: "Test Nutzer",
+    company: "Codariq Test GmbH",
     email: "test@example.com",
   });
   expect(submittedPayload?.answerDetails).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        id: "q1_automation_attitude",
-        question: "Wie stehst du zu Agenten und Automatisierung?",
+        id: "q1_task_area",
+        question: "Wo frisst Arbeit gerade am meisten Zeit?",
       }),
       expect.objectContaining({
-        id: "q8_company_structure",
+        id: "q4_data_systems",
       }),
     ]),
   );
   expect(submittedPayload?.resultSummary).toMatchObject({
     level: expect.any(String),
+    outcomeTitle: expect.any(String),
+    auditSignal: expect.stringMatching(/niedrig|mittel|hoch/),
+    dimensions: {
+      kiNeedScore: expect.any(Number),
+      agentReliefScore: expect.any(Number),
+      complianceReadinessScore: expect.any(Number),
+    },
     recommendations: expect.any(Array),
   });
   expect(submittedPayload?.emailDraft).toMatchObject({

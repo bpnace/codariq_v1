@@ -35,9 +35,39 @@ const faqItems = [
   },
   {
     category: "Kosten",
-    question: "Wie viel kostet eine KI-Automatisierung?",
+    question: "Wie viel kostet ein KI-Agenten-Setup?",
     answer:
-      "Die Pakete starten ab 399 €, 1.499 € und 3.499 €. Der Preis hängt vom Umfang, den angebundenen Systemen, der Datenlage und dem nötigen Sicherheitsrahmen ab. Vor der Umsetzung bekommst du einen klaren Plan mit Dauer und Ergebnis.",
+      "Die Einstiegspunkte liegen aktuell bei ab 219 €, ab 1.899 € und ab 3.899 €. Der Preis hängt vom Umfang, den angebundenen Systemen, der Datenlage und dem nötigen Sicherheitsrahmen ab. Vor der Umsetzung bekommst du einen klaren Plan mit Dauer und Ergebnis.",
+  },
+  {
+    category: "Kontrolle",
+    question: "Was wird protokolliert und wer sieht die Logs?",
+    answer:
+      "Wir legen vorab fest, welche Aktionen, Freigaben, Fehler und Übergaben dokumentiert werden. Sichtbar bleiben nur die Informationen, die für Betrieb, Nachvollziehbarkeit und Verantwortung wirklich gebraucht werden.",
+  },
+  {
+    category: "Einordnung",
+    question: "Wie finden wir den passenden ersten Ablauf?",
+    answer:
+      "Wir schauen auf Wiederholung, Datenlage, Risiko und Wirkung. Daraus wählen wir den kleinsten Ablauf, bei dem ein Agent sichtbar entlastet, ohne Verantwortung oder Freigaben zu verwischen.",
+  },
+  {
+    category: "Betrieb",
+    question: "Was kostet laufende Betreuung?",
+    answer:
+      "Für kleinere Abläufe beginnt Betreuung aktuell ab 89 € pro Monat, für umfangreichere Agenten-Setups ab 199 € pro Monat. Bei betreutem Betrieb eines ganzen Bereichs hängt der Preis vom Umfang, den Risiken und den nötigen Änderungen ab.",
+  },
+  {
+    category: "Technik",
+    question: "Reicht n8n oder braucht es einen Agenten-Stack?",
+    answer:
+      "Viele erste Agenten laufen sinnvoll als n8n-Workflow mit klaren KI-Schritten. Ein größerer Stack wie OpenClaw wird erst interessant, wenn mehrere Kanäle, Tools, Modelle, Freigaben und dauerhafter Betrieb sauber verwaltet werden müssen.",
+  },
+  {
+    category: "Datenschutz",
+    question: "Was passiert mit Daten nach Test und Betrieb?",
+    answer:
+      "Wir klären Speicherorte, Löschlogik, Zugriffsentzug und Übergabe vor dem Einsatz. Testdaten sollten nicht einfach liegen bleiben, und produktive Zugriffe müssen wieder entzogen werden können, wenn ein Agent geändert oder abgeschaltet wird.",
   },
   {
     category: "Betrieb",
@@ -57,8 +87,8 @@ const faqItems = [
 ---
 
 <Base
-  title="FAQ - Häufige Fragen zu KI-Agenten und Automatisierung | Codariq"
-  description="Kompakte Antworten zu KI-Agenten, DSGVO, Kosten, Zeitrahmen, Integration und Betrieb kontrollierbarer Automatisierung für Selbstständige, kleine Teams und KMU."
+  title="FAQ zu KI-Agenten, DSGVO, EU AI Act und Betrieb | Codariq"
+  description="Antworten zu Datenwegen, Freigaben, Logs, Preisen und Betrieb sicherer KI-Agenten für Selbstständige, kleine Teams und KMU."
   forceNavSolid={true}
 >
   <FAQSchema faqs={faqItems} />

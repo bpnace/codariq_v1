@@ -3,10 +3,9 @@ import { build } from "esbuild";
 import path from "node:path";
 import Base from "../layouts/Base.astro";
 
-const pageTitle =
-  "Codariq Agenten-Check: Aufgabenraum, Grenzen und nächster Schritt";
+const pageTitle = "Codariq KI-Check: Bedarf, Agentenpotenzial und Prüfbedarf";
 const pageDescription =
-  "Prüfe in wenigen Minuten, welcher Ablauf bei dir agentenfähig ist, welche Grenzen vor dem ersten Test stehen müssen und welcher nächste Schritt sinnvoll ist.";
+  "Prüfe in sechs Fragen, ob KI in deinem Unternehmen sinnvoll ist, ein Agent Arbeit abnehmen kann und ob Datenschutz- oder EU-AI-Act-Fragen vor dem Betrieb geklärt werden müssen.";
 const quizEntry = path.resolve(
   process.cwd(),
   "src/scripts/automatisierungs-check.ts",
@@ -26,92 +25,25 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 <Base title={pageTitle} description={pageDescription} forceNavSolid={true}>
   <main id="main-content" class="agent-check-page">
     <section
-      class="agent-check-hero"
-      data-enterprise-section
-      aria-labelledby="agent-check-title"
-    >
-      <div class="agent-check-hero__inner">
-        <div class="agent-check-hero__copy enterprise-reveal">
-          <p class="agent-check-kicker">Codariq Agenten-Check</p>
-          <h1 id="agent-check-title">
-            Welcher Agenten-Workflow darf schon echte Arbeit anfassen?
-          </h1>
-          <p>
-            Wir prüfen Aufgabenraum, Datenfluss, Freigaben und Stopps. Danach
-            weißt du, ob ein kleiner Agent reicht, zuerst Ordnung in den Ablauf
-            muss oder ein kontrollierter Workflow gebaut werden sollte.
-          </p>
-          <div class="agent-check-actions">
-            <a
-              href="#quiz"
-              class="agent-check-button agent-check-button--primary"
-            >
-              Check starten
-            </a>
-            <a
-              href="/#final-cta"
-              class="agent-check-button agent-check-button--secondary"
-            >
-              Ablauf besprechen
-            </a>
-          </div>
-        </div>
-
-        <aside
-          class="agent-check-board enterprise-reveal"
-          aria-label="Prüfprotokoll Vorschau"
-        >
-          <div class="agent-check-board__top">
-            <span>Prüfprotokoll</span>
-            <strong>10 Fragen</strong>
-          </div>
-          <div class="agent-check-board__flow" aria-hidden="true">
-            <span>2 Kontaktfelder</span>
-            <i></i>
-            <span>DSGVO</span>
-            <i></i>
-            <span>Empfehlung</span>
-          </div>
-          <dl class="agent-check-board__checks">
-            <div>
-              <dt>Datenfluss</dt>
-              <dd>Welche Quellen darf der Agent sehen?</dd>
-            </div>
-            <div>
-              <dt>Freigabe</dt>
-              <dd>Was darf er nur vorbereiten?</dd>
-            </div>
-            <div>
-              <dt>Nächster Schritt</dt>
-              <dd>Wo lohnt sich ein erster sauberer Workflow?</dd>
-            </div>
-          </dl>
-        </aside>
-      </div>
-    </section>
-
-    <section class="agent-check-strip" aria-label="Was der Check prüft">
-      <div class="agent-check-strip__inner">
-        <span>Ablauf</span>
-        <span>Daten</span>
-        <span>Zugriffe</span>
-        <span>Freigaben</span>
-        <span>Logs</span>
-        <span>Nächster Schritt</span>
-      </div>
-    </section>
-
-    <section
       id="quiz"
       class="agent-quiz-section"
       data-enterprise-section
-      aria-label="Agenten-Check"
+      aria-labelledby="agent-check-title"
     >
-      <div class="agent-quiz-section__intro enterprise-reveal">
-        <p>10 Fragen, 2 Kontaktfelder</p>
-        <h2>
-          Kein Tool-Test. Ein kurzer Blick auf den Ablauf, der gerade bremst.
-        </h2>
+      <div class="agent-check-compact enterprise-reveal">
+        <div>
+          <p class="agent-check-kicker">Codariq KI-Check</p>
+          <h1 id="agent-check-title">Braucht dein Unternehmen dafür KI?</h1>
+          <p>
+            Sechs kurze Fragen zu Ablauf, Wiederholung, Daten und heutiger
+            KI-Nutzung. Danach bekommst du eine erste Einschätzung per E-Mail.
+          </p>
+        </div>
+        <div class="agent-check-facts" aria-label="Checkumfang">
+          <span>6 Fragen</span>
+          <span>ca. 90 Sekunden</span>
+          <span>DSGVO / EU AI Act</span>
+        </div>
       </div>
 
       <div class="quiz-shell enterprise-card" id="quiz-app">
@@ -119,9 +51,10 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
           <div class="quiz-header-top">
             <div class="quiz-step">
               <span class="quiz-step-label" id="quiz-step-label"
-                >Schritt 1 von 12</span
+                >Frage 1 von 6</span
               >
-              <span class="quiz-step-meta">Dauer: ca. 2 Minuten</span>
+              <span class="quiz-step-meta">Kostenlos. Ergebnis per E-Mail.</span
+              >
             </div>
 
             <div class="quiz-progress">
@@ -139,7 +72,8 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
           </div>
 
           <p class="quiz-trustline">
-            Ablauf, Datenquellen, Freigaben und Logs. Kein Newsletter-Zwang.
+            Kein Tool-Test. Eine Vorprüfung für Bedarf, Entlastung und
+            Prüfbedarf.
           </p>
         </div>
 
@@ -183,27 +117,26 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
           <div class="quiz-result-header">
             <span class="quiz-result-badge">Auswertung</span>
             <h2>
-              Dein Agentenraum ist zu
-              <span id="result-potential">0%</span> bereit.
+              <span id="result-level">-</span>
             </h2>
-            <p>
-              Die Zahl ist kein Versprechen. Sie zeigt, wie viel vom Ablauf
-              schon greifbar ist: Daten, Grenzen, Freigaben und Betrieb.
+            <p id="result-summary">
+              Die Zahl ist keine Rechts- oder Umsetzungszusage, sondern eine
+              erste Einordnung von Bedarf, Entlastung und Prüfbedarf.
             </p>
           </div>
 
           <div class="quiz-result-grid">
             <div class="quiz-result-metric">
-              <p>Level</p>
-              <strong id="result-level">-</strong>
+              <p>KI-Bedarf</p>
+              <strong id="result-potential">0%</strong>
             </div>
             <div class="quiz-result-metric">
-              <p>Zeit pro Woche</p>
+              <p>Entlastung pro Woche</p>
               <strong><span id="result-time">0</span> Std.</strong>
             </div>
             <div class="quiz-result-metric">
-              <p>Geschätzter Wert pro Monat</p>
-              <strong><span id="result-roi">0</span> Euro</strong>
+              <p>Prüfbedarf</p>
+              <strong id="result-roi">-</strong>
             </div>
           </div>
 
@@ -217,13 +150,19 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
               href="/#final-cta"
               class="agent-check-button agent-check-button--primary"
             >
-              Ergebnis besprechen
+              Audit anfragen
             </a>
             <a
-              href="/"
+              href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true"
               class="agent-check-button agent-check-button--secondary"
             >
-              Zur Startseite
+              Termin buchen
+            </a>
+            <a
+              href="/#benefits"
+              class="agent-check-button agent-check-button--secondary"
+            >
+              Pakete ansehen
             </a>
           </div>
         </div>
@@ -249,8 +188,63 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       --check-teal: #14b8a6;
       --check-teal-dark: #0f766e;
       --check-ease: cubic-bezier(0.23, 1, 0.32, 1);
+      min-height: 100svh;
+      padding-top: 4.75rem;
       background: var(--check-bg);
       color: var(--check-ink);
+    }
+
+    .agent-check-compact {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: end;
+      margin-bottom: 0.75rem;
+    }
+
+    .agent-check-compact .agent-check-kicker {
+      margin-bottom: 0.45rem;
+    }
+
+    .agent-check-compact h1 {
+      max-width: 18ch;
+      margin: 0;
+      color: var(--check-ink);
+      font-size: clamp(1.55rem, 2.8vw, 2.45rem);
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 0.98;
+    }
+
+    .agent-check-compact p:not(.agent-check-kicker) {
+      max-width: 43rem;
+      margin: 0.5rem 0 0;
+      color: #334155;
+      font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .agent-check-facts {
+      display: flex;
+      max-width: 30rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.45rem;
+    }
+
+    .agent-check-facts span {
+      display: inline-flex;
+      min-height: 2.15rem;
+      align-items: center;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #334155;
+      padding: 0.42rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 850;
+      line-height: 1;
     }
 
     .agent-check-hero {
@@ -483,9 +477,13 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     }
 
     .agent-quiz-section {
-      width: min(100% - 2rem, 76rem);
+      display: grid;
+      width: min(100% - 1.5rem, 68rem);
+      min-height: calc(100svh - 4.75rem);
+      align-content: center;
+      gap: 0.75rem;
       margin: 0 auto;
-      padding: clamp(4rem, 7vw, 6.5rem) 0;
+      padding: 0.75rem 0 1rem;
     }
 
     .agent-quiz-section__intro {
@@ -517,7 +515,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
     .quiz-shell {
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr) auto auto;
       gap: 0;
       overflow: hidden;
       border: 1px solid var(--check-line);
@@ -528,11 +526,11 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
     .quiz-header {
       display: grid;
-      gap: 0.9rem;
+      gap: 0.65rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       background: #0b1220;
       color: #ffffff;
-      padding: clamp(1rem, 2.4vw, 1.5rem);
+      padding: clamp(0.85rem, 2vw, 1.1rem);
     }
 
     .quiz-header-top {
@@ -600,25 +598,27 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     }
 
     .quiz-body {
-      display: flex;
-      min-height: 29rem;
-      flex-direction: column;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+      min-height: min(23rem, calc(100svh - 16rem));
+      align-items: center;
       gap: 1rem;
-      padding: clamp(1rem, 3vw, 2rem);
+      padding: clamp(0.85rem, 2vw, 1.2rem);
     }
 
     .quiz-question {
-      max-width: 21ch;
+      grid-column: 1;
+      max-width: 16ch;
       margin: 0;
       color: var(--check-ink);
-      font-size: clamp(2rem, 4.2vw, 3.9rem);
+      font-size: clamp(1.7rem, 3.2vw, 2.75rem);
       font-weight: 950;
       letter-spacing: 0;
-      line-height: 0.96;
+      line-height: 1;
     }
 
     .quiz-subtitle {
+      grid-column: 1;
       max-width: 45rem;
       margin: 0;
       color: var(--check-muted);
@@ -628,9 +628,12 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     }
 
     .quiz-options {
+      grid-column: 2;
+      grid-row: 1 / span 3;
       display: grid;
       width: 100%;
-      margin-top: 0.75rem;
+      max-height: min(30rem, calc(100svh - 20rem));
+      margin-top: 0;
       overflow: hidden;
       border: 1px solid var(--check-line);
       border-radius: 8px;
@@ -642,25 +645,36 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     }
 
     .quiz-options[data-layout="icon_options"] {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
     }
 
     .quiz-options[data-layout="multiple_choice"] {
       grid-template-columns: 1fr;
+      overflow: auto;
+    }
+
+    .quiz-options[data-layout="contact_capture"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      align-content: start;
+      overflow: auto;
+      border: 0;
+      background: #f8fafc;
+      padding: 1rem;
     }
 
     .quiz-card,
     .quiz-option,
     .quiz-multi {
       display: grid;
-      gap: 0.65rem;
-      min-height: 7.5rem;
+      gap: 0.5rem;
+      min-height: 3.55rem;
       align-content: start;
       border: 0;
       border-right: 1px solid var(--check-line);
       border-bottom: 1px solid var(--check-line);
       background: #ffffff;
-      padding: 0.95rem;
+      padding: 0.72rem 0.8rem;
       color: var(--check-ink);
       cursor: pointer;
       text-align: left;
@@ -722,7 +736,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     .quiz-card-title,
     .quiz-option-text {
       color: var(--check-ink);
-      font-size: 0.98rem;
+      font-size: 0.93rem;
       font-weight: 900;
       line-height: 1.25;
     }
@@ -737,7 +751,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     .quiz-option,
     .quiz-multi {
       grid-template-columns: auto 1fr;
-      min-height: 4rem;
+      min-height: 3.55rem;
       align-items: center;
     }
 
@@ -762,6 +776,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
     .quiz-hint,
     .quiz-error {
+      grid-column: 1;
       min-height: 1.25rem;
       margin: 0;
       font-size: 0.88rem;
@@ -781,7 +796,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     .quiz-field {
       display: grid;
       gap: 0.55rem;
-      max-width: 28rem;
+      max-width: none;
     }
 
     .quiz-field label {
@@ -809,6 +824,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
     .quiz-consent {
       display: flex;
+      grid-column: 1 / -1;
       max-width: 36rem;
       align-items: flex-start;
       gap: 0.7rem;
@@ -837,7 +853,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       justify-content: space-between;
       gap: 0.75rem;
       border-top: 1px solid var(--check-line);
-      padding: 1rem clamp(1rem, 3vw, 2rem);
+      padding: 0.8rem clamp(1rem, 3vw, 1.4rem);
     }
 
     .quiz-button {
@@ -881,7 +897,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
-      margin: -0.35rem clamp(1rem, 3vw, 2rem) 1.25rem;
+      margin: -0.25rem clamp(1rem, 3vw, 1.4rem) 0.85rem;
       color: var(--check-muted);
       font-size: 0.82rem;
       font-weight: 750;
@@ -895,17 +911,17 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     }
 
     .quiz-result {
-      margin-top: 2rem;
+      margin-top: 0;
     }
 
     .quiz-result-card {
       display: grid;
-      gap: 1.35rem;
+      gap: 1rem;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 8px;
       background: linear-gradient(180deg, #0b1220 0%, #0f1d2f 100%);
       color: #ffffff;
-      padding: clamp(1rem, 3vw, 2rem);
+      padding: clamp(1rem, 2.4vw, 1.5rem);
       box-shadow: 0 32px 90px rgba(15, 23, 42, 0.1);
     }
 
@@ -935,7 +951,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     .quiz-result-header h2 {
       margin: 0;
       color: #ffffff;
-      font-size: clamp(2rem, 4vw, 4rem);
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
       font-weight: 950;
       letter-spacing: 0;
       line-height: 0.96;
@@ -962,7 +978,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
     }
 
     .quiz-result-metric {
-      min-height: 7rem;
+      min-height: 5.7rem;
       border-right: 1px solid rgba(255, 255, 255, 0.1);
       padding: 1rem;
       background: rgba(255, 255, 255, 0.055);
@@ -1120,8 +1136,13 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
     @media (max-width: 1023px) {
       .agent-check-hero__inner,
-      .agent-quiz-section__intro {
+      .agent-quiz-section__intro,
+      .agent-check-compact {
         grid-template-columns: 1fr;
+      }
+
+      .agent-check-facts {
+        justify-content: flex-start;
       }
 
       .agent-check-hero h1 {
@@ -1136,9 +1157,61 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       .quiz-header-top {
         grid-template-columns: 1fr;
       }
+
+      .quiz-body {
+        grid-template-columns: 1fr;
+        align-content: start;
+      }
+
+      .quiz-question,
+      .quiz-subtitle,
+      .quiz-hint,
+      .quiz-options {
+        grid-column: 1;
+      }
+
+      .quiz-options {
+        grid-row: auto;
+        max-height: 42svh;
+      }
     }
 
     @media (max-width: 767px) {
+      .agent-check-page {
+        padding-top: 4.25rem;
+      }
+
+      .agent-quiz-section {
+        width: min(100% - 1rem, 68rem);
+        min-height: calc(100svh - 4.25rem);
+        align-content: start;
+        padding-top: 0.55rem;
+      }
+
+      .agent-check-compact {
+        gap: 0.55rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .agent-check-compact h1 {
+        max-width: 18ch;
+        font-size: clamp(1.35rem, 6.6vw, 1.8rem);
+      }
+
+      .agent-check-compact p:not(.agent-check-kicker) {
+        display: none;
+      }
+
+      .agent-check-facts {
+        display: none;
+      }
+
+      .agent-check-facts span {
+        min-height: 1.9rem;
+        padding: 0.35rem 0.5rem;
+        font-size: 0.72rem;
+      }
+
       .agent-check-hero {
         padding-top: 6.5rem;
       }
@@ -1154,8 +1227,39 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       .quiz-header-top,
       .quiz-options[data-layout="visual_cards"],
       .quiz-options[data-layout="icon_options"],
+      .quiz-options[data-layout="contact_capture"],
       .quiz-result-grid {
         grid-template-columns: 1fr;
+      }
+
+      .quiz-header {
+        gap: 0.45rem;
+        padding: 0.78rem;
+      }
+
+      .quiz-trustline,
+      .quiz-progress-message,
+      .quiz-step-meta {
+        display: none;
+      }
+
+      .quiz-body {
+        gap: 0.65rem;
+        padding: 0.72rem;
+      }
+
+      .quiz-question {
+        max-width: 19ch;
+        font-size: clamp(1.32rem, 6vw, 1.7rem);
+      }
+
+      .quiz-subtitle {
+        font-size: 0.88rem;
+        line-height: 1.38;
+      }
+
+      .quiz-options {
+        max-height: 26svh;
       }
 
       .quiz-card,

@@ -19,7 +19,7 @@ export interface Props {
 const {
   title,
   description = "Wir bauen DSGVO-konforme KI-Agenten für KMU – vom ersten n8n-Workflow bis zum kontrollierten Agenten-Setup mit Rollen, Freigaben und sauberer Integration.",
-  keywords = "KI Agenten KMU, DSGVO KI Agenten, n8n KI Agent, OpenClaw Setup, KI Integration bestehende Systeme, KI Automatisierung Selbstständige, kleine Teams automatisieren, Prozesse automatisieren kleine Teams, Backoffice automatisieren, E-Mail Automatisierung",
+  keywords = "KI Agenten KMU, DSGVO KI Agenten, EU AI Act KI Agenten, n8n KI Agent, OpenClaw Setup, KI Integration bestehende Systeme, kontrollierbare KI Agenten, Human-in-the-loop Freigaben, Agenten Workflows, Backoffice Agent",
   ogImage,
   article,
   forceNavSolid: requestedForceNavSolid = false,
@@ -185,7 +185,7 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
     <meta name="twitter:image" content={resolvedOgImage} />
     <meta
       name="twitter:image:alt"
-      content="Codariq KI-Automatisierung Dashboard für deutsche Unternehmen"
+      content="Codariq KI-Agenten mit Datenwegen, Freigaben und Logs"
     />
     <meta name="twitter:site" content="@codariq" />
     <meta name="twitter:creator" content="@codariq" />
@@ -488,14 +488,16 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
         "knowsAbout": [
           "KI-Agenten für KMU",
           "DSGVO-konforme KI-Agenten",
+          "EU AI Act Einordnung",
+          "Human-in-the-loop Freigaben",
+          "Datenflüsse für KI-Agenten",
           "OpenClaw-Agenten-Setups",
-          "KI-Automatisierung für Selbstständige",
-          "E-Mail Automatisierung für kleine Teams",
-          "Dokumenten-Verarbeitung",
-          "Backoffice Automatisierung",
-          "Prozessautomatisierung für Freelancer",
-          "Workflow-Automatisierung bis 50 Mitarbeiter",
-          "DSGVO-konforme Automatisierung",
+          "n8n KI-Agenten",
+          "E-Mail-Triage mit KI-Agenten",
+          "Dokumenten-Verarbeitung mit Freigaben",
+          "Backoffice-Agenten",
+          "Workflow-Integration bis 50 Mitarbeiter",
+          "DSGVO-orientierter Agenten-Betrieb",
           "Künstliche Intelligenz für kleine Unternehmen"
         ],
         "serviceArea": {
@@ -508,24 +510,24 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
           "itemListElement": [
             {
               "@type": "Offer",
-              "@id": "https://codariq.de/#starter-paket",
+              "@id": "https://codariq.de/#grundlage-schaffen",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Starter Paket",
-                "description": "Für Selbstständige und kleine Teams, die einen Ablauf spürbar entlasten wollen. Auch wenn du allein bist: Automationen übernehmen Aufgaben wie ein zusätzliches Teammitglied.",
+                "name": "Grundlage schaffen",
+                "description": "Ein konkreter Ablauf mit Daten- und Freigabeprüfung, Quellen, Übergaben, Stopppunkten und kurzem Plan für den ersten Einsatz.",
                 "provider": {
                   "@type": "Organization",
                   "name": "Codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "Business Process Automation",
+                "serviceType": "AI Agent Workflow Design",
                 "category": "Artificial Intelligence Implementation"
               },
-              "price": "399",
+              "price": "219",
               "priceCurrency": "EUR",
               "priceSpecification": {
                 "@type": "PriceSpecification",
-                "price": "399",
+                "price": "219",
                 "priceCurrency": "EUR",
                 "valueAddedTaxIncluded": true
               },
@@ -533,24 +535,24 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             },
             {
               "@type": "Offer",
-              "@id": "https://codariq.de/#team-paket",
+              "@id": "https://codariq.de/#erster-einsatz",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Team Paket",
-                "description": "Für Selbstständige und kleine Teams, die mehrere Abläufe verbinden wollen, ohne dass es kompliziert wird. Deine Automationen und Agenten arbeiten wie ein eingespieltes Team im Hintergrund.",
+                "name": "Erster Einsatz",
+                "description": "Ein begrenzter Agenten-Workflow mit bis zu 3 verbundenen Arbeitsschritten, vorhandenen Systemen, Freigaben, Sonderfällen und Tests mit echten Beispielen.",
                 "provider": {
                   "@type": "Organization",
                   "name": "Codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "Custom AI Development",
+                "serviceType": "Controlled AI Agent Implementation",
                 "category": "Artificial Intelligence Implementation"
               },
-              "price": "1499",
+              "price": "1899",
               "priceCurrency": "EUR",
               "priceSpecification": {
                 "@type": "PriceSpecification",
-                "price": "1499",
+                "price": "1899",
                 "priceCurrency": "EUR",
                 "valueAddedTaxIncluded": true
               },
@@ -558,24 +560,24 @@ const shouldNoIndex = Boolean(Astro.url.searchParams.get("search"));
             },
             {
               "@type": "Offer",
-              "@id": "https://codariq.de/#wachstums-paket",
+              "@id": "https://codariq.de/#betrieb-absichern",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Wachstums Paket",
-                "description": "Für Selbstständige und Teams bis 50 Personen, die einen Bereich stabil und dauerhaft automatisieren wollen. So schaffst du mehr Volumen, ohne ständig neue Leute zu brauchen.",
+                "name": "Betrieb absichern",
+                "description": "Ein Bereich wie Support oder Backoffice mit Zugriffsschutz, Rollen, Protokollen, Fehlerpfaden, Datenfluss-Beobachtung und Begleitung nach dem ersten Einsatz.",
                 "provider": {
                   "@type": "Organization",
                   "name": "Codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "Enterprise AI Automation",
+                "serviceType": "AI Agent Operations",
                 "category": "Artificial Intelligence Implementation"
               },
-              "price": "3499",
+              "price": "3899",
               "priceCurrency": "EUR",
               "priceSpecification": {
                 "@type": "PriceSpecification",
-                "price": "3499",
+                "price": "3899",
                 "priceCurrency": "EUR",
                 "valueAddedTaxIncluded": true
               },
