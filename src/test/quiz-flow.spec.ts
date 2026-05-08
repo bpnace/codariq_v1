@@ -68,5 +68,11 @@ test("quiz flow completes and shows results", async ({ page }) => {
     to: "test@example.com",
     subject: expect.stringContaining("Codariq Auswertung"),
     text: expect.stringContaining("Hallo Test"),
+    ctaUrl: "https://codariq.de/#benefits",
+    servicesUrl: "https://codariq.de/#benefits",
+    faqUrl: "https://codariq.de/faq",
+    primaryCta: {
+      label: "Leistungen ansehen",
+    },
   });
 });

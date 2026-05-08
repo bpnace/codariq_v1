@@ -962,26 +962,47 @@ const init = () => {
     const firstName = state.userInfo.name.trim().split(/\s+/)[0] || "du";
     const topRecommendation =
       recommendations[0]?.title || "Agentenfähigkeit klären";
-    const recommendationLines = recommendations.map(
-      (recommendation) =>
-        `${recommendation.title}: ${recommendation.description}`,
-    );
+    const bookingUrl =
+      "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
+    const servicesUrl = "https://codariq.de/#benefits";
+    const faqUrl = "https://codariq.de/faq";
 
     return {
       to: state.userInfo.email,
       subject: `Deine Codariq Auswertung: ${topRecommendation}`,
-      previewText: `${results.level} Agentenfähigkeit, ${results.timeSavingsPotential} Std. mögliche Entlastung pro Woche.`,
-      headline: `${firstName}, dein sinnvoller Startpunkt ist: ${topRecommendation}`,
+      previewText: `${results.automationPotential}% Agentenfähigkeit. Nächster Schritt: den Ablauf in der Tiefe prüfen.`,
+      headline: `${firstName}, deine Auswertung ist da.`,
       text: [
         `Hallo ${firstName},`,
         `dein Check zeigt ${results.automationPotential}% Agentenfähigkeit (${results.level}).`,
-        `Der Ablauf wirkt vor allem dort interessant, wo pro Woche etwa ${results.timeSavingsPotential} Stunden Routine, Übergabe oder Nachkontrolle hängen.`,
-        `Nächster sinnvoller Schritt: ${topRecommendation}.`,
-        ...recommendationLines.map((line) => `- ${line}`),
-        "Wir melden uns mit einem konkreten Vorschlag, welche Daten, Freigaben und Stopps vor dem ersten Agenten-Test stehen sollten.",
+        "Der wichtigste Punkt ist gerade:",
+        topRecommendation,
+        `Bei dir hängen etwa ${results.timeSavingsPotential} Stunden pro Woche in Routine, Übergabe oder Nachkontrolle. Das ist genug, um nicht bei einer groben Einschätzung stehen zu bleiben.`,
+        "Wir schauen uns deinen Arbeitsbereich in der Tiefe an: Aufgaben, Datenquellen, Entscheidungspunkte, Freigaben, Risiken und mögliche Testagenten. Danach bekommst du eine persönliche Empfehlung, welcher Ansatz funktioniert, wo ein Agent schon echte Arbeit anfassen darf und was vorher noch geklärt werden muss.",
+        "Dabei denken wir Datenschutz, EU AI Act, Kontrolle und saubere Übergaben von Anfang an mit.",
+        `Leistungen ansehen: ${servicesUrl}`,
+        `Termin buchen: ${bookingUrl}`,
+        `FAQ öffnen: ${faqUrl}`,
+        "Wir freuen uns auf die Zusammenarbeit.",
+        "Dein Codariq Team",
       ].join("\n\n"),
       recommendations,
-      ctaUrl: "https://codariq.de/#final-cta",
+      ctaUrl: servicesUrl,
+      servicesUrl,
+      bookingUrl,
+      faqUrl,
+      primaryCta: {
+        label: "Leistungen ansehen",
+        url: servicesUrl,
+      },
+      secondaryCta: {
+        label: "Termin buchen",
+        url: bookingUrl,
+      },
+      faqCta: {
+        label: "FAQ öffnen",
+        url: faqUrl,
+      },
     };
   }
 
