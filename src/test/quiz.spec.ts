@@ -4,6 +4,6 @@ test("quiz starts at question 1", async ({ page }) => {
   await page.goto("/automatisierungs-check");
   const question = page.locator("#quiz-question");
   await expect(question).toHaveText(
-    "Wie stehst du zu KI-Agenten und Automatisierung?"
+    "Wie stehst du zu Agenten und Automatisierung?",
   );
 });

@@ -1,7 +1,13 @@
 import { expect, test } from "@playwright/test";
 
 test("quiz flow completes and shows results", async ({ page }) => {
-  await page.route("**/api/submit", async (route) => {
+  let submittedPayload: Record<string, unknown> | null = null;
+
+  await page.route("**/webhook-proxy.php", async (route) => {
+    submittedPayload = route.request().postDataJSON() as Record<
+      string,
+      unknown
+    >;
     await route.fulfill({
       status: 200,
       contentType: "application/json",
@@ -39,4 +45,28 @@ test("quiz flow completes and shows results", async ({ page }) => {
 
   await expect(page.locator("#quiz-result")).toBeVisible();
   await expect(page.locator("#result-level")).not.toHaveText("-");
+  expect(submittedPayload).toMatchObject({
+    source: "codariq_quiz",
+    email: "test@example.com",
+  });
+  expect(submittedPayload?.answerDetails).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        id: "q1_automation_attitude",
+        question: "Wie stehst du zu Agenten und Automatisierung?",
+      }),
+      expect.objectContaining({
+        id: "q8_company_structure",
+      }),
+    ]),
+  );
+  expect(submittedPayload?.resultSummary).toMatchObject({
+    level: expect.any(String),
+    recommendations: expect.any(Array),
+  });
+  expect(submittedPayload?.emailDraft).toMatchObject({
+    to: "test@example.com",
+    subject: expect.stringContaining("Codariq Auswertung"),
+    text: expect.stringContaining("Hallo Test"),
+  });
 });

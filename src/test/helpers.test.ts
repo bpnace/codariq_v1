@@ -23,7 +23,9 @@ describe("calculateResults", () => {
     expect(results.productFit).toBe("premium");
     expect(results.recommendations.length).toBe(3);
     expect(
-      results.recommendations.some((rec) => rec.title.includes("Support-Agent"))
+      results.recommendations.some((rec) =>
+        rec.title.includes("Support-Agent"),
+      ),
     ).toBe(true);
   });
 
@@ -47,8 +49,8 @@ describe("calculateResults", () => {
     expect(results.productFit).toBe("workshop");
     expect(
       results.recommendations.some((rec) =>
-        rec.title.includes("Agenten-Readiness")
-      )
+        rec.title.includes("Agentenfähigkeit"),
+      ),
     ).toBe(true);
   });
 });
@@ -71,7 +73,7 @@ describe("isStepValid", () => {
       isStepValid(step, {
         ...baseState,
         answers: { q5_use_cases: ["marketing"] },
-      })
+      }),
     ).toBe(true);
   });
 
@@ -82,7 +84,7 @@ describe("isStepValid", () => {
       isStepValid(step, {
         ...baseState,
         userInfo: { ...baseState.userInfo, name: "Ada" },
-      })
+      }),
     ).toBe(true);
   });
 
@@ -92,7 +94,7 @@ describe("isStepValid", () => {
       isStepValid(step, {
         ...baseState,
         userInfo: { ...baseState.userInfo, email: "hi@example.com" },
-      })
+      }),
     ).toBe(false);
     expect(
       isStepValid(step, {
@@ -102,7 +104,7 @@ describe("isStepValid", () => {
           email: "hi@example.com",
           consent: true,
         },
-      })
+      }),
     ).toBe(true);
   });
 });
