@@ -49,7 +49,7 @@ describe("calculateResults", () => {
     expect(results.productFit).toBe("workshop");
     expect(
       results.recommendations.some((rec) =>
-        rec.title.includes("Agentenfähigkeit"),
+        rec.title.includes("Automatisierungspotenzial"),
       ),
     ).toBe(true);
   });

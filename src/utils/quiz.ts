@@ -283,7 +283,7 @@ function generateRecommendations(
       : "";
   if (experienceLevel === "beginner" || experienceLevel === "novice") {
     recommendations.push({
-      title: "Agentenfähigkeit klären",
+      title: "Automatisierungspotenzial prüfen",
       description:
         "Starte mit einem klaren Überblick über Prozesse, Daten, Tool-Stack, Risiken und sinnvolle erste Aufgabenräume.",
       icon: "Ready",

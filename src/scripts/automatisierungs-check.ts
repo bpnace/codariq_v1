@@ -893,8 +893,8 @@ const init = () => {
           "Wir prüfen Tools, Datenfluss, Freigaben und den ersten Agenten-Workflow, der messbar entlastet.",
         icon: "Flow",
       },
-      "Agentenfähigkeit klären": {
-        title: "Agentenfähigkeit klären",
+      "Automatisierungspotenzial prüfen": {
+        title: "Automatisierungspotenzial prüfen",
         description:
           "Starte mit einem klaren Blick auf Prozesse, Daten, Tool-Stack, Risiken und sinnvolle erste Aufgabenräume.",
         icon: "Ready",
@@ -961,7 +961,7 @@ const init = () => {
   ) {
     const firstName = state.userInfo.name.trim().split(/\s+/)[0] || "du";
     const topRecommendation =
-      recommendations[0]?.title || "Agentenfähigkeit klären";
+      recommendations[0]?.title || "Automatisierungspotenzial prüfen";
     const bookingUrl =
       "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
     const servicesUrl = "https://codariq.de/#benefits";
@@ -970,11 +970,11 @@ const init = () => {
     return {
       to: state.userInfo.email,
       subject: `Deine Codariq Auswertung: ${topRecommendation}`,
-      previewText: `${results.automationPotential}% Agentenfähigkeit. Nächster Schritt: den Ablauf in der Tiefe prüfen.`,
+      previewText: `${results.automationPotential}% Automatisierungspotenzial. Nächster Schritt: den Ablauf in der Tiefe prüfen.`,
       headline: `${firstName}, deine Auswertung ist da.`,
       text: [
         `Hallo ${firstName},`,
-        `dein Check zeigt ${results.automationPotential}% Agentenfähigkeit (${results.level}).`,
+        `dein Check zeigt ${results.automationPotential}% Automatisierungspotenzial (${results.level}).`,
         "Der wichtigste Punkt ist gerade:",
         topRecommendation,
         `Bei dir hängen etwa ${results.timeSavingsPotential} Stunden pro Woche in Routine, Übergabe oder Nachkontrolle. Das ist genug, um nicht bei einer groben Einschätzung stehen zu bleiben.`,
