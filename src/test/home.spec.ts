@@ -13,7 +13,7 @@ type FinalCtaSubmissionPayload = Record<string, unknown> & {
 
 test("home loads", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(/Codariq/);
+  await expect(page).toHaveTitle(/codariq/);
 });
 
 test("hero uses the local original image background with a diagonal white overlay", async ({

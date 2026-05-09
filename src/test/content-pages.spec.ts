@@ -8,7 +8,7 @@ const pages = [
   },
   {
     path: "/dsgvo-ki-agenten",
-    title: /DSGVO-konforme KI-Agenten/,
+    title: /DSGVO-orientierte KI-Agenten/,
     heading: "KI-Agenten DSGVO-konform bauen, ohne Blackbox-Gefühl.",
   },
   {

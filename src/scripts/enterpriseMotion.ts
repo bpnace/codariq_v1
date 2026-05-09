@@ -1097,6 +1097,18 @@ export function initEnterpriseMotion(): void {
   };
 
   let heroConsoleMotion: HeroConsoleMotionController | null = null;
+  const heroEntranceTargets = Array.from(
+    document.querySelectorAll<HTMLElement>(HERO_CONSOLE_SELECTORS.entrance),
+  );
+  const heroPipelineCards = Array.from(
+    document.querySelectorAll<HTMLElement>(HERO_CONSOLE_SELECTORS.pipelineCard),
+  );
+  const heroLiveItems = Array.from(
+    document.querySelectorAll<HTMLElement>(HERO_CONSOLE_SELECTORS.liveItem),
+  );
+  const heroProgressRings = Array.from(
+    document.querySelectorAll<HTMLElement>(HERO_CONSOLE_SELECTORS.progressRing),
+  );
 
   const ctx = gsap.context(() => {
     if (consoleEl) {
@@ -1110,18 +1122,20 @@ export function initEnterpriseMotion(): void {
       });
     }
 
-    gsap.fromTo(
-      HERO_CONSOLE_SELECTORS.entrance,
-      { autoAlpha: 0, y: 28 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.85,
-        stagger: 0.1,
-        ease: "power4.out",
-        clearProps: "opacity,visibility",
-      },
-    );
+    if (heroEntranceTargets.length) {
+      gsap.fromTo(
+        heroEntranceTargets,
+        { autoAlpha: 0, y: 28 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.1,
+          ease: "power4.out",
+          clearProps: "opacity,visibility",
+        },
+      );
+    }
 
     if (consoleEl) {
       gsap.fromTo(
@@ -1139,38 +1153,44 @@ export function initEnterpriseMotion(): void {
       );
     }
 
-    gsap.fromTo(
-      HERO_CONSOLE_SELECTORS.pipelineCard,
-      { autoAlpha: 0, y: 18 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.58,
-        delay: 0.28,
-        stagger: 0.08,
-        ease: "power4.out",
-      },
-    );
+    if (heroPipelineCards.length) {
+      gsap.fromTo(
+        heroPipelineCards,
+        { autoAlpha: 0, y: 18 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.58,
+          delay: 0.28,
+          stagger: 0.08,
+          ease: "power4.out",
+        },
+      );
+    }
 
-    gsap.fromTo(
-      HERO_CONSOLE_SELECTORS.liveItem,
-      { autoAlpha: 0, x: -12 },
-      {
-        autoAlpha: 1,
-        x: 0,
-        duration: 0.46,
-        delay: 0.45,
-        stagger: 0.09,
-        ease: "power4.out",
-      },
-    );
+    if (heroLiveItems.length) {
+      gsap.fromTo(
+        heroLiveItems,
+        { autoAlpha: 0, x: -12 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.46,
+          delay: 0.45,
+          stagger: 0.09,
+          ease: "power4.out",
+        },
+      );
+    }
 
-    gsap.to(HERO_CONSOLE_SELECTORS.progressRing, {
-      rotate: 360,
-      duration: 18,
-      ease: "none",
-      repeat: -1,
-    });
+    if (heroProgressRings.length) {
+      gsap.to(heroProgressRings, {
+        rotate: 360,
+        duration: 18,
+        ease: "none",
+        repeat: -1,
+      });
+    }
 
     if (consoleEl) {
       heroConsoleMotion = initHeroConsoleMotion(consoleEl);
