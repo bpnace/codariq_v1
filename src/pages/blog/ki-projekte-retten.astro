@@ -2,13 +2,13 @@
 import Base from "../../layouts/Base.astro";
 import BlogConversionSection from "../../components/BlogConversionSection.astro";
 
-const title =
-  "KI Projekt retten: 3 Praxisbeispiele für stabile Agenten-Workflows";
+const title = "KI Projekt retten: 3 Praxisbeispiele für stabile Agenten-Setups";
 const description =
   "Dein KI Projekt ist fast fertig, aber im Alltag läuft es nicht sauber? Hier siehst du typische Ursachen, drei Praxisbeispiele für Projektrettung und einen klaren Plan, damit es genutzt wird und stabil bleibt.";
 const keywords =
-  "KI Projekt retten, KI-Projekt retten, Projektrettung, KI-Remediation, KI Projekt gescheitert, Agenten-Workflow stabilisieren, KI Agent Betrieb, E Mail Triage, Dokumente verarbeiten, Rechnungen vorbereiten, Lead Follow up vorbereiten, DSGVO KI Agent, RAG, LLM Support";
+  "KI Projekt retten, KI-Projekt retten, Projektrettung, KI-Remediation, KI Projekt gescheitert, Agenten-Setup stabilisieren, KI Agent Betrieb, E Mail Triage, Dokumente verarbeiten, Rechnungen vorbereiten, Lead Follow up vorbereiten, DSGVO KI Agent, RAG, LLM Support";
 const author = "Codariq";
+const metaAuthor = "codariq";
 const publishedTime = "2025-01-09T10:00:00+01:00";
 const modifiedTime = "2026-05-08T23:15:00+02:00";
 const image = "/images/hero/hero2.webp";
@@ -23,7 +23,13 @@ const tags = keywords
   description={description}
   keywords={keywords}
   ogImage={image}
-  article={{ publishedTime, modifiedTime, author, section: "Blog", tags }}
+  article={{
+    publishedTime,
+    modifiedTime,
+    author: metaAuthor,
+    section: "Blog",
+    tags,
+  }}
   forceNavSolid={true}
 >
   <!-- Breadcrumb Navigation -->
@@ -797,17 +803,17 @@ const tags = keywords
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "KI Projekt retten: 3 Praxisbeispiele, wie Automatisierung wieder stabil läuft",
+    "headline": "KI Projekt retten: 3 Praxisbeispiele, wie Agenten wieder stabil laufen",
     "description": "Dein KI Projekt ist fast fertig, aber im Alltag läuft es nicht sauber? Typische Ursachen, drei Praxisbeispiele für Projektrettung und ein klarer Plan, damit es genutzt wird und stabil bleibt.",
     "image": "/images/hero/hero2.webp",
     "author": {
       "@type": "Organization",
-      "name": "Codariq",
+      "name": "codariq",
       "url": "https://codariq.de"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Codariq",
+      "name": "codariq",
       "logo": {
         "@type": "ImageObject",
         "url": "/Logo1.svg"
@@ -819,7 +825,7 @@ const tags = keywords
       "@type": "WebPage",
       "@id": "https://codariq.de/blog/ki-projekte-retten"
     },
-    "keywords": "KI Projekt retten, KI-Projekt retten, Projektrettung, KI-Remediation, KI Projekt gescheitert, Automatisierung hängt fest, Prozessautomatisierung, Workflow automatisieren, E Mail automatisieren, Dokumente automatisieren, Rechnungen automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, DSGVO konforme Automatisierung",
+    "keywords": "KI Projekt retten, KI-Projekt retten, Projektrettung, KI-Remediation, KI Projekt gescheitert, Agenten-Setup stabilisieren, KI Agent Betrieb, E Mail Triage, Dokumente verarbeiten, Rechnungen vorbereiten, Lead Follow up vorbereiten, Recruiting Agent, DSGVO KI Agent",
     "articleSection": "Projektrettung",
     "wordCount": "2100"
   }

@@ -7,8 +7,9 @@ const title =
 const description =
   "Wie du KI sauber in CRM, E-Mail, Kalender, Buchhaltung, Cloud-Tools und bestehende Prozesse integrierst: von CRM-Integration mit bestehenden Tools bis zur passenden KI-Cloud-Integrationslösung.";
 const keywords =
-  "KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Integration in bestehende Systeme, Integration KI, KI integrieren, KI Integration Prozesse, IT-Integration für Unternehmen optimieren, CRM Integration mit bestehenden Tools, KI-Cloud-Integration Software, KI-Cloud-Integrationslösung, KI-Cloud-Integrationsplattform, Automatisierung von Integration";
+  "KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Integration in bestehende Systeme, Integration KI, KI integrieren, KI Integration Prozesse, IT-Integration für Unternehmen optimieren, CRM Integration mit bestehenden Tools, KI-Cloud-Integration Software, KI-Cloud-Integrationslösung, KI-Cloud-Integrationsplattform, KI-Agenten Integration";
 const author = "Codariq";
+const metaAuthor = "codariq";
 const publishedTime = "2026-04-30T09:00:00+02:00";
 const modifiedTime = "2026-05-08T22:45:00+02:00";
 const image = "/images/hero/hero2.webp";
@@ -23,7 +24,13 @@ const tags = keywords
   description={description}
   keywords={keywords}
   ogImage={image}
-  article={{ publishedTime, modifiedTime, author, section: "Blog", tags }}
+  article={{
+    publishedTime,
+    modifiedTime,
+    author: metaAuthor,
+    section: "Blog",
+    tags,
+  }}
   forceNavSolid={true}
 >
   <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">

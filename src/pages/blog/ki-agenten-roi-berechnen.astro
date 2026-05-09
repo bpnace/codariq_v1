@@ -4,12 +4,15 @@ import BlogConversionSection from "../../components/BlogConversionSection.astro"
 
 // SEO and meta data
 const title =
-  "ROI von KI-Agenten: So rechnet sich ein kontrollierter Workflow (2026)";
+  "ROI von KI-Agenten: So rechnet sich ein kontrolliertes Setup (2026)";
+const metaDescription =
+  "Wie du Agenteninitiativen anhand von Nutzen, Risiko und Freigaben priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration und Beispiele für kleine Teams und KMU.";
 const description =
   "Wie du Automatisierungsinitiativen anhand ihres ROI priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration, Freigaben und Beispiele für kleine Teams und KMU.";
 const keywords =
-  "KI Agent ROI, Agenten Workflow ROI, Automatisierungsinitiativen ROI priorisieren, ROI Priorisierung Automatisierung, KI Agent Kosten, KI Integration Prozesse, E Mail Triage, Rechnungen vorbereiten, Dokumente verarbeiten, Lead Follow up vorbereiten, Recruiting Agent, KI Agenten für Selbstständige, Agenten Workflows KMU, DSGVO KI Agent";
+  "KI Agent ROI, Agenten Setup ROI, Agenteninitiativen priorisieren, ROI Priorisierung KI Agenten, KI Agent Kosten, KI Integration Prozesse, E Mail Triage, Rechnungen vorbereiten, Dokumente verarbeiten, Lead Follow up vorbereiten, Recruiting Agent, KI Agenten für Selbstständige, Agenten Setups KMU, DSGVO KI Agent";
 const author = "Codariq";
+const metaAuthor = "codariq";
 const publishedTime = "2024-12-15T11:00:00+01:00";
 const modifiedTime = "2026-05-08T22:45:00+02:00";
 const image = "/images/hero/hero2.webp";
@@ -21,10 +24,16 @@ const tags = keywords
 
 <Base
   title={title}
-  description={description}
+  description={metaDescription}
   keywords={keywords}
   ogImage={image}
-  article={{ publishedTime, modifiedTime, author, section: "Blog", tags }}
+  article={{
+    publishedTime,
+    modifiedTime,
+    author: metaAuthor,
+    section: "Blog",
+    tags,
+  }}
   forceNavSolid={true}
 >
   <!-- Breadcrumb Navigation -->
@@ -780,16 +789,16 @@ const tags = keywords
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "ROI von KI-Agenten: So rechnet es sich für Selbstständige und kleine Teams (2026)",
-    "description": "Wie du Automatisierungsinitiativen anhand ihres ROI priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration, Freigaben und Beispiele für kleine Teams und KMU.",
+    "description": "Wie du Agenteninitiativen anhand von Nutzen, Risiko und Freigaben priorisierst: klare Rechenlogik, typische Zeitfresser, KI-Integration und Beispiele für kleine Teams und KMU.",
     "image": "/images/hero/hero2.webp",
     "author": {
       "@type": "Organization",
-      "name": "Codariq",
+      "name": "codariq",
       "url": "https://codariq.de"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Codariq",
+      "name": "codariq",
       "logo": {
         "@type": "ImageObject",
         "url": "/Logo1.svg"
@@ -801,8 +810,8 @@ const tags = keywords
       "@type": "WebPage",
       "@id": "https://codariq.de/blog/ki-agenten-roi-berechnen"
     },
-    "keywords": "Prozesse automatisieren, Prozessautomatisierung ROI, Workflow automatisieren, Automatisierungsinitiativen ROI priorisieren, ROI Priorisierung Automatisierung, KI Integration Prozesse, Automatisierung Kosten, E Mail automatisieren, Rechnungen automatisieren, Dokumente automatisieren, Lead Follow up automatisieren, Recruiting automatisieren, KI-Agenten für Selbstständige, Prozessautomatisierung KMU, DSGVO konforme Automatisierung",
-    "articleSection": "Automatisierung",
+    "keywords": "KI Agent ROI, Agenten Setup ROI, Agenteninitiativen priorisieren, ROI Priorisierung KI Agenten, KI Integration Prozesse, KI Agent Kosten, E Mail Triage, Rechnungen vorbereiten, Dokumente verarbeiten, Lead Follow up vorbereiten, Recruiting Agent, KI-Agenten für Selbstständige, Agenten Setups KMU, DSGVO KI Agent",
+    "articleSection": "KI-Agenten",
     "wordCount": "2100"
   }
 </script>

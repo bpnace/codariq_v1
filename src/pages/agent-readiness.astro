@@ -4,11 +4,11 @@ import path from "node:path";
 import Base from "../layouts/Base.astro";
 
 const pageTitle =
-  "Codariq KI-Check: KI-Integration, Agentenpotenzial und Prüfbedarf";
+  "codariq KI-Check: KI-Integration, Agentenpotenzial und Prüfbedarf";
 const pageDescription =
   "Prüfe in sechs Fragen, ob KI-Integration oder ein KI-Agent für E-Mail, Dokumente, CRM, Reporting oder Backoffice sinnvoll ist und welche DSGVO- oder EU-AI-Act-Fragen vorher geklärt werden müssen.";
 const pageKeywords =
-  "KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Integration Prozesse, CRM Integration mit bestehenden Tools, Automatisierungsinitiativen ROI priorisieren, KI Agenten Check, KI Agenten KMU";
+  "KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Integration Prozesse, CRM Integration mit bestehenden Tools, Agenteninitiativen priorisieren, KI Agenten Check, KI Agenten KMU";
 const quizEntry = path.resolve(process.cwd(), "src/scripts/agent-readiness.ts");
 const quizBundle = await build({
   entryPoints: [quizEntry],

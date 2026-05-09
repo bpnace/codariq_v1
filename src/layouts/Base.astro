@@ -21,8 +21,8 @@ export interface Props {
 
 const {
   title,
-  description = "Wir bauen DSGVO-konforme KI-Agenten für KMU – vom ersten n8n-Workflow bis zum kontrollierten Agenten-Setup mit Rollen, Freigaben und sauberer Integration.",
-  keywords = "KI Agenten KMU, DSGVO KI Agenten, EU AI Act KI Agenten, n8n KI Agent, OpenClaw Setup, KI Integration bestehende Systeme, kontrollierbare KI Agenten, Human-in-the-loop Freigaben, Agenten Workflows, Backoffice Agent",
+  description = "Wir bauen kontrollierbare KI-Agenten für echte Arbeit: von n8n-basierten Startabläufen bis zu Agentenbetrieb mit Rollen, Freigaben, Logs und DSGVO-orientierter Integration.",
+  keywords = "kontrollierbare KI Agenten, sichere KI Agenten, KI Agenten KMU, KI Agenten Selbstständige, DSGVO KI Agenten, EU AI Act KI Agenten, n8n KI Agent, OpenClaw Setup, KI Agenten Setup, KI Integration bestehende Systeme, Human-in-the-loop Freigaben, Agenten mit Grenzen, Backoffice Agent",
   ogImage,
   article,
   forceNavSolid: requestedForceNavSolid = false,
@@ -79,7 +79,7 @@ const articleSchema = isArticle
       },
       publisher: {
         "@type": "Organization",
-        name: "Codariq",
+        name: "codariq",
         url: canonicalURL.origin,
       },
       articleSection: article?.section,
@@ -105,7 +105,7 @@ const ccm19ScriptSrc =
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Codariq" />
+    <meta name="apple-mobile-web-app-title" content="codariq" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -135,7 +135,7 @@ const ccm19ScriptSrc =
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content={article?.author ?? "Codariq"} />
+    <meta name="author" content={article?.author ?? "codariq"} />
     <meta name="keywords" content={keywords} />
     <meta
       name="robots"
@@ -154,7 +154,7 @@ const ccm19ScriptSrc =
     <meta property="og:image:height" content="1024" />
     <meta property="og:image:type" content="image/webp" />
     <meta property="og:locale" content="de_DE" />
-    <meta property="og:site_name" content="Codariq" />
+    <meta property="og:site_name" content="codariq" />
     {
       isArticle && article?.publishedTime && (
         <meta
@@ -193,7 +193,7 @@ const ccm19ScriptSrc =
     <meta name="twitter:image" content={resolvedOgImage} />
     <meta
       name="twitter:image:alt"
-      content="Codariq KI-Agenten mit Datenwegen, Freigaben und Logs"
+      content="codariq KI-Agenten mit Datenwegen, Freigaben und Logs"
     />
     <meta name="twitter:site" content="@codariq" />
     <meta name="twitter:creator" content="@codariq" />
@@ -448,14 +448,14 @@ const ccm19ScriptSrc =
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Codariq - KI-Agenten und KI-Integration für KMU",
-        "alternateName": "Codariq",
+        "name": "codariq - kontrollierbare KI-Agenten",
+        "alternateName": "codariq",
         "url": "https://codariq.de",
-        "description": "DSGVO-konforme KI-Agenten und KI-Integration für Selbstständige, kleine Teams und KMU in Deutschland, Österreich und der Schweiz. Von n8n-Workflows bis zu kontrollierten Agenten-Setups.",
+        "description": "Codariq baut kontrollierbare KI-Agenten für Selbstständige, CEOs, kleine Teams und KMU: mit Aufgabenräumen, Rollen, Freigaben, Logs und nachvollziehbaren Datenflüssen.",
         "inLanguage": "de-DE",
         "publisher": {
           "@type": "Organization",
-          "name": "Codariq"
+          "name": "codariq"
         }
       }
     </script>
@@ -465,9 +465,9 @@ const ccm19ScriptSrc =
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Codariq",
+        "name": "codariq",
         "alternateName": "codariq",
-        "description": "Spezialisiert auf KI-Agenten, KI-Integration und kontrollierte KI-Agenten für Selbstständige und kleine Teams bis 50 Personen. Wir bauen Agenten für E-Mails, Dokumente, Backoffice, Support und bestehende Systeme.",
+        "description": "Codariq plant und baut KI-Agenten, digitale Assistenten und Agenten-Stacks für echte Arbeit: mit Aufgabenraum, Rollen, Freigaben, Logs und DSGVO-orientierten Datenflüssen.",
         "url": "https://codariq.de",
         "image": "https://codariq.de/images/hero/hero2.webp",
         "foundingDate": "2025",
@@ -518,16 +518,17 @@ const ccm19ScriptSrc =
         ],
         "knowsAbout": [
           "KI-Agenten für KMU",
-          "DSGVO-konforme KI-Agenten",
+          "DSGVO-orientierte KI-Agenten",
           "EU AI Act Einordnung",
           "Human-in-the-loop Freigaben",
           "Datenflüsse für KI-Agenten",
-          "OpenClaw-Agenten-Setups",
+          "KI-Agenten-Setups mit OpenClaw",
           "n8n KI-Agenten",
           "E-Mail-Triage mit KI-Agenten",
           "Dokumenten-Verarbeitung mit Freigaben",
           "Backoffice-Agenten",
-          "Workflow-Integration bis 50 Mitarbeiter",
+          "Agenten mit Grenzen",
+          "Anschlussfähige KI-Agenten-Setups bis 50 Nutzer",
           "DSGVO-orientierter Agenten-Betrieb",
           "Künstliche Intelligenz für kleine Unternehmen"
         ],
@@ -537,7 +538,7 @@ const ccm19ScriptSrc =
         },
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "KI-Agenten und KI-Integration",
+          "name": "Kontrollierbare KI-Agenten",
           "itemListElement": [
             {
               "@type": "Offer",
@@ -545,13 +546,13 @@ const ccm19ScriptSrc =
               "itemOffered": {
                 "@type": "Service",
                 "name": "Grundlage schaffen",
-                "description": "Ein konkreter Ablauf mit Daten- und Freigabeprüfung, Quellen, Übergaben, Stopppunkten und kurzem Plan für den ersten Einsatz.",
+                "description": "Ein konkreter Startpunkt mit Daten- und Freigabeprüfung, Quellen, Übergaben, Stopppunkten und kurzem Plan für den ersten Agenten-Einsatz.",
                 "provider": {
                   "@type": "Organization",
-                  "name": "Codariq"
+                  "name": "codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
-                "serviceType": "AI Agent Workflow Design",
+                "serviceType": "AI Agent Setup Design",
                 "category": "Artificial Intelligence Implementation"
               },
               "price": "219",
@@ -570,10 +571,10 @@ const ccm19ScriptSrc =
               "itemOffered": {
                 "@type": "Service",
                 "name": "Erster Einsatz",
-                "description": "Ein begrenzter Agenten-Workflow mit bis zu 3 verbundenen Arbeitsschritten, vorhandenen Systemen, Freigaben, Sonderfällen und Tests mit echten Beispielen.",
+                "description": "Ein begrenzter KI-Agenten-Ablauf mit bis zu 3 verbundenen Arbeitsschritten, vorhandenen Systemen, Freigaben, Sonderfällen und Tests mit echten Beispielen.",
                 "provider": {
                   "@type": "Organization",
-                  "name": "Codariq"
+                  "name": "codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
                 "serviceType": "Controlled AI Agent Implementation",
@@ -598,7 +599,7 @@ const ccm19ScriptSrc =
                 "description": "Ein Bereich wie Support oder Backoffice mit Zugriffsschutz, Rollen, Protokollen, Fehlerpfaden, Datenfluss-Beobachtung und Begleitung nach dem ersten Einsatz.",
                 "provider": {
                   "@type": "Organization",
-                  "name": "Codariq"
+                  "name": "codariq"
                 },
                 "areaServed": ["DE", "AT", "CH"],
                 "serviceType": "AI Agent Operations",
@@ -625,7 +626,7 @@ const ccm19ScriptSrc =
         "@context": "https://schema.org",
         "@type": "SpecialAnnouncement",
         "name": "Kostenloser KI-Agenten-Check",
-        "text": "Erhalten Sie eine kostenlose Strategieberatung zur Identifikation eines sinnvollen KI-Agenten-Startpunkts. Unverbindlich und ohne Risiko.",
+        "text": "Erhalten Sie eine kostenlose Einordnung, welcher KI-Agent echte Arbeit übernehmen kann und welche Datenwege, Rollen und Freigaben vorher geklärt werden müssen.",
         "category": "https://www.wikidata.org/wiki/Q186386",
         "datePosted": "2026-01-29",
         "expires": "2026-12-31",
@@ -639,7 +640,7 @@ const ccm19ScriptSrc =
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Codariq",
+          "name": "codariq",
           "url": "https://codariq.de"
         }
       }
@@ -650,7 +651,7 @@ const ccm19ScriptSrc =
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        "name": "Codariq - KI-Agenten für KMU",
+        "name": "codariq - KI-Agenten für KMU",
         "image": "https://codariq.de/images/hero/hero2.webp",
         "@id": "https://codariq.de",
         "url": "https://codariq.de",
@@ -668,7 +669,7 @@ const ccm19ScriptSrc =
           "closes": "18:00"
         },
         "priceRange": "€€€",
-        "serviceType": "Business Automation and AI Services"
+        "serviceType": "Controlled AI Agent Setup and Operations"
       }
     </script>
 

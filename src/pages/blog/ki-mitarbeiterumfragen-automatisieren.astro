@@ -3,12 +3,15 @@ import Base from "../../layouts/Base.astro";
 import BlogConversionSection from "../../components/BlogConversionSection.astro";
 
 const title =
-  "KI-Mitarbeiterumfragen automatisiert auswerten: Von Feedback zu klaren Maßnahmen";
+  "KI-Mitarbeiterumfragen auswerten: Von Feedback zu klaren Maßnahmen";
+const metaDescription =
+  "Wie kleine Teams Mitarbeiterumfragen mit KI auswerten, KI-Teammanagement verbessern, Themen clustern, Risiken erkennen und konkrete Maßnahmen ableiten.";
 const description =
   "Wie kleine Teams Mitarbeiterumfragen automatisiert mit KI auswerten, KI-Teammanagement verbessern, Themen clustern, Risiken erkennen und konkrete Maßnahmen ableiten.";
 const keywords =
-  "KI Mitarbeiterumfragen automatisiert, Mitarbeiterumfragen automatisieren, KI Mitarbeiterfeedback, automatisierte Interviewqualitätsprüfung, KI-Kompetenzentwicklung technische Teams, KI Teammanagement, Feedback auswerten KI";
+  "KI Mitarbeiterumfragen auswerten, Mitarbeiterfeedback mit KI, KI Mitarbeiterfeedback, Interviewqualitätsprüfung KI, KI-Kompetenzentwicklung technische Teams, KI Teammanagement, Feedback auswerten KI";
 const author = "Codariq";
+const metaAuthor = "codariq";
 const publishedTime = "2026-04-30T09:15:00+02:00";
 const modifiedTime = "2026-05-08T22:45:00+02:00";
 const image = "/images/hero/hero2.webp";
@@ -20,10 +23,16 @@ const tags = keywords
 
 <Base
   title={title}
-  description={description}
+  description={metaDescription}
   keywords={keywords}
   ogImage={image}
-  article={{ publishedTime, modifiedTime, author, section: "Blog", tags }}
+  article={{
+    publishedTime,
+    modifiedTime,
+    author: metaAuthor,
+    section: "Blog",
+    tags,
+  }}
   forceNavSolid={true}
 >
   <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
