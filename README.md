@@ -1,13 +1,25 @@
 # Codariq Landing Page
 
-> **High-converting Astro-powered landing page positioning Codariq as "KI-Automatisierungsexperte für Selbstständige und kleine Teams bis 50 Personen"**
+[![Astro](https://img.shields.io/badge/Astro-5-1A1A1A?style=flat-square&logo=astro&logoColor=FF5D01)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)]()
+[![Tailwind](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)]()
+[![Vitest](https://img.shields.io/badge/Vitest-Unit%20tests-6E9F18?style=flat-square&logo=vitest&logoColor=white)]()
+[![Playwright](https://img.shields.io/badge/Playwright-E2E-2EAD33?style=flat-square&logo=playwright&logoColor=white)]()
+[![Performance](https://img.shields.io/badge/Performance-audited-brightgreen)]()
+[![Accessibility](https://img.shields.io/badge/Accessibility-reviewed-blue)]()
+[![Legal Pages](https://img.shields.io/badge/Legal%20pages-DSGVO%20%2F%20Impressum-green)]()
 
-[![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
-[![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
-[![Compliance](https://img.shields.io/badge/DSGVO-Compliant-green)]()
-[![Tests](https://img.shields.io/badge/Tests-Vitest%20%2B%20Playwright-brightgreen)]()
-[![Coverage](https://img.shields.io/badge/Coverage-Manual-yellow)]()
-[![CI/CD](https://img.shields.io/badge/CI%2FCD-Manual-orange)]()
+Astro-powered landing page and lead flow for a DACH AI automation offer. The
+project combines conversion copy, quiz UX, legal pages, SEO structure, and
+browser-level validation.
+
+## What this shows
+
+- Production-style Astro site with reusable content sections and landing routes
+- Interactive automation check / quiz flow with form validation and submission handling
+- SEO, schema, sitemap, legal pages, and German-market compliance framing
+- Vitest and Playwright coverage for homepage, quiz, and complete lead flow
+- Static build workflow that can be uploaded to conventional web hosting
 
 ## 🎯 Project Overview
 
