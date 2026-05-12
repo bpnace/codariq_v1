@@ -11,9 +11,35 @@
 ![npm](https://img.shields.io/badge/npm-lockfile_v3-CB3837?style=flat-square&logo=npm&logoColor=white)
 ![Legal Pages](https://img.shields.io/badge/Legal_pages-DSGVO_Impressum-2ea043?style=flat-square)
 
-Astro-powered landing page and lead flow for a DACH AI automation offer. The
-project combines conversion copy, quiz UX, legal pages, SEO structure, and
-browser-level validation.
+![Codariq live homepage](docs/assets/codariq-home.png)
+
+Astro-powered live landing page and lead flow for a DACH AI automation offer.
+The project combines conversion copy, quiz UX, legal pages, SEO structure,
+static deployment, and browser-level validation.
+
+## Case study
+
+### Problem
+Small teams need concrete automation offers, but most AI landing pages stay too
+abstract. The page had to explain what an agent may do, route visitors into the
+right package, and stay legally credible for the German market.
+
+### Solution
+I built an Astro site around a clear automation offer, package sections, lead
+capture, quiz-style qualification, blog/SEO content, and legal pages for a DACH
+audience.
+
+### Engineering decisions
+- Static Astro output for simple hosting and fast page delivery
+- Reusable content sections for package, process, references, FAQ, and lead flow
+- Structured metadata, sitemap, robots, and schema support
+- Vitest and Playwright coverage around homepage, quiz, and lead-flow behavior
+- Live screenshot captured from `https://codariq.de`
+
+### Outcome
+Codariq works as a production landing case: it shows positioning, frontend
+execution, compliance awareness, and conversion-focused product thinking in one
+repository.
 
 ## What this shows
 
@@ -85,7 +111,8 @@ npm run format         # → Auto-fix formatting
 
 ### 3. Testing
 
-> **Note:** CI/CD is currently manual - GitHub Actions pipeline is not yet configured.
+GitHub Actions runs the repository CI workflow. Use the commands below for the
+same local checks before pushing changes.
 
 #### Test Commands
 
