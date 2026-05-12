@@ -1,0 +1,214 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  steps?: Array<{
+    number: number;
+    title: string;
+    description: string;
+    details: string[];
+    duration: string;
+    result: string;
+  }>;
+}
+
+const {
+  title = "Erst prüfen, dann Agenten bauen.",
+  subtitle = "Ein KI-Agent wird nicht einfach an Postfach, CRM oder Dokumente gehängt. Wir klären Zweck, Datenfluss, Zugriffe und Freigaben, bauen einen begrenzten Ersteinsatz und stabilisieren ihn vor dem Betrieb.",
+  steps = [
+    {
+      number: 1,
+      title: "Prüfen",
+      description:
+        "Wir prüfen, ob der Use Case agentenfähig ist und welche Grenzen vor dem ersten produktiven Test stehen müssen. Das klärt, ob Agenten überhaupt sinnvoll sind, welche Daten betroffen sind und wo Menschen prüfen müssen.",
+      details: [
+        "Zweck, Prozessgrenzen und Erfolgskriterien festlegen",
+        "Datenquellen, Speicherorte und Anbieter erfassen",
+        "Rollen, Zugriffe und Freigaben skizzieren",
+        "Risiken, Sonderfälle und Stopppunkte markieren",
+      ],
+      duration: "3 bis 5 Tage",
+      result:
+        "Du weißt, welcher Agent sinnvoll ist, welche Daten betroffen sind und wo Menschen prüfen müssen.",
+    },
+    {
+      number: 2,
+      title: "Ersteinsatz bauen",
+      description:
+        "Wir bauen einen Agenten-Workflow, der echte Arbeit vorbereitet, aber kritische Entscheidungen kontrolliert Menschen überlässt.",
+      details: [
+        "n8n-Agent oder Agenten-Workflow als kleinster stabiler Start",
+        "Anbindung an E-Mail, CRM, Kalender, Dokumente oder Wissen",
+        "Toolzugriffe, Prompts und Freigaben definieren",
+        "Tests mit echten Beispielen aus deinem Alltag",
+      ],
+      duration: "2 bis 6 Wochen",
+      result:
+        "Der Ersteinsatz zeigt, welche Aufgaben der Agent zuverlässig vorbereitet und wo Freigabe nötig bleibt.",
+    },
+    {
+      number: 3,
+      title: "Stabilisieren & betreiben",
+      description:
+        "Der erste Einsatz wird mit echten Fällen gehärtet und danach so betreut, dass Änderungen an Tools, Daten oder Prozessen nicht zum Risiko werden.",
+      details: [
+        "Review-Schleifen mit Team und Prozessverantwortlichen",
+        "Logging, Sonderfälle und Eskalationen nachschärfen",
+        "Monitoring von Wirkung, Fehlern und Datenflüssen",
+        "Anpassungen bei Tools, Feldern oder Anbieterwechseln",
+      ],
+      duration: "Begleitung oder Betrieb",
+      result:
+        "Der Agent bleibt nachvollziehbar, wartbar und kann erweitert werden, ohne die Kontrolle zu verlieren.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="process" data-enterprise-section class="deployment-flow">
+  <div class="saas-container">
+    <div class="saas-heading saas-heading--center enterprise-reveal">
+      <span data-agent-connection-target>Sicherer Einsatz</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+
+    <div class="deployment-flow__shell enterprise-card" data-delivery-framework>
+      {
+        steps.map((step) => (
+          <article
+            class="deploy-phase"
+            data-delivery-card
+            data-delivery-card-step={step.number}
+          >
+            <div class="deploy-phase__header">
+              <span>{step.duration}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+            <ul>
+              {step.details.map((detail) => (
+                <li>{detail}</li>
+              ))}
+            </ul>
+            <strong>{step.result}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .deployment-flow {
+    background: #ffffff;
+    padding: clamp(4.5rem, 2vw, 7rem) 0;
+  }
+
+  .deployment-flow__shell {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
+    padding: 1rem;
+    background: linear-gradient(
+      135deg,
+      rgba(248, 250, 252, 0.98),
+      rgba(236, 246, 244, 0.78)
+    );
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.08);
+  }
+
+  .deploy-phase {
+    display: flex;
+    flex-direction: column;
+    min-height: 32rem;
+    padding: 1.35rem;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    border-radius: 14px;
+    transform-origin: 50% 100%;
+    will-change: transform, opacity, filter;
+  }
+
+  .deploy-phase__header span {
+    display: inline-flex;
+    color: #0f766e;
+    border-radius: 7px;
+    padding: 0.38rem 0.52rem;
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .deploy-phase h3 {
+    margin-top: 1.1rem;
+    color: #0b1220;
+    font-size: clamp(1.45rem, 2.1vw, 2.25rem);
+    font-weight: 920;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .deploy-phase p,
+  .deploy-phase li,
+  .deploy-phase strong {
+    color: #64748b;
+    font-size: 0.96rem;
+    font-weight: 580;
+    line-height: 1.48;
+  }
+
+  .deploy-phase p {
+    margin-top: 0.9rem;
+  }
+
+  .deploy-phase ul {
+    display: grid;
+    gap: 0.72rem;
+    margin-top: 1.4rem;
+  }
+
+  .deploy-phase li {
+    position: relative;
+    padding-left: 1.35rem;
+  }
+
+  .deploy-phase li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.58rem;
+    height: 0.58rem;
+    border-radius: 3px;
+    background: #14b8a6;
+  }
+
+  .deploy-phase strong {
+    display: block;
+    margin-top: auto;
+    color: #0b1220;
+    font-weight: 850;
+  }
+
+  @media (max-width: 980px) {
+    .deployment-flow__shell {
+      grid-template-columns: 1fr;
+    }
+
+    .deploy-phase {
+      min-height: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deploy-phase {
+      filter: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+</style>

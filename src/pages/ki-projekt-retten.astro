@@ -1,0 +1,129 @@
+---
+import SeoLandingPageTemplate from "../components/SeoLandingPageTemplate.astro";
+
+const faqs = [
+  {
+    question: "Wann lohnt sich KI-Projektrettung statt Neubau?",
+    answer:
+      "Wenn die Grundidee stimmt, aber Scope, Daten, Prompts, Übergaben oder Betrieb wackeln. Dann ist ein kurzer Audit oft sinnvoller als ein kompletter Neustart.",
+    category: "Einordnung",
+  },
+  {
+    question: "Was prüft ihr zuerst?",
+    answer:
+      "Wir trennen sichtbare Symptome von Ursachen: Datenqualität, Prompt-Logik, Tool-Übergaben, Freigaben, Logs, Verantwortlichkeit und tatsächliche Nutzung im Alltag.",
+    category: "Audit",
+  },
+  {
+    question: "Können bestehende Workflows bleiben?",
+    answer:
+      "Ja, wenn sie stabil sind. Meist bleibt ein Teil erhalten, während riskante Schritte begrenzt, vereinfacht oder mit Freigaben versehen werden.",
+    category: "Umsetzung",
+  },
+  {
+    question: "Wie schnell gibt es eine Einschätzung?",
+    answer:
+      "Für einen ersten Schnellcheck reichen oft Beispiele, Fehlermuster, Zielzustand und ein Blick auf den aktuellen Ablauf. Danach ist klarer, ob Remediation oder Neubau sinnvoll ist.",
+    category: "Ablauf",
+  },
+];
+---
+
+<SeoLandingPageTemplate
+  title="KI-Projekt retten: Schnellcheck, Audit und KI-Remediation | codariq"
+  description="Dein KI-Projekt hängt fest? Codariq prüft Daten, Prompts, Tool-Übergaben, Freigaben und Betrieb, damit du reparieren oder bewusst neu bauen kannst."
+  keywords="KI Projekt retten, KI-Projekt retten, KI Projekt gescheitert, Projektrettung, KI-Remediation, KI Remediation, KI-Agenten stabilisieren, KI Agent Betrieb"
+  breadcrumbName="KI-Projekt retten"
+  breadcrumbUrl="https://codariq.de/ki-projekt-retten"
+  heroTitle="Dein KI-Projekt hängt fest? Wir finden den Bruch."
+  heroSubtitle="Wenn die Demo gut aussah, aber der Alltag nicht mitzieht, braucht es keine neue Hype-Runde. Wir prüfen Scope, Daten, Prompts, Übergaben und Betrieb, damit du weißt: reparieren, begrenzen oder neu bauen."
+  primaryCTA="Projekt prüfen lassen"
+  secondaryCTA="Remediation lesen"
+  secondaryCTALink="/blog/ki-remediation-projekte-retten"
+  introEyebrow="Projektrettung"
+  introTitle="Nicht jedes KI-Projekt muss weggeworfen werden"
+  introText="Viele gescheiterte KI-Projekte haben keinen falschen Kern. Sie sind zu groß gestartet, schlecht integriert oder operativ nicht klar besessen."
+  cards={[
+    {
+      title: "Demo läuft, Alltag nicht",
+      text: "Der Ablauf funktioniert mit perfekten Beispielen, bricht aber bei echten Fällen, Sonderfällen oder wechselnden Daten ab.",
+    },
+    {
+      title: "Niemand vertraut dem Ergebnis",
+      text: "Antworten sind schwer prüfbar, Quellen fehlen oder Freigaben sind nicht sauber geregelt.",
+    },
+    {
+      title: "Betrieb ist unklar",
+      text: "Niemand prüft Fehler, pflegt Quellen, misst Nutzung oder entscheidet über neue Anforderungen.",
+    },
+  ]}
+  processEyebrow="Audit vor Aktion"
+  processTitle="Erst Ursache finden, dann reparieren."
+  processText="KI-Remediation ist kein Prompt-Polish. Wir prüfen das System aus Ablauf, Daten, Tool-Übergaben und Verantwortung."
+  steps={[
+    {
+      title: "Symptome sammeln",
+      text: "Wir erfassen, wann der Fehler auftritt, welche Beispiele betroffen sind und welche Ergebnisse wirklich unbrauchbar sind.",
+      items: [
+        "Fehlermuster und Beispiele",
+        "Nutzung und manuelle Nacharbeit",
+        "Zielzustand und Qualitätsmaßstab",
+      ],
+    },
+    {
+      title: "Ursache eingrenzen",
+      text: "Dann trennen wir Datenproblem, Scopeproblem, Promptproblem, Integrationsproblem und Betriebsproblem.",
+      items: [
+        "Quellen und Zugriff prüfen",
+        "Prompts und Agenten-Grenzen prüfen",
+        "Übergabe an CRM, Postfach, Dateiablage oder Tool prüfen",
+      ],
+    },
+    {
+      title: "Reparaturpfad entscheiden",
+      text: "Am Ende steht eine klare Entscheidung: kleiner schneiden, stabilisieren, ersetzen oder stoppen.",
+      items: [
+        "Kurzfristige Fixes",
+        "30-Tage-Stabilisierung",
+        "Ausbau nur nach Messung",
+      ],
+    },
+  ]}
+  proofTitle="Gute Projektrettung spart Umwege."
+  proofText="Der größte Fehler bei festgefahrenen KI-Projekten ist ein weiterer Feature-Ausbau. Erst muss klar sein, was wirklich kaputt ist und welche kleinere Version im Alltag Vertrauen zurückholt."
+  proofItems={[
+    {
+      title: "Scope runter",
+      text: "Ein kleiner stabiler Ablauf ist besser als ein großer Agent, dem niemand vertraut.",
+    },
+    {
+      title: "Daten prüfen",
+      text: "Viele Fehler kommen aus Quellen, Zugriffsrechten oder veralteten Informationen, nicht aus dem Modell.",
+    },
+    {
+      title: "Betrieb klären",
+      text: "Owner, Logs, Review-Rhythmus und Freigaben entscheiden, ob das Projekt dauerhaft hält.",
+    },
+  ]}
+  linksTitle="Mehr zur KI-Projektrettung"
+  links={[
+    {
+      href: "/blog/ki-projekte-retten",
+      label: "Praxisbeispiele",
+      text: "Drei typische Fälle, in denen KI-Projekte fast fertig waren, aber im Alltag hingen.",
+    },
+    {
+      href: "/blog/ki-remediation-projekte-retten",
+      label: "Remediation",
+      text: "Der Reparaturplan für Scope, Daten, Prompts, Übergaben und Betrieb.",
+    },
+    {
+      href: "/blog/ki-agenten-roi-berechnen",
+      label: "ROI",
+      text: "Wie du entscheidest, ob Reparatur, Ausbau oder Stopp wirtschaftlich sinnvoll ist.",
+    },
+  ]}
+  faqs={faqs}
+  finalTitle="Lass uns dein KI-Projekt nüchtern prüfen."
+  finalDescription="Wir schauen auf Beispiele, Daten, Übergaben und Betrieb. Danach weißt du, ob dein Projekt repariert, kleiner geschnitten oder neu gedacht werden sollte."
+/>

@@ -1,0 +1,296 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  closingText?: string;
+  problems?: Array<{
+    title: string;
+    description: string;
+    outcome: string;
+    solution: string;
+    icon: string;
+  }>;
+}
+
+const defaultProblems = [
+  {
+    title: "Tools sind da, aber Datenflüsse nicht",
+    description:
+      "CRM, Postfach, Kalender, Cloud-Dokumente und Projekttools laufen nebeneinander. Für Menschen ist das gewohnt, für einen Agenten fehlen klare Quellen, Übergaben und Grenzen.",
+    outcome: "Erst Datenfluss klären.",
+    solution:
+      "Ablauf-Check mit Quellen, Zwecken, Speicherorten und Übergaben, bevor ein Agent produktiv arbeitet.",
+    icon: "mail",
+  },
+  {
+    title: "KI wird ausprobiert, aber nicht geführt",
+    description:
+      "Einzelne Tools liefern erste Ergebnisse, aber niemand hat festgelegt, welche Daten genutzt werden dürfen, wann Freigaben nötig sind und wer verantwortlich bleibt.",
+    outcome: "Kontrolle vor Einsatz.",
+    solution:
+      "Agenten-Setup mit Rollen, Zugriffen, Human-in-the-loop und klaren Grenzen für jede Aktion.",
+    icon: "document",
+  },
+  {
+    title: "Manuelle Übergaben halten Prozesse zusammen",
+    description:
+      "Anfragen, Dokumente und internes Wissen wandern über Mails, Chats und Zurufe weiter. Genau dort braucht ein Agent Struktur, sonst verstärkt er nur das bestehende Chaos.",
+    outcome: "Übergaben agentenfähig machen.",
+    solution:
+      "Support-, Backoffice- oder Wissens-Agent, der prüft, vorbereitet und Sonderfälle an Menschen übergibt.",
+    icon: "book",
+  },
+  {
+    title: "Compliance kommt erst nach dem Workflow",
+    description:
+      "Oft wird zuerst automatisiert und danach gefragt, ob Datenschutz, Anbieter, Logs und Freigaben passen. Für produktive KI-Agenten ist das die falsche Reihenfolge.",
+    outcome: "Sicherheit in die Architektur.",
+    solution:
+      "DSGVO- und EU-AI-Act-orientierte Datenlogik mit Logging, Freigaben und Anbieter-/Hosting-Check.",
+    icon: "link",
+  },
+];
+
+const {
+  title = "Deine Prozesse sind noch nicht bereit für sichere KI-Agenten.",
+  subtitle = "Tools, Daten und Abläufe sind vorhanden. Aber solange Datenflüsse, Freigaben, Sonderfälle und Verantwortlichkeiten offen sind, wird ein Agent im echten Betrieb zum Risiko.",
+  closingText = "Wir starten nicht mit dem Tool, sondern mit dem Prozess. Erst klären wir Datenflüsse, Rollen und Freigaben, dann bauen wir den kleinsten Agenten-Workflow, der sicher produktiv getestet werden kann.",
+  problems = defaultProblems,
+} = Astro.props;
+---
+
+<section id="pain-points" data-enterprise-section class="usecase-suite">
+  <div class="saas-container">
+    <div class="saas-heading enterprise-reveal">
+      <span data-agent-connection-start>Agenten-Setup</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+
+    <div class="usecase-suite__grid">
+      {
+        problems.map((problem) => (
+          <article class="usecase-card enterprise-card">
+            <div class="usecase-card__top">
+              <div class="usecase-icon" aria-hidden="true">
+                <span />
+              </div>
+              <p>{problem.outcome}</p>
+            </div>
+            <h3>{problem.title}</h3>
+            <p class="usecase-card__description">{problem.description}</p>
+            <div class="usecase-card__solution">
+              <strong>Agenten-Setup</strong>
+              <span>{problem.solution}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="usecase-suite__closing enterprise-reveal">
+      <div>
+        <strong>Kontrolliert starten</strong>
+        <p>{closingText}</p>
+      </div>
+      <a href="/#final-cta">Ersten Agenten einordnen</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .usecase-suite {
+    background: #f4f8fb;
+    padding: clamp(4.5rem, 2vw, 7rem) 0;
+  }
+
+  .usecase-suite .saas-heading {
+    grid-template-columns: minmax(18rem, 0.64fr) minmax(28rem, 1fr);
+    align-items: center;
+    column-gap: clamp(2rem, 5vw, 5rem);
+    row-gap: clamp(1.25rem, 2.2vw, 2rem);
+    max-width: 78rem;
+    margin-inline: auto;
+  }
+
+  .usecase-suite .saas-heading > span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .usecase-suite .saas-heading h2 {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 17ch;
+    margin-top: 0;
+  }
+
+  .usecase-suite .saas-heading p {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+    max-width: 37rem;
+    margin-top: 0.3rem;
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  .usecase-suite__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
+  }
+
+  .usecase-card {
+    min-height: 25rem;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.07);
+  }
+
+  .usecase-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .usecase-icon {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 6px;
+    background: linear-gradient(
+      135deg,
+      rgba(184, 20, 20, 0.16),
+      rgba(37, 99, 235, 0.08)
+    );
+  }
+
+  .usecase-icon span {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 4px;
+    background: #b83214;
+  }
+
+  .usecase-card__top p {
+    max-width: 9rem;
+    color: #760f0f;
+    text-align: right;
+    font-size: 0.78rem;
+    font-weight: 900;
+    line-height: 1.25;
+  }
+
+  .usecase-card h3 {
+    margin-top: 2rem;
+    color: #0b1220;
+    font-size: clamp(1.35rem, 1.9vw, 1.95rem);
+    font-weight: 920;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+  }
+
+  .usecase-card__description {
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.98rem;
+    font-weight: 570;
+    line-height: 1.5;
+  }
+
+  .usecase-card__solution {
+    margin-top: auto;
+    padding-top: 1.2rem;
+  }
+
+  .usecase-card__solution strong {
+    display: block;
+    color: #0b1220;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .usecase-card__solution span {
+    display: block;
+    margin-top: 0.4rem;
+    color: #475569;
+    font-size: 0.92rem;
+    font-weight: 620;
+    line-height: 1.45;
+  }
+
+  .usecase-suite__closing {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.4rem;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 1.25rem;
+    background: #0b1220;
+    color: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  }
+
+  .usecase-suite__closing strong {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 900;
+  }
+
+  .usecase-suite__closing p {
+    margin-top: 0.35rem;
+    color: #cbd5e1;
+    font-size: 0.98rem;
+    font-weight: 560;
+    line-height: 1.45;
+  }
+
+  .usecase-suite__closing a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.85rem;
+    padding: 0.8rem 1rem;
+    background: #14b8a6;
+    color: #052e2b;
+    border-radius: 8px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 1180px) {
+    .usecase-suite__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .usecase-suite__grid,
+    .usecase-suite__closing {
+      grid-template-columns: 1fr;
+    }
+
+    .usecase-suite .saas-heading {
+      grid-template-columns: 1fr;
+    }
+
+    .usecase-suite .saas-heading > span,
+    .usecase-suite .saas-heading h2,
+    .usecase-suite .saas-heading p {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .usecase-suite .saas-heading p {
+      margin-top: 0;
+    }
+  }
+</style>

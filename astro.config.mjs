@@ -5,6 +5,14 @@ import { EnumChangefreq } from "sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
+const legacyRoutes = [
+  "/automatisierungs-check",
+  "/automatisierung-selbststaendige",
+  "/automatisierung-gruender",
+  "/automatisierung-kleine-teams",
+  "/blog/automatisierung-roi-maximieren",
+];
+
 export default defineConfig({
   site: "https://codariq.de",
   base: "/",
@@ -14,6 +22,10 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      filter(page) {
+        const pathname = new URL(page).pathname.replace(/\/$/, "");
+        return !legacyRoutes.includes(pathname);
+      },
       i18n: {
         defaultLocale: "de",
         locales: {
@@ -25,32 +37,43 @@ export default defineConfig({
         const url = item.url;
         const now = new Date();
 
-        // Newest blog post (ki-projekte-retten) - just published
-        if (url.includes('/blog/ki-projekte-retten')) {
-          item.lastmod = new Date('2025-01-09').toISOString();
+        const newestBlogSlugs = [
+          "/blog/ki-integration-bestehende-systeme",
+          "/blog/ki-mitarbeiterumfragen-automatisieren",
+          "/blog/ki-remediation-projekte-retten",
+        ];
+
+        if (newestBlogSlugs.some((slug) => url.includes(slug))) {
+          item.lastmod = new Date("2026-04-30").toISOString();
           item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.9;
         }
         // Other blog posts get higher priority and more frequent updates
-        else if (url.includes('/blog/') && !url.endsWith('/blog')) {
+        else if (url.includes("/blog/") && !url.endsWith("/blog")) {
           item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.8;
         }
         // Blog index page (updated with newest post)
-        else if (url.endsWith('/blog')) {
+        else if (url.endsWith("/blog")) {
           item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 0.7;
         }
         // Homepage (recently updated with pricing changes)
-        else if (url === 'https://codariq.de/' || url === 'https://codariq.de') {
+        else if (
+          url === "https://codariq.de/" ||
+          url === "https://codariq.de"
+        ) {
           item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 1.0;
         }
-        // Automation landing pages and quiz - high priority conversion pages
-        else if (url.includes('/automatisierung-') || url.includes('/automatisierungs-check')) {
+        // Agent landing pages and readiness quiz - high priority conversion pages
+        else if (
+          url.includes("/ki-agenten-") ||
+          url.includes("/agent-readiness")
+        ) {
           item.lastmod = now.toISOString();
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 0.8;
@@ -74,7 +97,9 @@ export default defineConfig({
           if (
             warning?.code === "UNUSED_EXTERNAL_IMPORT" &&
             typeof warning?.message === "string" &&
-            warning.message.includes("astro/dist/assets/utils/remotePattern.js") &&
+            warning.message.includes(
+              "astro/dist/assets/utils/remotePattern.js",
+            ) &&
             warning.message.includes("@astrojs/internal-helpers/remote")
           ) {
             return;

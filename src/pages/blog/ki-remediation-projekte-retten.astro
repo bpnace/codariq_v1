@@ -1,0 +1,456 @@
+---
+import Base from "../../layouts/Base.astro";
+import BlogConversionSection from "../../components/BlogConversionSection.astro";
+
+const title =
+  "KI-Remediation: So bringst du festgefahrene KI-Projekte wieder in Betrieb";
+const description =
+  "Ein pragmatischer Leitfaden für KI-Remediation und Projektrettung: Ursachen finden, Scope verkleinern, Daten und Prompts prüfen, Betrieb stabilisieren und gescheiterte KI-Projekte wieder nutzbar machen.";
+const keywords =
+  "KI-Remediation, KI Remediation, KI Projekt retten, KI Projekt gescheitert, Projektrettung, KI-Projekte stabilisieren, KI-Agenten stabilisieren, KI Projekt wieder in Betrieb nehmen";
+const author = "Codariq";
+const metaAuthor = "codariq";
+const publishedTime = "2026-04-30T09:30:00+02:00";
+const modifiedTime = "2026-05-08T23:15:00+02:00";
+const image = "/images/hero/hero2.webp";
+const tags = keywords
+  .split(",")
+  .map((tag) => tag.trim())
+  .filter(Boolean);
+---
+
+<Base
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage={image}
+  article={{
+    publishedTime,
+    modifiedTime,
+    author: metaAuthor,
+    section: "Blog",
+    tags,
+  }}
+  forceNavSolid={true}
+>
+  <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li>
+          <a href="/blog" class="text-gray-600 hover:text-orange-600">Blog</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">KI-Remediation</li>
+      </ol>
+    </div>
+  </nav>
+
+  <header
+    class="article-header bg-gradient-to-r from-red-50 to-orange-100 py-8 sm:py-12"
+  >
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span
+            class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium"
+          >
+            KI-Remediation
+          </span>
+          <span class="text-gray-500 text-sm">•</span>
+          <span class="text-gray-600 text-sm">12 Min. Lesezeit</span>
+        </div>
+
+        <h1
+          class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight"
+        >
+          KI-Remediation: So bringst du festgefahrene KI-Projekte <span
+            class="text-red-600">wieder in Betrieb</span
+          >
+        </h1>
+
+        <p
+          class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6"
+        >
+          {description}
+        </p>
+
+        <div
+          class="flex items-center justify-center gap-4 text-sm text-gray-600"
+        >
+          <span>{author}</span>
+          <span>•</span>
+          <time datetime={publishedTime}>
+            {
+              new Date(publishedTime).toLocaleDateString("de-DE", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="prose prose-lg prose-orange max-w-none mb-12">
+      <p class="lead text-xl text-gray-700 font-medium">
+        KI-Remediation bedeutet: ein KI-Projekt nicht wegwerfen, sondern
+        systematisch stabilisieren, vereinfachen und wieder nutzbar machen.
+      </p>
+
+      <p>
+        Viele KI-Projekte scheitern nicht, weil die Idee falsch war. Sie
+        scheitern, weil der Ablauf zu groß wurde, Daten nicht zuverlässig sind,
+        Erwartungen unklar bleiben oder niemand den Betrieb besitzt. Genau
+        deshalb beginnt gute Projektrettung nicht mit mehr Features, sondern mit
+        einem klaren Schnitt: Was muss der Agent wirklich tun, und was bleibt
+        bewusst bei einem Menschen?
+      </p>
+
+      <p>
+        Dieser Artikel ist der Reparaturplan für genau diesen Moment. Wenn du
+        zuerst typische Beispiele sehen willst, lies ergänzend <a
+          href="/blog/ki-projekte-retten"
+          class="text-red-600 hover:text-red-700 underline"
+          >KI-Projekt retten: 3 Praxisbeispiele</a
+        >. Für eine knappe Diagnose vor dem nächsten Umbau gibt es zusätzlich
+        den <a
+          href="/ki-projekt-retten"
+          class="text-red-600 hover:text-red-700 underline"
+          >KI-Projekt-Schnellcheck</a
+        >.
+      </p>
+    </div>
+
+    <div
+      class="bg-gradient-to-r from-red-50 to-orange-50 rounded-xl p-6 mb-12 border border-red-100"
+    >
+      <h2 class="text-xl font-bold text-gray-900 mb-4">
+        Schnelldiagnose: Was ist wirklich kaputt?
+      </h2>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">Scope</div>
+          <p class="text-sm text-gray-600">
+            Zu viele Sonderfälle oder ein unklarer Zielzustand.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">Daten</div>
+          <p class="text-sm text-gray-600">
+            Fehlende, veraltete oder widersprüchliche Quellen.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">Qualität</div>
+          <p class="text-sm text-gray-600">
+            Antworten sind unzuverlässig oder nicht prüfbar.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+          <div class="text-sm font-semibold text-gray-900 mb-1">Betrieb</div>
+          <p class="text-sm text-gray-600">
+            Niemand überwacht Fehler, Logs oder Verbesserungen.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 rounded-xl p-6 mb-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Inhaltsverzeichnis</h2>
+      <ol class="space-y-2 text-gray-700">
+        <li>
+          <a href="#symptome" class="hover:text-red-600 transition-colors"
+            >1. Symptome vom Kernproblem trennen</a
+          >
+        </li>
+        <li>
+          <a href="#scope" class="hover:text-red-600 transition-colors"
+            >2. Scope radikal verkleinern</a
+          >
+        </li>
+        <li>
+          <a href="#daten" class="hover:text-red-600 transition-colors"
+            >3. Daten, Prompts und Übergaben prüfen</a
+          >
+        </li>
+        <li>
+          <a href="#betrieb" class="hover:text-red-600 transition-colors"
+            >4. Betrieb und Verantwortlichkeiten sichern</a
+          >
+        </li>
+        <li>
+          <a href="#messung" class="hover:text-red-600 transition-colors"
+            >5. Erst messen, dann wieder ausbauen</a
+          >
+        </li>
+      </ol>
+    </div>
+
+    <section id="symptome" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-red-600 font-bold text-lg">1</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Symptome vom Kernproblem trennen
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Die sichtbaren Symptome sind meistens nicht die Ursache. "Die KI
+          halluziniert" kann bedeuten, dass Quellen fehlen. "Niemand nutzt es"
+          kann bedeuten, dass der Ablauf nicht in den Alltag integriert ist.
+          "Die Automatisierung bricht ab" kann bedeuten, dass Sonderfälle nie
+          definiert wurden.
+        </p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">
+          Fragen für die erste Diagnose
+        </h3>
+        <ul>
+          <li>
+            <strong>Wann tritt der Fehler auf?</strong> Immer, nur bei bestimmten
+            Daten oder nur bei bestimmten Personen?
+          </li>
+          <li>
+            <strong>Ist das Ergebnis falsch oder nur nicht brauchbar?</strong> Das
+            sind unterschiedliche Probleme.
+          </li>
+          <li>
+            <strong>Gibt es Logs?</strong> Ohne Verlauf bleibt jede Reparatur Spekulation.
+          </li>
+          <li>
+            <strong>Wer entscheidet über Qualität?</strong> Ohne fachlichen Maßstab
+            kann kein KI-Projekt stabil werden.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="scope" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-orange-600 font-bold text-lg">2</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Scope radikal verkleinern
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-3">Vor Remediation</h3>
+          <p class="text-gray-700 text-sm">
+            Die KI soll Support, Vertrieb, Wissensmanagement und Dokumentation
+            gleichzeitig verbessern.
+          </p>
+        </div>
+        <div class="bg-white border border-red-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-3">Nach Remediation</h3>
+          <p class="text-gray-700 text-sm">
+            Die KI beantwortet nur interne Rückfragen zu einem klar abgegrenzten
+            Thema und nennt die Quelle.
+          </p>
+        </div>
+      </div>
+
+      <div class="prose prose-lg prose-orange max-w-none">
+        <p>
+          Ein kleiner, stabiler Ablauf ist wertvoller als ein großer, dem
+          niemand vertraut. Reduziere das Projekt auf einen Teilprozess, der
+          regelmäßig vorkommt, klare Qualitätskriterien hat und messbar
+          entlastet.
+        </p>
+      </div>
+    </section>
+
+    <section id="daten" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-red-600 font-bold text-lg">3</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Daten, Prompts und Übergaben prüfen
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Bei der Reparatur lohnt sich ein Dreischritt: Datenqualität,
+          Anweisungen und Übergaben getrennt betrachten. Sonst wird zu schnell
+          am Prompt geschraubt, obwohl das eigentliche Problem in der Quelle
+          oder im Zielsystem liegt.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Daten prüfen</h3>
+          <p class="text-gray-700 text-sm">
+            Sind Quellen aktuell, eindeutig, zugänglich und für die Aufgabe
+            wirklich relevant?
+          </p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Prompts prüfen</h3>
+          <p class="text-gray-700 text-sm">
+            Ist klar, wann die KI antworten darf, wann sie nachfragen muss und
+            wie Unsicherheit sichtbar wird?
+          </p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-2">Übergaben prüfen</h3>
+          <p class="text-gray-700 text-sm">
+            Landet das Ergebnis dort, wo es gebraucht wird, oder entsteht wieder
+            Copy Paste?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="betrieb" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-orange-600 font-bold text-lg">4</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Betrieb und Verantwortlichkeiten sichern
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Viele KI-Projekte sind technisch fertig, aber operativ obdachlos.
+          Niemand prüft Fehler, niemand pflegt Quellen, niemand bewertet neue
+          Anforderungen. Genau dort beginnt Remediation.
+        </p>
+        <ul>
+          <li>
+            <strong>Owner:</strong> Eine Person verantwortet fachliche Qualität.
+          </li>
+          <li>
+            <strong>Monitoring:</strong> Fehler und kritische Fälle werden sichtbar.
+          </li>
+          <li>
+            <strong>Review-Rhythmus:</strong> Ergebnisse werden regelmäßig geprüft.
+          </li>
+          <li>
+            <strong>Änderungslogik:</strong> Neue Anforderungen kommen in eine Liste,
+            nicht direkt in den Prompt.
+          </li>
+        </ul>
+        <p>
+          Bei Teamthemen lohnt sich zusätzlich der Artikel <a
+            href="/blog/ki-mitarbeiterumfragen-automatisieren"
+            class="text-red-600 hover:text-red-700 underline"
+            >KI-Mitarbeiterumfragen automatisieren</a
+          >, weil er zeigt, wie man Feedback strukturiert in Verbesserungen
+          übersetzt.
+        </p>
+      </div>
+    </section>
+
+    <section id="messung" class="mb-16">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-red-600 font-bold text-lg">5</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Erst messen, dann wieder ausbauen
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-orange max-w-none mb-8">
+        <p>
+          Nach der Reparatur solltest du nicht sofort wieder erweitern. Miss
+          erst, ob der reduzierte Ablauf stabil ist. Die wichtigsten Kennzahlen
+          sind Nutzungsrate, manuelle Korrekturen, Fehler pro Woche und
+          eingesparte Zeit.
+        </p>
+        <p>
+          Erst wenn diese Werte stabil sind, lohnt sich die nächste Ausbaustufe.
+          Für die wirtschaftliche Bewertung hilft der <a
+            href="/blog/ki-agenten-roi-berechnen"
+            class="text-red-600 hover:text-red-700 underline"
+            >ROI-Leitfaden für Prozessautomatisierung</a
+          >.
+        </p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-6">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">
+          Remediation-Ergebnis nach 30 Tagen
+        </h3>
+        <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-700">
+          <div class="bg-white rounded-lg p-4">
+            <strong>Stabilität:</strong> Weniger ungeklärte Fehler und klare Fallbacks.
+          </div>
+          <div class="bg-white rounded-lg p-4">
+            <strong>Nutzung:</strong> Das Team nutzt den Ablauf freiwillig, weil er
+            Arbeit spart.
+          </div>
+          <div class="bg-white rounded-lg p-4">
+            <strong>Entscheidung:</strong> Ausbau, Anpassung oder Stopp basiert auf
+            Daten.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <BlogConversionSection
+      accent="orange"
+      title="Dein KI-Projekt steckt fest?"
+      buttonText="Remediation-Check anfragen"
+      href="/ki-projekt-retten"
+    >
+      <p>
+        Wir prüfen Scope, Daten, Prompts, Schnittstellen und Betrieb. Danach
+        weißt du, was repariert werden kann, was raus sollte und welcher kleine
+        stabile Ablauf zuerst wieder live geht.
+      </p>
+    </BlogConversionSection>
+
+    <section class="mt-12 pt-8 border-t border-gray-200">
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/blog/ki-integration-bestehende-systeme" class="group">
+          <div
+            class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+          >
+            <div class="text-sm text-gray-500 mb-2">Vorbeugen</div>
+            <h3 class="font-semibold text-gray-900 group-hover:text-red-600">
+              KI-Integration in bestehende Systeme
+            </h3>
+          </div>
+        </a>
+        <a href="/blog/ki-projekte-retten" class="group">
+          <div
+            class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+          >
+            <div class="text-sm text-gray-500 mb-2">Praxisbeispiele</div>
+            <h3 class="font-semibold text-gray-900 group-hover:text-red-600">
+              KI-Projekt retten: 3 Beispiele
+            </h3>
+          </div>
+        </a>
+      </div>
+    </section>
+  </article>
+</Base>

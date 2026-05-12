@@ -1,0 +1,217 @@
+---
+import Base from "../layouts/Base.astro";
+import LandingHeroSection from "../components/LandingHeroSection.astro";
+import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import FAQ from "../components/FAQ.astro";
+import LeadCaptureSection from "../components/LeadCaptureSection.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+import FAQSchema from "../components/FAQSchema.astro";
+
+const stackLevels = [
+  {
+    title: "n8n-Agent",
+    bestFor:
+      "Ein klarer Workflow mit KI-Schritt, wenigen Tools und schneller Wirkung.",
+    examples:
+      "Postfach sortieren, Leads zusammenfassen, Rechnungen vorbereiten.",
+  },
+  {
+    title: "Agenten-Workflow",
+    bestFor: "Mehrere Schritte, Tool-Zugriffe, Freigaben und Sonderfälle.",
+    examples:
+      "Support-Triage, Reporting, Übergaben zwischen CRM, Kalender und Projekttool.",
+  },
+  {
+    title: "OpenClaw-Setup",
+    bestFor:
+      "Dauerhaft laufende Agenten mit Gateway, Kanälen, Modellen, Tools und Betriebskonzept.",
+    examples:
+      "Mehrkanal-Agent, persönlicher Team-Agent, Agenten mit Memory und kontrollierten Tools.",
+  },
+];
+
+const setupAreas = [
+  "Gateway, Dashboard und Betriebsmodus sauber einrichten",
+  "Model Provider und erlaubte Modelle bewusst auswählen",
+  "Kanäle wie Telegram, Slack oder andere Messenger kontrolliert anbinden",
+  "Tools, Skills und Plugin-Zugriffe begrenzen",
+  "Secrets, Tokens und Zugriffe nicht im Klartext verstreuen",
+  "Logs, Updates und Fehlerfälle für den Betrieb planen",
+];
+
+const faqs = [
+  {
+    question: "Was ist OpenClaw im Codariq-Kontext?",
+    answer:
+      "OpenClaw ist für uns eine mögliche Agenten-Infrastruktur, wenn ein einzelner n8n-Workflow nicht mehr reicht. Es geht um Gateway, Kanäle, Modelle, Tools, Konfiguration und kontrollierten Betrieb.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Braucht jedes KMU OpenClaw?",
+    answer:
+      "Nein. Viele starten sinnvoller mit einem n8n-Agenten. OpenClaw wird interessant, wenn mehrere Kanäle, dauerhafter Betrieb, Agenten-Konfiguration, Modellwahl und Tool-Zugriffe strukturiert verwaltet werden müssen.",
+    category: "Eignung",
+  },
+  {
+    question: "Was übernimmt Codariq beim Setup?",
+    answer:
+      "Wir klären den Use Case, planen Berechtigungen, richten den Stack ein, verbinden Kanäle und Tools, testen echte Abläufe und übergeben eine verständliche Dokumentation für Betrieb und Weiterentwicklung.",
+    category: "Umsetzung",
+  },
+  {
+    question: "Wie wird das DSGVO-konform?",
+    answer:
+      "Durch Datenminimierung, klare Anbieterwahl, Hosting- und AVV-Prüfung, Rollen, Freigaben, getrennte Zugriffe und dokumentierte Datenflüsse. Je nach Use Case empfehlen wir zusätzlich juristische Prüfung.",
+    category: "Datenschutz",
+  },
+  {
+    question: "Kann ein bestehender n8n-Workflow migriert werden?",
+    answer:
+      "Ja. Häufig analysieren wir zuerst, welche Teile stabil sind, welche KI-Schritte mehr Kontext brauchen und welche Aktionen künftig über einen Agenten mit klaren Grenzen laufen sollten.",
+    category: "Migration",
+  },
+];
+---
+
+<Base
+  title="OpenClaw-Agenten für KMU: Setup, n8n-Migration und sicherer Betrieb | codariq"
+  description="Vom kleinen n8n-Basisablauf zum OpenClaw-Agenten-Setup: Codariq plant Gateway, Kanäle, Modelle, Tools, Freigaben und DSGVO-orientierten Betrieb für KMU."
+  keywords="OpenClaw Setup, OpenClaw Agenten, n8n OpenClaw Migration, KI Agent Infrastruktur, AI Agent Gateway, n8n KI Agent, DSGVO KI Agent Setup, KI Agent Betrieb KMU"
+  ogImage="/images/hero/hero2.webp"
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "OpenClaw-Agenten", url: "https://codariq.de/openclaw-agenten" },
+    ]}
+  />
+  <FAQSchema faqs={faqs} />
+
+  <LandingHeroSection
+    title="Vom n8n-Workflow zum stabilen OpenClaw-Agenten."
+    subtitle="Wenn ein einfacher Workflow nicht mehr reicht, planen und bauen wir Agenten-Setups mit Gateway, Kanälen, Modellen, Tools, Freigaben und Betriebskonzept. Pragmatisch, kontrolliert und DSGVO-orientiert."
+    heroImage="/images/hero/hero2.webp"
+    primaryCTA="OpenClaw-Setup prüfen"
+    primaryCTALink="/#final-cta"
+    secondaryCTA="Stack vergleichen"
+    secondaryCTALink="#vergleich"
+  />
+
+  <TrustSignalsSection />
+
+  <section id="vergleich" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
+          Agenten-Reifegrad
+        </p>
+        <h2 class="section-title mb-4">
+          Nicht jeder Use Case braucht denselben Stack
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Wir wählen nicht das spannendste Tool, sondern die kleinste
+          Architektur, die zuverlässig funktioniert. So bleibt dein Agent
+          wartbar und bezahlbar.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+        {
+          stackLevels.map((level) => (
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
+              <h3 class="text-xl font-black text-gray-900 mb-3">
+                {level.title}
+              </h3>
+              <p class="text-sm font-bold uppercase tracking-wide text-orange-600 mb-2">
+                Geeignet für
+              </p>
+              <p class="text-gray-700 font-medium leading-relaxed mb-4">
+                {level.bestFor}
+              </p>
+              <p class="text-sm font-bold uppercase tracking-wide text-gray-500 mb-2">
+                Beispiele
+              </p>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {level.examples}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 sm:py-16 bg-gray-950 text-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div>
+          <p
+            class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3"
+          >
+            OpenClaw-Betrieb
+          </p>
+          <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
+            Ein Agent ist nur so gut wie seine Grenzen.
+          </h2>
+          <p class="text-white/80 text-lg leading-relaxed">
+            OpenClaw-Setups können mächtig werden, weil Agenten über Kanäle,
+            Tools und Modelle handeln. Genau deshalb planen wir Zugriff,
+            Secrets, Freigaben, Protokolle und Updatefähigkeit von Anfang an
+            mit.
+          </p>
+        </div>
+        <ul class="space-y-3">
+          {
+            setupAreas.map((item) => (
+              <li class="flex gap-3 rounded-xl border border-white/15 bg-white/10 p-4">
+                <span class="mt-1 h-5 w-5 flex-none rounded-full bg-orange-400" />
+                <span class="text-white/85 font-medium">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div
+        class="rounded-2xl border border-gray-200 bg-gray-50 p-6 sm:p-8 md:p-10"
+      >
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
+          Migration statt Neustart
+        </p>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4">
+          Bestehende n8n-Workflows bleiben wertvoll.
+        </h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          Wenn du bereits n8n nutzt, werfen wir nicht alles weg. Wir prüfen,
+          welche Trigger, Datenflüsse und Integrationen stabil sind und welche
+          Teile von einem Agenten mit mehr Kontext, Memory oder Kanal-Anbindung
+          profitieren.
+        </p>
+        <a
+          href="/ki-agenten-kmu"
+          class="inline-flex items-center font-bold text-orange-700 hover:text-orange-800"
+        >
+          Mehr zu KI-Agenten für KMU lesen →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <FAQ
+    title="FAQ: OpenClaw, n8n und Agenten-Setups"
+    subtitle="Wann OpenClaw sinnvoll ist und wie wir den Stack kontrolliert aufbauen."
+    faqs={faqs}
+  />
+
+  <LeadCaptureSection
+    title="Lass uns deinen Agenten-Stack richtig einordnen."
+    description="Wir prüfen deinen Use Case, bestehende n8n-Workflows und die Frage, ob ein OpenClaw-Setup bereits sinnvoll ist oder ein kleinerer Agent besser startet."
+  />
+</Base>

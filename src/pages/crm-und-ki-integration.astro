@@ -1,0 +1,129 @@
+---
+import SeoLandingPageTemplate from "../components/SeoLandingPageTemplate.astro";
+
+const faqs = [
+  {
+    question: "Was ist CRM-Integration mit KI?",
+    answer:
+      "CRM-Integration mit KI bedeutet, dass Anfragen, Leads, Notizen, Follow-ups oder Supportfälle automatisch gelesen, vorbereitet und sauber an das CRM übergeben werden. Ein Mensch gibt kritische Schritte frei.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Welche CRM-Systeme können angebunden werden?",
+    answer:
+      "Das hängt von Schnittstellen, Berechtigungen und Datenqualität ab. Entscheidend ist weniger der CRM-Name als die Frage, welche Felder führend sind und welche Aktionen der Agent auslösen darf.",
+    category: "Systeme",
+  },
+  {
+    question: "Kann KI bestehende Kundendaten aktualisieren?",
+    answer:
+      "Ja, aber kontrolliert. Sinnvoll ist meist ein Vorschlagsmodus: Die KI erkennt Änderungen, bereitet ein Update vor und übergibt es zur Prüfung, statt Kundendaten blind zu überschreiben.",
+    category: "Kontrolle",
+  },
+  {
+    question: "Wann lohnt sich eine KI-Cloud-Integrationslösung?",
+    answer:
+      "Wenn mehrere Tools, Kanäle, Rollen und Datenflüsse dauerhaft zusammenspielen müssen. Für einen einzelnen CRM-Ablauf reicht oft ein kleinerer Agenten-Workflow.",
+    category: "Architektur",
+  },
+];
+---
+
+<SeoLandingPageTemplate
+  title="CRM und KI-Integration: bestehende Tools sauber verbinden | codariq"
+  description="CRM-Integration mit bestehenden Tools: Codariq verbindet KI-Agenten mit CRM, E-Mail, Kalender und Cloud-Tools, inklusive Freigaben, Datenwegen und Logs."
+  keywords="CRM Integration mit bestehenden Tools, KI Integration bestehende Systeme, KI-Integration CRM, KI-Cloud-Integration Software, KI-Cloud-Integrationslösung, KI-Cloud-Integrationsplattform, Integration KI, KI integrieren"
+  breadcrumbName="CRM und KI-Integration"
+  breadcrumbUrl="https://codariq.de/crm-und-ki-integration"
+  heroTitle="CRM und KI integrieren, ohne Vertrieb und Support zu verwirren."
+  heroSubtitle="Wir verbinden CRM, Postfach, Kalender und Cloud-Tools so, dass KI-Agenten Leads, Anfragen und Follow-ups vorbereiten, aber kritische Kundendaten nicht ungeprüft verändern."
+  primaryCTA="CRM-Ablauf prüfen"
+  secondaryCTA="Integrationsguide lesen"
+  secondaryCTALink="/blog/ki-integration-bestehende-systeme"
+  introEyebrow="CRM-Integration"
+  introTitle="Das CRM bleibt führend"
+  introText="KI darf Arbeit vorbereiten, aber dein CRM muss die verlässliche Quelle bleiben. Deshalb planen wir Datenfelder, Schreibrechte und Freigaben, bevor ein Agent produktiv arbeitet."
+  cards={[
+    {
+      title: "Lead-Triage",
+      text: "Neue Anfragen werden eingeordnet, mit Kontext angereichert und als nächste Aufgabe im CRM vorbereitet.",
+    },
+    {
+      title: "Follow-ups",
+      text: "Der Agent erkennt offene nächste Schritte, erstellt Entwürfe und stoppt vor Nachrichten, die Freigabe brauchen.",
+    },
+    {
+      title: "Datenpflege",
+      text: "Änderungen aus E-Mails, Formularen oder Calls werden vorgeschlagen, geprüft und erst dann übernommen.",
+    },
+  ]}
+  processEyebrow="Von CRM-Feld zu Workflow"
+  processTitle="CRM-Integration funktioniert nur mit klarer Verantwortung."
+  processText="Bevor KI Kundendaten berührt, müssen Feldlogik, Datenqualität, Rechte und Zielzustand geklärt sein. Sonst entsteht schnell mehr Nacharbeit als Entlastung."
+  steps={[
+    {
+      title: "CRM-Objekte und Felder klären",
+      text: "Wir prüfen, welche Daten wirklich relevant sind und welche Felder nicht automatisch überschrieben werden dürfen.",
+      items: [
+        "Kontakte, Firmen, Deals, Tickets oder Aufgaben",
+        "Pflichtfelder und Datenqualität",
+        "Regeln für Dubletten und unklare Fälle",
+      ],
+    },
+    {
+      title: "KI-Aktionen begrenzen",
+      text: "Der Agent darf lesen, zusammenfassen und vorbereiten. Schreibzugriffe bekommen klare Regeln und Freigaben.",
+      items: [
+        "Vorschlagsmodus für sensible Änderungen",
+        "Freigabe vor externen Nachrichten",
+        "Logs für CRM-Updates",
+      ],
+    },
+    {
+      title: "Cloud-Tools bewusst anbinden",
+      text: "Kalender, Postfach, Dokumente und Projekttools werden nur angebunden, wenn sie für den CRM-Ablauf wirklich gebraucht werden.",
+      items: [
+        "Schnittstellen und Berechtigungen prüfen",
+        "Datenminimierung einhalten",
+        "Ausbau erst nach stabiler Nutzung",
+      ],
+    },
+  ]}
+  proofTitle="CRM und KI sollen Nacharbeit reduzieren, nicht Datenchaos erzeugen."
+  proofText="Der richtige Start ist meistens ein begrenzter CRM-Ablauf mit hohem Volumen: Leads sortieren, Aufgaben vorbereiten, Follow-ups prüfen oder Supportfälle sauber übergeben."
+  proofItems={[
+    {
+      title: "Führendes System bleibt klar",
+      text: "Das CRM ist weiterhin die Quelle. KI bereitet vor und dokumentiert.",
+    },
+    {
+      title: "Freigaben schützen Vertrauen",
+      text: "Externe Nachrichten und sensible Updates bleiben prüfbar.",
+    },
+    {
+      title: "Cloud-Integration bleibt schlank",
+      text: "Nur die Systeme werden angebunden, die den Ablauf wirklich verbessern.",
+    },
+  ]}
+  linksTitle="Passende Vertiefungen"
+  links={[
+    {
+      href: "/blog/ki-integration-bestehende-systeme",
+      label: "Bestehende Systeme",
+      text: "Wie CRM, E-Mail, Kalender und Buchhaltung sauber in KI-Workflows passen.",
+    },
+    {
+      href: "/ki-agenten-kmu",
+      label: "Agenten",
+      text: "Wie kontrollierbare KI-Agenten für KMU aufgebaut werden.",
+    },
+    {
+      href: "/agent-readiness",
+      label: "Check",
+      text: "Prüfe, ob CRM, Support oder Backoffice dein bester Startpunkt ist.",
+    },
+  ]}
+  faqs={faqs}
+  finalTitle="Lass uns deinen CRM-Ablauf sauber eingrenzen."
+  finalDescription="Wir prüfen, welche CRM-Daten führend sind, wo Nacharbeit entsteht und welche KI-Aktionen sinnvoll vorbereitet werden können."
+/>

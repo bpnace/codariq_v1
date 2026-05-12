@@ -1,0 +1,265 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  items?: Array<{
+    kind: "feedback" | "useCase";
+    body: string;
+    heading: string;
+    context: string;
+    label: string;
+    image?: string;
+    results?: {
+      metric: string;
+      improvement: string;
+    };
+    featured?: boolean;
+  }>;
+}
+
+const {
+  title = "Wo Agenten Teams wirklich entlasten können",
+  subtitle = "Zwei anonymisierte Rückmeldungen und konkrete Einsatzpunkte für Teams, Geschäftsführung und Selbstständige. Nicht als Showpiece, sondern dort, wo Büroarbeit jeden Tag liegen bleibt.",
+  items = [
+    {
+      kind: "feedback",
+      body: '"Vor Terminen war bei uns immer die gleiche Sucherei... Letzte Mail, offene Punkte, fehlende Unterlagen. Wenn das vorher als kurze Zusammenfassung bereit liegt, gehen wir deutlich ruhiger ins Gespräch."',
+      heading: "Terminmappe vor dem Gespräch",
+      context: "Mails, Notizen, offene Punkte",
+      label: "Rückmeldung von Kunden",
+      results: { metric: "Termin", improvement: "strukturiert geplant" },
+      featured: true,
+    },
+    {
+      kind: "useCase",
+      body: "Wenn Informationen in Mails, PDFs, Tickets und Köpfen verteilt sind, unterbricht jede Rückfrage den Arbeitstag. Der Agent sucht in freigegebenen Quellen, nennt den Fundort und bereitet eine ausführliche Antwort vor.",
+      heading: "Teamwissen ohne Zuruf",
+      context: "Mails, PDFs, Tickets, Übergaben",
+      label: "Nutzen für Teams",
+      results: { metric: "Antwort", improvement: "sauber erfasst" },
+    },
+    {
+      kind: "useCase",
+      body: "Neue Anfragen sind selten sofort entscheidungsreif. Der Agent ergänzt Firmendaten, bisherigen Kontakt, offene Fragen und eine nächste Handlung, bevor jemand zurückruft oder ein Angebot schreibt.",
+      heading: "Anfragen sauber einordnen",
+      context: "Firma, Kontakt, nächste Handlung",
+      label: "Nutzen für Selbstständige",
+      results: { metric: "Anfrage", improvement: "ergänzt" },
+    },
+    {
+      kind: "useCase",
+      body: "Für die Geschäftsführung zählt nicht jede einzelne Mail, sondern der Stand von offenen Freigaben, blockierten Aufgaben, wichtigen Rückmeldungen und Risiken, die nicht bis Freitag liegen bleiben dürfen.",
+      heading: "Entscheidungen mit vorbereitetem Stand",
+      context: "Freigaben, Blocker, Risiken",
+      label: "Nutzen für Geschäftsführung",
+      results: { metric: "Stand", improvement: "immer sichtbar" },
+    },
+    {
+      kind: "feedback",
+      body: '"Ich brauche morgens nicht noch ein Dashboard. Ich brauche eine klare Liste, was neu ist, was hängt, was ich freigeben muss und wo eine Entscheidung ansteht. Ich will nicht mehr nachfragen müssen, sondern direkt loslegen können."',
+      heading: "Chef-Überblick ohne Nachfragen",
+      context: "Freigaben, Rückfragen, offene Aufgaben",
+      label: "Rückmeldung von Kunden",
+      results: { metric: "Überblick", improvement: "vorbereitet" },
+    },
+    {
+      kind: "useCase",
+      body: "Listen, Rechnungen und Formulare kommen aus Postfach, Exporten und Ordnern. Der Agent findet Dubletten, fehlende Angaben und falsche Ablageorte, bevor daraus Nacharbeit wird.",
+      heading: "Daten und Unterlagen vorsortieren",
+      context: "Listen, Rechnungen, Ablage",
+      label: "Nutzen für Backoffice",
+      results: { metric: "Ablage", improvement: "logisch sortiert" },
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="testimonials" data-enterprise-section class="proof-suite">
+  <div class="saas-container">
+    <div class="saas-heading saas-heading--center enterprise-reveal">
+      <span>Typische Engpässe</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+
+    <div class="proof-suite__grid" data-testimonial-reveal>
+      {
+        items.map((item) => (
+          <article
+            class={`proof-card enterprise-card ${item.kind === "feedback" || item.featured ? "proof-card--featured" : ""}`}
+            data-testimonial-card
+            data-proof-kind={item.kind}
+          >
+            <div class="proof-card__meta">
+              <span>{item.label}</span>
+              <strong>{item.heading}</strong>
+              <p>{item.context}</p>
+            </div>
+            {item.kind === "feedback" ? (
+              <blockquote class="proof-card__body">{item.body}</blockquote>
+            ) : (
+              <p class="proof-card__body">{item.body}</p>
+            )}
+            {item.results && (
+              <div class="proof-card__result">
+                <strong>{item.results.metric}</strong>
+                <span>{item.results.improvement}</span>
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="proof-suite__cta enterprise-reveal">
+      <div>
+        <strong>Erkennst du mindestens einen dieser Fälle?</strong>
+        <p>
+          Wir schauen auf einen konkreten Prozess und klären, ob ein Agent dort
+          vorbereiten, sortieren oder mit Freigabe handeln sollte.
+        </p>
+      </div>
+      <a href="#final-cta">Fall einordnen</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proof-suite {
+    background: #ffffff;
+    padding: clamp(4.5rem, 2vw, 7rem) 0;
+  }
+
+  .proof-suite .saas-heading--center h2 {
+    max-width: 18ch;
+  }
+
+  .proof-suite__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
+  }
+
+  .proof-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 22rem;
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+    transform-origin: 50% 82%;
+    will-change: transform, opacity, filter;
+  }
+
+  .proof-card--featured {
+    background: linear-gradient(135deg, #ecfdf5, #eff6ff);
+  }
+
+  .proof-card__meta span {
+    color: #0f766e;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .proof-card__meta strong {
+    display: block;
+    margin-top: 0.55rem;
+    color: #0b1220;
+    font-size: 1.16rem;
+    font-weight: 900;
+  }
+
+  .proof-card__meta p {
+    margin-top: 0.18rem;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 620;
+  }
+
+  .proof-card__body {
+    margin-top: 1.3rem;
+    color: #334155;
+    font-size: 1rem;
+    font-weight: 590;
+    line-height: 1.55;
+  }
+
+  .proof-card__result {
+    margin-top: auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.2rem;
+  }
+
+  .proof-card__result strong {
+    color: #0b1220;
+    font-size: 1.55rem;
+    font-weight: 950;
+    letter-spacing: -0.05em;
+  }
+
+  .proof-card__result span {
+    color: #0f766e;
+    text-align: right;
+    font-size: 0.86rem;
+    font-weight: 850;
+  }
+
+  .proof-suite__cta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.2rem;
+    align-items: center;
+    margin-top: 1rem;
+    background: #0b1220;
+    color: #f8fafc;
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.13);
+  }
+
+  .proof-suite__cta strong {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  .proof-suite__cta p {
+    margin-top: 0.35rem;
+    color: #cbd5e1;
+    font-weight: 570;
+    line-height: 1.45;
+  }
+
+  .proof-suite__cta a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.85rem;
+    padding: 0.8rem 1rem;
+    background: #14b8a6;
+    color: #052e2b;
+    border-radius: 8px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 1040px) {
+    .proof-suite__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .proof-suite__grid,
+    .proof-suite__cta {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

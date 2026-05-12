@@ -1,11 +1,11 @@
 {
-  "name": "Codariq Intelligente Automatisierungen",
-  "short_name": "Codariq",
-  "description": "Automatisierungen für Selbstständige und kleine Teams. Weniger Routinearbeit, mehr Zeit fürs Kerngeschäft.",
+  "name": "codariq - kontrollierbare KI-Agenten",
+  "short_name": "codariq",
+  "description": "Kontrollierbare KI-Agenten für echte Arbeit mit klaren Datenwegen, Rollen, Freigaben, Logs und menschlicher Kontrolle.",
   "start_url": "/?source=pwa",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1d4ed8",
+  "background_color": "#f7fafc",
+  "theme_color": "#14b8a6",
   "orientation": "portrait-primary",
   "lang": "de-DE",
   "icons": [

@@ -8,7 +8,6 @@ dist/
 .cursor/
 .cursorrules
 .prettierrc
-.prettierignore
 .playwright*
 .venv/
 *.expect
@@ -36,12 +35,13 @@ pnpm-debug.log*
 .env.local
 .playwright-mcp
 test-results/
+public/webhook-proxy.config.php
+public/newsletter-proxy.config.php
 
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
-blog/
 
-# Blog post pages (excluded from GitHub)
+# Blog post pages are source code under src/pages/blog and must stay trackable.

@@ -1,0 +1,257 @@
+---
+import Base from "../layouts/Base.astro";
+import LandingHeroSection from "../components/LandingHeroSection.astro";
+import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import UseCaseCardsSection from "../components/UseCaseCardsSection.astro";
+import FAQ from "../components/FAQ.astro";
+import LeadCaptureSection from "../components/LeadCaptureSection.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+import FAQSchema from "../components/FAQSchema.astro";
+
+const useCases = [
+  {
+    title: "Postfach-Agent",
+    description:
+      "Sortiert Anfragen, erkennt Dringlichkeit, erstellt Antwortentwürfe und übergibt saubere Aufgaben an CRM, Kalender oder Projekttool.",
+    outcome: "Schneller reagieren, ohne ständig im Postfach zu hängen.",
+    icon: "mail",
+  },
+  {
+    title: "Backoffice-Agent",
+    description:
+      "Verarbeitet Dokumente, benennt Dateien, bereitet Rechnungsdaten vor und markiert Sonderfälle für menschliche Prüfung.",
+    outcome: "Weniger manuelle Ablage und weniger Copy Paste.",
+    icon: "document",
+  },
+  {
+    title: "Wissens-Agent",
+    description:
+      "Macht interne Informationen aus Dokumenten, Notizen und Tickets auffindbar, ohne dass dein Team alles neu strukturieren muss.",
+    outcome: "Schnellere Antworten und weniger Rückfragen im Team.",
+    icon: "book",
+  },
+];
+
+const buildSteps = [
+  {
+    title: "Ablauf verstehen",
+    text: "Wir klären, welche Aufgabe der Agent übernehmen soll, welche Daten wirklich nötig sind und wo ein Mensch entscheiden muss.",
+  },
+  {
+    title: "Agenten-Grenzen definieren",
+    text: "Der Agent bekommt klare Rollen, erlaubte Aktionen, Freigaben und Abbruchpunkte. So entsteht kein Blackbox-System.",
+  },
+  {
+    title: "n8n oder Agenten-Stack bauen",
+    text: "Kleine Agenten starten pragmatisch mit n8n. Komplexere Setups bekommen eine kontrollierte Agenten-Architektur mit Tools, Logs und Betriebskonzept.",
+  },
+  {
+    title: "Mit echten Fällen stabilisieren",
+    text: "Wir testen nicht mit Demo-Floskeln, sondern mit echten Anfragen, Dokumenten und Sonderfällen aus deinem Alltag.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Was ist der Unterschied zwischen Automatisierung und KI-Agent?",
+    answer:
+      "Eine klassische Automatisierung folgt festen Regeln. Ein KI-Agent kann Informationen lesen, priorisieren, zusammenfassen, Vorschläge erstellen und Aktionen vorbereiten. Wichtig bleibt: Er darf nur innerhalb klar definierter Grenzen handeln.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Für welche KMU lohnt sich ein KI-Agent?",
+    answer:
+      "Besonders sinnvoll ist ein KI-Agent, wenn regelmäßig ähnliche Anfragen, Dokumente, Follow ups, Reports oder Übergaben anfallen und heute viel manuell geprüft, kopiert oder nachgefasst wird.",
+    category: "Eignung",
+  },
+  {
+    question: "Startet ihr direkt mit einem großen Agenten-System?",
+    answer:
+      "Nein. Wir starten mit dem kleinsten sinnvollen Agenten, oft als n8n-basierter Workflow mit KI-Schritten. Erst wenn Rollen, Datenfluss und Nutzen klar sind, lohnt sich ein größerer Agenten-Stack.",
+    category: "Umsetzung",
+  },
+  {
+    question: "Wie bleibt die Kontrolle beim Unternehmen?",
+    answer:
+      "Über Rollen, Freigaben, Logs, definierte Tool-Zugriffe und klare Stopps. Kritische Entscheidungen werden nicht heimlich automatisiert, sondern bewusst an Menschen übergeben.",
+    category: "Kontrolle",
+  },
+  {
+    question: "Wie geht ihr mit DSGVO um?",
+    answer:
+      "Wir planen Datenminimierung, Zugriffskonzepte, Speicherorte, Auftragsverarbeitung und Freigaben von Anfang an mit. Je nach Fall empfehlen wir EU-Hosting, getrennte Datenflüsse und Human-in-the-loop für sensible Entscheidungen.",
+    category: "Datenschutz",
+  },
+];
+---
+
+<Base
+  title="KI-Agenten für KMU: kontrolliert, DSGVO-orientiert und praxisnah | codariq"
+  description="Codariq baut KI-Agenten für KMU: vom n8n-basierten Startablauf bis zu kontrollierten Agenten-Setups mit Freigaben, Rollen, Logs und DSGVO-orientierter Integration."
+  keywords="KI Agenten KMU, KI-Agenten für Unternehmen, KI Agent bauen lassen, KI Agent DSGVO, n8n KI Agent, KI Agenten Setup, KI Integration bestehende Systeme, kontrollierbare KI Agenten"
+  ogImage="/images/hero/hero2.webp"
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "KI-Agenten für KMU", url: "https://codariq.de/ki-agenten-kmu" },
+    ]}
+  />
+  <FAQSchema faqs={faqs} />
+
+  <LandingHeroSection
+    title="KI-Agenten für KMU, die wirklich Aufgaben übernehmen."
+    subtitle="Wir bauen kontrollierbare Agenten für Postfach, Backoffice, Support, Wissen und Reporting. Vom schlanken n8n-Workflow bis zum stabilen Agenten-Setup mit Freigaben, Rollen und DSGVO-konformer Datenführung."
+    heroImage="/images/hero/hero2.webp"
+    primaryCTA="Agenten-Grenzen klären"
+    primaryCTALink="/#final-cta"
+    secondaryCTA="Use Cases ansehen"
+    secondaryCTALink="#use-cases"
+  />
+
+  <TrustSignalsSection />
+
+  <section class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
+          Von Automatisierung zu Agenten
+        </p>
+        <h2 class="section-title mb-4">
+          Der nächste Schritt nach einfachen Workflows
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Viele KMU starten mit Automatisierung, merken aber schnell: Feste
+          Regeln reichen nicht, wenn E-Mails, Dokumente oder Kundenanfragen
+          jedes Mal leicht anders aussehen. Genau dort lohnt sich ein KI-Agent.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Er versteht Kontext
+          </h3>
+          <p class="text-gray-600 font-medium leading-relaxed">
+            Der Agent erkennt Anliegen, Priorität und nächste Schritte, statt
+            nur Wenn-dann-Regeln abzuarbeiten.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Er bereitet Aktionen vor
+          </h3>
+          <p class="text-gray-600 font-medium leading-relaxed">
+            Antworten, Aufgaben, Buchungen oder Datensätze entstehen
+            vorbereitet, aber mit Freigabe dort, wo sie nötig ist.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Er bleibt begrenzt
+          </h3>
+          <p class="text-gray-600 font-medium leading-relaxed">
+            Rollen, Tool-Zugriffe, Logs und Stopps verhindern, dass ein Agent
+            mehr tut als vereinbart.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <UseCaseCardsSection
+    title="KI-Agenten, die KMU wirklich nutzen"
+    subtitle="Drei Einstiege, die häufig schnell Klarheit schaffen: Postfach, Backoffice und internes Wissen."
+    useCases={useCases}
+  />
+
+  <section id="aufbau" class="py-12 sm:py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div class="text-center mb-8 sm:mb-10">
+        <h2 class="section-title mb-4">
+          So bauen wir deinen ersten KI-Agenten
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Kein Agenten-Hype, sondern ein klarer Bauplan: Aufgabe, Datenfluss,
+          Grenzen, Tests und Betrieb.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {
+          buildSteps.map((step, index) => (
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
+              <p class="text-sm font-bold text-orange-600 mb-1">
+                Schritt {index + 1}
+              </p>
+              <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-2">
+                {step.title}
+              </h3>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {step.text}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 sm:py-16 bg-gray-950 text-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div>
+          <p
+            class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3"
+          >
+            Architektur statt Tool-Wildwuchs
+          </p>
+          <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
+            Erst n8n, dann Agenten-Infrastruktur, wenn sie wirklich gebraucht
+            wird.
+          </h2>
+          <p class="text-white/80 text-lg leading-relaxed">
+            Nicht jedes KMU braucht sofort ein großes OpenClaw-Setup. Oft reicht
+            ein sauberer n8n-Agent als erster produktiver Schritt. Wenn mehrere
+            Kanäle, Tools, Erinnerungen, Rollen und dauerhafter Betrieb
+            dazukommen, planen wir den Ausbau bewusst.
+          </p>
+        </div>
+        <div class="grid gap-4">
+          <a
+            href="/openclaw-agenten"
+            class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors"
+          >
+            <h3 class="font-black text-xl mb-2">OpenClaw-Setup prüfen</h3>
+            <p class="text-white/75">
+              Für Agenten, die über Kanäle, Tools, Modelle und Gateway
+              kontrolliert laufen sollen.
+            </p>
+          </a>
+          <a
+            href="/dsgvo-ki-agenten"
+            class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors"
+          >
+            <h3 class="font-black text-xl mb-2">DSGVO-Architektur klären</h3>
+            <p class="text-white/75">
+              Für Datenflüsse, Freigaben, Rollen und menschliche Prüfung bei
+              sensiblen Entscheidungen.
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ
+    title="FAQ: KI-Agenten für KMU"
+    subtitle="Kurz beantwortet, damit du Agenten realistisch einschätzen kannst."
+    faqs={faqs}
+  />
+
+  <LeadCaptureSection
+    title="Lass uns deinen ersten KI-Agenten sauber eingrenzen."
+    description="In 30 Minuten finden wir heraus, welcher Agent wirklich hilft, welche Daten er braucht und ob ein n8n-Workflow reicht oder ein größerer Agenten-Stack sinnvoll ist."
+  />
+</Base>

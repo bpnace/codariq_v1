@@ -1,0 +1,199 @@
+---
+import Base from "../layouts/Base.astro";
+import LandingHeroSection from "../components/LandingHeroSection.astro";
+import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import FAQ from "../components/FAQ.astro";
+import LeadCaptureSection from "../components/LeadCaptureSection.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+import FAQSchema from "../components/FAQSchema.astro";
+
+const guardrails = [
+  {
+    title: "Datenminimierung",
+    text: "Der Agent bekommt nur die Informationen, die er für die Aufgabe wirklich braucht. Alles andere bleibt draußen.",
+  },
+  {
+    title: "Human-in-the-loop",
+    text: "Sensible Entscheidungen, externe Nachrichten oder irreversible Aktionen laufen über klare Freigaben.",
+  },
+  {
+    title: "Rollen und Zugriffe",
+    text: "Wir definieren, welche Systeme der Agent lesen darf, wo er schreiben darf und wann er stoppen muss.",
+  },
+  {
+    title: "Protokolle und Nachvollziehbarkeit",
+    text: "Wichtige Aktionen werden so dokumentiert, dass dein Team verstehen kann, was passiert ist.",
+  },
+];
+
+const checklist = [
+  "Welche personenbezogenen Daten werden verarbeitet?",
+  "Welche Systeme, Postfächer, Dateien oder CRM-Daten braucht der Agent?",
+  "Welche Aktionen darf der Agent selbst ausführen?",
+  "Wo ist eine menschliche Freigabe Pflicht?",
+  "Welcher Anbieter, Hosting-Ort und AVV passen zum Use Case?",
+  "Wie werden Fehler, Sonderfälle und Widersprüche sichtbar gemacht?",
+];
+
+const faqs = [
+  {
+    question: "Kann ein KI-Agent DSGVO-konform sein?",
+    answer:
+      "Ja, aber nicht durch ein einzelnes Tool-Label. Entscheidend sind Zweck, Datenkategorien, Anbieter, Hosting, Auftragsverarbeitung, Zugriffskonzept, Freigaben und Dokumentation des konkreten Ablaufs.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Darf ein Agent personenbezogene Daten verarbeiten?",
+    answer:
+      "Das hängt vom Zweck, der Rechtsgrundlage und den Schutzmaßnahmen ab. Wir bauen technische Setups so, dass nur notwendige Daten verarbeitet werden und sensible Schritte kontrolliert bleiben.",
+    category: "Daten",
+  },
+  {
+    question: "Was bedeutet Human-in-the-loop praktisch?",
+    answer:
+      "Der Agent bereitet vor, aber ein Mensch prüft und bestätigt kritische Aktionen. Beispiele sind Ablehnungen, externe Nachrichten, HR-Entscheidungen oder Änderungen an sensiblen Kundendaten.",
+    category: "Kontrolle",
+  },
+  {
+    question: "Ist das Rechtsberatung?",
+    answer:
+      "Nein. Codariq liefert technische Konzeption und Umsetzung. Für verbindliche rechtliche Bewertung sollte bei Bedarf Datenschutz- oder Rechtsberatung eingebunden werden.",
+    category: "Einordnung",
+  },
+  {
+    question: "Was prüfen wir im ersten Gespräch?",
+    answer:
+      "Wir prüfen Use Case, Datenfluss, Tool-Zugriffe, Anbieter, Risiken, Freigabepunkte und ob ein schlanker n8n-Agent oder ein größerer Agenten-Stack sinnvoll ist.",
+    category: "Ablauf",
+  },
+];
+---
+
+<Base
+  title="DSGVO-orientierte KI-Agenten: Datenflüsse, Freigaben und Kontrolle | codariq"
+  description="So plant codariq DSGVO-orientierte KI-Agenten für KMU: Datenminimierung, Rollen, Freigaben, Human-in-the-loop, Logs und sichere Integration in bestehende Systeme."
+  keywords="DSGVO KI Agenten, KI Agent DSGVO, KI Datenschutz KMU, Human in the loop KI, KI Agent personenbezogene Daten, DSGVO orientierte KI Integration, AI Act KMU"
+  ogImage="/images/hero/hero2.webp"
+>
+  <BreadcrumbSchema
+    items={[
+      {
+        name: "DSGVO-orientierte KI-Agenten",
+        url: "https://codariq.de/dsgvo-ki-agenten",
+      },
+    ]}
+  />
+  <FAQSchema faqs={faqs} />
+
+  <LandingHeroSection
+    title="KI-Agenten DSGVO-konform bauen, ohne Blackbox-Gefühl."
+    subtitle="Wir planen Agenten so, dass Datenflüsse, Zugriffe, Freigaben und menschliche Prüfung von Anfang an klar sind. Für KMU, die KI nutzen wollen, aber Kontrolle behalten müssen."
+    heroImage="/images/hero/hero2.webp"
+    primaryCTA="DSGVO-Setup prüfen"
+    primaryCTALink="/#final-cta"
+    secondaryCTA="Checkliste ansehen"
+    secondaryCTALink="#checkliste"
+  />
+
+  <TrustSignalsSection />
+
+  <section class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <p
+          class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600 mb-3"
+        >
+          DSGVO als Architekturfrage
+        </p>
+        <h2 class="section-title mb-4">Compliance entsteht nicht am Ende</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Bei KI-Agenten reicht es nicht, später einen Datenschutzhinweis zu
+          ergänzen. Entscheidend ist, welche Daten der Agent sieht, welche Tools
+          er nutzen darf und wo ein Mensch eingebunden wird.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        {
+          guardrails.map((item) => (
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
+              <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-2">
+                {item.title}
+              </h3>
+              <p class="text-gray-700 font-medium leading-relaxed">
+                {item.text}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="checkliste" class="py-12 sm:py-16 bg-gray-950 text-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div>
+          <p
+            class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300 mb-3"
+          >
+            Agenten-Checkliste
+          </p>
+          <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
+            Diese Fragen klären wir, bevor ein Agent produktiv arbeitet.
+          </h2>
+          <p class="text-white/80 text-lg leading-relaxed">
+            So wird aus „KI ausprobieren“ ein kontrollierter Ablauf mit Zweck,
+            Datenfluss und klarer Verantwortung. Besonders wichtig wird das bei
+            Support, HR, Finanzdaten und Kundenkommunikation.
+          </p>
+        </div>
+        <ul class="space-y-3">
+          {
+            checklist.map((item) => (
+              <li class="flex gap-3 rounded-xl border border-white/15 bg-white/10 p-4">
+                <span class="mt-1 h-5 w-5 flex-none rounded-full bg-orange-400" />
+                <span class="text-white/85 font-medium">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div
+        class="rounded-2xl border border-orange-200 bg-orange-50 p-6 sm:p-8 md:p-10"
+      >
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4">
+          AI Act, DSGVO und Agenten: Der sichere Nenner ist Kontrolle.
+        </h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          Viele regulatorische Anforderungen drehen sich um Transparenz,
+          menschliche Eingriffsmöglichkeiten, Risikobewertung und klare
+          Verantwortlichkeit. Deshalb bauen wir Agenten nicht als „mach einfach
+          alles“-Systeme, sondern als begrenzte Rollen mit prüfbaren Aktionen.
+        </p>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Hinweis: Diese Seite ersetzt keine Rechtsberatung. Sie beschreibt den
+          technischen Umsetzungsansatz, mit dem Codariq KI-Agenten
+          datenschutzorientiert und kontrollierbar in bestehende Abläufe
+          integriert.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <FAQ
+    title="FAQ: DSGVO und KI-Agenten"
+    subtitle="Die wichtigsten Fragen zu Daten, Freigaben und Verantwortung."
+    faqs={faqs}
+  />
+
+  <LeadCaptureSection
+    title="Lass uns deinen Agenten-Datenfluss prüfen."
+    description="Wir klären, welche Daten dein Agent wirklich braucht, welche Freigaben sinnvoll sind und ob n8n, OpenClaw oder ein schlankerer Stack passt."
+  />
+</Base>

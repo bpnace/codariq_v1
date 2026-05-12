@@ -1,0 +1,647 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  benefits?: Array<{
+    title: string;
+    description: string;
+    icon: string;
+    features: string[];
+    highlight?: boolean;
+    price?: string;
+    duration?: string;
+    isProduct?: boolean;
+    additionalInfo?: string;
+    colorTheme?: string;
+  }>;
+  additionalServices?: Array<{
+    title: string;
+    subtitle: string;
+    description: string;
+    features: string[];
+    note?: string;
+    price: string;
+    duration: string;
+    icon: string;
+    comingSoon?: boolean;
+  }>;
+}
+
+const {
+  title = "Drei Wege zum sicheren Agenten",
+  subtitle = "Die Arbeit beginnt nicht mit einem Tool. Wir grenzen den Ablauf ein, klären Daten, Zugriffe und Freigaben und bauen nur, was im Betrieb verantwortbar ist.",
+  benefits = [
+    {
+      title: "Grundlage schaffen",
+      description:
+        "Für einen konkreten Ablauf, bei dem erst Daten, Rollen und Freigaben geklärt werden müssen, bevor etwas gebaut wird.",
+      icon: "starter",
+      features: [
+        "1 Ablauf mit Daten- und Freigabeprüfung",
+        "Quellen, Übergaben und Stopppunkte erfassen",
+        "Machbarkeit und Risiko einordnen",
+        "Kurzer Plan für den ersten Einsatz",
+        "Optional: Betreuung ab 89 € pro Monat",
+      ],
+      price: "ab 219 €",
+      duration: "einmalig",
+      isProduct: true,
+      additionalInfo: "Ein Ablauf",
+      colorTheme: "green",
+    },
+    {
+      title: "Erster Einsatz",
+      description:
+        "Für Teams, die einen begrenzten Ablauf kontrolliert in den Arbeitsalltag bringen wollen, ohne Verantwortung an ein Tool abzugeben.",
+      icon: "growth",
+      features: [
+        "Bis zu 3 verbundene Arbeitsschritte",
+        "Anbindung an vorhandene Systeme",
+        "Freigaben und Sonderfälle festlegen",
+        "Tests mit echten Beispielen",
+        "Optional: Betreuung ab 199 € pro Monat",
+      ],
+      price: "ab 1.899 €",
+      duration: "einmalig",
+      highlight: true,
+      isProduct: true,
+      additionalInfo: "Kontrolliert nutzbar",
+      colorTheme: "blue",
+    },
+    {
+      title: "Betrieb absichern",
+      description:
+        "Für einen Bereich wie Support oder Backoffice, der stabil laufen, dokumentiert bleiben und später gezielt erweitert werden soll.",
+      icon: "scale",
+      features: [
+        "Ein Bereich wie Support oder Backoffice",
+        "Zugriffsschutz, Rollen und Protokolle",
+        "Fehler, Wirkung und Datenflüsse beobachten",
+        "Begleitung nach dem ersten Einsatz",
+        "Optional: Betreuungs Preis nach Umfang",
+      ],
+      price: "ab 3.899 €",
+      duration: "einmalig",
+      isProduct: true,
+      additionalInfo: "Dauerhaft betreut",
+      colorTheme: "green",
+    },
+  ],
+  additionalServices = [
+    {
+      title: "Immer enthalten",
+      subtitle: "",
+      description:
+        "Ziel, Daten, Zuständigkeiten und Grenzen werden vorab geklärt.",
+      features: [
+        "Klarer Startpunkt statt Tool-Auswahl",
+        "Plan mit Dauer, Ergebnis und Zuständigkeiten",
+        "Datenfluss, Zugriffe und Freigaben dokumentiert",
+        "Tests mit echten Beispielen",
+        "Übergabe ohne technische Abhängigkeit",
+        "Betrieb mit Sonderfall- und Fehlerpfaden",
+      ],
+      note: "Kein IT-Wissen nötig. Wir klären Prozess und Verantwortung.",
+      price: "",
+      duration: "",
+      icon: "included",
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="benefits" data-enterprise-section class="pricing-suite">
+  <div class="saas-container">
+    <div class="pricing-suite__heading enterprise-reveal">
+      <span>Leistungen</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+
+    <div class="pricing-suite__grid">
+      {
+        benefits.map((benefit) => (
+          <article
+            class={`pricing-card enterprise-card ${benefit.highlight ? "pricing-card--featured" : ""}`}
+            data-benefit-system-card={benefit.highlight ? "true" : undefined}
+          >
+            {benefit.highlight && (
+              <span class="pricing-card__badge">Empfohlen</span>
+            )}
+            <div class="pricing-card__head">
+              <p
+                class={benefit.highlight ? "pricing-card__system-label" : ""}
+                data-benefit-system-label={
+                  benefit.highlight ? "true" : undefined
+                }
+              >
+                {benefit.additionalInfo}
+              </p>
+              <h3>{benefit.title}</h3>
+              <strong>{benefit.price}</strong>
+              <span>{benefit.duration}</span>
+            </div>
+            <p class="pricing-card__description">{benefit.description}</p>
+            <ul>
+              {benefit.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+            <a
+              class={`pricing-card__cta ${benefit.highlight ? "pricing-card__cta--system" : ""}`}
+              href="/#final-cta"
+              data-benefit-system-cta={benefit.highlight ? "true" : undefined}
+            >
+              Ablauf einordnen
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="benefits-support-grid">
+      {
+        additionalServices.map((service) => (
+          <aside class="included-panel enterprise-card enterprise-reveal">
+            <div>
+              <span>Grundlage</span>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              {service.note && <strong>{service.note}</strong>}
+            </div>
+            <ul>
+              {service.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </aside>
+        ))
+      }
+
+      <div class="custom-offer-panel enterprise-card enterprise-reveal">
+        <div>
+          <h3>Individuelles Angebot benötigt?</h3>
+        </div>
+        <a href="/#final-cta">Umfang klären</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-suite {
+    background: #f7fafc;
+    padding: clamp(4.5rem, 2vw, 7rem) 0;
+  }
+
+  .pricing-suite__heading {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.64fr) minmax(28rem, 1fr);
+    grid-template-areas:
+      "eyebrow ."
+      "title copy";
+    gap: 1rem clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    justify-content: center;
+    max-width: 78rem;
+    margin-inline: auto;
+  }
+
+  .pricing-suite__heading > span {
+    display: inline-flex;
+    grid-area: eyebrow;
+    width: fit-content;
+    color: #ecfeff;
+    background: #0f766e;
+    border-radius: 7px;
+    padding: 0.42rem 0.56rem;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pricing-suite__heading h2 {
+    grid-area: title;
+    max-width: 23ch;
+    color: #0b1220;
+    font-size: clamp(2.25rem, 3.7vw, 4.15rem);
+    font-weight: 940;
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+
+  .pricing-suite__heading p {
+    grid-area: copy;
+    max-width: 42rem;
+    color: #64748b;
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    font-weight: 580;
+    line-height: 1.55;
+  }
+
+  .pricing-suite__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.8rem;
+  }
+
+  .pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 37rem;
+    padding: 1.35rem;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.07);
+  }
+
+  .pricing-card--featured {
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(180deg, #0b1220 0%, #14332f 100%);
+    color: #f8fafc;
+    transform: translateY(-0.8rem);
+    box-shadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+  }
+
+  .pricing-card--featured::after {
+    position: absolute;
+    inset: 47% 6% 0;
+    z-index: 0;
+    content: "";
+    pointer-events: none;
+    border-radius: 50% 50% 0 0;
+    background: radial-gradient(
+      ellipse at 50% 88%,
+      rgba(94, 234, 212, 0.3) 0%,
+      rgba(20, 184, 166, 0.17) 28%,
+      rgba(20, 184, 166, 0.07) 52%,
+      rgba(20, 184, 166, 0) 76%
+    );
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 88% 88%;
+    filter: blur(26px);
+    opacity: 0.32;
+    animation: pricing-system-panel-pulse 4.6s ease-in-out infinite;
+  }
+
+  .pricing-card--featured .pricing-card__head,
+  .pricing-card--featured .pricing-card__description,
+  .pricing-card--featured ul,
+  .pricing-card--featured a {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-card__badge {
+    position: absolute;
+    z-index: 2;
+    top: 1.1rem;
+    right: 1.1rem;
+    width: fit-content;
+    padding: 0.42rem 0.58rem;
+    background: #14b8a6;
+    color: #052e2b;
+    border-radius: 7px;
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .pricing-card__head p,
+  .included-panel span {
+    color: #0f766e;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pricing-card--featured .pricing-card__head p {
+    color: #5eead4;
+  }
+
+  .pricing-card__system-label {
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    margin-left: -0.42rem;
+    padding: 0.22rem 0.42rem;
+    overflow: hidden;
+    border-radius: 7px;
+    isolation: isolate;
+  }
+
+  .pricing-card__system-label::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    background: linear-gradient(
+      90deg,
+      rgba(20, 184, 166, 0.03) 0%,
+      rgba(94, 234, 212, 0.2) 52%,
+      rgba(20, 184, 166, 0.04) 100%
+    );
+    background-size: 220% 100%;
+    opacity: 0.72;
+    animation: pricing-system-label-glow 4.8s ease-in-out infinite;
+  }
+
+  .pricing-card h3 {
+    margin-top: 0.8rem;
+    color: inherit;
+    font-size: clamp(1.55rem, 2.35vw, 2.35rem);
+    font-weight: 930;
+    letter-spacing: -0.055em;
+    line-height: 0.96;
+  }
+
+  .pricing-card__head strong {
+    display: block;
+    margin-top: 1.6rem;
+    color: inherit;
+    font-size: clamp(1.9rem, 2.7vw, 2.8rem);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+  }
+
+  .pricing-card__head span,
+  .pricing-card__description,
+  .pricing-card li {
+    color: #64748b;
+    font-size: 0.96rem;
+    font-weight: 580;
+    line-height: 1.48;
+  }
+
+  .pricing-card--featured .pricing-card__head span,
+  .pricing-card--featured .pricing-card__description,
+  .pricing-card--featured li {
+    color: #cbd5e1;
+  }
+
+  .pricing-card__description {
+    margin-top: 1.4rem;
+  }
+
+  .pricing-card ul {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .pricing-card li {
+    position: relative;
+    padding-left: 1.35rem;
+  }
+
+  .pricing-card li::before,
+  .included-panel li::before {
+    content: "";
+    position: absolute;
+    top: 0.58rem;
+    left: 0;
+    width: 0.56rem;
+    height: 0.56rem;
+    border-radius: 3px;
+    background: #14b8a6;
+  }
+
+  .pricing-card a {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 3rem;
+    margin-top: auto;
+    padding: 0.82rem 1rem;
+    border-radius: 8px;
+    background: #0b1220;
+    color: #f8fafc;
+    font-weight: 900;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .pricing-card--featured a {
+    background: #14b8a6;
+    color: #052e2b;
+  }
+
+  .pricing-card__cta--system {
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  .pricing-card a:hover {
+    background: #14332f;
+  }
+
+  .pricing-card--featured a:hover {
+    background: #5eead4;
+  }
+
+  .pricing-card a:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  @keyframes pricing-system-label-glow {
+    0%,
+    100% {
+      background-position: 100% 50%;
+      opacity: 0.52;
+    }
+
+    50% {
+      background-position: 0% 50%;
+      opacity: 0.86;
+    }
+  }
+
+  @keyframes pricing-system-panel-pulse {
+    0% {
+      opacity: 0.18;
+      background-size: 78% 78%;
+    }
+
+    48% {
+      opacity: 0.44;
+      background-size: 112% 112%;
+    }
+
+    100% {
+      opacity: 0.2;
+      background-size: 86% 86%;
+    }
+  }
+
+  .benefits-support-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.62fr) minmax(20rem, 0.72fr);
+    gap: 1rem;
+    align-items: stretch;
+    margin-top: 1rem;
+  }
+
+  .custom-offer-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 1.25rem 1.35rem;
+    overflow: hidden;
+    background: #0b1220;
+    color: #f8fafc;
+    border: 1px solid rgba(94, 234, 212, 0.18);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  }
+
+  .custom-offer-panel span {
+    display: inline-flex;
+    width: fit-content;
+    color: #5eead4;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .custom-offer-panel h3 {
+    margin-top: 0.45rem;
+    color: inherit;
+    font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+    font-weight: 930;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .custom-offer-panel p {
+    margin-top: 0.55rem;
+    color: #cbd5e1;
+    font-size: 0.98rem;
+    font-weight: 570;
+    line-height: 1.45;
+  }
+
+  .custom-offer-panel a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3rem;
+    padding: 0.82rem 1rem;
+    border-radius: 8px;
+    background: #14b8a6;
+    color: #052e2b;
+    font-weight: 900;
+    white-space: nowrap;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .custom-offer-panel a:hover {
+    background: #5eead4;
+  }
+
+  .custom-offer-panel a:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  .included-panel {
+    display: grid;
+    grid-template-columns: minmax(13rem, 0.52fr) minmax(0, 1fr);
+    gap: 1.4rem;
+    padding: 1.35rem;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+  }
+
+  .included-panel h3 {
+    margin-top: 0.6rem;
+    color: #0b1220;
+    font-size: clamp(1.42rem, 2.1vw, 2.25rem);
+    font-weight: 930;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .included-panel p,
+  .included-panel li,
+  .included-panel strong {
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 580;
+    line-height: 1.48;
+  }
+
+  .included-panel p {
+    margin-top: 0.8rem;
+  }
+
+  .included-panel ul {
+    columns: 2;
+    column-gap: 1.2rem;
+  }
+
+  .included-panel li {
+    position: relative;
+    break-inside: avoid;
+    margin-bottom: 0.65rem;
+    padding-left: 1.25rem;
+  }
+
+  .included-panel strong {
+    display: block;
+    margin-top: 0.85rem;
+    color: #0b1220;
+    font-weight: 850;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card__system-label::before,
+    .pricing-card--featured::after {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1040px) {
+    .pricing-suite__heading {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "eyebrow"
+        "title"
+        "copy";
+      max-width: 42rem;
+      text-align: left;
+    }
+
+    .pricing-suite__grid,
+    .benefits-support-grid,
+    .included-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .custom-offer-panel a {
+      width: 100%;
+    }
+
+    .pricing-card--featured {
+      transform: none;
+    }
+
+    .included-panel ul {
+      columns: 1;
+    }
+  }
+</style>

@@ -12,48 +12,48 @@ export interface Props {
 const {
   title = "Häufig gestellte Fragen",
   subtitle =
-    "Antworten zu Automatisierung, Kosten, Zeitrahmen und Datenschutz für Selbstständige und kleine Teams in DACH",
+    "Antworten zu KI-Agenten, Preisen, Zeitrahmen, Datenschutz, Freigaben und Betrieb für Selbstständige und kleine Teams in DACH",
   faqs = [
     {
-      question: "Für wen ist Automatisierung geeignet?",
+      question: "Für wen ist ein KI-Agent geeignet?",
       answer:
-        "Für Selbstständige und Unternehmen bis 50 Personen, die viele wiederkehrende Aufgaben haben und im Alltag zu viel Zeit mit E Mails, Dokumenten, Leads oder Backoffice verlieren. Du musst dafür keine Tools kennen. Entscheidend ist nur, dass es einen Ablauf gibt, der sich wiederholt.",
+        "Für Selbstständige und Unternehmen bis 50 Personen, die wiederkehrende Arbeit in Postfach, Dokumenten, Leads oder Backoffice sauber vorbereiten lassen wollen. Entscheidend ist ein wiederkehrender Ablauf mit klaren Datenquellen, Grenzen und Freigaben.",
       category: "Allgemein",
     },
     {
       question: "Funktioniert das auch, wenn ich allein arbeite?",
       answer:
-        "Ja, gerade dann. Wenn du allein bist, musst du alles selbst machen. Automationen übernehmen Aufgaben wie ein zusätzliches Teammitglied: Sie sortieren Mails, fassen Leads nach, erstellen Dokumente oder übertragen Daten zwischen Tools. Du behältst die Kontrolle, sparst aber täglich Stunden für Routinearbeit.",
+        "Ja, gerade dann. Ein Agent kann Mails sortieren, Leads nachfassen, Dokumente vorbereiten oder Daten zwischen Tools übertragen. Du behältst die Kontrolle, weil kritische Aktionen zur Freigabe stoppen.",
       category: "Allgemein",
     },
     {
       question: "Lohnt sich das für mein kleines Team?",
       answer:
-        "Wenn dein Team jede Woche Zeit mit wiederkehrenden Aufgaben verliert, lohnt sich Automatisierung fast immer. Je nach Ablauf sparst du oft mehrere Stunden pro Woche, weil weniger nachgefasst, kopiert und manuell übertragen werden muss. Das Team Paket ab 1.499 € lohnt sich besonders, wenn mehrere Abläufe zusammenhängen und du mehr Durchsatz willst, ohne neue Leute einzustellen.",
+        "Wenn dein Team jede Woche Zeit mit wiederkehrenden Übergaben, Rückfragen und Copy-Paste verliert, lohnt sich ein kontrollierter Agenten-Workflow besonders. Der Einstieg ab 1.899 € passt, wenn mehrere Arbeitsschritte verbunden werden und Freigaben sauber geregelt sein müssen.",
       category: "Kosten",
     },
     {
-      question: "Welche Prozesse lassen sich am besten automatisieren?",
+      question: "Welche Abläufe lassen sich gut mit Agenten vorbereiten?",
       answer:
-        "Am besten funktionieren Abläufe, die regelmäßig vorkommen und heute manuell ablaufen. Typische Beispiele sind Support und Kontaktanfragen, Lead Nachfassen, Dokumente und Rechnungen, Recruiting und Onboarding, Terminabstimmungen sowie wiederkehrende Dateneingaben zwischen Tools.",
+        "Gut funktionieren Abläufe, die regelmäßig vorkommen und heute manuell sortiert, geprüft oder übertragen werden. Typische Beispiele sind Support, Kontaktanfragen, Lead-Follow-up, Dokumente, Rechnungen, Recruiting, Onboarding und Dateneingaben zwischen Tools.",
       category: "Use Cases",
     },
     {
       question: "Wie läuft die Zusammenarbeit ab?",
       answer:
-        "Erst schaffen wir Klarheit über Ziel, Ablauf und Startpunkt. Dann setzen wir die Automatisierung um und verbinden deine vorhandenen Systeme. Danach führen wir es in deinen Alltag ein, beobachten die ersten Wochen und justieren nach, bis es stabil läuft.",
+        "Erst schaffen wir Klarheit über Ziel, Ablauf, Datenquellen und Freigaben. Dann bauen wir den Agenten-Workflow, testen mit echten Beispielen und führen ihn so ein, dass Verantwortung und Stopppunkte sichtbar bleiben.",
       category: "Ablauf",
     },
     {
       question: "Wie lange dauert die Umsetzung?",
       answer:
-        "Das hängt vom Umfang ab. Das Start Paket ist meist in 2 bis 5 Wochen produktiv, das Team Paket in 3 bis 8 Wochen und das Wachstum Paket in 6 bis 12 Wochen. Entscheidend sind Anzahl der Abläufe, Datenlage und wie viele Tools verbunden werden.",
+        "Das hängt vom Umfang ab. Ein klar begrenzter Ablauf ist oft in 2 bis 6 Wochen nutzbar. Entscheidend sind Anzahl der Arbeitsschritte, Datenlage, angebundene Tools und wie viele Freigaben oder Sonderfälle gebraucht werden.",
       category: "Zeitrahmen",
     },
     {
       question: "Was kostet das und wovon hängt der Preis ab?",
       answer:
-        "Die Pakete starten ab 399 €, ab 1.499 € und ab 3.499 €. Der genaue Preis hängt vor allem von drei Dingen ab: wie viele Abläufe umgesetzt werden, welche Systeme angebunden werden und wie sauber die Daten heute schon vorliegen. Du bekommst vor der Umsetzung einen klaren Plan mit Dauer und ab Preis.",
+        "Die Einstiegspunkte liegen aktuell bei ab 219 €, ab 1.899 € und ab 3.899 €. Der genaue Preis hängt davon ab, wie viele Arbeitsschritte verbunden werden, welche Systeme angebunden werden und wie sauber Daten, Rechte und Freigaben heute schon vorliegen.",
       category: "Kosten",
     },
     {
@@ -104,11 +104,11 @@ const {
 
 // Group FAQs by category for better organization
 const categories = [...new Set(faqs.map((faq) => faq.category))].filter(
-  Boolean,
+  (category): category is string => Boolean(category),
 );
-const groupedFAQs =
+const groupedFAQs: Record<string, typeof faqs> =
   categories.length > 0
-    ? categories.reduce((acc, category) => {
+    ? categories.reduce<Record<string, typeof faqs>>((acc, category) => {
         acc[category] = faqs.filter((faq) => faq.category === category);
         return acc;
       }, {})
@@ -237,21 +237,3 @@ const groupedFAQs =
     animation: slideDown 0.3s ease-out;
   }
 </style>
-
-<!-- Schema.org structured data for FAQ -->
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  })}
-/>
-</file>

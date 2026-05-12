@@ -1,0 +1,140 @@
+---
+import Base from "../../layouts/Base.astro";
+import {
+  fetchDrupalPosts,
+  fetchDrupalPostBySlug,
+  type DrupalPost,
+} from "../../lib/drupal";
+
+export async function getStaticPaths() {
+  const posts = await fetchDrupalPosts(50);
+  const isUuidSlug = (slug: string) =>
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+      slug,
+    );
+  const publishedPosts = posts.filter(
+    (post) => !post.slug.includes("test_slug") && !isUuidSlug(post.slug),
+  );
+  console.log(`[Blog] Generating ${publishedPosts.length} dynamic blog routes`);
+  return publishedPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+let { post } = Astro.props as { post: DrupalPost | undefined };
+
+// If post lacks body (e.g., index fetch trimmed), refetch full node
+if (!post?.body) {
+  post = await fetchDrupalPostBySlug(Astro.params.slug);
+}
+
+if (!post) {
+  return new Response("Not found", { status: 404 });
+}
+
+const formatDate = (value?: string) => {
+  if (!value) return "";
+  const d = new Date(value);
+  return d.toLocaleDateString("de-DE", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
+const formatCategory = (value: string | string[] | undefined) => {
+  if (!value) return "Blog";
+  const first = Array.isArray(value) ? value[0] : value;
+  const str = String(first).trim();
+    return str ? str.charAt(0).toUpperCase() + str.slice(1) : "Blog";
+  };
+
+const articleTags = Array.isArray(post.category)
+  ? post.category.map((item) => String(item).trim()).filter(Boolean)
+  : post.category
+    ? [String(post.category).trim()].filter(Boolean)
+    : [];
+const articleSection = formatCategory(post.category);
+const articleData = {
+  publishedTime: post.date,
+  modifiedTime: post.date,
+  author: "Codariq Team",
+  section: articleSection,
+  tags: articleTags,
+};
+---
+
+<Base
+  title={post.title}
+  description={post.summary || post.title}
+  ogImage={post.coverUrl}
+  article={articleData}
+  forceNavSolid={true}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li><a href="/" class="text-gray-600 hover:text-orange-600">Startseite</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="/blog" class="text-gray-600 hover:text-orange-600">Blog</a></li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">{post.title}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header bg-gradient-to-r from-orange-50 to-orange-100 py-8 sm:py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">
+            {formatCategory(post.category)}
+          </span>
+          <span class="text-gray-500 text-sm">•</span>
+          <span class="text-gray-600 text-sm">
+            {post.readTime ? `${post.readTime} Min. Lesezeit` : ""}
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+          {post.title}
+        </h1>
+
+        {post.introText && (
+          <p class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+            {post.introText}
+          </p>
+        )}
+
+        <div class="flex items-center justify-center gap-4 text-sm text-gray-600">
+          <span>Codariq Team</span>
+          <span class="text-gray-500">•</span>
+          <span>{formatDate(post.date)}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Cover -->
+  {post.coverUrl && (
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div class="w-full h-64 sm:h-80 rounded-xl overflow-hidden shadow">
+        <img
+          src={post.coverUrl}
+          alt={post.title}
+          class="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  )}
+
+  <!-- Article Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-14 prose prose-lg prose-orange">
+    <div set:html={post.body}></div>
+  </main>
+</Base>

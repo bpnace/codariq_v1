@@ -1,0 +1,9 @@
+dist/
+.astro/
+.omx/
+.playwright-cli/
+test-results/
+node_modules/
+.venv/
+.git/
+.DS_Store

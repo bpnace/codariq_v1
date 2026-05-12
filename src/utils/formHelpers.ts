@@ -30,7 +30,7 @@ export function hideFieldError(fieldId: string): void {
 export function setButtonLoading(
   button: HTMLButtonElement,
   loading: boolean,
-  loadingText: string = "Wird gesendet..."
+  loadingText: string = "Wird gesendet...",
 ): void {
   button.disabled = loading;
   if (loading) {
@@ -44,7 +44,10 @@ export function setButtonLoading(
 /**
  * Submit form data to an API endpoint
  */
-export async function submitFormData(url: string, data: Record<string, any>): Promise<any> {
+export async function submitFormData<T = unknown>(
+  url: string,
+  data: Record<string, unknown>,
+): Promise<T> {
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -55,7 +58,8 @@ export async function submitFormData(url: string, data: Record<string, any>): Pr
     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
   }
 
-  return response.json();
+  const json = (await response.json()) as T;
+  return json;
 }
 
 /**
@@ -85,7 +89,7 @@ export function hideSuccessMessage(messageId: string): void {
 export function resetForm(
   form: HTMLFormElement,
   errorIds: string[] = [],
-  successIds: string[] = []
+  successIds: string[] = [],
 ): void {
   form.reset();
   errorIds.forEach(hideFieldError);

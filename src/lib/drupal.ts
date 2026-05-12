@@ -74,8 +74,7 @@ interface DrupalApiResponse {
   included?: DrupalIncludedItem[];
 }
 
-const API_BASE =
-  import.meta.env.DRUPAL_API_BASE || "https://cms.codariq.de";
+const API_BASE = import.meta.env.DRUPAL_API_BASE || "https://cms.codariq.de";
 
 const POSTS_ENDPOINT = `${API_BASE}/jsonapi/node/codariq_blog`;
 
@@ -98,7 +97,7 @@ function normalizeUrl(url: string | undefined): string | undefined {
 
 function extractCoverUrl(
   included: DrupalIncludedItem[] | undefined,
-  rel: DrupalRelationship | undefined
+  rel: DrupalRelationship | undefined,
 ): string | undefined {
   if (!included || !rel?.data) return undefined;
 
@@ -122,14 +121,16 @@ function extractCoverUrl(
 function getFieldValue(
   attrs: DrupalNodeAttributes,
   fieldNames: string[],
-  fallback: string = ""
+  fallback: string = "",
 ): string {
   for (const field of fieldNames) {
     const fieldValue = attrs?.[field as keyof DrupalNodeAttributes];
-    if (typeof fieldValue === 'object' && fieldValue !== null) {
-      const value = (fieldValue as DrupalFieldValue).processed || (fieldValue as DrupalFieldValue).value;
+    if (typeof fieldValue === "object" && fieldValue !== null) {
+      const value =
+        (fieldValue as DrupalFieldValue).processed ||
+        (fieldValue as DrupalFieldValue).value;
       if (value) return value;
-    } else if (typeof fieldValue === 'string' && fieldValue) {
+    } else if (typeof fieldValue === "string" && fieldValue) {
       return fieldValue;
     }
   }
@@ -144,10 +145,11 @@ function mapNode(node: DrupalNode, included: DrupalIncludedItem[]): DrupalPost {
   const alias: string = attrs?.path?.alias || "";
   const slug = alias.replace(/^\/+/, "").replace(/^blog\//, "") || node.id;
 
-  const mainBody = getFieldValue(attrs, ['field_body_content', 'body']);
-  const introText = getFieldValue(attrs, ['field_intro_text']);
-  const mainSummary = getFieldValue(attrs, ['field_body_content.summary', 'body.summary'])
-    || mainBody.slice(0, 200);
+  const mainBody = getFieldValue(attrs, ["field_body_content", "body"]);
+  const introText = getFieldValue(attrs, ["field_intro_text"]);
+  const mainSummary =
+    getFieldValue(attrs, ["field_body_content.summary", "body.summary"]) ||
+    mainBody.slice(0, 200);
 
   return {
     id: node.id,
@@ -175,8 +177,7 @@ export async function fetchDrupalPosts(limit = 6): Promise<DrupalPost[]> {
     const data: DrupalApiResponse = await res.json();
     const included = data?.included || [];
     return (data?.data || []).map((node) => mapNode(node, included));
-  } catch (err) {
-    console.error("[Drupal] Failed to fetch posts:", err);
+  } catch {
     return [];
   }
 }
@@ -197,8 +198,7 @@ export async function fetchDrupalPostBySlug(
 
     const included = data?.included || [];
     return mapNode(node, included);
-  } catch (err) {
-    console.error("[Drupal] Failed to fetch post by slug:", err);
+  } catch {
     const posts = await fetchDrupalPosts(50);
     return posts.find((p) => p.slug === slug) || null;
   }

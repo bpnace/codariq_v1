@@ -1,0 +1,901 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  primaryCTALink?: string;
+  secondaryCTALink?: string;
+}
+
+const {
+  title = "Lass uns deinen ersten KI-Agenten entwerfen.",
+  description = "Erzähle uns, was dein persönlicher Agent können sollte. Egal ob Anfragen vorbereiten, Wissen abrufen oder Daten prüfen. Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung zurück.",
+  primaryCTA = "Anfrage senden",
+} = Astro.props;
+
+const bookingUrl =
+  "https://calendar.google.com/calendar/appointments/schedules/AcZssZ20waM7c1kcdYXBfRS0TPxCy0ESIBNKTbcfpQuoQJXW-jjtyb9_BRb9DjeCoN2D5BqrsbsxurS2?gv=true";
+---
+
+<section id="final-cta" data-enterprise-section class="secure-contact">
+  <div class="secure-contact__ambient" aria-hidden="true"></div>
+  <div class="secure-contact__inner">
+    <div class="secure-contact__copy enterprise-reveal">
+      <span class="secure-contact__eyebrow">Jetzt wird es ernst</span>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <div class="secure-contact__assurance">
+        <strong>30 Minuten</strong>
+        <strong>Keine Verpflichtungen</strong>
+        <strong>DSGVO & EU AI Act</strong>
+      </div>
+    </div>
+
+    <div class="secure-contact__form enterprise-card enterprise-reveal">
+      <form action="#" method="POST" id="contact-form" novalidate>
+        <fieldset>
+          <legend>Problemfälle schildern</legend>
+
+          <input
+            type="text"
+            name="website"
+            id="website"
+            tabindex="-1"
+            autocomplete="off"
+            style="position:absolute;left:-9999px;width:1px;height:1px"
+            aria-hidden="true"
+          />
+
+          <div class="secure-form-grid">
+            <div class="secure-field">
+              <label for="name">Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                aria-describedby="name-error"
+                placeholder="Dein Name"
+              />
+              <div
+                id="name-error"
+                role="alert"
+                aria-live="polite"
+                class="secure-error hidden"
+              >
+              </div>
+            </div>
+
+            <div class="secure-field">
+              <label for="company">Unternehmen oder Tätigkeit *</label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                required
+                autocomplete="organization"
+                aria-describedby="company-error"
+                placeholder="Firma oder Selbstständig"
+              />
+              <div
+                id="company-error"
+                role="alert"
+                aria-live="polite"
+                class="secure-error hidden"
+              >
+              </div>
+            </div>
+
+            <div class="secure-field">
+              <label for="email">E-Mail *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                aria-describedby="email-error"
+                placeholder="dein@email.de"
+              />
+              <div
+                id="email-error"
+                role="alert"
+                aria-live="polite"
+                class="secure-error hidden"
+              >
+              </div>
+            </div>
+
+            <div class="secure-field">
+              <label for="phone">Telefon</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+                placeholder="+49 XXX XXXXXXX"
+              />
+              <div class="secure-error hidden"></div>
+            </div>
+
+            <div class="secure-field secure-field--wide">
+              <label for="message">Was soll der Agent können? *</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                aria-describedby="message-error"
+                rows="4"
+                placeholder="Termine vorbereiten, Leads anreichern, interne Daten durchsuchen, ..."
+              ></textarea>
+              <div
+                id="message-error"
+                role="alert"
+                aria-live="polite"
+                class="secure-error hidden"
+              >
+              </div>
+            </div>
+          </div>
+
+          <div class="secure-action-row">
+            <button type="submit" class="secure-submit cta-button">
+              <span class="cta-button-text">{primaryCTA}</span>
+            </button>
+
+            <div class="secure-action-divider" aria-hidden="true"></div>
+
+            <div
+              class="secure-calendar-action"
+              data-calendar-schedule-url={bookingUrl}
+            >
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="30 min Potenzialgespräch über Google Calendar buchen"
+              >
+                <svg
+                  class="secure-calendar-action__icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 2v3M17 2v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"></path>
+                  <path d="M8 13h3v3H8zM13 13h3v3h-3z" fill="currentColor"
+                  ></path>
+                </svg>
+                <span>Termin buchen</span>
+              </a>
+            </div>
+          </div>
+
+          <p
+            id="form-status"
+            class="secure-status"
+            role="status"
+            aria-live="polite"
+          >
+          </p>
+
+          <p class="secure-privacy">
+            Mit dem Absenden stimmst du unserer <a href="/datenschutz"
+              >Datenschutzerklärung</a
+            > zu.
+          </p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .secure-contact {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 78% 22%,
+          rgba(20, 184, 166, 0.16),
+          transparent 28rem
+        ),
+        linear-gradient(135deg, #0b1220, #122033 58%, #14332f);
+      color: #f8fafc;
+      padding: clamp(4.5rem, 2vw, 7rem) 0;
+    }
+
+    .secure-contact__ambient {
+      position: absolute;
+      right: 6vw;
+      top: 10%;
+      width: 22rem;
+      height: 22rem;
+      background: rgba(20, 184, 166, 0.12);
+      filter: blur(14px);
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .secure-contact__inner {
+      position: relative;
+      width: min(100% - 2rem, 1440px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(25rem, 0.74fr);
+      gap: clamp(2rem, 5vw, 5.5rem);
+      align-items: start;
+    }
+
+    .secure-contact__eyebrow,
+    .secure-contact__form legend {
+      color: #5eead4;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .secure-contact__copy h2 {
+      margin-top: 1rem;
+      max-width: 11ch;
+      font-size: clamp(2.55rem, 4.2vw, 4.8rem);
+      font-weight: 950;
+      letter-spacing: -0.058em;
+      line-height: 0.98;
+    }
+
+    .secure-contact__copy p {
+      margin-top: 1.35rem;
+      max-width: 40rem;
+      color: #cbd5e1;
+      font-size: clamp(1.05rem, 1.35vw, 1.24rem);
+      font-weight: 570;
+      line-height: 1.55;
+    }
+
+    .secure-contact__assurance {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.6rem;
+    }
+
+    .secure-contact__assurance strong {
+      padding: 0.45rem 0.62rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 7px;
+      color: #e2e8f0;
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .secure-submit {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 3rem;
+      margin-top: 1.8rem;
+      padding: 0.85rem 1rem;
+      background: #14b8a6;
+      color: #052e2b;
+      border-radius: 8px;
+      border: 0;
+      font-weight: 900;
+      transition:
+        transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+        background-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .secure-submit:hover {
+      background: #5eead4;
+    }
+
+    .secure-submit:active {
+      transform: translateY(1px) scale(0.985);
+    }
+
+    .secure-contact__form {
+      padding: 1.35rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 16px;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.28);
+      color: #0b1220;
+      backdrop-filter: blur(18px);
+    }
+
+    .secure-contact__form legend {
+      color: #0f766e;
+    }
+
+    .secure-contact__form fieldset {
+      border: 0;
+      padding: 0;
+    }
+
+    .secure-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.15rem;
+      row-gap: 1.55rem;
+      margin-top: 1.4rem;
+    }
+
+    .secure-field {
+      position: relative;
+    }
+
+    .secure-field--wide {
+      grid-column: 1 / -1;
+    }
+
+    .secure-field label {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: #334155;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .secure-field input,
+    .secure-field textarea {
+      width: 100%;
+      border: 1px solid rgba(15, 23, 42, 0.13);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0b1220;
+      padding: 0.82rem 0.9rem;
+      font-size: 0.96rem;
+      font-weight: 620;
+      outline: none;
+      transition:
+        border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+        box-shadow 170ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .secure-field textarea {
+      resize: vertical;
+    }
+
+    .secure-field input:focus,
+    .secure-field textarea:focus {
+      border-color: #14b8a6;
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
+    }
+
+    .secure-error {
+      position: absolute;
+      top: calc(100% + 0.3rem);
+      left: 0;
+      z-index: 2;
+      max-width: min(100%, 28rem);
+      margin-top: 0;
+      color: #dc2626;
+      font-size: 0.84rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .secure-action-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(12.5rem, 0.82fr);
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 1.8rem;
+    }
+
+    .secure-submit {
+      width: 100%;
+      margin-top: 0;
+      cursor: pointer;
+    }
+
+    .secure-submit:disabled {
+      cursor: not-allowed;
+      opacity: 0.74;
+    }
+
+    .secure-submit.loading,
+    .secure-submit.success {
+      background: #14b8a6;
+      color: #052e2b;
+    }
+
+    .secure-submit.success:disabled {
+      opacity: 1;
+    }
+
+    .secure-submit.error {
+      background: #fee2e2;
+      color: #991b1b;
+      box-shadow: inset 0 0 0 1px rgba(153, 27, 27, 0.12);
+    }
+
+    .secure-submit.response-positive {
+      animation: securePositiveLift 620ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .secure-submit.response-error {
+      animation: secureErrorShake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+    }
+
+    .secure-action-divider {
+      width: 1px;
+      min-height: 3rem;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(15, 118, 110, 0.28),
+        transparent
+      );
+    }
+
+    .secure-calendar-action {
+      display: flex;
+      align-items: center;
+      min-height: 3rem;
+      min-width: 0;
+    }
+
+    .secure-calendar-action a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 3rem;
+      width: 100%;
+      border: 1px solid rgba(15, 118, 110, 0.28);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f766e;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+      transition:
+        background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 170ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .secure-calendar-action a:hover {
+      background: #f0fdfa;
+      border-color: rgba(15, 118, 110, 0.42);
+    }
+
+    .secure-calendar-action a:active {
+      transform: translateY(1px) scale(0.985);
+    }
+
+    .secure-calendar-action__icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      flex: 0 0 auto;
+    }
+
+    .secure-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .secure-privacy {
+      margin-top: clamp(0.9rem, 1vw, 1.15rem);
+      color: #64748b;
+      font-size: 0.82rem;
+      font-weight: 620;
+    }
+
+    .secure-privacy a {
+      color: #0f766e;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .cta-button.success {
+      background: #14b8a6 !important;
+      color: #052e2b !important;
+    }
+
+    .cta-button-text {
+      transition: opacity 0.3s ease;
+    }
+
+    .cta-button-text.fade-out {
+      opacity: 0;
+    }
+
+    @keyframes securePositiveLift {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      36% {
+        transform: translateY(-2px) scale(1.003);
+      }
+
+      68% {
+        transform: translateY(0.5px) scale(0.999);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes secureErrorShake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      22% {
+        transform: translateX(-4px);
+      }
+
+      44% {
+        transform: translateX(4px);
+      }
+
+      66% {
+        transform: translateX(-3px);
+      }
+
+      82% {
+        transform: translateX(2px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .secure-submit.response-positive,
+      .secure-submit.response-error {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .secure-contact__inner,
+      .secure-form-grid,
+      .secure-action-row {
+        grid-template-columns: 1fr;
+      }
+
+      .secure-form-grid {
+        row-gap: 1.75rem;
+      }
+
+      .secure-action-divider {
+        width: 100%;
+        min-height: 1px;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(15, 118, 110, 0.24),
+          transparent
+        );
+      }
+
+      .secure-calendar-action {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <script type="module">
+    // Handle contact form submission with spam protection
+    function initSecureContactForm() {
+      const form = document.getElementById("contact-form");
+      if (!(form instanceof HTMLFormElement)) return;
+      if (form.dataset.secureContactBound === "true") return;
+      form.dataset.secureContactBound = "true";
+
+      const submitButton = form?.querySelector('button[type="submit"]');
+      const statusText = document.getElementById("form-status");
+
+      // Track form load time for spam protection
+      const formLoadTime = Date.now();
+      const MIN_FORM_TIME = 3000; // 3 seconds minimum
+
+      // Store original button text
+      const originalButtonText =
+        submitButton?.querySelector(".cta-button-text")?.textContent || "";
+
+      const compactButtonMessage = (message, fallback) => {
+        const cleaned =
+          typeof message === "string"
+            ? message.trim().replace(/\s+/g, " ")
+            : "";
+        if (!cleaned) return fallback;
+        return cleaned.length <= 38 ? cleaned : fallback;
+      };
+
+      const setSubmitState = (message, state = "idle", disabled = false) => {
+        if (statusText) {
+          statusText.textContent = message;
+        }
+
+        if (!(submitButton instanceof HTMLButtonElement)) return;
+
+        const buttonText = submitButton.querySelector(".cta-button-text");
+        submitButton.classList.remove(
+          "loading",
+          "success",
+          "error",
+          "response-positive",
+          "response-error",
+        );
+        if (state !== "idle") {
+          submitButton.classList.add(state);
+        }
+        submitButton.disabled = disabled;
+
+        if (buttonText) {
+          buttonText.textContent = message;
+        }
+
+        const reduceResponseMotion =
+          window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ??
+          false;
+
+        if (
+          (state === "success" || state === "error") &&
+          !reduceResponseMotion
+        ) {
+          const motionClass =
+            state === "success" ? "response-positive" : "response-error";
+          void submitButton.offsetWidth;
+          submitButton.classList.add(motionClass);
+        }
+      };
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.addEventListener("animationend", (event) => {
+          if (
+            event.animationName === "securePositiveLift" ||
+            event.animationName === "secureErrorShake"
+          ) {
+            submitButton.classList.remove(
+              "response-positive",
+              "response-error",
+            );
+          }
+        });
+      }
+
+      const resetSubmitState = () => {
+        setSubmitState(originalButtonText, "idle", false);
+        if (statusText) {
+          statusText.textContent = "";
+        }
+      };
+
+      // Clear messages when user starts typing
+      const formInputs = form?.querySelectorAll("input, textarea");
+      formInputs?.forEach((input) => {
+        input.addEventListener("input", () => {
+          if (!submitButton?.classList.contains("success")) {
+            resetSubmitState();
+          }
+        });
+      });
+
+      // Handle form submission
+      if (form) {
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          // Reset error states
+          resetSubmitState();
+
+          // Get form fields
+          const name = document.getElementById("name");
+          const company = document.getElementById("company");
+          const email = document.getElementById("email");
+          const phone = document.getElementById("phone");
+          const message = document.getElementById("message");
+          const honeypot = document.getElementById("website");
+
+          // Client-side validation
+          let hasErrors = false;
+          const errors = [];
+
+          // Validate name
+          if (!name.value.trim()) {
+            errors.push("Bitte gib deinen Namen ein");
+            document.getElementById("name-error").textContent =
+              "Bitte gib deinen Namen ein";
+            document.getElementById("name-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("name-error").classList.add("hidden");
+          }
+
+          // Validate company
+          if (!company.value.trim()) {
+            errors.push("Bitte gib dein Unternehmen oder deine Tätigkeit ein");
+            document.getElementById("company-error").textContent =
+              "Bitte gib dein Unternehmen oder deine Tätigkeit ein";
+            document.getElementById("company-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("company-error").classList.add("hidden");
+          }
+
+          // Validate email
+          const isValidEmail = (email) =>
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+          if (!email.value.trim() || !isValidEmail(email.value.trim())) {
+            errors.push("Bitte gib eine gültige E Mail Adresse ein");
+            document.getElementById("email-error").textContent =
+              "Bitte gib eine gültige E Mail Adresse ein";
+            document.getElementById("email-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("email-error").classList.add("hidden");
+          }
+
+          // Validate message
+          if (!message.value.trim()) {
+            errors.push("Bitte sag kurz, was der Agent zuerst übernehmen soll");
+            document.getElementById("message-error").textContent =
+              "Bitte sag kurz, was der Agent zuerst übernehmen soll";
+            document.getElementById("message-error").classList.remove("hidden");
+            hasErrors = true;
+          } else {
+            document.getElementById("message-error").classList.add("hidden");
+          }
+
+          // Spam protection: Check honeypot field
+          if (honeypot && honeypot.value.trim() !== "") {
+            console.warn("Spam detected: honeypot field filled");
+            return; // Silent fail for bots
+          }
+
+          // Spam protection: Check time since form load
+          const timeSinceLoad = Date.now() - formLoadTime;
+          if (timeSinceLoad < MIN_FORM_TIME) {
+            errors.push(
+              "Bitte nimm dir einen Moment Zeit, um das Formular auszufüllen",
+            );
+            hasErrors = true;
+          }
+
+          // If there are client-side errors, show them and stop
+          if (hasErrors) {
+            setSubmitState("Bitte Angaben prüfen", "error", false);
+            if (statusText) {
+              statusText.textContent = errors.join(". ");
+            }
+            return;
+          }
+
+          // Show loading state
+          setSubmitState("Wird gesendet...", "loading", true);
+
+          let response; // Declare outside try block for finally access
+          try {
+            // Prepare payload
+            const payload = {
+              name: name.value.trim(),
+              company: company.value.trim(),
+              email: email.value.trim(),
+              phone: phone?.value.trim() || "",
+              message: message?.value.trim() || "",
+              timestamp: new Date().toISOString(),
+              userAgent: navigator.userAgent,
+              source: "final_cta",
+            };
+
+            // PHP proxy for contact form submissions (static hosting)
+            const webhookUrl = "/webhook-proxy.php";
+
+            // Send to n8n webhook
+            response = await fetch(webhookUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+
+            // Parse JSON response (ignore errors for successful status codes)
+            let result = {};
+            try {
+              result = await response.json();
+            } catch (e) {
+              // Response is not JSON - ignore for successful responses
+              console.log("Response is not JSON");
+            }
+
+            // Handle response based on status code
+            if (response.status === 200) {
+              // Success - Lead accepted
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "";
+              setSubmitState(
+                compactButtonMessage(
+                  serverMessage,
+                  "Gesendet - wir melden uns",
+                ),
+                "success",
+                true,
+              );
+            } else if (response.status === 400) {
+              // Validation error - missing required fields
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Bitte füll alle Pflichtfelder korrekt aus.";
+              setSubmitState(
+                compactButtonMessage(serverMessage, "Bitte Angaben prüfen"),
+                "error",
+                false,
+              );
+            } else if (response.status === 403) {
+              // Spam detected
+              console.warn("Spam detected by server");
+              resetSubmitState();
+              return; // Silent fail
+            } else if (response.status === 429) {
+              // Too many requests / Rate limit
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Zu viele Anfragen. Bitte versuch es in ein paar Minuten erneut.";
+              setSubmitState(
+                compactButtonMessage(serverMessage, "Kurz warten"),
+                "error",
+                false,
+              );
+            } else {
+              // Other errors
+              const serverMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Es ist ein Fehler passiert. Bitte versuch es erneut.";
+              setSubmitState(
+                compactButtonMessage(serverMessage, "Senden fehlgeschlagen"),
+                "error",
+                false,
+              );
+            }
+          } catch (error) {
+            console.error("Form submission error:", error);
+            setSubmitState("Netzwerkfehler - erneut versuchen", "error", false);
+          } finally {
+            if (submitButton && response && response.status !== 200) {
+              submitButton.disabled = false;
+            }
+          }
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initSecureContactForm, {
+        once: true,
+      });
+    } else {
+      initSecureContactForm();
+    }
+  </script>
+</section>

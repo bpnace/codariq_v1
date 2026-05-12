@@ -1,0 +1,763 @@
+---
+import ArrowRight from "./icons/ArrowRight.astro";
+import {
+  HERO_CONSOLE_INITIAL_STATE,
+  HERO_CONSOLE_MOTION_VERSION,
+  HERO_CONSOLE_STATES,
+} from "../lib/heroMotionContract";
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  primaryCTALink?: string;
+  secondaryCTALink?: string;
+  heroImage?: string;
+}
+
+const {
+  title = "KI-Agenten, die deinen Alltag tatsächlich entlasten.",
+  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt... Wir bauen digitale Assistenten für echte Arbeit. Lesen, sortieren und vorbereiten aber immer mit einem Menschen, der entscheiden muss.",
+  primaryCTA = "Grenzen klären",
+  secondaryCTA = "Was darf ein Agent?",
+  primaryCTALink = "#final-cta",
+  secondaryCTALink = "/agent-readiness",
+  heroImage = "/images/hero/hero2.webp",
+} = Astro.props;
+
+const allowedHeroImages = new Set([
+  "/images/hero/hero1.webp",
+  "/images/hero/hero2.webp",
+  "/images/hero/hero3.webp",
+]);
+const safeHeroImage = allowedHeroImages.has(heroImage)
+  ? heroImage
+  : "/images/hero/hero2.webp";
+const safeMobileHeroImage =
+  safeHeroImage === "/images/hero/hero2.webp"
+    ? "/images/hero/hero2-mobile.webp"
+    : safeHeroImage;
+
+const trustSignals = [
+  "Zugriff klar begrenzt",
+  "Freigaben sauber geregelt",
+  "Logs für den Betrieb sichtbar",
+];
+const initialHeroAlert = HERO_CONSOLE_STATES.find(
+  (state) => state.alert,
+)?.alert;
+---
+
+<section
+  id="hero"
+  data-enterprise-section
+  class="secure-hero"
+  style={`--secure-hero-image: url("${safeHeroImage}"); --secure-hero-image-mobile: url("${safeMobileHeroImage}");`}
+>
+  <div
+    class="secure-hero__ambient secure-hero__ambient--green"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="secure-hero__ambient secure-hero__ambient--blue"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="secure-hero__inner">
+    <div class="secure-hero__copy enterprise-reveal" data-hero-entrance>
+      <div class="secure-hero__kicker">
+        KI-Agenten arbeiten vor, du bleibst Chef.
+      </div>
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+
+      <div class="secure-hero__actions">
+        <a
+          href={primaryCTALink}
+          class="secure-button secure-button--primary group"
+          aria-label={primaryCTA}
+        >
+          <span>{primaryCTA}</span>
+          <ArrowRight
+            class="h-5 w-5 transition-transform duration-200 ease-out group-hover:translate-x-1"
+          />
+        </a>
+        <a
+          href={secondaryCTALink}
+          class="secure-button secure-button--secondary group"
+          aria-label={secondaryCTA}
+        >
+          <span>{secondaryCTA}</span>
+          <ArrowRight
+            class="h-5 w-5 transition-transform duration-200 ease-out group-hover:translate-x-1"
+          />
+        </a>
+      </div>
+
+      <ul class="secure-hero__trust" aria-label="Arbeitsweise des KI-Agenten">
+        {
+          trustSignals.map((signal) => (
+            <li>
+              <span aria-hidden="true" />
+              {signal}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <aside
+      class="secure-console enterprise-reveal"
+      data-hero-agent-console
+      data-hero-motion-contract={HERO_CONSOLE_MOTION_VERSION}
+      data-hero-snapshot={HERO_CONSOLE_INITIAL_STATE.id}
+      data-hero-entrance
+      aria-label="Geschäftsführer-Briefing eines KI-Agenten"
+    >
+      <div class="secure-console__topbar">
+        <div>
+          <span>KI-Agent meldet</span>
+          <strong>Morgen-Briefing</strong>
+        </div>
+        <p data-hero-clock>{HERO_CONSOLE_INITIAL_STATE.clock}</p>
+      </div>
+
+      <div class="secure-console__status" data-hero-status-card>
+        <div>
+          <span>Heute vom Team genommen</span>
+          <strong data-hero-saved-time>
+            {HERO_CONSOLE_INITIAL_STATE.savedTime}
+          </strong>
+        </div>
+        <div
+          class="secure-console__ring"
+          data-hero-progress-ring
+          aria-hidden="true"
+        >
+          <span></span>
+        </div>
+      </div>
+
+      <div
+        class="secure-console__alert"
+        data-hero-alert
+        aria-live="polite"
+        aria-hidden="true"
+      >
+        <span data-hero-alert-label>
+          {initialHeroAlert?.label}
+        </span>
+        <strong data-hero-alert-title>
+          {initialHeroAlert?.title}
+        </strong>
+        <p data-hero-alert-copy>
+          {initialHeroAlert?.copy}
+        </p>
+      </div>
+
+      <div class="secure-console__pipeline">
+        {
+          HERO_CONSOLE_INITIAL_STATE.pipeline.map((item) => (
+            <article
+              class="pipeline-card"
+              data-hero-pipeline-card
+              data-hero-pipeline-slot={item.slot}
+            >
+              <span data-hero-pipeline-label>{item.label}</span>
+              <strong
+                data-hero-pipeline-value
+                data-hero-pipeline-slot={item.slot}
+              >
+                {item.value}
+              </strong>
+              <p data-hero-pipeline-state data-hero-pipeline-slot={item.slot}>
+                {item.state}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="decision-panel">
+        <div>
+          <span>Nächster sinnvoller Schritt</span>
+          <strong>Kundenthemen mit Umsatzbezug prüfen</strong>
+          <p>
+            Der Agent hat Kontext, Vorschlag und nächste Aktion vorbereitet. Du
+            entscheidest nur noch, was rausgeht.
+          </p>
+        </div>
+        <a href="/agent-readiness">Entscheidung ansehen</a>
+      </div>
+
+      <div
+        class="handover-stream"
+        aria-label="Vom KI-Agenten übernommene Arbeit"
+      >
+        <span>Agent hat übernommen</span>
+        <p data-hero-live-item data-hero-live-row>
+          <strong data-hero-live-source>
+            {HERO_CONSOLE_INITIAL_STATE.liveSource}
+          </strong>
+          <span data-hero-live-copy>
+            {HERO_CONSOLE_INITIAL_STATE.liveCopy}
+          </span>
+        </p>
+        <p data-hero-live-item>
+          <strong>CRM</strong> Kontakte ergänzt und Follow-ups vorbereitet
+        </p>
+        <p data-hero-live-item>
+          <strong>Team</strong> Aufgaben gebündelt statt weitergereicht
+        </p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .secure-hero {
+    --secure-hero-current-image: var(--secure-hero-image);
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: flex-start;
+    background:
+      radial-gradient(
+        circle at 12% 18%,
+        rgba(20, 184, 166, 0.15),
+        transparent 28rem
+      ),
+      radial-gradient(
+        circle at 84% 16%,
+        rgba(59, 130, 246, 0.12),
+        transparent 30rem
+      ),
+      linear-gradient(135deg, #f7fafc 0%, #edf4f8 52%, #f6fbf8 100%);
+    color: #0b1220;
+    padding: 2rem 0 4.5rem;
+  }
+
+  .secure-hero::before,
+  .secure-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .secure-hero::before {
+    z-index: 0;
+    background-image: var(--secure-hero-current-image);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .secure-hero::after {
+    z-index: 1;
+    background: linear-gradient(
+      to top right,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.96) 20%,
+      rgba(255, 255, 255, 0.72) 42%,
+      rgba(255, 255, 255, 0.2) 64%,
+      rgba(255, 255, 255, 0) 82%
+    );
+  }
+
+  .secure-hero__ambient {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    filter: blur(12px);
+    opacity: 0.9;
+    will-change: transform;
+  }
+
+  .secure-hero__ambient--green {
+    right: 8vw;
+    top: 18vh;
+    width: 18rem;
+    height: 18rem;
+    background: rgba(20, 184, 166, 0.14);
+  }
+
+  .secure-hero__ambient--blue {
+    left: 4vw;
+    bottom: 8vh;
+    width: 16rem;
+    height: 16rem;
+    background: rgba(37, 99, 235, 0.1);
+  }
+
+  .secure-hero__inner {
+    position: relative;
+    z-index: 3;
+    width: min(100% - 2rem, 1440px);
+    margin: clamp(1.5rem, 4vw, 3.5rem) auto 0;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(30rem, 1fr);
+    gap: clamp(2.4rem, 5vw, 6rem);
+    align-items: center;
+    perspective: 1400px;
+    perspective-origin: 74% 42%;
+  }
+
+  .secure-hero__copy {
+    max-width: 47rem;
+  }
+
+  .secure-hero__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 2.25rem;
+    padding: 0 0.85rem;
+    background: rgba(255, 255, 255, 0.72);
+    color: #14332f;
+    border: 1px solid rgba(20, 51, 47, 0.12);
+    border-radius: 10px;
+    font-size: 0.86rem;
+    font-weight: 850;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+  }
+
+  .secure-dot {
+    width: 0.58rem;
+    height: 0.58rem;
+    border-radius: 2px;
+    background: #14b8a6;
+    box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14);
+  }
+
+  .secure-hero h1 {
+    margin-top: 1.45rem;
+    color: #0b1220;
+    font-size: clamp(2.7rem, 4.8vw, 5.25rem);
+    font-weight: 950;
+    letter-spacing: -0.058em;
+    line-height: 0.98;
+  }
+
+  .secure-hero__copy > p {
+    margin-top: 1.5rem;
+    max-width: 42rem;
+    color: #475569;
+    font-size: clamp(1.08rem, 1.45vw, 1.34rem);
+    font-weight: 580;
+    line-height: 1.55;
+  }
+
+  .secure-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2.2rem;
+  }
+
+  .secure-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    min-height: 3.35rem;
+    padding: 0.95rem 1.18rem;
+    border-radius: 8px;
+    font-weight: 900;
+    line-height: 1;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .secure-button:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  .secure-button--primary {
+    background: #0b1220;
+    color: #f8fafc;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.24);
+  }
+
+  .secure-button--primary:hover {
+    background: #14332f;
+  }
+
+  .secure-button--secondary {
+    background: rgba(255, 255, 255, 0.78);
+    color: #0b1220;
+    border: 1px solid rgba(15, 23, 42, 0.13);
+  }
+
+  .secure-button--secondary:hover {
+    background: #ffffff;
+    border-color: rgba(20, 184, 166, 0.42);
+  }
+
+  .secure-hero__trust {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 2rem;
+    color: #334155;
+    font-size: 0.96rem;
+    font-weight: 720;
+  }
+
+  .secure-hero__trust li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .secure-hero__trust li span {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #05070c 0%, #111827 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  .secure-console {
+    --console-light-x: 58;
+    --console-light-y: 28;
+    position: relative;
+    padding: clamp(1rem, 1.6vw, 1.35rem);
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 18px;
+    box-shadow:
+      0 28px 90px rgba(15, 23, 42, 0.16),
+      -26px 32px 80px rgba(20, 184, 166, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    backdrop-filter: blur(18px);
+    transform: rotateX(-2deg) rotateY(-5deg);
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    isolation: isolate;
+    will-change: transform;
+  }
+
+  .secure-console::before {
+    content: "";
+    position: absolute;
+    inset: 0.55rem;
+    border-radius: 12px;
+    background: linear-gradient(
+      135deg,
+      rgba(20, 184, 166, 0.08),
+      transparent 45%,
+      rgba(37, 99, 235, 0.06)
+    );
+    pointer-events: none;
+  }
+
+  .secure-console::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        circle at calc(var(--console-light-x) * 1%)
+          calc(var(--console-light-y) * 1%),
+        rgba(255, 255, 255, 0.62),
+        transparent 28%
+      ),
+      linear-gradient(
+        118deg,
+        rgba(255, 255, 255, 0.16),
+        transparent 38%,
+        rgba(20, 184, 166, 0.14) 82%,
+        rgba(37, 99, 235, 0.11)
+      );
+    opacity: 0.78;
+    pointer-events: none;
+    z-index: 1;
+    transform: translateZ(34px);
+  }
+
+  .secure-console > :not(.secure-console__alert) {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(24px);
+  }
+
+  .secure-console__topbar,
+  .secure-console__status,
+  .decision-panel,
+  .handover-stream {
+    background: rgba(248, 250, 252, 0.86);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 12px;
+  }
+
+  .secure-console__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .secure-console__topbar span,
+  .secure-console__status span,
+  .pipeline-card span,
+  .decision-panel span,
+  .handover-stream > span {
+    display: block;
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .secure-console__topbar strong {
+    display: block;
+    margin-top: 0.24rem;
+    color: #0b1220;
+    font-size: 1.12rem;
+    font-weight: 900;
+  }
+
+  .secure-console__topbar p {
+    min-width: 5.25rem;
+    color: #14332f;
+    background: rgba(20, 184, 166, 0.12);
+    border-radius: 7px;
+    padding: 0.42rem 0.55rem;
+    font-size: 0.82rem;
+    font-weight: 850;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .secure-console__status {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.85rem;
+    padding: 1.1rem;
+    background: #0b1220;
+  }
+
+  .secure-console__status strong {
+    display: block;
+    margin-top: 0.3rem;
+    min-width: 7.4ch;
+    color: #f8fafc;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 950;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .secure-console__ring {
+    display: grid;
+    place-items: center;
+    width: 5.4rem;
+    height: 5.4rem;
+    border-radius: 50%;
+    background: conic-gradient(
+      #14b8a6 0 82%,
+      rgba(255, 255, 255, 0.14) 82% 100%
+    );
+  }
+
+  .secure-console__ring span {
+    width: 3.7rem;
+    height: 3.7rem;
+    border-radius: 50%;
+    background: #0b1220;
+  }
+
+  .secure-console__pipeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+  }
+
+  .pipeline-card {
+    min-height: 8rem;
+    padding: 0.9rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 12px;
+    transform: translateZ(34px);
+  }
+
+  .pipeline-card strong {
+    display: block;
+    margin-top: 1.1rem;
+    color: #0b1220;
+    font-size: 1.16rem;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+
+  [data-hero-clock],
+  [data-hero-saved-time],
+  [data-hero-pipeline-value] {
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .pipeline-card p {
+    margin-top: 0.65rem;
+    color: #0f766e;
+    font-size: 0.86rem;
+    font-weight: 850;
+  }
+
+  .secure-console__alert {
+    position: absolute;
+    top: clamp(5.2rem, 10vw, 6rem);
+    right: clamp(1rem, 1.6vw, 1.35rem);
+    z-index: 4;
+    width: min(20rem, calc(100% - 2rem));
+    padding: 0.82rem 0.9rem;
+    color: #451a03;
+    background: rgba(255, 251, 235, 0.95);
+    border: 1px solid rgba(245, 158, 11, 0.26);
+    border-radius: 12px;
+    box-shadow: 0 18px 44px rgba(120, 53, 15, 0.14);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, 0.75rem, 38px) scale(0.96);
+    visibility: hidden;
+  }
+
+  .secure-console__alert span {
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.22rem 0.42rem;
+    color: #78350f;
+    background: rgba(245, 158, 11, 0.14);
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .secure-console__alert strong {
+    display: block;
+    margin-top: 0.44rem;
+    color: #0b1220;
+    font-size: 0.96rem;
+    font-weight: 920;
+    line-height: 1.08;
+  }
+
+  .secure-console__alert p {
+    margin-top: 0.28rem;
+    color: #92400e;
+    font-size: 0.78rem;
+    font-weight: 720;
+    line-height: 1.35;
+  }
+
+  .decision-panel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: end;
+    margin-top: 0.85rem;
+    padding: 1.1rem;
+  }
+
+  .decision-panel strong {
+    display: block;
+    margin-top: 0.45rem;
+    color: #0b1220;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  .decision-panel p {
+    margin-top: 0.45rem;
+    max-width: 30rem;
+    color: #475569;
+    font-size: 0.94rem;
+    font-weight: 620;
+    line-height: 1.45;
+  }
+
+  .decision-panel a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.7rem;
+    padding: 0.75rem 0.95rem;
+    color: #f8fafc;
+    background: #14332f;
+    border: 0;
+    border-radius: 8px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .handover-stream {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.85rem;
+    padding: 1rem;
+  }
+
+  .handover-stream p {
+    color: #475569;
+    font-size: 0.86rem;
+    font-weight: 650;
+  }
+
+  .handover-stream strong {
+    display: inline-block;
+    color: #0b1220;
+    font-weight: 900;
+  }
+
+  .handover-stream [data-hero-live-copy] {
+    display: inline-block;
+  }
+
+  @media (max-width: 1040px) {
+    .secure-hero {
+      --secure-hero-current-image: var(--secure-hero-image-mobile);
+    }
+
+    .secure-hero__inner {
+      grid-template-columns: 1fr;
+      perspective-origin: 50% 48%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .secure-hero {
+      padding-top: 6.8rem;
+    }
+
+    .secure-hero__actions,
+    .secure-button,
+    .decision-panel {
+      width: 100%;
+    }
+
+    .secure-console__pipeline,
+    .decision-panel {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

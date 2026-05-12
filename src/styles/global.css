@@ -5,8 +5,8 @@
    ======================================== */
 @theme {
   /* === BRAND COLORS === */
-  --color-brand-light: #ED254E;
-  --color-brand-dark: #2D0C1B;
+  --color-brand-light: #14b8a6;
+  --color-brand-dark: #0b1220;
 
   /* === NEUTRAL SCALE === */
   --color-neutral-white: #ffffff;
@@ -24,8 +24,8 @@
   /* === SEMANTIC COLORS === */
 
   --color-pack-purple: #611fd1;
-  --color-pack-blue: #081a40;
-  --color-pack-green: #22c9a2;
+  --color-pack-blue: #122033;
+  --color-pack-green: #14b8a6;
 
   --color-semantic-success: #16a34a;
   --color-semantic-error: #dd3a44;
@@ -47,8 +47,8 @@
   --color-nav-link-hover: var(--color-neutral-gray-900);
   --color-nav-underline: var(--color-brand-light);
   --color-nav-focus: var(--color-brand-dark);
-  --color-nav-bg-scrolled: rgba(255, 255, 255, 0.78);
-  --color-nav-border-scrolled: rgba(17, 24, 39, 0.08);
+  --color-nav-bg-scrolled: rgba(247, 250, 252, 0.86);
+  --color-nav-border-scrolled: rgba(15, 23, 42, 0.08);
   --color-nav-shadow-scrolled: rgba(0, 0, 0, 0.08);
 
   /* Package Icons */
@@ -62,13 +62,13 @@
   --color-solution-icon-bg: var(--color-neutral-white);
   --color-solution-icon: var(--color-semantic-success);
 
-  /* Process */
+  /* DeliveryProcessSection */
   --color-process-badge-active-from: var(--color-neutral-gray-900);
   --color-process-badge-active-to: var(--color-neutral-gray-800);
   --color-process-bullet: var(--color-brand-light);
 
   /* === CTA PULSE RGB === */
-  --cta-pulse-brand-rgb: 237, 37, 78;
+  --cta-pulse-brand-rgb: 20, 184, 166;
 }
 
 /* Codec Pro (Logo) */
@@ -177,13 +177,16 @@ body {
 
 /* Pulsing brand outline animation for CTA button in hero and testimonials */
 @keyframes pulse-outline {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.7),
-                0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4);
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.7),
+      0 0 0 0 rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4),
-                0 0 0 8px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.1);
+    box-shadow:
+      0 0 0 4px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.4),
+      0 0 0 8px rgba(var(--cta-pulse-rgb, var(--cta-pulse-brand-rgb)), 0.1);
   }
 }
 
@@ -225,12 +228,12 @@ header[style*="position: fixed"] {
 
 /* Fix scroll positioning for anchor links to account for fixed header */
 html {
-  scroll-padding-top: 5rem; /* Account for fixed header height */
+  scroll-padding-top: 3.5rem; /* Account for fixed header height */
 }
 
-@media (min-width: 390px) {
+@media (min-width: 640px) {
   html {
-    scroll-padding-top: 6rem; /* Larger header on small screens */
+    scroll-padding-top: 4rem; /* Account for fixed desktop header height */
   }
 }
 
@@ -327,7 +330,7 @@ html {
   }
 }
 
-/* ===== Hero Section Styles ===== */
+/* ===== LandingHeroSection Section Styles ===== */
 
 #hero-parallax-container {
   z-index: 1;
@@ -335,7 +338,9 @@ html {
 
 /* Smooth background transitions for header */
 header {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* Light frosted background when scrolled past hero */
@@ -431,7 +436,7 @@ header.nav-scrolled {
   transform: translateZ(0); /* Force GPU layer */
 }
 
-/* Hero section motion preferences */
+/* LandingHeroSection section motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .hero-animate {
     opacity: 1;
@@ -442,5 +447,152 @@ header.nav-scrolled {
   /* Disable parallax effect for users with motion sensitivity */
   [data-parallax] {
     transform: none !important;
+  }
+}
+
+/* Enterprise SaaS redesign primitives */
+#main-content {
+  position: relative;
+}
+
+.saas-container {
+  width: min(100% - 2rem, 1440px);
+  margin-inline: auto;
+}
+
+.saas-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(18rem, 0.52fr);
+  gap: clamp(1.2rem, 4vw, 4rem);
+  align-items: end;
+}
+
+.saas-heading--center {
+  max-width: 58rem;
+  margin-inline: auto;
+  display: block;
+  text-align: center;
+}
+
+.saas-heading > span,
+.saas-heading--center > span {
+  display: inline-flex;
+  width: fit-content;
+  color: #ecfeff;
+  background: #0f766e;
+  border-radius: 7px;
+  padding: 0.42rem 0.56rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.saas-heading h2,
+.saas-heading--center h2 {
+  margin-top: 1rem;
+  max-width: 13ch;
+  color: #0b1220;
+  font-size: clamp(2.25rem, 3.7vw, 4.15rem);
+  font-weight: 940;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.saas-heading--center h2 {
+  margin-inline: auto;
+}
+
+.saas-heading p,
+.saas-heading--center p {
+  color: #64748b;
+  font-size: clamp(1rem, 1.25vw, 1.18rem);
+  font-weight: 580;
+  line-height: 1.55;
+}
+
+.saas-heading--center p {
+  margin-top: 1rem;
+}
+
+.enterprise-card {
+  will-change: transform, opacity;
+}
+
+#main-content .secure-hero__inner,
+#main-content .trust-cloud__inner,
+#main-content [data-enterprise-section] > .saas-container {
+  position: relative;
+  z-index: 2;
+}
+
+.agent-connection-layer {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  width: 100%;
+  height: var(--agent-connection-height, 100%);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.agent-connection-layer path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.agent-connection-path {
+  stroke: url("#agent-connection-gradient");
+  stroke-width: 3.25;
+}
+
+.agent-connection-confetti {
+  stroke: #0f766e;
+  stroke-width: 3.2;
+  opacity: 0;
+}
+
+.codariq-click-wavy-effect {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  overflow: visible;
+  pointer-events: none;
+  transform: rotate(0deg);
+  transform-origin: center center;
+  z-index: 30;
+}
+
+.codariq-click-wavy-stroke {
+  fill: none;
+  stroke: #0f766e;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+[data-agent-connection-start],
+[data-agent-connection-target] {
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 700px) {
+  .agent-connection-path {
+    stroke-width: 2.75;
+  }
+}
+
+@media (max-width: 900px) {
+  .saas-heading {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-connection-layer {
+    display: none;
   }
 }

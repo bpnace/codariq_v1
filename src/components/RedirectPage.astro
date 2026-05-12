@@ -1,0 +1,32 @@
+---
+export interface Props {
+  target: string;
+  title?: string;
+}
+
+const { target, title = "Seite umgezogen | codariq" } = Astro.props;
+const canonicalUrl = `https://codariq.de${target}`;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>{title}</title>
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target);
+    </script>
+  </head>
+  <body>
+    <main>
+      <p>
+        Diese Seite ist umgezogen:
+        <a href={target}>zur aktuellen Codariq-Seite</a>.
+      </p>
+    </main>
+  </body>
+</html>
