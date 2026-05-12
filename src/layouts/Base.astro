@@ -207,6 +207,11 @@ const ccm19ScriptSrc =
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://cloud.ccm19.de" crossorigin />
+    <script
+      is:inline
+      src={ccm19ScriptSrc}
+      referrerpolicy="origin"
+      data-codariq-ccm19></script>
 
     <!-- Fonts -->
     <link
@@ -721,15 +726,9 @@ const ccm19ScriptSrc =
     <script
       is:inline
       type="text/x-ccm-loader"
-      data-ccm-loader-group="Google Analytics"
       data-ccm-loader-src="https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY"
       crossorigin="anonymous"></script>
-    <script
-      is:inline
-      type="text/x-ccm-loader"
-      data-ccm-loader-group="Google Analytics"
-      crossorigin="anonymous"
-    >
+    <script is:inline type="text/x-ccm-loader" crossorigin="anonymous">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -1553,34 +1552,6 @@ const ccm19ScriptSrc =
             initEnterpriseMotion();
           }
         });
-      </script>
-      <script is:inline define:vars={{ ccm19ScriptSrc }}>
-        (() => {
-          const loadCcm19 = () => {
-            if (document.querySelector("script[data-codariq-ccm19]")) return;
-
-            const script = document.createElement("script");
-            script.src = ccm19ScriptSrc;
-            script.referrerPolicy = "origin";
-            script.dataset.codariqCcm19 = "true";
-            document.head.append(script);
-          };
-
-          const scheduleCcm19 = () => {
-            if ("requestIdleCallback" in window) {
-              window.requestIdleCallback(loadCcm19, { timeout: 2800 });
-              return;
-            }
-
-            window.setTimeout(loadCcm19, 1200);
-          };
-
-          if (document.readyState === "complete") {
-            scheduleCcm19();
-          } else {
-            window.addEventListener("load", scheduleCcm19, { once: true });
-          }
-        })();
       </script>
     </div>
   </body>

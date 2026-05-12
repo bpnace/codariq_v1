@@ -95,6 +95,16 @@ test("home renders CCM19 before consent-controlled google analytics", async ({
   expect(html?.match(/G-PV0P0WH6KY/g)?.length ?? 0).toBe(2);
   expect(html).toContain('type="text/x-ccm-loader"');
   expect(html).toContain("data-ccm-loader-src");
+  expect(html).not.toContain('data-ccm-loader-group="Google Analytics"');
+
+  const ccm19Index = html?.indexOf("https://cloud.ccm19.de/app.js") ?? -1;
+  const googleAnalyticsIndex = html?.indexOf(
+    "https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY",
+  ) ?? -1;
+
+  expect(ccm19Index).toBeGreaterThanOrEqual(0);
+  expect(googleAnalyticsIndex).toBeGreaterThanOrEqual(0);
+  expect(ccm19Index).toBeLessThan(googleAnalyticsIndex);
 });
 
 test("hero agent panel cycles live metrics and review alerts", async ({
