@@ -228,12 +228,12 @@ header[style*="position: fixed"] {
 
 /* Fix scroll positioning for anchor links to account for fixed header */
 html {
-  scroll-padding-top: 5rem; /* Account for fixed header height */
+  scroll-padding-top: 3.5rem; /* Account for fixed header height */
 }
 
-@media (min-width: 390px) {
+@media (min-width: 640px) {
   html {
-    scroll-padding-top: 6rem; /* Larger header on small screens */
+    scroll-padding-top: 4rem; /* Account for fixed desktop header height */
   }
 }
 

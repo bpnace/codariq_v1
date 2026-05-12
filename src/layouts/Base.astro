@@ -698,6 +698,7 @@ const ccm19ScriptSrc =
         ad_user_data: "denied",
         ad_personalization: "denied",
         analytics_storage: "denied",
+        wait_for_update: 500,
       });
 
       const updateGoogleAnalyticsConsent = (consentEvent) => {
@@ -725,10 +726,10 @@ const ccm19ScriptSrc =
     </script>
     <script
       is:inline
-      type="text/x-ccm-loader"
-      data-ccm-loader-src="https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY"
       crossorigin="anonymous"></script>
-    <script is:inline type="text/x-ccm-loader" crossorigin="anonymous">
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -783,11 +784,6 @@ const ccm19ScriptSrc =
             class="hidden sm:flex items-center justify-center space-x-4 md:space-x-8"
             id="nav-links"
           >
-            <a
-              href="/#pain-points"
-              class="nav-link transition-colors font-medium text-sm md:text-base"
-              >Probleme</a
-            >
             <a
               href="/#process"
               class="nav-link transition-colors font-medium text-sm md:text-base"
@@ -899,11 +895,6 @@ const ccm19ScriptSrc =
           class="sm:hidden hidden bg-[#f7fafc]/95 backdrop-blur-lg border-b border-slate-200/70"
         >
           <div class="px-4 py-3 space-y-3">
-            <a
-              href="/#pain-points"
-              class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
-              >Probleme</a
-            >
             <a
               href="/#process"
               class="block text-gray-800 hover:text-gray-600 transition-colors font-medium py-2"
@@ -1515,15 +1506,13 @@ const ccm19ScriptSrc =
                     }
                   }
 
-                  // Smooth scroll with offset for fixed header
-                  const headerHeight =
-                    document.getElementById("main-nav")?.getBoundingClientRect()
-                      .height || 64;
-                  const headerOffset = headerHeight + 20; // Account for fixed header + some padding
-                  const elementPosition =
-                    targetElement.getBoundingClientRect().top;
-                  const offsetPosition =
-                    elementPosition + window.pageYOffset - headerOffset;
+                  const headerBottom =
+                    document.querySelector("header")?.getBoundingClientRect()
+                      .bottom ?? 64;
+                  const targetTop =
+                    targetElement.getBoundingClientRect().top +
+                    window.pageYOffset;
+                  const offsetPosition = targetTop - Math.ceil(headerBottom);
 
                   window.scrollTo({
                     top: offsetPosition,

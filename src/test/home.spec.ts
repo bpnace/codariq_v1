@@ -80,7 +80,7 @@ test("trust badges use local badge assets", async ({ page }) => {
   );
 });
 
-test("home renders CCM19 before consent-controlled google analytics", async ({
+test("home renders CCM19 and a debug-capable consent-mode google tag", async ({
   page,
 }) => {
   const response = await page.goto("/");
@@ -93,14 +93,19 @@ test("home renders CCM19 before consent-controlled google analytics", async ({
   expect(html).toContain("G-PV0P0WH6KY");
   expect(html).not.toContain("G-6TLXVYD8V2");
   expect(html?.match(/G-PV0P0WH6KY/g)?.length ?? 0).toBe(2);
-  expect(html).toContain('type="text/x-ccm-loader"');
-  expect(html).toContain("data-ccm-loader-src");
+  expect(html).toContain(
+    'src="https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY"',
+  );
+  expect(html).toContain('analytics_storage: "denied"');
+  expect(html).toContain("wait_for_update: 500");
+  expect(html).not.toContain('type="text/x-ccm-loader"');
+  expect(html).not.toContain("data-ccm-loader-src");
   expect(html).not.toContain('data-ccm-loader-group="Google Analytics"');
 
   const ccm19Index = html?.indexOf("https://cloud.ccm19.de/app.js") ?? -1;
-  const googleAnalyticsIndex = html?.indexOf(
-    "https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY",
-  ) ?? -1;
+  const googleAnalyticsIndex =
+    html?.indexOf("https://www.googletagmanager.com/gtag/js?id=G-PV0P0WH6KY") ??
+    -1;
 
   expect(ccm19Index).toBeGreaterThanOrEqual(0);
   expect(googleAnalyticsIndex).toBeGreaterThanOrEqual(0);
@@ -488,7 +493,7 @@ test("desktop nav stays on homepage anchors", async ({ page }) => {
   await page.goto("/");
   const nav = page.locator("#main-nav");
 
-  await expect(nav.locator('a[href="/#pain-points"]')).toHaveText("Probleme");
+  await expect(nav.locator('a[href="/#pain-points"]')).toHaveCount(0);
   await expect(nav.locator('a[href="/#process"]')).toHaveText("Prozess");
   await expect(nav.locator('a[href="/#benefits"]')).toHaveText("Pakete");
   await expect(nav.locator('a[href="/#testimonials"]')).toHaveText(
@@ -502,6 +507,53 @@ test("desktop nav stays on homepage anchors", async ({ page }) => {
   await expect(nav.locator('a[href="/dsgvo-ki-agenten"]')).toHaveCount(0);
   await expect(nav.locator('a[href="/openclaw-agenten"]')).toHaveCount(0);
   await expect(nav.locator('a[href="/faq"]')).toHaveCount(0);
+});
+
+test("desktop nav anchors land directly below fixed header", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.addStyleTag({
+    content: "html, body { scroll-behavior: auto !important; }",
+  });
+
+  const targets = [
+    { href: "/#process", id: "process" },
+    { href: "/#benefits", id: "benefits" },
+    { href: "/#testimonials", id: "testimonials" },
+    { href: "/#final-cta", id: "final-cta" },
+  ];
+
+  for (const target of targets) {
+    await page.locator(`#nav-links a[href="${target.href}"]`).click();
+    await page.waitForFunction(({ id }) => {
+      const section = document.getElementById(id);
+      const header = document.querySelector("header");
+      if (!section || !header || window.location.hash !== `#${id}`) {
+        return false;
+      }
+
+      const headerBottom = Math.ceil(header.getBoundingClientRect().bottom);
+      const sectionTop = Math.round(section.getBoundingClientRect().top);
+      return Math.abs(sectionTop - headerBottom) <= 2;
+    }, target);
+
+    const alignment = await page.evaluate((id) => {
+      const section = document.getElementById(id);
+      const header = document.querySelector("header");
+      if (!section || !header) return null;
+
+      return {
+        headerBottom: Math.ceil(header.getBoundingClientRect().bottom),
+        sectionTop: Math.round(section.getBoundingClientRect().top),
+      };
+    }, target.id);
+
+    expect(alignment).not.toBeNull();
+    expect(
+      Math.abs(alignment!.sectionTop - alignment!.headerBottom),
+    ).toBeLessThanOrEqual(2);
+  }
 });
 
 test("pain list uses agent reframing", async ({ page }) => {
