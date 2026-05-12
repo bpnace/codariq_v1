@@ -1,0 +1,129 @@
+---
+import SeoLandingPageTemplate from "../components/SeoLandingPageTemplate.astro";
+
+const faqs = [
+  {
+    question: "Was macht eine n8n Agentur anders als eine klassische IT-Agentur?",
+    answer:
+      "Eine n8n Agentur startet nicht mit einer großen Individualsoftware, sondern mit klar begrenzten Workflows zwischen bestehenden Tools. Wichtig sind Datenquellen, Berechtigungen, Fehlerfälle, Logs und Freigaben, damit Automatisierung im Alltag kontrollierbar bleibt.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Kann n8n auch KI-Agenten steuern?",
+    answer:
+      "Ja, n8n eignet sich als Orchestrierungsschicht für KI-Schritte, Tool-Aufrufe und Freigaben. Für echte Agentenarbeit definieren wir jedoch genau, welche Daten gelesen werden, welche Aktionen erlaubt sind und wann ein Mensch entscheiden muss.",
+    category: "KI-Agenten",
+  },
+  {
+    question: "Welche n8n Workflows lohnen sich zuerst?",
+    answer:
+      "Gute Einstiege sind E-Mail-Triage, Lead-Follow-up, CRM-Datenpflege, Dokumentenprüfung, Rechnungs- oder Angebotsvorbereitung und regelmäßige Reports. Sie haben meist wiederholbares Volumen und klar sichtbare manuelle Nacharbeit.",
+    category: "Use Cases",
+  },
+  {
+    question: "Wie verhindert ihr Tool-Chaos bei n8n Automatisierung?",
+    answer:
+      "Wir legen ein führendes System fest, dokumentieren Datenflüsse, trennen Test- und Produktivlogik und bauen Stopps für Sonderfälle ein. Dadurch bleibt n8n eine kontrollierte Automatisierungsebene statt einer Schattenplattform.",
+    category: "Betrieb",
+  },
+];
+---
+
+<SeoLandingPageTemplate
+  title="n8n Agentur: Workflow-Automatisierung mit KI und Freigaben | codariq"
+  description="Codariq ist deine n8n Agentur für kontrollierbare Workflow-Automatisierung: KI-Agenten, CRM, E-Mail, Dokumente, Freigaben, Logs und DSGVO-orientierte Datenflüsse."
+  keywords="n8n Agentur, n8n Beratung, n8n Automatisierung, n8n Workflow Automatisierung, n8n KI Agent, n8n Agentur Deutschland, n8n CRM Automatisierung, n8n DSGVO, KI Workflow Automatisierung, Agentic AI n8n"
+  breadcrumbName="n8n Agentur"
+  breadcrumbUrl="https://codariq.de/n8n-agentur"
+  heroTitle="n8n Agentur für Workflows, die echte Arbeit abnehmen."
+  heroSubtitle="Wir bauen n8n-Automatisierungen mit KI-Schritten, Freigaben und sauberen Datenwegen: von E-Mail und CRM bis Dokumentenprüfung, Reporting und Backoffice."
+  primaryCTA="n8n Workflow prüfen"
+  secondaryCTA="Agent Readiness testen"
+  secondaryCTALink="/agent-readiness"
+  introEyebrow="n8n Beratung und Umsetzung"
+  introTitle="Automatisierung ohne neue Schattenplattform"
+  introText="n8n ist stark, wenn es bestehende Systeme verbindet und Routinearbeit vorbereitet. Entscheidend ist nicht die Zahl der Nodes, sondern ob der Ablauf stabil, nachvollziehbar und für dein Team freigabefähig bleibt."
+  cards={[
+    {
+      title: "Workflow statt Tool-Sammlung",
+      text: "Wir starten beim konkreten Ablauf: Auslöser, Datenquellen, Zielsystem, Fehlerfälle und die Stellen, an denen ein Mensch entscheiden muss.",
+    },
+    {
+      title: "KI-Agenten mit Grenzen",
+      text: "KI-Schritte dürfen klassifizieren, zusammenfassen, vorbereiten oder prüfen. Kritische Aktionen laufen über Freigaben, Rollen und Protokolle.",
+    },
+    {
+      title: "Betrieb von Anfang an",
+      text: "Produktive n8n Workflows brauchen Tests, Monitoring, Versionslogik und klare Zuständigkeiten. Genau das planen wir vor dem Go-live ein.",
+    },
+  ]}
+  processEyebrow="Von Idee zu produktivem Workflow"
+  processTitle="So wird n8n vom Experiment zum verlässlichen Agenten-Setup."
+  processText="Wir bauen zuerst einen kleinen, wirtschaftlich sinnvollen Workflow. Danach entscheiden wir anhand echter Fälle, ob weitere Systeme, Agentenrollen oder ein größerer Automatisierungsstack nötig sind."
+  steps={[
+    {
+      title: "Use Case und ROI eingrenzen",
+      text: "Wir wählen einen wiederkehrenden Ablauf mit messbarer Nacharbeit und legen fest, was automatisiert, vorbereitet oder bewusst manuell bleiben soll.",
+      items: [
+        "Volumen, Zeitverlust und Fehlerkosten grob schätzen",
+        "führendes System und Datenquellen festlegen",
+        "Freigabepunkte und Sonderfälle markieren",
+      ],
+    },
+    {
+      title: "n8n Workflow sicher aufbauen",
+      text: "Der Workflow entsteht mit klarer Trennung von Triggern, Datenaufbereitung, KI-Schritten, Aktionen, Logs und Eskalationen.",
+      items: [
+        "Credentials und Berechtigungen begrenzen",
+        "Testfälle mit echten Beispielen prüfen",
+        "Fehlerpfade und Benachrichtigungen einbauen",
+      ],
+    },
+    {
+      title: "Agentenlogik kontrolliert erweitern",
+      text: "Wenn der Basisablauf sitzt, ergänzen wir KI-Agenten für Kontext, Priorisierung, Entwürfe oder Recherche - immer mit definierten Grenzen.",
+      items: [
+        "Prompts, Tools und Datenzugriffe versionieren",
+        "Human-in-the-loop für kritische Aktionen",
+        "Ausbau nach Nutzungsdaten statt nach Hype",
+      ],
+    },
+  ]}
+  proofTitle="Ein guter n8n Workflow ist nicht spektakulär. Er läuft einfach sauber."
+  proofText="Der Mehrwert zeigt sich daran, dass weniger kopiert, sortiert, nachgefragt und manuell nachgetragen wird. Dafür braucht n8n klare Architektur statt immer neuer Einzelautomationen."
+  proofItems={[
+    {
+      title: "CRM bleibt führend",
+      text: "Leads, Kontakte und Aufgaben werden vorbereitet, aber nicht in parallelen Listen verstreut.",
+    },
+    {
+      title: "Freigaben bleiben sichtbar",
+      text: "Antworten, Angebotsdaten oder Dokumentenentscheidungen landen bei der richtigen Person, bevor etwas ausgelöst wird.",
+    },
+    {
+      title: "Logs schaffen Vertrauen",
+      text: "Jeder wichtige Schritt ist nachvollziehbar: Eingangsdaten, KI-Ergebnis, Aktion und Abbruchgrund.",
+    },
+  ]}
+  linksTitle="Passende nächste Schritte"
+  links={[
+    {
+      href: "/crm-und-ki-integration",
+      label: "CRM",
+      text: "Wenn dein n8n Workflow Leads, Follow-ups oder Kundendaten mit CRM und E-Mail verbinden soll.",
+    },
+    {
+      href: "/ki-integration-prozesse",
+      label: "Prozesse",
+      text: "Wenn du zuerst klären willst, welcher Prozess sich für KI-Integration wirklich eignet.",
+    },
+    {
+      href: "/blog/ki-agenten-roi-berechnen",
+      label: "ROI",
+      text: "Wenn du mehrere Automatisierungsideen hast und die Reihenfolge wirtschaftlich priorisieren willst.",
+    },
+  ]}
+  faqs={faqs}
+  finalTitle="Lass uns deinen ersten n8n Workflow sauber eingrenzen."
+  finalDescription="Wir prüfen, ob n8n für deinen Ablauf reicht, wo KI sinnvoll ist und welche Freigaben, Logs und Datenwege vor dem Start geklärt werden müssen."
+/>
