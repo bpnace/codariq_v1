@@ -1,13 +1,27 @@
 # Codariq Landing Page
 
-> **Astro-powered landing page positioning Codariq as the partner for kontrollierbare KI-Agenten with clear data flows, approvals, logs, and human control.**
+[![CI](https://github.com/bpnace/codariq_v1/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bpnace/codariq_v1/actions/workflows/ci.yml)
+![Version](https://img.shields.io/badge/version-1.1.0-2563EB?style=flat-square)
+![Status](https://img.shields.io/badge/status-production_landing_case-1F2937?style=flat-square)
+![Astro](https://img.shields.io/badge/Astro-5.16-1A1A1A?style=flat-square&logo=astro&logoColor=FF5D01)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-4.0-6E9F18?style=flat-square&logo=vitest&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-1.57-2EAD33?style=flat-square&logo=playwright&logoColor=white)
+![npm](https://img.shields.io/badge/npm-lockfile_v3-CB3837?style=flat-square&logo=npm&logoColor=white)
+![Legal Pages](https://img.shields.io/badge/Legal_pages-DSGVO_Impressum-2ea043?style=flat-square)
 
-[![Performance](https://img.shields.io/badge/Lighthouse-100%2F100%2F100%2F100-brightgreen)]()
-[![Accessibility](https://img.shields.io/badge/WCAG-2.1%20AA-blue)]()
-[![Compliance](https://img.shields.io/badge/DSGVO-Compliant-green)]()
-[![Tests](https://img.shields.io/badge/Tests-Vitest%20%2B%20Playwright-brightgreen)]()
-[![Coverage](https://img.shields.io/badge/Coverage-Manual-yellow)]()
-[![CI/CD](https://img.shields.io/badge/CI%2FCD-Manual-orange)]()
+Astro-powered landing page and lead flow for a DACH AI automation offer. The
+project combines conversion copy, quiz UX, legal pages, SEO structure, and
+browser-level validation.
+
+## What this shows
+
+- Production-style Astro site with reusable content sections and landing routes
+- Interactive automation check / quiz flow with form validation and submission handling
+- SEO, schema, sitemap, legal pages, and German-market compliance framing
+- Vitest and Playwright coverage for homepage, quiz, and complete lead flow
+- Static build workflow that can be uploaded to conventional web hosting
 
 ## 🎯 Project Overview
 
