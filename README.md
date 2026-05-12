@@ -3,6 +3,8 @@
 [![CI](https://github.com/bpnace/codariq_v1/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bpnace/codariq_v1/actions/workflows/ci.yml)
 ![Version](https://img.shields.io/badge/version-1.1.0-2563EB?style=flat-square)
 ![Status](https://img.shields.io/badge/status-production_landing_case-1F2937?style=flat-square)
+![Security](https://img.shields.io/badge/security-Dependabot_%2B_CodeQL-2ea043?style=flat-square)
+![License](https://img.shields.io/badge/license-proprietary_portfolio_review-6B7280?style=flat-square)
 ![Astro](https://img.shields.io/badge/Astro-5.16-1A1A1A?style=flat-square&logo=astro&logoColor=FF5D01)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
