@@ -33,5 +33,12 @@ jobs:
       - name: Unit tests
         run: npm run test:run
 
+      - name: Security scan
+        run: |
+          set -euo pipefail
+          if git grep -nE 'automation\.codariq\.de|/webhook(-test)?/[0-9A-Za-z_-]{12,}|sk-[A-Za-z0-9_-]{20,}|hf_[A-Za-z0-9]{20,}|[0-9]{8,10}:[A-Za-z0-9_-]{35,}|-----BEGIN (RSA |OPENSSH |EC )?PRIVATE KEY-----' -- ':!package-lock.json'; then
+            exit 1
+          fi
+
       - name: Build
         run: npm run build
