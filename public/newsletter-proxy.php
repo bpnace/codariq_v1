@@ -3,6 +3,7 @@
 // Reads credentials from newsletter-proxy.config.php (not committed).
 
 header('Content-Type: application/json; charset=utf-8');
+header('X-Robots-Tag: noindex, nofollow');
 
 $allowedOrigin = 'https://codariq.de';
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';

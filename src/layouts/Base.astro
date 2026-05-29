@@ -40,6 +40,10 @@ if (pathname.endsWith(".html")) {
 if (pathname !== "/" && pathname.endsWith("/")) {
   pathname = pathname.slice(0, -1);
 }
+// Astro's static build renders the homepage from /index; keep public signals on root.
+if (pathname === "/index") {
+  pathname = "/";
+}
 const solidNavBackgroundRoutes = new Set([
   "/impressum",
   "/datenschutz",

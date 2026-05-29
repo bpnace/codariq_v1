@@ -83,6 +83,61 @@ for (const [legacyRoute, canonicalRoute] of legacyRoutes) {
   });
 }
 
+test("homepage exposes root canonical social URLs", async ({ page }) => {
+  await page.goto("/");
+
+  const seoUrls = await page.evaluate(() => ({
+    canonical: document
+      .querySelector('link[rel="canonical"]')
+      ?.getAttribute("href"),
+    ogUrl: document
+      .querySelector('meta[property="og:url"]')
+      ?.getAttribute("content"),
+    twitterUrl: document
+      .querySelector('meta[name="twitter:url"]')
+      ?.getAttribute("content"),
+  }));
+
+  expect(seoUrls).toEqual({
+    canonical: "https://codariq.de",
+    ogUrl: "https://codariq.de",
+    twitterUrl: "https://codariq.de",
+  });
+});
+
+test("ki integration roadmap blog post is indexable and internally linked", async ({
+  page,
+}) => {
+  await page.goto("/blog/ki-integration-roadmap-agenten");
+
+  await expect(page).toHaveTitle(/KI-Integration Roadmap/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "KI-Integration Roadmap: vom Pilot zum stabilen Agenten-Stack",
+  );
+  await expect(page.getByText("29. Mai 2026")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Integrationspunkt prüfen" }),
+  ).toHaveAttribute("href", "/ki-integration-prozesse");
+
+  const seoSignals = await page.evaluate(() => ({
+    canonical: document
+      .querySelector('link[rel="canonical"]')
+      ?.getAttribute("href"),
+    robots: document
+      .querySelector('meta[name="robots"]')
+      ?.getAttribute("content"),
+    articlePublished: document
+      .querySelector('meta[property="article:published_time"]')
+      ?.getAttribute("content"),
+  }));
+
+  expect(seoSignals).toEqual({
+    canonical: "https://codariq.de/blog/ki-integration-roadmap-agenten",
+    robots: "index, follow",
+    articlePublished: "2026-05-29T09:30:00+02:00",
+  });
+});
+
 test("faq page uses compact question-first layout", async ({ page }) => {
   await page.goto("/faq");
 

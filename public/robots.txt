@@ -1,55 +1,26 @@
 # Robots.txt for codariq.de
 
-# Allow legitimate search engines full access
+# Allow legitimate search engines full access to public pages
 User-agent: Googlebot
-Allow: /
-
 User-agent: Bingbot
-Allow: /
-
 User-agent: DuckDuckBot
-Allow: /
-
-# Allow AI search engines and assistants
 User-agent: ChatGPT-User
-Allow: /
-
 User-agent: GPTBot
-Allow: /
-
 User-agent: OAI-SearchBot
-Allow: /
-
 User-agent: PerplexityBot
-Allow: /
-
 User-agent: Claude-Web
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: anthropic-ai
-Allow: /
-
 User-agent: Applebot
-Allow: /
-
 User-agent: YouBot
-Allow: /
-
 User-agent: cohere-ai
-Allow: /
-
-# Allow AI training crawlers
 User-agent: Google-Extended
-Allow: /
-
 User-agent: FacebookBot
-Allow: /
-
 User-agent: Bytespider
 Allow: /
+Disallow: /api/
+Disallow: /webhook-proxy.php
+Disallow: /newsletter-proxy.php
 
 # Block data extraction crawlers
 User-agent: CCBot
@@ -192,6 +163,9 @@ Disallow: /
 # Default directives for remaining crawlers
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /webhook-proxy.php
+Disallow: /newsletter-proxy.php
 
 # Sitemap location
 Sitemap: https://codariq.de/sitemap-index.xml

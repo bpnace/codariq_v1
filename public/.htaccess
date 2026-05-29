@@ -18,6 +18,9 @@ RewriteRule ^_astro/ - [L]
 RewriteRule ^(images|fonts)/ - [L]
 RewriteRule \.(css|js|mjs|map|json|png|jpg|jpeg|gif|svg|webp|woff2?|ico|txt|xml)$ - [L]
 
+# Canonicalize generated homepage aliases in one hop
+RewriteRule ^index(\.html)?/?$ https://codariq.de/ [R=301,L,NC]
+
 # Force HTTPS and remove www in one redirect (reduces redirect hops)
 RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
@@ -29,7 +32,7 @@ RewriteRule ^automatisierungs-check$ /agent-readiness [R=301,L]
 RewriteRule ^automatisierung-selbststaendige$ /ki-agenten-selbststaendige [R=301,L]
 RewriteRule ^automatisierung-gruender$ /ki-agenten-gruender [R=301,L]
 RewriteRule ^automatisierung-kleine-teams$ /ki-agenten-kleine-teams [R=301,L]
-RewriteRule ^blog/automatisierung-roi-maximieren$ /blog/ki-agenten-roi-berechnen [R=301,L]
+RewriteRule ^blog/automatisierung-roi-maximieren/?$ /blog/ki-agenten-roi-berechnen [R=301,L]
 
 # Strip ?search= query params to canonical URL
 RewriteCond %{QUERY_STRING} (^|&)search= [NC]

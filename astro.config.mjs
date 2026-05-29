@@ -35,28 +35,43 @@ export default defineConfig({
       serialize(item) {
         // Add lastmod, changefreq, and priority to sitemap entries
         const url = item.url;
+        const pathname = new URL(url).pathname.replace(/\/$/, "") || "/";
         const now = new Date();
+        const latestBlogLastmod = "2026-05-29T07:30:00.000Z";
 
-        const newestBlogSlugs = [
-          "/blog/ki-integration-bestehende-systeme",
-          "/blog/ki-mitarbeiterumfragen-automatisieren",
-          "/blog/ki-remediation-projekte-retten",
-        ];
+        const fixedBlogLastmodByPath = new Map([
+          ["/blog/ki-integration-roadmap-agenten", latestBlogLastmod],
+          [
+            "/blog/ki-integration-bestehende-systeme",
+            "2026-05-08T20:45:00.000Z",
+          ],
+          [
+            "/blog/ki-mitarbeiterumfragen-automatisieren",
+            "2026-05-08T20:45:00.000Z",
+          ],
+          ["/blog/ki-remediation-projekte-retten", "2026-05-08T21:15:00.000Z"],
+          ["/blog/ki-projekte-retten", "2026-05-08T21:15:00.000Z"],
+          ["/blog/ki-agenten-roi-berechnen", "2026-05-08T20:45:00.000Z"],
+          ["/blog/ki-integration-5-schritte", "2026-05-08T20:45:00.000Z"],
+          ["/blog/ki-teams-vorbereiten", "2026-05-05T15:00:00.000Z"],
+          ["/blog/ki-compliance-2025", "2025-01-15T09:00:00.000Z"],
+        ]);
+        const fixedBlogLastmod = fixedBlogLastmodByPath.get(pathname);
 
-        if (newestBlogSlugs.some((slug) => url.includes(slug))) {
-          item.lastmod = new Date("2026-04-30").toISOString();
+        if (fixedBlogLastmod) {
+          item.lastmod = new Date(fixedBlogLastmod).toISOString();
           item.changefreq = EnumChangefreq.MONTHLY;
           item.priority = 0.9;
         }
-        // Other blog posts get higher priority and more frequent updates
-        else if (url.includes("/blog/") && !url.endsWith("/blog")) {
-          item.lastmod = now.toISOString();
+        // Dynamic or externally sourced blog pages should not inherit build time.
+        else if (pathname.startsWith("/blog/")) {
+          delete item.lastmod;
           item.changefreq = EnumChangefreq.MONTHLY;
-          item.priority = 0.8;
+          item.priority = 0.6;
         }
         // Blog index page (updated with newest post)
-        else if (url.endsWith("/blog")) {
-          item.lastmod = now.toISOString();
+        else if (pathname === "/blog") {
+          item.lastmod = new Date(latestBlogLastmod).toISOString();
           item.changefreq = EnumChangefreq.WEEKLY;
           item.priority = 0.7;
         }

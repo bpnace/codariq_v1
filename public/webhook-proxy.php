@@ -3,6 +3,7 @@
 // Reads credentials from webhook-proxy.config.php (not committed).
 
 header('Content-Type: application/json; charset=utf-8');
+header('X-Robots-Tag: noindex, nofollow');
 
 function send_json_response($statusCode, $payload)
 {

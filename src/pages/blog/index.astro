@@ -3,12 +3,11 @@ import Base from "../../layouts/Base.astro";
 import { fetchDrupalPosts, type DrupalPost } from "../../lib/drupal";
 
 // SEO and meta data
-const title =
-  "codariq Blog: KI-Integration, KI-Remediation und Agenten für KMU";
+const title = "codariq Blog: KI-Integration Roadmap, Remediation und Agenten";
 const description =
-  "Praxisnahe Artikel zu KI-Integration, KI-Projektrettung, KI-Remediation, Mitarbeiterumfragen und ROI-Priorisierung für Selbstständige, kleine Teams und KMU.";
+  "Praxisnahe Artikel zu KI-Integration Roadmaps, KI-Projektrettung, KI-Remediation, Mitarbeiterumfragen und ROI-Priorisierung für Selbstständige, kleine Teams und KMU.";
 const keywords =
-  "KI Integration, KI-Integration, KI Agenten integrieren, KI Integration bestehende Systeme, KI Agenten KMU, kontrollierbare KI Agenten, KI Projekt retten, Projektrettung, KI-Remediation, KI Mitarbeiterumfragen, KI Teammanagement, Agenten Setup ROI";
+  "KI Integration Roadmap, KI-Integration Roadmap, KI Integration, KI-Integration, KI Agenten integrieren, KI Integration bestehende Systeme, KI Agenten KMU, kontrollierbare KI Agenten, KI Projekt retten, Projektrettung, KI-Remediation, KI Mitarbeiterumfragen, KI Teammanagement, Agenten Setup ROI";
 const author = "Codariq Research Team";
 const publishedTime = "2026-01-02T10:00:00+01:00";
 const image = "/images/hero/hero2.webp";
@@ -192,6 +191,56 @@ const formatCategory = (value: string | string[] | undefined) => {
           );
         })
       }
+
+      <!-- Blog Post - KI-Integration Roadmap (Mai 2026) -->
+      <article
+        class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group"
+      >
+        <a href="/blog/ki-integration-roadmap-agenten" class="block">
+          <div class="p-6">
+            <div class="mb-4">
+              <div
+                class="w-full h-32 bg-gradient-to-br from-teal-100 to-cyan-200 rounded-lg flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-teal-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 17v-2a4 4 0 014-4h6m0 0l-3-3m3 3l-3 3M4 7h6m-6 4h4m-4 4h3"
+                  ></path>
+                </svg>
+              </div>
+              <span
+                class="text-xs font-medium text-teal-700 bg-teal-50 px-2 py-1 rounded"
+              >
+                KI-Integration
+              </span>
+            </div>
+            <h2
+              class="text-lg font-semibold text-gray-900 mb-3 group-hover:text-teal-700 transition-colors line-clamp-2"
+            >
+              KI-Integration Roadmap: vom Pilot zum stabilen Agenten-Stack
+            </h2>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+              Wie du Integrationspunkt, Datenwege, Freigaben und Pilotmessung
+              klärst, bevor KI-Agenten in CRM, Postfach oder Projekttools
+              produktiv mitarbeiten.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs text-gray-500"
+            >
+              <span>12 Min. Lesezeit</span>
+              <span>29. Mai 2026</span>
+            </div>
+          </div>
+        </a>
+      </article>
 
       <!-- Blog Post 1 - KI Integration (April 2026) -->
       <article
@@ -843,6 +892,16 @@ const formatCategory = (value: string | string[] | undefined) => {
       }
     },
     "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "KI-Integration Roadmap: vom Pilot zum stabilen Agenten-Stack",
+        "url": "https://codariq.de/blog/ki-integration-roadmap-agenten",
+        "datePublished": "2026-05-29T09:30:00+02:00",
+        "author": {
+          "@type": "Organization",
+          "name": "codariq"
+        }
+      },
       {
         "@type": "BlogPosting",
         "headline": "KI Projekt retten: 3 Praxisbeispiele, wie es wieder stabil läuft",

@@ -1,0 +1,450 @@
+---
+import Base from "../../layouts/Base.astro";
+import BlogConversionSection from "../../components/BlogConversionSection.astro";
+
+const title = "KI-Integration Roadmap: vom Pilot zum stabilen Agenten-Stack";
+const description =
+  "Eine praktische KI-Integration Roadmap für Unternehmen: Integrationspunkt wählen, Datenwege klären, Freigaben setzen, Pilot messen und KI-Agenten kontrolliert ausbauen.";
+const keywords =
+  "KI Integration Roadmap, KI-Integration Roadmap, KI Integration Unternehmen, KI Agenten integrieren, KI Integration Prozesse, KI Integration bestehende Systeme, KI Implementierung Unternehmen, Integration Strategy Entwicklung, KI Rollout, Agenten Stack, KI Workflow Integration, KI Pilot";
+const author = "Codariq";
+const metaAuthor = "codariq";
+const publishedTime = "2026-05-29T09:30:00+02:00";
+const modifiedTime = "2026-05-29T09:30:00+02:00";
+const image = "/images/hero/hero2.webp";
+const tags = keywords
+  .split(",")
+  .map((tag) => tag.trim())
+  .filter(Boolean);
+---
+
+<Base
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogImage={image}
+  article={{
+    publishedTime,
+    modifiedTime,
+    author: metaAuthor,
+    section: "Blog",
+    tags,
+  }}
+  forceNavSolid={true}
+>
+  <nav aria-label="Breadcrumb" class="bg-gray-50 py-3 pt-16 sm:pt-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-600 hover:text-teal-700">Startseite</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li>
+          <a href="/blog" class="text-gray-600 hover:text-teal-700">Blog</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">KI-Integration Roadmap</li>
+      </ol>
+    </div>
+  </nav>
+
+  <header
+    class="article-header bg-gradient-to-r from-teal-50 to-cyan-100 py-8 sm:py-12"
+  >
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span
+            class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium"
+          >
+            KI-Integration
+          </span>
+          <span class="text-gray-500 text-sm">•</span>
+          <span class="text-gray-600 text-sm">12 Min. Lesezeit</span>
+        </div>
+
+        <h1
+          class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight"
+        >
+          KI-Integration Roadmap: vom Pilot zum <span class="text-teal-700"
+            >stabilen Agenten-Stack</span
+          >
+        </h1>
+
+        <p
+          class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6"
+        >
+          {description}
+        </p>
+
+        <div
+          class="flex items-center justify-center gap-4 text-sm text-gray-600"
+        >
+          <span>{author}</span>
+          <span>•</span>
+          <time datetime={publishedTime}>
+            {
+              new Date(publishedTime).toLocaleDateString("de-DE", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="prose prose-lg prose-teal max-w-none mb-12">
+      <p class="lead text-xl text-gray-700 font-medium">
+        Eine KI-Integration wird nicht stabil, weil das Modell gut ist. Sie wird
+        stabil, wenn klar ist, welcher Prozess angebunden wird, welche Daten
+        fließen dürfen und wo ein Mensch bewusst freigibt.
+      </p>
+
+      <p>
+        Viele Unternehmen starten KI-Projekte mit einer Tool-Liste. CRM, E-Mail,
+        Kalender, Dokumentenablage, Projektmanagement, Buchhaltung, vielleicht
+        noch ein Chatbot. Danach entsteht schnell ein zweiter Arbeitsort. Die KI
+        kann etwas, aber die Arbeit bleibt trotzdem im Postfach, im CRM oder im
+        Projekttool hängen.
+      </p>
+
+      <p>
+        Diese Roadmap dreht die Reihenfolge um. Erst kommt der konkrete
+        Integrationspunkt, dann die Systemgrenze, dann die Agentenrolle. Wenn du
+        noch die Grundlagen brauchst, lies zuerst den <a
+          href="/blog/ki-integration-5-schritte"
+          class="text-teal-700 hover:text-teal-800 underline"
+          >5-Schritte-Guide zur KI-Integration</a
+        >. Wenn du schon weißt, welche Systeme beteiligt sind, passt der Artikel
+        zur <a
+          href="/blog/ki-integration-bestehende-systeme"
+          class="text-teal-700 hover:text-teal-800 underline"
+          >KI-Integration in bestehende Systeme</a
+        > als nächster Schritt.
+      </p>
+    </div>
+
+    <section id="kurzfassung" class="mb-14">
+      <div class="bg-teal-50 border border-teal-100 rounded-xl p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+          Kurzfassung der Roadmap
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+          <p>
+            <strong>1. Integrationspunkt wählen:</strong> Starte mit einem Ablauf,
+            der häufig vorkommt und heute sichtbare Nacharbeit erzeugt.
+          </p>
+          <p>
+            <strong>2. Systemgrenzen klären:</strong> Definiere Quelle, Zielsystem,
+            Schreibrechte und Stopps, bevor gebaut wird.
+          </p>
+          <p>
+            <strong>3. Datenwege begrenzen:</strong> Die KI bekommt nur den Kontext,
+            den sie für diese Aufgabe wirklich braucht.
+          </p>
+          <p>
+            <strong>4. Pilot messen:</strong> Entscheide nach echten Fällen, ob du
+            ausbaust, reparierst oder stoppst.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="integrationspunkt" class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-teal-700 font-bold text-lg">1</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Wähle einen Integrationspunkt, nicht ein Tool
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-teal max-w-none">
+        <p>
+          Ein guter Integrationspunkt ist kein abstrakter Bereich wie „Vertrieb“
+          oder „Operations“. Er ist ein wiederkehrender Moment im Arbeitsfluss.
+          Zum Beispiel: Eine Anfrage kommt rein, ein Dokument wird geprüft, ein
+          CRM-Datensatz muss aktualisiert werden oder ein Kundenfall braucht
+          eine Antwortvorlage.
+        </p>
+        <p>
+          Für die erste KI-Integration eignen sich Abläufe mit drei Merkmalen:
+          Sie passieren oft, sie haben klare Quellen und das Ergebnis lässt sich
+          prüfen. Wenn einer dieser Punkte fehlt, wird aus dem Pilot schnell ein
+          Dauerprojekt.
+        </p>
+        <ul>
+          <li>Postfach-Triage für Anfragen, Leads oder Supportfälle</li>
+          <li>CRM-Vorbereitung für Follow-ups, Aufgaben oder Datenpflege</li>
+          <li>Dokumentenprüfung für Rechnungen, Verträge oder Briefings</li>
+          <li>Meeting- und Projektübergaben mit klaren nächsten Schritten</li>
+        </ul>
+        <p>
+          Die Frage lautet also nicht: Welche KI-Cloud-Integrationslösung ist am
+          stärksten? Die bessere Frage lautet: Wo entsteht jeden Tag Arbeit, die
+          ein Agent vorbereiten kann, ohne Verantwortung zu verschleiern?
+        </p>
+      </div>
+    </section>
+
+    <section id="systemgrenzen" class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-cyan-700 font-bold text-lg">2</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Lege Quelle, Zielsystem und Schreibrechte fest
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-teal max-w-none">
+        <p>
+          Eine KI-Integration scheitert oft nicht an der KI, sondern an
+          unscharfen Systemrollen. Ein Agent liest aus dem Postfach, schreibt
+          ins CRM, nutzt Projektkontext aus einem Dokument und erzeugt eine
+          Aufgabe im Projekttool. Wenn nicht klar ist, welches System führend
+          ist, erzeugt die Integration neue Dubletten.
+        </p>
+        <p>Lege deshalb für jeden Pilot vier Dinge fest:</p>
+        <ul>
+          <li>
+            <strong>Startsignal:</strong> Welches Ereignis startet den Ablauf?
+          </li>
+          <li>
+            <strong>Quellen:</strong> Welche Daten darf der Agent lesen?
+          </li>
+          <li>
+            <strong>Zielsystem:</strong> Wo muss das Ergebnis am Ende stehen?
+          </li>
+          <li>
+            <strong>Schreibrechte:</strong> Was darf der Agent selbst speichern und
+            was braucht Freigabe?
+          </li>
+        </ul>
+        <p>
+          Gerade bei <a
+            href="/crm-und-ki-integration"
+            class="text-teal-700 hover:text-teal-800 underline"
+            >CRM und KI-Integration</a
+          > ist diese Grenze entscheidend. Das CRM bleibt die führende Quelle. Der
+          Agent bereitet vor, dokumentiert und stoppt bei unsicheren Änderungen.
+        </p>
+      </div>
+    </section>
+
+    <section id="datenwege" class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-slate-700 font-bold text-lg">3</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Baue Datenwege so klein wie möglich
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-teal max-w-none">
+        <p>
+          KI-Agenten wirken schnell mächtiger, wenn sie auf viele Systeme
+          zugreifen. Im Betrieb ist das oft ein Risiko. Je mehr Kontext
+          ungefiltert in einen Ablauf läuft, desto schwieriger werden Prüfung,
+          Datenschutz und Fehlersuche.
+        </p>
+        <p>
+          Für eine belastbare Integration reicht am Anfang ein schmaler
+          Datenweg. Der Agent liest genau die Felder, die er braucht, erzeugt
+          ein klar begrenztes Ergebnis und protokolliert, welche Quellen genutzt
+          wurden.
+        </p>
+        <div class="overflow-x-auto my-8">
+          <table class="w-full text-left border border-gray-200 rounded-lg">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="p-3 font-semibold text-gray-900">Frage</th>
+                <th class="p-3 font-semibold text-gray-900">Gute Antwort</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="p-3">Welche Daten braucht der Agent?</td>
+                <td class="p-3"
+                  >Nur die Felder, die für die Aufgabe nötig sind.</td
+                >
+              </tr>
+              <tr>
+                <td class="p-3">Wer darf das Ergebnis sehen?</td>
+                <td class="p-3"
+                  >Nur Rollen, die auch die Quelle sehen dürfen.</td
+                >
+              </tr>
+              <tr>
+                <td class="p-3">Was passiert bei Unsicherheit?</td>
+                <td class="p-3">Der Fall landet bei einem Menschen.</td>
+              </tr>
+              <tr>
+                <td class="p-3">Wie wird ein Fehler gefunden?</td>
+                <td class="p-3"
+                  >Quelle, Prompt, Ausgabe und Entscheidung sind geloggt.</td
+                >
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="agentenrolle" class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-emerald-700 font-bold text-lg">4</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Definiere die Agentenrolle mit Stopps
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-teal max-w-none">
+        <p>
+          Der Unterschied zwischen einem stabilen Agenten-Stack und einem
+          riskanten Automatisierungsversuch liegt oft in einem Satz: Der Agent
+          bereitet Arbeit vor, aber übernimmt Verantwortung nur dort, wo es
+          explizit erlaubt ist.
+        </p>
+        <p>
+          Gute Rollen klingen nicht wie „mach Vertrieb besser“. Sie klingen wie
+          ein Arbeitsauftrag:
+        </p>
+        <blockquote>
+          Lies neue Anfragen, ordne sie nach Anliegen und Dringlichkeit,
+          vergleiche sie mit bestehenden CRM-Daten und erstelle einen
+          Antwortentwurf. Schreibe keine externe Nachricht ohne Freigabe.
+        </blockquote>
+        <p>
+          Mit solchen Grenzen wird KI-Integration prüfbar. Das Team versteht,
+          was der Agent darf. Der Betrieb weiß, wo Logs liegen. Und bei Fehlern
+          lässt sich der Ablauf reparieren, statt das ganze Projekt in Frage zu
+          stellen.
+        </p>
+      </div>
+    </section>
+
+    <section id="pilot" class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center"
+        >
+          <span class="text-orange-700 font-bold text-lg">5</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+          Miss den Pilot, bevor du ausbaust
+        </h2>
+      </div>
+
+      <div class="prose prose-lg prose-teal max-w-none">
+        <p>
+          Der erste Pilot muss nicht groß sein. Er muss beweisen, dass der
+          Ablauf echte Arbeit reduziert. Dafür reichen oft 20 bis 50 reale
+          Fälle, wenn vorher klar ist, was gemessen wird.
+        </p>
+        <ul>
+          <li>Zeit pro Fall vor und nach der Integration</li>
+          <li>Anteil der Fälle, die ohne Korrektur vorbereitet wurden</li>
+          <li>Anzahl der Stopps, Freigaben und Sonderfälle</li>
+          <li>
+            Fehler, die durch fehlende Daten oder unklare Regeln entstehen
+          </li>
+        </ul>
+        <p>
+          Erst danach lohnt sich der Ausbau. Wenn du die Wirtschaftlichkeit
+          sauber bewerten willst, nutze die Rechenlogik aus dem Artikel <a
+            href="/blog/ki-agenten-roi-berechnen"
+            class="text-teal-700 hover:text-teal-800 underline"
+            >ROI von KI-Agenten berechnen</a
+          >. Ein Integrationsprojekt ist stark, wenn es messbar entlastet und
+          trotzdem kontrollierbar bleibt.
+        </p>
+      </div>
+    </section>
+
+    <section id="plattform" class="mb-14">
+      <div class="bg-gray-50 rounded-xl p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+          Wann eine KI-Cloud-Integrationsplattform sinnvoll wird
+        </h2>
+        <div class="prose prose-lg prose-teal max-w-none">
+          <p>
+            Nicht jeder Pilot braucht sofort eine große Plattform. Eine
+            KI-Cloud-Integrationsplattform wird interessant, wenn mehrere
+            Agenten, Rollen, Datenquellen und Freigabestufen dauerhaft
+            zusammenspielen sollen.
+          </p>
+          <p>
+            Vorher ist oft ein kleinerer Agenten-Workflow sinnvoller. Er zeigt,
+            welche Datenqualität wirklich vorhanden ist, wo Entscheidungen
+            hängen und welche Schnittstellen stabil genug sind. So kaufst oder
+            baust du später nicht auf Annahmen, sondern auf Betriebserfahrung.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <BlogConversionSection
+      accent="green"
+      title="Du willst eine KI-Integration Roadmap für euren ersten Agenten?"
+      buttonText="Integrationspunkt prüfen"
+      href="/ki-integration-prozesse"
+    >
+      <p>
+        Wir prüfen mit dir, welcher Ablauf sich zuerst eignet, welche Systeme
+        beteiligt sind und wo Freigaben, Logs und Stopps hingehören.
+      </p>
+    </BlogConversionSection>
+
+    <section class="mt-12 pt-8 border-t border-gray-200">
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/blog/ki-integration-bestehende-systeme" class="group">
+          <div
+            class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+          >
+            <div class="text-sm text-gray-500 mb-2">Systeme anbinden</div>
+            <h3 class="font-semibold text-gray-900 group-hover:text-teal-700">
+              KI-Integration in bestehende Systeme
+            </h3>
+          </div>
+        </a>
+        <a href="/blog/ki-integration-5-schritte" class="group">
+          <div
+            class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+          >
+            <div class="text-sm text-gray-500 mb-2">Grundlagen</div>
+            <h3 class="font-semibold text-gray-900 group-hover:text-teal-700">
+              KI-Integration in 5 Schritten
+            </h3>
+          </div>
+        </a>
+        <a href="/agent-readiness" class="group">
+          <div
+            class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+          >
+            <div class="text-sm text-gray-500 mb-2">Check</div>
+            <h3 class="font-semibold text-gray-900 group-hover:text-teal-700">
+              Prüfen, welcher Agentenfall zuerst passt
+            </h3>
+          </div>
+        </a>
+      </div>
+    </section>
+  </article>
+</Base>
