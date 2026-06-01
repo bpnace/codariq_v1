@@ -14,12 +14,12 @@ const legacyRoutes = [
 ];
 
 const engpassLandingSlugs = [
-  "/terminmappe-vor-dem-gespraech",
-  "/teamwissen-ohne-zuruf",
-  "/anfragen-sauber-einordnen",
-  "/entscheidungen-vorbereiten",
-  "/chef-ueberblick-ohne-nachfragen",
-  "/daten-und-unterlagen-vorsortieren",
+  "/ki-terminvorbereitung",
+  "/ki-wissensmanagement",
+  "/ki-anfragebearbeitung",
+  "/ki-entscheidungsgrundlage",
+  "/ki-management-reporting",
+  "/ki-dokumentenablage",
 ];
 
 export default defineConfig({

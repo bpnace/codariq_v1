@@ -9,7 +9,7 @@ import FAQSchema from "../components/FAQSchema.astro";
 const guardrails = [
   {
     title: "Datenminimierung",
-    text: "Der Agent bekommt nur die Informationen, die er für die Aufgabe wirklich braucht. Alles andere bleibt draußen.",
+    text: "Der Agent bekommt nur die Informationen, die für die Aufgabe nötig sind. Alles andere bleibt draußen.",
   },
   {
     title: "Human-in-the-loop",
@@ -38,7 +38,7 @@ const faqs = [
   {
     question: "Kann ein KI-Agent DSGVO-konform sein?",
     answer:
-      "Ja, aber nicht durch ein einzelnes Tool-Label. Entscheidend sind Zweck, Datenkategorien, Anbieter, Hosting, Auftragsverarbeitung, Zugriffskonzept, Freigaben und Dokumentation des konkreten Ablaufs.",
+      "Ja, aber nicht durch ein einzelnes Tool-Label. Entscheidend sind Zweck, Datenkategorien, Anbieter, Hosting, Auftragsverarbeitung, Zugriffskonzept, Freigaben und Dokumentation des geplanten Ablaufs.",
     category: "Grundlagen",
   },
   {
@@ -68,7 +68,7 @@ const faqs = [
   {
     question: "Welche Daten sollte ein KI-Agent nicht sehen?",
     answer:
-      "Alles, was für den konkreten Zweck nicht nötig ist, bleibt außen vor. Besonders sensible Kategorien, private Notizen, HR-Daten oder Finanzdaten bekommen strengere Zugriffe, getrennte Abläufe oder zusätzliche Prüfung.",
+      "Alles, was für den Zweck nicht nötig ist, bleibt außen vor. Besonders sensible Kategorien, private Notizen, HR-Daten oder Finanzdaten bekommen strengere Zugriffe, getrennte Abläufe oder zusätzliche Prüfung.",
     category: "Datenminimierung",
   },
   {
@@ -115,7 +115,7 @@ const faqs = [
   <FAQSchema faqs={faqs} />
 
   <SeoContentHeroSection
-    title="KI-Agenten DSGVO-konform bauen, ohne Blackbox-Gefühl."
+    title="KI-Agenten DSGVO-konform bauen, mit nachvollziehbaren Datenflüssen."
     subtitle="Wir planen Agenten so, dass Datenflüsse, Zugriffe, Freigaben und menschliche Prüfung von Anfang an nachvollziehbar geregelt sind. Für KMU, die KI nutzen wollen, aber Kontrolle behalten müssen."
     heroImage="/images/hero/hero2.webp"
     primaryCTA="DSGVO-Setup prüfen"
@@ -191,7 +191,7 @@ const faqs = [
             Agenten-Checkliste
           </p>
           <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
-            Diese Fragen prüfen wir, bevor ein Agent produktiv arbeitet.
+            Diese Punkte prüfen wir, bevor ein Agent produktiv arbeitet.
           </h2>
           <p class="text-white/80 text-lg leading-relaxed">
             So wird aus „KI ausprobieren“ ein kontrollierter Ablauf mit Zweck,
@@ -215,7 +215,7 @@ const faqs = [
 
   <LeadCaptureSection
     title="Lass uns deinen Agenten-Datenfluss prüfen."
-    description="Wir prüfen, welche Daten dein Agent wirklich braucht, welche Freigaben sinnvoll sind und ob n8n, OpenClaw oder ein schlankerer Stack passt."
+    description="Wir prüfen, welche Daten dein Agent braucht, welche Freigaben sinnvoll sind und ob n8n, OpenClaw oder ein schlankerer Stack passt."
   />
 
   <FAQ

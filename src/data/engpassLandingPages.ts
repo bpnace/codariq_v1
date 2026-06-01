@@ -1,12 +1,12 @@
 const siteUrl = "https://codariq.de";
 
 export const engpassRoutes = {
-  terminmappe: "/terminmappe-vor-dem-gespraech",
-  teamwissen: "/teamwissen-ohne-zuruf",
-  anfragen: "/anfragen-sauber-einordnen",
-  entscheidungen: "/entscheidungen-vorbereiten",
-  chefUeberblick: "/chef-ueberblick-ohne-nachfragen",
-  unterlagen: "/daten-und-unterlagen-vorsortieren",
+  terminmappe: "/ki-terminvorbereitung",
+  teamwissen: "/ki-wissensmanagement",
+  anfragen: "/ki-anfragebearbeitung",
+  entscheidungen: "/ki-entscheidungsgrundlage",
+  chefUeberblick: "/ki-management-reporting",
+  unterlagen: "/ki-dokumentenablage",
 } as const;
 
 type SeoCard = {
@@ -66,16 +66,16 @@ const buildUrl = (path: string) => `${siteUrl}${path}`;
 
 export const engpassLandingPages: EngpassLandingPage[] = [
   {
-    slug: "terminmappe-vor-dem-gespraech",
+    slug: "ki-terminvorbereitung",
     title:
-      "Terminmappe vor dem Gespräch: KI-Agent für Gesprächsvorbereitung | codariq",
+      "KI-Terminvorbereitung: Kundentermine automatisch vorbereiten | codariq",
     description:
       "KI-Agent für Terminvorbereitung: Mails, Notizen, offene Punkte und Unterlagen zu einer Terminmappe bündeln, mit Quellen, Freigaben und CRM-Übergabe.",
     keywords:
       "Terminmappe KI, KI Gesprächsvorbereitung, Meeting Briefing KI, Kundentermin vorbereiten, KI Agent Postfach, CRM Terminvorbereitung, Unterlagen vor Gespräch bündeln",
-    breadcrumbName: "Terminmappe vor dem Gespräch",
+    breadcrumbName: "KI-Terminvorbereitung",
     breadcrumbUrl: buildUrl(engpassRoutes.terminmappe),
-    heroTitle: "Terminmappe vor dem Gespräch, ohne Sucherei.",
+    heroTitle: "KI-Terminvorbereitung für Kundengespräche",
     heroSubtitle:
       "Ein Agent bündelt letzte Mails, Notizen, offene Punkte und fehlende Unterlagen, damit Kundentermine mit vorbereitetem Kontext starten und nicht mit fünf Suchfenstern.",
     primaryCTA: "Terminmappe prüfen",
@@ -132,8 +132,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         ],
       },
     ],
-    proofTitle:
-      "Eine gute Terminmappe spart Vorbereitung und senkt Rückfragen.",
+    proofTitle: "Gute Terminvorbereitung spart Suchzeit und senkt Rückfragen.",
     proofText:
       "Der Nutzen entsteht durch einen rechtzeitig vorbereiteten Stand, der direkt vor dem Gespräch brauchbar ist.",
     proofItems: [
@@ -165,7 +164,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       {
         href: "/agent-readiness",
         label: "Check",
-        text: "Prüfen, ob ein konkreter Ablauf bereits agentenfähig ist.",
+        text: "Prüfen, ob ein Ablauf bereits agentenfähig ist.",
       },
     ],
     faqs: [
@@ -202,7 +201,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       {
         question: "Wie bleibt das DSGVO-orientiert?",
         answer:
-          "Wir begrenzen Quellen, Datenfelder und Speicherorte. Personenbezogene Informationen werden nur verarbeitet, wenn sie für den konkreten Termin nötig sind.",
+          "Wir begrenzen Quellen, Datenfelder und Speicherorte. Personenbezogene Informationen werden nur verarbeitet, wenn sie für den Termin gebraucht werden.",
         category: "Datenschutz",
       },
       {
@@ -218,27 +217,27 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         category: "Umsetzung",
       },
     ],
-    finalTitle: "Terminvorbereitung als Agenten-Ablauf prüfen",
+    finalTitle: "KI-Terminvorbereitung als Agenten-Ablauf prüfen",
     finalDescription:
-      "Wir schauen auf eine konkrete Terminart und prüfen, welche Quellen, Freigaben und Übergaben für eine nutzbare Terminmappe nötig sind.",
+      "Wir schauen auf eine Terminart und prüfen, welche Quellen, Freigaben und Übergaben für eine nutzbare Terminmappe nötig sind.",
   },
   {
-    slug: "teamwissen-ohne-zuruf",
+    slug: "ki-wissensmanagement",
     title:
-      "Teamwissen ohne Zuruf: KI-Agent für interne Antworten und Quellen | codariq",
+      "KI-Wissensmanagement: interne Antworten mit Quellen finden | codariq",
     description:
       "KI-Agent für Teamwissen: interne Informationen aus Mails, PDFs, Tickets und Notizen auffindbar machen, mit Quellen, Freigaben und kontrolliertem Zugriff.",
     keywords:
       "Teamwissen KI, interner Wissensagent, KI Wissensmanagement, interne Fragen automatisieren, Dokumente durchsuchen KI, KI Agent Teamwissen, Wissen ohne Zuruf",
-    breadcrumbName: "Teamwissen ohne Zuruf",
+    breadcrumbName: "KI-Wissensmanagement",
     breadcrumbUrl: buildUrl(engpassRoutes.teamwissen),
-    heroTitle: "Teamwissen ohne Zuruf auffindbar machen.",
+    heroTitle: "KI-Wissensmanagement für interne Antworten",
     heroSubtitle:
       "Wenn Antworten in Mails, PDFs, Tickets und Köpfen verteilt sind, unterbricht jede Rückfrage den Arbeitstag. Ein Agent sucht in freigegebenen Quellen und nennt den Fundort.",
     primaryCTA: "Wissen bündeln",
     secondaryCTA: "Prozesse prüfen",
     secondaryCTALink: "/ki-integration-prozesse",
-    introEyebrow: "Interner Wissensagent",
+    introEyebrow: "KI-Wissensmanagement",
     introTitle: "Rückfragen sind oft ein Strukturproblem",
     introText:
       "Teamwissen fehlt selten komplett. Es liegt verteilt, veraltet oder schwer auffindbar. Der Agent findet relevante Quellen und bereitet Antwortvorschläge mit Fundort vor.",
@@ -260,11 +259,11 @@ export const engpassLandingPages: EngpassLandingPage[] = [
     processTitle:
       "So wird aus verstreutem Wissen ein kontrollierter Antwortfluss.",
     processText:
-      "Wir verbinden nicht jede Datei. Wir wählen die Quellen, die heute wirklich gesucht werden, und definieren, was der Agent beantworten darf.",
+      "Wir verbinden nicht jede Datei. Wir wählen die Quellen, nach denen dein Team heute sucht, und definieren, was der Agent beantworten darf.",
     steps: [
       {
         title: "Fragearten sammeln",
-        text: "Wir erfassen, welche Fragen heute regelmäßig gestellt werden und welche Quellen dafür wirklich herangezogen werden.",
+        text: "Wir erfassen, welche Fragen heute regelmäßig gestellt werden und welche Quellen dafür zählen.",
         items: [
           "Support-, Projekt- oder Onboarding-Fragen",
           "wiederkehrende Rückfragen aus dem Team",
@@ -292,7 +291,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
     ],
     proofTitle: "Teamwissen wird wertvoll, wenn es im Arbeitsfluss auftaucht.",
     proofText:
-      "Der Agent ersetzt kein sauberes Wissensmanagement. Er macht vorhandene Informationen nutzbar und zeigt, wo Quellen fehlen oder veraltet sind.",
+      "Der Agent ersetzt kein gepflegtes Wissensmanagement. Er macht vorhandene Informationen nutzbar und zeigt, wo Quellen fehlen oder veraltet sind.",
     proofItems: [
       {
         title: "Antworten mit Fundort",
@@ -312,7 +311,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       {
         href: "/ki-integration-prozesse",
         label: "Prozesse",
-        text: "Wie ein Wissensagent sauber in bestehende Abläufe integriert wird.",
+        text: "Wie ein Wissensagent in bestehende Abläufe integriert wird.",
       },
       {
         href: engpassRoutes.chefUeberblick,
@@ -353,7 +352,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       {
         question: "Braucht das Team ein neues Wiki?",
         answer:
-          "Nicht zwingend. Oft starten wir mit vorhandenen Quellen und prüfen erst danach, ob eine bessere Struktur oder ein Wiki wirklich nötig ist.",
+          "Nicht zwingend. Oft starten wir mit vorhandenen Quellen und prüfen erst danach, ob eine bessere Struktur oder ein Wiki gebraucht wird.",
         category: "Tools",
       },
       {
@@ -375,27 +374,27 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         category: "Umsetzung",
       },
     ],
-    finalTitle: "Teamwissen als Agenten-Ablauf prüfen",
+    finalTitle: "KI-Wissensmanagement als Agenten-Ablauf prüfen",
     finalDescription:
       "Wir prüfen, welche Fragen heute Zeit kosten, welche Quellen tragfähig sind und wie ein Wissensagent mit begrenztem Zugriff starten kann.",
   },
   {
-    slug: "anfragen-sauber-einordnen",
+    slug: "ki-anfragebearbeitung",
     title:
-      "Anfragen sauber einordnen: KI-Agent für Leads, Rückrufe und CRM | codariq",
+      "KI-Anfragebearbeitung: Leads, Rückrufe und CRM vorbereiten | codariq",
     description:
       "KI-Agent für die Anfragebearbeitung: neue Anfragen, Leads und Rückrufe einordnen, Firmendaten ergänzen, nächste Handlung vorbereiten und CRM-Freigaben erhalten.",
     keywords:
-      "Anfragen einordnen KI, Leads mit KI einordnen, CRM Agent, Rückruf vorbereiten, Anfrage automatisieren, KI Agent Vertrieb, KI CRM Integration",
-    breadcrumbName: "Anfragen sauber einordnen",
+      "KI Anfragebearbeitung, Leads mit KI einordnen, CRM Agent, Rückruf vorbereiten, Anfrage automatisieren, KI Agent Vertrieb, KI CRM Integration",
+    breadcrumbName: "KI-Anfragebearbeitung",
     breadcrumbUrl: buildUrl(engpassRoutes.anfragen),
-    heroTitle: "Anfragen einordnen, bevor jemand zurückruft.",
+    heroTitle: "KI-Anfragebearbeitung für Leads und Rückrufe",
     heroSubtitle:
       "Neue Anfragen sind selten sofort entscheidungsreif. Ein Agent ergänzt Firma, Kontakt, Kontext und nächste Handlung, bevor Rückruf, Angebot oder CRM-Aufgabe entstehen.",
     primaryCTA: "Anfragen prüfen",
     secondaryCTA: "CRM-Setup ansehen",
     secondaryCTALink: "/crm-und-ki-integration",
-    introEyebrow: "Anfragen einordnen",
+    introEyebrow: "KI-Anfragebearbeitung",
     introTitle: "Der Engpass liegt zwischen Eingang und nächster Handlung",
     introText:
       "Eine Anfrage kommt rein, aber Priorität, Kontext und Zuständigkeit fehlen. Genau dort kann ein Agent vorbereiten, ohne Kundendaten ungeprüft zu verändern.",
@@ -532,21 +531,21 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         category: "Zielgruppe",
       },
     ],
-    finalTitle: "Anfragen einordnen als Agenten-Ablauf prüfen",
+    finalTitle: "KI-Anfragebearbeitung als Agenten-Ablauf prüfen",
     finalDescription:
       "Wir prüfen, welche Anfragen heute nachrecherchiert werden müssen und wie ein Agent die nächste Handlung vorbereiten kann.",
   },
   {
-    slug: "entscheidungen-vorbereiten",
+    slug: "ki-entscheidungsgrundlage",
     title:
-      "Entscheidungen vorbereiten: KI-Agent für Freigaben, Blocker und Risiken | codariq",
+      "KI-Entscheidungsgrundlage: Freigaben und Risiken vorbereiten | codariq",
     description:
       "KI-Agent für Geschäftsführung und Freigaben: offene Entscheidungen, Blocker, Risiken und wichtige Rückmeldungen vorbereiten, ohne operative Details zu überladen.",
     keywords:
-      "Entscheidungen vorbereiten KI, KI Agent Geschäftsführung, Freigaben bündeln, Blocker erkennen KI, Management Briefing KI, Risiken vorbereiten",
-    breadcrumbName: "Entscheidungen vorbereiten",
+      "KI Entscheidungsgrundlage, Entscheidungen vorbereiten KI, KI Agent Geschäftsführung, Freigaben bündeln, Blocker erkennen KI, Management Briefing KI, Risiken vorbereiten",
+    breadcrumbName: "KI-Entscheidungsgrundlage",
     breadcrumbUrl: buildUrl(engpassRoutes.entscheidungen),
-    heroTitle: "Entscheidungen mit vorbereitetem Stand treffen.",
+    heroTitle: "KI-Entscheidungsgrundlage für Freigaben und Risiken",
     heroSubtitle:
       "Für Führung zählt der Stand von Freigaben, blockierten Aufgaben, wichtigen Rückmeldungen und Risiken, die nicht liegen bleiben dürfen.",
     primaryCTA: "Stand vorbereiten",
@@ -595,7 +594,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       },
       {
         title: "Briefing im Alltag testen",
-        text: "Wir prüfen, ob die vorbereiteten Stände wirklich zur Entscheidung reichen oder ob Informationen fehlen.",
+        text: "Wir prüfen, ob die vorbereiteten Stände für eine Entscheidung reichen oder ob Informationen fehlen.",
         items: [
           "reale Freigaben als Testfälle",
           "Review mit Führung oder Owner",
@@ -688,27 +687,27 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         category: "Zielgruppe",
       },
     ],
-    finalTitle: "Entscheidungsbriefing mit Agent prüfen",
+    finalTitle: "KI-Entscheidungsgrundlage mit Agent prüfen",
     finalDescription:
       "Wir schauen auf eine wiederkehrende Freigabe oder Entscheidung und prüfen, welche Quellen und Stopps ein Agent dafür braucht.",
   },
   {
-    slug: "chef-ueberblick-ohne-nachfragen",
+    slug: "ki-management-reporting",
     title:
-      "Chef-Überblick ohne Nachfragen: KI-Agent für Tagesstand und Freigaben | codariq",
+      "KI-Management-Reporting: Tagesüberblick für Geschäftsführung | codariq",
     description:
       "KI-Agent für Geschäftsführung: neue Themen, offene Freigaben, blockierte Aufgaben und wichtige Rückmeldungen als Tagesstand vorbereiten.",
     keywords:
-      "Chef Überblick KI, Tagesbriefing KI, Geschäftsführer Agent, Freigaben bündeln KI, offene Aufgaben KI, Management Übersicht KI",
-    breadcrumbName: "Chef-Überblick ohne Nachfragen",
+      "KI Management Reporting, Tagesbriefing KI, Geschäftsführer Agent, Freigaben bündeln KI, offene Aufgaben KI, Management Übersicht KI, Chef Überblick KI",
+    breadcrumbName: "KI-Management-Reporting",
     breadcrumbUrl: buildUrl(engpassRoutes.chefUeberblick),
-    heroTitle: "Chef-Überblick ohne Nachfragen.",
+    heroTitle: "KI-Management-Reporting für den Tagesüberblick",
     heroSubtitle:
       "Morgens hilft eine kurze Liste: Was ist neu, was hängt, was braucht Freigabe und wo steht eine Entscheidung an?",
     primaryCTA: "Überblick prüfen",
     secondaryCTA: "Stand vorbereiten",
     secondaryCTALink: engpassRoutes.entscheidungen,
-    introEyebrow: "Tagesbriefing",
+    introEyebrow: "Management-Reporting",
     introTitle: "Führung verliert Zeit, wenn Status verteilt bleibt",
     introText:
       "Viele operative Fragen sind nicht strategisch, aber sie blockieren den Tag. Ein Agent kann neue Themen und Hänger bündeln, ohne jeden Detailverlauf in ein Dashboard zu kippen.",
@@ -727,7 +726,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       },
     ],
     processEyebrow: "Vom Tool-Stapel zum Tagesstand",
-    processTitle: "So entsteht ein Überblick, der wirklich gelesen wird.",
+    processTitle: "So entsteht ein Überblick, den Führung morgens nutzt.",
     processText:
       "Wir gestalten kein Kontrollzentrum. Wir definieren die wenigen Signale, die Führung täglich braucht, und halten die Quellen nachvollziehbar.",
     steps: [
@@ -810,7 +809,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
       {
         question: "Wie unterscheidet sich das von einem Dashboard?",
         answer:
-          "Ein Dashboard zeigt Daten. Das Briefing bereitet konkrete Punkte vor, die heute Aufmerksamkeit, Freigabe oder Entscheidung brauchen.",
+          "Ein Dashboard zeigt Daten. Das Briefing bereitet die Punkte vor, die heute Aufmerksamkeit, Freigabe oder Entscheidung brauchen.",
         category: "Einordnung",
       },
       {
@@ -844,21 +843,20 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         category: "Eignung",
       },
     ],
-    finalTitle: "Chef-Überblick als Agenten-Ablauf prüfen",
+    finalTitle: "KI-Management-Reporting als Agenten-Ablauf prüfen",
     finalDescription:
-      "Wir prüfen, welche Signale morgens wirklich zählen und wie ein Agent daraus einen kompakten Tagesstand vorbereiten kann.",
+      "Wir prüfen, welche Signale morgens zählen und wie ein Agent daraus einen kompakten Tagesstand vorbereiten kann.",
   },
   {
-    slug: "daten-und-unterlagen-vorsortieren",
-    title:
-      "Daten und Unterlagen vorsortieren: KI-Agent für Backoffice und Ablage | codariq",
+    slug: "ki-dokumentenablage",
+    title: "KI-Dokumentenablage: Unterlagen und Daten vorsortieren | codariq",
     description:
       "KI-Agent für Backoffice: Listen, Rechnungen, Formulare und Unterlagen vorsortieren, Dubletten finden, fehlende Angaben markieren und Ablage vorbereiten.",
     keywords:
-      "Daten vorsortieren KI, Unterlagen sortieren KI, Backoffice Agent, Rechnungen vorsortieren, Formulare prüfen KI, Ablage automatisieren, Dokumentenverarbeitung KI",
-    breadcrumbName: "Daten und Unterlagen vorsortieren",
+      "KI Dokumentenablage, Daten vorsortieren KI, Unterlagen sortieren KI, Backoffice Agent, Rechnungen vorsortieren, Formulare prüfen KI, Ablage automatisieren, Dokumentenverarbeitung KI",
+    breadcrumbName: "KI-Dokumentenablage",
     breadcrumbUrl: buildUrl(engpassRoutes.unterlagen),
-    heroTitle: "Daten und Unterlagen vorsortieren, bevor Nacharbeit entsteht.",
+    heroTitle: "KI-Dokumentenablage für Unterlagen und Daten",
     heroSubtitle:
       "Listen, Rechnungen und Formulare kommen aus Postfach, Exporten und Ordnern. Ein Agent findet Dubletten, fehlende Angaben und falsche Ablageorte, bevor daraus manuelle Korrektur wird.",
     primaryCTA: "Unterlagen prüfen",
@@ -917,7 +915,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
     ],
     proofTitle: "Gute Vorsortierung reduziert Korrekturschleifen.",
     proofText:
-      "Der Agent soll nicht einfach Dateien verschieben. Er soll fehlende und widersprüchliche Informationen früh genug markieren, damit weniger Nacharbeit entsteht.",
+      "Der Agent soll Dateien nicht blind verschieben. Er soll fehlende und widersprüchliche Informationen früh genug markieren, damit weniger Nacharbeit entsteht.",
     proofItems: [
       {
         title: "Weniger Dubletten",
@@ -1000,7 +998,7 @@ export const engpassLandingPages: EngpassLandingPage[] = [
         category: "Eignung",
       },
     ],
-    finalTitle: "Backoffice-Sortierung mit Agent prüfen",
+    finalTitle: "KI-Dokumentenablage mit Agent prüfen",
     finalDescription:
       "Wir prüfen einen Dokument- oder Datenfluss und zeigen, wo ein Agent vorsortieren, markieren und mit Freigabe übergeben kann.",
   },

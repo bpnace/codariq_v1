@@ -11,7 +11,7 @@ const useCases = [
   {
     title: "Postfach-Agent",
     description:
-      "Sortiert Anfragen, erkennt Dringlichkeit, erstellt Antwortentwürfe und übergibt saubere Aufgaben an CRM, Kalender oder Projekttool.",
+      "Sortiert Anfragen, erkennt Dringlichkeit, erstellt Antwortentwürfe und übergibt Aufgaben mit Kontext an CRM, Kalender oder Projekttool.",
     outcome: "Schneller reagieren, ohne ständig im Postfach zu hängen.",
     icon: "mail",
   },
@@ -34,11 +34,11 @@ const useCases = [
 const buildSteps = [
   {
     title: "Ablauf verstehen",
-    text: "Wir prüfen, welche Aufgabe der Agent übernehmen soll, welche Daten wirklich nötig sind und wo ein Mensch entscheiden muss.",
+    text: "Wir prüfen, welche Aufgabe der Agent übernehmen soll, welche Daten nötig sind und wo ein Mensch entscheiden muss.",
   },
   {
     title: "Agenten-Grenzen definieren",
-    text: "Der Agent bekommt feste Rollen, erlaubte Aktionen, Freigaben und Abbruchpunkte. So entsteht kein Blackbox-System.",
+    text: "Der Agent bekommt feste Rollen, erlaubte Aktionen, Freigaben und Abbruchpunkte. So entsteht kein unkontrollierter Ablauf.",
   },
   {
     title: "n8n oder Agenten-Stack bauen",
@@ -128,7 +128,7 @@ const faqs = [
   <FAQSchema faqs={faqs} />
 
   <SeoContentHeroSection
-    title="KI-Agenten für KMU, die wirklich Aufgaben übernehmen."
+    title="KI-Agenten für KMU, die Arbeit im Betrieb übernehmen."
     subtitle="Wir bauen kontrollierbare Agenten für Postfach, Backoffice, Support, Wissen und Reporting. Vom schlanken n8n-Workflow bis zum stabilen Agenten-Setup mit Freigaben, Rollen und DSGVO-konformer Datenführung."
     heroImage="/images/hero/hero2.webp"
     primaryCTA="Agenten-Grenzen prüfen"
@@ -142,9 +142,9 @@ const faqs = [
       <div class="text-center mb-10 sm:mb-12">
         <h2 class="section-title mb-3 sm:mb-4">Für wen das passt</h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Diese Seite ist für KMU, die bereits wiederkehrende Arbeit in
-          Postfach, Support, CRM oder Backoffice haben und KI nicht als Demo,
-          sondern als begrenzten Arbeitsablauf einsetzen wollen.
+          Diese Seite ist für KMU mit wiederkehrender Arbeit in Postfach,
+          Support, CRM oder Backoffice. KI soll dort keinen Demo-Effekt liefern,
+          sondern einen begrenzten Arbeitsablauf tragen.
         </p>
       </div>
 
@@ -197,7 +197,7 @@ const faqs = [
         <p class="section-subtitle max-w-3xl mx-auto">
           Viele KMU starten mit Automatisierung, merken aber schnell: Feste
           Regeln reichen nicht, wenn E-Mails, Dokumente oder Kundenanfragen
-          jedes Mal leicht anders aussehen. Genau dort lohnt sich ein KI-Agent.
+            jedes Mal leicht anders aussehen. Dort lohnt sich ein KI-Agent.
         </p>
       </div>
 
@@ -234,7 +234,7 @@ const faqs = [
   </section>
 
   <UseCaseCardsSection
-    title="KI-Agenten, die KMU wirklich nutzen"
+    title="KI-Agenten, die im KMU-Alltag genutzt werden"
     subtitle="Drei Einstiege, die häufig schnell Orientierung geben: Postfach, Backoffice und internes Wissen."
     useCases={useCases}
   />
@@ -323,12 +323,11 @@ const faqs = [
             Architektur statt Tool-Wildwuchs
           </p>
           <h2 class="text-3xl sm:text-4xl font-black leading-tight mb-4">
-            Erst n8n, dann Agenten-Infrastruktur, wenn sie wirklich gebraucht
-            wird.
+            Erst n8n, dann Agenten-Infrastruktur, wenn der Betrieb sie braucht.
           </h2>
           <p class="text-white/80 text-lg leading-relaxed">
             Nicht jedes KMU braucht sofort ein großes OpenClaw-Setup. Oft reicht
-            ein sauberer n8n-Agent als erster produktiver Schritt. Wenn mehrere
+            ein begrenzter n8n-Agent als erster produktiver Schritt. Wenn mehrere
             Kanäle, Tools, Erinnerungen, Rollen und dauerhafter Betrieb
             dazukommen, planen wir den Ausbau bewusst.
           </p>
@@ -360,8 +359,8 @@ const faqs = [
   </section>
 
   <LeadCaptureSection
-    title="Lass uns deinen ersten KI-Agenten sauber eingrenzen."
-    description="In 30 Minuten finden wir heraus, welcher Agent wirklich hilft, welche Daten er braucht und ob ein n8n-Workflow reicht oder ein größerer Agenten-Stack sinnvoll ist."
+    title="Lass uns deinen ersten KI-Agenten eingrenzen."
+    description="In 30 Minuten finden wir heraus, welcher Agent Arbeit spart, welche Daten er braucht und ob ein n8n-Workflow reicht oder ein größerer Agenten-Stack sinnvoll ist."
   />
 
   <FAQ

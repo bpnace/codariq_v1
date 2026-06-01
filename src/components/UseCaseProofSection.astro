@@ -24,32 +24,32 @@ export interface Props {
 }
 
 const {
-  title = "Wo Agenten Teams wirklich entlasten können",
-  subtitle = "Zwei anonymisierte Rückmeldungen und konkrete Einsatzpunkte für Teams, Geschäftsführung und Selbstständige. Relevant wird ein Agent dort, wo Büroarbeit jeden Tag liegen bleibt.",
+  title = "Wo Agenten Teams Arbeit abnehmen",
+  subtitle = "Zwei anonymisierte Rückmeldungen und Einsatzpunkte für Teams, Geschäftsführung und Selbstständige. Relevant wird ein Agent dort, wo Büroarbeit jeden Tag liegen bleibt.",
   items = [
     {
       kind: "feedback",
       body: '"Vor Terminen war bei uns immer die gleiche Sucherei... Letzte Mail, offene Punkte, fehlende Unterlagen. Wenn das vorher als kurze Zusammenfassung bereit liegt, gehen wir deutlich ruhiger ins Gespräch."',
-      heading: "Terminmappe vor dem Gespräch",
+      heading: "KI-Terminvorbereitung",
       context: "Mails, Notizen, offene Punkte",
       label: "Rückmeldung von Kunden",
       results: { metric: "Termin", improvement: "strukturiert geplant" },
-      link: { href: engpassRoutes.terminmappe, label: "Terminmappe prüfen" },
+      link: { href: engpassRoutes.terminmappe, label: "Termine vorbereiten" },
       featured: true,
     },
     {
       kind: "useCase",
       body: "Wenn Informationen in Mails, PDFs, Tickets und Köpfen verteilt sind, unterbricht jede Rückfrage den Arbeitstag. Der Agent sucht in freigegebenen Quellen, nennt den Fundort und bereitet eine ausführliche Antwort vor.",
-      heading: "Teamwissen ohne Zuruf",
+      heading: "KI-Wissensmanagement",
       context: "Mails, PDFs, Tickets, Übergaben",
       label: "Nutzen für Teams",
-      results: { metric: "Antwort", improvement: "sauber erfasst" },
+      results: { metric: "Antwort", improvement: "mit Quelle erfasst" },
       link: { href: engpassRoutes.teamwissen, label: "Wissen bündeln" },
     },
     {
       kind: "useCase",
       body: "Neue Anfragen sind selten sofort entscheidungsreif. Der Agent ergänzt Firmendaten, bisherigen Kontakt, offene Fragen und eine nächste Handlung, bevor jemand zurückruft oder ein Angebot schreibt.",
-      heading: "Anfragen sauber einordnen",
+      heading: "KI-Anfragebearbeitung",
       context: "Firma, Kontakt, nächste Handlung",
       label: "Nutzen für Selbstständige",
       results: { metric: "Anfrage", improvement: "ergänzt" },
@@ -58,7 +58,7 @@ const {
     {
       kind: "useCase",
       body: "Für die Geschäftsführung zählt der Stand von offenen Freigaben, blockierten Aufgaben, wichtigen Rückmeldungen und Risiken, die nicht bis Freitag liegen bleiben dürfen.",
-      heading: "Entscheidungen mit vorbereitetem Stand",
+      heading: "KI-Entscheidungsgrundlage",
       context: "Freigaben, Blocker, Risiken",
       label: "Nutzen für Geschäftsführung",
       results: { metric: "Stand", improvement: "immer sichtbar" },
@@ -70,7 +70,7 @@ const {
     {
       kind: "feedback",
       body: '"Ich brauche morgens eine kurze Liste: was neu ist, was hängt, was ich freigeben muss und wo eine Entscheidung ansteht. Dann kann ich direkt loslegen."',
-      heading: "Chef-Überblick ohne Nachfragen",
+      heading: "KI-Management-Reporting",
       context: "Freigaben, Rückfragen, offene Aufgaben",
       label: "Rückmeldung von Kunden",
       results: { metric: "Überblick", improvement: "vorbereitet" },
@@ -79,11 +79,11 @@ const {
     {
       kind: "useCase",
       body: "Listen, Rechnungen und Formulare kommen aus Postfach, Exporten und Ordnern. Der Agent findet Dubletten, fehlende Angaben und falsche Ablageorte, bevor daraus Nacharbeit wird.",
-      heading: "Daten und Unterlagen vorsortieren",
+      heading: "KI-Dokumentenablage",
       context: "Listen, Rechnungen, Ablage",
       label: "Nutzen für Backoffice",
       results: { metric: "Ablage", improvement: "logisch sortiert" },
-      link: { href: engpassRoutes.unterlagen, label: "Unterlagen prüfen" },
+      link: { href: engpassRoutes.unterlagen, label: "Ablage prüfen" },
     },
   ],
 } = Astro.props;
@@ -152,7 +152,7 @@ const {
       <div>
         <strong>Kommt dir einer davon bekannt vor?</strong>
         <p>
-          Wir schauen auf einen konkreten Prozess und prüfen, ob ein Agent dort
+          Wir schauen auf einen Arbeitsablauf und prüfen, ob ein Agent dort
           vorbereiten, sortieren oder mit Freigabe handeln sollte.
         </p>
       </div>

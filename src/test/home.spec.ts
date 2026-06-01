@@ -130,28 +130,28 @@ test("home keeps contextual landing-page links on matching proof cards", async (
 
   expect(linkTargets).toEqual([
     {
-      href: "/terminmappe-vor-dem-gespraech",
-      text: expect.stringContaining("Terminmappe vor dem Gespräch"),
+      href: "/ki-terminvorbereitung",
+      text: expect.stringContaining("KI-Terminvorbereitung"),
     },
     {
-      href: "/teamwissen-ohne-zuruf",
-      text: expect.stringContaining("Teamwissen ohne Zuruf"),
+      href: "/ki-wissensmanagement",
+      text: expect.stringContaining("KI-Wissensmanagement"),
     },
     {
-      href: "/anfragen-sauber-einordnen",
-      text: expect.stringContaining("Anfragen sauber einordnen"),
+      href: "/ki-anfragebearbeitung",
+      text: expect.stringContaining("KI-Anfragebearbeitung"),
     },
     {
-      href: "/entscheidungen-vorbereiten",
-      text: expect.stringContaining("Entscheidungen mit vorbereitetem Stand"),
+      href: "/ki-entscheidungsgrundlage",
+      text: expect.stringContaining("KI-Entscheidungsgrundlage"),
     },
     {
-      href: "/chef-ueberblick-ohne-nachfragen",
-      text: expect.stringContaining("Chef-Überblick ohne Nachfragen"),
+      href: "/ki-management-reporting",
+      text: expect.stringContaining("KI-Management-Reporting"),
     },
     {
-      href: "/daten-und-unterlagen-vorsortieren",
-      text: expect.stringContaining("Daten und Unterlagen vorsortieren"),
+      href: "/ki-dokumentenablage",
+      text: expect.stringContaining("KI-Dokumentenablage"),
     },
   ]);
   expect(
@@ -166,50 +166,50 @@ test("home keeps contextual landing-page links on matching proof cards", async (
   await expect(
     section
       .locator(".proof-card")
-      .filter({ hasText: "Terminmappe vor dem Gespräch" })
+      .filter({ hasText: "KI-Terminvorbereitung" })
       .first(),
-  ).toHaveAttribute("href", "/terminmappe-vor-dem-gespraech");
+  ).toHaveAttribute("href", "/ki-terminvorbereitung");
   await expect(
     section
       .locator(".proof-card")
-      .filter({ hasText: "Teamwissen ohne Zuruf" })
+      .filter({ hasText: "KI-Wissensmanagement" })
       .first(),
-  ).toHaveAttribute("href", "/teamwissen-ohne-zuruf");
+  ).toHaveAttribute("href", "/ki-wissensmanagement");
   await expect(
     section
       .locator(".proof-card")
-      .filter({ hasText: "Anfragen sauber einordnen" })
+      .filter({ hasText: "KI-Anfragebearbeitung" })
       .first(),
-  ).toHaveAttribute("href", "/anfragen-sauber-einordnen");
+  ).toHaveAttribute("href", "/ki-anfragebearbeitung");
   await expect(
     section
       .locator(".proof-card")
-      .filter({ hasText: "Entscheidungen mit vorbereitetem Stand" })
+      .filter({ hasText: "KI-Entscheidungsgrundlage" })
       .first(),
-  ).toHaveAttribute("href", "/entscheidungen-vorbereiten");
+  ).toHaveAttribute("href", "/ki-entscheidungsgrundlage");
   await expect(
     section
       .locator(".proof-card")
-      .filter({ hasText: "Chef-Überblick ohne Nachfragen" })
+      .filter({ hasText: "KI-Management-Reporting" })
       .first(),
-  ).toHaveAttribute("href", "/chef-ueberblick-ohne-nachfragen");
+  ).toHaveAttribute("href", "/ki-management-reporting");
   await expect(
     section
       .locator(".proof-card")
-      .filter({ hasText: "Daten und Unterlagen vorsortieren" })
+      .filter({ hasText: "KI-Dokumentenablage" })
       .first(),
-  ).toHaveAttribute("href", "/daten-und-unterlagen-vorsortieren");
+  ).toHaveAttribute("href", "/ki-dokumentenablage");
 
   await expect(section.locator(".proof-card__link")).toHaveCount(0);
 
   const teamCard = section
     .locator(".proof-card")
-    .filter({ hasText: "Teamwissen ohne Zuruf" })
+    .filter({ hasText: "KI-Wissensmanagement" })
     .first();
   await teamCard.scrollIntoViewIfNeeded();
   const previousHomeScrollY = await page.evaluate(() => window.scrollY);
   await teamCard.click();
-  await expect(page).toHaveURL(/\/teamwissen-ohne-zuruf$/);
+  await expect(page).toHaveURL(/\/ki-wissensmanagement$/);
   await page.goBack({ waitUntil: "domcontentloaded" });
   await expect(page).toHaveURL(/\/$/);
   await page.waitForFunction(
@@ -718,7 +718,7 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   await section.scrollIntoViewIfNeeded();
   await expect(
     section.getByRole("heading", {
-      name: "Wo Agenten Teams wirklich entlasten können",
+      name: "Wo Agenten Teams Arbeit abnehmen",
     }),
   ).toBeVisible();
   await expect(
@@ -733,18 +733,16 @@ test("testimonials mix two feedback quotes with team use cases", async ({
     "Nutzen für Backoffice",
   ]);
   await expect(section.locator(".proof-card__meta strong")).toHaveText([
-    "Terminmappe vor dem Gespräch",
-    "Teamwissen ohne Zuruf",
-    "Anfragen sauber einordnen",
-    "Entscheidungen mit vorbereitetem Stand",
-    "Chef-Überblick ohne Nachfragen",
-    "Daten und Unterlagen vorsortieren",
+    "KI-Terminvorbereitung",
+    "KI-Wissensmanagement",
+    "KI-Anfragebearbeitung",
+    "KI-Entscheidungsgrundlage",
+    "KI-Management-Reporting",
+    "KI-Dokumentenablage",
   ]);
-  await expect(section.getByText("Terminmappe vor dem Gespräch")).toBeVisible();
-  await expect(section.getByText("Anfragen sauber einordnen")).toBeVisible();
-  await expect(
-    section.getByText("Daten und Unterlagen vorsortieren"),
-  ).toBeVisible();
+  await expect(section.getByText("KI-Terminvorbereitung")).toBeVisible();
+  await expect(section.getByText("KI-Anfragebearbeitung")).toBeVisible();
+  await expect(section.getByText("KI-Dokumentenablage")).toBeVisible();
 
   await expect(section.locator(".proof-card__body")).toHaveCount(6);
   await expect(section.locator('[data-proof-kind="feedback"]')).toHaveCount(2);

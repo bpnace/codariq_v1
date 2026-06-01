@@ -6,51 +6,52 @@ const HUMANIZER_METADATA_PATTERN =
 
 const pages = [
   {
-    path: "/terminmappe-vor-dem-gespraech",
-    title: /Terminmappe vor dem Gespräch/,
-    heading: "Terminmappe vor dem Gespräch, ohne Sucherei.",
+    path: "/ki-terminvorbereitung",
+    title: /KI-Terminvorbereitung/,
+    heading: "KI-Terminvorbereitung für Kundengespräche",
     minimumFaqs: 8,
   },
   {
-    path: "/teamwissen-ohne-zuruf",
-    title: /Teamwissen ohne Zuruf/,
-    heading: "Teamwissen ohne Zuruf auffindbar machen.",
+    path: "/ki-wissensmanagement",
+    title: /KI-Wissensmanagement/,
+    heading: "KI-Wissensmanagement für interne Antworten",
     minimumFaqs: 8,
   },
   {
-    path: "/anfragen-sauber-einordnen",
-    title: /Anfragen sauber einordnen/,
-    heading: "Anfragen einordnen, bevor jemand zurückruft.",
+    path: "/ki-anfragebearbeitung",
+    title: /KI-Anfragebearbeitung/,
+    heading: "KI-Anfragebearbeitung für Leads und Rückrufe",
     minimumFaqs: 8,
   },
   {
-    path: "/entscheidungen-vorbereiten",
-    title: /Entscheidungen vorbereiten/,
-    heading: "Entscheidungen mit vorbereitetem Stand treffen.",
+    path: "/ki-entscheidungsgrundlage",
+    title: /KI-Entscheidungsgrundlage/,
+    heading: "KI-Entscheidungsgrundlage für Freigaben und Risiken",
     minimumFaqs: 8,
   },
   {
-    path: "/chef-ueberblick-ohne-nachfragen",
-    title: /Chef-Überblick ohne Nachfragen/,
-    heading: "Chef-Überblick ohne Nachfragen.",
+    path: "/ki-management-reporting",
+    title: /KI-Management-Reporting/,
+    heading: "KI-Management-Reporting für den Tagesüberblick",
     minimumFaqs: 8,
   },
   {
-    path: "/daten-und-unterlagen-vorsortieren",
-    title: /Daten und Unterlagen vorsortieren/,
-    heading: "Daten und Unterlagen vorsortieren, bevor Nacharbeit entsteht.",
+    path: "/ki-dokumentenablage",
+    title: /KI-Dokumentenablage/,
+    heading: "KI-Dokumentenablage für Unterlagen und Daten",
     minimumFaqs: 8,
   },
   {
     path: "/ki-agenten-kmu",
     title: /KI-Agenten für KMU/,
-    heading: "KI-Agenten für KMU, die wirklich Aufgaben übernehmen.",
+    heading: "KI-Agenten für KMU, die Arbeit im Betrieb übernehmen.",
     minimumFaqs: 10,
   },
   {
     path: "/dsgvo-ki-agenten",
     title: /DSGVO-orientierte KI-Agenten/,
-    heading: "KI-Agenten DSGVO-konform bauen, ohne Blackbox-Gefühl.",
+    heading:
+      "KI-Agenten DSGVO-konform bauen, mit nachvollziehbaren Datenflüssen.",
     minimumFaqs: 10,
   },
   {
@@ -93,7 +94,8 @@ const pages = [
   {
     path: "/ki-agenten-kleine-teams",
     title: /KI-Agenten für kleine Teams/,
-    heading: "KI-Agenten für kleine Teams, die Übergaben sauber vorbereiten",
+    heading:
+      "KI-Agenten für kleine Teams, die Übergaben mit Kontext vorbereiten",
     minimumFaqs: 12,
   },
 ];
