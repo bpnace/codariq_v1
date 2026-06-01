@@ -63,7 +63,7 @@ test("quiz flow completes and shows results", async ({ page }) => {
     expect.arrayContaining([
       expect.objectContaining({
         id: "q1_task_area",
-        question: "Wo frisst Arbeit gerade am meisten Zeit?",
+        question: "Welcher Ablauf frisst gerade am meisten Zeit?",
       }),
       expect.objectContaining({
         id: "q4_data_systems",
@@ -104,7 +104,9 @@ test("quiz answers use svg icons and keep data-system step compact", async ({
   const options = page.locator("#quiz-options button");
   const optionIcons = page.locator("#quiz-options .quiz-option-icon svg");
 
-  await expect(question).toHaveText("Wo frisst Arbeit gerade am meisten Zeit?");
+  await expect(question).toHaveText(
+    "Welcher Ablauf frisst gerade am meisten Zeit?",
+  );
   await expect(optionIcons).toHaveCount(6);
   await options.first().click();
   await next.click();
@@ -140,7 +142,9 @@ test("quiz answers use svg icons and keep data-system step compact", async ({
   await options.first().click();
   await next.click();
 
-  await expect(question).toHaveText("Wie nutzt ihr KI heute schon?");
+  await expect(question).toHaveText(
+    "Wie ist eure heutige KI-Nutzung geregelt?",
+  );
   await expect(optionIcons).toHaveCount(5);
   await options.first().click();
   await next.click();
@@ -155,7 +159,7 @@ test("desktop quiz surface is wider and more readable", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/agent-readiness");
   await expect(page.locator("#quiz-question")).toHaveText(
-    "Wo frisst Arbeit gerade am meisten Zeit?",
+    "Welcher Ablauf frisst gerade am meisten Zeit?",
   );
   await expect(page.locator(".quiz-option-text").first()).toBeVisible();
 

@@ -199,7 +199,7 @@ export function calculateResults(answers: QuizAnswers): QuizResults {
   const roiEstimate = Math.round(timeSavingsPotential * 55 * 4);
 
   let level = "Orientierung";
-  let outcomeTitle = "Noch kein klarer Agentenfall";
+  let outcomeTitle = "Noch kein belastbarer Agentenfall";
   let outcomeSummary =
     "Der Ablauf muss zuerst genauer gefasst werden, bevor ein Agent sinnvoll geplant werden kann.";
   let nextStep = "Aufgabenraum finden";
@@ -208,7 +208,7 @@ export function calculateResults(answers: QuizAnswers): QuizResults {
     level = "Prüfen";
     outcomeTitle = "Erst Risiko- und Datencheck";
     outcomeSummary =
-      "Potenzial ist erkennbar, aber Daten, Freigaben und heutige KI-Nutzung müssen vor einem Agenten sauber geprüft werden.";
+      "Potenzial ist erkennbar, aber Daten, Freigaben und heutiger Tool-Rahmen müssen vor einem Agenten geprüft werden.";
     nextStep = "Ablauf-Audit";
   } else if (agentReliefScore >= 78 && kiNeedScore >= 70) {
     level = "Agent lohnt sich";
@@ -226,7 +226,7 @@ export function calculateResults(answers: QuizAnswers): QuizResults {
     level = "Workflow";
     outcomeTitle = "Automatisierung sinnvoll, Agent später";
     outcomeSummary =
-      "Der Ablauf bremst, aber ein klarer Workflow kann wahrscheinlich mehr helfen als sofort ein eigenständiger Agent.";
+      "Der Ablauf bremst, aber ein begrenzter Workflow kann wahrscheinlich mehr helfen als sofort ein eigenständiger Agent.";
     nextStep = "Workflow prüfen";
   }
 
@@ -361,7 +361,7 @@ function generateRecommendations(
     recommendations.push({
       title: "Erst den richtigen Aufgabenraum finden",
       description:
-        "Wenn der stärkste Hebel noch unklar ist, lohnt sich eine kurze Prozessprüfung vor Tool- oder Agentenentscheidungen.",
+        "Wenn der stärkste Hebel noch offen ist, lohnt sich eine kurze Prozessprüfung vor Tool- oder Agentenentscheidungen.",
       icon: "Scope",
       priority: 9,
     });
@@ -371,7 +371,7 @@ function generateRecommendations(
     recommendations.push({
       title: "Freigaben festlegen, bevor der Agent in Tools schreibt",
       description:
-        "Sobald ein Agent Daten ändert oder Aktionen vorbereitet, braucht er Rollen, Stopps, Protokolle und klare Zuständigkeiten.",
+        "Sobald ein Agent Daten ändert oder Aktionen vorbereitet, braucht er Rollen, Stopps, Protokolle und benannte Zuständigkeiten.",
       icon: "Rules",
       priority: 8,
     });
@@ -385,7 +385,7 @@ function generateRecommendations(
     recommendations.push({
       title: "DSGVO- und EU-AI-Act-Vorprüfung einplanen",
       description:
-        "Bei Kunden-, Finanz-, Vertrags- oder Personaldaten muss vor dem Betrieb geklärt werden, wer was verarbeitet und kontrolliert.",
+        "Bei Kunden-, Finanz-, Vertrags- oder Personaldaten muss vor dem Betrieb festgelegt werden, wer was verarbeitet und kontrolliert.",
       icon: "Law",
       priority: 9,
     });
@@ -393,9 +393,9 @@ function generateRecommendations(
 
   if (aiUse === "employees_free" || aiUse === "rules_no_review") {
     recommendations.push({
-      title: "Bestehende KI-Nutzung sauber einhegen",
+      title: "Bestehende KI-Nutzung in einen festen Rahmen bringen",
       description:
-        "Wenn Mitarbeitende KI bereits nutzen, sollten Tools, Datenarten, Freigaben und Nachweise zuerst geordnet werden.",
+        "Wenn Mitarbeitende bereits KI-Tools nutzen, sollten Tools, Datenarten, Freigaben und Nachweise zuerst geordnet werden.",
       icon: "AI",
       priority: 8,
     });
@@ -405,7 +405,7 @@ function generateRecommendations(
     recommendations.push({
       title: "Ersten Testagenten begrenzt aufsetzen",
       description:
-        "Starte mit einem kleinen Ablauf, echten Beispielen, klarer Freigabe und einem Protokoll der Entscheidungen.",
+        "Starte mit einem kleinen Ablauf, echten Beispielen, verbindlicher Freigabe und einem Protokoll der Entscheidungen.",
       icon: "Test",
       priority: 8,
     });
@@ -413,9 +413,9 @@ function generateRecommendations(
 
   if (recommendations.length === 0 || context.totalScore < 45) {
     recommendations.push({
-      title: "KI-Bedarf zuerst sauber einordnen",
+      title: "Agentenbedarf zuerst einordnen",
       description:
-        "Der nächste Schritt ist keine Tool-Auswahl, sondern ein klarer Blick auf Aufwand, Wiederholung, Daten und Entscheidungspunkte.",
+        "Der nächste Schritt ist keine Tool-Auswahl, sondern eine Prüfung von Aufwand, Wiederholung, Daten und Entscheidungspunkten.",
       icon: "Check",
       priority: 7,
     });

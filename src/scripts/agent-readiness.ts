@@ -166,9 +166,9 @@ const init = () => {
   > = [
     {
       id: "q1_task_area",
-      question: "Wo frisst Arbeit gerade am meisten Zeit?",
+      question: "Welcher Ablauf frisst gerade am meisten Zeit?",
       subtitle:
-        "Wähle den Bereich, bei dem du zuerst prüfen willst, ob KI oder ein Agent wirklich entlasten kann.",
+        "Wähle den Bereich, bei dem du zuerst prüfen willst, ob ein begrenzter Agenten-Workflow wirklich entlasten kann.",
       type: "icon_options",
       options: [
         {
@@ -198,7 +198,7 @@ const init = () => {
         },
         {
           icon: "question",
-          text: "Noch unklar. Ich will den passenden Aufgabenraum finden",
+          text: "Noch offen. Ich will den passenden Aufgabenraum finden",
           value: "unclear",
         },
       ],
@@ -302,31 +302,31 @@ const init = () => {
     },
     {
       id: "q5_current_ai_use",
-      question: "Wie nutzt ihr KI heute schon?",
+      question: "Wie ist eure heutige KI-Nutzung geregelt?",
       subtitle:
-        "Optional, aber hilfreich für die Einschätzung, ob DSGVO- und EU-AI-Act-Themen schon sauber angelegt sind.",
+        "Optional, aber hilfreich für die Einschätzung, ob Tools, Datenarten und Freigaben schon belastbar geregelt sind.",
       type: "icon_options",
       optional: true,
       options: [
-        { icon: "none", text: "Noch gar nicht", value: "none" },
+        { icon: "none", text: "Noch nicht produktiv", value: "none" },
         {
           icon: "free",
-          text: "Einzelne Mitarbeitende nutzen Tools frei",
+          text: "Einzelne nutzen Tools ohne festen Rahmen",
           value: "employees_free",
         },
         {
           icon: "rules",
-          text: "Es gibt Regeln, aber noch keine Prüfung",
+          text: "Regeln existieren, werden aber nicht geprüft",
           value: "rules_no_review",
         },
         {
           icon: "tools",
-          text: "Feste Tools, AVV oder interne Standards sind vorhanden",
+          text: "Freigegebene Tools, AVV und Standards sind vorhanden",
           value: "approved_tools",
         },
         {
           icon: "logs",
-          text: "Produktive KI-Prozesse haben Freigaben und Protokolle",
+          text: "Produktive Agenten- oder KI-Prozesse haben Freigaben und Protokolle",
           value: "logged_processes",
         },
       ],
@@ -357,7 +357,7 @@ const init = () => {
         },
         {
           icon: "rules",
-          text: "Saubere KI-Regeln und Freigaben",
+          text: "Regeln und Freigaben festlegen",
           value: "clean_rules",
         },
         {
@@ -380,9 +380,9 @@ const init = () => {
   ];
 
   const progressMessages: Array<{ at: number; text: string }> = [
-    { at: 35, text: "Aufgabenraum steht." },
-    { at: 60, text: "Daten- und Freigaberahmen wird klarer." },
-    { at: 86, text: "Nur noch E-Mail für die Auswertung." },
+    { at: 35, text: "Aufgabenraum eingegrenzt." },
+    { at: 60, text: "Daten und Freigaben eingeordnet." },
+    { at: 86, text: "Auswertung vorbereiten." },
   ];
 
   const steps: QuizStep[] = [...quizQuestions, ...captureSteps];
@@ -441,8 +441,29 @@ const init = () => {
     elements.hint.textContent = message || "";
   }
 
+  function hasAnswerForStep(step: QuizStep | undefined) {
+    if (!step) return false;
+    if (step.type === "multiple_choice") {
+      const values = state.answers[step.id];
+      return Array.isArray(values) && values.length > 0;
+    }
+    if (step.type === "contact_capture" || step.type === "name_capture") {
+      return false;
+    }
+    return Boolean(state.answers[step.id]);
+  }
+
+  function getCompletedQuestionCount() {
+    return quizQuestions.reduce((count, step, index) => {
+      const wasPassedOrSkipped = index < state.currentStep;
+      return wasPassedOrSkipped || hasAnswerForStep(step) ? count + 1 : count;
+    }, 0);
+  }
+
   function updateProgress() {
-    const percent = Math.round(((state.currentStep + 1) / totalSteps) * 100);
+    const percent = Math.round(
+      (getCompletedQuestionCount() / quizQuestions.length) * 100,
+    );
     const current = steps[state.currentStep];
     elements.stepLabel.textContent =
       current?.type === "contact_capture"
@@ -861,7 +882,7 @@ const init = () => {
       "Automatisierungspotenzial prüfen": {
         title: "Automatisierungspotenzial prüfen",
         description:
-          "Starte mit einem klaren Blick auf Prozesse, Daten, Tool-Stack, Risiken und sinnvolle erste Aufgabenräume.",
+          "Starte mit einer Prüfung von Prozessen, Daten, Tool-Stack, Risiken und sinnvollen ersten Aufgabenräumen.",
         icon: "Ready",
       },
       "Agenten-Workflow entwickeln": {
@@ -943,9 +964,9 @@ const init = () => {
         results.outcomeSummary,
         "Der wichtigste Punkt ist gerade:",
         topRecommendation,
-        `In dem Ablauf stecken grob ${results.timeSavingsPotential} Stunden pro Woche, die ein sauber begrenzter Workflow oder Agent vorbereiten, sortieren oder nach Freigabe abarbeiten könnte.`,
-        "Für eine belastbare Entscheidung prüfen wir den Arbeitsbereich in der Tiefe: Aufgaben, Datenquellen, Entscheidungspunkte, Freigaben, Risiken und erste Testfälle. Danach weißt du, ob KI wirklich gebraucht wird, wo ein Agent Arbeit abnehmen darf und was vor dem Betrieb geklärt werden muss.",
-        "Diese Einschätzung ersetzt keine Rechtsberatung. Datenschutz, EU AI Act, Kontrolle und saubere Übergaben gehören aber von Anfang an in die Prüfung.",
+        `In dem Ablauf stecken grob ${results.timeSavingsPotential} Stunden pro Woche, die ein eng begrenzter Workflow oder Agent vorbereiten, sortieren oder nach Freigabe abarbeiten könnte.`,
+        "Für eine belastbare Entscheidung prüfen wir den Arbeitsbereich in der Tiefe: Aufgaben, Datenquellen, Entscheidungspunkte, Freigaben, Risiken und erste Testfälle. Danach weißt du, ob ein Agent wirklich gebraucht wird, wo er Arbeit abnehmen darf und was vor dem Betrieb festgelegt werden muss.",
+        "Diese Einschätzung ersetzt keine Rechtsberatung. Datenschutz, EU AI Act, Kontrolle und geregelte Übergaben gehören aber von Anfang an in die Prüfung.",
         `Leistungen ansehen: ${servicesUrl}`,
         `Termin buchen: ${bookingUrl}`,
         `FAQ öffnen: ${faqUrl}`,

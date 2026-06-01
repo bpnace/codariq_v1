@@ -69,7 +69,7 @@ describe("calculateResults", () => {
 
     expect(results.automationPotential).toBe(44);
     expect(results.level).toBe("Orientierung");
-    expect(results.outcomeTitle).toBe("Noch kein klarer Agentenfall");
+    expect(results.outcomeTitle).toBe("Noch kein belastbarer Agentenfall");
     expect(results.timeSavingsPotential).toBe(1);
     expect(results.roiEstimate).toBe(220);
     expect(results.productFit).toBe("orientation");

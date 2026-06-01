@@ -13,6 +13,10 @@ export interface Props {
       metric: string;
       improvement: string;
     };
+    link?: {
+      href: string;
+      label: string;
+    };
     featured?: boolean;
   }>;
 }
@@ -37,6 +41,7 @@ const {
       context: "Mails, PDFs, Tickets, Übergaben",
       label: "Nutzen für Teams",
       results: { metric: "Antwort", improvement: "sauber erfasst" },
+      link: { href: "/ki-integration-prozesse", label: "Prozesse prüfen" },
     },
     {
       kind: "useCase",
@@ -45,6 +50,7 @@ const {
       context: "Firma, Kontakt, nächste Handlung",
       label: "Nutzen für Selbstständige",
       results: { metric: "Anfrage", improvement: "ergänzt" },
+      link: { href: "/crm-und-ki-integration", label: "CRM-Setup ansehen" },
     },
     {
       kind: "useCase",
@@ -53,6 +59,7 @@ const {
       context: "Freigaben, Blocker, Risiken",
       label: "Nutzen für Geschäftsführung",
       results: { metric: "Stand", improvement: "immer sichtbar" },
+      link: { href: "/ki-projekt-retten", label: "Projekt retten" },
     },
     {
       kind: "feedback",
@@ -106,6 +113,11 @@ const {
                 <span>{item.results.improvement}</span>
               </div>
             )}
+            {item.link && (
+              <a class="proof-card__link" href={item.link.href}>
+                {item.link.label}
+              </a>
+            )}
           </article>
         ))
       }
@@ -119,7 +131,9 @@ const {
           vorbereiten, sortieren oder mit Freigabe handeln sollte.
         </p>
       </div>
-      <a href="#final-cta">Jetzt Projekt anfragen</a>
+      <a class="proof-suite__primary" href="#final-cta">
+        Jetzt Projekt anfragen
+      </a>
     </div>
   </div>
 </section>
@@ -212,6 +226,37 @@ const {
     font-weight: 850;
   }
 
+  .proof-card__link {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.15rem;
+    margin-top: 0.85rem;
+    padding: 0.48rem 0.68rem;
+    border: 1px solid rgba(15, 118, 110, 0.22);
+    border-radius: 999px;
+    background: rgba(20, 184, 166, 0.08);
+    color: #0f766e;
+    font-size: 0.82rem;
+    font-weight: 880;
+    transition:
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .proof-card__link:hover {
+    border-color: rgba(15, 118, 110, 0.4);
+    background: rgba(20, 184, 166, 0.14);
+    color: #0b4f49;
+  }
+
+  .proof-card__link:focus-visible {
+    outline: 3px solid rgba(20, 184, 166, 0.34);
+    outline-offset: 3px;
+  }
+
   .proof-suite__cta {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -238,7 +283,7 @@ const {
     line-height: 1.45;
   }
 
-  .proof-suite__cta a {
+  .proof-suite__primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;

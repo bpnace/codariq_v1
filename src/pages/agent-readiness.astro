@@ -4,9 +4,9 @@ import path from "node:path";
 import Base from "../layouts/Base.astro";
 
 const pageTitle =
-  "codariq KI-Check: KI-Integration, Agentenpotenzial und Prüfbedarf";
+  "codariq Agenten-Check: Agentenpotenzial, Daten und Prüfbedarf";
 const pageDescription =
-  "Prüfe in sechs Fragen, ob KI-Integration oder ein KI-Agent für E-Mail, Dokumente, CRM, Reporting oder Backoffice sinnvoll ist und welche DSGVO- oder EU-AI-Act-Fragen vorher geklärt werden müssen.";
+  "Prüfe in sechs Fragen, welcher wiederkehrende Ablauf für einen kontrollierten Agenten geeignet ist, welche Daten betroffen sind und welche DSGVO- oder EU-AI-Act-Fragen vorher geregelt werden müssen.";
 const pageKeywords =
   "KI Integration, KI-Integration, KI Integration bestehende Systeme, KI Integration Prozesse, CRM Integration mit bestehenden Tools, Agenteninitiativen priorisieren, KI Agenten Check, KI Agenten KMU";
 const quizEntry = path.resolve(process.cwd(), "src/scripts/agent-readiness.ts");
@@ -38,10 +38,13 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
       <div class="agent-check-compact enterprise-reveal">
         <div>
           <p class="agent-check-kicker">Codariq KI-Check</p>
-          <h1 id="agent-check-title">Braucht dein Unternehmen dafür KI?</h1>
+          <h1 id="agent-check-title">
+            Welcher Ablauf braucht zuerst einen Agenten?
+          </h1>
           <p>
-            Sechs kurze Fragen zu Ablauf, Wiederholung, Daten und heutiger
-            KI-Nutzung. Danach bekommst du eine erste Einschätzung per E-Mail.
+            Sechs kurze Fragen zu Arbeitsstau, Wiederholung, Daten, Freigaben
+            und heutigem Tool-Rahmen. Danach bekommst du eine erste
+            Einschätzung per E-Mail.
           </p>
         </div>
         <div class="agent-check-facts" aria-label="Checkumfang">
@@ -68,7 +71,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
               </div>
               <div class="quiz-progress-row">
                 <span class="quiz-progress-percent" id="quiz-progress-percent"
-                  >8%</span
+                  >0%</span
                 >
                 <span class="quiz-progress-message" id="quiz-progress-message"
                 ></span>
@@ -127,7 +130,7 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
 
           <div class="quiz-result-grid">
             <div class="quiz-result-metric">
-              <p>KI-Bedarf</p>
+              <p>Agentenpotenzial</p>
               <strong id="result-potential">0%</strong>
             </div>
             <div class="quiz-result-metric">
@@ -212,9 +215,9 @@ const quizScript = quizBundle.outputFiles[0]?.text ?? "";
           <article class="quiz-seo-card">
             <h3>Welcher nächste Schritt realistisch ist</h3>
             <p>
-              Das Ergebnis benennt KI-Bedarf, mögliche Entlastung pro Woche und
-              Prüfbedarf, damit aus einer Idee ein begrenzter Agenten-Workflow
-              mit Rollen, Freigaben und Protokollen wird.
+              Das Ergebnis benennt Agentenpotenzial, mögliche Entlastung pro
+              Woche und Prüfbedarf, damit aus einer Idee ein begrenzter
+              Agenten-Workflow mit Rollen, Freigaben und Protokollen wird.
             </p>
           </article>
         </div>

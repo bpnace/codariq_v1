@@ -92,17 +92,25 @@ test("trust badges render visible inline icons", async ({ page }) => {
   ).toBe(true);
 });
 
-test("seo entry section uses explicit landing-page CTAs", async ({ page }) => {
+test("home keeps contextual landing-page links on matching proof cards", async ({
+  page,
+}) => {
   await page.goto("/");
 
-  const section = page.locator("#seo-einstiege");
+  await expect(page.locator("#seo-einstiege")).toHaveCount(0);
+
+  const section = page.locator("#testimonials");
   await section.scrollIntoViewIfNeeded();
   await expect(section).toBeVisible();
+  await expect(
+    section.getByText("Typische Engpässe", { exact: true }),
+  ).toBeVisible();
 
-  const links = section.locator("a");
-  await expect(links).toHaveCount(3);
+  await expect(section.locator("[data-contextual-entry-links]")).toHaveCount(0);
 
-  const linkTargets = await links.evaluateAll((anchors) =>
+  const cardLinks = section.locator(".proof-card__link");
+  await expect(cardLinks).toHaveCount(3);
+  const linkTargets = await cardLinks.evaluateAll((anchors) =>
     anchors.map((anchor) => ({
       href: anchor.getAttribute("href"),
       text: anchor.textContent?.trim(),
@@ -110,7 +118,7 @@ test("seo entry section uses explicit landing-page CTAs", async ({ page }) => {
   );
 
   expect(linkTargets).toEqual([
-    { href: "/ki-integration-prozesse", text: "Prozess prüfen" },
+    { href: "/ki-integration-prozesse", text: "Prozesse prüfen" },
     { href: "/crm-und-ki-integration", text: "CRM-Setup ansehen" },
     { href: "/ki-projekt-retten", text: "Projekt retten" },
   ]);
@@ -118,19 +126,31 @@ test("seo entry section uses explicit landing-page CTAs", async ({ page }) => {
     linkTargets.every((target) => !target.href?.startsWith("/blog/")),
   ).toBe(true);
 
-  const firstCard = section.locator(".intent-entry__card").first();
-  const firstCardBox = await firstCard.boundingBox();
-  if (!firstCardBox) {
-    throw new Error("SEO entry card was not measurable.");
-  }
+  await expect(
+    section.getByRole("link", { name: "Jetzt Projekt anfragen" }),
+  ).toHaveAttribute("href", "#final-cta");
+  await expect(section.locator(".proof-suite__cta a")).toHaveCount(1);
 
-  await page.mouse.click(
-    firstCardBox.x + firstCardBox.width / 2,
-    firstCardBox.y + firstCardBox.height / 2,
-  );
-  await expect(page).toHaveURL(/\/$/);
+  await expect(
+    section
+      .locator(".proof-card")
+      .filter({ hasText: "Teamwissen ohne Zuruf" })
+      .getByRole("link", { name: "Prozesse prüfen" }),
+  ).toHaveAttribute("href", "/ki-integration-prozesse");
+  await expect(
+    section
+      .locator(".proof-card")
+      .filter({ hasText: "Anfragen sauber einordnen" })
+      .getByRole("link", { name: "CRM-Setup ansehen" }),
+  ).toHaveAttribute("href", "/crm-und-ki-integration");
+  await expect(
+    section
+      .locator(".proof-card")
+      .filter({ hasText: "Entscheidungen mit vorbereitetem Stand" })
+      .getByRole("link", { name: "Projekt retten" }),
+  ).toHaveAttribute("href", "/ki-projekt-retten");
 
-  const firstCta = section.getByRole("link", { name: "Prozess prüfen" });
+  const firstCta = section.getByRole("link", { name: "Prozesse prüfen" });
   await firstCta.scrollIntoViewIfNeeded();
   await firstCta.click();
   await expect(page).toHaveURL(/\/ki-integration-prozesse$/);
@@ -680,8 +700,10 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   ).toHaveLength(2);
 
   await expect(
-    section.getByRole("link", { name: "Fall Prüfen" }),
-  ).toBeVisible();
+    section.getByRole("link", { name: "Jetzt Projekt anfragen" }),
+  ).toHaveAttribute("href", "#final-cta");
+  await expect(section.locator("[data-contextual-entry-links]")).toHaveCount(0);
+  await expect(section.locator(".proof-card__link")).toHaveCount(3);
   await expect(section.locator(".proof-card")).toHaveCount(6);
   await expect(section.getByText("Triage")).toHaveCount(0);
   await expect(section.getByText("Scope")).toHaveCount(0);

@@ -3,7 +3,43 @@ import { expect, test } from "@playwright/test";
 test("quiz starts at question 1", async ({ page }) => {
   await page.goto("/agent-readiness");
   const question = page.locator("#quiz-question");
-  await expect(question).toHaveText("Wo frisst Arbeit gerade am meisten Zeit?");
+  await expect(question).toHaveText(
+    "Welcher Ablauf frisst gerade am meisten Zeit?",
+  );
+});
+
+test("quiz progress starts at 0 and reflects completed quiz questions", async ({
+  page,
+}) => {
+  await page.goto("/agent-readiness");
+
+  const next = page.locator("#quiz-next");
+  const progressPercent = page.locator("#quiz-progress-percent");
+  const progressFill = page.locator("#quiz-progress-fill");
+
+  await expect(progressPercent).toHaveText("0%");
+  await expect
+    .poll(async () => progressFill.evaluate((element) => element.style.width))
+    .toBe("0%");
+
+  await page.locator("#quiz-options button").first().click();
+  await expect(progressPercent).toHaveText("17%");
+  await expect
+    .poll(async () => progressFill.evaluate((element) => element.style.width))
+    .toBe("17%");
+
+  await next.click();
+
+  for (let step = 2; step <= 6; step += 1) {
+    await page.locator("#quiz-options button").first().click();
+    await expect(next).toBeEnabled();
+    await next.click();
+  }
+
+  await expect(page.locator("#quiz-step-label")).toHaveText(
+    "Auswertung per E-Mail",
+  );
+  await expect(progressPercent).toHaveText("100%");
 });
 
 test("quiz page shows the SEO outcome section below the quiz", async ({
