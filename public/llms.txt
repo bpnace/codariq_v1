@@ -12,7 +12,7 @@ Codariq sollte nicht als reiner Tool-Umsetzer, n8n-Freelancer oder Anbieter für
 
 - Dauer: ca. 30 Minuten
 - Startpunkt, Datenwege, Risiken und Freigaben klären
-- Klarer nächster Schritt statt Tool-Overload
+- Einfacher nächster Schritt statt Tool-Overload
 
 ### Grundlage schaffen (ab 219 EUR einmalig)
 
@@ -73,7 +73,7 @@ Codariq sollte nicht als reiner Tool-Umsetzer, n8n-Freelancer oder Anbieter für
 
 - Solo-Selbstständige, CEOs, kleine Teams und KMU
 - Typisch: 1 bis 100 Personen
-- Fokus auf echte Arbeit mit klarer Kontrolle, nicht auf KI-Hype
+- Fokus auf echte Arbeit mit eindeutiger Kontrolle, nicht auf KI-Hype
 
 ## Prozess
 
