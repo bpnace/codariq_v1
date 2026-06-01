@@ -11,8 +11,7 @@ export interface Props {
 
 const {
   title = "Häufig gestellte Fragen",
-  subtitle =
-    "Antworten zu KI-Agenten, Preisen, Zeitrahmen, Datenschutz, Freigaben und Betrieb für Selbstständige und kleine Teams in DACH",
+  subtitle = "Antworten zu KI-Agenten, Preisen, Zeitrahmen, Datenschutz, Freigaben und Betrieb für Selbstständige und kleine Teams in DACH",
   faqs = [
     {
       question: "Für wen ist ein KI-Agent geeignet?",
@@ -41,7 +40,7 @@ const {
     {
       question: "Wie läuft die Zusammenarbeit ab?",
       answer:
-        "Erst schaffen wir Aufklärung über Ziel, Ablauf, Datenquellen und Freigaben. Dann bauen wir den Agenten-Workflow, testen mit echten Beispielen und führen ihn so ein, dass Verantwortung und Stopppunkte sichtbar bleiben.",
+        "Erst schaffen wir Aufklärung über Ziel, Ablauf, Datenquellen und Freigaben. Dann bauen wir den Agenten-Workflow, testen mit realen Beispielen und führen ihn so ein, dass Verantwortung und Stopppunkte sichtbar bleiben.",
       category: "Ablauf",
     },
     {
@@ -113,69 +112,75 @@ const groupedFAQs: Record<string, typeof faqs> =
         return acc;
       }, {})
     : { Allgemein: faqs };
+
+const faqColumnBreak = Math.ceil(faqs.length / 2);
+const faqColumns = [faqs.slice(0, faqColumnBreak), faqs.slice(faqColumnBreak)];
 ---
 
 <section id="faq" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
   <div class="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
     <!-- Section Header -->
     <div class="text-center mb-8 sm:mb-12 lg:mb-16 animate-slide-up">
-      <h2
-        class="section-title mb-3 sm:mb-4"
-      >
+      <h2 class="section-title mb-3 sm:mb-4">
         {title}
       </h2>
-      <p
-        class="section-subtitle max-w-3xl mx-auto"
-      >
+      <p class="section-subtitle max-w-3xl mx-auto">
         {subtitle}
       </p>
     </div>
 
-    <!-- FAQ Accordion - Two Column Layout -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
-    >
+    <div class="faq-columns max-w-6xl mx-auto">
       {
-        faqs.map((faq, index) => (
-          <div
-            class="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-200 group mb-2 animate-fade-in-up"
-            style={`animation-delay: ${index * 50}ms`}
-          >
-            <details class="group/details">
-              <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer list-none hover:bg-gray-50 transition-colors duration-200">
-                <div class="flex-1 pr-3 sm:pr-4">
-                  <h3 class="text-sm sm:text-base font-black text-gray-900 group-hover/details:text-gray-700 transition-colors leading-tight">
-                    {faq.question}
-                  </h3>
-                </div>
+        faqColumns.map((columnFaqs, columnIndex) => (
+          <div class="faq-column" data-faq-column={columnIndex + 1}>
+            {columnFaqs.map((faq, columnItemIndex) => {
+              const index =
+                columnIndex === 0
+                  ? columnItemIndex
+                  : faqColumnBreak + columnItemIndex;
 
-                {/* Toggle Icon */}
-                <div class="flex-shrink-0 ml-3 sm:ml-4">
-                  <svg
-                    class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover/details:text-gray-600 transition-all duration-200 transform group-open/details:rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </summary>
+              return (
+                <div
+                  class="faq-item bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-200 group animate-fade-in-up"
+                  data-faq-item
+                  style={`animation-delay: ${index * 50}ms`}
+                >
+                  <details class="group/details">
+                    <summary class="flex items-center justify-between p-3 sm:p-4 cursor-pointer list-none hover:bg-gray-50 transition-colors duration-200">
+                      <div class="flex-1 pr-3 sm:pr-4">
+                        <h3 class="text-sm sm:text-base font-black text-gray-900 group-hover/details:text-gray-700 transition-colors leading-tight">
+                          {faq.question}
+                        </h3>
+                      </div>
 
-              {/* Answer Content */}
-              <div class="px-3 sm:px-4 pb-3 sm:pb-4">
-                <div class="pt-2 sm:pt-3 border-t border-gray-100">
-                  <p class="text-gray-600 leading-relaxed text-xs sm:text-sm">
-                    {faq.answer}
-                  </p>
+                      <div class="flex-shrink-0 ml-3 sm:ml-4">
+                        <svg
+                          class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover/details:text-gray-600 transition-all duration-200 transform group-open/details:rotate-180"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </div>
+                    </summary>
+
+                    <div class="px-3 sm:px-4 pb-3 sm:pb-4">
+                      <div class="pt-2 sm:pt-3 border-t border-gray-100">
+                        <p class="text-gray-600 leading-relaxed text-xs sm:text-sm">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </details>
                 </div>
-              </div>
-            </details>
+              );
+            })}
           </div>
         ))
       }
@@ -218,6 +223,31 @@ const groupedFAQs: Record<string, typeof faqs> =
 </section>
 
 <style>
+  .faq-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .faq-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-self: start;
+  }
+
+  @media (min-width: 768px) {
+    .faq-columns {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(1.25rem, 2vw, 2rem);
+    }
+
+    .faq-column {
+      gap: 1rem;
+    }
+  }
+
   /* Enhanced styling for details/summary */
   details[open] summary {
     border-bottom: 1px solid #e5e7eb;

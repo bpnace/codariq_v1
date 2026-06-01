@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import LandingHeroSection from "../components/LandingHeroSection.astro";
+import SeoContentHeroSection from "../components/SeoContentHeroSection.astro";
 import UseCaseCardsSection from "../components/UseCaseCardsSection.astro";
 import FAQ from "../components/FAQ.astro";
 import LeadCaptureSection from "../components/LeadCaptureSection.astro";
@@ -49,11 +49,11 @@ const processSteps = [
     number: 2,
     title: "Automatisierung aufsetzen",
     description:
-      "Wir bauen den Ablauf, verbinden deine Tools und testen mit echten Fällen aus deinem Alltag.",
+      "Wir bauen den Ablauf, verbinden deine Tools und testen mit realen Fällen aus deinem Alltag.",
     details: [
       "Automatisierung mit Regeln",
       "KI versteht Kontext und macht Vorschläge",
-      "Tests mit echten Anfragen und Dokumenten",
+      "Tests mit realen Anfragen und Dokumenten",
       "Feinschliff für Sonderfälle",
     ],
     duration: "1 bis 3 Wochen",
@@ -83,7 +83,7 @@ const faqs = [
   {
     question: "Welche Tools lassen sich verbinden?",
     answer:
-      "Workflows folgen festen Regeln. KI Agenten verstehen zusätzlich den Kontext, machen Vorschläge und bereiten Aufgaben über mehrere Tools hinweg vor, immer innerhalb fester Grenzen und mit Freigaben, wenn es sinnvoll ist.",
+      "Typisch sind E-Mail, Kalender, Drive oder OneDrive, CRM, Buchhaltung, Angebots-Tools, Formulare und Projekttools. Wir verbinden nur die Systeme, die für deinen ersten Ablauf wirklich gebraucht werden.",
   },
   {
     question: "Wie schnell sehe ich erste Entlastung?",
@@ -93,7 +93,7 @@ const faqs = [
   {
     question: "Wie läuft die Umsetzung ab?",
     answer:
-      "Erst definieren wir den Startpunkt, dann bauen wir den Ablauf, testen mit echten Fällen und führen ihn gemeinsam ein. Du bekommst eine kurze, verständliche Übergabe.",
+      "Erst definieren wir den Startpunkt, dann bauen wir den Ablauf, testen mit realen Fällen und führen ihn gemeinsam ein. Du bekommst eine kurze, verständliche Übergabe.",
   },
   {
     question: "Wie bleibt das DSGVO-konform?",
@@ -105,13 +105,43 @@ const faqs = [
     answer:
       "Nein. Du lieferst nur Kontext und Beispiele, wir übernehmen den Rest. Am Ende verstehst du den Ablauf und kannst ihn selbst steuern.",
   },
+  {
+    question: "Kann ein KI-Agent mein Postfach vorsortieren?",
+    answer:
+      "Ja. Der Agent kann Anfragen erkennen, Dringlichkeit markieren, Antwortentwürfe vorbereiten und Aufgaben an CRM, Kalender oder Projekttool übergeben. Versand oder sensible Aussagen bleiben bei dir.",
+  },
+  {
+    question: "Hilft ein Agent bei Angeboten und Rechnungen?",
+    answer:
+      "Er kann Informationen sammeln, Dokumente vorbereiten, Belege benennen, Rechnungsdaten extrahieren und Sonderfälle markieren. Alles, was rechtlich oder finanziell wirkt, bekommt einen Freigabepunkt.",
+  },
+  {
+    question: "Was ist besser: kleiner Workflow oder kompletter KI-Assistent?",
+    answer:
+      "Für Selbstständige ist ein begrenzter Workflow meistens der bessere Start. Erst wenn ein Ablauf zuverlässig läuft, erweitern wir ihn auf weitere Aufgaben oder verbinden zusätzliche Tools.",
+  },
+  {
+    question: "Kann ich den Agenten später erweitern?",
+    answer:
+      "Ja. Wir bauen den ersten Ablauf so, dass weitere Schritte anschließen können: Follow-ups, Dokumente, CRM-Pflege, Terminabstimmung oder Reporting. Erweiterung passiert nach Nutzungsdaten, nicht nach Bauchgefühl.",
+  },
+  {
+    question: "Wie verhindere ich, dass KI falsche Antworten verschickt?",
+    answer:
+      "Externe Nachrichten laufen im Entwurfs- oder Freigabemodus. Der Agent darf vorbereiten, aber nicht blind senden. Zusätzlich arbeiten wir mit Quellen, Regeln und Stopps für unsichere Fälle.",
+  },
+  {
+    question: "Lohnt sich das auch bei wenig Anfragevolumen?",
+    answer:
+      "Ja, wenn die Arbeit regelmäßig stört oder Folgeaufgaben erzeugt. Bei sehr niedrigem Volumen starten wir kleiner und prüfen, ob ein Check, eine Vorlage oder ein einfacher Workflow reicht.",
+  },
 ];
 ---
 
 <Base
   title="KI-Agenten für Selbstständige: Postfach, Backoffice und Freigaben | codariq"
   description="Kontrollierbare KI-Agenten für Selbstständige: Postfach sortieren, Follow-ups vorbereiten, Dokumente übergeben und kritische Aktionen sauber freigeben."
-  keywords="KI Agenten für Selbstständige, kontrollierbare KI Agenten, Postfach sortieren, Backoffice Agent, E Mail Triage, Follow ups vorbereiten, Angebote vorbereiten, Rechnungen verarbeiten, Freigaben KI Agent"
+  keywords="KI Agenten für Selbstständige, kontrollierbare KI Agenten, Postfach sortieren, Backoffice Agent, E-Mail sortieren, Follow ups vorbereiten, Angebote vorbereiten, Rechnungen verarbeiten, Freigaben KI Agent"
   ogImage="/images/hero/hero2.webp"
 >
   <BreadcrumbSchema
@@ -124,7 +154,7 @@ const faqs = [
   />
   <FAQSchema faqs={faqs} />
 
-  <LandingHeroSection
+  <SeoContentHeroSection
     title="KI-Agenten für Selbstständige, die vorarbeiten statt alles zu übernehmen"
     subtitle="Postfach, Follow-ups und Backoffice fressen den Tag. Wir bauen Agenten, die sortieren, vorbereiten und anhalten, wenn eine Freigabe oder Entscheidung nötig ist."
     heroImage="/images/hero/hero2.webp"
@@ -172,7 +202,8 @@ const faqs = [
           </h3>
           <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
             <li>
-              Der Ablauf bekommt verlässliche Datenquellen und Verantwortlichkeiten
+              Der Ablauf bekommt verlässliche Datenquellen und
+              Verantwortlichkeiten
             </li>
             <li>Freigaben werden dort eingebaut, wo etwas nach außen wirkt</li>
             <li>Sonderfälle werden markiert statt blind ausgeführt</li>
@@ -184,8 +215,8 @@ const faqs = [
       <p
         class="text-sm sm:text-base font-semibold text-gray-700 text-center mt-6"
       >
-        Ziel ist nicht mehr Tools, sondern weniger Handarbeit, damit du mehr
-        Zeit für Kunden und Umsatz hast.
+        Ziel ist weniger Handarbeit, damit du mehr Zeit für Kunden und Umsatz
+        hast.
       </p>
     </div>
   </section>
@@ -295,8 +326,8 @@ const faqs = [
                 class="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-brand-light)] flex-shrink-0"
               ></span>
               <span
-                >Ausnahmen: wenn etwas nicht eindeutig ist, wird es markiert statt blind
-                ausgeführt</span
+                >Ausnahmen: wenn etwas nicht eindeutig ist, wird es markiert
+                statt blind ausgeführt</span
               >
             </li>
           </ul>

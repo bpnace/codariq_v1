@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import LandingHeroSection from "../components/LandingHeroSection.astro";
+import SeoContentHeroSection from "../components/SeoContentHeroSection.astro";
 import UseCaseCardsSection from "../components/UseCaseCardsSection.astro";
 import FAQ from "../components/FAQ.astro";
 import LeadCaptureSection from "../components/LeadCaptureSection.astro";
@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Welche Aufgaben lohnen sich für Gründer als erstes?",
     answer:
-      "Alles, was jede Woche wiederkommt: Angebote, Rechnungen, Belegablage, Postfach Triage, Follow ups, Status Updates und Übergaben zwischen Tools. Wir starten dort, wo du sofort Zeit zurückgewinnst.",
+      "Alles, was jede Woche wiederkommt: Angebote, Rechnungen, Belegablage, Postfach sortieren, Follow-ups, Status-Updates und Übergaben zwischen Tools. Wir starten dort, wo du sofort Zeit zurückgewinnst.",
   },
   {
     question:
@@ -103,7 +103,37 @@ const faqs = [
   {
     question: "Was kostet das und wie läuft der Start?",
     answer:
-      "Du bekommst vorab einen konkreten Fahrplan mit Dauer, Startpreis und Erfolgskriterien. Dann bauen wir den Ablauf, testen mit echten Fällen und führen ihn sauber ein.",
+      "Du bekommst vorab einen konkreten Fahrplan mit Dauer, Startpreis und Erfolgskriterien. Dann bauen wir den Ablauf, testen mit realen Fällen und führen ihn sauber ein.",
+  },
+  {
+    question: "Kann ein KI-Agent Gründer beim Sales-Prozess entlasten?",
+    answer:
+      "Ja, besonders bei Leads, Follow-ups, Gesprächsnotizen, CRM-Aufgaben und Angebotsvorbereitung. Der Agent bereitet vor, damit du schneller reagieren kannst, ohne Kundendaten unkontrolliert zu ändern.",
+  },
+  {
+    question: "Was ist der beste erste Use Case für ein Startup?",
+    answer:
+      "Der beste Startpunkt ist ein wiederkehrender Ablauf, der Wachstum bremst: Postfach, Angebote, Rechnungen, Investor-Updates, Onboarding, Support oder Tool-Übergaben. Wir wählen den Fall mit spürbarer Nacharbeit.",
+  },
+  {
+    question: "Wie passt ein Agent zu einem frühen MVP?",
+    answer:
+      "Ein Agent sollte kein Produkt-Feature ersetzen, sondern operative Arbeit abfangen. Gerade beim MVP hilft ein begrenzter interner Workflow, damit Feedback, Leads und Support nicht liegen bleiben.",
+  },
+  {
+    question: "Kann das Setup mit dem Team wachsen?",
+    answer:
+      "Ja. Wir starten mit einem engen Aufgabenraum und erweitern erst, wenn Datenfluss, Freigaben und Nutzung stabil sind. So wächst der Agent mit Prozessen, Rollen und Tool-Stack mit.",
+  },
+  {
+    question: "Wie schützt ihr sensible Gründer- und Kundendaten?",
+    answer:
+      "Wir begrenzen Zugriffe, trennen Datenquellen, dokumentieren Anbieter und bauen Freigaben ein. Besonders bei Investorendaten, Finanzen, HR oder Kundendaten wird der Agent bewusst enger geführt.",
+  },
+  {
+    question: "Müssen wir schon einen perfekten Prozess haben?",
+    answer:
+      "Nein. Wir brauchen Beispiele und einen Zielzustand. Wenn der Prozess noch wächst, schneiden wir den ersten Agenten kleiner und halten manuelle Prüfung dort, wo Verantwortung oder Kundenwirkung entsteht.",
   },
 ];
 ---
@@ -111,7 +141,7 @@ const faqs = [
 <Base
   title="KI-Agenten für Gründer: Backoffice, Übergaben und feste Grenzen | codariq"
   description="Kontrollierbare KI-Agenten für Gründer: Postfach, Dokumente, Angebote, Rechnungen und Tool-Übergaben vorbereiten, ohne Datenwege und Freigaben zu verwischen."
-  keywords="KI Agenten für Gründer, kontrollierbare KI Agenten Startup, Backoffice Agent, Inbox Triage, Angebote vorbereiten, Rechnungen verarbeiten, Dokumente organisieren, Freigaben KI Agent"
+  keywords="KI Agenten für Gründer, kontrollierbare KI Agenten Startup, Backoffice Agent, Postfach sortieren, Angebote vorbereiten, Rechnungen verarbeiten, Dokumente organisieren, Freigaben KI Agent"
   ogImage="/images/hero/hero2.webp"
 >
   <BreadcrumbSchema
@@ -124,7 +154,7 @@ const faqs = [
   />
   <FAQSchema faqs={faqs} />
 
-  <LandingHeroSection
+  <SeoContentHeroSection
     title="KI-Agenten für Gründer, damit Admin nicht den Tag führt"
     subtitle="Du willst bauen und verkaufen, aber Postfach, Dokumente und Übergaben ziehen dich raus. Wir bauen Agenten, die vorbereiten, sortieren und stoppen, wenn Verantwortung oder Freigabe nötig ist."
     heroImage="/images/hero/hero2.webp"
@@ -185,8 +215,8 @@ const faqs = [
       <p
         class="text-sm sm:text-base font-semibold text-gray-700 text-center mt-6"
       >
-        Ziel ist nicht mehr Tools, sondern weniger Handarbeit durch saubere
-        Übergaben.
+        Ziel ist weniger Handarbeit durch saubere Übergaben, ohne ein weiteres
+        Tool zu pflegen.
       </p>
     </div>
   </section>
@@ -272,8 +302,8 @@ const faqs = [
           <p
             class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed"
           >
-            Hosting in der EU ist möglich, inklusive AVV und dokumentierter Regelung der
-            Auftragsverarbeitung.
+            Hosting in der EU ist möglich, inklusive AVV und dokumentierter
+            Regelung der Auftragsverarbeitung.
           </p>
         </div>
         <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">

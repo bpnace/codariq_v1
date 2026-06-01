@@ -26,6 +26,30 @@ const faqs = [
       "Für einen ersten Schnellcheck reichen oft Beispiele, Fehlermuster, Zielzustand und ein Blick auf den aktuellen Ablauf. Danach lässt sich besser einschätzen, ob Remediation oder Neubau sinnvoll ist.",
     category: "Ablauf",
   },
+  {
+    question: "Woran erkennt man ein gescheitertes KI-Projekt?",
+    answer:
+      "Typische Signale sind Demo-Ergebnisse ohne Alltagsnutzen, fehlende Quellen, unzuverlässige Übergaben, zu großer Scope, niemand im Betrieb und Nutzer, die wieder auf manuelle Arbeit zurückfallen.",
+    category: "Einordnung",
+  },
+  {
+    question: "Was bedeutet KI-Remediation konkret?",
+    answer:
+      "KI-Remediation heißt: Ursache finden, Ablauf kleiner schneiden, Daten und Prompts reparieren, Übergaben stabilisieren und Betrieb festlegen. Es ist kein weiterer Feature-Ausbau, sondern ein Reparaturpfad.",
+    category: "Remediation",
+  },
+  {
+    question: "Wann sollte ein KI-Projekt gestoppt werden?",
+    answer:
+      "Ein Stopp ist sinnvoll, wenn der Nutzen nicht messbar ist, Datenquellen fehlen, Risiken zu hoch sind oder der Ablauf keine wiederkehrende Arbeit löst. Dann ist eine bewusst kleinere Version besser als weiteres Budget.",
+    category: "Entscheidung",
+  },
+  {
+    question: "Welche Unterlagen helfen beim Projekt-Audit?",
+    answer:
+      "Hilfreich sind Beispielausgaben, Fehlermuster, Prompts, Datenquellen, aktuelle Workflows, Zielbild, Nutzerfeedback und Angaben dazu, wo heute manuell nachgearbeitet wird.",
+    category: "Audit",
+  },
 ];
 ---
 
@@ -46,7 +70,7 @@ const faqs = [
   cards={[
     {
       title: "Demo läuft, Alltag nicht",
-      text: "Der Ablauf funktioniert mit perfekten Beispielen, bricht aber bei echten Fällen, Sonderfällen oder wechselnden Daten ab.",
+      text: "Der Ablauf funktioniert mit perfekten Beispielen, bricht aber bei realen Fällen, Sonderfällen oder wechselnden Daten ab.",
     },
     {
       title: "Niemand vertraut dem Ergebnis",

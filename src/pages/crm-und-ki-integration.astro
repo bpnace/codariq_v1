@@ -26,6 +26,30 @@ const faqs = [
       "Wenn mehrere Tools, Kanäle, Rollen und Datenflüsse dauerhaft zusammenspielen müssen. Für einen einzelnen CRM-Ablauf reicht oft ein kleinerer Agenten-Workflow.",
     category: "Architektur",
   },
+  {
+    question: "Wie verhindert ihr Datenchaos im CRM?",
+    answer:
+      "Wir definieren führende Felder, Dublettenregeln, Schreibrechte und Prüfpunkte. Der Agent schlägt Updates vor, dokumentiert Quellen und schreibt nur dort, wo Regeln und Freigaben passen.",
+    category: "Datenqualität",
+  },
+  {
+    question: "Kann KI Leads im CRM priorisieren?",
+    answer:
+      "Ja, wenn Kriterien und Quellen benannt sind. Der Agent kann Anfragen nach Relevanz, Dringlichkeit, Segment oder Umsatzbezug sortieren und daraus Aufgaben oder Follow-up-Entwürfe vorbereiten.",
+    category: "Use Cases",
+  },
+  {
+    question: "Wie verbindet ihr CRM, E-Mail und Kalender?",
+    answer:
+      "Wir prüfen Schnittstellen, Berechtigungen und den führenden Datensatz. Danach verbinden wir nur die Schritte, die für den Ablauf nötig sind: Eingang erkennen, Kontext ergänzen, Aufgabe vorbereiten, Freigabe einholen.",
+    category: "Integration",
+  },
+  {
+    question: "Was passiert bei sensiblen Kundeninformationen?",
+    answer:
+      "Sensible Informationen bekommen engere Zugriffe, weniger Automatik und mehr Prüfung. Änderungen an Kundendaten, externe Nachrichten oder Eskalationen laufen im Vorschlagsmodus, bevor etwas im CRM landet.",
+    category: "Datenschutz",
+  },
 ];
 ---
 
@@ -45,7 +69,7 @@ const faqs = [
   introText="KI darf Arbeit vorbereiten, aber dein CRM muss die verlässliche Quelle bleiben. Deshalb planen wir Datenfelder, Schreibrechte und Freigaben, bevor ein Agent produktiv arbeitet."
   cards={[
     {
-      title: "Lead-Triage",
+      title: "Leads einordnen",
       text: "Neue Anfragen werden eingeordnet, mit Kontext angereichert und als nächste Aufgabe im CRM vorbereitet.",
     },
     {

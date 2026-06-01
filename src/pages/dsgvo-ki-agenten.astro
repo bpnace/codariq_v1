@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import LandingHeroSection from "../components/LandingHeroSection.astro";
-import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import SeoContentHeroSection from "../components/SeoContentHeroSection.astro";
 import FAQ from "../components/FAQ.astro";
 import LeadCaptureSection from "../components/LeadCaptureSection.astro";
 import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
@@ -66,6 +65,36 @@ const faqs = [
       "Wir prüfen Use Case, Datenfluss, Tool-Zugriffe, Anbieter, Risiken, Freigabepunkte und ob ein schlanker n8n-Agent oder ein größerer Agenten-Stack sinnvoll ist.",
     category: "Ablauf",
   },
+  {
+    question: "Welche Daten sollte ein KI-Agent nicht sehen?",
+    answer:
+      "Alles, was für den konkreten Zweck nicht nötig ist, bleibt außen vor. Besonders sensible Kategorien, private Notizen, HR-Daten oder Finanzdaten bekommen strengere Zugriffe, getrennte Abläufe oder zusätzliche Prüfung.",
+    category: "Datenminimierung",
+  },
+  {
+    question: "Braucht man für jeden KI-Agenten eine AVV?",
+    answer:
+      "Wenn personenbezogene Daten durch externe Dienstleister verarbeitet werden, ist eine Auftragsverarbeitung zu prüfen. Wir achten technisch darauf, dass Anbieter, Speicherort und Datenfluss dokumentierbar sind.",
+    category: "Auftragsverarbeitung",
+  },
+  {
+    question: "Wie werden Datenflüsse dokumentiert?",
+    answer:
+      "Wir erfassen Quelle, Zweck, Empfänger, Tool-Zugriff, Speicherort, Freigabepunkt und Ergebnisübergabe. So lässt sich nachvollziehen, welche Daten der Agent verarbeitet und wo ein Mensch entscheidet.",
+    category: "Dokumentation",
+  },
+  {
+    question: "Kann ein KI-Agent in der EU gehostet werden?",
+    answer:
+      "Je nach Stack ist EU-Hosting oder ein Setup mit EU-orientierten Anbietern möglich. Hosting wird zusammen mit Modellanbieter, Logs, Backups und Tool-Zugriffen betrachtet.",
+    category: "Hosting",
+  },
+  {
+    question: "Wie reduziert ihr Datenschutzrisiken bei Prompts?",
+    answer:
+      "Wir begrenzen Kontext, entfernen unnötige Daten, trennen sensible Quellen und bauen Freigaben ein. Prompts sind dabei ein Baustein der technischen Architektur, keine alleinige Schutzmaßnahme.",
+    category: "Prompts",
+  },
 ];
 ---
 
@@ -85,19 +114,17 @@ const faqs = [
   />
   <FAQSchema faqs={faqs} />
 
-  <LandingHeroSection
+  <SeoContentHeroSection
     title="KI-Agenten DSGVO-konform bauen, ohne Blackbox-Gefühl."
     subtitle="Wir planen Agenten so, dass Datenflüsse, Zugriffe, Freigaben und menschliche Prüfung von Anfang an nachvollziehbar geregelt sind. Für KMU, die KI nutzen wollen, aber Kontrolle behalten müssen."
     heroImage="/images/hero/hero2.webp"
     primaryCTA="DSGVO-Setup prüfen"
     primaryCTALink="/#final-cta"
     secondaryCTA="Checkliste ansehen"
-    secondaryCTALink="#checkliste"
+    secondaryCTALink="#process"
   />
 
-  <TrustSignalsSection />
-
-  <section class="py-12 sm:py-16 md:py-20 bg-white">
+  <section id="fuer-wen" class="py-12 sm:py-16 md:py-20 bg-gray-50">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="text-center mb-10 sm:mb-12">
         <p
@@ -130,7 +157,31 @@ const faqs = [
     </div>
   </section>
 
-  <section id="checkliste" class="py-12 sm:py-16 bg-gray-950 text-white">
+  <section id="value-focus" class="py-12 sm:py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+      <div
+        class="rounded-2xl border border-orange-200 bg-orange-50 p-6 sm:p-8 md:p-10"
+      >
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4">
+          AI Act, DSGVO und Agenten: Der sichere Nenner ist Kontrolle.
+        </h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          Viele regulatorische Anforderungen drehen sich um Transparenz,
+          menschliche Eingriffsmöglichkeiten, Risikobewertung und geregelte
+          Verantwortlichkeit. Deshalb bauen wir Agenten als begrenzte Rollen mit
+          prüfbaren Aktionen.
+        </p>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Hinweis: Diese Seite ersetzt keine Rechtsberatung. Sie beschreibt den
+          technischen Umsetzungsansatz, mit dem Codariq KI-Agenten
+          datenschutzorientiert und kontrollierbar in bestehende Abläufe
+          integriert.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="py-12 sm:py-16 bg-gray-950 text-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div>
@@ -144,8 +195,8 @@ const faqs = [
           </h2>
           <p class="text-white/80 text-lg leading-relaxed">
             So wird aus „KI ausprobieren“ ein kontrollierter Ablauf mit Zweck,
-            Datenfluss und geregelter Verantwortung. Besonders wichtig wird das bei
-            Support, HR, Finanzdaten und Kundenkommunikation.
+            Datenfluss und geregelter Verantwortung. Besonders wichtig wird das
+            bei Support, HR, Finanzdaten und Kundenkommunikation.
           </p>
         </div>
         <ul class="space-y-3">
@@ -162,38 +213,14 @@ const faqs = [
     </div>
   </section>
 
-  <section class="py-12 sm:py-16 bg-white">
-    <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
-      <div
-        class="rounded-2xl border border-orange-200 bg-orange-50 p-6 sm:p-8 md:p-10"
-      >
-        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4">
-          AI Act, DSGVO und Agenten: Der sichere Nenner ist Kontrolle.
-        </h2>
-        <p class="text-gray-700 text-lg leading-relaxed mb-4">
-          Viele regulatorische Anforderungen drehen sich um Transparenz,
-          menschliche Eingriffsmöglichkeiten, Risikobewertung und geregelte
-          Verantwortlichkeit. Deshalb bauen wir Agenten nicht als „mach einfach
-          alles“-Systeme, sondern als begrenzte Rollen mit prüfbaren Aktionen.
-        </p>
-        <p class="text-sm text-gray-600 leading-relaxed">
-          Hinweis: Diese Seite ersetzt keine Rechtsberatung. Sie beschreibt den
-          technischen Umsetzungsansatz, mit dem Codariq KI-Agenten
-          datenschutzorientiert und kontrollierbar in bestehende Abläufe
-          integriert.
-        </p>
-      </div>
-    </div>
-  </section>
+  <LeadCaptureSection
+    title="Lass uns deinen Agenten-Datenfluss prüfen."
+    description="Wir prüfen, welche Daten dein Agent wirklich braucht, welche Freigaben sinnvoll sind und ob n8n, OpenClaw oder ein schlankerer Stack passt."
+  />
 
   <FAQ
     title="FAQ: DSGVO und KI-Agenten"
     subtitle="Die wichtigsten Fragen zu Daten, Freigaben und Verantwortung."
     faqs={faqs}
-  />
-
-  <LeadCaptureSection
-    title="Lass uns deinen Agenten-Datenfluss prüfen."
-    description="Wir prüfen, welche Daten dein Agent wirklich braucht, welche Freigaben sinnvoll sind und ob n8n, OpenClaw oder ein schlankerer Stack passt."
   />
 </Base>

@@ -1,4 +1,6 @@
 ---
+import { engpassRoutes } from "../data/engpassLandingPages";
+
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -23,7 +25,7 @@ export interface Props {
 
 const {
   title = "Wo Agenten Teams wirklich entlasten können",
-  subtitle = "Zwei anonymisierte Rückmeldungen und konkrete Einsatzpunkte für Teams, Geschäftsführung und Selbstständige. Nicht als Showpiece, sondern dort, wo Büroarbeit jeden Tag liegen bleibt.",
+  subtitle = "Zwei anonymisierte Rückmeldungen und konkrete Einsatzpunkte für Teams, Geschäftsführung und Selbstständige. Relevant wird ein Agent dort, wo Büroarbeit jeden Tag liegen bleibt.",
   items = [
     {
       kind: "feedback",
@@ -32,6 +34,7 @@ const {
       context: "Mails, Notizen, offene Punkte",
       label: "Rückmeldung von Kunden",
       results: { metric: "Termin", improvement: "strukturiert geplant" },
+      link: { href: engpassRoutes.terminmappe, label: "Terminmappe prüfen" },
       featured: true,
     },
     {
@@ -41,7 +44,7 @@ const {
       context: "Mails, PDFs, Tickets, Übergaben",
       label: "Nutzen für Teams",
       results: { metric: "Antwort", improvement: "sauber erfasst" },
-      link: { href: "/ki-integration-prozesse", label: "Prozesse prüfen" },
+      link: { href: engpassRoutes.teamwissen, label: "Wissen bündeln" },
     },
     {
       kind: "useCase",
@@ -50,24 +53,28 @@ const {
       context: "Firma, Kontakt, nächste Handlung",
       label: "Nutzen für Selbstständige",
       results: { metric: "Anfrage", improvement: "ergänzt" },
-      link: { href: "/crm-und-ki-integration", label: "CRM-Setup ansehen" },
+      link: { href: engpassRoutes.anfragen, label: "Anfragen prüfen" },
     },
     {
       kind: "useCase",
-      body: "Für die Geschäftsführung zählt nicht jede einzelne Mail, sondern der Stand von offenen Freigaben, blockierten Aufgaben, wichtigen Rückmeldungen und Risiken, die nicht bis Freitag liegen bleiben dürfen.",
+      body: "Für die Geschäftsführung zählt der Stand von offenen Freigaben, blockierten Aufgaben, wichtigen Rückmeldungen und Risiken, die nicht bis Freitag liegen bleiben dürfen.",
       heading: "Entscheidungen mit vorbereitetem Stand",
       context: "Freigaben, Blocker, Risiken",
       label: "Nutzen für Geschäftsführung",
       results: { metric: "Stand", improvement: "immer sichtbar" },
-      link: { href: "/ki-projekt-retten", label: "Projekt retten" },
+      link: {
+        href: engpassRoutes.entscheidungen,
+        label: "Stand vorbereiten",
+      },
     },
     {
       kind: "feedback",
-      body: '"Ich brauche morgens nicht noch ein Dashboard. Ich brauche eine kurze Liste, was neu ist, was hängt, was ich freigeben muss und wo eine Entscheidung ansteht. Ich will nicht mehr nachfragen müssen, sondern direkt loslegen können."',
+      body: '"Ich brauche morgens eine kurze Liste: was neu ist, was hängt, was ich freigeben muss und wo eine Entscheidung ansteht. Dann kann ich direkt loslegen."',
       heading: "Chef-Überblick ohne Nachfragen",
       context: "Freigaben, Rückfragen, offene Aufgaben",
       label: "Rückmeldung von Kunden",
       results: { metric: "Überblick", improvement: "vorbereitet" },
+      link: { href: engpassRoutes.chefUeberblick, label: "Überblick prüfen" },
     },
     {
       kind: "useCase",
@@ -76,6 +83,7 @@ const {
       context: "Listen, Rechnungen, Ablage",
       label: "Nutzen für Backoffice",
       results: { metric: "Ablage", improvement: "logisch sortiert" },
+      link: { href: engpassRoutes.unterlagen, label: "Unterlagen prüfen" },
     },
   ],
 } = Astro.props;
@@ -91,41 +99,58 @@ const {
 
     <div class="proof-suite__grid" data-testimonial-reveal>
       {
-        items.map((item) => (
-          <article
-            class={`proof-card enterprise-card ${item.kind === "feedback" || item.featured ? "proof-card--featured" : ""}`}
-            data-testimonial-card
-            data-proof-kind={item.kind}
-          >
-            <div class="proof-card__meta">
-              <span>{item.label}</span>
-              <strong>{item.heading}</strong>
-              <p>{item.context}</p>
-            </div>
-            {item.kind === "feedback" ? (
-              <blockquote class="proof-card__body">{item.body}</blockquote>
-            ) : (
-              <p class="proof-card__body">{item.body}</p>
-            )}
-            {item.results && (
-              <div class="proof-card__result">
-                <strong>{item.results.metric}</strong>
-                <span>{item.results.improvement}</span>
+        items.map((item) => {
+          const cardClass = `proof-card enterprise-card ${item.kind === "feedback" || item.featured ? "proof-card--featured" : ""}`;
+          const content = (
+            <>
+              <div class="proof-card__meta">
+                <span>{item.label}</span>
+                <strong>{item.heading}</strong>
+                <p>{item.context}</p>
               </div>
-            )}
-            {item.link && (
-              <a class="proof-card__link" href={item.link.href}>
-                {item.link.label}
-              </a>
-            )}
-          </article>
-        ))
+              {item.kind === "feedback" ? (
+                <blockquote class="proof-card__body">{item.body}</blockquote>
+              ) : (
+                <p class="proof-card__body">{item.body}</p>
+              )}
+              {item.results && (
+                <div class="proof-card__result">
+                  <strong>{item.results.metric}</strong>
+                  <span>{item.results.improvement}</span>
+                </div>
+              )}
+              {item.link && (
+                <span class="proof-card__cue">{item.link.label}</span>
+              )}
+            </>
+          );
+
+          return item.link ? (
+            <a
+              href={item.link.href}
+              class={cardClass}
+              data-testimonial-card
+              data-proof-kind={item.kind}
+              aria-label={`${item.heading}: ${item.link.label}`}
+            >
+              {content}
+            </a>
+          ) : (
+            <article
+              class={cardClass}
+              data-testimonial-card
+              data-proof-kind={item.kind}
+            >
+              {content}
+            </article>
+          );
+        })
       }
     </div>
 
     <div class="proof-suite__cta enterprise-reveal">
       <div>
-        <strong>Erkennst du mindestens einen dieser Fälle?</strong>
+        <strong>Kommt dir einer davon bekannt vor?</strong>
         <p>
           Wir schauen auf einen konkreten Prozess und prüfen, ob ein Agent dort
           vorbereiten, sortieren oder mit Freigabe handeln sollte.
@@ -159,6 +184,8 @@ const {
     display: flex;
     flex-direction: column;
     min-height: 22rem;
+    color: inherit;
+    text-decoration: none;
     background: #f8fafc;
     border: 1px solid rgba(15, 23, 42, 0.08);
     border-radius: 16px;
@@ -166,6 +193,25 @@ const {
     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
     transform-origin: 50% 82%;
     will-change: transform, opacity, filter;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  a.proof-card {
+    cursor: pointer;
+  }
+
+  a.proof-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(15, 118, 110, 0.22);
+    box-shadow: 0 28px 68px rgba(15, 23, 42, 0.1);
+  }
+
+  a.proof-card:focus-visible {
+    outline: 3px solid rgba(20, 184, 166, 0.34);
+    outline-offset: 4px;
   }
 
   .proof-card--featured {
@@ -226,7 +272,7 @@ const {
     font-weight: 850;
   }
 
-  .proof-card__link {
+  .proof-card__cue {
     display: inline-flex;
     align-self: flex-start;
     align-items: center;
@@ -240,21 +286,12 @@ const {
     color: #0f766e;
     font-size: 0.82rem;
     font-weight: 880;
-    transition:
-      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
-      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
-      color 170ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .proof-card__link:hover {
+  a.proof-card:hover .proof-card__cue {
     border-color: rgba(15, 118, 110, 0.4);
     background: rgba(20, 184, 166, 0.14);
     color: #0b4f49;
-  }
-
-  .proof-card__link:focus-visible {
-    outline: 3px solid rgba(20, 184, 166, 0.34);
-    outline-offset: 3px;
   }
 
   .proof-suite__cta {

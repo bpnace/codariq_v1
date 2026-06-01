@@ -1,0 +1,473 @@
+---
+import ArrowRight from "./icons/ArrowRight.astro";
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  primaryCTALink?: string;
+  secondaryCTALink?: string;
+  heroImage?: string;
+  eyebrow?: string;
+  proofItems?: string[];
+  scopeItems?: string[];
+  entryLinks?: Array<{
+    href: string;
+    label: string;
+  }>;
+}
+
+const {
+  title = "KI-Agenten, die deinen Alltag tatsächlich entlasten.",
+  subtitle = "Wir bauen digitale Assistenten für konkrete Arbeit. Lesen, sortieren und vorbereiten, aber immer mit einem Menschen, der entscheidet.",
+  primaryCTA = "Grenzen prüfen",
+  secondaryCTA = "Was darf ein Agent?",
+  primaryCTALink = "#final-cta",
+  secondaryCTALink = "/agent-readiness",
+  heroImage = "/images/hero/hero2.webp",
+  eyebrow = "Codariq Einstieg",
+  proofItems = [
+    "Begrenzter Agentenfall",
+    "Freigaben im Ablauf",
+    "Start ohne Komplettumbau",
+  ],
+  scopeItems = [
+    "Ablauf und Entscheidungspunkte",
+    "Datenzugriff und Tool-Grenzen",
+    "Pilot, Betrieb und nächste Schritte",
+  ],
+  entryLinks = [
+    { href: "/ki-integration-prozesse", label: "Prozesse prüfen" },
+    { href: "/crm-und-ki-integration", label: "CRM-Setup ansehen" },
+    { href: "/ki-projekt-retten", label: "Projekt retten" },
+    { href: "/agent-readiness", label: "KI-Check starten" },
+  ],
+} = Astro.props;
+
+const allowedHeroImages = new Set([
+  "/images/hero/hero1.webp",
+  "/images/hero/hero2.webp",
+  "/images/hero/hero3.webp",
+]);
+const safeHeroImage = allowedHeroImages.has(heroImage)
+  ? heroImage
+  : "/images/hero/hero2.webp";
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const visibleEntryLinks = entryLinks.filter(
+  (link) => link.href.replace(/\/$/, "") !== currentPath,
+);
+---
+
+<section
+  id="hero"
+  class="seo-content-hero"
+  data-content-hero
+  style={`--seo-content-hero-image: url("${safeHeroImage}");`}
+>
+  <div class="seo-content-hero__inner">
+    <div class="seo-content-hero__copy">
+      <p class="seo-content-hero__eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="seo-content-hero__subtitle">{subtitle}</p>
+
+      <div class="seo-content-hero__actions">
+        <a
+          href={primaryCTALink}
+          class="seo-content-button seo-content-button--primary group"
+          aria-label={primaryCTA}
+        >
+          <span>{primaryCTA}</span>
+          <ArrowRight
+            class="h-5 w-5 transition-transform duration-200 ease-out group-hover:translate-x-1"
+          />
+        </a>
+        <a
+          href={secondaryCTALink}
+          class="seo-content-button seo-content-button--secondary group"
+          aria-label={secondaryCTA}
+        >
+          <span>{secondaryCTA}</span>
+          <ArrowRight
+            class="h-5 w-5 transition-transform duration-200 ease-out group-hover:translate-x-1"
+          />
+        </a>
+      </div>
+
+      <ul
+        class="seo-content-hero__proof"
+        aria-label="Arbeitsweise auf der Landingpage"
+      >
+        {
+          proofItems.map((item) => (
+            <li>
+              <span aria-hidden="true" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        visibleEntryLinks.length > 0 && (
+          <nav
+            class="seo-content-hero__entry-links"
+            data-seo-entry-links
+            aria-label="Passende Einstiege"
+          >
+            <span>Passende Einstiege</span>
+            {visibleEntryLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+        )
+      }
+    </div>
+
+    <aside
+      class="seo-content-hero__scope"
+      aria-label="Prüfpunkte der Landingpage"
+    >
+      <p>Was wir prüfen</p>
+      <ul>
+        {
+          scopeItems.map((item) => (
+            <li>
+              <span aria-hidden="true" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <div>
+        <span>Codariq</span>
+        <strong>Agenten mit kontrolliertem Aufgabenraum.</strong>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .seo-content-hero {
+    position: relative;
+    min-height: clamp(27rem, 56svh, 34rem);
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    padding: clamp(4.8rem, 7svh, 5.7rem) 0 clamp(2rem, 3.5svh, 3rem);
+    color: #0b1220;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(244, 248, 250, 0.92)
+      ),
+      #f8fafc;
+  }
+
+  .seo-content-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--seo-content-hero-image);
+    background-position: center 38%;
+    background-size: cover;
+    opacity: 0.055;
+    filter: grayscale(1) saturate(0) contrast(0.9) brightness(1.06);
+    pointer-events: none;
+  }
+
+  .seo-content-hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(15, 23, 42, 0.16),
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  .seo-content-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: min(100% - 2rem, 1160px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.55fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+
+  .seo-content-hero__copy {
+    max-width: 52rem;
+  }
+
+  .seo-content-hero__eyebrow {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 2rem;
+    align-items: center;
+    padding: 0 0.72rem;
+    color: #14332f;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(20, 51, 47, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+    font-size: 0.78rem;
+    font-weight: 860;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .seo-content-hero h1 {
+    max-width: 16ch;
+    margin-top: 0.95rem;
+    color: #0b1220;
+    font-size: 4rem;
+    font-weight: 950;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .seo-content-hero__subtitle {
+    max-width: 46rem;
+    margin-top: 1rem;
+    color: #475569;
+    font-size: 1.12rem;
+    font-weight: 590;
+    line-height: 1.58;
+  }
+
+  .seo-content-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.35rem;
+  }
+
+  .seo-content-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 3.05rem;
+    padding: 0.86rem 1.04rem;
+    border-radius: 8px;
+    font-weight: 900;
+    line-height: 1;
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .seo-content-button:focus-visible,
+  .seo-content-hero__scope:focus-within {
+    outline: 3px solid rgba(20, 184, 166, 0.36);
+    outline-offset: 3px;
+  }
+
+  .seo-content-button:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  .seo-content-button--primary {
+    color: #f8fafc;
+    background: #0b1220;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.22);
+  }
+
+  .seo-content-button--primary:hover {
+    background: #14332f;
+  }
+
+  .seo-content-button--secondary {
+    color: #0b1220;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(15, 23, 42, 0.14);
+  }
+
+  .seo-content-button--secondary:hover {
+    background: #ffffff;
+    border-color: rgba(20, 184, 166, 0.42);
+  }
+
+  .seo-content-hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+    margin-top: 1.05rem;
+    color: #334155;
+    font-size: 0.88rem;
+    font-weight: 760;
+  }
+
+  .seo-content-hero__entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.8rem;
+    color: #475569;
+    font-size: 0.84rem;
+    font-weight: 760;
+  }
+
+  .seo-content-hero__entry-links > span {
+    color: #64748b;
+    font-size: 0.74rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .seo-content-hero__entry-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0 0.68rem;
+    color: #0b1220;
+    background: rgba(255, 255, 255, 0.74);
+    border: 1px solid rgba(15, 23, 42, 0.13);
+    border-radius: 999px;
+    transition:
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .seo-content-hero__entry-links a:hover {
+    background: #ffffff;
+    border-color: rgba(20, 184, 166, 0.42);
+  }
+
+  .seo-content-hero__entry-links a:focus-visible {
+    outline: 3px solid rgba(20, 184, 166, 0.36);
+    outline-offset: 3px;
+  }
+
+  .seo-content-hero__proof li,
+  .seo-content-hero__scope li {
+    display: flex;
+    align-items: center;
+    gap: 0.58rem;
+  }
+
+  .seo-content-hero__proof li span,
+  .seo-content-hero__scope li span {
+    width: 0.72rem;
+    height: 0.72rem;
+    flex: 0 0 auto;
+    border-radius: 3px;
+    background: #14b8a6;
+    box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
+  }
+
+  .seo-content-hero__scope {
+    align-self: center;
+    padding: clamp(1.05rem, 2vw, 1.35rem);
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 8px;
+    box-shadow:
+      0 24px 54px rgba(15, 23, 42, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(14px);
+  }
+
+  .seo-content-hero__scope > p {
+    color: #f97316;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .seo-content-hero__scope ul {
+    display: grid;
+    gap: 0.82rem;
+    margin-top: 1rem;
+    color: #334155;
+    font-size: 0.94rem;
+    font-weight: 730;
+    line-height: 1.35;
+  }
+
+  .seo-content-hero__scope div {
+    margin-top: 1.15rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  .seo-content-hero__scope div span {
+    display: block;
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 850;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .seo-content-hero__scope strong {
+    display: block;
+    margin-top: 0.34rem;
+    color: #0b1220;
+    font-size: 1.02rem;
+    font-weight: 900;
+    line-height: 1.22;
+  }
+
+  @media (max-width: 1120px) {
+    .seo-content-hero h1 {
+      font-size: 3.45rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .seo-content-hero {
+      min-height: auto;
+      align-items: flex-start;
+      padding: 5rem 0 2rem;
+    }
+
+    .seo-content-hero__inner {
+      grid-template-columns: 1fr;
+      gap: 1.45rem;
+    }
+
+    .seo-content-hero h1 {
+      max-width: 16ch;
+      font-size: 2.75rem;
+    }
+
+    .seo-content-hero__scope {
+      display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .seo-content-hero h1 {
+      font-size: 2.15rem;
+    }
+
+    .seo-content-hero__subtitle {
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .seo-content-hero__actions,
+    .seo-content-button {
+      width: 100%;
+    }
+
+    .seo-content-button {
+      min-height: 3rem;
+    }
+  }
+</style>

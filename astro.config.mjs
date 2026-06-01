@@ -13,6 +13,15 @@ const legacyRoutes = [
   "/blog/automatisierung-roi-maximieren",
 ];
 
+const engpassLandingSlugs = [
+  "/terminmappe-vor-dem-gespraech",
+  "/teamwissen-ohne-zuruf",
+  "/anfragen-sauber-einordnen",
+  "/entscheidungen-vorbereiten",
+  "/chef-ueberblick-ohne-nachfragen",
+  "/daten-und-unterlagen-vorsortieren",
+];
+
 export default defineConfig({
   site: "https://codariq.de",
   base: "/",
@@ -87,6 +96,7 @@ export default defineConfig({
         // Agent landing pages and readiness quiz - high priority conversion pages
         else if (
           url.includes("/ki-agenten-") ||
+          engpassLandingSlugs.includes(pathname) ||
           url.includes("/agent-readiness")
         ) {
           item.lastmod = now.toISOString();

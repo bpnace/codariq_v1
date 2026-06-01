@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import LandingHeroSection from "../components/LandingHeroSection.astro";
-import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import SeoContentHeroSection from "../components/SeoContentHeroSection.astro";
 import UseCaseCardsSection from "../components/UseCaseCardsSection.astro";
 import FAQ from "../components/FAQ.astro";
 import LeadCaptureSection from "../components/LeadCaptureSection.astro";
@@ -46,8 +45,8 @@ const buildSteps = [
     text: "Kleine Agenten starten pragmatisch mit n8n. Komplexere Setups bekommen eine kontrollierte Agenten-Architektur mit Tools, Logs und Betriebskonzept.",
   },
   {
-    title: "Mit echten Fällen stabilisieren",
-    text: "Wir testen nicht mit Demo-Floskeln, sondern mit echten Anfragen, Dokumenten und Sonderfällen aus deinem Alltag.",
+    title: "Mit realen Fällen stabilisieren",
+    text: "Wir testen mit Anfragen, Dokumenten und Sonderfällen aus deinem Alltag. Demo-Floskeln helfen im Betrieb nicht weiter.",
   },
 ];
 
@@ -73,7 +72,7 @@ const faqs = [
   {
     question: "Wie bleibt die Kontrolle beim Unternehmen?",
     answer:
-      "Über Rollen, Freigaben, Logs, definierte Tool-Zugriffe und feste Stopps. Kritische Entscheidungen werden nicht heimlich automatisiert, sondern bewusst an Menschen übergeben.",
+      "Über Rollen, Freigaben, Logs, definierte Tool-Zugriffe und feste Stopps. Kritische Entscheidungen gehen an Menschen, bevor sie Wirkung nach außen haben.",
     category: "Kontrolle",
   },
   {
@@ -81,6 +80,36 @@ const faqs = [
     answer:
       "Wir planen Datenminimierung, Zugriffskonzepte, Speicherorte, Auftragsverarbeitung und Freigaben von Anfang an mit. Je nach Fall empfehlen wir EU-Hosting, getrennte Datenflüsse und Human-in-the-loop für sensible Entscheidungen.",
     category: "Datenschutz",
+  },
+  {
+    question: "Welche KI-Agenten lohnen sich für KMU zuerst?",
+    answer:
+      "Gute Startpunkte sind Postfach-Agenten, CRM-Agenten, Support-Anfragen, Dokumentenprüfung, Reporting und interne Wissenssuche. Wichtig ist ein Ablauf mit Wiederholung, Datenquellen und messbarer Nacharbeit.",
+    category: "Use Cases",
+  },
+  {
+    question: "Kann ein KI-Agent mit n8n gebaut werden?",
+    answer:
+      "Ja. Viele KMU starten mit einem n8n-Agenten, wenn der Ablauf begrenzt ist und wenige Tools beteiligt sind. Größere Setups brauchen erst dann mehr Architektur, wenn Betrieb, Rollen und Kanäle wachsen.",
+    category: "n8n",
+  },
+  {
+    question: "Was kostet ein KI-Agent für ein KMU?",
+    answer:
+      "Der Preis hängt von Ablauf, Systemen, Datenqualität, Freigaben und Betrieb ab. Wir schätzen zuerst den kleinsten sinnvollen Start, damit kein großes Agenten-System gebaut wird, bevor der Nutzen belastbar ist.",
+    category: "Kosten",
+  },
+  {
+    question: "Wie wird ein KI-Agent im Betrieb betreut?",
+    answer:
+      "Ein produktiver Agent braucht Logs, Review-Rhythmus, Owner, Fehlerbehandlung und Regeln für Änderungen. Wir planen diese Punkte mit, damit der Agent nach dem Livegang nicht unkontrolliert weiterläuft.",
+    category: "Betrieb",
+  },
+  {
+    question: "Welche Rolle spielt der AI Act für KMU?",
+    answer:
+      "Je nach Use Case müssen Zweck, Risiken, Transparenz, menschliche Prüfung und Dokumentation betrachtet werden. Wir bauen technische Setups so, dass Prüfpflichten und Freigaben früh im Ablauf sichtbar sind.",
+    category: "Compliance",
   },
 ];
 ---
@@ -98,7 +127,7 @@ const faqs = [
   />
   <FAQSchema faqs={faqs} />
 
-  <LandingHeroSection
+  <SeoContentHeroSection
     title="KI-Agenten für KMU, die wirklich Aufgaben übernehmen."
     subtitle="Wir bauen kontrollierbare Agenten für Postfach, Backoffice, Support, Wissen und Reporting. Vom schlanken n8n-Workflow bis zum stabilen Agenten-Setup mit Freigaben, Rollen und DSGVO-konformer Datenführung."
     heroImage="/images/hero/hero2.webp"
@@ -108,9 +137,53 @@ const faqs = [
     secondaryCTALink="#use-cases"
   />
 
-  <TrustSignalsSection />
+  <section id="fuer-wen" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Für wen das passt</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Diese Seite ist für KMU, die bereits wiederkehrende Arbeit in
+          Postfach, Support, CRM oder Backoffice haben und KI nicht als Demo,
+          sondern als begrenzten Arbeitsablauf einsetzen wollen.
+        </p>
+      </div>
 
-  <section class="py-12 sm:py-16 md:py-20 bg-white">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Für wen
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>KMU mit wiederkehrenden Anfragen, Dokumenten oder Reports</li>
+            <li>
+              Teams, die n8n, CRM, Postfach oder Projekttools verbinden wollen
+            </li>
+            <li>
+              Geschäftsführung, die Freigaben und Betrieb geregelt braucht
+            </li>
+            <li>
+              Organisationen, die vor einem größeren Agenten-Stack prüfen wollen
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Worauf wir achten
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Ein erster Agent bekommt einen engen Aufgabenraum</li>
+            <li>
+              Datenfluss, Tool-Zugriff und Freigaben werden vor dem Bau
+              festgelegt
+            </li>
+            <li>Der Ausbau passiert erst, wenn Nutzung und Nutzen tragen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="value-focus" class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="text-center mb-10 sm:mb-12">
         <p
@@ -166,15 +239,57 @@ const faqs = [
     useCases={useCases}
   />
 
-  <section id="aufbau" class="py-12 sm:py-16 bg-white">
+  <section id="sicherheit-daten" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Sicherheit und Betrieb</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Ein Agent im KMU braucht mehr als einen guten Prompt. Entscheidend
+          sind Rollen, Logs, Fehlerwege und ein Owner, der den Ablauf im Betrieb
+          verantwortet.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Rollen und Freigaben
+          </h3>
+          <p class="text-gray-600 font-medium leading-relaxed">
+            Kritische Schritte bekommen menschliche Prüfung, externe Wirkung
+            bleibt im Entwurf oder Freigabemodus.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Logs und Fehlerwege
+          </h3>
+          <p class="text-gray-600 font-medium leading-relaxed">
+            Ergebnisse, Quellen und Abbrüche werden so dokumentiert, dass
+            Ursachen später auffindbar bleiben.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-lg font-black text-gray-900 mb-2">
+            Stack mit Augenmaß
+          </h3>
+          <p class="text-gray-600 font-medium leading-relaxed">
+            n8n reicht für viele Startfälle. OpenClaw oder ein größerer Stack
+            kommt erst ins Spiel, wenn Betrieb und Kanäle es brauchen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="py-12 sm:py-16 bg-white">
     <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
       <div class="text-center mb-8 sm:mb-10">
         <h2 class="section-title mb-4">
           So bauen wir deinen ersten KI-Agenten
         </h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Kein Agenten-Hype, sondern ein umsetzbarer Bauplan: Aufgabe, Datenfluss,
-          Grenzen, Tests und Betrieb.
+          Kein Agenten-Hype, sondern ein umsetzbarer Bauplan: Aufgabe,
+          Datenfluss, Grenzen, Tests und Betrieb.
         </p>
       </div>
 
@@ -244,14 +359,14 @@ const faqs = [
     </div>
   </section>
 
+  <LeadCaptureSection
+    title="Lass uns deinen ersten KI-Agenten sauber eingrenzen."
+    description="In 30 Minuten finden wir heraus, welcher Agent wirklich hilft, welche Daten er braucht und ob ein n8n-Workflow reicht oder ein größerer Agenten-Stack sinnvoll ist."
+  />
+
   <FAQ
     title="FAQ: KI-Agenten für KMU"
     subtitle="Kurz beantwortet, damit du Agenten realistisch einschätzen kannst."
     faqs={faqs}
-  />
-
-  <LeadCaptureSection
-    title="Lass uns deinen ersten KI-Agenten sauber eingrenzen."
-    description="In 30 Minuten finden wir heraus, welcher Agent wirklich hilft, welche Daten er braucht und ob ein n8n-Workflow reicht oder ein größerer Agenten-Stack sinnvoll ist."
   />
 </Base>

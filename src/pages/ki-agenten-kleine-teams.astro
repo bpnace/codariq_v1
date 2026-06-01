@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import LandingHeroSection from "../components/LandingHeroSection.astro";
-import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import SeoContentHeroSection from "../components/SeoContentHeroSection.astro";
 import UseCaseCardsSection from "../components/UseCaseCardsSection.astro";
 import FAQ from "../components/FAQ.astro";
 import LeadCaptureSection from "../components/LeadCaptureSection.astro";
@@ -50,7 +49,7 @@ const processSteps = [
     number: 2,
     title: "Systeme verbinden",
     description:
-      "Wir verbinden eure Tools und automatisieren Übergaben und Status Updates. Dann testen wir mit echten Fällen.",
+      "Wir verbinden eure Tools und automatisieren Übergaben und Status Updates. Dann testen wir mit realen Fällen.",
     details: [
       "Tools verbinden ohne Brüche",
       "Automatische Status Berichte",
@@ -105,6 +104,36 @@ const faqs = [
     answer:
       "Zugriffsrechte, Datenflüsse und Speicherorte werden verbindlich geregelt. Auf Wunsch EU Hosting und AVV.",
   },
+  {
+    question: "Welche Team-Abläufe eignen sich für KI-Agenten?",
+    answer:
+      "Gute Startpunkte sind Übergaben, Status-Updates, Support-Anfragen, interne Rückfragen, CRM-Aufgaben, Dokumentenablage und Meeting-Nachbereitung. Entscheidend ist, dass der Ablauf oft genug wiederkommt.",
+  },
+  {
+    question: "Kann ein Agent Teamwissen auffindbar machen?",
+    answer:
+      "Ja. Der Agent kann Dokumente, Notizen, Tickets oder Projektstände durchsuchen und Antworten vorbereiten. Quellen und Grenzen bleiben sichtbar, damit niemand blind auf eine Antwort vertrauen muss.",
+  },
+  {
+    question: "Wie verhindert ihr zusätzliche Tool-Komplexität?",
+    answer:
+      "Wir verbinden bestehende Systeme, bevor ein neues Tool entsteht. Der Agent soll weniger Wechsel, weniger Suche und weniger Nachfragen erzeugen, statt ein weiteres Dashboard zu pflegen.",
+  },
+  {
+    question: "Wie werden Freigaben im Team geregelt?",
+    answer:
+      "Wir legen fest, wer welche Entscheidungen prüft: externe Nachrichten, Kundendaten, sensible Dokumente, Eskalationen oder Budgetthemen. Der Agent stoppt dort und übergibt mit Kontext.",
+  },
+  {
+    question: "Funktioniert das mit Remote-Teams?",
+    answer:
+      "Ja. Gerade Remote-Teams profitieren von vorbereiteten Statusständen, geordneten Übergaben und weniger Zurufen. Wichtig sind feste Quellen, Rollen und ein einfacher Review-Rhythmus.",
+  },
+  {
+    question: "Wie schnell merkt ein kleines Team Entlastung?",
+    answer:
+      "Wenn der Startfall gut gewählt ist, oft nach wenigen Wochen. Spürbar wird es dort, wo weniger gesucht, kopiert, nachgefragt oder in Meetings erklärt werden muss.",
+  },
 ];
 ---
 
@@ -124,7 +153,7 @@ const faqs = [
   />
   <FAQSchema faqs={faqs} />
 
-  <LandingHeroSection
+  <SeoContentHeroSection
     title="KI-Agenten für kleine Teams, die Übergaben sauber vorbereiten"
     subtitle="Wenn dein Team ständig nachfragt, Dinge doppelt einträgt oder Status in Meetings erklärt, kostet das jeden Tag Zeit. Wir verbinden eure Tools so, dass Agenten bündeln, vorbereiten und bei Freigaben stoppen."
     heroImage="/images/hero/hero2.webp"
@@ -134,7 +163,48 @@ const faqs = [
     secondaryCTALink="#use-cases"
   />
 
-  <TrustSignalsSection />
+  <section id="fuer-wen" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Für wen das passt</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Wenn Wissen, Status und Übergaben über mehrere Tools verteilt sind,
+          verliert ein kleines Team jeden Tag Zeit. Der erste Agent sollte dort
+          starten, wo Rückfragen und Nacharbeit am häufigsten auftreten.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Für wen
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Teams, die Status in Meetings wieder zusammensuchen</li>
+            <li>Teams mit Übergaben zwischen Postfach, CRM und Projekttool</li>
+            <li>
+              Remote-Teams mit vielen Rückfragen zu Dokumenten und Tickets
+            </li>
+            <li>
+              Teams, die Freigaben und Zuständigkeiten verbindlicher brauchen
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Worauf wir achten
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Der Agent bekommt feste Quellen und benannte Owner</li>
+            <li>Externe Nachrichten und sensible Daten bleiben mit Freigabe</li>
+            <li>
+              Der Ablauf senkt Abstimmung, statt ein weiteres Board zu pflegen
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="value-focus" class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
@@ -188,6 +258,56 @@ const faqs = [
     subtitle="Beispiele für Team Koordination, Status Updates und Übergaben zwischen Tools."
     useCases={useCases}
   />
+
+  <section id="sicherheit-daten" class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">
+          Sicherheit und Zuständigkeiten
+        </h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          Kleine Teams brauchen keine große Governance-Sprache. Sie brauchen
+          Regeln, die im Alltag halten: Wer darf sehen, wer gibt frei und wann
+          stoppt der Agent.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Rollen und Quellen
+          </h3>
+          <p
+            class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed"
+          >
+            Der Agent liest nur freigegebene Quellen und trennt Teamwissen,
+            Kundendaten und interne Notizen.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Freigaben im Ablauf
+          </h3>
+          <p
+            class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed"
+          >
+            Nachrichten, Kundendaten und Budgetthemen werden vorbereitet und an
+            die zuständige Person übergeben.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2">
+            Nachvollziehbare Übergaben
+          </h3>
+          <p
+            class="text-sm sm:text-base font-medium text-gray-600 leading-relaxed"
+          >
+            Status, Quellen und offene Punkte bleiben sichtbar, damit das Team
+            dem Ergebnis nicht blind folgen muss.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="process" class="py-10 sm:py-12 bg-white">
     <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-10">

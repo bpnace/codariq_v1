@@ -1,0 +1,42 @@
+---
+import SeoLandingPageTemplate from "../components/SeoLandingPageTemplate.astro";
+import { engpassLandingPages } from "../data/engpassLandingPages";
+
+export function getStaticPaths() {
+  return engpassLandingPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<SeoLandingPageTemplate
+  title={page.title}
+  description={page.description}
+  keywords={page.keywords}
+  breadcrumbName={page.breadcrumbName}
+  breadcrumbUrl={page.breadcrumbUrl}
+  heroTitle={page.heroTitle}
+  heroSubtitle={page.heroSubtitle}
+  primaryCTA={page.primaryCTA}
+  secondaryCTA={page.secondaryCTA}
+  secondaryCTALink={page.secondaryCTALink}
+  introEyebrow={page.introEyebrow}
+  introTitle={page.introTitle}
+  introText={page.introText}
+  cards={page.cards}
+  processEyebrow={page.processEyebrow}
+  processTitle={page.processTitle}
+  processText={page.processText}
+  steps={page.steps}
+  proofTitle={page.proofTitle}
+  proofText={page.proofText}
+  proofItems={page.proofItems}
+  linksTitle={page.linksTitle}
+  links={page.links}
+  faqs={page.faqs}
+  finalTitle={page.finalTitle}
+  finalDescription={page.finalDescription}
+/>

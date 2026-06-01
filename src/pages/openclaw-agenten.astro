@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import LandingHeroSection from "../components/LandingHeroSection.astro";
-import TrustSignalsSection from "../components/TrustSignalsSection.astro";
+import SeoContentHeroSection from "../components/SeoContentHeroSection.astro";
 import FAQ from "../components/FAQ.astro";
 import LeadCaptureSection from "../components/LeadCaptureSection.astro";
 import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
@@ -19,7 +18,7 @@ const stackLevels = [
     title: "Agenten-Workflow",
     bestFor: "Mehrere Schritte, Tool-Zugriffe, Freigaben und Sonderfälle.",
     examples:
-      "Support-Triage, Reporting, Übergaben zwischen CRM, Kalender und Projekttool.",
+      "Support-Anfragen, Reporting, Übergaben zwischen CRM, Kalender und Projekttool.",
   },
   {
     title: "OpenClaw-Setup",
@@ -55,7 +54,7 @@ const faqs = [
   {
     question: "Was übernimmt Codariq beim Setup?",
     answer:
-      "Wir prüfen den Use Case, planen Berechtigungen, richten den Stack ein, verbinden Kanäle und Tools, testen echte Abläufe und übergeben eine verständliche Dokumentation für Betrieb und Weiterentwicklung.",
+      "Wir prüfen den Use Case, planen Berechtigungen, richten den Stack ein, verbinden Kanäle und Tools, testen reale Abläufe und übergeben eine verständliche Dokumentation für Betrieb und Weiterentwicklung.",
     category: "Umsetzung",
   },
   {
@@ -69,6 +68,36 @@ const faqs = [
     answer:
       "Ja. Häufig analysieren wir zuerst, welche Teile stabil sind, welche KI-Schritte mehr Kontext brauchen und welche Aktionen künftig über einen Agenten mit definierten Grenzen laufen sollten.",
     category: "Migration",
+  },
+  {
+    question: "Wann ist OpenClaw besser als ein einzelner n8n-Workflow?",
+    answer:
+      "OpenClaw lohnt sich eher, wenn mehrere Agenten, Kanäle, Modelle, Tools und Berechtigungen dauerhaft betrieben werden müssen. Für einen einzelnen linearen Ablauf bleibt n8n oft der schnellere Start.",
+    category: "Eignung",
+  },
+  {
+    question: "Welche Kanäle lassen sich an einen Agenten-Stack anbinden?",
+    answer:
+      "Typisch sind E-Mail, Slack, Telegram, Webformulare, CRM, Projekttools und interne Wissensquellen. Entscheidend ist, welche Kanäle wirklich zum Use Case gehören und welche Aktionen dort erlaubt sind.",
+    category: "Kanäle",
+  },
+  {
+    question: "Wie werden Model Provider und Tools begrenzt?",
+    answer:
+      "Wir legen fest, welche Modelle, Tools und Aktionen für welchen Agenten erlaubt sind. Secrets, Tokens und Zugriffe liegen in einer kontrollierten Konfiguration, getrennt vom Ablauf.",
+    category: "Sicherheit",
+  },
+  {
+    question: "Was gehört zu einem stabilen Agenten-Betrieb?",
+    answer:
+      "Dazu gehören Logs, Update-Prozess, Fehlerroutinen, Monitoring, Berechtigungen, Dokumentation und ein Owner. Ohne diese Punkte bleibt ein Agenten-Stack schwer wartbar.",
+    category: "Betrieb",
+  },
+  {
+    question: "Kann OpenClaw mit DSGVO-orientierten Vorgaben genutzt werden?",
+    answer:
+      "Ja, wenn Anbieterwahl, Hosting, Datenminimierung, Tool-Zugriffe, Freigaben und Dokumentation zum Use Case passen. Wir prüfen diese Punkte, bevor ein Stack produktiv angebunden wird.",
+    category: "Datenschutz",
   },
 ];
 ---
@@ -86,19 +115,60 @@ const faqs = [
   />
   <FAQSchema faqs={faqs} />
 
-  <LandingHeroSection
+  <SeoContentHeroSection
     title="Vom n8n-Workflow zum stabilen OpenClaw-Agenten."
     subtitle="Wenn ein einfacher Workflow nicht mehr reicht, planen und bauen wir Agenten-Setups mit Gateway, Kanälen, Modellen, Tools, Freigaben und Betriebskonzept. Pragmatisch, kontrolliert und DSGVO-orientiert."
     heroImage="/images/hero/hero2.webp"
     primaryCTA="OpenClaw-Setup prüfen"
     primaryCTALink="/#final-cta"
     secondaryCTA="Stack vergleichen"
-    secondaryCTALink="#vergleich"
+    secondaryCTALink="#value-focus"
   />
 
-  <TrustSignalsSection />
+  <section id="fuer-wen" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="section-title mb-3 sm:mb-4">Für wen das passt</h2>
+        <p class="section-subtitle max-w-3xl mx-auto">
+          OpenClaw wird interessant, wenn ein einzelner Workflow nicht mehr
+          reicht und Agenten über mehrere Kanäle, Modelle und Tools hinweg
+          betrieben werden sollen.
+        </p>
+      </div>
 
-  <section id="vergleich" class="py-12 sm:py-16 md:py-20 bg-white">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Für wen
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>KMU mit bestehenden n8n-Workflows, die an Grenzen kommen</li>
+            <li>
+              Teams mit Slack, Telegram, Webformularen, CRM und Wissensquellen
+            </li>
+            <li>
+              Setups, bei denen Modellwahl, Tools und Betrieb dokumentiert sein
+              müssen
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+          <h3 class="text-base sm:text-lg font-black text-gray-900 mb-3">
+            Worauf wir achten
+          </h3>
+          <ul class="space-y-2 text-sm sm:text-base font-medium text-gray-600">
+            <li>Bestehende Workflows werden geprüft, bevor neu gebaut wird</li>
+            <li>
+              Secrets, Provider und Tool-Zugriffe bleiben getrennt verwaltet
+            </li>
+            <li>Der Stack wächst nur, wenn Betrieb und Use Case es tragen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="value-focus" class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="text-center mb-10 sm:mb-12">
         <p
@@ -110,9 +180,8 @@ const faqs = [
           Nicht jeder Use Case braucht denselben Stack
         </h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Wir wählen nicht das spannendste Tool, sondern die kleinste
-          Architektur, die zuverlässig funktioniert. So bleibt dein Agent
-          wartbar und bezahlbar.
+          Wir wählen die kleinste Architektur, die zuverlässig funktioniert. So
+          bleibt dein Agent wartbar und bezahlbar.
         </p>
       </div>
 
@@ -142,7 +211,7 @@ const faqs = [
     </div>
   </section>
 
-  <section class="py-12 sm:py-16 bg-gray-950 text-white">
+  <section id="process" class="py-12 sm:py-16 bg-gray-950 text-white">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div>
@@ -204,14 +273,14 @@ const faqs = [
     </div>
   </section>
 
+  <LeadCaptureSection
+    title="Lass uns deinen Agenten-Stack richtig einordnen."
+    description="Wir prüfen deinen Use Case, bestehende n8n-Workflows und die Frage, ob ein OpenClaw-Setup bereits sinnvoll ist oder ein kleinerer Agent besser startet."
+  />
+
   <FAQ
     title="FAQ: OpenClaw, n8n und Agenten-Setups"
     subtitle="Wann OpenClaw sinnvoll ist und wie wir den Stack kontrolliert aufbauen."
     faqs={faqs}
-  />
-
-  <LeadCaptureSection
-    title="Lass uns deinen Agenten-Stack richtig einordnen."
-    description="Wir prüfen deinen Use Case, bestehende n8n-Workflows und die Frage, ob ein OpenClaw-Setup bereits sinnvoll ist oder ein kleinerer Agent besser startet."
   />
 </Base>

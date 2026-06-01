@@ -5,13 +5,13 @@ const faqs = [
   {
     question: "Was bedeutet KI-Integration in Prozesse konkret?",
     answer:
-      "KI-Integration in Prozesse heißt: Die KI arbeitet nicht isoliert in einem Chatfenster, sondern liest relevante Daten, bereitet nächste Schritte vor und übergibt Ergebnisse an die Systeme, in denen dein Team ohnehin arbeitet.",
+      "KI-Integration in Prozesse heißt: Die KI verlässt das einzelne Chatfenster, liest relevante Daten, bereitet nächste Schritte vor und übergibt Ergebnisse an die Systeme, in denen dein Team ohnehin arbeitet.",
     category: "Grundlagen",
   },
   {
     question: "Welche Prozesse eignen sich zuerst?",
     answer:
-      "Gute Startpunkte sind wiederkehrende Abläufe mit verlässlichen Quellen und sichtbarer Nacharbeit: Postfach-Triage, CRM-Übergaben, Dokumentenprüfung, Reporting, Support oder interne Rückfragen.",
+      "Gute Startpunkte sind wiederkehrende Abläufe mit verlässlichen Quellen und sichtbarer Nacharbeit: Postfach sortieren, CRM-Übergaben, Dokumentenprüfung, Reporting, Support oder interne Rückfragen.",
     category: "Eignung",
   },
   {
@@ -26,17 +26,43 @@ const faqs = [
       "Über verlässliche Datenquellen, erlaubte Aktionen, Freigaben, Logs und Stopps. Kritische Ergebnisse werden vorbereitet, aber nicht blind ausgelöst.",
     category: "Kontrolle",
   },
+  {
+    question:
+      "Was ist der Unterschied zwischen KI-Integration und Automatisierung?",
+    answer:
+      "Automatisierung folgt festen Regeln. KI-Integration bindet zusätzlich einen Agenten in den Ablauf ein, der Kontext liest, Informationen bewertet und Arbeit vorbereitet, bevor ein Mensch oder ein Zielsystem übernimmt.",
+    category: "Grundlagen",
+  },
+  {
+    question: "Wie startet man eine Integration Strategy Entwicklung?",
+    answer:
+      "Der Start ist eine Prozesskarte: Auslöser, Datenquellen, Zielsystem, manuelle Prüfung, Freigaben und Erfolgskriterium. Erst danach entscheiden wir, ob n8n, API-Verbindung oder ein größerer Agenten-Stack passt.",
+    category: "Strategie",
+  },
+  {
+    question:
+      "Welche bestehenden Systeme lassen sich in KI-Abläufe integrieren?",
+    answer:
+      "Typische Systeme sind E-Mail, CRM, Kalender, Dokumentenablage, Projekttools, Helpdesk, Buchhaltung und interne Wissensquellen. Entscheidend sind Schnittstellen, Rechte, Datenqualität und ein begrenzter Zweck.",
+    category: "Systeme",
+  },
+  {
+    question: "Wie wird der Erfolg einer KI-Integration gemessen?",
+    answer:
+      "Wir messen Volumen, gesparte manuelle Schritte, Fehlerquote, Freigabeaufwand und Nacharbeit. Ein Pilot gilt erst als tragfähig, wenn reale Fälle schneller oder verlässlicher durch den Ablauf laufen.",
+    category: "ROI",
+  },
 ];
 ---
 
 <SeoLandingPageTemplate
   title="KI-Integration Prozesse: KI sauber in bestehende Abläufe integrieren | codariq"
-  description="KI-Integration für Prozesse, die im Alltag funktionieren: Codariq verbindet Daten, Tools, Freigaben und Betrieb, damit KI-Agenten echte Arbeit vorbereiten."
+  description="KI-Integration für Prozesse, die im Alltag funktionieren: Codariq verbindet Daten, Tools, Freigaben und Betrieb, damit KI-Agenten konkrete Arbeit vorbereiten."
   keywords="KI Integration Prozesse, KI-Integration Prozesse, Integration KI, KI integrieren, künstliche Intelligenz Integration, Integration Strategy Entwicklung, IT-Integration für Unternehmen optimieren, KI Integration bestehende Systeme"
   breadcrumbName="KI-Integration Prozesse"
   breadcrumbUrl="https://codariq.de/ki-integration-prozesse"
-  heroTitle="KI-Integration, die in echte Prozesse passt."
-  heroSubtitle="Wir integrieren KI nicht als weiteres Tool, sondern als begrenzten Agenten im Ablauf: Daten lesen, Arbeit vorbereiten, Ergebnisse übergeben und bei Verantwortung stoppen."
+  heroTitle="KI-Integration, die in Arbeitsprozesse passt."
+  heroSubtitle="Wir integrieren KI als begrenzten Agenten im Ablauf: Daten lesen, Arbeit vorbereiten, Ergebnisse übergeben und bei Verantwortung stoppen."
   primaryCTA="Integrationspunkt prüfen"
   secondaryCTA="KI-Check starten"
   secondaryCTALink="/agent-readiness"
@@ -59,7 +85,7 @@ const faqs = [
   ]}
   processEyebrow="Von Prozess zu Pilot"
   processTitle="So wird aus Integration KI, die wirklich genutzt wird."
-  processText="Wir starten nicht mit einem großen Architekturbild, sondern mit einem belastbaren Ablauf. Erst wenn der erste Prozess messbar funktioniert, lohnt sich der Ausbau."
+  processText="Wir starten mit einem belastbaren Ablauf. Erst wenn der erste Prozess messbar funktioniert, lohnt sich der Ausbau."
   steps={[
     {
       title: "Ablauf mit Reibung auswählen",
@@ -81,7 +107,7 @@ const faqs = [
     },
     {
       title: "Kleinen Pilot integrieren",
-      text: "Der Agent übernimmt einen Teilprozess, wird mit echten Fällen getestet und erst danach erweitert.",
+      text: "Der Agent übernimmt einen Teilprozess, wird mit realen Fällen getestet und erst danach erweitert.",
       items: [
         "Tests mit realen Beispielen",
         "Logs für Fehler und Qualität",

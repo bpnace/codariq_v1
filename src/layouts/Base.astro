@@ -21,7 +21,7 @@ export interface Props {
 
 const {
   title,
-  description = "Wir bauen kontrollierbare KI-Agenten für echte Arbeit: von n8n-basierten Startabläufen bis zu Agentenbetrieb mit Rollen, Freigaben, Logs und DSGVO-orientierter Integration.",
+  description = "Wir bauen kontrollierbare KI-Agenten für konkrete Arbeit: von n8n-basierten Startabläufen bis zu Agentenbetrieb mit Rollen, Freigaben, Logs und DSGVO-orientierter Integration.",
   keywords = "kontrollierbare KI Agenten, sichere KI Agenten, KI Agenten KMU, KI Agenten Selbstständige, DSGVO KI Agenten, EU AI Act KI Agenten, n8n KI Agent, OpenClaw Setup, KI Agenten Setup, KI Integration bestehende Systeme, Human-in-the-loop Freigaben, Agenten mit Grenzen, Backoffice Agent",
   ogImage,
   article,
@@ -476,7 +476,7 @@ const ccm19ScriptSrc =
         "@type": "Organization",
         "name": "codariq",
         "alternateName": "codariq",
-        "description": "Codariq plant und baut KI-Agenten, digitale Assistenten und Agenten-Stacks für echte Arbeit: mit Aufgabenraum, Rollen, Freigaben, Logs und DSGVO-orientierten Datenflüssen.",
+        "description": "Codariq plant und baut KI-Agenten, digitale Assistenten und Agenten-Stacks für konkrete Arbeit: mit Aufgabenraum, Rollen, Freigaben, Logs und DSGVO-orientierten Datenflüssen.",
         "url": "https://codariq.de",
         "image": "https://codariq.de/images/hero/hero2.webp",
         "foundingDate": "2025",
@@ -533,7 +533,7 @@ const ccm19ScriptSrc =
           "Datenflüsse für KI-Agenten",
           "KI-Agenten-Setups mit OpenClaw",
           "n8n KI-Agenten",
-          "E-Mail-Triage mit KI-Agenten",
+          "E-Mails mit KI-Agenten sortieren",
           "Dokumenten-Verarbeitung mit Freigaben",
           "Backoffice-Agenten",
           "Agenten mit Grenzen",
@@ -580,7 +580,7 @@ const ccm19ScriptSrc =
               "itemOffered": {
                 "@type": "Service",
                 "name": "Erster Einsatz",
-                "description": "Ein begrenzter KI-Agenten-Ablauf mit bis zu 3 verbundenen Arbeitsschritten, vorhandenen Systemen, Freigaben, Sonderfällen und Tests mit echten Beispielen.",
+                "description": "Ein begrenzter KI-Agenten-Ablauf mit bis zu 3 verbundenen Arbeitsschritten, vorhandenen Systemen, Freigaben, Sonderfällen und Tests mit realen Beispielen.",
                 "provider": {
                   "@type": "Organization",
                   "name": "codariq"
@@ -635,7 +635,7 @@ const ccm19ScriptSrc =
         "@context": "https://schema.org",
         "@type": "SpecialAnnouncement",
         "name": "Kostenloser KI-Agenten-Check",
-        "text": "Erhalten Sie eine kostenlose Einordnung, welcher KI-Agent echte Arbeit übernehmen kann und welche Datenwege, Rollen und Freigaben vorher geklärt werden müssen.",
+        "text": "Erhalten Sie eine kostenlose Einordnung, welcher KI-Agent konkrete Arbeit übernehmen kann und welche Datenwege, Rollen und Freigaben vorher geklärt werden müssen.",
         "category": "https://www.wikidata.org/wiki/Q186386",
         "datePosted": "2026-01-29",
         "expires": "2026-12-31",
@@ -1335,6 +1335,73 @@ const ccm19ScriptSrc =
             }
           }
 
+          const homeScrollStorageKey = "codariq:home-scroll-position";
+          const isHomePath = (path: string) =>
+            path === "/" || path === "/index.html";
+          const isHomepage = isHomePath(window.location.pathname);
+
+          const saveHomepageScroll = () => {
+            if (!isHomepage || window.location.hash) return;
+
+            try {
+              sessionStorage.setItem(
+                homeScrollStorageKey,
+                JSON.stringify({
+                  y: Math.max(0, window.scrollY),
+                  timestamp: Date.now(),
+                }),
+              );
+            } catch {
+              // Ignore storage restrictions.
+            }
+          };
+
+          if (isHomepage && !window.location.hash) {
+            try {
+              const rawHomeScroll =
+                sessionStorage.getItem(homeScrollStorageKey);
+              const navigationEntry = performance.getEntriesByType(
+                "navigation",
+              )[0] as PerformanceNavigationTiming | undefined;
+              const cameFromSameSite =
+                document.referrer.startsWith(window.location.origin) &&
+                !isHomePath(new URL(document.referrer).pathname);
+
+              if (
+                rawHomeScroll &&
+                (navigationEntry?.type === "back_forward" || cameFromSameSite)
+              ) {
+                const stored = JSON.parse(rawHomeScroll) as {
+                  y?: number;
+                  timestamp?: number;
+                };
+                const isFresh =
+                  typeof stored.timestamp === "number" &&
+                  Date.now() - stored.timestamp < 30 * 60 * 1000;
+
+                if (isFresh && typeof stored.y === "number" && stored.y > 0) {
+                  const restoreHomepageScroll = () => {
+                    const html = document.documentElement;
+                    const previousBehavior = html.style.scrollBehavior;
+                    html.style.scrollBehavior = "auto";
+                    window.scrollTo(0, stored.y ?? 0);
+                    html.style.scrollBehavior = previousBehavior;
+                  };
+
+                  requestAnimationFrame(() => {
+                    requestAnimationFrame(restoreHomepageScroll);
+                  });
+                }
+              }
+            } catch {
+              sessionStorage.removeItem(homeScrollStorageKey);
+            }
+          }
+
+          window.addEventListener("pagehide", saveHomepageScroll, {
+            passive: true,
+          });
+
           // Footer Newsletter form submission with webhook
           if (
             footerNewsletterForm &&
@@ -1488,9 +1555,18 @@ const ccm19ScriptSrc =
                 const href = this.getAttribute("href");
                 if (!href) return;
 
-                const targetId = href.startsWith("/#")
-                  ? href.substring(2)
-                  : href.substring(1);
+                const targetUrl = new URL(href, window.location.href);
+                const targetPath = targetUrl.pathname;
+                const currentPath = window.location.pathname;
+                const samePage =
+                  targetUrl.origin === window.location.origin &&
+                  targetPath === currentPath;
+
+                if (!samePage) return;
+
+                const targetId = decodeURIComponent(targetUrl.hash.slice(1));
+                if (!targetId) return;
+
                 const targetElement = document.getElementById(targetId);
 
                 if (targetElement) {
@@ -1524,7 +1600,7 @@ const ccm19ScriptSrc =
                   });
 
                   // Update URL without causing a jump
-                  window.history.pushState({}, "", href);
+                  window.history.pushState({}, "", targetUrl.hash);
                 }
               },
             );

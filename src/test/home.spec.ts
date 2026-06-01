@@ -64,8 +64,12 @@ test("mobile hero uses the compact background and skips enterprise motion", asyn
 });
 
 test("trust badges render visible inline icons", async ({ page }) => {
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
   await page.goto("/");
 
+  await page.locator("#trust-bar").scrollIntoViewIfNeeded();
   const icons = page.locator(".trust-pill__icon");
   await expect(icons).toHaveCount(3);
   await expect(icons.first()).toBeVisible();
@@ -95,7 +99,14 @@ test("trust badges render visible inline icons", async ({ page }) => {
 test("home keeps contextual landing-page links on matching proof cards", async ({
   page,
 }) => {
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
   await page.goto("/");
+  await page.addStyleTag({
+    content:
+      ".ccm-root { display: none !important; pointer-events: none !important; }",
+  });
 
   await expect(page.locator("#seo-einstiege")).toHaveCount(0);
 
@@ -108,8 +119,8 @@ test("home keeps contextual landing-page links on matching proof cards", async (
 
   await expect(section.locator("[data-contextual-entry-links]")).toHaveCount(0);
 
-  const cardLinks = section.locator(".proof-card__link");
-  await expect(cardLinks).toHaveCount(3);
+  const cardLinks = section.locator("a.proof-card");
+  await expect(cardLinks).toHaveCount(6);
   const linkTargets = await cardLinks.evaluateAll((anchors) =>
     anchors.map((anchor) => ({
       href: anchor.getAttribute("href"),
@@ -118,9 +129,30 @@ test("home keeps contextual landing-page links on matching proof cards", async (
   );
 
   expect(linkTargets).toEqual([
-    { href: "/ki-integration-prozesse", text: "Prozesse prüfen" },
-    { href: "/crm-und-ki-integration", text: "CRM-Setup ansehen" },
-    { href: "/ki-projekt-retten", text: "Projekt retten" },
+    {
+      href: "/terminmappe-vor-dem-gespraech",
+      text: expect.stringContaining("Terminmappe vor dem Gespräch"),
+    },
+    {
+      href: "/teamwissen-ohne-zuruf",
+      text: expect.stringContaining("Teamwissen ohne Zuruf"),
+    },
+    {
+      href: "/anfragen-sauber-einordnen",
+      text: expect.stringContaining("Anfragen sauber einordnen"),
+    },
+    {
+      href: "/entscheidungen-vorbereiten",
+      text: expect.stringContaining("Entscheidungen mit vorbereitetem Stand"),
+    },
+    {
+      href: "/chef-ueberblick-ohne-nachfragen",
+      text: expect.stringContaining("Chef-Überblick ohne Nachfragen"),
+    },
+    {
+      href: "/daten-und-unterlagen-vorsortieren",
+      text: expect.stringContaining("Daten und Unterlagen vorsortieren"),
+    },
   ]);
   expect(
     linkTargets.every((target) => !target.href?.startsWith("/blog/")),
@@ -134,26 +166,56 @@ test("home keeps contextual landing-page links on matching proof cards", async (
   await expect(
     section
       .locator(".proof-card")
+      .filter({ hasText: "Terminmappe vor dem Gespräch" })
+      .first(),
+  ).toHaveAttribute("href", "/terminmappe-vor-dem-gespraech");
+  await expect(
+    section
+      .locator(".proof-card")
       .filter({ hasText: "Teamwissen ohne Zuruf" })
-      .getByRole("link", { name: "Prozesse prüfen" }),
-  ).toHaveAttribute("href", "/ki-integration-prozesse");
+      .first(),
+  ).toHaveAttribute("href", "/teamwissen-ohne-zuruf");
   await expect(
     section
       .locator(".proof-card")
       .filter({ hasText: "Anfragen sauber einordnen" })
-      .getByRole("link", { name: "CRM-Setup ansehen" }),
-  ).toHaveAttribute("href", "/crm-und-ki-integration");
+      .first(),
+  ).toHaveAttribute("href", "/anfragen-sauber-einordnen");
   await expect(
     section
       .locator(".proof-card")
       .filter({ hasText: "Entscheidungen mit vorbereitetem Stand" })
-      .getByRole("link", { name: "Projekt retten" }),
-  ).toHaveAttribute("href", "/ki-projekt-retten");
+      .first(),
+  ).toHaveAttribute("href", "/entscheidungen-vorbereiten");
+  await expect(
+    section
+      .locator(".proof-card")
+      .filter({ hasText: "Chef-Überblick ohne Nachfragen" })
+      .first(),
+  ).toHaveAttribute("href", "/chef-ueberblick-ohne-nachfragen");
+  await expect(
+    section
+      .locator(".proof-card")
+      .filter({ hasText: "Daten und Unterlagen vorsortieren" })
+      .first(),
+  ).toHaveAttribute("href", "/daten-und-unterlagen-vorsortieren");
 
-  const firstCta = section.getByRole("link", { name: "Prozesse prüfen" });
-  await firstCta.scrollIntoViewIfNeeded();
-  await firstCta.click();
-  await expect(page).toHaveURL(/\/ki-integration-prozesse$/);
+  await expect(section.locator(".proof-card__link")).toHaveCount(0);
+
+  const teamCard = section
+    .locator(".proof-card")
+    .filter({ hasText: "Teamwissen ohne Zuruf" })
+    .first();
+  await teamCard.scrollIntoViewIfNeeded();
+  const previousHomeScrollY = await page.evaluate(() => window.scrollY);
+  await teamCard.click();
+  await expect(page).toHaveURL(/\/teamwissen-ohne-zuruf$/);
+  await page.goBack({ waitUntil: "domcontentloaded" });
+  await expect(page).toHaveURL(/\/$/);
+  await page.waitForFunction(
+    (expectedScrollY) => Math.abs(window.scrollY - expectedScrollY) < 120,
+    previousHomeScrollY,
+  );
 });
 
 test("home renders CCM19 and a debug-capable consent-mode google tag", async ({
@@ -642,7 +704,7 @@ test("pain list uses agent reframing", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByText(
-      "Tools, Daten und Abläufe sind vorhanden. Aber solange Datenflüsse, Freigaben, Sonderfälle und Verantwortlichkeiten offen sind, wird ein Agent im echten Betrieb zum Risiko.",
+      "Tools, Daten und Abläufe sind vorhanden. Aber solange Datenflüsse, Freigaben, Sonderfälle und Verantwortlichkeiten offen sind, wird ein Agent im Betrieb zum Risiko.",
     ),
   ).toBeVisible();
 });
@@ -703,8 +765,9 @@ test("testimonials mix two feedback quotes with team use cases", async ({
     section.getByRole("link", { name: "Jetzt Projekt anfragen" }),
   ).toHaveAttribute("href", "#final-cta");
   await expect(section.locator("[data-contextual-entry-links]")).toHaveCount(0);
-  await expect(section.locator(".proof-card__link")).toHaveCount(3);
-  await expect(section.locator(".proof-card")).toHaveCount(6);
+  await expect(section.locator(".proof-card__link")).toHaveCount(0);
+  await expect(section.locator("a.proof-card")).toHaveCount(6);
+  await expect(section.locator(".proof-card__cue")).toHaveCount(6);
   await expect(section.getByText("Triage")).toHaveCount(0);
   await expect(section.getByText("Scope")).toHaveCount(0);
   await expect(section.getByText("Prompts")).toHaveCount(0);
@@ -712,6 +775,9 @@ test("testimonials mix two feedback quotes with team use cases", async ({
 });
 
 test("testimonial cards blur in with a randomized order", async ({ page }) => {
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
   await page.goto("/");
 
   const section = page.locator("#testimonials");
