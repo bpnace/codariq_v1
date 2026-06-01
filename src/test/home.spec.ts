@@ -63,19 +63,31 @@ test("mobile hero uses the compact background and skips enterprise motion", asyn
   expect(enterpriseMotionRequests).toEqual([]);
 });
 
-test("trust badges use local badge assets", async ({ page }) => {
+test("trust badges render visible inline icons", async ({ page }) => {
   await page.goto("/");
 
-  const sources = await page
-    .locator(".trust-pill__icon")
-    .evaluateAll((icons) => icons.map((icon) => icon.getAttribute("src")));
+  const icons = page.locator(".trust-pill__icon");
+  await expect(icons).toHaveCount(3);
+  await expect(icons.first()).toBeVisible();
 
-  expect(sources).toEqual([
-    "/images/badges/gdpr-ready.webp",
-    "/images/badges/EU-hosted.webp",
-    "/images/badges/remote-only.webp",
-  ]);
-  expect(sources.every((source) => source?.startsWith("/images/badges/"))).toBe(
+  const iconMetrics = await icons.evaluateAll((elements) =>
+    elements.map((icon) => {
+      const rect = icon.getBoundingClientRect();
+      const style = getComputedStyle(icon);
+
+      return {
+        pathCount: icon.querySelectorAll("path").length,
+        width: rect.width,
+        height: rect.height,
+        stroke: style.stroke,
+      };
+    }),
+  );
+
+  expect(iconMetrics.every((icon) => icon.pathCount > 0)).toBe(true);
+  expect(iconMetrics.every((icon) => icon.width >= 36)).toBe(true);
+  expect(iconMetrics.every((icon) => icon.height >= 36)).toBe(true);
+  expect(iconMetrics.every((icon) => icon.stroke === "rgb(255, 255, 255)")).toBe(
     true,
   );
 });

@@ -34,17 +34,29 @@ const {
 const normalizeVariant = (icon: string) =>
   icon.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-const iconSources: Record<string, string> = {
-  "gdpr-ready": "/images/badges/gdpr-ready.webp",
-  "eu-hosted": "/images/badges/EU-hosted.webp",
-  "remote-only": "/images/badges/remote-only.webp",
+const iconPaths: Record<string, string[]> = {
+  "gdpr-ready": [
+    "M12 3.25 5.75 5.8v5.15c0 4.05 2.58 7.72 6.25 9.04 3.67-1.32 6.25-4.99 6.25-9.04V5.8L12 3.25Z",
+    "m9.1 12.05 1.95 1.95 3.95-4.2",
+  ],
+  "eu-hosted": [
+    "M5.25 7.1c0-1.41 3.02-2.55 6.75-2.55s6.75 1.14 6.75 2.55-3.02 2.55-6.75 2.55S5.25 8.51 5.25 7.1Z",
+    "M5.25 7.1v4.9c0 1.41 3.02 2.55 6.75 2.55s6.75-1.14 6.75-2.55V7.1",
+    "M5.25 12v4.9c0 1.41 3.02 2.55 6.75 2.55s6.75-1.14 6.75-2.55V12",
+  ],
+  "remote-only": [
+    "M7.15 5.2h9.7a2 2 0 0 1 2 2v6.9a2 2 0 0 1-2 2h-9.7a2 2 0 0 1-2-2V7.2a2 2 0 0 1 2-2Z",
+    "M9.4 19.15h5.2",
+    "M12 16.1v3.05",
+    "m9.15 10.75 1.8 1.8 3.9-4.15",
+  ],
 };
 
 const trustBadges = badges.map((badge) => ({
   ...badge,
   variant: normalizeVariant(badge.icon),
-  iconSrc:
-    iconSources[normalizeVariant(badge.icon)] ?? iconSources["remote-only"],
+  iconPath:
+    iconPaths[normalizeVariant(badge.icon)] ?? iconPaths["remote-only"],
 }));
 ---
 
@@ -65,14 +77,15 @@ const trustBadges = badges.map((badge) => ({
             class={`trust-pill trust-pill--${badge.variant} enterprise-card`}
           >
             <div class="trust-pill__visual" aria-hidden="true">
-              <img
+              <svg
                 class="trust-pill__icon"
-                src={badge.iconSrc}
-                width="96"
-                height="96"
-                alt=""
-                loading="lazy"
-              />
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                {badge.iconPath.map((d) => (
+                  <path d={d} />
+                ))}
+              </svg>
             </div>
             <div class="trust-pill__content">
               <h3>{badge.name}</h3>
@@ -208,12 +221,14 @@ const trustBadges = badges.map((badge) => ({
   .trust-pill__icon {
     position: relative;
     z-index: 1;
-    width: clamp(2rem, 3.2vw, 2.55rem);
-    height: clamp(2rem, 3.2vw, 2.55rem);
-    object-fit: contain;
-    opacity: 0.96;
-    filter: brightness(0) invert(1)
-      drop-shadow(0 0.75rem 1.25rem rgba(15, 23, 42, 0.24));
+    width: clamp(2.25rem, 3.4vw, 2.85rem);
+    height: clamp(2.25rem, 3.4vw, 2.85rem);
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0.75rem 1.25rem rgba(15, 23, 42, 0.24));
   }
 
   .trust-pill__content {
