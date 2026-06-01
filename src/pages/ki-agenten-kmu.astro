@@ -35,11 +35,11 @@ const useCases = [
 const buildSteps = [
   {
     title: "Ablauf verstehen",
-    text: "Wir klären, welche Aufgabe der Agent übernehmen soll, welche Daten wirklich nötig sind und wo ein Mensch entscheiden muss.",
+    text: "Wir prüfen, welche Aufgabe der Agent übernehmen soll, welche Daten wirklich nötig sind und wo ein Mensch entscheiden muss.",
   },
   {
     title: "Agenten-Grenzen definieren",
-    text: "Der Agent bekommt klare Rollen, erlaubte Aktionen, Freigaben und Abbruchpunkte. So entsteht kein Blackbox-System.",
+    text: "Der Agent bekommt feste Rollen, erlaubte Aktionen, Freigaben und Abbruchpunkte. So entsteht kein Blackbox-System.",
   },
   {
     title: "n8n oder Agenten-Stack bauen",
@@ -55,7 +55,7 @@ const faqs = [
   {
     question: "Was ist der Unterschied zwischen Automatisierung und KI-Agent?",
     answer:
-      "Eine klassische Automatisierung folgt festen Regeln. Ein KI-Agent kann Informationen lesen, priorisieren, zusammenfassen, Vorschläge erstellen und Aktionen vorbereiten. Wichtig bleibt: Er darf nur innerhalb klar definierter Grenzen handeln.",
+      "Eine klassische Automatisierung folgt festen Regeln. Ein KI-Agent kann Informationen lesen, priorisieren, zusammenfassen, Vorschläge erstellen und Aktionen vorbereiten. Wichtig bleibt: Er darf nur innerhalb definierter Grenzen handeln.",
     category: "Grundlagen",
   },
   {
@@ -67,13 +67,13 @@ const faqs = [
   {
     question: "Startet ihr direkt mit einem großen Agenten-System?",
     answer:
-      "Nein. Wir starten mit dem kleinsten sinnvollen Agenten, oft als n8n-basierter Workflow mit KI-Schritten. Erst wenn Rollen, Datenfluss und Nutzen klar sind, lohnt sich ein größerer Agenten-Stack.",
+      "Nein. Wir starten mit dem kleinsten sinnvollen Agenten, oft als n8n-basierter Workflow mit KI-Schritten. Erst wenn Rollen, Datenfluss und Nutzen belastbar sind, lohnt sich ein größerer Agenten-Stack.",
     category: "Umsetzung",
   },
   {
     question: "Wie bleibt die Kontrolle beim Unternehmen?",
     answer:
-      "Über Rollen, Freigaben, Logs, definierte Tool-Zugriffe und klare Stopps. Kritische Entscheidungen werden nicht heimlich automatisiert, sondern bewusst an Menschen übergeben.",
+      "Über Rollen, Freigaben, Logs, definierte Tool-Zugriffe und feste Stopps. Kritische Entscheidungen werden nicht heimlich automatisiert, sondern bewusst an Menschen übergeben.",
     category: "Kontrolle",
   },
   {
@@ -102,7 +102,7 @@ const faqs = [
     title="KI-Agenten für KMU, die wirklich Aufgaben übernehmen."
     subtitle="Wir bauen kontrollierbare Agenten für Postfach, Backoffice, Support, Wissen und Reporting. Vom schlanken n8n-Workflow bis zum stabilen Agenten-Setup mit Freigaben, Rollen und DSGVO-konformer Datenführung."
     heroImage="/images/hero/hero2.webp"
-    primaryCTA="Agenten-Grenzen klären"
+    primaryCTA="Agenten-Grenzen prüfen"
     primaryCTALink="/#final-cta"
     secondaryCTA="Use Cases ansehen"
     secondaryCTALink="#use-cases"
@@ -162,7 +162,7 @@ const faqs = [
 
   <UseCaseCardsSection
     title="KI-Agenten, die KMU wirklich nutzen"
-    subtitle="Drei Einstiege, die häufig schnell Klarheit schaffen: Postfach, Backoffice und internes Wissen."
+    subtitle="Drei Einstiege, die häufig schnell Orientierung geben: Postfach, Backoffice und internes Wissen."
     useCases={useCases}
   />
 
@@ -173,7 +173,7 @@ const faqs = [
           So bauen wir deinen ersten KI-Agenten
         </h2>
         <p class="section-subtitle max-w-3xl mx-auto">
-          Kein Agenten-Hype, sondern ein klarer Bauplan: Aufgabe, Datenfluss,
+          Kein Agenten-Hype, sondern ein umsetzbarer Bauplan: Aufgabe, Datenfluss,
           Grenzen, Tests und Betrieb.
         </p>
       </div>
@@ -233,7 +233,7 @@ const faqs = [
             href="/dsgvo-ki-agenten"
             class="block rounded-xl border border-white/15 bg-white/10 p-5 hover:bg-white/15 transition-colors"
           >
-            <h3 class="font-black text-xl mb-2">DSGVO-Architektur klären</h3>
+            <h3 class="font-black text-xl mb-2">DSGVO-Architektur prüfen</h3>
             <p class="text-white/75">
               Für Datenflüsse, Freigaben, Rollen und menschliche Prüfung bei
               sensiblen Entscheidungen.

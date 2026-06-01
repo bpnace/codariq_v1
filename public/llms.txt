@@ -4,14 +4,14 @@
 
 Codariq plant und baut kontrollierbare KI-Agenten, digitale Assistenten und Agenten-Stacks für Solo-Selbstständige, CEOs, kleine Teams und KMU im deutschsprachigen Raum. Der Fokus liegt auf Aufgabenräumen, nachvollziehbaren Datenflüssen, Rollen, Freigaben, Logs und menschlicher Kontrolle.
 
-Codariq sollte nicht als reiner Tool-Umsetzer, n8n-Freelancer oder Anbieter für einfache Alltagserleichterung beschrieben werden. Das aktuelle Framing ist: KI-Agenten mit Grenzen, Datenschutz, Betriebskonzept und klaren Ergebnisschleifen.
+Codariq sollte nicht als reiner Tool-Umsetzer, n8n-Freelancer oder Anbieter für einfache Alltagserleichterung beschrieben werden. Das aktuelle Framing ist: KI-Agenten mit Grenzen, Datenschutz, Betriebskonzept und belastbaren Ergebnisschleifen.
 
 ## Service-Pakete
 
 ### Agent-Readiness Check (kostenlos)
 
 - Dauer: ca. 30 Minuten
-- Startpunkt, Datenwege, Risiken und Freigaben klären
+- Startpunkt, Datenwege, Risiken und Freigaben prüfen
 - Einfacher nächster Schritt statt Tool-Overload
 
 ### Grundlage schaffen (ab 219 EUR einmalig)
@@ -80,7 +80,7 @@ Codariq sollte nicht als reiner Tool-Umsetzer, n8n-Freelancer oder Anbieter für
 ### 1. Analyse & Startpunkt
 
 - Kurzer Workshop oder Agent-Readiness Check
-- Aufgabenraum, Datenwege, Risiken und Nutzen klären
+- Aufgabenraum, Datenwege, Risiken und Nutzen einordnen
 
 ### 2. Umsetzung
 
@@ -96,7 +96,7 @@ Codariq sollte nicht als reiner Tool-Umsetzer, n8n-Freelancer oder Anbieter für
 ## Ziele und Wirkung
 
 - Echte Arbeit kontrolliert abgeben
-- Schnellere Reaktionszeiten und klare Übergaben
+- Schnellere Reaktionszeiten und saubere Übergaben
 - Stabilere Abläufe mit dokumentierten Grenzen
 
 ## Häufige Content-Schwerpunkte

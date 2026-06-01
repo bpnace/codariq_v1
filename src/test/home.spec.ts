@@ -87,9 +87,9 @@ test("trust badges render visible inline icons", async ({ page }) => {
   expect(iconMetrics.every((icon) => icon.pathCount > 0)).toBe(true);
   expect(iconMetrics.every((icon) => icon.width >= 36)).toBe(true);
   expect(iconMetrics.every((icon) => icon.height >= 36)).toBe(true);
-  expect(iconMetrics.every((icon) => icon.stroke === "rgb(255, 255, 255)")).toBe(
-    true,
-  );
+  expect(
+    iconMetrics.every((icon) => icon.stroke === "rgb(255, 255, 255)"),
+  ).toBe(true);
 });
 
 test("seo entry section uses explicit landing-page CTAs", async ({ page }) => {
@@ -114,9 +114,9 @@ test("seo entry section uses explicit landing-page CTAs", async ({ page }) => {
     { href: "/crm-und-ki-integration", text: "CRM-Setup ansehen" },
     { href: "/ki-projekt-retten", text: "Projekt retten" },
   ]);
-  expect(linkTargets.every((target) => !target.href?.startsWith("/blog/"))).toBe(
-    true,
-  );
+  expect(
+    linkTargets.every((target) => !target.href?.startsWith("/blog/")),
+  ).toBe(true);
 
   const firstCard = section.locator(".intent-entry__card").first();
   const firstCardBox = await firstCard.boundingBox();
@@ -1032,7 +1032,10 @@ test("final cta uses the google calendar logo", async ({ page }) => {
   await expect(schedulingButton).toBeVisible();
 
   const icon = schedulingButton.locator("img.secure-calendar-action__icon");
-  await expect(icon).toHaveAttribute("src", "/images/logos/google-calendar.svg");
+  await expect(icon).toHaveAttribute(
+    "src",
+    "/images/logos/google-calendar.svg",
+  );
   await expect(icon).toHaveAttribute("width", "48");
   await expect(icon).toHaveAttribute("height", "48");
   await expect(icon).toHaveCSS("width", "28px");
@@ -1129,13 +1132,15 @@ test("featured benefits system card has a subtle animated highlight", async ({
   await expect(systemCard.getByText("Kontrolliert nutzbar")).toBeVisible();
   await expect(
     page.getByRole("heading", {
-      name: "Individuelles Angebot benötigt?",
+      name: "Etwas ganz anderes wird benötigt?",
     }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Umfang klären" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Individuelle Anfrage stellen" }),
+  ).toBeVisible();
   await expect(
     page.getByText(
-      "Kein IT-Wissen nötig. Wir klären Prozess und Verantwortung.",
+      "Kein IT-Wissen nötig. Wir prüfen Prozess und Verantwortung.",
     ),
   ).toBeVisible();
 
