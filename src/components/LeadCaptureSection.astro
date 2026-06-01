@@ -158,21 +158,16 @@ const bookingUrl =
                 rel="noopener noreferrer"
                 aria-label="30 min Potenzialgespräch über Google Calendar buchen"
               >
-                <svg
+                <img
                   class="secure-calendar-action__icon"
-                  viewBox="0 0 24 24"
+                  src="/images/logos/google-calendar.svg"
+                  width="48"
+                  height="48"
+                  alt=""
                   aria-hidden="true"
-                >
-                  <path
-                    d="M7 2v3M17 2v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"></path>
-                  <path d="M8 13h3v3H8zM13 13h3v3h-3z" fill="currentColor"
-                  ></path>
-                </svg>
+                  loading="lazy"
+                  decoding="async"
+                />
                 <span>Termin buchen</span>
               </a>
             </div>
@@ -478,8 +473,8 @@ const bookingUrl =
     }
 
     .secure-calendar-action__icon {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.75rem;
+      height: 1.75rem;
       flex: 0 0 auto;
     }
 

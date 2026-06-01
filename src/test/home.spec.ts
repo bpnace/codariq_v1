@@ -92,6 +92,50 @@ test("trust badges render visible inline icons", async ({ page }) => {
   );
 });
 
+test("seo entry section uses explicit landing-page CTAs", async ({ page }) => {
+  await page.goto("/");
+
+  const section = page.locator("#seo-einstiege");
+  await section.scrollIntoViewIfNeeded();
+  await expect(section).toBeVisible();
+
+  const links = section.locator("a");
+  await expect(links).toHaveCount(3);
+
+  const linkTargets = await links.evaluateAll((anchors) =>
+    anchors.map((anchor) => ({
+      href: anchor.getAttribute("href"),
+      text: anchor.textContent?.trim(),
+    })),
+  );
+
+  expect(linkTargets).toEqual([
+    { href: "/ki-integration-prozesse", text: "Prozess prüfen" },
+    { href: "/crm-und-ki-integration", text: "CRM-Setup ansehen" },
+    { href: "/ki-projekt-retten", text: "Projekt retten" },
+  ]);
+  expect(linkTargets.every((target) => !target.href?.startsWith("/blog/"))).toBe(
+    true,
+  );
+
+  const firstCard = section.locator(".intent-entry__card").first();
+  const firstCardBox = await firstCard.boundingBox();
+  if (!firstCardBox) {
+    throw new Error("SEO entry card was not measurable.");
+  }
+
+  await page.mouse.click(
+    firstCardBox.x + firstCardBox.width / 2,
+    firstCardBox.y + firstCardBox.height / 2,
+  );
+  await expect(page).toHaveURL(/\/$/);
+
+  const firstCta = section.getByRole("link", { name: "Prozess prüfen" });
+  await firstCta.scrollIntoViewIfNeeded();
+  await firstCta.click();
+  await expect(page).toHaveURL(/\/ki-integration-prozesse$/);
+});
+
 test("home renders CCM19 and a debug-capable consent-mode google tag", async ({
   page,
 }) => {
@@ -636,7 +680,7 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   ).toHaveLength(2);
 
   await expect(
-    section.getByRole("link", { name: "Fall einordnen" }),
+    section.getByRole("link", { name: "Fall Prüfen" }),
   ).toBeVisible();
   await expect(section.locator(".proof-card")).toHaveCount(6);
   await expect(section.getByText("Triage")).toHaveCount(0);
@@ -877,8 +921,8 @@ test("final cta keeps form submit separate from calendar booking", async ({
   await expect(schedulingButton).toHaveAttribute("href", scheduleUrl);
   await expect(schedulingButton).toHaveAttribute("target", "_blank");
   await expect(
-    schedulingButton.locator("svg.secure-calendar-action__icon"),
-  ).toHaveCSS("width", "24px");
+    schedulingButton.locator("img.secure-calendar-action__icon"),
+  ).toHaveCSS("width", "28px");
   await expect(schedulingButton).toHaveCSS(
     "background-color",
     "rgb(255, 255, 255)",
@@ -976,6 +1020,23 @@ test("final cta keeps form submit separate from calendar booking", async ({
   await expect(submitButton).toHaveText("Anfrage angekommen");
   await expect(submitButton).toBeDisabled();
   await expect(form.getByText("Danke! Ich melde mich bei dir.")).toHaveCount(0);
+});
+
+test("final cta uses the google calendar logo", async ({ page }) => {
+  await page.goto("/");
+
+  const schedulingButton = page.locator("#final-cta").getByRole("link", {
+    name: "30 min Potenzialgespräch über Google Calendar buchen",
+  });
+  await schedulingButton.scrollIntoViewIfNeeded();
+  await expect(schedulingButton).toBeVisible();
+
+  const icon = schedulingButton.locator("img.secure-calendar-action__icon");
+  await expect(icon).toHaveAttribute("src", "/images/logos/google-calendar.svg");
+  await expect(icon).toHaveAttribute("width", "48");
+  await expect(icon).toHaveAttribute("height", "48");
+  await expect(icon).toHaveCSS("width", "28px");
+  await expect(icon).toHaveCSS("height", "28px");
 });
 
 test("final cta keeps response feedback static for reduced motion", async ({

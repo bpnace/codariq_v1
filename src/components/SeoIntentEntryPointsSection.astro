@@ -5,36 +5,21 @@ const entryPoints = [
     eyebrow: "KI-Integration Prozesse",
     title: "KI in bestehende Abläufe integrieren",
     text: "Für Unternehmen, die wissen wollen, welcher Prozess zuerst KI bekommen sollte und wie Daten, Freigaben und Betrieb zusammenpassen.",
+    cta: "Prozess prüfen",
   },
   {
     href: "/crm-und-ki-integration",
     eyebrow: "CRM Integration",
     title: "CRM, E-Mail und Cloud-Tools verbinden",
     text: "Für Teams, die Leads, Follow-ups, Support oder Datenpflege vorbereiten lassen wollen, ohne das CRM als führendes System zu verlieren.",
+    cta: "CRM-Setup ansehen",
   },
   {
     href: "/ki-projekt-retten",
     eyebrow: "KI-Projektrettung",
-    title: "Festgefahrenes KI-Projekt prüfen",
+    title: "Festgefahrenes KI-Projekt retten",
     text: "Für Projekte, die in der Demo gut aussahen, aber im Alltag an Daten, Prompts, Übergaben oder Betrieb hängen.",
-  },
-  {
-    href: "/blog/ki-integration-roadmap-agenten",
-    eyebrow: "KI-Integration Roadmap",
-    title: "Vom Pilot zum stabilen Agenten-Stack",
-    text: "Für Teams, die KI-Agenten integrieren wollen und dafür Datenwege, Freigaben, Pilotmessung und Ausbaufolge sauber klären müssen.",
-  },
-  {
-    href: "/blog/ki-agenten-roi-berechnen",
-    eyebrow: "ROI-Priorisierung",
-    title: "Automatisierungsinitiativen nach ROI sortieren",
-    text: "Für Entscheider, die klären wollen, wie sollten Automatisierungsinitiativen anhand ihres ROI priorisiert werden und welcher Agent zuerst Sinn ergibt.",
-  },
-  {
-    href: "/blog/ki-mitarbeiterumfragen-automatisieren",
-    eyebrow: "KI-Teammanagement",
-    title: "Mitarbeiterumfragen automatisiert auswerten",
-    text: "Für Teams, die KI Mitarbeiterumfragen automatisiert auswerten wollen, um Reibung, Übergaben und echte Entlastung sichtbar zu machen.",
+    cta: "Projekt prüfen",
   },
 ];
 ---
@@ -42,24 +27,24 @@ const entryPoints = [
 <section id="seo-einstiege" data-enterprise-section class="intent-entry">
   <div class="saas-container">
     <div class="intent-entry__heading enterprise-reveal">
-      <span>Suchst du etwas bestimmtes?</span>
+      <span>Suchst du etwas Bestimmtes?</span>
       <h2>Die nützlichsten Bereiche</h2>
       <p>
-        Viele Anfragen kommen nicht mit „wir brauchen jetzt KI“, sondern mit einem
-        konkreten Problem wie zum Beispiel Integration, CRM, ROI-Priorisierung, Teammanagement
-        oder ein Projekt, das nicht sauber läuft.
+        Viele Anfragen kommen nicht mit „wir brauchen jetzt KI“, sondern mit
+        einem konkreten Problem wie Integration, CRM oder einem Projekt, das
+        nicht sauber läuft.
       </p>
     </div>
 
     <div class="intent-entry__grid">
       {
         entryPoints.map((item) => (
-          <a href={item.href} class="intent-entry__card enterprise-card">
+          <article class="intent-entry__card enterprise-card">
             <span>{item.eyebrow}</span>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
-            <strong>Seite öffnen</strong>
-          </a>
+            <a href={item.href}>{item.cta}</a>
+          </article>
         ))
       }
     </div>
@@ -134,13 +119,13 @@ const entryPoints = [
     border-radius: 16px;
     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
     transition:
-      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
       box-shadow 170ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .intent-entry__card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 30px 70px rgba(15, 23, 42, 0.1);
+    border-color: rgba(15, 118, 110, 0.26);
+    box-shadow: 0 28px 64px rgba(15, 23, 42, 0.08);
   }
 
   .intent-entry__card span {
@@ -168,11 +153,40 @@ const entryPoints = [
     line-height: 1.5;
   }
 
-  .intent-entry__card strong {
+  .intent-entry__card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 2.75rem;
     margin-top: auto;
+    padding: 0.72rem 0.9rem;
+    border: 1px solid rgba(15, 118, 110, 0.26);
+    border-radius: 8px;
     color: #0f766e;
     font-size: 0.9rem;
     font-weight: 900;
+    transition:
+      background-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      color 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .intent-entry__card a:hover {
+    background: #0f766e;
+    border-color: #0f766e;
+    color: #ecfeff;
+    transform: translateY(-1px);
+  }
+
+  .intent-entry__card a:active {
+    transform: translateY(0) scale(0.985);
+  }
+
+  .intent-entry__card a:focus-visible {
+    outline: 3px solid rgba(20, 184, 166, 0.42);
+    outline-offset: 3px;
   }
 
   @media (max-width: 960px) {
