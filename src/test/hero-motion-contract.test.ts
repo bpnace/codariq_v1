@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  HERO_CONSOLE_ALERT_STATE_ID,
+  HERO_CONSOLE_DISPLAY_CLOCK,
+  HERO_CONSOLE_INITIAL_ALERT,
   HERO_CONSOLE_MOTION_VERSION,
   HERO_CONSOLE_SELECTORS,
   HERO_CONSOLE_STATES,
@@ -16,7 +19,6 @@ describe("hero motion contract", () => {
     expect(new Set(ids).size).toBe(ids.length);
 
     for (const state of HERO_CONSOLE_STATES) {
-      expect(state.clock).toMatch(/\d{2}:\d{2} Uhr/);
       expect(state.savedTime).toMatch(/Std\./);
       expect(state.pipeline.map((item) => item.slot)).toEqual([
         "inbox",
@@ -36,11 +38,26 @@ describe("hero motion contract", () => {
     }
   });
 
+  it("keeps the hero console clock static", () => {
+    expect(HERO_CONSOLE_DISPLAY_CLOCK).toBe("08:35 Uhr");
+  });
+
   it("keeps the initial reading hold longer than the repeated loop", () => {
     expect(HERO_CONSOLE_TIMING.initialUpdateHold).toBeGreaterThan(4);
     expect(HERO_CONSOLE_TIMING.repeatingUpdateHold).toBeLessThan(
       HERO_CONSOLE_TIMING.initialUpdateHold,
     );
+  });
+
+  it("pins the preloaded alert copy to the review snapshot", () => {
+    const alertState = HERO_CONSOLE_STATES.find(
+      (state) => state.id === HERO_CONSOLE_ALERT_STATE_ID,
+    );
+
+    expect(alertState).toMatchObject({ alert: HERO_CONSOLE_INITIAL_ALERT });
+    expect(HERO_CONSOLE_INITIAL_ALERT.label).not.toBe("");
+    expect(HERO_CONSOLE_INITIAL_ALERT.title).not.toBe("");
+    expect(HERO_CONSOLE_INITIAL_ALERT.copy).not.toBe("");
   });
 
   it("exposes a data-attribute selector contract", () => {

@@ -16,7 +16,6 @@ export type HeroAlertState = {
 
 export type HeroConsoleState = {
   id: HeroConsoleSnapshotId;
-  clock: string;
   savedTime: string;
   pipeline: readonly HeroPipelineItem[];
   liveSource: string;
@@ -52,10 +51,11 @@ export const HERO_CONSOLE_TIMING = {
   repeatingUpdateHold: 2.25,
 } as const;
 
+export const HERO_CONSOLE_DISPLAY_CLOCK = "08:35 Uhr";
+
 export const HERO_CONSOLE_STATES = [
   {
     id: "morning",
-    clock: "08:15 Uhr",
     savedTime: "4,6 Std.",
     pipeline: [
       {
@@ -82,7 +82,6 @@ export const HERO_CONSOLE_STATES = [
   },
   {
     id: "crm-review",
-    clock: "08:16 Uhr",
     savedTime: "5,1 Std.",
     pipeline: [
       {
@@ -114,7 +113,6 @@ export const HERO_CONSOLE_STATES = [
   },
   {
     id: "support-ready",
-    clock: "08:17 Uhr",
     savedTime: "5,4 Std.",
     pipeline: [
       {
@@ -141,4 +139,23 @@ export const HERO_CONSOLE_STATES = [
   },
 ] as const satisfies readonly HeroConsoleState[];
 
+export const HERO_CONSOLE_ALERT_STATE_ID =
+  "crm-review" satisfies HeroConsoleSnapshotId;
+
+const heroConsoleAlertState = HERO_CONSOLE_STATES.find(
+  (
+    state,
+  ): state is Extract<
+    (typeof HERO_CONSOLE_STATES)[number],
+    { id: typeof HERO_CONSOLE_ALERT_STATE_ID }
+  > => state.id === HERO_CONSOLE_ALERT_STATE_ID,
+);
+
+if (!heroConsoleAlertState?.alert) {
+  throw new Error(
+    `Hero console motion contract is missing an alert for ${HERO_CONSOLE_ALERT_STATE_ID}.`,
+  );
+}
+
 export const HERO_CONSOLE_INITIAL_STATE = HERO_CONSOLE_STATES[0];
+export const HERO_CONSOLE_INITIAL_ALERT = heroConsoleAlertState.alert;

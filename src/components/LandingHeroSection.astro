@@ -1,14 +1,16 @@
 ---
 import ArrowRight from "./icons/ArrowRight.astro";
 import {
+  HERO_CONSOLE_DISPLAY_CLOCK,
+  HERO_CONSOLE_INITIAL_ALERT,
   HERO_CONSOLE_INITIAL_STATE,
   HERO_CONSOLE_MOTION_VERSION,
-  HERO_CONSOLE_STATES,
 } from "../lib/heroMotionContract";
 
 export interface Props {
   title?: string;
   subtitle?: string;
+  x?: string;
   primaryCTA?: string;
   secondaryCTA?: string;
   primaryCTALink?: string;
@@ -17,10 +19,10 @@ export interface Props {
 }
 
 const {
-  title = "KI-Agenten, die deinen Alltag tatsächlich entlasten.",
-  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt... Wir bauen digitale Assistenten für konkrete Arbeit. Lesen, sortieren und vorbereiten aber immer mit einem Menschen, der entscheiden muss.",
-  primaryCTA = "Grenzen prüfen",
-  secondaryCTA = "Was darf ein Agent?",
+  title = "KI-Agenten, die deinen Alltag erleichtern.",
+  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt. Wir bauen digitale Assistenten, die Arbeit abnehmen. Sie lesen, sortieren und bereiten vor, aber immer mit einem Menschen, der entscheidet.",
+  primaryCTA = "Agent erstellen",
+  secondaryCTA = "Was darf dein Agent?",
   primaryCTALink = "#final-cta",
   secondaryCTALink = "/agent-readiness",
   heroImage = "/images/hero/hero2.webp",
@@ -44,9 +46,6 @@ const trustSignals = [
   "Freigaben sauber geregelt",
   "Logs für den Betrieb sichtbar",
 ];
-const initialHeroAlert = HERO_CONSOLE_STATES.find(
-  (state) => state.alert,
-)?.alert;
 ---
 
 <section
@@ -68,9 +67,6 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
 
   <div class="secure-hero__inner">
     <div class="secure-hero__copy enterprise-reveal" data-hero-entrance>
-      <div class="secure-hero__kicker">
-        KI-Agenten arbeiten vor, du bleibst Chef.
-      </div>
       <h1>{title}</h1>
       <p>{subtitle}</p>
 
@@ -122,7 +118,7 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
           <span>KI-Agent meldet</span>
           <strong>Morgen-Briefing</strong>
         </div>
-        <p data-hero-clock>{HERO_CONSOLE_INITIAL_STATE.clock}</p>
+        <p data-hero-clock>{HERO_CONSOLE_DISPLAY_CLOCK}</p>
       </div>
 
       <div class="secure-console__status" data-hero-status-card>
@@ -148,13 +144,13 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
         aria-hidden="true"
       >
         <span data-hero-alert-label>
-          {initialHeroAlert?.label}
+          {HERO_CONSOLE_INITIAL_ALERT.label}
         </span>
         <strong data-hero-alert-title>
-          {initialHeroAlert?.title}
+          {HERO_CONSOLE_INITIAL_ALERT.title}
         </strong>
         <p data-hero-alert-copy>
-          {initialHeroAlert?.copy}
+          {HERO_CONSOLE_INITIAL_ALERT.copy}
         </p>
       </div>
 
@@ -184,20 +180,28 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
       <div class="decision-panel">
         <div>
           <span>Nächster sinnvoller Schritt</span>
-          <strong>Kundenthemen mit Umsatzbezug prüfen</strong>
+          <strong>Agent-Check starten</strong>
           <p>
-            Der Agent hat Kontext, Vorschlag und nächste Aktion vorbereitet. Du
-            entscheidest nur noch, was rausgeht.
+            Finde in sechs Fragen heraus, welcher Ablauf sich zuerst für einen
+            Agenten eignet und wo Freigaben nötig sind.
           </p>
         </div>
-        <a href="/agent-readiness">Entscheidung ansehen</a>
+        <a
+          class="decision-panel__cta"
+          href="/agent-readiness"
+          aria-label="Agent-Check starten"
+          data-hero-decision-cta
+        >
+          <span>Agent-Check starten</span>
+          <ArrowRight class="decision-panel__cta-icon" />
+        </a>
       </div>
 
       <div
         class="handover-stream"
         aria-label="Vom KI-Agenten übernommene Arbeit"
       >
-        <span>Agent hat übernommen</span>
+        <span>Hat Agent bereits übernommen</span>
         <p data-hero-live-item data-hero-live-row>
           <strong data-hero-live-source>
             {HERO_CONSOLE_INITIAL_STATE.liveSource}
@@ -210,7 +214,7 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
           <strong>CRM</strong> Kontakte ergänzt und Follow-ups vorbereitet
         </p>
         <p data-hero-live-item>
-          <strong>Team</strong> Aufgaben gebündelt statt weitergereicht
+          <strong>Team</strong> Aufgaben gebündelt und weitergereicht
         </p>
       </div>
     </aside>
@@ -384,6 +388,10 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
     background: #0b1220;
     color: #f8fafc;
     box-shadow: 0 18px 42px rgba(15, 23, 42, 0.24);
+  }
+
+  .secure-button--primary > span {
+    font-weight: 950;
   }
 
   .secure-button--primary:hover {
@@ -695,19 +703,83 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
     line-height: 1.45;
   }
 
-  .decision-panel a {
+  .decision-panel__cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.56rem;
     min-height: 2.7rem;
-    padding: 0.75rem 0.95rem;
+    padding: 0.75rem 1rem;
     color: #f8fafc;
     background: #14332f;
     border: 0;
     border-radius: 8px;
+    box-shadow: 0 14px 34px rgba(20, 51, 47, 0.22);
     font-weight: 900;
     line-height: 1;
     white-space: nowrap;
+    transform: translateZ(30px);
+    transition:
+      background-color 0.17s cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 0.17s cubic-bezier(0.23, 1, 0.32, 1),
+      transform 0.17s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: decisionCtaPulse 2.8s ease-in-out infinite;
+  }
+
+  .decision-panel__cta::before {
+    position: absolute;
+    inset: -1px;
+    z-index: 0;
+    content: "";
+    background: linear-gradient(
+      105deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.42) 42%,
+      transparent 68%
+    );
+    transform: translateX(-120%);
+    animation: decisionCtaSweep 2.8s ease-in-out infinite;
+  }
+
+  .decision-panel__cta > span,
+  .decision-panel__cta-icon {
+    position: relative;
+    z-index: 1;
+  }
+
+  .decision-panel__cta > span {
+    display: inline-flex;
+    color: inherit;
+    font-size: 0.92rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .decision-panel__cta:hover,
+  .decision-panel__cta:focus-visible {
+    background: #0b1220;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.28);
+    transform: translate3d(0, -1px, 30px);
+  }
+
+  .decision-panel__cta:focus-visible {
+    outline: 3px solid rgba(20, 184, 166, 0.38);
+    outline-offset: 4px;
+  }
+
+  .decision-panel__cta:active {
+    transform: translate3d(0, 1px, 30px) scale(0.985);
+  }
+
+  .decision-panel__cta-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    animation: decisionCtaArrow 1.8s ease-in-out infinite;
   }
 
   .handover-stream {
@@ -758,6 +830,53 @@ const initialHeroAlert = HERO_CONSOLE_STATES.find(
     .secure-console__pipeline,
     .decision-panel {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @keyframes decisionCtaPulse {
+    0%,
+    100% {
+      box-shadow: 0 14px 34px rgba(20, 51, 47, 0.22);
+    }
+
+    46% {
+      box-shadow:
+        0 18px 42px rgba(20, 51, 47, 0.28),
+        0 0 0 5px rgba(20, 184, 166, 0.16);
+    }
+  }
+
+  @keyframes decisionCtaSweep {
+    0%,
+    48% {
+      transform: translateX(-120%);
+    }
+
+    72% {
+      transform: translateX(120%);
+    }
+
+    100% {
+      transform: translateX(120%);
+    }
+  }
+
+  @keyframes decisionCtaArrow {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    45% {
+      transform: translateX(0.22rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .decision-panel__cta,
+    .decision-panel__cta::before,
+    .decision-panel__cta-icon {
+      animation: none;
     }
   }
 </style>

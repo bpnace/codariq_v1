@@ -626,7 +626,6 @@ export function initHeroConsoleMotion(
   const { selectors, timing } = contract;
   const query = (selector: string): HTMLElement | null =>
     root.querySelector<HTMLElement>(selector);
-  const clockEl = query(selectors.clock);
   const savedTimeEl = query(selectors.savedTime);
   const statusEl = query(selectors.statusCard);
   const alertEl = query(selectors.alert);
@@ -638,7 +637,6 @@ export function initHeroConsoleMotion(
   const liveCopyEl = query(selectors.liveCopy);
 
   if (
-    !clockEl ||
     !savedTimeEl ||
     !statusEl ||
     !alertEl ||
@@ -671,7 +669,7 @@ export function initHeroConsoleMotion(
     pipelineTargets.set(item.slot, { cardEl, valueEl, stateEl });
   }
 
-  const statusNumberTargets = [clockEl, savedTimeEl];
+  const statusNumberTargets = [savedTimeEl];
   const liveTargets = [liveSourceEl, liveCopyEl];
   const initialTextTargets = [
     ...statusNumberTargets,
@@ -688,7 +686,6 @@ export function initHeroConsoleMotion(
   };
 
   const applyStatusState = (state: HeroConsoleState): void => {
-    clockEl.textContent = state.clock;
     savedTimeEl.textContent = state.savedTime;
   };
 

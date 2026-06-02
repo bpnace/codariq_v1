@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import {
+  HERO_CONSOLE_DISPLAY_CLOCK,
   HERO_CONSOLE_MOTION_VERSION,
   HERO_CONSOLE_STATES,
   HERO_CONSOLE_TIMING,
@@ -37,6 +38,85 @@ test("hero uses the local original image background with a diagonal white overla
   expect(heroBackground.image).toContain("/images/hero/hero2.webp");
   expect(heroBackground.overlay).toContain("linear-gradient");
   expect(heroBackground.overlay).toMatch(/to (right top|top right)|45deg/);
+});
+
+test("hero primary cta renders Agent erstellen in bold", async ({ page }) => {
+  await page.goto("/");
+
+  const primaryCtaLabel = page
+    .locator(".secure-hero__actions .secure-button--primary > span")
+    .filter({ hasText: "Agent erstellen" });
+
+  await expect(primaryCtaLabel).toBeVisible();
+
+  const fontWeight = await primaryCtaLabel.evaluate((element) =>
+    Number.parseInt(getComputedStyle(element).fontWeight, 10),
+  );
+
+  expect(fontWeight).toBeGreaterThanOrEqual(950);
+});
+
+test("hero decision panel points to the agent check with restrained motion", async ({
+  page,
+}) => {
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
+  await page.goto("/");
+
+  const panel = page.locator(".decision-panel");
+  const cta = panel.locator("[data-hero-decision-cta]");
+
+  await expect(panel).toContainText("Nächster sinnvoller Schritt");
+  await expect(panel).toContainText("Agent-Check starten");
+  await expect(panel).toContainText(
+    "Finde in sechs Fragen heraus, welcher Ablauf sich zuerst für einen Agenten eignet und wo Freigaben nötig sind.",
+  );
+  await expect(cta).toHaveAttribute("href", "/agent-readiness");
+  await expect(cta).toBeVisible();
+  await expect(cta).toHaveAccessibleName("Agent-Check starten");
+
+  const ctaMotion = await cta.evaluate((element) => {
+    const style = getComputedStyle(element);
+    const before = getComputedStyle(element, "::before");
+    const label = element.querySelector("span");
+    if (!(label instanceof HTMLElement)) {
+      throw new Error("Hero decision CTA label is missing.");
+    }
+    const labelStyle = getComputedStyle(label);
+
+    return {
+      animationName: style.animationName,
+      beforeAnimationName: before.animationName,
+      color: labelStyle.color,
+      textTransform: labelStyle.textTransform,
+    };
+  });
+
+  expect(ctaMotion.animationName).toContain("decisionCtaPulse");
+  expect(ctaMotion.beforeAnimationName).toContain("decisionCtaSweep");
+  expect(ctaMotion.color).toBe("rgb(248, 250, 252)");
+  expect(ctaMotion.textTransform).toBe("none");
+});
+
+test("hero decision panel respects reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const ctaMotion = await page
+    .locator("[data-hero-decision-cta]")
+    .evaluate((element) => {
+      const style = getComputedStyle(element);
+      const before = getComputedStyle(element, "::before");
+
+      return {
+        animationName: style.animationName,
+        beforeAnimationName: before.animationName,
+      };
+    });
+
+  expect(ctaMotion.animationName).toBe("none");
+  expect(ctaMotion.beforeAnimationName).toBe("none");
 });
 
 test("mobile hero uses the compact background and skips enterprise motion", async ({
@@ -302,7 +382,7 @@ test("hero agent panel cycles live metrics and review alerts", async ({
     initialState.id,
   );
   await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
-    initialState.clock,
+    HERO_CONSOLE_DISPLAY_CLOCK,
   );
   await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
     initialState.savedTime,
@@ -344,7 +424,7 @@ test("hero agent panel cycles live metrics and review alerts", async ({
 
   await page.waitForTimeout(2200);
   await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
-    initialState.clock,
+    HERO_CONSOLE_DISPLAY_CLOCK,
   );
   await expect(consolePanel.locator("[data-hero-saved-time]")).toHaveText(
     initialState.savedTime,
@@ -393,6 +473,9 @@ test("hero agent panel cycles live metrics and review alerts", async ({
 
   await expect(consolePanel.locator("[data-hero-live-copy]")).toHaveText(
     firstUpdateState.liveCopy,
+  );
+  await expect(consolePanel.locator("[data-hero-clock]")).toHaveText(
+    HERO_CONSOLE_DISPLAY_CLOCK,
   );
   await expect(
     consolePanel.locator(
@@ -543,7 +626,10 @@ test("home keeps a fixed bottom blur gradient over the viewport", async ({
 
     return {
       afterBackground: afterStyle.backgroundImage,
+      afterBottom: afterStyle.bottom,
       afterContent: afterStyle.content,
+      afterHeight: afterStyle.height,
+      afterTop: afterStyle.top,
       beforeBackground: beforeStyle.backgroundImage,
       beforeContent: beforeStyle.content,
       beforeMaskImage: beforeStyle.maskImage,
@@ -576,29 +662,41 @@ test("home keeps a fixed bottom blur gradient over the viewport", async ({
   expect(initialVeil.right).toBe(initialVeil.viewportWidth);
   expect(initialVeil.bottom).toBe(initialVeil.viewportHeight);
   expect(
-    Math.abs(initialVeil.height - initialVeil.viewportHeight * 0.125),
+    Math.abs(initialVeil.height - initialVeil.viewportHeight * 0.145),
   ).toBeLessThanOrEqual(1);
   expect(initialVeil.afterContent).toBe('""');
+  expect(initialVeil.afterBottom).toBe("0px");
+  expect(Number.parseFloat(initialVeil.afterHeight)).toBeLessThan(
+    initialVeil.height,
+  );
   expect(initialVeil.afterBackground).toContain("linear-gradient");
   expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18");
+  expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18, 0) 68%");
+  expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18, 0) 100%");
   expect(initialVeil.afterBackground).not.toContain("247, 250, 252");
+  expect(initialVeil.afterBackground).not.toContain("0.28");
   expect(initialVeil.beforeContent).toBe("none");
   expect(initialVeil.beforeBackground).toBe("none");
   expect(initialVeil.beforeMaskImage).toBe("none");
   expect(initialVeil.beforeOpacity).toBe("1");
   expect(initialVeil.layers).toHaveLength(3);
-  expect(initialVeil.layers[0].backdropFilter).toContain("blur(0px)");
-  expect(initialVeil.layers[1].backdropFilter).toContain("blur(4px)");
-  expect(initialVeil.layers[2].backdropFilter).toContain("blur(20px)");
+  expect(initialVeil.layers[0].backdropFilter).toContain("blur(1px)");
+  expect(initialVeil.layers[1].backdropFilter).toContain("blur(7px)");
+  expect(initialVeil.layers[2].backdropFilter).toContain("blur(30px)");
   expect(
     initialVeil.layers.every(
       ({ maskImage, webkitMaskImage }) =>
         maskImage.includes("linear-gradient") &&
         webkitMaskImage.includes("linear-gradient") &&
+        maskImage.includes("rgba(0, 0, 0, 0) 100%") &&
+        webkitMaskImage.includes("rgba(0, 0, 0, 0) 100%") &&
         !maskImage.includes("rgb(0, 0, 0) 12%") &&
         !maskImage.includes("rgb(0, 0, 0) 6%"),
     ),
   ).toBe(true);
+  expect(initialVeil.layers[0].maskImage).toContain("rgba(0, 0, 0, 0) 72%");
+  expect(initialVeil.layers[1].maskImage).toContain("rgba(0, 0, 0, 0) 58%");
+  expect(initialVeil.layers[2].maskImage).toContain("rgba(0, 0, 0, 0) 42%");
 
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";
