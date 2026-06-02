@@ -661,42 +661,37 @@ test("home keeps a fixed bottom blur gradient over the viewport", async ({
   expect(initialVeil.left).toBe(0);
   expect(initialVeil.right).toBe(initialVeil.viewportWidth);
   expect(initialVeil.bottom).toBe(initialVeil.viewportHeight);
-  expect(
-    Math.abs(initialVeil.height - initialVeil.viewportHeight * 0.145),
-  ).toBeLessThanOrEqual(1);
-  expect(initialVeil.afterContent).toBe('""');
-  expect(initialVeil.afterBottom).toBe("0px");
-  expect(Number.parseFloat(initialVeil.afterHeight)).toBeLessThan(
-    initialVeil.height,
+  const expectedVeilHeight = Math.min(
+    Math.max(7 * 16, initialVeil.viewportHeight * 0.13),
+    9 * 16,
   );
-  expect(initialVeil.afterBackground).toContain("linear-gradient");
-  expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18");
-  expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18, 0) 68%");
-  expect(initialVeil.afterBackground).toContain("rgba(3, 7, 18, 0) 100%");
-  expect(initialVeil.afterBackground).not.toContain("247, 250, 252");
-  expect(initialVeil.afterBackground).not.toContain("0.28");
+  expect(Math.abs(initialVeil.height - expectedVeilHeight)).toBeLessThanOrEqual(
+    1,
+  );
+  expect(initialVeil.afterContent).toBe("none");
+  expect(initialVeil.afterBackground).toBe("none");
   expect(initialVeil.beforeContent).toBe("none");
   expect(initialVeil.beforeBackground).toBe("none");
   expect(initialVeil.beforeMaskImage).toBe("none");
   expect(initialVeil.beforeOpacity).toBe("1");
   expect(initialVeil.layers).toHaveLength(3);
-  expect(initialVeil.layers[0].backdropFilter).toContain("blur(1px)");
-  expect(initialVeil.layers[1].backdropFilter).toContain("blur(7px)");
-  expect(initialVeil.layers[2].backdropFilter).toContain("blur(30px)");
+  expect(initialVeil.layers[0].backdropFilter).toContain("blur(4px)");
+  expect(initialVeil.layers[1].backdropFilter).toContain("blur(14px)");
+  expect(initialVeil.layers[2].backdropFilter).toContain("blur(44px)");
   expect(
     initialVeil.layers.every(
       ({ maskImage, webkitMaskImage }) =>
         maskImage.includes("linear-gradient") &&
         webkitMaskImage.includes("linear-gradient") &&
-        maskImage.includes("rgba(0, 0, 0, 0) 100%") &&
-        webkitMaskImage.includes("rgba(0, 0, 0, 0) 100%") &&
-        !maskImage.includes("rgb(0, 0, 0) 12%") &&
-        !maskImage.includes("rgb(0, 0, 0) 6%"),
+        maskImage.includes("rgba(0, 0, 0, 0) 0%") &&
+        webkitMaskImage.includes("rgba(0, 0, 0, 0) 0%") &&
+        !maskImage.includes("3, 7, 18") &&
+        !webkitMaskImage.includes("3, 7, 18"),
     ),
   ).toBe(true);
-  expect(initialVeil.layers[0].maskImage).toContain("rgba(0, 0, 0, 0) 72%");
-  expect(initialVeil.layers[1].maskImage).toContain("rgba(0, 0, 0, 0) 58%");
-  expect(initialVeil.layers[2].maskImage).toContain("rgba(0, 0, 0, 0) 42%");
+  expect(initialVeil.layers[0].maskImage).toContain("rgba(0, 0, 0, 0) 24%");
+  expect(initialVeil.layers[1].maskImage).toContain("rgba(0, 0, 0, 0) 48%");
+  expect(initialVeil.layers[2].maskImage).toContain("rgba(0, 0, 0, 0) 68%");
 
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";

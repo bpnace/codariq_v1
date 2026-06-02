@@ -72,84 +72,70 @@ import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
     isolation: isolate;
   }
 
+  .home-scroll-blur::before,
   .home-scroll-blur::after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    height: 72%;
-    content: "";
-    background: linear-gradient(
-      to top,
-      rgba(3, 7, 18, 0.24) 0%,
-      rgba(3, 7, 18, 0.14) 8%,
-      rgba(3, 7, 18, 0.05) 46%,
-      rgba(3, 7, 18, 0) 88%,
-      rgba(3, 7, 18, 0) 100%
-    );
+    content: none;
   }
 
   .home-scroll-blur__layer {
     position: absolute;
     inset: 0;
-    z-index: 1;
   }
 
   .home-scroll-blur__layer--soft {
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.72) 0%,
-      rgba(0, 0, 0, 0.28) 8%,
-      transparent 80%,
-      transparent 100%
+      to bottom,
+      transparent 0%,
+      transparent 24%,
+      rgba(0, 0, 0, 0.18) 56%,
+      rgba(0, 0, 0, 0.72) 100%
     );
     -webkit-mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.72) 0%,
-      rgba(0, 0, 0, 0.28) 8%,
-      transparent 80%,
-      transparent 100%
+      to bottom,
+      transparent 0%,
+      transparent 24%,
+      rgba(0, 0, 0, 0.18) 56%,
+      rgba(0, 0, 0, 0.72) 100%
     );
   }
 
   .home-scroll-blur__layer--mid {
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.64) 0%,
-      rgba(0, 0, 0, 0.22) 34%,
-      transparent 58%,
-      transparent 100%
+      to bottom,
+      transparent 0%,
+      transparent 48%,
+      rgba(0, 0, 0, 0.16) 72%,
+      rgba(0, 0, 0, 0.64) 100%
     );
     -webkit-mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.64) 0%,
-      rgba(0, 0, 0, 0.22) 34%,
-      transparent 58%,
-      transparent 100%
+      to bottom,
+      transparent 0%,
+      transparent 48%,
+      rgba(0, 0, 0, 0.16) 72%,
+      rgba(0, 0, 0, 0.64) 100%
     );
   }
 
   .home-scroll-blur__layer--deep {
-    backdrop-filter: blur(60px);
-    -webkit-backdrop-filter: blur(60px);
+    backdrop-filter: blur(44px);
+    -webkit-backdrop-filter: blur(44px);
     mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.52) 80%,
-      rgba(0, 0, 0, 0.18) 20%,
-      transparent 2%,
-      transparent 100%
+      to bottom,
+      transparent 0%,
+      transparent 68%,
+      rgba(0, 0, 0, 0.2) 86%,
+      rgba(0, 0, 0, 0.78) 100%
     );
     -webkit-mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.52) 0%,
-      rgba(0, 0, 0, 0.18) 20%,
-      transparent 42%,
-      transparent 100%
+      to bottom,
+      transparent 0%,
+      transparent 68%,
+      rgba(0, 0, 0, 0.2) 86%,
+      rgba(0, 0, 0, 0.78) 100%
     );
   }
 
