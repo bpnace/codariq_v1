@@ -1013,6 +1013,95 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   await expect(section.getByText("Logging")).toHaveCount(0);
 });
 
+test("home FAQ desktop columns expand independently", async ({ page }) => {
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  await page.goto("/");
+  await page.addStyleTag({
+    content: `
+      #home-faq .enterprise-card,
+      #home-faq .enterprise-reveal,
+      #home-faq [data-home-faq-item],
+      #home-faq [data-home-faq-item] * {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
+    `,
+  });
+
+  const section = page.locator("#home-faq");
+  await section.scrollIntoViewIfNeeded();
+  await expect(section.locator("[data-home-faq-column]")).toHaveCount(2);
+  await expect(
+    section.locator('[data-home-faq-column="1"] [data-home-faq-item]'),
+  ).toHaveCount(4);
+  await expect(
+    section.locator('[data-home-faq-column="2"] [data-home-faq-item]'),
+  ).toHaveCount(4);
+
+  const readMetrics = async () =>
+    section.evaluate((faqSection) => {
+      const readColumn = (column: Element | null) => {
+        if (!(column instanceof HTMLElement)) {
+          throw new Error("FAQ column is missing.");
+        }
+
+        const columnRect = column.getBoundingClientRect();
+        const items = Array.from(
+          column.querySelectorAll<HTMLElement>("[data-home-faq-item]"),
+        );
+
+        return {
+          height: columnRect.height,
+          itemHeights: items.map((item) => item.getBoundingClientRect().height),
+          itemTops: items.map(
+            (item) => item.getBoundingClientRect().top - columnRect.top,
+          ),
+        };
+      };
+
+      return {
+        left: readColumn(
+          faqSection.querySelector('[data-home-faq-column="1"]'),
+        ),
+        right: readColumn(
+          faqSection.querySelector('[data-home-faq-column="2"]'),
+        ),
+      };
+    });
+
+  const closedMetrics = await readMetrics();
+
+  await section
+    .locator('[data-home-faq-column="2"] [data-home-faq-item]')
+    .nth(1)
+    .locator("summary")
+    .click();
+
+  const openMetrics = await readMetrics();
+
+  expect(openMetrics.right.height).toBeGreaterThan(closedMetrics.right.height);
+  expect(
+    Math.abs(openMetrics.left.height - closedMetrics.left.height),
+  ).toBeLessThan(1);
+  for (const [
+    index,
+    closedHeight,
+  ] of closedMetrics.left.itemHeights.entries()) {
+    expect(
+      Math.abs(openMetrics.left.itemHeights[index] - closedHeight),
+    ).toBeLessThan(1);
+  }
+  for (const [index, closedTop] of closedMetrics.left.itemTops.entries()) {
+    expect(Math.abs(openMetrics.left.itemTops[index] - closedTop)).toBeLessThan(
+      1,
+    );
+  }
+});
+
 test("testimonial cards blur in with a randomized order", async ({ page }) => {
   await page.route("https://cloud.ccm19.de/**", async (route) => {
     await route.abort();

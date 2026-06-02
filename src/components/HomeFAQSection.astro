@@ -54,6 +54,15 @@ const {
     },
   ],
 } = Astro.props;
+
+const faqColumns: Array<
+  Array<{ faq: (typeof faqs)[number]; originalIndex: number }>
+> = [[], []];
+
+faqs.forEach((faq, originalIndex) => {
+  const columnIndex = originalIndex % 2 === 0 ? 0 : 1;
+  faqColumns[columnIndex].push({ faq, originalIndex });
+});
 ---
 
 <section id="home-faq" data-enterprise-section class="home-faq">
@@ -66,14 +75,22 @@ const {
 
     <div class="home-faq__grid">
       {
-        faqs.map((faq) => (
-          <details class="home-faq__item enterprise-card">
-            <summary>
-              <h3>{faq.question}</h3>
-              <span aria-hidden="true">+</span>
-            </summary>
-            <p>{faq.answer}</p>
-          </details>
+        faqColumns.map((columnFaqs, columnIndex) => (
+          <div class="home-faq__column" data-home-faq-column={columnIndex + 1}>
+            {columnFaqs.map(({ faq, originalIndex }) => (
+              <details
+                class="home-faq__item enterprise-card"
+                data-home-faq-item
+                style={`--faq-order: ${originalIndex};`}
+              >
+                <summary>
+                  <h3>{faq.question}</h3>
+                  <span aria-hidden="true">+</span>
+                </summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
         ))
       }
     </div>
@@ -141,7 +158,16 @@ const {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
+    align-items: start;
     margin-top: 2.8rem;
+  }
+
+  .home-faq__column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: start;
+    min-width: 0;
   }
 
   .home-faq__item {
@@ -257,6 +283,20 @@ const {
     .home-faq__footer {
       align-items: stretch;
       flex-direction: column;
+    }
+
+    .home-faq__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .home-faq__column {
+      display: contents;
+    }
+
+    .home-faq__item {
+      order: var(--faq-order);
     }
 
     .home-faq__footer a {
