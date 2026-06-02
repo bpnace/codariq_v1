@@ -99,8 +99,9 @@ const {
 
     <div class="proof-suite__grid" data-testimonial-reveal>
       {
-        items.map((item) => {
+        items.map((item, index) => {
           const cardClass = `proof-card enterprise-card ${item.kind === "feedback" || item.featured ? "proof-card--featured" : ""}`;
+          const scribbleMaskId = `proof-card-scribble-mask-${index}`;
           const content = (
             <>
               <div class="proof-card__meta">
@@ -115,12 +116,38 @@ const {
               )}
               {item.results && (
                 <div class="proof-card__result">
-                  <strong>{item.results.metric}</strong>
+                  <strong>
+                    <span class="proof-card__metric-label">
+                      {item.results.metric}
+                    </span>
+                    {item.link && (
+                      <svg
+                        class="proof-card__scribble"
+                        viewBox="0 0 172 56"
+                        aria-hidden="true"
+                        focusable="false"
+                        pointer-events="none"
+                      >
+                        <defs>
+                          <mask id={scribbleMaskId} maskUnits="userSpaceOnUse">
+                            <path
+                              class="proof-card__scribble-reveal"
+                              pathLength="1"
+                              d="M 28 36 C 12 31, 18 17, 42 10 C 78 0, 140 3, 161 20 C 180 35, 153 51, 108 54 C 63 57, 19 50, 10 39 C 1 28, 19 17, 45 12"
+                            />
+                          </mask>
+                        </defs>
+                        <path
+                          class="proof-card__scribble-stroke"
+                          fill="#14b8a6"
+                          mask={`url(#${scribbleMaskId})`}
+                          d="M 28 36 C 10 31, 17 16, 42 8 C 79 -3, 140 3, 162 20 C 182 36, 152 52, 105 55 C 60 58, 18 50, 9 39 C 0 28, 18 16, 45 10 C 52 9, 54 15, 47 17 C 25 22, 12 30, 17 37 C 26 48, 64 53, 105 50 C 149 47, 172 35, 156 24 C 134 10, 78 4, 44 14 C 23 20, 19 30, 29 33 C 34 35, 33 38, 28 36 Z"
+                        />
+                      </svg>
+                    )}
+                  </strong>
                   <span>{item.results.improvement}</span>
                 </div>
-              )}
-              {item.link && (
-                <span class="proof-card__cue">{item.link.label}</span>
               )}
             </>
           );
@@ -181,6 +208,7 @@ const {
   }
 
   .proof-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-height: 22rem;
@@ -207,6 +235,10 @@ const {
     transform: translateY(-3px);
     border-color: rgba(15, 118, 110, 0.22);
     box-shadow: 0 28px 68px rgba(15, 23, 42, 0.1);
+  }
+
+  a.proof-card:active {
+    transform: translateY(-1px) scale(0.996);
   }
 
   a.proof-card:focus-visible {
@@ -259,10 +291,21 @@ const {
   }
 
   .proof-card__result strong {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
     color: #0b1220;
     font-size: 1.55rem;
     font-weight: 950;
     letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .proof-card__metric-label {
+    position: relative;
+    z-index: 1;
   }
 
   .proof-card__result span {
@@ -272,26 +315,63 @@ const {
     font-weight: 850;
   }
 
-  .proof-card__cue {
-    display: inline-flex;
-    align-self: flex-start;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.15rem;
-    margin-top: 0.85rem;
-    padding: 0.48rem 0.68rem;
-    border: 1px solid rgba(15, 118, 110, 0.22);
-    border-radius: 999px;
-    background: rgba(20, 184, 166, 0.08);
-    color: #0f766e;
-    font-size: 0.82rem;
-    font-weight: 880;
+  .proof-card__scribble {
+    position: absolute;
+    inset: -0.62rem -0.95rem -0.54rem -0.62rem;
+    z-index: 0;
+    width: calc(100% + 1.57rem);
+    height: calc(100% + 1.16rem);
+    overflow: visible;
+    pointer-events: none;
+    opacity: 0;
+    transform: rotate(-1.6deg) scale(0.985);
+    transform-origin: 52% 58%;
+    transition:
+      opacity 120ms cubic-bezier(0.65, 0, 0.35, 1) 35ms,
+      transform 520ms cubic-bezier(0.65, 0, 0.35, 1) 35ms;
   }
 
-  a.proof-card:hover .proof-card__cue {
-    border-color: rgba(15, 118, 110, 0.4);
-    background: rgba(20, 184, 166, 0.14);
-    color: #0b4f49;
+  .proof-card__scribble-stroke {
+    fill: #14b8a6;
+    fill-rule: nonzero;
+  }
+
+  .proof-card__scribble-reveal {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  a.proof-card:is(:hover, :focus-visible) .proof-card__scribble {
+    opacity: 1;
+    transform: rotate(-1.6deg) scale(1);
+  }
+
+  a.proof-card:is(:hover, :focus-visible) .proof-card__scribble-reveal {
+    animation: proof-card-pen-mark 480ms cubic-bezier(0.65, 0, 0.35, 1) 30ms
+      forwards;
+  }
+
+  @keyframes proof-card-pen-mark {
+    0% {
+      stroke-dashoffset: 1;
+    }
+
+    18% {
+      stroke-dashoffset: 0.8;
+    }
+
+    66% {
+      stroke-dashoffset: 0.12;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   .proof-suite__cta {
@@ -342,6 +422,23 @@ const {
     .proof-suite__grid,
     .proof-suite__cta {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a.proof-card:hover,
+    a.proof-card:active {
+      transform: none;
+    }
+
+    a.proof-card:is(:hover, :focus-visible) .proof-card__scribble {
+      opacity: 1;
+      transform: rotate(-1.6deg) scale(1);
+    }
+
+    a.proof-card:is(:hover, :focus-visible) .proof-card__scribble-reveal {
+      animation: none;
+      stroke-dashoffset: 0;
     }
   }
 </style>

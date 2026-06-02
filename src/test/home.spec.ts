@@ -298,6 +298,125 @@ test("home keeps contextual landing-page links on matching proof cards", async (
   );
 });
 
+test("home proof card links draw one tapered CTA-green marker loop around metric words", async ({
+  page,
+}) => {
+  await page.route("https://cloud.ccm19.de/**", async (route) => {
+    await route.abort();
+  });
+  await page.goto("/");
+  await page.addStyleTag({
+    content:
+      ".ccm-root { display: none !important; pointer-events: none !important; }",
+  });
+
+  const section = page.locator("#testimonials");
+  await section.scrollIntoViewIfNeeded();
+
+  const cardLinks = section.locator("a.proof-card");
+  await expect(cardLinks).toHaveCount(6);
+  await expect(cardLinks.locator(".proof-card__scribble")).toHaveCount(6);
+  await expect(cardLinks.locator(".proof-card__cue")).toHaveCount(0);
+  await expect(cardLinks.locator(".proof-card__action")).toHaveCount(0);
+
+  await expect(cardLinks.locator(".proof-card__result strong")).toHaveText([
+    "Termin",
+    "Antwort",
+    "Anfrage",
+    "Stand",
+    "Überblick",
+    "Ablage",
+  ]);
+
+  const firstCard = cardLinks.first();
+  const initialScribble = await firstCard.evaluate((card) => {
+    const scribble = card.querySelector<SVGSVGElement>(".proof-card__scribble");
+    const marker = card.querySelector<SVGPathElement>(
+      ".proof-card__scribble-stroke",
+    );
+    const reveal = card.querySelector<SVGPathElement>(
+      ".proof-card__scribble-reveal",
+    );
+
+    return {
+      ariaHidden: scribble?.getAttribute("aria-hidden"),
+      dashOffset: reveal
+        ? Number.parseFloat(getComputedStyle(reveal).strokeDashoffset)
+        : -1,
+      focusable: scribble?.getAttribute("focusable"),
+      fill: marker ? getComputedStyle(marker).fill : "",
+      markerMask: marker?.getAttribute("mask") ?? "",
+      metricText:
+        card.querySelector(".proof-card__result strong")?.textContent?.trim() ??
+        "",
+      opacity: scribble
+        ? Number.parseFloat(getComputedStyle(scribble).opacity)
+        : -1,
+      pathCount: card.querySelectorAll(".proof-card__scribble-stroke").length,
+      pointerEvents: scribble ? getComputedStyle(scribble).pointerEvents : "",
+      revealPathCount: card.querySelectorAll(".proof-card__scribble-reveal")
+        .length,
+      stroke: marker ? getComputedStyle(marker).stroke : "",
+    };
+  });
+
+  expect(initialScribble.ariaHidden).toBe("true");
+  expect(initialScribble.focusable).toBe("false");
+  expect(initialScribble.pointerEvents).toBe("none");
+  expect(initialScribble.opacity).toBe(0);
+  expect(initialScribble.pathCount).toBe(1);
+  expect(initialScribble.revealPathCount).toBe(1);
+  expect(initialScribble.fill).toBe("rgb(20, 184, 166)");
+  expect(initialScribble.markerMask).toContain("proof-card-scribble-mask-0");
+  expect(initialScribble.metricText).toBe("Termin");
+  expect(initialScribble.stroke).toBe("none");
+  expect(initialScribble.dashOffset).toBe(1);
+
+  await firstCard.hover();
+
+  await expect
+    .poll(
+      async () =>
+        firstCard.evaluate((card) => {
+          const scribble = card.querySelector<SVGSVGElement>(
+            ".proof-card__scribble",
+          );
+          const reveal = card.querySelector<SVGPathElement>(
+            ".proof-card__scribble-reveal",
+          );
+          const opacity = scribble
+            ? Number.parseFloat(getComputedStyle(scribble).opacity)
+            : 0;
+          const dashOffset = reveal
+            ? Number.parseFloat(getComputedStyle(reveal).strokeDashoffset)
+            : 1;
+
+          return opacity > 0.7 && dashOffset < 1;
+        }),
+      { timeout: 1500 },
+    )
+    .toBe(true);
+
+  const hoverScribble = await firstCard.evaluate((card) => {
+    const scribble = card.querySelector<SVGSVGElement>(".proof-card__scribble");
+    const reveal = card.querySelector<SVGPathElement>(
+      ".proof-card__scribble-reveal",
+    );
+
+    return {
+      dashOffset: reveal
+        ? Number.parseFloat(getComputedStyle(reveal).strokeDashoffset)
+        : 1,
+      opacity: scribble
+        ? Number.parseFloat(getComputedStyle(scribble).opacity)
+        : 0,
+    };
+  });
+
+  expect(hoverScribble.opacity).toBeGreaterThan(0.7);
+  expect(hoverScribble.dashOffset).toBeLessThan(1);
+});
+
 test("home renders CCM19 and a debug-capable consent-mode google tag", async ({
   page,
 }) => {
@@ -858,7 +977,16 @@ test("testimonials mix two feedback quotes with team use cases", async ({
   await expect(section.locator("[data-contextual-entry-links]")).toHaveCount(0);
   await expect(section.locator(".proof-card__link")).toHaveCount(0);
   await expect(section.locator("a.proof-card")).toHaveCount(6);
-  await expect(section.locator(".proof-card__cue")).toHaveCount(6);
+  await expect(section.locator(".proof-card__cue")).toHaveCount(0);
+  await expect(section.locator(".proof-card__scribble")).toHaveCount(6);
+  await expect(section.locator(".proof-card__result strong")).toHaveText([
+    "Termin",
+    "Antwort",
+    "Anfrage",
+    "Stand",
+    "Überblick",
+    "Ablage",
+  ]);
   await expect(section.getByText("Triage")).toHaveCount(0);
   await expect(section.getByText("Scope")).toHaveCount(0);
   await expect(section.getByText("Prompts")).toHaveCount(0);
