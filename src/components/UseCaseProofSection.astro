@@ -306,9 +306,11 @@ const {
   .proof-card__metric-label {
     position: relative;
     z-index: 1;
+    -webkit-text-stroke: 0.012em currentColor;
+    text-shadow: 0.006em 0 0 currentColor;
   }
 
-  .proof-card__result span {
+  .proof-card__result > span {
     color: #0f766e;
     text-align: right;
     font-size: 0.86rem;

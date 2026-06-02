@@ -334,9 +334,17 @@ test("home proof card links draw one tapered CTA-green marker loop around metric
     const marker = card.querySelector<SVGPathElement>(
       ".proof-card__scribble-stroke",
     );
+    const metric = card.querySelector<HTMLElement>(
+      ".proof-card__result strong",
+    );
+    const metricLabel = card.querySelector<HTMLElement>(
+      ".proof-card__metric-label",
+    );
     const reveal = card.querySelector<SVGPathElement>(
       ".proof-card__scribble-reveal",
     );
+    const metricStyle = metric ? getComputedStyle(metric) : null;
+    const metricLabelStyle = metricLabel ? getComputedStyle(metricLabel) : null;
 
     return {
       ariaHidden: scribble?.getAttribute("aria-hidden"),
@@ -346,9 +354,14 @@ test("home proof card links draw one tapered CTA-green marker loop around metric
       focusable: scribble?.getAttribute("focusable"),
       fill: marker ? getComputedStyle(marker).fill : "",
       markerMask: marker?.getAttribute("mask") ?? "",
-      metricText:
-        card.querySelector(".proof-card__result strong")?.textContent?.trim() ??
-        "",
+      metricColor: metricStyle?.color ?? "",
+      metricFontFamily: metricStyle?.fontFamily ?? "",
+      metricFontSize: metricStyle?.fontSize ?? "",
+      metricFontWeight: metricStyle?.fontWeight ?? "",
+      metricLabelShadow: metricLabelStyle?.textShadow ?? "",
+      metricLabelStrokeWidth:
+        metricLabelStyle?.getPropertyValue("-webkit-text-stroke-width") ?? "",
+      metricText: metric?.textContent?.trim() ?? "",
       opacity: scribble
         ? Number.parseFloat(getComputedStyle(scribble).opacity)
         : -1,
@@ -368,6 +381,13 @@ test("home proof card links draw one tapered CTA-green marker loop around metric
   expect(initialScribble.revealPathCount).toBe(1);
   expect(initialScribble.fill).toBe("rgb(20, 184, 166)");
   expect(initialScribble.markerMask).toContain("proof-card-scribble-mask-0");
+  expect(initialScribble.metricColor).toBe("rgb(11, 18, 32)");
+  expect(initialScribble.metricFontFamily).toContain("Satoshi");
+  expect(initialScribble.metricFontFamily).not.toContain("CodecPro");
+  expect(initialScribble.metricFontSize).toBe("24.8px");
+  expect(initialScribble.metricFontWeight).toBe("950");
+  expect(initialScribble.metricLabelShadow).toContain("rgb(11, 18, 32)");
+  expect(initialScribble.metricLabelStrokeWidth).not.toBe("0px");
   expect(initialScribble.metricText).toBe("Termin");
   expect(initialScribble.stroke).toBe("none");
   expect(initialScribble.dashOffset).toBe(1);
