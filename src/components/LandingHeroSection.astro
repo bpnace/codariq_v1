@@ -20,7 +20,7 @@ export interface Props {
 
 const {
   title = "KI-Agenten, die deinen Alltag erleichtern.",
-  subtitle = "Ein Agent, der alles darf, ist kein Fortschritt. Wir bauen digitale Assistenten, die Arbeit abnehmen. Sie lesen, sortieren und bereiten vor, aber immer mit einem Menschen der entscheidet.",
+  subtitle = "Ein Ki-Agent ohne Grenzen ist kein digitaler Mitarbeiter.\nEr ist ein Sicherheitsrisiko mit eigenem Login. Wir bauen deshalb lokale Assistenten mit DSGVO-orientierten Datenflüssen, EU-AI-Act-Vorbereitung und menschlichen Freigaben an den wichtigen Stellen.",
   primaryCTA = "Agent erstellen",
   secondaryCTA = "Was darf dein Agent?",
   primaryCTALink = "#final-cta",
@@ -42,10 +42,12 @@ const safeMobileHeroImage =
     : safeHeroImage;
 
 const trustSignals = [
-  "Zugriff definiert",
-  "Freigaben sauber geregelt",
-  "Logs für den Betrieb sichtbar",
+  "DSGVO-konforme Datenverarbeitung",
+  "EU-AI-Act kompatibel",
+  "Mensch behält die Kontrolle",
 ];
+
+const [subtitleFirstLine, ...subtitleRestLines] = subtitle.split("\n");
 ---
 
 <section
@@ -68,7 +70,17 @@ const trustSignals = [
   <div class="secure-hero__inner">
     <div class="secure-hero__copy enterprise-reveal" data-hero-entrance>
       <h1>{title}</h1>
-      <p>{subtitle}</p>
+      <p>
+        {subtitleFirstLine}
+        {
+          subtitleRestLines.length > 0 && (
+            <>
+              <br />
+              {subtitleRestLines.join("\n")}
+            </>
+          )
+        }
+      </p>
 
       <div class="secure-hero__actions">
         <a
