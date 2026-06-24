@@ -90,6 +90,7 @@ describe("isStepValid", () => {
       email: "",
       phone: "",
       consent: false,
+      newsletterConsent: false,
     },
   };
 
@@ -130,6 +131,7 @@ describe("isStepValid", () => {
           ...baseState.userInfo,
           email: "hi@example.com",
           consent: true,
+          newsletterConsent: false,
         },
       }),
     ).toBe(true);

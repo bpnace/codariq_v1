@@ -398,6 +398,7 @@ const init = () => {
       email: "",
       phone: "",
       consent: false,
+      newsletterConsent: false,
     },
   };
 
@@ -701,6 +702,23 @@ const init = () => {
       consentField.appendChild(consentInput);
       consentField.appendChild(consentText);
 
+      const newsletterField = document.createElement("label");
+      newsletterField.className = "quiz-consent";
+      const newsletterInput = document.createElement("input");
+      newsletterInput.type = "checkbox";
+      newsletterInput.id = "quiz-newsletter-consent";
+      newsletterInput.checked = Boolean(state.userInfo.newsletterConsent);
+      newsletterInput.addEventListener("change", (event: Event) => {
+        const target = event.currentTarget as HTMLInputElement;
+        state.userInfo.newsletterConsent = target.checked;
+        saveState();
+      });
+      const newsletterText = document.createElement("span");
+      newsletterText.textContent =
+        "Ich möchte zusätzlich den CODARIQ Newsletter mit KI-Updates erhalten.";
+      newsletterField.appendChild(newsletterInput);
+      newsletterField.appendChild(newsletterText);
+
       const honeypotField = document.createElement("div");
       honeypotField.className = "honeypot-field";
       const honeypotLabel = document.createElement("label");
@@ -719,6 +737,7 @@ const init = () => {
       elements.options.appendChild(companyField);
       elements.options.appendChild(phoneField);
       elements.options.appendChild(consentField);
+      elements.options.appendChild(newsletterField);
       elements.options.appendChild(honeypotField);
     }
   }
@@ -1062,6 +1081,8 @@ const init = () => {
       timestamp: new Date().toISOString(),
       userAgent: navigator.userAgent,
       source: "codariq_quiz",
+      dataProcessingConsent: Boolean(state.userInfo.consent),
+      newsletterConsent: Boolean(state.userInfo.newsletterConsent),
       answers: state.answers,
       answerDetails,
       results,

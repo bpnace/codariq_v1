@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 type QuizSubmissionPayload = Record<string, unknown> & {
   answerDetails: unknown[];
@@ -6,22 +6,7 @@ type QuizSubmissionPayload = Record<string, unknown> & {
   emailDraft: Record<string, unknown>;
 };
 
-test("quiz flow completes and shows results", async ({ page }) => {
-  const submittedPayloads: QuizSubmissionPayload[] = [];
-
-  await page.route("**/webhook-proxy.php", async (route) => {
-    submittedPayloads.push(
-      route.request().postDataJSON() as QuizSubmissionPayload,
-    );
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ success: true }),
-    });
-  });
-
-  await page.goto("/agent-readiness");
-
+async function answerQuizQuestions(page: Page) {
   const next = page.locator("#quiz-next");
   const question = page.locator("#quiz-question");
   const options = page.locator("#quiz-options button");
@@ -38,10 +23,35 @@ test("quiz flow completes and shows results", async ({ page }) => {
     await expect(next).toBeEnabled();
     await next.click();
   }
+}
+
+test("quiz flow completes and shows results", async ({ page }) => {
+  const submittedPayloads: QuizSubmissionPayload[] = [];
+
+  await page.route("**/webhook-proxy.php", async (route) => {
+    submittedPayloads.push(
+      route.request().postDataJSON() as QuizSubmissionPayload,
+    );
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ success: true }),
+    });
+  });
+  await page.route("**/newsletter-proxy.php", async () => {
+    throw new Error("Quiz flow should not call the newsletter proxy.");
+  });
+
+  await page.goto("/agent-readiness");
+
+  const next = page.locator("#quiz-next");
+  await answerQuizQuestions(page);
 
   await page.fill("#quiz-name", "Test Nutzer");
   await page.fill("#quiz-company", "Codariq Test GmbH");
   await page.fill("#quiz-email", "test@example.com");
+  await expect(page.locator("#quiz-newsletter-consent")).not.toBeChecked();
+  await expect(next).toBeDisabled();
   await page.check("#quiz-consent");
   await expect(next).toBeEnabled();
   await next.click();
@@ -58,6 +68,8 @@ test("quiz flow completes and shows results", async ({ page }) => {
     name: "Test Nutzer",
     company: "Codariq Test GmbH",
     email: "test@example.com",
+    dataProcessingConsent: true,
+    newsletterConsent: false,
   });
   expect(payload.answerDetails).toEqual(
     expect.arrayContaining([
@@ -91,6 +103,41 @@ test("quiz flow completes and shows results", async ({ page }) => {
     primaryCta: {
       label: "Leistungen ansehen",
     },
+  });
+});
+
+test("quiz sends checked newsletter consent in the lead payload", async ({
+  page,
+}) => {
+  const submittedPayloads: QuizSubmissionPayload[] = [];
+
+  await page.route("**/webhook-proxy.php", async (route) => {
+    submittedPayloads.push(
+      route.request().postDataJSON() as QuizSubmissionPayload,
+    );
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ success: true }),
+    });
+  });
+  await page.route("**/newsletter-proxy.php", async () => {
+    throw new Error("Quiz flow should not call the newsletter proxy.");
+  });
+
+  await page.goto("/agent-readiness");
+  await answerQuizQuestions(page);
+
+  await page.fill("#quiz-email", "newsletter@example.com");
+  await page.check("#quiz-consent");
+  await page.check("#quiz-newsletter-consent");
+  await page.locator("#quiz-next").click();
+
+  await expect(page.locator("#quiz-result")).toBeVisible();
+  expect(submittedPayloads[0]).toMatchObject({
+    email: "newsletter@example.com",
+    dataProcessingConsent: true,
+    newsletterConsent: true,
   });
 });
 

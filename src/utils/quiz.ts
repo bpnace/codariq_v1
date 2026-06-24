@@ -6,6 +6,7 @@ export type QuizUserInfo = {
   email: string;
   phone: string;
   consent: boolean;
+  newsletterConsent: boolean;
 };
 
 export type QuizState = {
