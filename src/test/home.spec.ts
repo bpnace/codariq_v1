@@ -1293,6 +1293,20 @@ test("final cta keeps form submit separate from calendar booking", async ({
     "placeholder",
     /Termine vorbereiten, Leads anreichern, interne Daten durchsuchen/,
   );
+  const dataProcessingConsent = form.locator(
+    "#contact-data-processing-consent",
+  );
+  const newsletterConsent = form.locator("#contact-newsletter-consent");
+  await expect(
+    form.getByText(
+      "Ich bin damit einverstanden, dass CODARIQ meine Angaben zur Bearbeitung meiner Anfrage und Rückmeldung verarbeitet.",
+    ),
+  ).toBeVisible();
+  await expect(
+    form.getByText("CODARIQ Newsletter mit KI-Updates abonnieren."),
+  ).toBeVisible();
+  await expect(dataProcessingConsent).not.toBeChecked();
+  await expect(newsletterConsent).not.toBeChecked();
 
   const submitButton = form.locator('button[type="submit"]');
   await expect(submitButton).toHaveCount(1);
@@ -1404,6 +1418,18 @@ test("final cta keeps form submit separate from calendar booking", async ({
   await expect.poll(formCardReady).toBe(true);
   await expect(submitButton).toBeVisible();
   await page.waitForTimeout(3200);
+  await submitButton.click();
+  expect(submittedPayloads).toHaveLength(0);
+  await expect(form.locator("#data-processing-consent-error")).toHaveText(
+    "Bitte bestätige, dass wir deine Angaben zur Anfrage verarbeiten dürfen.",
+  );
+
+  await dataProcessingConsent.check();
+  await expect(dataProcessingConsent).toBeChecked();
+  await expect(newsletterConsent).not.toBeChecked();
+  await newsletterConsent.check();
+  await expect(newsletterConsent).toBeChecked();
+
   const successAnimation = submitButton.evaluate(
     (button) =>
       new Promise<string>((resolve) => {
@@ -1429,6 +1455,8 @@ test("final cta keeps form submit separate from calendar booking", async ({
     phone: "+49 30 123456",
     message: "Bitte pruefen, welcher Agent Termine vorbereiten kann.",
     source: "final_cta",
+    dataProcessingConsent: true,
+    newsletterConsent: true,
   });
   expect(typeof payload.timestamp).toBe("string");
   expect(typeof payload.userAgent).toBe("string");

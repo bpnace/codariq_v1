@@ -141,6 +141,40 @@ const bookingUrl =
             </div>
           </div>
 
+          <div class="secure-consent-list">
+            <label class="secure-consent" for="contact-data-processing-consent">
+              <input
+                type="checkbox"
+                id="contact-data-processing-consent"
+                name="dataProcessingConsent"
+                required
+                aria-describedby="data-processing-consent-error"
+              />
+              <span>
+                Ich bin damit einverstanden, dass CODARIQ meine Angaben zur
+                Bearbeitung meiner Anfrage und Rückmeldung verarbeitet. Details
+                stehen in der <a href="/datenschutz">Datenschutzerklärung</a>.
+              </span>
+            </label>
+
+            <label class="secure-consent" for="contact-newsletter-consent">
+              <input
+                type="checkbox"
+                id="contact-newsletter-consent"
+                name="newsletterConsent"
+              />
+              <span>CODARIQ Newsletter mit KI-Updates abonnieren.</span>
+            </label>
+
+            <div
+              id="data-processing-consent-error"
+              role="alert"
+              aria-live="polite"
+              class="secure-consent-error"
+            >
+            </div>
+          </div>
+
           <div class="secure-action-row">
             <button type="submit" class="secure-submit cta-button">
               <span class="cta-button-text">{primaryCTA}</span>
@@ -182,9 +216,8 @@ const bookingUrl =
           </p>
 
           <p class="secure-privacy">
-            Mit dem Absenden stimmst du unserer <a href="/datenschutz"
-              >Datenschutzerklärung</a
-            > zu.
+            Datenschutz- und Newsletter-Angaben werden im Lead mit übermittelt,
+            damit die Anfrage korrekt weiterverarbeitet werden kann.
           </p>
         </fieldset>
       </form>
@@ -375,6 +408,46 @@ const bookingUrl =
       margin-top: 0;
       color: #dc2626;
       font-size: 0.84rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .secure-consent-list {
+      margin-top: 1.25rem;
+    }
+
+    .secure-consent {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      color: #475569;
+      font-size: 0.84rem;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .secure-consent + .secure-consent {
+      margin-top: 0.55rem;
+    }
+
+    .secure-consent input {
+      margin-top: 0.18rem;
+      accent-color: #0f766e;
+      flex: 0 0 auto;
+    }
+
+    .secure-consent a {
+      color: #0f766e;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .secure-consent-error {
+      min-height: 1.1rem;
+      margin-top: 0.32rem;
+      color: #dc2626;
+      font-size: 0.82rem;
       font-weight: 750;
       line-height: 1.25;
     }
@@ -679,7 +752,16 @@ const bookingUrl =
         if (statusText) {
           statusText.textContent = "";
         }
+        const dataProcessingConsentError = document.getElementById(
+          "data-processing-consent-error",
+        );
+        if (dataProcessingConsentError) {
+          dataProcessingConsentError.textContent = "";
+        }
       };
+
+      const isChecked = (element) =>
+        element instanceof HTMLInputElement && element.checked;
 
       // Clear messages when user starts typing
       const formInputs = form?.querySelectorAll("input, textarea");
@@ -706,6 +788,15 @@ const bookingUrl =
           const phone = document.getElementById("phone");
           const message = document.getElementById("message");
           const honeypot = document.getElementById("website");
+          const dataProcessingConsent = document.getElementById(
+            "contact-data-processing-consent",
+          );
+          const newsletterConsent = document.getElementById(
+            "contact-newsletter-consent",
+          );
+          const dataProcessingConsentError = document.getElementById(
+            "data-processing-consent-error",
+          );
 
           // Client-side validation
           let hasErrors = false;
@@ -757,6 +848,18 @@ const bookingUrl =
             document.getElementById("message-error").classList.add("hidden");
           }
 
+          // Validate data processing consent
+          if (!isChecked(dataProcessingConsent)) {
+            errors.push("Bitte bestätige die Datenverarbeitung");
+            if (dataProcessingConsentError) {
+              dataProcessingConsentError.textContent =
+                "Bitte bestätige, dass wir deine Angaben zur Anfrage verarbeiten dürfen.";
+            }
+            hasErrors = true;
+          } else if (dataProcessingConsentError) {
+            dataProcessingConsentError.textContent = "";
+          }
+
           // Spam protection: Check honeypot field
           if (honeypot && honeypot.value.trim() !== "") {
             console.warn("Spam detected: honeypot field filled");
@@ -796,6 +899,8 @@ const bookingUrl =
               timestamp: new Date().toISOString(),
               userAgent: navigator.userAgent,
               source: "final_cta",
+              dataProcessingConsent: isChecked(dataProcessingConsent),
+              newsletterConsent: isChecked(newsletterConsent),
             };
 
             // PHP proxy for contact form submissions (static hosting)
