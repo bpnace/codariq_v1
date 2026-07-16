@@ -1,0 +1,129 @@
+---
+import SeoLandingPageTemplate from "../components/SeoLandingPageTemplate.astro";
+
+const faqs = [
+  {
+    question: "Was umfasst KI Beratung für den Mittelstand bei codariq?",
+    answer:
+      "Wir prüfen Prozesse, Datenquellen, Risiken und wirtschaftliche Priorität. Danach entsteht kein Foliensatz, sondern ein klarer Pilotplan für einen begrenzten KI-Agenten oder Workflow mit Freigaben und Betriebskonzept.",
+    category: "Leistung",
+  },
+  {
+    question: "Startet ihr mit Strategie oder direkt mit Umsetzung?",
+    answer:
+      "Wir verbinden beides: erst ein kurzer KI-Check, dann ein kleiner produktionsnaher Pilot. So entsteht eine KI-Roadmap aus echten Abläufen statt aus abstrakten Tool-Trends.",
+    category: "Vorgehen",
+  },
+  {
+    question: "Für welche Unternehmen ist die KI Beratung geeignet?",
+    answer:
+      "Für mittelständische Unternehmen und kleine Teams, die bereits viele manuelle Übergaben in E-Mail, CRM, Dokumenten, Support oder Reporting haben und KI kontrolliert in bestehende Systeme integrieren wollen.",
+    category: "Zielgruppe",
+  },
+  {
+    question: "Wie berücksichtigt ihr Datenschutz und EU AI Act?",
+    answer:
+      "Wir planen Datenminimierung, Rollen, Zugriffskonzepte, Speicherorte, Auftragsverarbeitung, Protokolle und menschliche Freigaben früh mit. Rechtliche Prüfung ersetzen wir nicht, aber wir bauen die technische Grundlage für prüfbare KI-Nutzung.",
+    category: "Compliance",
+  },
+];
+---
+
+<SeoLandingPageTemplate
+  title="KI Beratung Mittelstand: Roadmap, Agenten und Prozessintegration | codariq"
+  description="KI Beratung für den Mittelstand: Codariq identifiziert geeignete Prozesse, baut kontrollierbare KI-Agenten und integriert KI in CRM, E-Mail, Dokumente und Backoffice."
+  keywords="KI Beratung Mittelstand, KI Beratung KMU, KI Strategie Mittelstand, KI Roadmap Mittelstand, KI Einführung Mittelstand, KI Agenten Beratung, KI Prozessberatung, KI Automatisierung Mittelstand, KI Integration Mittelstand, DSGVO KI Beratung"
+  breadcrumbName="KI Beratung Mittelstand"
+  breadcrumbUrl="https://codariq.de/ki-beratung-mittelstand"
+  heroTitle="KI Beratung für den Mittelstand, die in Umsetzung endet."
+  heroSubtitle="Wir finden die Prozesse, in denen KI wirklich Arbeit spart, und bauen daraus kontrollierbare Agenten mit Datenwegen, Freigaben, Logs und klarer Betriebsverantwortung."
+  primaryCTA="KI-Potenzial prüfen"
+  secondaryCTA="Agent Readiness starten"
+  secondaryCTALink="/agent-readiness"
+  introEyebrow="KI Strategie und Prozessberatung"
+  introTitle="Erst der Engpass, dann der Agent"
+  introText="Viele Mittelständler wissen, dass KI relevant wird, aber nicht welcher Ablauf zuerst dran ist. Unsere Beratung sortiert Use Cases nach Nutzen, Machbarkeit, Risiko und Integrationsaufwand."
+  cards={[
+    {
+      title: "Prozesse priorisieren",
+      text: "Wir suchen Routinearbeit mit hohem Volumen: E-Mail, CRM, Dokumente, Support, Reporting, Angebots- oder Rechnungsprozesse.",
+    },
+    {
+      title: "Risiken begrenzen",
+      text: "Sensible Daten, Entscheidungen und externe Aktionen bekommen klare Stopps, menschliche Freigaben und nachvollziehbare Protokolle.",
+    },
+    {
+      title: "Pilot statt Großprojekt",
+      text: "Der erste KI-Agent muss klein genug sein, um schnell zu lernen, und relevant genug, um im Alltag spürbar zu entlasten.",
+    },
+  ]}
+  processEyebrow="KI Roadmap für KMU"
+  processTitle="Aus Beratung wird ein belastbarer Umsetzungsplan."
+  processText="Unsere KI Beratung endet nicht bei Empfehlungen. Wir übersetzen die Roadmap in einen ersten kontrollierten Workflow oder Agenten, der mit echten Fällen getestet werden kann."
+  steps={[
+    {
+      title: "KI-Check durchführen",
+      text: "Wir erfassen Ziele, wiederkehrende Aufgaben, Systeme, Datenqualität, Entscheidungsrisiken und aktuelle Tool-Landschaft.",
+      items: [
+        "Use Cases sammeln und clustern",
+        "Aufwand, Nutzen und Datenschutz grob bewerten",
+        "Sofort ungeeignete Ideen aussortieren",
+      ],
+    },
+    {
+      title: "Roadmap und Pilot festlegen",
+      text: "Der stärkste Use Case bekommt ein klares Zielbild: Welche Daten werden gelesen, was bereitet die KI vor und wo bleibt der Mensch verantwortlich?",
+      items: [
+        "führende Systeme und Schnittstellen definieren",
+        "Erfolgskriterien vor dem Bau festlegen",
+        "Betrieb, Support und Verantwortliche planen",
+      ],
+    },
+    {
+      title: "KI-Agent kontrolliert integrieren",
+      text: "Wir bauen den ersten Ablauf, testen ihn mit realistischen Fällen und erweitern erst, wenn Qualität, Akzeptanz und Nutzen stimmen.",
+      items: [
+        "Human-in-the-loop für kritische Schritte",
+        "Logs für Qualität und Fehleranalyse",
+        "Ausbaupfad für weitere Prozesse dokumentieren",
+      ],
+    },
+  ]}
+  proofTitle="Gute KI Beratung macht Entscheidungen leichter."
+  proofText="Am Ende solltest du wissen, welcher KI-Use-Case zuerst kommt, warum er wirtschaftlich sinnvoll ist, welche Risiken begrenzt werden und wie der Pilot technisch betrieben wird."
+  proofItems={[
+    {
+      title: "Klare Priorität",
+      text: "Nicht zehn Ideen gleichzeitig, sondern ein Prozess mit messbarem Nutzen und realistischen Daten.",
+    },
+    {
+      title: "Prüfbare Architektur",
+      text: "Datenflüsse, Rollen, Freigaben und Logs sind geplant, bevor KI produktiv arbeitet.",
+    },
+    {
+      title: "Umsetzbarer Start",
+      text: "Die Roadmap führt direkt in einen Pilot, der bestehende Tools nutzt statt neue Komplexität aufzubauen.",
+    },
+  ]}
+  linksTitle="Vertiefende Seiten für die KI Beratung"
+  links={[
+    {
+      href: "/ki-integration-prozesse",
+      label: "Integration",
+      text: "Für Unternehmen, die KI direkt in bestehende Prozesse und Systeme integrieren wollen.",
+    },
+    {
+      href: "/ki-agenten-kmu",
+      label: "Agenten",
+      text: "Für KMU, die kontrollierbare KI-Agenten für Postfach, Wissen, Backoffice oder Reporting planen.",
+    },
+    {
+      href: "/dsgvo-ki-agenten",
+      label: "Compliance",
+      text: "Für Teams, die Datenschutz, Freigaben und prüfbare Datenwege früh mitdenken wollen.",
+    },
+  ]}
+  faqs={faqs}
+  finalTitle="Lass uns deine KI-Roadmap auf einen ersten Pilot herunterbrechen."
+  finalDescription="Wir prüfen, welcher Prozess für KI Beratung und Umsetzung jetzt den größten Hebel hat - inklusive Datenquellen, Risiko, Freigaben und Betriebsaufwand."
+/>
