@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutz – CODARIQ</title>
+  <meta name="description" content="Die CODARIQ Website befindet sich aktuell im Umbau.">
+
+
+
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="clarity-consent.css">
+  <style>
+    .nav, .hero-sub { font-family: Arial, Helvetica, sans-serif; }
+    .nav-logo { font-family: Arial, Helvetica, sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; }
+    .nav-links a { font-family: Arial, Helvetica, sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em; }
+    .footer { flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem; }
+    .hero { width: 100%; max-width: 900px; margin-inline: auto; align-items: center; text-align: center; }
+    .hero-title { font-family: 'Press Start 2P', monospace; font-size: clamp(2.1rem, 6.2vw, 5.6rem); line-height: 1.3; letter-spacing: 0; }
+    .hero-sub { max-width: 520px; color: var(--text); font-size: clamp(0.9rem, 1.2vw, 1.05rem); }
+    .hero-actions { justify-content: center; }
+    @media (max-width: 640px) {
+      .nav-logo { font-size: 0.7rem; }
+      .nav-links { gap: 0.55rem; }
+      .nav-links a { font-size: 0.66rem; letter-spacing: 0; }
+    }
+  </style>
+<script src="https://cloud.ccm19.de/app.js?apiKey=ca9c0009a731e6e5562d8332ea527ef38cb98c8bb9cce3c1&amp;domain=69fe4855081b12d33000aec2" defer referrerpolicy="origin"></script><link rel="stylesheet" href="/fonts/fonts.css"></head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div class="vignette"></div>
+
+  <main class="overlay">
+    <nav class="nav">
+      <span class="nav-logo">CODARIQ</span>
+      <ul class="nav-links">
+        <li><a href="/impressum">Impressum</a></li>
+        <li><a href="/datenschutz">Datenschutz</a></li>
+        <li><a href="mailto:kontakt@codariq.de" data-open-contact>Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <h1 class="hero-title">
+        CODARIQ
+      </h1>
+      <p class="hero-sub">
+        Unsere Website befindet sich aktuell im Umbau.
+      </p>
+      <div class="hero-actions">
+        <a href="mailto:kontakt@codariq.de" class="btn btn-primary" data-open-contact>Kontakt aufnehmen</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="footer-coords" id="coords">00°N / 00°E</span>
+    </footer>
+  </main>
+
+  <dialog id="contact-dialog" class="site-dialog" aria-labelledby="contact-heading" data-clarity-mask="true">
+    <div class="dialog-heading">
+      <h2 id="contact-heading">Kontakt aufnehmen</h2>
+      <button type="button" class="dialog-close" data-close-dialog aria-label="Schließen">×</button>
+    </div>
+    <p class="dialog-intro">Erzähl uns kurz, wobei wir helfen können.</p>
+    <form id="contact-form">
+      <div class="contact-grid">
+        <label>Name *<input name="name" autocomplete="name" required></label>
+        <label>Unternehmen oder Tätigkeit *<input name="company" autocomplete="organization" required></label>
+        <label>E-Mail *<input name="email" type="email" autocomplete="email" required></label>
+        <label>Telefon<input name="phone" type="tel" autocomplete="tel"></label>
+        <label class="wide">Deine Nachricht *<textarea name="message" rows="4" required></textarea></label>
+      </div>
+      <input name="website" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+      <label class="consent"><input type="checkbox" name="dataProcessingConsent" required><span>Ich bin damit einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Weitere Informationen stehen in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
+      <label class="consent"><input type="checkbox" name="newsletterConsent"><span>CODARIQ Newsletter mit KI-Updates abonnieren.</span></label>
+      <p id="contact-status" role="status" aria-live="polite"></p>
+      <button type="submit" class="btn btn-primary" id="contact-submit">Anfrage senden</button>
+    </form>
+  </dialog>
+
+
+  <div class="legal-shade" aria-hidden="true"></div>
+  <dialog open class="site-dialog legal-dialog" aria-labelledby="legal-heading">
+    <div class="dialog-heading"><h2 id="legal-heading">Datenschutz</h2><a href="/" class="dialog-close" aria-label="Zurück zur Startseite">×</a></div>
+    <div class="legal-body">
+      <button type="button" class="clarity-settings" data-ccm19-settings>Cookie-Einstellungen</button>
+      <p>Informationen zur Verarbeitung personenbezogener Daten auf dieser vorübergehenden Website.</p>
+      <h3>1. Verantwortlicher</h3>
+      <p>codariq – Tarik Arthur Marshall, Sigmaringer Str. 27, 10713 Berlin, Deutschland. E-Mail <a href="mailto:kontakt@codariq.de">kontakt@codariq.de</a>, Telefon <a href="tel:+4917631378294">0176 3137 8294</a>.</p>
+      <h3>2. Hosting und Server-Logfiles</h3>
+      <p>Die Website wird bei STRATO AG, Pascalstraße 10, 10587 Berlin, betrieben. Bei einem Aufruf werden technisch erforderliche Zugriffsdaten verarbeitet, etwa IP-Adresse, Zeitpunkt, angeforderte Datei, Referrer, Browser und HTTP-Status. Dies dient dem sicheren und stabilen Betrieb auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Soweit STRATO als Auftragsverarbeiter tätig wird, geschieht dies nach Art. 28 DSGVO.</p>
+      <h3>3. Kontaktformular</h3>
+      <p>Wenn Sie das Kontaktformular nutzen, verarbeiten wir Name, Unternehmen oder Tätigkeit, E-Mail-Adresse, gegebenenfalls Telefonnummer und Ihre Nachricht zur Bearbeitung der Anfrage und Vorbereitung einer möglichen Zusammenarbeit. Die Angaben werden über einen technischen Proxy an unseren internen Automatisierungs-Workflow weitergeleitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, hilfsweise lit. f DSGVO. Kontaktanfragen bewahren wir in der Regel bis zu 24 Monate nach der letzten Aktivität auf, sofern keine gesetzlichen Pflichten entgegenstehen.</p>
+      <h3>4. Optionaler Newsletter</h3>
+      <p>Wenn Sie die gesonderte Newsletter-Einwilligung im Kontaktformular erteilen, verwenden wir Ihre E-Mail-Adresse zum Versand von KI-Updates. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO. Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden. Newsletter-Daten speichern wir bis zum Widerruf, anschließend nur soweit gesetzliche Nachweis- oder Sperrlistenpflichten bestehen.</p>
+      <h3>5. Schriftarten und Animation</h3>
+      <p>Die Website verwendet lokal auf unserem Server gespeicherte Schriftarten. Beim Laden der Schriftarten wird keine Verbindung zu Google hergestellt. Die Hintergrundanimation läuft im Browser; ihre Interaktionen werden nicht über das Kontaktformular versendet. Die lokal bereitgestellten Schriftarten dienen der Darstellung der Website.</p>
+      <h3>6. Microsoft Clarity (optionale Nutzungsanalyse)</h3>
+      <p>Microsoft Clarity wird nur geladen, wenn Sie zuvor über CCM19 der Einbindung „Microsoft Clarity“ ausdrücklich zugestimmt haben. Anbieter ist Microsoft. Clarity hilft uns, die Nutzung dieser Website zu verstehen und ihre Darstellung zu verbessern. Dazu erstellt der Dienst Heatmaps und Sitzungsaufzeichnungen mit Seitenaufrufen, Klicks, Maus- und Scrollbewegungen sowie technischen Nutzungsdaten wie Browser-, Geräte-, Seiten- und Verweisangaben.</p>
+      <p>Microsoft verarbeitet dabei auch technische Kennungen zur Zuordnung von Sitzungen; beim Abruf des Clarity-Skripts kann insbesondere Ihre IP-Adresse an Microsoft übermittelt werden. Wir übermitteln zusätzlich fest definierte Ereignisse für markierte Kontakt- und Angebotsklicks sowie Scrollschwellen von 25, 50, 75 und 90 Prozent. Diese eigenen Ereignisse enthalten keine Formulareingaben, frei ausgelesenen Buttontexte, Linkziele, URL-Parameter oder von uns vergebenen Nutzerkennungen. Kontaktformularinhalte werden nicht als Ereignisparameter übermittelt. Das Kontaktformular ist zusätzlich mit der Clarity-Maskierung gekennzeichnet. Bei erteilter Einwilligung kann Clarity Cookies und vergleichbare Speichertechniken verwenden. Ihre Einwilligung wird durch CCM19 verwaltet und dokumentiert. Der bisherige separate Einwilligungsdialog und dessen gespeicherte Auswahl werden nicht weiter für die Tracking-Freigabe verwendet.</p>
+      <p>Rechtsgrundlage für das Speichern oder Auslesen von Informationen auf Ihrem Endgerät ist § 25 Abs. 1 TDDDG; für die anschließende Verarbeitung gilt Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit über „Cookie-Einstellungen“ am Seitenende oder hier im Dialog mit Wirkung für die Zukunft ändern oder widerrufen. Eine Verarbeitung in Drittländern, insbesondere den USA, kann nicht ausgeschlossen werden. Weitere Informationen finden Sie in der <a href="https://privacy.microsoft.com/de-de/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft-Datenschutzerklärung</a>.</p>
+      <h3>7. Ihre Rechte</h3>
+      <p>Sie können nach Maßgabe der gesetzlichen Voraussetzungen Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch verlangen. Einwilligungen können Sie jederzeit widerrufen. Schreiben Sie dafür an <a href="mailto:kontakt@codariq.de">kontakt@codariq.de</a>. Außerdem können Sie sich bei einer Datenschutzaufsichtsbehörde beschweren. Für Berlin ist die Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin zuständig.</p>
+      <p>Stand November 2026</p>
+    </div>
+  </dialog>
+
+  <script src="game.js"></script>
+  <script src="contact.js"></script>
+  
+  <script src="/ccm19-consent.js" defer></script>
+<script src="/growth-events.js" defer></script></body>
+</html>

@@ -1,5 +1,9 @@
 # Codariq Landing Page
 
+## Aktuell ausgelieferter VPS-Stand
+
+Die derzeit eingesetzte Wartungswebsite einschließlich CCM19, Blog-Rendering und lokaler Fonts ist separat unter [deploy/vps-maintenance](deploy/vps-maintenance/SNAPSHOT.md) gesichert (18. November 2026). Der folgende Astro-Projektstand bleibt erhalten; er entspricht nicht automatisch der aktuell ausgelieferten Website. Private Konfiguration und Laufzeitinhalte liegen außerhalb von Git.
+
 [![CI](https://github.com/bpnace/codariq_v1/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bpnace/codariq_v1/actions/workflows/ci.yml)
 ![Version](https://img.shields.io/badge/version-1.1.0-2563EB?style=flat-square)
 ![Status](https://img.shields.io/badge/status-production_landing_case-1F2937?style=flat-square)

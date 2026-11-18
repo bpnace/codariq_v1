@@ -1,0 +1,29 @@
+name: codariq
+services:
+  codariq-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bpn-codariq:tracking-20261118t014956z
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+    - /tmp:rw,noexec,nosuid,size=16m
+    - /var/run/apache2:rw,noexec,nosuid,size=1m
+    - /var/lock/apache2:rw,noexec,nosuid,size=1m
+    volumes:
+    - type: bind
+      source: /srv/codariq/private/webhook-proxy.config.php
+      target: /var/www/private/webhook-proxy.config.php
+      read_only: true
+      bind:
+        create_host_path: false
+    - ../content:/var/www/content:ro
+    networks:
+      proxy-net:
+        aliases:
+        - codariq-web
+networks:
+  proxy-net:
+    external: true
+    name: proxy-net

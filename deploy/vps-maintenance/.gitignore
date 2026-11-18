@@ -1,0 +1,7 @@
+# Public source only. Private service configuration belongs outside this tree.
+.env
+.env.*
+*.config.php
+*.sqlite*
+*.log
+!stage-runtime.sh

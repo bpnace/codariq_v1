@@ -1,0 +1,232 @@
+{
+  "captured_at_utc": "2026-11-18T10:51:54.275423+00:00",
+  "source": "/srv/codariq/release",
+  "scope": "source only; private configuration and runtime content excluded",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "source_sha256": "6096f45f9138d8efda8142991de9d58a55c0e17ae50d42d4e7288ca7286d0282",
+      "repository_adjustment": "Allow later public CCM19, blog and local-font assets in build context"
+    },
+    {
+      "path": "Dockerfile",
+      "source_sha256": "4c406c7c1125e5f43ef6fba521122ced5cb50837040f38c48e69ebf410e6da68"
+    },
+    {
+      "path": "README.md",
+      "source_sha256": "d78f9c6431fb595a3020a38a3acccc5c65ef11b7bd80aad26e9b557bd0b30fc5"
+    },
+    {
+      "path": "apache/security.conf",
+      "source_sha256": "020d1b33acc7a776ba3e40f965621cbbe92d7d0895189cc261e54dcc963112a9"
+    },
+    {
+      "path": "apache/site.conf",
+      "source_sha256": "7006bc447915921ec474169f08d7d6672be8cb076150b15a0c6740a16a17764c"
+    },
+    {
+      "path": "assets/apply-clarity-overlay.py",
+      "source_sha256": "6a9773ad4c46d88712fe762705441a071f5add9e14589a2deffdcf134d2b31ca"
+    },
+    {
+      "path": "assets/clarity-consent.css",
+      "source_sha256": "e0e6394bd2c86ce0305de43adf477138ec72afa07a9fdd5a32bfac7a1cd9c1c6"
+    },
+    {
+      "path": "assets/clarity-consent.js",
+      "source_sha256": "893e6f34ad6da3cb38236d06a3f9bc373b1760ed17a49c85b107fea48c4a7cb0"
+    },
+    {
+      "path": "compose.yaml",
+      "source_sha256": "27d98736f3dd7e0f0c42a72d8f221be9b2e3ee79744e45b0117e37fe3af32af4"
+    },
+    {
+      "path": "php/production.ini",
+      "source_sha256": "be72e28628ed7a4ad8c092961e8c2e88c7c203487e64a0ff914c02d511b6d03d"
+    },
+    {
+      "path": "stage/site/android-chrome-192x192.png",
+      "source_sha256": "8177de601ce312f13c20a50dd82a7e104cadf7323a44088f8a49bf18cc7e3877"
+    },
+    {
+      "path": "stage/site/android-chrome-512x512.png",
+      "source_sha256": "02cfc0251034f0d32c4fc6751c1b0b7010a8d7d0279abc0fcaee7e2a0470a761"
+    },
+    {
+      "path": "stage/site/apple-touch-icon.png",
+      "source_sha256": "5ec3499b07fea91ff3f2979b3a18d8460d446aedbb87a88ddeac547ac79f0c65"
+    },
+    {
+      "path": "stage/site/blog/index.php",
+      "source_sha256": "da05c26cad473b6a422b2555a3dba659e46b8db82d509df4b57276fd8f17cda9"
+    },
+    {
+      "path": "stage/site/ccm19-consent.js",
+      "source_sha256": "06674e91b1743f98a96eb12668d58113de348537a390c42f3f0cb7403bc3202e"
+    },
+    {
+      "path": "stage/site/clarity-consent.css",
+      "source_sha256": "e0e6394bd2c86ce0305de43adf477138ec72afa07a9fdd5a32bfac7a1cd9c1c6"
+    },
+    {
+      "path": "stage/site/clarity-consent.js",
+      "source_sha256": "830148f0a2227fd3c42461310fcd3ed371c5dc10b7a5f01684c0c3c5173d8b20"
+    },
+    {
+      "path": "stage/site/contact.js",
+      "source_sha256": "0e3f2b10eba444ba7befc4f678af9e36b16d1a74fe6e392cf4d43b94a1ea0a52"
+    },
+    {
+      "path": "stage/site/datenschutz.html",
+      "source_sha256": "71c7e144774c0bc3e5a64044d44818e665a9d3ce2212cba5091ab198d56c6663"
+    },
+    {
+      "path": "stage/site/favicon-16x16.png",
+      "source_sha256": "41eb1551a8bffefc8aeba7741dcd18fcb4caa5827e34044e152f9b9180d0f2a0"
+    },
+    {
+      "path": "stage/site/favicon-32x32.png",
+      "source_sha256": "989992d98ca6edf99e88cf25db38488d4ac38b79caba926b80d894631da68749"
+    },
+    {
+      "path": "stage/site/favicon.ico",
+      "source_sha256": "399376df726dfc0013bd7bc2ac7bd8585f7be3e658066895d5ed2e42fe3491bf"
+    },
+    {
+      "path": "stage/site/fonts/font-1.woff2",
+      "source_sha256": "7ced53420784c93cecccb7c27237594f0e41e5a7990581565f0aef8eda9e9d2f"
+    },
+    {
+      "path": "stage/site/fonts/font-10.woff2",
+      "source_sha256": "c5a1b472aecff6fa991729ccac0735d4ad587f2584c45152609eabc0a66914cf"
+    },
+    {
+      "path": "stage/site/fonts/font-11.woff2",
+      "source_sha256": "bfe911bdf7b13f32109299116d325091c1f815a79729c57a9d1c68116f5000de"
+    },
+    {
+      "path": "stage/site/fonts/font-12.woff2",
+      "source_sha256": "9f8b89f01b0be5a24401d82725b16eb8ffa5029e59967f1294eb02f9846b1417"
+    },
+    {
+      "path": "stage/site/fonts/font-13.woff2",
+      "source_sha256": "c2a20dcb95ec8f4d1e8db6bd01dfedb669913f5e691e7baa3981b2d88a3b9ae3"
+    },
+    {
+      "path": "stage/site/fonts/font-14.woff2",
+      "source_sha256": "afec86997fdaf54af1f59358fa2c1e2a0f1d04146edad18e5cd141d0384a7548"
+    },
+    {
+      "path": "stage/site/fonts/font-15.woff2",
+      "source_sha256": "fb54a8f8c24cd5c532c5d52ece3d82b9a08ed83bad076446b938f8f50353753f"
+    },
+    {
+      "path": "stage/site/fonts/font-16.woff2",
+      "source_sha256": "954380ff6f96dcb0cde857bb1cb906401908729cfbdd98140174bb1965f025c7"
+    },
+    {
+      "path": "stage/site/fonts/font-17.woff2",
+      "source_sha256": "3c7df3a15e173b8fa04ec9191171e72c314ddbac1b395e2b2e2092bb4f47cc8c"
+    },
+    {
+      "path": "stage/site/fonts/font-18.woff2",
+      "source_sha256": "8895e3d49825128bfa5238e4c96e9b432d7a3dadbe5c17c6081267398305dc71"
+    },
+    {
+      "path": "stage/site/fonts/font-19.woff2",
+      "source_sha256": "952dddb45d2f96f71cbf3b7f510b24379afc3c89ea02fcf89d377b45d62c0166"
+    },
+    {
+      "path": "stage/site/fonts/font-2.woff2",
+      "source_sha256": "aeaa5b49508dca08599d12f8782b5d24366418d8dfc57d391589458dbe8b0d77"
+    },
+    {
+      "path": "stage/site/fonts/font-20.woff2",
+      "source_sha256": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d"
+    },
+    {
+      "path": "stage/site/fonts/font-3.woff2",
+      "source_sha256": "7ba7a2b0f611cda114878d9412ed356481ee5232c7b188ac2fad4d01dd6c4263"
+    },
+    {
+      "path": "stage/site/fonts/font-4.woff2",
+      "source_sha256": "f8c22ec1804bd6966b70f43ac7c327025645b4c09597117fca2a5a6c750106fe"
+    },
+    {
+      "path": "stage/site/fonts/font-5.woff2",
+      "source_sha256": "1431edf60f08a3d3c88c83a2919cfce1b53149939375adb2ac4f587efeed80af"
+    },
+    {
+      "path": "stage/site/fonts/font-6.woff2",
+      "source_sha256": "afe2b708d2857614368aaa41aff592e2eac2395ca40efc101381741f141bc5be"
+    },
+    {
+      "path": "stage/site/fonts/font-7.woff2",
+      "source_sha256": "c129280f7831f0e528f327ee4496a7dd097a71a0d659d382ba4d579713eeaf0d"
+    },
+    {
+      "path": "stage/site/fonts/font-8.woff2",
+      "source_sha256": "66046fe5fc0ec03e895fcc6e903bf224b03811cf39fa8f4953758823f3c227fb"
+    },
+    {
+      "path": "stage/site/fonts/font-9.woff2",
+      "source_sha256": "ea3bc8f813abc2a31164a7e2476a6cab3dda839248c03c274f6b90ff729b0c39"
+    },
+    {
+      "path": "stage/site/fonts/fonts.css",
+      "source_sha256": "e648b5d1a5c8acc3178c81cfbcb2b6671d480dbbf0cf1ce378c70adc891ea559"
+    },
+    {
+      "path": "stage/site/fonts/ibmplexmono-OFL.txt",
+      "source_sha256": "37784b44044a4ffd9256702b7c0982c37e5c8887ba90c6dca0479aea93dc898d"
+    },
+    {
+      "path": "stage/site/fonts/pressstart2p-OFL.txt",
+      "source_sha256": "705960c3281a5765ecc0b59bd4ed7ca59eed165748076bc2fc3e8fdbfeb944b0"
+    },
+    {
+      "path": "stage/site/fonts/spacegrotesk-OFL.txt",
+      "source_sha256": "c6dec685825f73b18c20926fddc65e8315642e12986f15db0699170940a09efc"
+    },
+    {
+      "path": "stage/site/game.js",
+      "source_sha256": "0a51c2d43ca6508c48d92050dacbc3bd1584409d54e10828bbe2172986a6721c"
+    },
+    {
+      "path": "stage/site/growth-events.js",
+      "source_sha256": "4f59027c6d27eb9184e8601b44db1b960ce4e072036e154e4ac47910cd671e26"
+    },
+    {
+      "path": "stage/site/impressum.html",
+      "source_sha256": "8392c4246cbd873e89952d91d99a06d4200f19a941341001abc2e1097fa103e5"
+    },
+    {
+      "path": "stage/site/index.html",
+      "source_sha256": "b70752438b4cc0aaf81d46d1f19e2684866b5ab12d05dbe6d24dc718bf4512af"
+    },
+    {
+      "path": "stage/site/manifest.json",
+      "source_sha256": "5a41e892bc30959be90bb55a9e70f1ebebdb619ccac88d2af3f0d9bf97dc803d"
+    },
+    {
+      "path": "stage/site/robots.txt",
+      "source_sha256": "144906847d66557a05b95ad7bbc813cd4dd0cbf1228d4637daf7ab62a38a5715"
+    },
+    {
+      "path": "stage/site/sitemap.php",
+      "source_sha256": "b7bed5ef9bf21bc2cb77e9faafcabe1748f64f2c9e1132e2908b9eacbecbd0c6"
+    },
+    {
+      "path": "stage/site/style.css",
+      "source_sha256": "e7172a97ce1dd8c33a5c64ecfcda5ae7723a20cab1a62495df92e08a99a2443a"
+    },
+    {
+      "path": "stage/site/webhook-proxy.php",
+      "source_sha256": "f037e65b7461780596ac7bd7f3e2ed638ccebffb5193ceccc7f3ab7e38fd3fcb"
+    },
+    {
+      "path": "stage-runtime.sh",
+      "source_sha256": "72230993230dda3080707b07a86f58b1c44cc36f73774b63b31662d70565f81d"
+    }
+  ]
+}
