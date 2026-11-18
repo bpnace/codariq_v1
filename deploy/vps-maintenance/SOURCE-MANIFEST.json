@@ -1,12 +1,11 @@
 {
-  "captured_at_utc": "2026-11-18T10:51:54.275423+00:00",
+  "captured_at_utc": "2026-11-18T12:11:40.092550+00:00",
   "source": "/srv/codariq/release",
-  "scope": "source only; private configuration and runtime content excluded",
+  "scope": "source only; private configuration/runtime content excluded",
   "files": [
     {
       "path": ".dockerignore",
-      "source_sha256": "6096f45f9138d8efda8142991de9d58a55c0e17ae50d42d4e7288ca7286d0282",
-      "repository_adjustment": "Allow later public CCM19, blog and local-font assets in build context"
+      "source_sha256": "fc24307e4e45b8d75448506c0270a6d8f57b3d2fe28029b3375990eb3dc046ca"
     },
     {
       "path": "Dockerfile",
@@ -38,7 +37,7 @@
     },
     {
       "path": "compose.yaml",
-      "source_sha256": "27d98736f3dd7e0f0c42a72d8f221be9b2e3ee79744e45b0117e37fe3af32af4"
+      "source_sha256": "cb8b9b5b5ea5cbce03d4d82d9751f07cb2c321cf32e68aa2cd814a0f24653653"
     },
     {
       "path": "php/production.ini",
@@ -62,7 +61,7 @@
     },
     {
       "path": "stage/site/ccm19-consent.js",
-      "source_sha256": "06674e91b1743f98a96eb12668d58113de348537a390c42f3f0cb7403bc3202e"
+      "source_sha256": "228287a940b0337dea95f29940ae1e4d9427e5aba3aad723c37d97305f141e61"
     },
     {
       "path": "stage/site/clarity-consent.css",
@@ -74,11 +73,11 @@
     },
     {
       "path": "stage/site/contact.js",
-      "source_sha256": "0e3f2b10eba444ba7befc4f678af9e36b16d1a74fe6e392cf4d43b94a1ea0a52"
+      "source_sha256": "feeabc38a18a81cb27764503f6cad169b3cac695ba9dd7d1c571e52eb9a065c5"
     },
     {
       "path": "stage/site/datenschutz.html",
-      "source_sha256": "71c7e144774c0bc3e5a64044d44818e665a9d3ce2212cba5091ab198d56c6663"
+      "source_sha256": "acb214fb2d50910d128a63eae60c593cb8ff2a0e9274b3cb8f5c1f1d006a1219"
     },
     {
       "path": "stage/site/favicon-16x16.png",
@@ -194,11 +193,11 @@
     },
     {
       "path": "stage/site/growth-events.js",
-      "source_sha256": "4f59027c6d27eb9184e8601b44db1b960ce4e072036e154e4ac47910cd671e26"
+      "source_sha256": "bd621e17eaa9f1509b0ab29289c6a8e85a2ae9ed0a216e4747a38f33726aecd8"
     },
     {
       "path": "stage/site/impressum.html",
-      "source_sha256": "8392c4246cbd873e89952d91d99a06d4200f19a941341001abc2e1097fa103e5"
+      "source_sha256": "782640e2ac2dfa8841b1c8d080c04c02c26f251f0dbb3586b2a1071aaed3200e"
     },
     {
       "path": "stage/site/index.html",

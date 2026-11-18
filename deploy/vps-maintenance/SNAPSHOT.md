@@ -2,6 +2,8 @@
 
 Quellsicherung vom 18. November 2026. Dieser Ordner enthält den derzeit eingesetzten PHP-/Apache-Wartungsstand von `codariq.de`, einschließlich Blog-Rendering, lokal ausgelieferter Fonts, CCM19 und Clarity-Anbindung. Der Astro-Quellbaum im Repository bleibt als eigenständiger Entwicklungsstand erhalten; er ist nicht mit dem aktuell ausgelieferten Wartungsstand gleichzusetzen.
 
+Nach dem Tracking-Ausbau desselben Tages erneut mit dem Live-Stand abgeglichen: GA4 `G-PV0P0WH6KY` wird jetzt ausschließlich nach der separaten optionalen CCM19-Freigabe geladen, unabhängig von Clarity. Kontaktannahme/-fehler, CTA-Sichtbarkeit und Positionskennungen sind enthalten. Aktueller technischer Abnahmebericht im privaten Growth-Board-Projekt: `TRACKING-LIVE-ACCEPTANCE.md`.
+
 ## Maßgebliche Dateien
 
 - `stage/site/`: aktuelle öffentliche Website-Dateien; direkt aus `/srv/codariq/release/stage/site` übernommen.
@@ -9,7 +11,7 @@ Quellsicherung vom 18. November 2026. Dieser Ordner enthält den derzeit eingese
 - `SOURCE-MANIFEST.json`: SHA256-Herkunftsnachweis der vom VPS übernommenen Dateien.
 - Die bestehende `README.md`, `assets/` und `stage-runtime.sh` stammen aus der ursprünglichen Migration. Ihre eigene Consent-Vorlage ist historisch. **`stage-runtime.sh` nicht erneut auf den aktuellen Stand anwenden:** Das würde spätere Blog-, Font- und CCM19-Änderungen überschreiben. Aktueller Build-Eingang ist bereits `stage/site/`.
 
-Die mitgesicherte `.dockerignore` wurde ausschließlich in dieser Git-Arbeitskopie um die später hinzugekommenen öffentlichen Blog-, Font- und Consent-Dateien ergänzt. Auf dem VPS wurde nichts geändert.
+Die mitgesicherte `.dockerignore` enthält die später hinzugekommenen öffentlichen Blog-, Font- und Consent-Dateien. Beim aktuellen Tracking-Rollout wurden diese Build-Eingänge auch auf dem VPS abgesichert. Die GitHub-Sicherung selbst löst keinen weiteren Rollout aus.
 
 ## Nicht in Git
 

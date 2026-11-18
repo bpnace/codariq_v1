@@ -59,13 +59,22 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (!response.ok) throw new Error(String(response.status));
+      if (!response.ok) {
+        const code = response.status === 429 ? 'rate_limited' : response.status >= 500 ? 'server' : 'rejected';
+        form.dispatchEvent(new CustomEvent('growth:form-error', {bubbles: true, detail: {code}}));
+        throw new Error(String(response.status));
+      }
       const receipt = await response.json().catch(() => null);
-      if (receipt?.success === true) form.dispatchEvent(new Event("growth:form-accepted", {bubbles: true}));
+      if (receipt?.success !== true) {
+        form.dispatchEvent(new CustomEvent('growth:form-error', {bubbles: true, detail: {code: 'invalid_response'}}));
+        throw new Error('INVALID_RESPONSE');
+      }
+      form.dispatchEvent(new Event("growth:form-accepted", {bubbles: true}));
       status.textContent = 'Danke! Deine Anfrage wurde gesendet.';
       status.dataset.state = 'success';
       form.reset();
     } catch (error) {
+      if (error instanceof TypeError) form.dispatchEvent(new CustomEvent('growth:form-error', {bubbles: true, detail: {code: 'network'}}));
       status.textContent = error.message === '429'
         ? 'Zu viele Anfragen. Bitte versuche es später erneut.'
         : 'Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreibe an kontakt@codariq.de.';

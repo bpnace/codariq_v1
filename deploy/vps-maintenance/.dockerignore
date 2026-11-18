@@ -25,7 +25,6 @@
 !stage/site/manifest.json
 !stage/site/webhook-proxy.php
 
-# Current public runtime additions after the original maintenance migration.
 !stage/site/growth-events.js
 !stage/site/ccm19-consent.js
 !stage/site/sitemap.php
