@@ -77,7 +77,7 @@
     },
     {
       "path": "stage/site/datenschutz.html",
-      "source_sha256": "acb214fb2d50910d128a63eae60c593cb8ff2a0e9274b3cb8f5c1f1d006a1219"
+      "source_sha256": "9c8c4759f7fbea6561ad0aa85713cb5129d119c2068798081dc8253456798061"
     },
     {
       "path": "stage/site/favicon-16x16.png",
@@ -197,11 +197,11 @@
     },
     {
       "path": "stage/site/impressum.html",
-      "source_sha256": "782640e2ac2dfa8841b1c8d080c04c02c26f251f0dbb3586b2a1071aaed3200e"
+      "source_sha256": "35f5c31e46a088765873da97b426c31e1995e3aef8a6af336be5516be285cf12"
     },
     {
       "path": "stage/site/index.html",
-      "source_sha256": "b70752438b4cc0aaf81d46d1f19e2684866b5ab12d05dbe6d24dc718bf4512af"
+      "source_sha256": "0f9c863f2059da2c70a94754dfdec6a2976a76d6eddef460d923760ab9b14e3b"
     },
     {
       "path": "stage/site/manifest.json",
@@ -227,5 +227,7 @@
       "path": "stage-runtime.sh",
       "source_sha256": "72230993230dda3080707b07a86f58b1c44cc36f73774b63b31662d70565f81d"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-11-18T17:40:52.897718+00:00",
+  "update_scope": "Three canonical links only; source snapshot, no runtime content or credentials"
 }
