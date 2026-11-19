@@ -1,9 +1,22 @@
 <?php
 $raw=@file_get_contents('/var/www/content/blog.json');$data=$raw?json_decode($raw,true):null;
 if(!$data||($data['brand']??'')!=='codariq'){http_response_code(503);exit('Der Blog ist vorübergehend nicht verfügbar.');}
-$slug=$_GET['slug']??'';if($slug!==''&&!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D',$slug)){http_response_code(404);exit('Nicht gefunden');}
+$slug=$_GET['slug']??'';if(!is_string($slug)){http_response_code(404);exit('Nicht gefunden');}
+if($slug!==''&&!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D',$slug)){http_response_code(404);exit('Nicht gefunden');}
 $article=null;foreach($data['articles'] as $a){if($a['slug']===$slug)$article=$a;}
 if($slug!==''&&!$article){http_response_code(404);exit('Beitrag nicht gefunden');}
+
+$requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$canonicalPath = '/blog'.($article ? '/'.$article['slug'] : '');
+if ($requestPath !== $canonicalPath && preg_match('~^/blog(?:/[a-z0-9-]+)?/?$~D', $requestPath ?? '')) {
+    parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) ?? '', $query);
+    unset($query['slug']);
+    $target = 'https://codariq.de'.$canonicalPath;
+    if ($query) $target .= '?'.http_build_query($query, '', '&', PHP_QUERY_RFC3986);
+    header('Location: '.$target, true, 301);
+    exit;
+}
+
 function e($s){return htmlspecialchars((string)$s,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');}
 $title=$article?$article['title']:'Blog';$description=$article?$article['summary']:'Beiträge von CODARIQ.';$canonical='https://codariq.de/blog'.($article?'/'.$article['slug']:'');
 header('Content-Type: text/html; charset=utf-8');
